@@ -1,0 +1,478 @@
+/* ==========================================================================
+   HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* ===== Initializr Styles ==================================================
+   Author: Sebastian Colombini
+   ========================================================================== */
+
+/* Estilos Comunes*/
+
+body {
+    font: 16px Helvetica, Helvetica Neue, Arial;
+	background:url("../img/como-hacer-amigos.png") no-repeat fixed top right;	
+}
+
+h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-size:1em;}
+a{text-decoration:none;}
+ul{margin:0;padding:0;}
+ul li{ list-style:none;}
+ul.horizontal li{float:left;}
+
+.fr{float:right;}
+.fl{float:left;}
+
+h2.titulo, h2.titulo a{
+	background-color:#f16529;
+	color:white;
+	padding:3px;
+	font-size:1.1em;
+}
+
+.titulo {
+    font-size:1.1em;
+	background-color:#f16529;
+	color:white;
+	padding:3px;
+	font-size:1.1em;
+	-webkit-box-shadow: 0 5px 10px #aaa;
+	   -moz-box-shadow: 0 5px 10px #aaa;
+			box-shadow: 0 5px 10px #aaa;
+}
+
+a.boton-azul , .boton-azul{
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 0;
+
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    color: white;
+    background: #00a1f1;
+}
+a.boton-azul:hover, a.boton-azul:visited {
+    color: white;
+}
+a.boton-azul:hover{
+    text-decoration: underline;
+}
+.mas-info{
+width:200px;
+}
+	/*iconos */
+    #telefono_ico{
+		display:block;
+		margin:0 5px;
+		height:55px;
+		width:55px;
+		background:url("../img/iconos.png") no-repeat -79px 0px;
+	}
+	#telefono_ico span{ display:none;}
+    
+    #whatsapp_ico{
+		display:block;
+		margin:0 5px;
+		height:55px;
+		width:55px;
+		background:url("../img/iconos.png") no-repeat -728px 0px;
+	}
+	#whatsapp_ico span{ display:none;}
+
+	#facebook_ico{
+		display:block;
+		margin:0 5px;
+		height:55px;
+		width:55px;
+		background:url("../img/iconos.png") no-repeat -401px 0px;
+	}
+	#facebook_ico span{ display:none;}
+
+	#twitter_ico{
+		display:block;
+		margin:0 5px;
+		height:55px;
+		width:55px;
+		background:url("../img/iconos.png") no-repeat -805px 1px;
+	}
+	#twitter_ico span{ display:none;}
+	/*Fin iconos */
+	
+	/*contacto*/
+	.input-form{
+		border:2px solid #f16529;
+		width:100%;
+	}
+	.boton-form{
+		border:2px solid #f16529;
+	}
+
+	/*Fin contacto*/
+/*FIN Estilos Comunes*/
+
+/*ESTILO movil 320 x 480*/
+.wrapper {
+    width: 90%;
+    margin: 0 5%;
+}
+.logo{
+	margin:10px 0;
+}
+
+/* Region header-container */
+#header-container {
+    border-bottom: 20px solid #00a1f1;
+}
+/* Menu */
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 15px 0;
+
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+
+    color: white;
+    background: #00a1f1;
+}
+
+nav ul li a:hover,
+nav ul li a:visited {
+    color: white;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* FIN Region header-container */
+
+/* Region main-container */
+#main-container{}
+
+.main {
+    padding: 30px 0;
+}
+
+.main aside {
+    color: white;
+    padding: 10px;
+	background: #f16529;
+}
+/* Fin Region main-container */
+
+/* Region footer-container*/
+#footer-container{
+    border-top: 20px solid #00a1f1;
+	background: #f16529;
+}
+
+#footer-container footer {
+    color: white;
+    padding: 20px 0;
+}
+
+ul#menusocial{
+	display:block;
+	overflow:hidden;
+	width:100%;
+	margin:0 0 10px 0;
+	padding: 0;
+}
+ul#menusocial li{ 
+	display:inline-block;
+	text-align:center;
+}
+
+#email_ico,#email_ico:hover,#email_ico:visited{ color:white;}
+#email_ico:hover{ text-decoration:underline;}
+
+
+/* Fin Region footer-container*/
+
+
+/* ALL: IE Fixes */
+.ie7 .title {
+	padding-top: 20px;
+}
+/* ALL: IE Fixes */
+
+/*FIN ESTILO movil 320 x 480*/
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 480px) {
+/* ESTILO movil 480 x 640*/
+
+/*Region footer-container*/
+	footer span.first {
+		float:left;
+	}
+	footer span.last {
+		float:right;
+	}
+/*Fin Region footer-container*/
+
+}
+/*FIN ESTILO movil 480 x 640*/
+
+@media only screen and (min-width: 768px) {
+/* ESTILO tablet 768 x 1024*/
+
+/* Region header-container*/
+	#header-container{
+        -webkit-box-shadow: 0 5px 10px #aaa;
+           -moz-box-shadow: 0 5px 10px #aaa;
+                box-shadow: 0 5px 10px #aaa;
+    }
+
+	nav ul{
+		display:block;
+		overflow:hidden;
+		width:100%;
+		margin:0;
+		padding: 0;
+	}
+	nav ul li{ 
+		display:inline-block;
+		width:23%;
+		text-align:center;
+	}
+
+/* Fin Region header-container*/
+
+/* Region main-container*/
+	.main span.first {
+        float: left;
+        width: 60%;
+    }
+	.main span.last {
+        float: right;
+		width: 35%;
+    }
+	
+	.main aside {
+        -webkit-box-shadow: 0 5px 10px #aaa;
+           -moz-box-shadow: 0 5px 10px #aaa;
+                box-shadow: 0 5px 10px #aaa;
+    }
+/* Fin Region main-container*/
+/* Region footer-container*/
+	
+	
+/* Fin Region footer-container*/
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+
+}
+@media only screen and (min-width: 1200px) {
+
+/* ===============
+    Maximal Width
+   =============== */
+
+    .wrapper {
+        width: 1026px; /* 1140px - 10% for margins */
+        margin: 0 auto;
+    }
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
