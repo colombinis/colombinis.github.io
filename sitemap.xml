@@ -7,32 +7,33 @@
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 <url>
-  <loc>http://www.sacsi.com.ar/</loc>
+  <loc>https://sacsi.com.ar/</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/index.php</loc>
+  <loc>https://sacsi.com.ar/sobre-nosotros.html</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/sobre-nosotros.php</loc>
+  <loc>https://sacsi.com.ar/contacto.html</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/contacto.php</loc>
+  <loc>https://sacsi.com.ar/programacion-sistemas-a-medida.html</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/programacion-sistemas-a-medida.php</loc>
+  <loc>https://sacsi.com.ar/desarrollo-web-facebook-comercio-electronico.html</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/desarrollo-web-facebook-comercio-electronico.php</loc>
+  <loc>https://sacsi.com.ar/automatizacion-procesos.html</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>http://www.sacsi.com.ar/automatizacion-procesos.php</loc>
+  <loc>https://sacsi.com.ar/inteligencia-artificial/</loc>
   <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
 </url>
 
 </urlset>
