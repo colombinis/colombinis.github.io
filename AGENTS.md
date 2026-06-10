@@ -8,7 +8,9 @@ Rebranding the SACsi website (soluciones informáticas, Rosario, Argentina) from
 - **Production URL:** https://sacsi.com.ar
 - **Owner:** Sebastian (colombinis@gmail.com)
 - **Language:** Spanish (Rioplatense) — all user-facing content is in Argentine Spanish
-- **Current Phase:** Fase 0-1 (Foundation + Structure)
+- **Current Phase:** Fase 1 (Structure)
+- **Default Branch:** master
+- **Working Branch:** rebranding_20260610
 
 ## Tech Stack
 
@@ -16,6 +18,7 @@ Rebranding the SACsi website (soluciones informáticas, Rosario, Argentina) from
 - **Hosting:** GitHub Pages
 - **CI:** Jenkins (see `Jenkinsfile` at root)
 - **Domain:** sacsi.com.ar (managed via `CNAME`)
+- **Analytics:** Google Tag Manager + GA4
 
 ## Design System
 
@@ -33,6 +36,8 @@ The design tokens are defined in `DESIGN.md` — **that is the single source of 
 
 **Typography:** System font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif`)
 **Approach:** Mobile-first responsive design
+**Rounded corners:** xs=4px, sm=8px, md=16px, full=100px
+**Spacing:** xs=4px → xxl=80px, container=1120px
 
 ## Project Structure
 
@@ -74,20 +79,73 @@ The design tokens are defined in `DESIGN.md` — **that is the single source of 
 
 ## Coding Conventions
 
-1. **Mobile-first** — design and test for mobile widths first, then scale up
-2. **Semantic HTML** — use `<header>`, `<main>`, `<section>`, `<footer>`, etc.
-3. **CSS custom properties** — reference design tokens from DESIGN.md where possible
-4. **Spanish content** — all text on the site is in Argentine Spanish (rioplatense)
-5. **No external dependencies** — no npm, no build tools, no CDN frameworks
-6. **Accessibility** — use semantic elements, proper heading hierarchy, alt text on images
+### HTML
+- **Semantic HTML** — use `<header>`, `<main>`, `<section>`, `<footer>`, `<nav>`, `<article>`
+- Proper heading hierarchy: one `<h1>` per page, sequential `h1`→`h2`→`h3`
+- All images MUST have descriptive `alt` attributes
+- Forms must have labeled inputs (`<label>` or `aria-label`)
+
+### CSS
+- **Mobile-first responsive design** — write base styles for mobile, use `@media (min-width:)` for larger screens
+- Use CSS custom properties (reference DESIGN.md tokens: `var(--primary)`, `var(--tertiary)`, etc.)
+- Class naming: BEM-like convention or descriptive kebab-case
+- Avoid `!important` — use specificity instead
+- No CSS frameworks allowed (no Bootstrap, Tailwind, etc.)
+
+### JavaScript
+- Vanilla JS only — no frameworks, no jQuery, no npm packages
+- Use `defer` or place scripts before `</body>`
+- No inline event handlers (`onclick`, etc.) — use `addEventListener` in JS files
+- Always handle errors in async operations (fetch, timeouts)
+
+### General
+- **No external dependencies** — no npm, no build tools, no CDN frameworks
+- All user-facing content in **Argentine Spanish (rioplatense)** — not neutral Spanish
+- Tone: professional but approachable ("cercano")
+- Performance: Lighthouse > 80 in all 4 categories
+- Must be accessible: semantic HTML, proper heading hierarchy, alt text
 
 ## Git Workflow
 
-1. Branch from `master` using naming convention: `feat/description`, `fix/description`, `docs/description`
-2. Commit with conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `style:`
-3. Push branch and create PR to `master`
-4. CI runs via Jenkins (`Jenkinsfile`)
-5. Squash-merge to `master` when approved
+1. Always work on branch `rebranding_20260610` (never commit directly to master)
+2. Commit with conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `style:`, `test:`
+3. Include a description body for non-trivial commits
+4. CI runs via Jenkins (`Jenkinsfile`) — verify the build passes
+5. All changes land via squash-merge PR to `master`
+
+## Best Practices for Coding Agents
+
+### Before Implementing
+- **Explore first, then plan, then code** — read relevant files before making changes
+- Reference `DESIGN.md` for colors, typography, spacing, and component specs
+- Read existing files to understand current patterns before adding new ones
+- For multi-file changes, consider the dependency order
+
+### During Implementation
+- **Give yourself a way to verify your work** — run tests, build, or take screenshots
+- Make focused, single-purpose changes per commit
+- Do NOT change CNAME unless explicitly asked
+- Do NOT modify files unrelated to the task
+- Do NOT leave commented-out code, debug logs, or console.log statements
+
+### Security (MANDATORY — auto-fail if violated)
+- No hardcoded secrets, API keys, tokens, or credentials in code
+- No `eval()`, `exec()`, or `document.write()` with user input
+- No `innerHTML` with unsanitized user data (use `textContent` instead)
+- No inline event handlers (`onclick="..."`) in HTML
+- External links must use `rel="noopener noreferrer"`
+
+### Code Quality
+- Write meaningful comments for non-obvious logic (but prefer self-documenting code)
+- Keep functions small and single-purpose
+- Use descriptive variable and function names in Spanish or English (consistent)
+- Avoid deep nesting — early return where possible
+- Ensure no regressions: check that existing pages still work after changes
+
+### After Implementing
+- Run the verification check (build, Lighthouse, visual comparison)
+- Request a code review before marking as complete
+- Verify on mobile widths first, then tablet, then desktop
 
 ## Quick Start
 
@@ -95,6 +153,9 @@ The design tokens are defined in `DESIGN.md` — **that is the single source of 
 # Clone
 git clone https://github.com/colombinis/colombinis.github.io.git
 cd colombinis.github.io
+
+# Checkout working branch
+git checkout rebranding_20260610
 
 # No build step needed — open index.html in a browser
 # Or serve locally:
@@ -109,3 +170,11 @@ python3 -m http.server 8000
 - Do NOT change the CNAME file unless explicitly asked
 - All new pages should match the mobile-first responsive layout
 - When in doubt about content tone: professional but approachable (cercano)
+- All user-facing content is in Argentine Spanish
+
+## Reference Documentation
+
+- Plan de Rebranding: `docs/wiki/Plan-de-Rebranding.md`
+- Design tokens: `DESIGN.md`
+- Glosario: `docs/wiki/Glosario.md`
+- Wiki home: `docs/wiki/Home.md`
