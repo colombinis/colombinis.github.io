@@ -8,7 +8,7 @@ Renovar la identidad digital de SACsi, pasando de un diseno antiguo (theme mobil
 
 ### Fase 0 — Fundacion
 - Crear DESIGN.md con tokens de marca
-- Verificar que no existen referencias a inspire.software en el repositorio (completado)
+- Verificar que no existen referencias a la empresa de inspiración original en el repositorio (completado)
 - Documentar proyecto en esta wiki
 
 ### Fase 1 — Estructura
