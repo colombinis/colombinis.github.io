@@ -7,6 +7,8 @@ Bienvenido a la documentación del proyecto de rebranding de SACsi.
 - [Plan de Rebranding](Plan-de-Rebranding)
 - [DESIGN.md — Tokens de Marca](https://github.com/colombinis/colombinis.github.io/blob/master/DESIGN.md)
 - [Glosario](Glosario)
+- [SITEMAP — Arquitectura de Contenido](SITEMAP)
+- [SERVICE_COPY — Redacción de Servicios](SERVICE_COPY)
 
 ## Propuesta de Valor — F1 (Issue #20)
 
