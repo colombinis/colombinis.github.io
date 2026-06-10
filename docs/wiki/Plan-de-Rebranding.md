@@ -7,7 +7,7 @@ Renovar la identidad digital de SACsi, pasando de un diseno antiguo (theme mobil
 ## Fases
 
 ### Fase 0 — Fundacion
-- Crear DESIGN.md con tokens de marca
+- Crear DESIGN.md con tokens de marca (completado)
 - Verificar que no existen referencias a la empresa de inspiración original en el repositorio (completado)
 - Documentar proyecto en esta wiki
 
