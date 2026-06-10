@@ -58,7 +58,7 @@ Funciona así:
 4. **Lo ajustamos** hasta que quede justo como lo imaginaste
 
 ### Claim medible
-> **"Sistemas que crecen con tu empresa, sin límites ni costos ocultos."**
+> **"Sistemas hechos a tu medida, hasta un 50% más rápido que adaptar un programa genérico."**
 
 ### CTA
 > **"Pedí tu sistema a medida"** — Contanos tu idea sin compromiso
@@ -92,7 +92,7 @@ Funciona así:
 3. **Lo publicamos** y te explicamos cómo manejarlo vos mismo si querés
 
 ### Claim medible
-> **"Llevá tu negocio a internet y empezá a vender 24/7."**
+> **"Llevá tu negocio a internet y empezá a vender 24/7 — hasta duplicar tus consultas online."**
 
 ### CTA
 > **"Creamos tu presencia online"** — Empezá hoy con una consulta sin cargo
