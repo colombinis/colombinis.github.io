@@ -83,7 +83,7 @@
 
         <div id="main-container">
             <div class="main wrapper clearfix">
-				<section id="contacto" class='clearfix'>
+				<section id="contacto" class='clearfix' data-section="hero">
     <span class="first">
         <figure>
                 <div class='overimg'>
@@ -105,7 +105,7 @@
             No te quedes con ninguna duda. Si esta interesado en saber mas sobre este tipo de servicio dejenos un mensaje por whatsapp 
         </p>
         <p>
-            <a id="whatsapp_ico" target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre:%20..." title="whatsapp"><span>whatsapp</span></a>
+            <a id="whatsapp_ico" target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre:%20..." title="whatsapp" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'hero'});"><span>whatsapp</span></a>
         </p>
         <p>
             O llamanos por tel&eacute;fono    
@@ -125,7 +125,7 @@
             <footer class="wrapper clearfix">
                 <span class="first">
                     <ul id="menusocial">
-                            <li><a id="whatsapp_ico" target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre:%20..." title="whatsapp"><span>whatsapp</span></a></li>
+                            <li><a id="whatsapp_ico" target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre:%20..." title="whatsapp" onclick="dataLayer.push({'event': 'whatsapp_click', 'location': 'footer'});"><span>whatsapp</span></a></li>
                             <li><a id="facebook_ico" target="_blank" href="https://m.me/sacsi" title="facebook"><span>facebook</span></a></li>
                             <li><a id="telefono_ico" target="_blank" href="tel:3415197937"><span>LL&aacute;manos.</span></a></li>
                     </ul>
@@ -136,6 +136,23 @@
             </footer>
         </div>
         
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sections = document.querySelectorAll('[data-section]');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        dataLayer.push({
+                            'event': 'section_view',
+                            'section': entry.target.getAttribute('data-section')
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            sections.forEach(function(s) { observer.observe(s); });
+        });
+        </script>
     
     </body>
 </html>

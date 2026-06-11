@@ -613,18 +613,18 @@
             </header>
         </div>
 
-        <section class="hero">
+        <section class="hero" data-section="hero">
             <div class="hero__container">
                 <p class="hero__label">SERVICIO</p>
                 <h1 class="hero__title">Presencia Online</h1>
                 <p class="hero__subtitle">Tu negocio en internet, listo para vender 24/7. Sitio web profesional o tienda online, sin complicaciones.</p>
                 <div class="hero__actions">
-                    <a class="hero__cta" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico" rel="noopener noreferrer" target="_blank">Empezá hoy</a>
+                    <a class="hero__cta" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico" rel="noopener noreferrer" target="_blank" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'hero'});">Empezá hoy</a>
                 </div>
             </div>
         </section>
 
-        <section id="problema" class="section">
+        <section id="problema" class="section" data-section="servicios">
             <div class="container">
                 <h2 class="section__title">El problema que resolvemos</h2>
                 <div class="problem-box">
@@ -633,7 +633,7 @@
             </div>
         </section>
 
-        <section id="solucion" class="section section--alt">
+        <section id="solucion" class="section section--alt" data-section="servicios">
             <div class="container">
                 <h2 class="section__title">La solución que ofrecemos</h2>
                 <div class="solution-text">
@@ -643,7 +643,7 @@
             </div>
         </section>
 
-        <section id="beneficios" class="section">
+        <section id="beneficios" class="section" data-section="servicios">
             <div class="container">
                 <h2 class="section__title">Resultados medibles</h2>
                 <div class="claim-box">
@@ -652,7 +652,7 @@
             </div>
         </section>
 
-        <section id="ejemplos" class="section section--alt">
+        <section id="ejemplos" class="section section--alt" data-section="servicios">
             <div class="container">
                 <h2 class="section__title">Ejemplos concretos</h2>
                 <ul class="examples-list">
@@ -664,7 +664,7 @@
             </div>
         </section>
 
-        <section id="como-funciona" class="section">
+        <section id="como-funciona" class="section" data-section="como-trabajamos">
             <div class="container">
                 <h2 class="section__title">Cómo funciona</h2>
                 <div class="steps">
@@ -688,7 +688,7 @@
         </section>
 
         <!-- Testimonios -->
-        <section class="section section--alt testimonios">
+        <section class="section section--alt testimonios" data-section="social-proof">
             <div class="container">
                 <h2 class="section__title" style="text-align:center; margin-bottom:var(--spacing-xl);">
                     Lo que dicen nuestros clientes
@@ -719,13 +719,13 @@
             </div>
         </section>
 
-        <section id="cta-final" class="cta-final">
+        <section id="cta-final" class="cta-final" data-section="cta-final">
             <div class="container">
                 <h2>¿Listo para estar online?</h2>
                 <p class="cta-final__subtitle">Empezá hoy con una consulta sin cargo. Te contamos cómo llevar tu negocio a internet.</p>
                 <div class="cta-final__actions">
-                    <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online" rel="noopener noreferrer" target="_blank">Empezá hoy</a>
-                    <a class="cta-final__outline" href="/contacto.html">Completá el formulario</a>
+                    <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online" rel="noopener noreferrer" target="_blank" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'cta-final'});">Empezá hoy</a>
+                    <a class="cta-final__outline" href="/contacto.html" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'outline', 'cta_location': 'cta-final'});">Completá el formulario</a>
                 </div>
             </div>
         </section>
@@ -733,7 +733,7 @@
         <div id="footer-container">
             <footer class="wrapper">
                 <ul id="menusocial">
-                    <li><a target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones" rel="noopener noreferrer">WhatsApp</a></li>
+                    <li><a target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones" rel="noopener noreferrer" onclick="dataLayer.push({'event': 'whatsapp_click', 'location': 'footer'});">WhatsApp</a></li>
                     <li><a target="_blank" href="https://m.me/sacsi" rel="noopener noreferrer">Facebook</a></li>
                     <li><a target="_blank" href="tel:3415197937">Llamanos</a></li>
                 </ul>
@@ -744,6 +744,24 @@
             document.querySelector('.hamburger').addEventListener('click', function() {
                 document.getElementById('nav-menu').classList.toggle('active');
             });
+        </script>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var sections = document.querySelectorAll('[data-section]');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        dataLayer.push({
+                            'event': 'section_view',
+                            'section': entry.target.getAttribute('data-section')
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            sections.forEach(function(s) { observer.observe(s); });
+        });
         </script>
 
     </body>

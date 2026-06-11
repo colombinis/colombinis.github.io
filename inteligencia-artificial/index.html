@@ -277,20 +277,20 @@
     </div>
 
     <!-- Hero -->
-    <section class="hero">
+    <section class="hero" data-section="hero">
         <div class="container">
             <span class="tag">Consultoria en Inteligencia Artificial</span>
             <h1>Automatizamos tus flujos de trabajo con <span>agentes de IA</span> personalizados</h1>
             <p>Transformamos procesos repetitivos en sistemas autonomos. Creamos agentes inteligentes que trabajan 24/7 para hacer crecer tu negocio.</p>
             <div class="cta-group">
-                <a href="#contacto" class="btn btn-primary">Agenda una llamada gratuita</a>
-                <a href="#servicios" class="btn btn-outline">Ver servicios</a>
+                <a href="#contacto" class="btn btn-primary" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'hero'});">Agenda una llamada gratuita</a>
+                <a href="#servicios" class="btn btn-outline" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'outline', 'cta_location': 'hero'});">Ver servicios</a>
             </div>
         </div>
     </section>
 
     <!-- Services -->
-    <section id="servicios">
+    <section id="servicios" data-section="servicios">
         <div class="container">
             <h2>Servicios de IA para tu empresa</h2>
             <p class="subtitle">Soluciones concretas, desde el diagnostico hasta la implementacion y el soporte continuo.</p>
@@ -342,7 +342,7 @@
     </section>
 
     <!-- How it works -->
-    <section id="metodo">
+    <section id="metodo" data-section="como-trabajamos">
         <div class="container">
             <h2>Como trabajamos</h2>
             <p class="subtitle">Un proceso probado que minimiza riesgos y maximiza resultados.</p>
@@ -372,7 +372,7 @@
     </section>
 
     <!-- Differentiators / Why us -->
-    <section>
+    <section data-section="social-proof">
         <div class="container">
             <h2>Por que SACsi</h2>
             <p class="subtitle">No solo vendemos tecnologia. Entendemos tu negocio y construimos soluciones que funcionan.</p>
@@ -398,11 +398,11 @@
     </section>
 
     <!-- CTA Final -->
-    <section id="contacto">
+    <section id="contacto" data-section="cta-final">
         <div class="container">
             <h2>Transforma tu empresa con IA</h2>
             <p>Agenda una llamada de 30 minutos sin costo. Te contamos que es posible automatizar y cuanto podrias ahorrar.</p>
-            <a href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre%20consultoria%20IA" target="_blank" class="btn btn-whatsapp">
+            <a href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre%20consultoria%20IA" target="_blank" class="btn btn-whatsapp" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'cta-final'});">
                 Escribinos por WhatsApp
             </a>
             <p class="small">Tambien podes llamarnos al <a href="tel:3415197937" style="color:rgba(255,255,255,0.7); text-decoration:underline;">341 519-7937</a></p>
@@ -415,5 +415,23 @@
             <p>&copy; 2026 <a href="https://sacsi.com.ar/">SACsi</a> — Soluciones Informaticas &middot; Rosario, Santa Fe, Argentina</p>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var sections = document.querySelectorAll('[data-section]');
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    dataLayer.push({
+                        'event': 'section_view',
+                        'section': entry.target.getAttribute('data-section')
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        sections.forEach(function(s) { observer.observe(s); });
+    });
+    </script>
 </body>
 </html>
