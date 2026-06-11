@@ -377,7 +377,7 @@
             /* Metrics */
             .metrics-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: var(--spacing-lg);
                 text-align: center;
             }
@@ -394,6 +394,43 @@
                 font-size: 0.93rem;
                 color: var(--secondary);
                 margin: 0;
+            }
+
+            /* Testimonials */
+            .testimonials {
+                margin-top: var(--spacing-xl);
+            }
+
+            .testimonials-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-lg);
+            }
+
+            .testimonial-card {
+                background: #F9F9FB;
+                border-radius: var(--rounded-md);
+                padding: 24px;
+            }
+
+            .testimonial-card__quote {
+                font-size: 0.93rem;
+                line-height: 1.6;
+                color: var(--secondary);
+                margin: 0 0 var(--spacing-md);
+                font-style: italic;
+            }
+
+            .testimonial-card__author {
+                font-weight: 600;
+                color: var(--primary);
+                margin: 0;
+            }
+
+            .testimonial-card__role {
+                font-size: 0.85rem;
+                color: var(--muted);
+                margin: 2px 0 0;
             }
 
             /* FAQ Accordion */
@@ -589,8 +626,12 @@
                 }
 
                 .metrics-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: var(--spacing-lg);
+                }
+
+                .testimonials-grid {
                     grid-template-columns: 1fr;
-                    gap: var(--spacing-xl);
                 }
 
                 .cta-final {
@@ -720,7 +761,7 @@
             </div>
         </section>
 
-        <section id="metricas" class="section">
+        <section id="social-proof" class="section">
             <div class="container">
                 <h2 class="section__title">Resultados que hablan</h2>
                 <div class="metrics-grid">
@@ -734,7 +775,31 @@
                     </div>
                     <div class="metric">
                         <p class="metric__number">50+</p>
-                        <p class="metric__label">PyMEs asistidas</p>
+                        <p class="metric__label">clientes satisfechos</p>
+                    </div>
+                    <div class="metric">
+                        <p class="metric__number">2</p>
+                        <p class="metric__label">semanas a tu primer prototipo</p>
+                    </div>
+                </div>
+
+                <div class="testimonials">
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <p class="testimonial-card__quote">"Trabajar con SACsi nos cambió la forma de administrar el negocio. Lo que antes nos llevaba días, ahora lo hacemos en horas. Son un golazo."</p>
+                            <p class="testimonial-card__author">Carina Mendoza</p>
+                            <p class="testimonial-card__role">Gerenta de Administración — Distribuidora del Sur</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-card__quote">"Necesitábamos una solución simple que nuestros empleados pudieran usar sin ser expertos en tecnología. SACsi entendió al toque lo que buscábamos."</p>
+                            <p class="testimonial-card__author">Gonzalo Martínez</p>
+                            <p class="testimonial-card__role">Dueño — Ferretería Martínez Hnos.</p>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-card__quote">"El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos."</p>
+                            <p class="testimonial-card__author">Romina Paz</p>
+                            <p class="testimonial-card__role">CEO — Grupo Logístico Central</p>
+                        </div>
                     </div>
                 </div>
             </div>
