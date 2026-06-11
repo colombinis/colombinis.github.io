@@ -810,33 +810,39 @@
                 <h2 class="section__title">Preguntas frecuentes</h2>
                 <div class="faq-list">
                     <div class="faq-item">
-                        <button class="faq-question">¿Cuánto cuesta un desarrollo?</button>
-                        <div class="faq-answer">
-                            <p>Depende de lo que necesites. Por eso primero tenemos una conversación sin cargo para entender tu proyecto, y ahí te damos un presupuesto claro y sin compromiso. No creemos en los misterios con los precios.</p>
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">¿Cuánto cuesta un desarrollo?</button>
+                        <div class="faq-answer" id="faq-answer-1">
+                            <p>Los proyectos chicos arrancan desde los $150.000 ARS. El precio final depende del alcance y la complejidad. Por eso primero tenemos una conversación sin cargo para entender tu proyecto, y ahí te damos un presupuesto claro y sin compromiso. No creemos en los misterios con los precios.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">¿Cuánto tiempo lleva?</button>
-                        <div class="faq-answer">
-                            <p>Cada proyecto es distinto, pero trabajamos con entregas periódicas. Un sitio web puede estar listo en semanas; un sistema a medida, en meses. Siempre te damos tiempos realistas y te mostramos avances constantes.</p>
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">¿Cuánto tiempo lleva?</button>
+                        <div class="faq-answer" id="faq-answer-2">
+                            <p>Depende del proyecto: un sitio web puede estar listo en 2 a 4 semanas, mientras que un sistema a medida lleva entre 4 y 12 semanas. Trabajamos con entregas periódicas y siempre te mostramos avances constantes.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">¿Necesito saber de tecnología?</button>
-                        <div class="faq-answer">
-                            <p>Para nada. Nosotros nos encargamos de la parte técnica. Vos solo necesitás contarnos qué problema querés resolver. Hablamos en tu idioma, no en código.</p>
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">¿Necesito saber de tecnología?</button>
+                        <div class="faq-answer" id="faq-answer-3">
+                            <p>Para nada. Nosotros nos encargamos de toda la parte técnica. Vos solo necesitás contarnos qué problema querés resolver. Hablamos en tu idioma, no en código. Usamos tecnologías modernas como Python, JavaScript y bases de datos SQL para construir tu solución.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">¿Dan soporte después de entregar?</button>
-                        <div class="faq-answer">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">¿Dan soporte después de entregar?</button>
+                        <div class="faq-answer" id="faq-answer-4">
                             <p>Sí, siempre. No somos de los que desaparecen. Te damos soporte continuo y hacemos los ajustes que sean necesarios después de la entrega.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">¿Trabajan con empresas fuera de Rosario?</button>
-                        <div class="faq-answer">
-                            <p>¡Sí! Trabajamos con clientes de toda Argentina. Todo se puede coordinar por videollamada, teléfono o mail. No hace falta que estés en Rosario.</p>
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">¿Trabajan con empresas fuera de Rosario?</button>
+                        <div class="faq-answer" id="faq-answer-5">
+                            <p>¡Sí! Trabajamos con clientes de toda Argentina y del exterior. Todo se coordina por videollamada, teléfono o mail. No hace falta que estés en Rosario.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">¿Qué servicios ofrecen exactamente?</button>
+                        <div class="faq-answer" id="faq-answer-6">
+                            <p>Ofrecemos tres servicios principales: <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología), <strong>desarrollo de software a medida</strong> (creamos sistemas que se adaptan exactamente a tu negocio), y <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales). Si no estás seguro de cuál necesitás, podemos asesorarte sin compromiso.</p>
                         </div>
                     </div>
                 </div>
@@ -879,11 +885,13 @@
                     });
                     document.querySelectorAll('.faq-question.active').forEach(function(q) {
                         q.classList.remove('active');
+                        q.setAttribute('aria-expanded', 'false');
                     });
 
                     if (!isOpen) {
                         answer.classList.add('open');
                         this.classList.add('active');
+                        this.setAttribute('aria-expanded', 'true');
                     }
                 });
             });
