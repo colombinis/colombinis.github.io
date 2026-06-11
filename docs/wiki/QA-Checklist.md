@@ -10,7 +10,7 @@
 
 - [x] DESIGN.md creado con tokens de marca
 - [x] DESIGN.md validado con `npx @google/design.md lint DESIGN.md` (0 errores)
-- [x] Referencias a inspire.software anonimizadas (0 ocurrencias restantes)
+- [x] Referencias a la empresa de inspiracion original eliminadas (0 ocurrencias restantes)
 - [x] Documentación en `docs/wiki/` — 7 páginas creadas
 
 ## Fase 1 — Estructura ✅
