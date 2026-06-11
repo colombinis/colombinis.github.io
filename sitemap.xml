@@ -35,5 +35,20 @@
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
+<url>
+  <loc>https://sacsi.com.ar/servicios/presencia-online.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://sacsi.com.ar/servicios/software-a-medida.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://sacsi.com.ar/servicios/automatizacion.html</loc>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 
 </urlset>
