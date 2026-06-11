@@ -442,6 +442,30 @@
                 color: #FFFFFF;
             }
 
+            /* Testimonials */
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .testimonial-card p {
+                font-size: 1rem;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .testimonial-card footer strong {
+                display: block;
+                color: var(--primary);
+                font-size: 0.95rem;
+            }
+
+            .testimonial-card footer span {
+                display: block;
+                font-size: 0.85rem;
+                color: var(--muted);
+            }
+
             /* Responsive */
             @media (max-width: 600px) {
                 h2 {
@@ -535,6 +559,10 @@
                 .cta-final__outline {
                     width: 100%;
                     text-align: center;
+                }
+
+                .testimonials-grid {
+                    grid-template-columns: 1fr;
                 }
             }
         </style>
@@ -650,6 +678,38 @@
                         <h3>Lo ponemos a funcionar</h3>
                         <p>Mientras vos seguís trabajando, el sistema ya está corriendo.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios -->
+        <section class="section section--alt testimonios">
+            <div class="container">
+                <h2 class="section__title" style="text-align:center; margin-bottom:var(--spacing-xl);">
+                    Lo que dicen nuestros clientes
+                </h2>
+                <div class="testimonials-grid" style="display:grid; gap:var(--spacing-lg);">
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;Desde que automatizamos la facturación, ahorramos horas todos los días. Antes perdíamos toda una mañana, ahora se genera solo mientras tomamos mate.&rdquo;</p>
+                        <footer>
+                            <strong>Carina Mendoza</strong>
+                            <span>Gerenta de Operaciones &mdash; Distribuidora del Sur</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;El sistema de sincronización de stock nos sacó un problema enorme. Ya no vendemos cosas que no tenemos y los precios se actualizan solos. SACsi nos entendió rápido.&rdquo;</p>
+                        <footer>
+                            <strong>Gonzalo Martinez</strong>
+                            <span>Dueño &mdash; Ferretería Martínez Hnos.</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;Los reportes automáticos nos cambiaron la gestión. Llegan todos los días sin que nadie los pida. Esa visibilidad que ganamos sobre la operación no tiene precio.&rdquo;</p>
+                        <footer>
+                            <strong>Romina Paz</strong>
+                            <span>Gerenta de Logística &mdash; Grupo Logístico Central</span>
+                        </footer>
+                    </blockquote>
                 </div>
             </div>
         </section>

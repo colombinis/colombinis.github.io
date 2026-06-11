@@ -438,6 +438,30 @@
                 color: #FFFFFF;
             }
 
+            /* Testimonials */
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .testimonial-card p {
+                font-size: 1rem;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .testimonial-card footer strong {
+                display: block;
+                color: var(--primary);
+                font-size: 0.95rem;
+            }
+
+            .testimonial-card footer span {
+                display: block;
+                font-size: 0.85rem;
+                color: var(--muted);
+            }
+
             /* Responsive */
             @media (max-width: 600px) {
                 h2 {
@@ -527,6 +551,10 @@
                 .cta-final__outline {
                     width: 100%;
                     text-align: center;
+                }
+
+                .testimonials-grid {
+                    grid-template-columns: 1fr;
                 }
             }
         </style>
@@ -642,6 +670,38 @@
                         <h3>Publicamos</h3>
                         <p>Lo subimos y te explicamos cómo manejarlo vos mismo si querés.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios -->
+        <section class="section section--alt testimonios">
+            <div class="container">
+                <h2 class="section__title" style="text-align:center; margin-bottom:var(--spacing-xl);">
+                    Lo que dicen nuestros clientes
+                </h2>
+                <div class="testimonials-grid" style="display:grid; gap:var(--spacing-lg);">
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;Nuestra página web nos duplicó las consultas. Los clientes nos encuentran, ven lo que hacemos y nos escriben directo. Sencillo, profesional y efectivo.&rdquo;</p>
+                        <footer>
+                            <strong>Carina Mendoza</strong>
+                            <span>Gerenta de Operaciones &mdash; Distribuidora del Sur</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;La tienda online nos abrió un canal que antes no teníamos. Ahora vendemos las 24 horas, incluso cuando el negocio está cerrado. Muy fácil de administrar.&rdquo;</p>
+                        <footer>
+                            <strong>Gonzalo Martinez</strong>
+                            <span>Dueño &mdash; Ferretería Martínez Hnos.</span>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonial-card" style="background:var(--surface); border-radius:var(--rounded-md); padding:28px 24px 32px; box-shadow:0 4px 12px rgba(0,0,0,0.04);">
+                        <p>&ldquo;Queríamos algo simple y profesional para mostrar nuestros servicios. La web que nos hicieron es exactamente eso: limpia, moderna y fácil de actualizar nosotras mismas.&rdquo;</p>
+                        <footer>
+                            <strong>Romina Paz</strong>
+                            <span>Gerenta de Logística &mdash; Grupo Logístico Central</span>
+                        </footer>
+                    </blockquote>
                 </div>
             </div>
         </section>
