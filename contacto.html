@@ -544,8 +544,21 @@
 
             document.getElementById('contact-form').addEventListener('submit', function(e) {
                 e.preventDefault();
-                dataLayer.push({'event': 'form_submit'});
-                document.getElementById('success-message').classList.add('show');
+                var formData = new FormData(this);
+                var nombre = formData.get('nombre');
+                var email = formData.get('email');
+                var telefono = formData.get('telefono');
+                var mensaje = formData.get('mensaje');
+                
+                var body = 'Nombre: ' + encodeURIComponent(nombre) + 
+                           '%0AEmail: ' + encodeURIComponent(email) + 
+                           '%0ATelefono: ' + encodeURIComponent(telefono) + 
+                           '%0A%0AMensaje:%0A' + encodeURIComponent(mensaje);
+                var mailto = 'mailto:colombinis@sacsi.com.ar?subject=Consulta%20desde%20SACsi&body=' + body;
+                
+                window.location.href = mailto;
+                
+                document.querySelector('.success-message').classList.add('show');
                 this.reset();
             });
         </script>
