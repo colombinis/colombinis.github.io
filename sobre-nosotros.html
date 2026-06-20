@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="no-js">
     <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -12,11 +9,10 @@
     })(window,document,'script','dataLayer','GTM-T7PWJ99');</script>
     <!-- End Google Tag Manager -->
 
-
         <title>Sobre Nosotros — SACsi | Soluciones Informáticas</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="keywords" content="soluciones informaticas, automatizacion de procesos, software a medida, desarrollo web, Rosario, Argentina, PyMEs, presencia online" />
         <meta name="description" content="Conocé a SACsi, soluciones informáticas en Rosario. Más de 15 años ayudando a PyMEs con automatización, software a medida y presencia online.">
@@ -34,19 +30,433 @@
 
         <link rel="canonical" href="https://sacsi.com.ar/sobre-nosotros.html" />
 
-        <link rel="shortcut icon" href="https://sacsi.com.ar/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico">
 
-        <link rel="stylesheet" href="https://sacsi.com.ar/theme/mobile1/css/normalize.css">
-        <link rel="stylesheet" href="https://sacsi.com.ar/theme/mobile1/css/main.css">
-        
-                
+        <style>
+            :root {
+                --primary: #1A1A2E;
+                --secondary: #555555;
+                --tertiary: #0A7CFF;
+                --neutral: #FAFAFA;
+                --surface: #FFFFFF;
+                --muted: #888888;
+                --whatsapp: #25D366;
+                --whatsapp-dark: #128C7E;
+                --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+                --rounded-sm: 8px;
+                --rounded-md: 16px;
+                --rounded-full: 100px;
+                --spacing-xs: 4px;
+                --spacing-sm: 8px;
+                --spacing-md: 16px;
+                --spacing-lg: 24px;
+                --spacing-xl: 32px;
+                --spacing-xxl: 80px;
+                --container: 1120px;
+            }
+
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: var(--font-stack);
+                color: var(--secondary);
+                background: var(--neutral);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a {
+                color: var(--tertiary);
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: var(--tertiary);
+            }
+
+            h2 {
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.3;
+                letter-spacing: -0.01em;
+                color: var(--primary);
+                margin: 0 0 var(--spacing-md);
+            }
+
+            h3 {
+                font-size: 1.15rem;
+                font-weight: 600;
+                line-height: 1.4;
+                color: var(--primary);
+                margin: 0 0 var(--spacing-sm);
+            }
+
+            p {
+                margin: 0 0 var(--spacing-md);
+            }
+
+            /* Navigation */
+            #header-container {
+                position: relative;
+                background: var(--surface);
+                border-bottom: 1px solid #E8E8E8;
+            }
+
+            header.wrapper {
+                max-width: var(--container);
+                margin: 0 auto;
+                padding: var(--spacing-md) var(--spacing-lg);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .logo {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo img {
+                height: 36px;
+                width: auto;
+                display: block;
+            }
+
+            .hamburger {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--primary);
+                padding: var(--spacing-xs);
+                line-height: 1;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                list-style: none;
+                margin: 0;
+                padding: var(--spacing-md);
+                box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+                display: none;
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                z-index: 100;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav li a {
+                display: block;
+                padding: var(--spacing-sm) var(--spacing-md);
+                color: var(--secondary);
+                font-weight: 500;
+                border-radius: var(--rounded-sm);
+                transition: background 0.2s ease;
+            }
+
+            nav li a:hover,
+            nav li a:focus {
+                background: var(--neutral);
+                color: var(--primary);
+            }
+
+            /* Sections base */
+            .section {
+                padding: var(--spacing-xxl) var(--spacing-lg);
+            }
+
+            .section--alt {
+                background: var(--surface);
+            }
+
+            .container {
+                max-width: var(--container);
+                margin: 0 auto;
+            }
+
+            .section__title {
+                text-align: center;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            /* About Hero */
+            .about-hero {
+                text-align: center;
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
+            .about-hero .hero__label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--tertiary);
+                margin: 0 0 var(--spacing-sm);
+            }
+
+            .about-hero .hero__title {
+                font-size: 2rem;
+                font-weight: 700;
+                line-height: 1.2;
+                letter-spacing: -0.02em;
+                color: var(--primary);
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .about-hero .hero__subtitle {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: var(--secondary);
+                margin: 0 auto var(--spacing-xl);
+                max-width: 560px;
+            }
+
+            /* Values grid */
+            .values-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+                max-width: var(--container);
+                margin: 0 auto;
+            }
+
+            .value-card {
+                background: var(--surface);
+                border-radius: var(--rounded-md);
+                padding: var(--spacing-xl) var(--spacing-lg);
+                text-align: center;
+                border: 1px solid #E8E8E8;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .value-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+            }
+
+            .value-card__icon {
+                width: 48px;
+                height: 48px;
+                background: var(--primary);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto var(--spacing-md);
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #FFFFFF;
+            }
+
+            .value-card h3 {
+                margin-bottom: var(--spacing-sm);
+            }
+
+            .value-card p {
+                font-size: 0.93rem;
+                line-height: 1.6;
+                color: var(--secondary);
+                margin: 0;
+            }
+
+            /* Principles section */
+            .principles {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .principle {
+                margin-bottom: var(--spacing-xl);
+                padding-bottom: var(--spacing-xl);
+                border-bottom: 1px solid #E8E8E8;
+            }
+
+            .principle:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .principle h3 {
+                color: var(--primary);
+            }
+
+            .principle p {
+                font-size: 1rem;
+                line-height: 1.7;
+                color: var(--secondary);
+            }
+
+            /* Team values */
+            .team-values {
+                max-width: 720px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .team-values h3 {
+                margin-bottom: var(--spacing-lg);
+            }
+
+            .team-values p {
+                font-size: 1rem;
+                line-height: 1.7;
+                color: var(--secondary);
+                margin-bottom: var(--spacing-md);
+            }
+
+            /* Footer */
+            #footer-container {
+                background: var(--surface);
+                border-top: 1px solid #E8E8E8;
+                padding: var(--spacing-lg);
+            }
+
+            footer.wrapper {
+                max-width: var(--container);
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: var(--spacing-md);
+            }
+
+            #menusocial {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: var(--spacing-md);
+            }
+
+            #menusocial li a {
+                font-size: 0.93rem;
+                color: var(--secondary);
+                transition: color 0.2s ease;
+            }
+
+            #menusocial li a:hover {
+                color: var(--tertiary);
+            }
+
+            .copyright {
+                font-size: 0.85rem;
+                color: var(--muted);
+                margin: 0;
+            }
+
+            /* Responsive - Desktop */
+            @media (min-width: 601px) {
+                h2 {
+                    font-size: 2rem;
+                }
+
+                h3 {
+                    font-size: 1.15rem;
+                }
+
+                header.wrapper {
+                    padding: var(--spacing-md) var(--spacing-lg);
+                }
+
+                .logo img {
+                    height: 36px;
+                }
+
+                .hamburger {
+                    display: none;
+                }
+
+                nav ul {
+                    position: static;
+                    display: flex !important;
+                    flex-direction: row;
+                    background: none;
+                    padding: 0;
+                    box-shadow: none;
+                    gap: var(--spacing-lg);
+                    z-index: auto;
+                }
+
+                nav li a {
+                    padding: var(--spacing-xs) 0;
+                    border-radius: 0;
+                }
+
+                nav li a:hover {
+                    background: none;
+                    color: var(--tertiary);
+                }
+
+                .section {
+                    padding: var(--spacing-xxl) var(--spacing-lg);
+                }
+
+                .about-hero .hero__title {
+                    font-size: 2.8rem;
+                }
+
+                .about-hero .hero__subtitle {
+                    font-size: 1rem;
+                }
+
+                .values-grid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+
+                footer.wrapper {
+                    flex-wrap: nowrap;
+                }
+            }
+        </style>
+
+        <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "SACsi",
+        "description": "Soluciones informáticas para PyMEs. Automatización, software a medida y presencia online.",
+        "url": "https://sacsi.com.ar",
+        "telephone": "+543415197937",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Rosario",
+            "addressRegion": "Santa Fe",
+            "addressCountry": "AR"
+        },
+        "priceRange": "$$",
+        "currenciesAccepted": "ARS",
+        "paymentAccepted": "Transfer, Card, Cash"
+    }
+    </script>
+
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
     </head>
     <body>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T7PWJ99"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-   
+
     <!-- Load Facebook SDK for JavaScript -->
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -68,11 +478,12 @@
 </div>
 
         <div id="header-container">
-            <header class="wrapper clearfix">
-                <span class="first"><h1 class="logo"><a href="index.html" title="SACsi - analisis, programacion y desarrollo de sistemas personalizados"><img src="/theme/mobile1/img/logo_sacsi.png" alt="SACsi- Desarrollo web rosario, Programación de sistemas a medida" /></a></h1></span>
+            <header class="wrapper">
+                <a class="logo" href="index.html" title="SACsi - soluciones informáticas"><img src="/theme/mobile1/img/logo_sacsi.png" alt="SACsi - Soluciones Informáticas" /></a>
                 <nav>
-                    <ul>
-                        <li><a href="index.html">Servicios</a></li>
+                    <button class="hamburger" aria-label="Menú de navegación">☰</button>
+                    <ul id="nav-menu">
+                        <li><a href="index.html#servicios">Servicios</a></li>
                         <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
                         <li><a href="contacto.html">Contacto</a></li>
                     </ul>
@@ -80,72 +491,115 @@
             </header>
         </div>
 
-        <div id="main-container">
-            <div class="main wrapper clearfix">
-				<section id="contacto" class='clearfix' data-section="hero">
-	<span class="first">
-		<aside class="clearfix">
-			<span class="fl">
-				<p><b>Sobre Nosotros</b></p>
-				<p>En <b>SACsi</b> Hemos acompa&ntilde;ado a muchas empresas, desde el año 1999.</p>
+        <main>
+            <section class="section" data-section="hero">
+                <div class="container">
+                    <div class="about-hero">
+                        <p class="hero__label">Empresa</p>
+                        <h1 class="hero__title">Más de 25 años simplificando tecnología para PyMEs</h1>
+                        <p class="hero__subtitle">Nacimos en 1999 en Rosario con una idea clara: la tecnología debe servir al negocio, no complicarlo. Desde entonces acompañamos a empresas argentinas a automatizar procesos, crear software a medida y vender online.</p>
+                    </div>
+                </div>
+            </section>
 
-				<p><b>SACsi es Velocidad de principio a fin</b><br/>
-				Nos eligen porque somos <b>r&aacute;pidos</b> a la hora de iniciar un proyecto y agil durante su desarrollo
-				Hacemos que lo dificil resulte facil y dejamos lo simple...simple !</p>
+            <section class="section section--alt" data-section="values">
+                <div class="container">
+                    <h2 class="section__title">Nuestros pilares</h2>
+                    <div class="values-grid">
+                        <article class="value-card">
+                            <div class="value-card__icon">⚡</div>
+                            <h3>Velocidad</h3>
+                            <p>Iniciamos proyectos rápido y desarrollamos con agilidad. Hacemos que lo difícil resulte fácil y dejamos lo simple... simple.</p>
+                        </article>
+                        <article class="value-card">
+                            <div class="value-card__icon">🎯</div>
+                            <h3>Sencillez</h3>
+                            <p>Diseñamos para que todo sea fácil de usar, con tecnologías adecuadas y buenas prácticas. Vemos desafíos donde otros ven problemas.</p>
+                        </article>
+                        <article class="value-card">
+                            <div class="value-card__icon">✅</div>
+                            <h3>Eficacia</h3>
+                            <p>Hacemos realidad tu idea sin que el costo económico impacte negativamente. Entendemos tu realidad porque ya transitamos ese camino.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
 
-				<p><b>SACsi es Sencillez</b><br/>
-				Dise&ntilde;amos para que todo sea <b>fácil</b> de utilizar utilizando las tecnologías adecuadas y buenas prácticas de la industria.<br>
-				<b>Vemos desaf&iacute;os donde otros ven problemas</b></p>
+            <section class="section" data-section="principles">
+                <div class="container principles">
+                    <h2 class="section__title">Cómo trabajamos</h2>
+                    <div class="principle">
+                        <h3>1. Escuchamos primero</h3>
+                        <p>Nos tomamos el tiempo para entender tu negocio, tus procesos y tus dolores. Sin diagnóstico no hay solución.</p>
+                    </div>
+                    <div class="principle">
+                        <h3>2. Propuesta clara</h3>
+                        <p>Te presentamos alcance, tiempos y presupuesto sin sorpresas. Sin letra chica, sin costos ocultos.</p>
+                    </div>
+                    <div class="principle">
+                        <h3>3. Entregas constantes</h3>
+                        <p>Desarrollamos en iteraciones cortas. Vos ves avances reales y validás antes de que sigamos.</p>
+                    </div>
+                    <div class="principle">
+                        <h3>4. No desaparecemos</h3>
+                        <p>Soporte continuo post-entrega. Ajustamos, mejoramos y seguimos al lado de tu equipo.</p>
+                    </div>
+                </div>
+            </section>
 
-				<p><b>SACsi es Eficaz</b><br/>
-				Hacemos realidad TU idea sin que el costo <b>econ&oacute;mico</b> impacte negativamente en tu emprendimiento.<br>
-				Entendemos tu realidad porque ya transitamos ese camino y podés aprovechar nuestra experiencia.</p>
-			</span>
-		</aside>
-	</span>
-	<span class="last">
-        <h2 class='titulo'>&nbsp;Nuestros valores</h2><br>
-		<p>Somos un grupo de profesionales, que trabajamos de forma socialmente responsable.</p>
-		<p>Participamos activamente de encuentros donde prevalecen voluntades para mejorar el entorno social, ambiental y económico.</p>
-	</span>
-	
-	
-</section>            </div> <!-- #main -->
-        </div> <!-- #main-container -->
+            <section class="section section--alt" data-section="team-values">
+                <div class="container team-values">
+                    <h2 class="section__title">Nuestros valores</h2>
+                    <p>Somos un grupo de profesionales que trabajamos de forma socialmente responsable.</p>
+                    <p>Participamos activamente de encuentros donde prevalecen voluntades para mejorar el entorno social, ambiental y económico.</p>
+                </div>
+            </section>
+
+            <section class="cta-final" data-section="cta-final">
+                <div class="container">
+                    <h2>¿Empezamos?</h2>
+                    <p class="cta-final__subtitle">Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.</p>
+                    <div class="cta-final__actions">
+                        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas" rel="noopener noreferrer" target="_blank" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'cta-final'});">Escribinos por WhatsApp</a>
+                        <a class="cta-final__outline" href="contacto.html" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'outline', 'cta_location': 'cta-final'});">Completá el formulario</a>
+                    </div>
+                    <p style="margin:var(--spacing-lg) 0 0;font-size:0.93rem;color:rgba(255,255,255,0.85);">O escribinos a <a href="mailto:colombinis@sacsi.com.ar" style="color:#FFFFFF;text-decoration:underline;font-weight:600;">colombinis@sacsi.com.ar</a></p>
+                </div>
+            </section>
+        </main>
 
         <div id="footer-container">
-            <footer class="wrapper clearfix">
-                <span class="first">
-                    <ul id="menusocial">
-                            <li><a id="whatsapp_ico" target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20mas%20sobre:%20..." title="whatsapp" onclick="dataLayer.push({'event': 'whatsapp_click', 'location': 'footer'});"><span>whatsapp</span></a></li>
-                            <li><a id="facebook_ico" target="_blank" href="https://m.me/sacsi" title="facebook"><span>facebook</span></a></li>
-                            <li><a id="telefono_ico" target="_blank" href="tel:3415197937"><span>LL&aacute;manos.</span></a></li>
-                    </ul>
-                </span>
-                <span class="last">
-                        
-                </span>
+            <footer class="wrapper">
+                <ul id="menusocial">
+                    <li><a target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones" rel="noopener noreferrer" onclick="dataLayer.push({'event': 'whatsapp_click', 'location': 'footer'});">WhatsApp</a></li>
+                    <li><a target="_blank" href="https://m.me/sacsi" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a target="_blank" href="tel:3415197937">Llamanos</a></li>
+                </ul>
+                <p class="copyright">&copy; SACsi — Soluciones Informáticas</p>
             </footer>
         </div>
-        
+
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var sections = document.querySelectorAll('[data-section]');
-            var observer = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        dataLayer.push({
-                            'event': 'section_view',
-                            'section': entry.target.getAttribute('data-section')
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            sections.forEach(function(s) { observer.observe(s); });
-        });
+            document.querySelector('.hamburger').addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.toggle('active');
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                var sections = document.querySelectorAll('[data-section]');
+                var observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            dataLayer.push({
+                                'event': 'section_view',
+                                'section': entry.target.getAttribute('data-section')
+                            });
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                sections.forEach(function(s) { observer.observe(s); });
+            });
         </script>
-    
+
     </body>
 </html>
- 
