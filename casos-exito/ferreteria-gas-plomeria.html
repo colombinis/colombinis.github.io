@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ferretería de gas y plomería — Presencia online sin complicaciones | SACsi</title>
+    <meta name="description" content="Cómo una ferretería familiar de Rosario puede automatizar su stock, pedidos por WhatsApp y presencia online sin perder tiempo ni contratar personal extra.">
+    <meta property="og:title" content="Ferretería de gas y plomería — Presencia online sin complicaciones | SACsi" />
+    <meta property="og:description" content="Cómo una ferretería familiar de Rosario puede automatizar su stock, pedidos por WhatsApp y presencia online sin perder tiempo ni contratar personal extra." />
+    <meta property="og:image" content="https://sacsi.com.ar/logo-autor.png" />
+    <meta property="og:url" content="https://sacsi.com.ar/casos-exito/ferreteria-gas-plomeria.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_LA" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Ferretería de gas y plomería — Presencia online sin complicaciones | SACsi" />
+    <meta name="twitter:description" content="Cómo una ferretería familiar de Rosario puede automatizar su stock, pedidos por WhatsApp y presencia online sin perder tiempo ni contratar personal extra." />
+    <link rel="canonical" href="https://sacsi.com.ar/casos-exito/ferreteria-gas-plomeria.html" />
+
+    <style>
+        :root {
+            --primary: #1A1A2E;
+            --secondary: #555555;
+            --tertiary: #0A7CFF;
+            --tertiary-dark: #0066CC;
+            --neutral: #FAFAFA;
+            --surface: #FFFFFF;
+            --muted: #888888;
+            --whatsapp: #25D366;
+            --whatsapp-dark: #128C7E;
+            --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            --rounded-sm: 8px;
+            --rounded-md: 16px;
+            --rounded-full: 100px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 80px;
+            --container: 1120px;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-stack);
+            color: var(--secondary);
+            background: var(--neutral);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--tertiary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--tertiary);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        h1 { font-size: 1.6rem; font-weight: 700; margin: 0 0 var(--spacing-md); }
+        h2 { font-size: 1.4rem; font-weight: 700; margin: 0 0 var(--spacing-md); }
+        h3 { font-size: 1.15rem; font-weight: 600; margin: 0 0 var(--spacing-sm); }
+
+        #header-container {
+            position: relative;
+            background: var(--surface);
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        header.wrapper {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo img {
+            height: 28px;
+            width: auto;
+            display: block;
+        }
+
+        /* Navigation base (mobile first) */
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            padding: var(--spacing-md);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            gap: var(--spacing-md);
+            z-index: 100;
+        }
+
+        nav ul.active {
+            display: flex;
+        }
+
+        nav ul li a {
+            font-size: 0.93rem;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--tertiary);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.93rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            padding: var(--spacing-xl) var(--spacing-md);
+            background: var(--surface);
+            text-align: center;
+        }
+
+        .hero__container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .hero__icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero__title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 0 var(--spacing-md);
+        }
+
+        .hero__subtitle {
+            font-size: 1rem;
+            color: var(--secondary);
+            margin: 0 auto;
+            max-width: 640px;
+        }
+
+        .section {
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .section--alt {
+            background: var(--surface);
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: #F9F9FB;
+            border-radius: var(--rounded-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .content-card h3 {
+            color: var(--tertiary-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .content-card ul {
+            margin: var(--spacing-sm) 0 0;
+            padding-left: var(--spacing-lg);
+        }
+
+        .content-card li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .section__title {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .cta-final {
+            background: var(--primary);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            color: #FFFFFF;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-final__subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.85);
+            margin: 0 auto var(--spacing-xl);
+            max-width: 500px;
+        }
+
+        .cta-final__actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-final__whatsapp {
+            display: inline-block;
+            background-color: var(--whatsapp-dark);
+            color: #FFFFFF;
+            padding: 14px 32px;
+            border-radius: var(--rounded-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .cta-final__whatsapp:hover {
+            background-color: #1DA851;
+            color: #FFFFFF;
+        }
+
+        .cta-final__outline {
+            display: inline-block;
+            background-color: transparent;
+            color: #FFFFFF;
+            padding: 14px 32px;
+            border-radius: var(--rounded-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            width: 100%;
+            text-align: center;
+            transition: border-color 0.2s ease;
+        }
+
+        .cta-final__outline:hover {
+            border-color: #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        #footer-container {
+            background: var(--surface);
+            border-top: 1px solid #E8E8E8;
+            padding: var(--spacing-lg);
+        }
+
+        footer.wrapper {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #menusocial {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        #menusocial li a {
+            font-size: 0.93rem;
+            color: var(--secondary);
+            transition: color 0.2s ease;
+        }
+
+        #menusocial li a:hover {
+            color: var(--tertiary);
+        }
+
+        @media (min-width: 601px) {
+            h1 { font-size: 2rem; }
+            .hero__title { font-size: 2.4rem; }
+            .hero { padding: var(--spacing-xxl) var(--spacing-lg); }
+            .section { padding: var(--spacing-xxl) var(--spacing-lg); }
+            
+            .cta-final__actions {
+                flex-direction: row;
+            }
+
+            .cta-final__whatsapp,
+            .cta-final__outline {
+                width: auto;
+                text-align: left;
+            }
+
+            header.wrapper {
+                padding: var(--spacing-md) var(--spacing-lg);
+            }
+
+            .logo img {
+                height: 36px;
+            }
+
+            .hamburger {
+                display: none;
+            }
+
+            nav ul {
+                display: flex;
+                flex-direction: row;
+                position: static;
+                background: none;
+                padding: 0;
+                box-shadow: none;
+                gap: var(--spacing-lg);
+                z-index: auto;
+            }
+
+            .content-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container">
+        <header class="wrapper">
+            <a class="logo" href="/index.html" title="SACsi - soluciones informáticas">
+                <img src="/logo-autor.png" alt="SACsi - Soluciones Informáticas" />
+            </a>
+            <nav>
+                <button class="hamburger" aria-label="Menú de navegación">☰</button>
+                <ul id="nav-menu">
+                    <li><a href="/index.html#servicios">Servicios</a></li>
+                    <li><a href="/index.html#casos-exito">Casos de éxito</a></li>
+                    <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="/contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+    </div>
+
+    <section class="hero">
+        <div class="hero__container">
+            <div class="hero__icon">🔧</div>
+            <h1 class="hero__title">Ferretería de gas y plomería: stock, pedidos y ventas online sin volverse loco</h1>
+            <p class="hero__subtitle">Un caso real sobre cómo un dueño de PyME puede delegar la parte web y enfocarse en atender clientes, sin contratar personal técnico ni pagar costos ocultos.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <a class="back-link" href="https://sacsi.com.ar/index.html#casos-exito">← Volver a casos de éxito</a>
+
+            <div class="content-card">
+                <h3>El problema real</h3>
+                <p>Soy dueño de una ferretería especializada en accesorios de gas y plomería en Rosario. Vendemos mayormente en el local físico, pero queremos vender más por internet. El problema es que entre atender el mostrador, llamar a los proveedores, pagar a los municipios y organizar el depósito, me quedan <strong>2 horas por semana</strong> para pensar en la página web. Y cuando me siento, no sé ni por dónde arrancar: cargar catálogo, configurar Mercado Pago, sincronizar el stock, hacer fotos de productos... No termino nunca.</p>
+            </div>
+
+            <div class="content-card">
+                <h3>Lo que me gustaría que SACsi me ofrezca (y pagaría por ello)</h3>
+                <p>No quiero "un desarrollo a medida" que empiece en $150.000 y termine en $400.000. Quiero un <strong>servicio cerrado</strong>, con precio fijo, que incluya:</p>
+                <ul>
+                    <li><strong>Catálogo precargado</strong> — que yo le pase una lista de productos (nombre, código, precio, foto) y lo suban todo sin que yo haga nada técnico.</li>
+                    <li><strong>Sincronización simple de stock</strong> — cuando se venden 10 codos de 50mm, que el sistema me avise por WhatsApp o mail que quedan 3, y yo pueda actualizar con un mensaje, sin entrar a un panel admin.</li>
+                    <li><strong>Conexión con mi facturación</strong> — uso Facturador PY (o Xubio). Que cada venta se registre sola en mi sistema de facturación, sin tenerla que cargar dos veces.</li>
+                    <li><strong>Pedidos por WhatsApp + pago online</strong> — el cliente elige: pagar con Mercado Pago / transferencia, o pedir y pagar en el local. Ambos caminos deben estar funcionando desde el día uno.</li>
+                    <li><strong>Diseño mobile-first</strong> — porque el 90% de mis clientes entran desde el celular mientras están en la obra.</li>
+                    <li><strong>30 días de soporte sin costo</strong> — para que yo pueda consultar dudas sin que me cobren cada pregunta.</li>
+                </ul>
+            </div>
+
+            <div class="content-card">
+                <h3>Preparía pagar</h3>
+                <p>Sin vueltas, estos son los rangos que me cierran:</p>
+                <ul>
+                    <li><strong>Presencia online completa (catálogo + pagos + envíos):</strong> $8.000 — $12.000 mensuales. Incluye carga inicial y soporte por WhatsApp.</li>
+                    <li><strong>Automatización de stock básica (alertas + actualización por mensaje):</strong> $3.000 — $5.000 extras.</li>
+                    <li><strong>Soporte postventa mensual:</strong> $1.500 — $2.000. Para cuando se rompe algo y no tengo tiempo de leer manuales.</li>
+                </ul>
+                <p>No pago por "horas de desarrollo" ni por "cambios no contemplados". Si quiero agregar una categoría nueva, que tenga un precio cerrado y un plazo de 48hs.</p>
+            </div>
+
+            <div class="content-card">
+                <h3>¿Por qué SACsi podría ser la indicada?</h3>
+                <p>Porque tienen experiencia en automatización de procesos y presencia online. Ya ayudaron a una tienda de ropa a automatizar pagos; en mi caso necesito algo más simple: <strong>que el sistema trabaje por mí, no al revés</strong>. Si pueden armar un producto empaquetado para ferreterías, yo soy el primer cliente.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="container">
+            <h2>¿Te gustaría armar algo así para tu PyME?</h2>
+            <p class="cta-final__subtitle">Conversamos sin cargo. En 15 minutos te contamos si podemos ayudarte y cómo.</p>
+            <div class="cta-final__actions">
+                <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20vi%20el%20caso%20de%20la%20ferreter%C3%ADa%20de%20gas%20y%20plomer%C3%ADa.%20Quiero%20una%20soluci%C3%B3n%20similar%20para%20mi%20negocio." rel="noopener noreferrer" target="_blank" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'whatsapp', 'cta_location': 'cta-final'});">Escribinos por WhatsApp</a>
+                <a class="cta-final__outline" href="https://sacsi.com.ar/contacto.html" onclick="dataLayer.push({'event': 'cta_click', 'cta_type': 'outline', 'cta_location': 'cta-final'});">Completá el formulario</a>
+            </div>
+            <p style="margin:var(--spacing-lg) 0 0;font-size:0.93rem;color:rgba(255,255,255,0.85);">O escribinos a <a href="mailto:colombinis@sacsi.com.ar" style="color:#FFFFFF;text-decoration:underline;font-weight:600;">colombinis@sacsi.com.ar</a></p>
+        </div>
+    </section>
+
+    <div id="footer-container">
+        <footer class="wrapper">
+            <ul id="menusocial">
+                <li><a target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones" rel="noopener noreferrer" onclick="dataLayer.push({'event': 'whatsapp_click', 'location': 'footer'});">WhatsApp</a></li>
+                <li><a target="_blank" href="https://m.me/sacsi" rel="noopener noreferrer">Facebook</a></li>
+                <li><a target="_blank" href="tel:3415197937">Llamanos</a></li>
+            </ul>
+            <p style="font-size:0.85rem;color:var(--secondary);margin:0;">&copy; SACsi — Soluciones Informáticas</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.faq-question').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var answer = this.nextElementSibling;
+                var isOpen = answer.classList.contains('open');
+
+                document.querySelectorAll('.faq-answer.open').forEach(function(a) {
+                    a.classList.remove('open');
+                });
+                document.querySelectorAll('.faq-question.active').forEach(function(q) {
+                    q.classList.remove('active');
+                    q.setAttribute('aria-expanded', 'false');
+                });
+
+                if (!isOpen) {
+                    answer.classList.add('open');
+                    this.classList.add('active');
+                    this.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

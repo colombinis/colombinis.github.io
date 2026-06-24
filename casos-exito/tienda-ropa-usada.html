@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <title>Tienda de ropa usada — Caso de éxito — SACsi</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="Caso de éxito: digitalización de una tienda de ropa usada con pagos automáticos a donantes y catálogo online.">
+        <meta name="keywords" content="caso de éxito, tienda de ropa usada, automatización, inventario, pagos a donantes, SACsi" />
+
+        <meta property="og:title" content="Tienda de ropa usada — Caso de éxito — SACsi" />
+        <meta property="og:description" content="Cómo una PyME de ropa usada escaló registrando prendas en dos pasos, publicando automáticamente y pagando a donantes sin mover efectivo." />
+        <meta property="og:image" content="https://sacsi.com.ar/logo-autor.png" />
+        <meta property="og:url" content="https://sacsi.com.ar/casos-exito/tienda-ropa-usada.html" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="es_LA" />
+
+        <link rel="canonical" href="https://sacsi.com.ar/casos-exito/tienda-ropa-usada.html" />
+        <link rel="shortcut icon" href="https://sacsi.com.ar/favicon.ico" />
+
+        <link rel="stylesheet" href="https://sacsi.com.ar/theme/mobile1/css/normalize.css">
+        <style>
+            :root {
+                --primary: #1A1A2E;
+                --secondary: #555555;
+                --tertiary: #0A7CFF;
+                --tertiary-dark: #0066CC;
+                --neutral: #FAFAFA;
+                --surface: #FFFFFF;
+                --muted: #888888;
+                --whatsapp: #25D366;
+                --whatsapp-dark: #128C7E;
+                --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+                --rounded-sm: 8px;
+                --rounded-md: 16px;
+                --rounded-full: 100px;
+                --spacing-xs: 4px;
+                --spacing-sm: 8px;
+                --spacing-md: 16px;
+                --spacing-lg: 24px;
+                --spacing-xl: 32px;
+                --spacing-xxl: 80px;
+                --container: 1120px;
+            }
+
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                font-family: var(--font-stack);
+                color: var(--secondary);
+                background: var(--neutral);
+                line-height: 1.6;
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a {
+                color: var(--tertiary);
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: var(--tertiary);
+            }
+
+            h1, h2, h3 {
+                color: var(--primary);
+                line-height: 1.3;
+            }
+
+            /* Header */
+            #header-container {
+                position: relative;
+                background: var(--surface);
+                border-bottom: 1px solid #E8E8E8;
+            }
+
+            header.wrapper {
+                max-width: var(--container);
+                margin: 0 auto;
+                padding: var(--spacing-sm) var(--spacing-md);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .logo img {
+                height: 28px;
+                width: auto;
+            }
+
+            /* Nav */
+            nav ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                padding: var(--spacing-md);
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+                gap: var(--spacing-md);
+                z-index: 100;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li a {
+                font-size: 0.93rem;
+                color: var(--secondary);
+                font-weight: 500;
+                transition: color 0.2s ease;
+            }
+
+            nav ul li a:hover {
+                color: var(--tertiary);
+            }
+
+            .hamburger {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                padding: 4px;
+                color: var(--primary);
+                line-height: 1;
+            }
+
+            /* Hero */
+            .hero {
+                padding: var(--spacing-xl) var(--spacing-md);
+                background: var(--surface);
+                text-align: center;
+            }
+
+            .hero__container {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
+            .hero__label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--tertiary-dark);
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .hero__title {
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .hero__subtitle {
+                font-size: 0.93rem;
+                line-height: 1.6;
+                color: var(--secondary);
+                margin: 0 auto var(--spacing-xl);
+                max-width: 720px;
+            }
+
+            /* Sections */
+            .section {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+
+            .section--alt {
+                background: var(--surface);
+            }
+
+            .container {
+                max-width: var(--container);
+                margin: 0 auto;
+            }
+
+            .section__title {
+                text-align: center;
+                margin-bottom: var(--spacing-xl);
+            }
+
+            /* Content */
+            .content {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .content p {
+                font-size: 0.93rem;
+                line-height: 1.7;
+                color: var(--secondary);
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .content h2 {
+                font-size: 1.6rem;
+                font-weight: 700;
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .content h3 {
+                font-size: 1.15rem;
+                font-weight: 600;
+                margin: 0 0 var(--spacing-sm);
+            }
+
+            .content ul {
+                padding-left: 20px;
+                margin: 0 0 var(--spacing-md);
+            }
+
+            .content li {
+                font-size: 0.93rem;
+                line-height: 1.7;
+                color: var(--secondary);
+                margin: 0 0 var(--spacing-xs);
+            }
+
+            .highlight {
+                background: #F9F9FB;
+                border-radius: var(--rounded-md);
+                padding: 24px;
+                margin: var(--spacing-lg) 0;
+            }
+
+            .highlight h3 {
+                margin-top: 0;
+            }
+
+            .cta-row {
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-md);
+                align-items: center;
+                margin-top: var(--spacing-xl);
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 14px 32px;
+                border-radius: var(--rounded-sm);
+                font-weight: 600;
+                font-size: 1rem;
+                text-decoration: none;
+                text-align: center;
+                transition: background-color 0.2s ease;
+            }
+
+            .btn--primary {
+                background-color: var(--primary);
+                color: #FFFFFF;
+                width: 100%;
+            }
+
+            .btn--primary:hover {
+                background-color: var(--tertiary);
+                color: #FFFFFF;
+            }
+
+            .btn--whatsapp {
+                background-color: var(--whatsapp);
+                color: #FFFFFF;
+                width: 100%;
+            }
+
+            .btn--whatsapp:hover {
+                background-color: var(--whatsapp-dark);
+                color: #FFFFFF;
+            }
+
+            /* Footer */
+            #footer-container {
+                background: var(--surface);
+                border-top: 1px solid #E8E8E8;
+                padding: var(--spacing-lg);
+            }
+
+            footer.wrapper {
+                max-width: var(--container);
+                margin: 0 auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            #menusocial {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                gap: var(--spacing-md);
+            }
+
+            #menusocial li a {
+                font-size: 0.93rem;
+                color: var(--secondary);
+                transition: color 0.2s ease;
+            }
+
+            #menusocial li a:hover {
+                color: var(--tertiary);
+            }
+
+            /* Responsive */
+            @media (min-width: 601px) {
+                .hero__title {
+                    font-size: 2.8rem;
+                }
+
+                .hero {
+                    padding: var(--spacing-xl) var(--spacing-lg);
+                }
+
+                header.wrapper {
+                    padding: var(--spacing-md) var(--spacing-lg);
+                }
+
+                .logo img {
+                    height: 36px;
+                }
+
+                .hamburger {
+                    display: none;
+                }
+
+                nav ul {
+                    display: flex;
+                    flex-direction: row;
+                    position: static;
+                    background: none;
+                    padding: 0;
+                    box-shadow: none;
+                    gap: var(--spacing-lg);
+                    z-index: auto;
+                }
+
+                .btn--primary,
+                .btn--whatsapp {
+                    width: auto;
+                }
+
+                .cta-row {
+                    flex-direction: row;
+                    justify-content: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header-container">
+            <header class="wrapper">
+                <a class="logo" href="/index.html" title="SACsi - soluciones informáticas">
+                    <img src="/theme/mobile1/img/logo_sacsi.png" alt="SACsi - Soluciones Informáticas" />
+                </a>
+                <nav>
+                    <button class="hamburger" aria-label="Menú de navegación">☰</button>
+                    <ul id="nav-menu">
+                        <li><a href="/index.html#servicios">Servicios</a></li>
+                        <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
+                        <li><a href="/contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <section class="hero">
+            <div class="hero__container">
+                <p class="hero__label">CASO DE ÉXITO</p>
+                <h1 class="hero__title">Tienda de ropa usada con pagos automáticos a donantes</h1>
+                <p class="hero__subtitle">Cómo una PyME pasó de registrar prendas en papel y pagar en mano a un flujo digital donde el inventario se actualiza solo y los donantes cobran sin fricción.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container content">
+                <h2>El problema</h2>
+                <p>El negocio crecía: más donantes, más prendas, más ventas. Pero el sistema de registro seguía siendo manual: planillas dispersas, fotos en el celu del encargado, pagos en efectivo los viernes a la tarde y un híper trabajo administrativo que no escalaba.</p>
+
+                <div class="highlight">
+                    <h3>Los puntos de dolor más fuertes</h3>
+                    <ul>
+                        <li><strong>Inventario sin datos fiables:</strong> no sabían con certeza qué tenían en stock, en qué estado ni a qué precio vender.</li>
+                        <li><strong>Seguimiento de donantes:</strong> quién trajo qué y cuánto le correspondía se resolvía con mensajes de WhatsApp y anotaciones en cuadernos.</li>
+                        <li><strong>Fotos inconsistentes:</strong> el catálogo online dependía de fotos tomadas con celulares distintos, sin fondo ni luz estandarizada.</li>
+                        <li><strong>Pagos manuales:</strong> había que conciliar ventas, calcular porcentajes y pagar en mano. Eso generaba errores, demoras y desconfianza.</li>
+                        <li><strong>Publicación repetitiva:</strong> cada prenda nueva se subía a mano en la web y en las redes, consumiendo horas semanales.</li>
+                    </ul>
+                </div>
+
+                <h2>La solución que implementamos</h2>
+                <p>Diseñamos un sistema a medida en etapas, priorizando lo que más dolor generaba. No hubo que cambiar todos los procesos de una; empezamos por lo que daba mayor retorno en el menor tiempo.</p>
+
+                <h3>1. Catálogo online con carga guiada</h3>
+                <p>Armamos un panel de carga por categorías predefinidas: talle, marca, estado, tipo de prenda. La foto se captura desde el celu, se comprime automáticamente y se guarda en galería. El encargado publica en dos minutos.</p>
+
+                <h3>2. Panel de donante</h3>
+                <p>Cada donante tiene acceso a un panel privado donde ve el estado de sus prendas: recibida, publicada, vendida o disponible para retiro de no comercializables. Ahí también ve el historial de pagos.</p>
+
+                <h3>3. Notificaciones automáticas</h3>
+                <p>El sistema avisa sola: “se vendió tu camisa”, “tenés $X disponible para retirar” o “tu prenda ya está publicada”. Se envía por WhatsApp y mail, sin intervención humana.</p>
+
+                <h3>4. Pagos a donantes sin efectivo</h3>
+                <p>Integramos una billetera virtual que calcula automáticamente el porcentaje de cada venta. El donante retira por transferencia o lo deja como saldo para futuros cambios. El cierre semanal pasó de 4 horas a 15 minutos.</p>
+
+                <h3>5. Dashboard simple</h3>
+                <p>Ventas por día, stock vigente, prendas sin movimiento y pagos pendientes. Todo en un panel limpio pensado para dueños que no son técnicos.</p>
+
+                <h2>Resultados</h2>
+                <ul>
+                    <li>Registro de prendas: de ~30 minutos por prenda a menos de 5 minutos.</li>
+                    <li>Tiempo administrativo: se redujo un 70%.</li>
+                    <li>Errores de pago a donantes: bajó a cero.</li>
+                    <li>Publicaciones simultáneas en web + redes desde un solo paso.</li>
+                    <li>El donante consulta el estado de su ropa sin escribir al local.</li>
+                </ul>
+
+                <div class="highlight">
+                    <h3>¿Qué ganó el negocio?</h3>
+                    <p>No solo ganó tiempo. Ganó trazabilidad: hoy sabe exactamente qué entra, qué se vende y a quién le corresponde pagar. Eso generó más confianza, más donantes y menos fricción con el cobro.</p>
+                </div>
+
+                <h2>¿Qué podemos hacer para tu negocio?</h2>
+                <p>Si tenés un emprendimiento de ropa usada, marketplace local o cualquier modelo donde haya donantes, consignaciones o pagos a terceros, podemos armar un sistema parecido — adaptado a tu forma de trabajar.</p>
+
+                <div class="cta-row">
+                    <a class="btn btn--whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20vengo%20por%20el%20caso%20de%20%C3%A9xito%20de%20tienda%20de%20ropa%20usada" rel="noopener noreferrer" target="_blank">Consultá por WhatsApp</a>
+                    <a class="btn btn--primary" href="/contacto.html">Completá el formulario</a>
+                </div>
+            </div>
+        </section>
+
+        <div id="footer-container">
+            <footer class="wrapper">
+                <ul id="menusocial">
+                    <li><a target="_blank" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones" rel="noopener noreferrer">WhatsApp</a></li>
+                    <li><a target="_blank" href="https://m.me/sacsi" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a target="_blank" href="tel:3415197937">Llamanos</a></li>
+                </ul>
+                <p style="font-size:0.85rem;color:var(--secondary);margin:0;">&copy; SACsi — Soluciones Inform&aacute;ticas</p>
+            </footer>
+        </div>
+
+        <script>
+            document.querySelector('.hamburger').addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.toggle('active');
+            });
+        </script>
+    </body>
+</html>

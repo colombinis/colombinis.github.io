@@ -1,0 +1,145 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} | SACSI</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`https://sacsi.com.ar${Astro.url.pathname}`} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section class="hero">
+        <div class="hero__container">
+          <p class="hero__label">CASO DE ÉXITO</p>
+          <h1 class="hero__title">{title}</h1>
+          <slot name="subtitle" />
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container content">
+          <slot />
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .content :global(h2) {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .content :global(h3) {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .content :global(p) {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .content :global(ul),
+  .content :global(ol) {
+    padding-left: 20px;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .content :global(li) {
+    font-size: 0.93rem;
+    line-height: 1.7;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .highlight {
+    background: #F9F9FB;
+    border-radius: var(--rounded-md);
+    padding: 24px;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .highlight :global(h3) {
+    margin-top: 0;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    margin-top: var(--spacing-xl);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn--primary {
+    background-color: var(--primary);
+    color: #FFFFFF;
+    width: 100%;
+  }
+
+  .btn--primary:hover {
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .btn--whatsapp {
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+    width: 100%;
+  }
+
+  .btn--whatsapp:hover {
+    background-color: var(--whatsapp-dark);
+    color: #FFFFFF;
+  }
+
+  @media (min-width: 601px) {
+    .btn--primary,
+    .btn--whatsapp {
+      width: auto;
+    }
+
+    .cta-row {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+</style>

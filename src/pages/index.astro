@@ -1,0 +1,716 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+---
+
+<Layout
+  title="Inicio"
+  description="SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
+>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-T7PWJ99"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden"
+    ></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script type="module">
+    // Facebook SDK se puede restaurar si es necesario
+  </script>
+
+  <section id="hero" class="hero">
+    <div class="hero__container">
+      <p class="hero__label">SOLUCIONES INFORMÁTICAS</p>
+      <h1 class="hero__title">Tecnología simple para PyMEs que quieren crecer</h1>
+      <p class="hero__subtitle">
+        Automatizamos procesos, desarrollamos software a medida y potenciamos tu presencia online. Más de 15 años ayudando a empresas como la tuya a ganar tiempo, reducir costos y vender más.
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas"
+          rel="noopener noreferrer"
+          target="_blank"
+        >Consultános sin cargo</a>
+        <a class="hero__cta-secondary" href="/contacto.html">Conocé más</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section">
+    <div class="container">
+      <h2 class="section__title">Soluciones para tu negocio</h2>
+      <div class="cards-grid">
+        <ServiceCard
+          title="Automatización de Procesos"
+          href="/servicios/automatizacion.html"
+          icon="/logo-autor.png"
+        >
+          Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.
+          <span slot="claim">Liberá hasta 65% del tiempo administrativo de tu equipo.</span>
+          <a
+            slot="cta"
+            class="service-card__cta"
+            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20automatizaci%C3%B3n%20de%20procesos"
+            rel="noopener noreferrer"
+            target="_blank"
+          >Consultá por este servicio</a>
+        </ServiceCard>
+
+        <ServiceCard
+          title="Software a Medida"
+          href="/servicios/software-a-medida.html"
+          icon="/logo-autor.png"
+        >
+          Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.
+          <span slot="claim">Sistemas hechos a tu medida, hasta un 50% más rápido.</span>
+          <a
+            slot="cta"
+            class="service-card__cta"
+            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20desarrollo%20de%20software%20a%20medida"
+            rel="noopener noreferrer"
+            target="_blank"
+          >Contanos tu idea</a>
+        </ServiceCard>
+
+        <ServiceCard
+          title="Presencia Online"
+          href="/servicios/presencia-online.html"
+          icon="/logo-autor.png"
+        >
+          Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.
+          <span slot="claim">Llevá tu negocio a internet y empezá a vender 24/7.</span>
+          <a
+            slot="cta"
+            class="service-card__cta"
+            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico"
+            rel="noopener noreferrer"
+            target="_blank"
+          >Empezá hoy</a>
+        </ServiceCard>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-trabajamos" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Cómo trabajamos</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <h3>Descubrimiento</h3>
+          <p>
+            Analizamos tu negocio, tus procesos y tus necesidades. Recibís un diagnóstico claro con las oportunidades de mejora identificadas.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <h3>Diagnóstico</h3>
+          <p>
+            Evaluamos la mejor solución técnica para tu caso. Recibís una propuesta con alcance, tiempos y presupuesto sin sorpresas.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <h3>Prototipo</h3>
+          <p>
+            Construimos una versión funcional de la solución. Recibís entregas periódicas con avances visibles para que puedas sugerir ajustes.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">4</div>
+          <h3>Producción</h3>
+          <p>
+            Ponemos la solución en marcha y te acompañamos. Recibís soporte continuo y garantía de funcionamiento post-entrega.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="social-proof" class="section">
+    <div class="container">
+      <h2 class="section__title">Resultados que hablan</h2>
+      <div class="metrics-grid">
+        <div class="metric">
+          <p class="metric__number">15+</p>
+          <p class="metric__label">años de experiencia</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">65%</p>
+          <p class="metric__label">del tiempo administrativo liberado</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">50+</p>
+          <p class="metric__label">clientes satisfechos</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">2</p>
+          <p class="metric__label">semanas a tu primer prototipo</p>
+        </div>
+      </div>
+
+      <div class="testimonials">
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-card__quote">
+              "Trabajar con SACsi nos cambió la forma de administrar el negocio. Lo que antes nos llevaba días, ahora lo hacemos en horas. Son un golazo."
+            </p>
+            <p class="testimonial-card__author">Carina Mendoza</p>
+            <p class="testimonial-card__role">Gerenta de Administración — Distribuidora del Sur</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-card__quote">
+              "Necesitábamos una solución simple que nuestros empleados pudieran usar sin ser expertos en tecnología. SACsi entendió al toque lo que buscábamos."
+            </p>
+            <p class="testimonial-card__author">Gonzalo Martínez</p>
+            <p class="testimonial-card__role">Dueño — Ferretería Martínez Hnos.</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-card__quote">
+              "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos."
+            </p>
+            <p class="testimonial-card__author">Romina Paz</p>
+            <p class="testimonial-card__role">CEO — Grupo Logístico Central</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos-exito" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Casos de éxito</h2>
+      <div class="cards-grid">
+        <ServiceCard
+          title="Tienda de ropa usada con pagos automáticos a donantes"
+          href="/casos-exito/tienda-ropa-usada.html"
+          icon="/logo-autor.png"
+        >
+          Inventario que se registra en dos pasos, publicación automática y pagos a donantes sin mover efectivo. El administrativo se redujo un 70%.
+          <a slot="cta" class="service-card__cta" href="/casos-exito/tienda-ropa-usada.html">Ver más</a>
+        </ServiceCard>
+
+        <ServiceCard
+          title="Consultorio de psicología con alquiler de espacios de atención"
+          href="/casos-exito/consultorio-psicologia.html"
+          icon="/logo-autor.png"
+        >
+          Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada. El administrativo se redujo un 70%.
+          <a slot="cta" class="service-card__cta" href="/casos-exito/consultorio-psicologia.html">Ver más</a>
+        </ServiceCard>
+
+        <ServiceCard
+          title="Ferretería familiar sin tiempo para la tienda online"
+          href="/casos-exito/ferreteria-gas-plomeria.html"
+          icon="/logo-autor.png"
+        >
+          Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas.
+          <a slot="cta" class="service-card__cta" href="/casos-exito/ferreteria-gas-plomeria.html">Ver más</a>
+        </ServiceCard>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section__title">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+            ¿Cuánto cuesta un desarrollo?
+          </button>
+          <div class="faq-answer" id="faq-answer-1">
+            <p>
+              Los proyectos chicos arrancan desde los $150.000 ARS. El precio final depende del alcance y la complejidad. Por eso primero tenemos una conversación sin cargo para entender tu proyecto, y ahí te damos un presupuesto claro y sin compromiso. No creemos en los misterios con los precios.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+            ¿Cuánto tiempo lleva?
+          </button>
+          <div class="faq-answer" id="faq-answer-2">
+            <p>
+              Depende del proyecto: un sitio web puede estar listo en 2 a 4 semanas, mientras que un sistema a medida lleva entre 4 y 12 semanas. Trabajamos con entregas periódicas y siempre te mostramos avances constantes.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+            ¿Necesito saber de tecnología?
+          </button>
+          <div class="faq-answer" id="faq-answer-3">
+            <p>
+              Para nada. Nosotros nos encargamos de toda la parte técnica. Vos solo necesitás contarnos qué problema querés resolver. Hablamos en tu idioma, no en código. Usamos tecnologías modernas como Python, JavaScript y bases de datos SQL para construir tu solución.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+            ¿Dan soporte después de entregar?
+          </button>
+          <div class="faq-answer" id="faq-answer-4">
+            <p>
+              Sí, siempre. No somos de los que desaparecen. Te damos soporte continuo y hacemos los ajustes que sean necesarios después de la entrega.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+            ¿Trabajan con empresas fuera de Rosario?
+          </button>
+          <div class="faq-answer" id="faq-answer-5">
+            <p>
+              ¡Sí! Trabajamos con clientes de toda Argentina y del exterior. Todo se coordina por videollamada, teléfono o mail. No hace falta que estés en Rosario.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
+            ¿Qué servicios ofrecen exactamente?
+          </button>
+          <div class="faq-answer" id="faq-answer-6">
+            <p>
+              Ofrecemos tres servicios principales: <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología), <strong>desarrollo de software a medida</strong> (creamos sistemas que se adaptan exactamente a tu negocio), y <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales). Si no estás seguro de cuál necesitás, podemos asesorarte sin compromiso.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Empezamos?</h2>
+      <p class="cta-final__subtitle">
+        Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.
+      </p>
+      <div class="cta-final__actions">
+        <a
+          class="cta-final__whatsapp"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas"
+          rel="noopener noreferrer"
+          target="_blank"
+        >Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto.html">Completá el formulario</a>
+      </div>
+      <p style="margin:var(--spacing-lg) 0 0;font-size:0.93rem;color:rgba(255,255,255,0.85);">
+        O escribinos a <a href="mailto:colombinis@sacsi.com.ar" style="color:#FFFFFF;text-decoration:underline;font-weight:600;">colombinis@sacsi.com.ar</a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    min-height: calc(100vh - 61px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: var(--surface);
+    text-align: center;
+  }
+
+  .hero__container {
+    max-width: 720px;
+    width: 100%;
+  }
+
+  .hero__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .hero__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .hero__subtitle {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 auto var(--spacing-xl);
+    max-width: 560px;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    background-color: var(--primary);
+    color: #FFFFFF;
+    padding: 14px 32px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s ease;
+  }
+
+  .hero__cta:hover {
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .hero__cta-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--primary);
+    padding: 14px 32px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1.5px solid #DDDDDD;
+    width: 100%;
+    text-align: center;
+    transition: border-color 0.2s ease;
+  }
+
+  .hero__cta-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .section {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  .section--alt {
+    background: var(--surface);
+  }
+
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+
+  .section__title {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .step {
+    text-align: center;
+  }
+
+  .step__number {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .step h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .step p {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .metric__number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .metric__label {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .testimonials {
+    margin-top: var(--spacing-xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .testimonial-card {
+    background: #F9F9FB;
+    border-radius: var(--rounded-md);
+    padding: 24px;
+  }
+
+  .testimonial-card__quote {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+    font-style: italic;
+  }
+
+  .testimonial-card__author {
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .testimonial-card__role {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 2px 0 0;
+  }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #E0E0E0;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: var(--spacing-md) 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-family: var(--font-stack);
+  }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+
+  .faq-question.active::after {
+    content: '−';
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-answer.open {
+    max-height: 300px;
+  }
+
+  .faq-answer p {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .cta-final {
+    background: var(--primary);
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+  }
+
+  .cta-final h2 {
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cta-final__subtitle {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    margin: 0 auto var(--spacing-xl);
+    max-width: 500px;
+  }
+
+  .cta-final__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-final__whatsapp {
+    display: inline-block;
+    background-color: var(--whatsapp-dark);
+    color: #FFFFFF;
+    padding: 14px 32px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s ease;
+  }
+
+  .cta-final__whatsapp:hover {
+    background-color: #1DA851;
+    color: #FFFFFF;
+  }
+
+  .cta-final__outline {
+    display: inline-block;
+    background-color: transparent;
+    color: #FFFFFF;
+    padding: 14px 32px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    width: 100%;
+    text-align: center;
+    transition: border-color 0.2s ease;
+  }
+
+  .cta-final__outline:hover {
+    border-color: #FFFFFF;
+    color: #FFFFFF;
+  }
+
+  /* FAQ interaction script */
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var answer = this.nextElementSibling;
+        var isOpen = answer.classList.contains('open');
+
+        document.querySelectorAll('.faq-answer.open').forEach(function(a) {
+          a.classList.remove('open');
+        });
+        document.querySelectorAll('.faq-question.active').forEach(function(q) {
+          q.classList.remove('active');
+          q.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          answer.classList.add('open');
+          this.classList.add('active');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+  @media (min-width: 601px) {
+    .hero__title {
+      font-size: 2.8rem;
+    }
+
+    .hero__subtitle {
+      font-size: 1rem;
+    }
+
+    .hero {
+      min-height: calc(100vh - 69px);
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .hero__actions {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    .section {
+      padding: var(--spacing-xxl) var(--spacing-lg);
+    }
+
+    .cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .steps {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .metrics-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cta-final {
+      padding: var(--spacing-xxl) var(--spacing-lg);
+    }
+
+    .cta-final__actions {
+      flex-direction: row;
+    }
+
+    .cta-final__whatsapp,
+    .cta-final__outline {
+      width: auto;
+      text-align: left;
+    }
+  }
+</style>

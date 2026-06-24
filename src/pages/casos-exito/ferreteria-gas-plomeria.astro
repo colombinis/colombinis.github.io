@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = 'Ferretería familiar sin tiempo para la tienda online';
+---
+
+<Layout title={title} description="Caso de éxito: ferretería de accesorios de gas y plomería que pasó de no tener tienda online a vender sin cargar stock ni configurar pagos.">
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">CASO DE ÉXITO</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">
+        Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/#casos-exito">Ver otros casos</a>
+        <a class="hero__cta-secondary" href="/contacto.html">Consultá por este resultado</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El problema</h2>
+      <div style="max-width:720px;margin:0 auto;color:var(--secondary);">
+        <p>El owner no tenía tiempo ni conocimientos para armar una tienda. Quería un canal de venta simple, con pasarelas integradas y sin mantenimiento diario.</p>
+      </div>
+
+      <h2 class="section__title" style="margin-top:var(--spacing-xxl);">La solución</h2>
+      <div class="cards-grid">
+        <article class="service-card">
+          <div class="service-card__icon">🛒</div>
+          <h3>Tienda online simple</h3>
+          <p>Catálogo por categorías, carrito y checkout listo para usar.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">💳</div>
+          <h3>Pagos y envíos</h3>
+          <p>Mercado Pago y correo integrados. Sin comisiones ocultas.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">📦</div>
+          <h3>Stock bajo control</h3>
+          <p>Actualización automática y alertas de mínimo stock.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            "Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes."
+          </p>
+          <p class="testimonial-card__author">Dueño — Ferretería de gas y plomería</p>
+          <p class="testimonial-card__role">Rosario, Santa Fe</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        <div class="metric">
+          <p class="metric__number">+35%</p>
+          <p class="metric__label">ventas online - 3 meses</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">0</p>
+          <p class="metric__label">configuración diaria</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Querés un resultado igual?</h2>
+      <p class="cta-final__subtitle">Contanos tu caso y te mostramos cómo armar tu tienda sin fricción.</p>
+      <div class="cta-final__actions">
+        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20el%20caso%20de%20ferreter%C3%ADa%20gas%20y%20plomer%C3%ADa" rel="noopener noreferrer" target="_blank">Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto.html">Completá el formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>

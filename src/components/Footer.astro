@@ -1,0 +1,73 @@
+<style>
+  #footer-container {
+    background: var(--surface);
+    border-top: 1px solid #E8E8E8;
+    padding: var(--spacing-lg);
+  }
+
+  footer.wrapper {
+    max-width: var(--container);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  #menusocial {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  #menusocial li a {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    transition: color 0.2s ease;
+  }
+
+  #menusocial li a:hover {
+    color: var(--tertiary);
+  }
+
+  .footer-copy {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    footer.wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<div id="footer-container">
+  <footer class="wrapper">
+    <ul id="menusocial">
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones"
+        >WhatsApp</a>
+      </li>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://m.me/sacsi"
+        >Facebook</a>
+      </li>
+      <li>
+        <a target="_blank" rel="noopener noreferrer" href="tel:3415197937">Llamanos</a>
+      </li>
+    </ul>
+    <p class="footer-copy">&copy; SACsi — Soluciones Informáticas</p>
+  </footer>
+</div>

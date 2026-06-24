@@ -8,7 +8,7 @@ Rebranding the SACsi website (soluciones informáticas, Rosario, Argentina) from
 - **Production URL:** https://sacsi.com.ar
 - **Owner:** Sebastian (colombinis@gmail.com)
 - **Language:** Spanish (Rioplatense) — all user-facing content is in Argentine Spanish
-- **Current Phase:** Fase 1 (Structure)
+- **Current Phase:** Fase 2 (Build)
 - **Default Branch:** master
 - **Working Branch:** rebranding_20260610
 
@@ -43,13 +43,14 @@ The design tokens are defined in `DESIGN.md` — **that is the single source of 
 
 ```
 /
-├── index.html                                    # Homepage
-├── desarrollo-web-facebook-comercio-electronico.html  # Service page
-├── programacion-sistemas-a-medida.html                # Service page
-├── automatizacion-procesos.html                       # Service page
-├── sobre-nosotros.html                                # About page
-├── contacto.html                                      # Contact page
-├── DESIGN.md                                     # Design tokens & component specs
+├── index.html                                    # Homepage (rebranded)
+├── servicios/
+│   ├── presencia-online.html                     # Service page (was desarrollo-web-facebook-comercio-electronico.html)
+│   ├── software-a-medida.html                    # Service page (was programacion-sistemas-a-medida.html)
+│   └── automatizacion.html                       # Service page (was automatizacion-procesos.html)
+├── sobre-nosotros.html                           # About page (rewritten Jun 2026 with new design system)
+├── contacto.html                                 # Contact page (rebranded)
+├── DESIGN.md                                     # Design tokens & component specs (single source of truth)
 ├── AGENTS.md                                     # This file — agent instructions
 ├── CNAME                                         # Custom domain
 ├── Jenkinsfile                                   # CI pipeline
@@ -57,14 +58,15 @@ The design tokens are defined in `DESIGN.md` — **that is the single source of 
 ├── favicon.ico                                   # Favicon
 ├── logo-autor.png                                # Logo asset
 ├── inteligencia-artificial/                      # AI section pages
-├── theme/                                        # Theme assets (old theme)
-├── wiki/                                         # Local wiki pages
+├── theme/                                        # Theme assets (old theme — deprecated)
 ├── docs/
 │   └── wiki/
 │       ├── Home.md                               # Wiki home
 │       ├── Glosario.md                           # Project glossary
 │       └── Plan-de-Rebranding.md                 # Rebranding plan & phases
 ```
+
+> **Note:** Old standalone service pages (`automatizacion-procesos.html`, `programacion-sistemas-a-medida.html`, `desarrollo-web-facebook-comercio-electronico.html`) were replaced by the `/servicios/` directory. `sobre-nosotros.html` was fully rewritten in June 2026 with the new design system (inline CSS, hamburger menu, DESIGN.md tokens, cards, sections). All pages (`index.html`, `contacto.html`, service pages) now use inline rebranding CSS referencing DESIGN.md tokens.
 
 ## Rebranding Phases
 
