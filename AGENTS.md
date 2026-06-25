@@ -1,182 +1,80 @@
-# SACsi Rebranding — AGENTS.md
+# SACsi — AGENTS.md
 
-## Project Overview
+Rebranding SACsi (soluciones informáticas, Rosario, Argentina). All user-facing content in Argentine Spanish.
 
-Rebranding the SACsi website (soluciones informáticas, Rosario, Argentina) from an old mobile theme to a modern, professional, mobile-first design.
+## Quick reference
 
-- **Repository:** colombinis/colombinis.github.io
-- **Production URL:** https://sacsi.com.ar
-- **Owner:** Sebastian (colombinis@gmail.com)
-- **Language:** Spanish (Rioplatense) — all user-facing content is in Argentine Spanish
-- **Current Phase:** Fase 2 (Build)
-- **Default Branch:** master
-- **Working Branch:** rebranding_20260610
+| What | How |
+|------|-----|
+| Dev server (Astro) | `npm run dev` — serves on port 8000 |
+| Build (Astro) | `npm run build` — outputs to `dist/` |
+| Preview build | `npm run preview` — serves `dist/` on port 8000 |
+| Serve static HTML | `python3 -m http.server 8000` (no build needed) |
+| Working branch | `rebranding_20260610` — never commit to `master` |
+| Commit style | Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `style:` |
+| Design source | `DESIGN.md` — single source of truth for all design decisions |
 
-## Tech Stack
+## Architecture — dual versions
 
-- **Static site:** Pure HTML + CSS + JavaScript (no frameworks)
-- **Hosting:** GitHub Pages
-- **CI:** Jenkins (see `Jenkinsfile` at root)
-- **Domain:** sacsi.com.ar (managed via `CNAME`)
-- **Analytics:** Google Tag Manager + GA4
+The repo has **two parallel versions** of the same site:
 
-## Design System
+1. **Static HTML** (`.html` files at root) — deployed via GitHub Pages (`CNAME` → sacsi.com.ar)
+2. **Astro v7** (`src/` directory) — builds to `dist/`, may become the primary deploy target
 
-The design tokens are defined in `DESIGN.md` — **that is the single source of truth** for all design decisions.
+When editing, check which version(s) need the change. Most pages exist in both forms.
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| Primary | `#1A1A2E` (navy) | Headers, primary buttons, main accents |
-| Secondary | `#555555` | Body text, secondary elements |
-| Tertiary | `#0A7CFF` (blue) | Hover states, links, interactive accents |
-| Neutral | `#FAFAFA` | Page backgrounds |
-| Surface | `#FFFFFF` | Cards, content areas |
-| Muted | `#888888` | Subtle text, metadata |
-| WhatsApp | `#25D366` | WhatsApp CTA button |
-
-**Typography:** System font stack (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif`)
-**Approach:** Mobile-first responsive design
-**Rounded corners:** xs=4px, sm=8px, md=16px, full=100px
-**Spacing:** xs=4px → xxl=80px, container=1120px
-
-## Project Structure
+### Astro source structure
 
 ```
-/
-├── index.html                                    # Homepage (rebranded)
-├── servicios/
-│   ├── presencia-online.html                     # Service page (was desarrollo-web-facebook-comercio-electronico.html)
-│   ├── software-a-medida.html                    # Service page (was programacion-sistemas-a-medida.html)
-│   └── automatizacion.html                       # Service page (was automatizacion-procesos.html)
-├── sobre-nosotros.html                           # About page (rewritten Jun 2026 with new design system)
-├── contacto.html                                 # Contact page (rebranded)
-├── DESIGN.md                                     # Design tokens & component specs (single source of truth)
-├── AGENTS.md                                     # This file — agent instructions
-├── CNAME                                         # Custom domain
-├── Jenkinsfile                                   # CI pipeline
-├── sitemap.xml                                   # SEO sitemap
-├── favicon.ico                                   # Favicon
-├── logo-autor.png                                # Logo asset
-├── inteligencia-artificial/                      # AI section pages
-├── theme/                                        # Theme assets (old theme — deprecated)
-├── docs/
-│   └── wiki/
-│       ├── Home.md                               # Wiki home
-│       ├── Glosario.md                           # Project glossary
-│       └── Plan-de-Rebranding.md                 # Rebranding plan & phases
+src/
+├── pages/           # Routes mirror the HTML site: index, contacto, sobre-nosotros, servicios/*, casos-exito/*
+├── layouts/         # Layout.astro (shared shell: Header+Footer+global.css), CaseStudyLayout.astro
+├── components/      # Header.astro, Footer.astro, ServiceCard.astro
+└── styles/
+    └── global.css   # CSS custom properties (--primary, --tertiary, --whatsapp, etc.)
 ```
 
-> **Note:** Old standalone service pages (`automatizacion-procesos.html`, `programacion-sistemas-a-medida.html`, `desarrollo-web-facebook-comercio-electronico.html`) were replaced by the `/servicios/` directory. `sobre-nosotros.html` was fully rewritten in June 2026 with the new design system (inline CSS, hamburger menu, DESIGN.md tokens, cards, sections). All pages (`index.html`, `contacto.html`, service pages) now use inline rebranding CSS referencing DESIGN.md tokens.
+### Static HTML inline CSS
 
-## Rebranding Phases
+Every HTML page repeats the same `:root` variables. Edits must stay in sync with `DESIGN.md` tokens.
 
-| Phase | Description | Status |
-|-------|-------------|--------|
-| **Fase 0** | Foundation — DESIGN.md, docs, wiki | ✅ Done |
-| **Fase 1** | Structure — brand research, content architecture, UI/UX responsive | 🔜 In progress |
-| **Fase 2** | Build — homepage, service pages, "How we work" | ⬜ Pending |
-| **Fase 3** | Conversion — social proof, FAQ, contact CTA | ⬜ Pending |
-| **Fase 4** | Growth — SEO, analytics, meta tags | ⬜ Pending |
-| **Fase 5** | Close — QA, testing, deployment | ⬜ Pending |
+## Environment
 
-## Coding Conventions
+- **No CI, no tests, no linter, no formatter, no .gitignore**
+- **No external npm deps** beyond Astro itself (pure vanilla JS for client scripts)
+- **Domain:** sacsi.com.ar (via `CNAME`) — do not change `CNAME` unless asked
+- **Analytics:** GTM + GA4 (snippet in Layout.astro head, placeholder for now)
+- **No GitHub directories** (no `.github/`, no workflows)
 
-### HTML
-- **Semantic HTML** — use `<header>`, `<main>`, `<section>`, `<footer>`, `<nav>`, `<article>`
-- Proper heading hierarchy: one `<h1>` per page, sequential `h1`→`h2`→`h3`
-- All images MUST have descriptive `alt` attributes
-- Forms must have labeled inputs (`<label>` or `aria-label`)
+## Legacy / do-not-touch files
 
-### CSS
-- **Mobile-first responsive design** — write base styles for mobile, use `@media (min-width:)` for larger screens
-- Use CSS custom properties (reference DESIGN.md tokens: `var(--primary)`, `var(--tertiary)`, etc.)
-- Class naming: BEM-like convention or descriptive kebab-case
-- Avoid `!important` — use specificity instead
-- No CSS frameworks allowed (no Bootstrap, Tailwind, etc.)
+- `automatizacion-procesos.html`, `programacion-sistemas-a-medida.html`, `desarrollo-web-facebook-comercio-electronico.html` — old standalone pages using deprecated `theme/mobile1/` CSS. Do not edit.
+- `inteligencia-artificial/index.html` — uses older CSS style (not rebranded). Verify before editing.
 
-### JavaScript
-- Vanilla JS only — no frameworks, no jQuery, no npm packages
-- Use `defer` or place scripts before `</body>`
-- No inline event handlers (`onclick`, etc.) — use `addEventListener` in JS files
-- Always handle errors in async operations (fetch, timeouts)
+## Conventions
 
-### General
-- **No external dependencies** — no npm, no build tools, no CDN frameworks
-- All user-facing content in **Argentine Spanish (rioplatense)** — not neutral Spanish
+- **Mobile-first CSS** — base styles for mobile, `@media (min-width: ...)` for larger
+- **CSS custom properties** from `DESIGN.md` tokens (`var(--primary)`, `var(--tertiary)`, etc.)
+- **System font stack only** — no external fonts
+- **Semantic HTML** — proper heading hierarchy, one `<h1>` per page, `alt` on all images
+- **Vanilla JS** — no jQuery, no frameworks, no npm client-side packages
+- A **`var(--container)`** max-width of 1120px centered layout
+- Astro components may use inline `onClick` (Astro compiles this server-side) — acceptable in `.astro` files but avoid in raw HTML
 - Tone: professional but approachable ("cercano")
-- Performance: Lighthouse > 80 in all 4 categories
-- Must be accessible: semantic HTML, proper heading hierarchy, alt text
 
-## Git Workflow
+## Phases
 
-1. Always work on branch `rebranding_20260610` (never commit directly to master)
-2. Commit with conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `style:`, `test:`
-3. Include a description body for non-trivial commits
-4. CI runs via Jenkins (`Jenkinsfile`) — verify the build passes
-5. All changes land via squash-merge PR to `master`
+| Phase | Status |
+|-------|--------|
+| Fase 0 — Foundation (DESIGN.md, docs, wiki) | ✅ Done |
+| Fase 1 — Structure (brand research, content arch, UI/UX) | 🔜 In progress |
+| Fase 2 — Build (homepage, service pages, "How we work") | 🔜 In progress |
+| Fase 3 — Conversion (social proof, FAQ, contact CTA) | ⬜ Pending |
+| Fase 4 — Growth (SEO, analytics, meta tags) | ⬜ Pending |
+| Fase 5 — Close (QA, testing, deployment) | ⬜ Pending |
 
-## Best Practices for Coding Agents
+## Reference
 
-### Before Implementing
-- **Explore first, then plan, then code** — read relevant files before making changes
-- Reference `DESIGN.md` for colors, typography, spacing, and component specs
-- Read existing files to understand current patterns before adding new ones
-- For multi-file changes, consider the dependency order
-
-### During Implementation
-- **Give yourself a way to verify your work** — run tests, build, or take screenshots
-- Make focused, single-purpose changes per commit
-- Do NOT change CNAME unless explicitly asked
-- Do NOT modify files unrelated to the task
-- Do NOT leave commented-out code, debug logs, or console.log statements
-
-### Security (MANDATORY — auto-fail if violated)
-- No hardcoded secrets, API keys, tokens, or credentials in code
-- No `eval()`, `exec()`, or `document.write()` with user input
-- No `innerHTML` with unsanitized user data (use `textContent` instead)
-- No inline event handlers (`onclick="..."`) in HTML
-- External links must use `rel="noopener noreferrer"`
-
-### Code Quality
-- Write meaningful comments for non-obvious logic (but prefer self-documenting code)
-- Keep functions small and single-purpose
-- Use descriptive variable and function names in Spanish or English (consistent)
-- Avoid deep nesting — early return where possible
-- Ensure no regressions: check that existing pages still work after changes
-
-### After Implementing
-- Run the verification check (build, Lighthouse, visual comparison)
-- Request a code review before marking as complete
-- Verify on mobile widths first, then tablet, then desktop
-
-## Quick Start
-
-```bash
-# Clone
-git clone https://github.com/colombinis/colombinis.github.io.git
-cd colombinis.github.io
-
-# Checkout working branch
-git checkout rebranding_20260610
-
-# No build step needed — open index.html in a browser
-# Or serve locally:
-python3 -m http.server 8000
-# Then visit http://localhost:8000
-```
-
-## Agent Guidelines
-
-- When making visual changes, always reference `DESIGN.md` for colors, typography, spacing, and component specs
-- Do NOT add frameworks, npm packages, or build tools — this is a pure static site
-- Do NOT change the CNAME file unless explicitly asked
-- All new pages should match the mobile-first responsive layout
-- When in doubt about content tone: professional but approachable (cercano)
-- All user-facing content is in Argentine Spanish
-
-## Reference Documentation
-
-- Plan de Rebranding: `docs/wiki/Plan-de-Rebranding.md`
-- Design tokens: `DESIGN.md`
-- Glosario: `docs/wiki/Glosario.md`
-- Wiki home: `docs/wiki/Home.md`
+- `DESIGN.md` — colors, typography, spacing, components
+- `docs/wiki/Plan-de-Rebranding.md` — full rebranding plan
+- `docs/wiki/Glosario.md` — project glossary
