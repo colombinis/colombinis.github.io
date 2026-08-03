@@ -9,6 +9,13 @@ export default defineConfig({
     port: 8000,
     host: true,
   },
+  vite: {
+    server: {
+      // Permite que la preview (servida desde otro host vía proxy) no sea
+      // bloqueada por el chequeo de Host de Vite ("Cross-origin request blocked").
+      allowedHosts: true,
+    },
+  },
   build: {
     format: 'directory',
   },
