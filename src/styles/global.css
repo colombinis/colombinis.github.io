@@ -482,6 +482,71 @@ h1, h2, h3 {
   color: #FFFFFF;
 }
 
+/* ---------- Caso de éxito: narrativa (deseo / visión / stack) ---------- */
+.case-prose {
+  max-width: 720px;
+  margin: 0 auto;
+  color: var(--secondary);
+}
+
+.case-prose p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 0 var(--spacing-md);
+}
+
+.case-prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* Callout que muestra cómo el cliente imaginaba el éxito */
+.case-vision {
+  max-width: 720px;
+  margin: var(--spacing-lg) auto 0;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: #F9F9FB;
+  border-left: 4px solid var(--tertiary);
+  border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+}
+
+.case-vision__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tertiary-dark);
+  margin: 0 0 var(--spacing-sm);
+}
+
+.case-vision__quote {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--primary);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Stack técnico (chips) */
+.tech-stack {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  justify-content: center;
+}
+
+.tech-tag {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid #E0E0E0;
+  border-radius: var(--rounded-full);
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
 /* ---------- Responsive (>= 601px) ---------- */
 @media (min-width: 601px) {
   .hero__title {

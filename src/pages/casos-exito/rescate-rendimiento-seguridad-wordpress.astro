@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = 'Rescate de un e-commerce WordPress lento y hackeado';
+---
+
+<Layout title={title} description="Caso de éxito: recuperamos un e-commerce WordPress infectado con malware y lentísimo. Limpieza, hardening de seguridad y optimización de rendimiento sin perder catálogo ni SEO.">
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">CASO DE ÉXITO</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">
+        Un e-commerce con más de 2.000 productos que fue hackeado —redirecciones a sitios de spam— y que además tardaba 8 segundos en abrir. Perdía ventas y Google lo marcaba como inseguro.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/#casos-exito">Ver otros casos</a>
+        <a class="hero__cta-secondary" href="/contacto/">Consultá por este resultado</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El deseo del cliente</h2>
+      <div class="case-prose">
+        <p>
+          El dueño descubrió que su tienda redirigía a los visitantes a páginas de spam y que Google había empezado a mostrar la advertencia de "sitio peligroso". Las ventas se desplomaron de un día para el otro. Encima, cuando el sitio sí cargaba, tardaba casi 8 segundos: años de plugins, imágenes sin optimizar y una base de datos inflada.
+        </p>
+        <p>
+          Su deseo era, ante todo, <strong>volver a confiar en su propia web</strong>: recuperarla limpia, rápida y segura, <strong>sin perder los 2.000 productos ni el posicionamiento SEO</strong> que había construido durante años. Y quería quedarse tranquilo de que no lo iban a volver a hackear.
+        </p>
+      </div>
+
+      <div class="case-vision">
+        <p class="case-vision__label">Cómo imaginaba el éxito</p>
+        <p class="case-vision__quote">
+          "Quiero abrir mi tienda y que cargue rápido, que Google deje de decir que es peligrosa y que mis clientes vuelvan a comprar sin miedo. Y sobre todo, no tener que despertarme pensando si hoy me hackearon de nuevo."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">La solución</h2>
+      <div class="cards-grid">
+        <article class="service-card">
+          <div class="service-card__icon">🧹</div>
+          <h3>Limpieza de malware</h3>
+          <p>Auditamos el sitio, eliminamos el código malicioso y las puertas traseras, y pedimos la re-revisión a Google para sacar la advertencia.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">🔒</div>
+          <h3>Hardening de seguridad</h3>
+          <p>WAF, doble factor, permisos de archivos correctos, actualizaciones al día, backups automáticos y monitoreo de integridad.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">⚡</div>
+          <h3>Optimización de rendimiento</h3>
+          <p>Caché de página y de objetos, CDN, compresión de imágenes, limpieza de la base de datos y optimización de queries lentas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Stack técnico</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">WordPress</span>
+        <span class="tech-tag">WooCommerce</span>
+        <span class="tech-tag">Limpieza de malware</span>
+        <span class="tech-tag">Hardening / WAF</span>
+        <span class="tech-tag">Object Cache + CDN</span>
+        <span class="tech-tag">Optimización MySQL</span>
+        <span class="tech-tag">Core Web Vitals</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            "Recuperé mi tienda en tiempo récord y sin perder nada. Ahora carga rapidísimo, Google la volvió a marcar como segura y las ventas se normalizaron."
+          </p>
+          <p class="testimonial-card__author">Dueño — E-commerce de indumentaria</p>
+          <p class="testimonial-card__role">Argentina</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        <div class="metric">
+          <p class="metric__number">1.5s</p>
+          <p class="metric__label">carga (antes 8s)</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">95</p>
+          <p class="metric__label">PageSpeed</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">0</p>
+          <p class="metric__label">reinfecciones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Querés un resultado igual?</h2>
+      <p class="cta-final__subtitle">Contanos tu caso y te ayudamos a recuperar, asegurar y acelerar tu sitio WordPress.</p>
+      <div class="cta-final__actions">
+        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20el%20caso%20de%20rescate%20de%20WordPress" rel="noopener noreferrer" target="_blank">Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>
