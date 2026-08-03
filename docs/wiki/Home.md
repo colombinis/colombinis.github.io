@@ -8,6 +8,7 @@ Esta wiki es la fuente de verdad del proyecto. Se organiza en **5 documentos** e
 
 | Documento | Contenido |
 |-----------|-----------|
+| [Progreso](Progreso) | **Seguimiento activo:** hallazgos del análisis y tareas con estado (`TODO`/`DOING`/`DONE`). |
 | [Roadmap](Roadmap) | Fases, estado actual, entregables, criterios de éxito y checklist de QA. |
 | [Arquitectura](Arquitectura) | Stack real (Astro), estructura del repo, archivos legacy, deploy y SEO técnico. |
 | [Contenido](Contenido) | Arquitectura de contenido, navegación, wireframes, propuesta de valor y copy de servicios. |
