@@ -1,64 +1,43 @@
 # SACsi Rebranding — Wiki
 
-Bienvenido a la documentación del proyecto de rebranding de SACsi.
+Documentación del rebranding del sitio de **SACsi** (soluciones informáticas para PyMEs, Rosario, Argentina).
 
-## Indice
+Esta wiki es la fuente de verdad del proyecto. Se organiza en **5 documentos** enlazados desde acá.
 
-- [Plan de Rebranding](Plan-de-Rebranding)
-- [DESIGN.md — Tokens de Marca](DESIGN)
-- [Decisiones de Diseño](Decisiones-de-Diseno)
-- [Glosario](Glosario)
-- [SITEMAP — Arquitectura de Contenido](SITEMAP)
-- [SERVICE_COPY — Redacción de Servicios](SERVICE_COPY)
+## Índice
 
-## Propuesta de Valor — F1 (Issue #20)
+| Documento | Contenido |
+|-----------|-----------|
+| [Roadmap](Roadmap) | Fases, estado actual, entregables, criterios de éxito y checklist de QA. |
+| [Arquitectura](Arquitectura) | Stack real (Astro), estructura del repo, archivos legacy, deploy y SEO técnico. |
+| [Contenido](Contenido) | Arquitectura de contenido, navegación, wireframes, propuesta de valor y copy de servicios. |
+| [Diseño](Diseno) | Decisiones de diseño, glosario y enlace a los tokens de marca. |
+| [DESIGN.md (raíz)](https://github.com/colombinis/colombinis.github.io/blob/v0_alternativo_rebranding/DESIGN.md) | **Fuente canónica** de tokens visuales (colores, tipografía, spacing, componentes). |
 
-### Value Proposition (Homepage Hero)
+## Estado actual (lo importante)
 
-La propuesta de valor de SACsi se comunica en el hero de la homepage con tres niveles de información, diseñados para que un visitante entienda qué hace la empresa en menos de 8 segundos sin hacer scroll:
+> El sitio **ya fue migrado a Astro**. La versión de HTML estático de la raíz es **legacy** y se irá deprecando.
 
-| Nivel | Texto | Función |
-|-------|-------|---------|
-| **Label** (label-uppercase) | `SOLUCIONES INFORMÁTICAS` | Categoriza el servicio de inmediato |
-| **H1** (headline principal) | `Tecnología simple para PyMEs que quieren crecer` | Comunica qué hace (tecnología), para quién (PyMEs) y qué resultado (crecer) |
-| **Subtitle** (body-md) | `Automatizamos procesos, desarrollamos software a medida y potenciamos tu presencia online. Más de 15 años ayudando a empresas como la tuya a ganar tiempo, reducir costos y vender más.` | Detalla los 3 servicios principales y el resultado concreto (ganar tiempo, reducir costos, vender más) |
+| Dimensión | Estado real |
+|-----------|-------------|
+| Stack oficial | **Astro v7** (`src/`), build a `dist/`, deploy en GitHub Pages (`CNAME` → sacsi.com.ar). |
+| Legacy a deprecar | `.html` de la raíz, `theme/mobile1/`, `inteligencia-artificial/index.html`, y `dist/` commiteado. |
+| Rama de trabajo | `v0_alternativo_rebranding` — nunca commitear a `master`. |
+| Tokens de diseño | `/DESIGN.md` (raíz) es la única fuente. Ver [drift pendiente](Diseno#tokens-y-drift-pendiente). |
 
-### Principios de Copy
+El detalle del progreso por fase está en el [Roadmap](Roadmap).
 
-- **Sin jerga técnica**: no se usan términos como "desarrollo full-stack", "SaaS", "integración API". Se usa lenguaje simple: "automatizamos procesos", "software a medida", "presencia online".
-- **Orientado a resultados**: cada servicio se describe por el beneficio para el cliente, no por la tecnología.
-- **Argentino rioplatense**: se usa "PyMEs", "empresas como la tuya", "consultános" — tono profesional pero cercano.
-- **8-second test**: un visitante que no conoce SACsi puede repetir después de 8 segundos: "SACsi es una empresa de tecnología que ayuda a PyMEs a automatizar procesos, hacer software y vender más online."
+## Propuesta de valor (resumen)
 
-### Target
+SACsi comunica su valor en el hero de la homepage en 3 niveles, pensados para el **test de 8 segundos**:
 
-Dueños de PyMEs y emprendedores no técnicos que necesitan automatización y desarrollo de software pero buscan confianza, resultados medibles y comunicación clara. Principalmente en Rosario, Santa Fe y Argentina.
+| Nivel | Texto |
+|-------|-------|
+| Label | `SOLUCIONES INFORMÁTICAS` |
+| H1 | `Tecnología simple para PyMEs que quieren crecer` |
+| Subtítulo | `Automatizamos procesos, desarrollamos software a medida y potenciamos tu presencia online. Más de 15 años ayudando a empresas como la tuya a ganar tiempo, reducir costos y vender más.` |
 
-### CTA Strategy
-
-- **CTA primario**: WhatsApp (`hero__cta` con color `--whatsapp` #25D366) — "Consultános sin cargo". El verde WhatsApp indica canal de chat directo, que es el medio de contacto preferido del target.
-- **CTA secundario**: "Conocé más" (botón outline) — lleva a la página de contacto para quienes prefieren un formulario tradicional.
-- Ambos visibles sin scrolling en mobile y desktop.
-
-## Estructura del Proyecto
-
-El rebranding se organiza en 5 fases:
-
-| Fase | Nombre | Issues |
-|------|--------|--------|
-| F0 | Fundacion | DESIGN.md, Anonimizar, Wiki |
-| F1 | Estructura | Investigacion, Arquitectura, UI/UX |
-| F2 | Construccion | Homepage, Servicios, Proceso |
-| F3 | Conversion | Metricas, FAQ, Contacto |
-| F4 | Crecimiento | SEO, Analytics |
-| F5 | Cierre | QA, Deploy |
-
-## Stack Tecnologico
-
-- Sitio static HTML/CSS/JS hosteado en GitHub Pages
-- Sin frameworks externos — CSS vanilla con diseno mobile-first
-- DESIGN.md como source of truth de tokens visuales
-- Google Tag Manager + Analytics 4 para medicion
+El desarrollo completo (target, principios de copy, CTA strategy) vive en [Contenido](Contenido).
 
 ## Enlaces
 

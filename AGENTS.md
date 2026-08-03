@@ -10,18 +10,18 @@ Rebranding SACsi (soluciones informáticas, Rosario, Argentina). All user-facing
 | Build (Astro) | `npm run build` — outputs to `dist/` |
 | Preview build | `npm run preview` — serves `dist/` on port 8000 |
 | Serve static HTML | `python3 -m http.server 8000` (no build needed) |
-| Working branch | `rebranding_20260610` — never commit to `master` |
+| Working branch | `v0_alternativo_rebranding` — never commit to `master` |
 | Commit style | Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `style:` |
 | Design source | `DESIGN.md` — single source of truth for all design decisions |
 
-## Architecture — dual versions
+## Architecture — Astro is the official stack
 
-The repo has **two parallel versions** of the same site:
+The repo currently holds **two versions**, but they are not equal:
 
-1. **Static HTML** (`.html` files at root) — deployed via GitHub Pages (`CNAME` → sacsi.com.ar)
-2. **Astro v7** (`src/` directory) — builds to `dist/`, may become the primary deploy target
+1. **Astro v7** (`src/` directory) — **official stack**. Builds to `dist/`, deployed via GitHub Pages (`CNAME` → sacsi.com.ar). Make all changes here.
+2. **Static HTML** (`.html` files at root) — **legacy**, being deprecated. Do not build on it. Will be removed in Fase 5.
 
-When editing, check which version(s) need the change. Most pages exist in both forms.
+See `docs/wiki/Arquitectura.md` for the full legacy inventory and cleanup plan.
 
 ### Astro source structure
 
@@ -67,14 +67,19 @@ Every HTML page repeats the same `:root` variables. Edits must stay in sync with
 | Phase | Status |
 |-------|--------|
 | Fase 0 — Foundation (DESIGN.md, docs, wiki) | ✅ Done |
-| Fase 1 — Structure (brand research, content arch, UI/UX) | 🔜 In progress |
-| Fase 2 — Build (homepage, service pages, "How we work") | 🔜 In progress |
-| Fase 3 — Conversion (social proof, FAQ, contact CTA) | ⬜ Pending |
-| Fase 4 — Growth (SEO, analytics, meta tags) | ⬜ Pending |
-| Fase 5 — Close (QA, testing, deployment) | ⬜ Pending |
+| Fase 1 — Structure (brand research, content arch, UI/UX) | ✅ Done |
+| Fase 2 — Build (homepage, service pages, "How we work") | 🔄 In progress (migrated to Astro; QA pending) |
+| Fase 3 — Conversion (social proof, FAQ, contact CTA) | 🔄 In progress |
+| Fase 4 — Growth (SEO, analytics, meta tags) | ⬜ Pending (GTM/GA4 is a placeholder) |
+| Fase 5 — Close (QA on Astro, legacy cleanup, deployment) | ⬜ Pending |
+
+Full status: `docs/wiki/Roadmap.md`.
 
 ## Reference
 
-- `DESIGN.md` — colors, typography, spacing, components
-- `docs/wiki/Plan-de-Rebranding.md` — full rebranding plan
-- `docs/wiki/Glosario.md` — project glossary
+- `DESIGN.md` — colors, typography, spacing, components (canonical tokens)
+- `docs/wiki/Home.md` — wiki hub (index + current status)
+- `docs/wiki/Roadmap.md` — phases, status, QA checklist, rollback
+- `docs/wiki/Arquitectura.md` — Astro structure, legacy files, deploy, SEO
+- `docs/wiki/Contenido.md` — content architecture + service copy
+- `docs/wiki/Diseno.md` — design rationale + glossary + token drift
