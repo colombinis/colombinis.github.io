@@ -8,6 +8,7 @@
     "preview": "astro preview --port 8000"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.0.0"
   }
 }
