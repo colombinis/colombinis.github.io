@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import CasosCarousel from '../components/CasosCarousel.astro';
 ---
 
 <Layout
@@ -170,6 +171,11 @@ import ServiceCard from '../components/ServiceCard.astro';
   <section id="casos-exito" class="section section--alt">
     <div class="container">
       <h2 class="section__title">Casos de éxito</h2>
+      <p class="section__subtitle">Proyectos reales, resultados medibles. Deslizá para explorarlos.</p>
+
+      <CasosCarousel />
+
+      <h3 class="cases-all__title">Todos los casos</h3>
       <div class="cards-grid">
         <ServiceCard
           title="Tienda de ropa usada con pagos automáticos a donantes"
