@@ -6,9 +6,39 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = '' } = Astro.props;
+const {
+  title,
+  description = 'Soluciones informáticas para PyMEs en Rosario: automatización de procesos, software a medida y presencia online.',
+  image = '/og-image.png',
+} = Astro.props;
+
+const GTM_ID = 'GTM-T7PWJ99';
+const siteName = 'SACsi';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://sacsi.com.ar');
+const socialImage = new URL(image, Astro.site ?? 'https://sacsi.com.ar');
+const fullTitle = `${title} | ${siteName}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'SACsi — Soluciones Informáticas',
+  description,
+  url: 'https://sacsi.com.ar',
+  telephone: '+54-341-519-7937',
+  email: 'colombinis@sacsi.com.ar',
+  image: socialImage.toString(),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rosario',
+    addressRegion: 'Santa Fe',
+    addressCountry: 'AR',
+  },
+  areaServed: 'Argentina',
+  sameAs: ['https://api.whatsapp.com/send?phone=5493415197937'],
+};
 ---
 
 <!DOCTYPE html>
@@ -16,16 +46,56 @@ const { title, description = '' } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} | SACSI</title>
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={`https://sacsi.com.ar${Astro.url.pathname}`} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
     <!-- Google Tag Manager -->
-    <script type="module">
-      // GTM placeholder; se puede restaurar el snippet original si es necesario
+    <script is:inline define:vars={{ GTM_ID }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', GTM_ID);
     </script>
+    <!-- End Google Tag Manager -->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <Header />
     <main>
       <slot />
