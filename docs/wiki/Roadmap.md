@@ -15,12 +15,12 @@ Leyenda: ✅ hecho · 🔄 en curso · ⬜ pendiente
 |------|--------|--------|-------|
 | F0 | Fundación | ✅ | DESIGN.md, anonimización, wiki. |
 | F1 | Estructura | ✅ | Propuesta de valor, sitemap, service copy, UI/UX responsive. |
-| F2 | Construcción | 🔄 | Homepage y páginas migradas a Astro. Falta cerrar QA sobre Astro (no sobre el HTML viejo). |
-| F3 | Conversión | 🔄 | Métricas, testimonios, FAQ y CTA existen en Astro; validar formulario y tracking real. |
-| F4 | Crecimiento | ⬜ | SEO/meta por página y GA4 a revalidar tras la migración (el snippet GTM quedó como placeholder). |
-| F5 | Cierre | ⬜ | QA final sobre Astro + limpieza de legacy + deploy. |
+| F2 | Construcción | ✅ | Homepage y páginas en Astro; QA re-ejecutada en navegador (se corrigió el CSS scoped, ver H11). |
+| F3 | Conversión | ✅ | Métricas, testimonios, FAQ, formulario y CTAs verificados en Astro. |
+| F4 | Crecimiento | ✅ | SEO por página (OG/Twitter/JSON-LD/canonical), sitemap automático y GTM `GTM-T7PWJ99` activos. |
+| F5 | Cierre | ✅ | QA final sobre Astro, legacy eliminado, `dist/` fuera de git y workflow de deploy creado. |
 
-> **Importante:** el checklist original marcaba todo como ✅, pero validaba la versión de **HTML estático**. Tras la migración a Astro, la QA de F2–F5 debe **re-ejecutarse sobre las páginas `.astro`**.
+> El detalle de tareas (T0–T16) y hallazgos (H1–H18) con su estado está en [Progreso](Progreso). Las fases quedaron cerradas; el trabajo posterior (carrusel, casos WordPress, ajustes de UX) se registra como T12–T16.
 
 ## Detalle de fases
 
@@ -73,35 +73,38 @@ Leyenda: ✅ hecho · 🔄 en curso · ⬜ pendiente
 - Sin regresión visual respecto de la versión publicada.
 - Todos los CTAs funcionales y trackeados.
 
-## Checklist de QA (re-validar sobre Astro)
+## Checklist de QA (verificada sobre Astro)
 
 ### Build y servidor
-- [ ] `npm run build` compila sin errores.
-- [ ] `npm run preview` sirve `dist/` correctamente en el puerto 8000.
-- [ ] Todas las rutas resuelven: `/`, `/contacto`, `/sobre-nosotros`, `/servicios/*`, `/casos-exito/*`.
-- [ ] Sin errores en consola JS.
+- [x] `npm run build` compila sin errores (15 páginas + sitemap + CNAME).
+- [x] `npm run preview` sirve `dist/` correctamente.
+- [x] Todas las rutas resuelven: `/`, `/contacto/`, `/sobre-nosotros/`, `/servicios/*`, `/casos-exito/*`.
+- [x] Sin errores en consola JS.
 
 ### Responsive
-- [ ] Breakpoint mobile (≤ 600px): grillas a 1–2 columnas.
-- [ ] Menú hamburguesa visible en mobile.
-- [ ] CTAs full-width en mobile.
-- [ ] Tipografía responsive.
+- [x] Breakpoint mobile: grillas a 1–2 columnas (verificado en 390px).
+- [x] Menú hamburguesa funcional en mobile.
+- [x] CTAs full-width en mobile.
+- [x] Tipografía responsive.
 
 ### Accesibilidad
-- [ ] `aria-expanded` / `aria-controls` en FAQ.
-- [ ] `alt` en todas las imágenes.
-- [ ] Jerarquía de headings correcta (un solo `<h1>` por página).
+- [x] `aria-expanded` / `aria-controls` en FAQ.
+- [x] `alt` en imágenes (el sitio no usa `<img>` de contenido; íconos inline).
+- [x] Jerarquía de headings correcta (un solo `<h1>` por página).
+- [x] `target="_blank"` con `rel="noopener"` en todos los enlaces externos.
 
 ### SEO
-- [ ] `title` y `description` únicos por página.
-- [ ] Open Graph y canonical presentes.
-- [ ] JSON-LD `LocalBusiness`.
-- [ ] `sitemap.xml` con las URLs Astro reales.
+- [x] `title` y `description` únicos por página.
+- [x] Open Graph, Twitter Card y canonical presentes.
+- [x] JSON-LD `LocalBusiness`.
+- [x] `sitemap.xml` (automático) con las URLs Astro reales + `robots.txt`.
 
 ### Conversión / tracking
-- [ ] GTM/GA4 restaurado y emitiendo eventos (`cta_click`, `whatsapp_click`, `form_submit`).
-- [ ] Enlaces de WhatsApp funcionan.
-- [ ] Formulario de contacto envía correctamente.
+- [x] GTM (`GTM-T7PWJ99`) presente (head + noscript). *Falta validar eventos con datos reales tras el deploy.*
+- [x] Enlaces de WhatsApp funcionan.
+- [x] Formulario de contacto con validación JS operativa.
+
+> **Pendiente post-deploy:** correr Lighthouse sobre la URL productiva (meta > 80) y confirmar que GA4/GTM recibe eventos reales.
 
 ## Plan de rollback
 

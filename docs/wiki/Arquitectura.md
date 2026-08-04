@@ -14,7 +14,7 @@ El sitio se construye con **Astro v7** y se despliega como sitio estático en **
 | Dominio | `sacsi.com.ar` (vía `CNAME`) — no cambiar salvo pedido explícito |
 | Fuente de tokens | `/DESIGN.md` (raíz) |
 
-Sin dependencias npm más allá de Astro. El JavaScript de cliente es **vanilla** (sin jQuery ni frameworks). Sin CI, tests, linter ni formatter configurados.
+Única dependencia relevante: `@astrojs/sitemap` (genera el sitemap en build). El JavaScript de cliente es **vanilla** (sin jQuery ni frameworks). Sin tests, linter ni formatter; el CI de deploy se define en `.github/workflows/deploy.yml`.
 
 ### Estructura Astro
 
@@ -24,64 +24,46 @@ src/
 │   ├── index.astro
 │   ├── contacto.astro
 │   ├── sobre-nosotros.astro
-│   ├── servicios/    # automatizacion, software-a-medida, presencia-online
-│   └── casos-exito/  # tienda-ropa-usada, consultorio-psicologia, ferreteria-gas-plomeria
+│   ├── casos.json.js        # Endpoint estático: expone los casos para el carrusel
+│   ├── servicios/           # index + automatizacion, software-a-medida, presencia-online
+│   └── casos-exito/         # 8 casos (3 PyME + 5 orientados a perfil WordPress)
 ├── layouts/
-│   ├── Layout.astro         # Shell compartido: Header + Footer + global.css + <head>
-│   └── CaseStudyLayout.astro
+│   └── Layout.astro         # Shell compartido: Header + Footer + global.css + <head> (SEO/GTM)
 ├── components/
-│   ├── Header.astro
+│   ├── Header.astro         # Nav + hamburguesa (toggle client-side)
 │   ├── Footer.astro
-│   └── ServiceCard.astro
+│   ├── ServiceCard.astro
+│   └── CasosCarousel.astro  # Carrusel con render asíncrono (fetch a /casos.json)
+├── data/
+│   └── casos.js             # Fuente única de verdad de los 8 casos de éxito
 └── styles/
-    └── global.css   # Custom properties (--primary, --tertiary, --whatsapp, etc.)
+    └── global.css           # Design system: tokens + clases compartidas de todas las páginas
 ```
 
-`global.css` es donde los tokens de `DESIGN.md` se materializan como CSS custom properties. Toda página consume `var(--primary)`, `var(--tertiary)`, etc.
+`global.css` es donde los tokens de `DESIGN.md` se materializan como CSS custom properties **y** donde viven las clases compartidas del sitio (hero, secciones, cards, carrusel…). Es importado por `Layout.astro`, por lo que aplica a todas las páginas — los `<style>` de Astro son *scoped* por archivo, así que el CSS común **debe** estar aquí, no en páginas individuales (ver H11 en [Progreso](Progreso)).
 
-## Legacy — a deprecar
+### Casos de éxito y carrusel
 
-Estos archivos son de la etapa anterior y **no deben editarse ni tomarse como referencia**. Se eliminarán en F5.
-
-| Ruta | Qué es | Acción |
-|------|--------|--------|
-| `index.html`, `contacto.html`, `sobre-nosotros.html` (raíz) | Versión HTML estática previa a Astro | Deprecar (duplican las rutas Astro) |
-| `servicios/*.html`, `casos-exito/*.html` (raíz) | Ídem, versión estática | Deprecar |
-| `automatizacion-procesos.html`, `programacion-sistemas-a-medida.html`, `desarrollo-web-facebook-comercio-electronico.html` | Páginas viejas con `theme/mobile1` | Eliminar |
-| `theme/mobile1/` | Tema antiguo (CSS + imágenes) | Eliminar |
-| `inteligencia-artificial/index.html` | Página con estilo viejo, sin rebrandear | Migrar a Astro o eliminar |
-| `dist/` | Output de build **commiteado por error** | Sacar del control de versiones (agregar `.gitignore`) |
-
-> **Deuda de repo:** no existe `.gitignore`. `dist/`, `node_modules/` y artefactos de build no deberían versionarse.
+- `src/data/casos.js` es la **fuente única** de los 8 casos. Para agregar/editar un caso se toca este archivo (y su página de detalle en `casos-exito/`).
+- `casos.json.js` genera `/casos.json` en el build; `CasosCarousel.astro` lo consume con `fetch` (render asíncrono en cliente) y arma los slides, cada uno enlazando a `/casos-exito/<slug>/`.
 
 ## Deploy (GitHub Pages)
 
-- El dominio se sirve vía `CNAME` (`sacsi.com.ar`).
-- Al ser Astro, el deploy debe publicar el contenido de `dist/` (idealmente vía GitHub Action, hoy inexistente). Definir esto es parte de F5.
-- `astro.config.mjs`: `site: 'https://sacsi.com.ar'`, `base: '/'`, `build.format: 'directory'`.
+- El dominio se sirve vía `CNAME` (`sacsi.com.ar`), incluido en `public/CNAME` para que quede en el build.
+- **Workflow:** `.github/workflows/deploy.yml` corre en cada push a `master`: `astro build` → `actions/deploy-pages`.
+- `astro.config.mjs`: `site: 'https://sacsi.com.ar'`, `build.format: 'directory'`, `@astrojs/sitemap` integrado, y `vite.server.allowedHosts: true` (para la preview cross-origin).
+- **Requisito manual (una vez):** en **Settings → Pages** del repo, fijar *Source* = **GitHub Actions**.
+- `.gitignore` excluye `dist/`, `.astro/` y `node_modules/`.
 
 ## SEO técnico
 
-### Rutas y `sitemap.xml`
+### `sitemap.xml` (automático)
 
-El `sitemap.xml` debe reflejar las **rutas Astro reales** (con `build.format: 'directory'` las URLs son con barra final):
-
-```
-https://sacsi.com.ar/                              (prioridad 1.0)
-https://sacsi.com.ar/sobre-nosotros/               (0.7)
-https://sacsi.com.ar/contacto/                     (0.7)
-https://sacsi.com.ar/servicios/automatizacion/     (0.8)
-https://sacsi.com.ar/servicios/software-a-medida/  (0.8)
-https://sacsi.com.ar/servicios/presencia-online/   (0.8)
-https://sacsi.com.ar/casos-exito/...               (0.6)
-```
-
-> Las rutas viejas tipo `programacion-sistemas-a-medida.html` quedan obsoletas; conviene un redirect o dejarlas fuera del sitemap.
+Lo genera `@astrojs/sitemap` en cada build a partir de las rutas reales (con `build.format: 'directory'`, URLs con barra final): homepage, `/sobre-nosotros/`, `/contacto/`, `/servicios/` + 3 servicios, y los 8 `/casos-exito/*`. Complementado por `public/robots.txt`.
 
 ### Metadatos
 
-- `Layout.astro` centraliza `<title>`, `description` y `canonical`.
-- **Pendiente (F4):** Open Graph / Twitter Card por página, JSON-LD `LocalBusiness`, y restaurar el snippet de **GTM/GA4** (hoy es un placeholder vacío en `Layout.astro`).
+- `Layout.astro` centraliza `<title>`, `description`, `canonical`, **Open Graph**, **Twitter Card**, **JSON-LD `LocalBusiness`**, `theme-color` y el snippet de **GTM** (`GTM-T7PWJ99`, head + noscript).
 
 ## Convenciones de código
 

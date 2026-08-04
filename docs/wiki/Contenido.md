@@ -48,14 +48,16 @@ Hero → Soluciones → Cómo trabajamos → Métricas/Testimonios → Casos de 
 
 | Sección | Contenido |
 |---------|-----------|
-| Hero | Label + H1 + subtítulo + 2 CTAs |
+| Hero | Label + H1 + subtítulo + 2 CTAs + **carrusel de casos de éxito** (render asíncrono) |
 | Soluciones | 3 tarjetas de servicio con hover |
 | Cómo trabajamos | 4 pasos: Descubrimiento, Diagnóstico, Prototipo, Producción |
 | Métricas | 15+ años · 65% tiempo liberado · 50+ clientes · 2 semanas al prototipo |
 | Testimonios | 3 testimonios |
-| Casos de éxito | 3 casos (tienda ropa usada, consultorio psicología, ferretería) |
+| Todos los casos de éxito | Grilla con los **8 casos** completos |
 | FAQ | 6 preguntas, acordeón accesible |
-| CTA final | Fondo `--primary` + WhatsApp + email |
+| CTA final | Fondo `--primary` + WhatsApp + email (`sacsi@sacsi.com.ar`) |
+
+> El **carrusel** se ubica en el hero, debajo de los CTAs, y es el punto de entrada rápido a los casos; la grilla completa "Todos los casos de éxito" vive más abajo. El footer contiene solo el copyright (sin links de redes).
 
 ## Estructura de una página de servicio
 
@@ -106,7 +108,26 @@ Hero (nombre + tagline)
 
 ### 4. (Futuro) Inteligencia Artificial
 
-Sección existente en `/inteligencia-artificial/` (legacy). Se puede integrar como cuarto servicio o como complemento transversal. Claim potencial: *"Machine learning y automatización inteligente para empresas que quieren dar el salto."*
+Servicio potencial, aún **no implementado** (la vieja página `/inteligencia-artificial/` se eliminó con el legacy). Se puede integrar como cuarto servicio o como complemento transversal. Claim potencial: *"Machine learning y automatización inteligente para empresas que quieren dar el salto."*
+
+---
+
+## Casos de éxito (8)
+
+La fuente de datos es `src/data/casos.js`; cada caso tiene su página de detalle en `src/pages/casos-exito/<slug>/`. Los 5 casos WordPress se sumaron para evidenciar competencias que un reclutador de ese perfil evalúa. Cada página de detalle sigue el patrón: **deseo del cliente → cómo visualizaba el logro → solución → stack técnico → métricas**.
+
+| # | Caso | Slug | Enfoque |
+|---|------|------|---------|
+| 1 | Tienda de ropa usada | `tienda-ropa-usada` | E-commerce PyME |
+| 2 | Consultorio de psicología | `consultorio-psicologia` | Presencia online / turnos |
+| 3 | Ferretería (gas y plomería) | `ferreteria-gas-plomeria` | Tienda online sin fricción |
+| 4 | Estudio de arquitectura | `tema-wordpress-a-medida-gutenberg` | Tema a medida + bloques Gutenberg/ACF |
+| 5 | Club de café de especialidad | `tienda-woocommerce-suscripciones` | WooCommerce + suscripciones |
+| 6 | Medio digital | `wordpress-headless-nextjs` | WordPress headless + Next.js (WPGraphQL) |
+| 7 | Rescate de e-commerce | `rescate-rendimiento-seguridad-wordpress` | Performance + hardening de seguridad |
+| 8 | Academia online | `plataforma-cursos-lms-membresias` | LMS + membresías |
+
+> **Nota de contenido:** las descripciones están redactadas para "lucir reales" y sirven de plantilla. A futuro se mapean a proyectos concretos o se crean como proyectos nuevos que se ajusten a cada narrativa.
 
 ---
 
