@@ -6,82 +6,78 @@ Validar que los precios de PRI-02 cubren las horas reales de trabajo ×
 tarifa hora interna (PRI-01: la hora es unidad interna de cotización)
 y dejan margen. Se conecta con CON-03 (breakeven del negocio).
 
-**Tarifa hora interna Sebastián (2026):**
-- Costo hora (referencia USD): $30 - $45/h (senior 20+ años, mercado
-  servicios PyME AR)
-- Convertido a ARS (referencia ~$1.100 ARS/USD): $33k - $50k/h ARS
-- Se usa el rango bajo ($30/h USD) para el cálculo conservador:
-  **$33k ARS/h**
+**Tarifa hora real Sebastián (confirmada por el usuario 2026-08-04):**
+- **USD 20/h** (no USD 30-45/h como se asumía inicialmente)
+- Convertido a ARS (referencia ~1.100 ARS/USD): **~ARS 22.000/h**
+- Cálculo conservador: **ARS 22k/h**
 
-**Horas estimadas reales por tier (con experiencia del stack):**
+## Tabla de breakeven (tarifa REAL $22k/h ARS)
 
-| Servicio/Tier | Precio (ARS) | Horas estimadas | Costo interno (33k/h) | Margen bruto | Margen % |
-|---------------|-------------|-----------------|----------------------|--------------|----------|
-| Landing | $250k-400k | 15-20h | $495k-660k ⚠️ | — | **NEGATIVO** |
-| Sitio pro | $600k-1M | 25-35h | $825k-1.15M | — | **MARGINAL** |
-| E-commerce | $1.2M-2M | 50-70h | $1.65M-2.3M | — | **MARGINAL** |
-| Auto básico | $400k-600k | 20-30h | $660k-990k ⚠️ | — | **NEGATIVO** |
-| Auto intermedio | $800k-1.2M | 40-60h | $1.3M-2M | — | **MARGINAL** |
-| Soft chico | $1.5M-3M | 60-90h | $2M-3M | — | **MARGINAL** |
-| Soft grande | $3M-6M | 100-160h | $3.3M-5.3M | — | **MARGINAL** |
-| Hora técnica | $30-45k/h | 1h | $33k | $0-12k | 0-27% |
-| Retainer básico | $200-400k/mes | 5h/mes | $165k | $35-235k | 18-59% |
-| Retainer pro | $500-800k/mes | 15h/mes | $495k | $5-305k | 1-38% |
+| Servicio/Tier | Precio (ARS) | Horas est. | Costo @22k/h | Margen min | Margen max | ¿Viable? |
+|---------------|-------------|------------|--------------|------------|------------|----------|
+| Landing | $250k-400k | 15-20h | $330k-440k | **-24%** | **-9%** | ❌ NEGATIVO |
+| Sitio pro | $600k-1M | 25-35h | $550k-770k | +9% | +30% | ✅ OK |
+| E-commerce | $1.2M-2M | 50-70h | $1.1M-1.54M | +9% | +30% | ✅ OK |
+| Auto básico | $400k-600k | 20-30h | $440k-660k | **-9%** | **-9%** | ⚠️ MARGINAL |
+| Auto intermedio | $800k-1.2M | 40-60h | $880k-1.32M | **-9%** | **-9%** | ⚠️ MARGINAL |
+| Soft chico | $1.5M-3M | 60-90h | $1.32M-1.98M | +14% | +52% | ✅ OK |
+| Soft grande | $3M-6M | 100-160h | $2.2M-3.52M | +36% | +70% | ✅ OK |
+| Hora técnica | $30-45k/h | 1h | $22k | +36% | +105% | ✅ OK |
+| Retainer básico | $200-400k/mes | 5h/mes | $110k | +82% | +264% | ✅ OK |
+| Retainer pro | $500-800k/mes | 15h/mes | $330k | +52% | +142% | ✅ OK |
 
-## Problema detectado
+## Problema detectado (recalculado con tarifa real)
 
-**Los precios del borrador original NO cubren el costo hora real** en los
-tiers bajos. A $33k/h ARS:
-- Una landing de 15h cuesta $495k — pero se vende a $250k-400k → PÉRDIDA.
-- Auto básico de 20h cuesta $660k — se vende a $400k-600k → PÉRDIDA.
+**Con $20/h USD (~$22k ARS/h) los tiers bajos siguen sin cubrir costo:**
+- **Landing:** 15h = $330k, se vendía a $250k-400k → PÉRDIDA en todo el rango
+- **Auto básico:** 20h = $440k, se vendía a $400k-600k → pierde en el rango bajo
+- **Auto intermedio:** 40h = $880k, se vendía a $800k-1.2M → pierde en el rango bajo
 
-El borrador (PRI-02 original) fue hecho "para iniciar la conversación"
-sin validar contra horas reales. Este es el hallazgo central de PRI-03.
+Los tiers medios/altos (Sitio pro, E-commerce, Software, Hora, Retainers)
+SÍ son viables con margen 9-264%.
 
-## Ajuste propuesto
+## Ajuste propuesto — Opción A (revisada con tarifa real)
 
-Opción A — **Subir precios mínimos** (recomendada):
 | Tier | Precio ajustado | Por qué |
 |------|----------------|---------|
-| Landing | $500k - $800k | Cubre 15-20h + margen 20-30% |
-| Sitio pro | $900k - $1.4M | Cubre 25-35h + margen |
-| Auto básico | $700k - $1M | Cubre 20-30h + margen |
-| Auto intermedio | $1.2M - $1.8M | Cubre 40-60h + margen |
-| Soft chico | $2M - $3.5M | Cubre 60-90h + margen |
-| Soft grande | $4M - $8M | Cubre 100-160h + margen |
+| **Landing** | **$500k - $700k** | Alinea con ancla FAQ "$500.000"; cubre 15-20h + margen 14-52% |
+| Sitio pro | $600k - $1M | OK tal cual (+9 a +30%) |
+| E-commerce | $1.2M - $2M | OK tal cual (+9 a +30%) |
+| **Auto básico** | **$500k - $750k** | Cubre 20-30h + margen 14-25% |
+| **Auto intermedio** | **$1.1M - $1.6M** | Cubre 40-60h + margen 25-21% |
+| Soft chico | $1.5M - $3M | OK tal cual (+14 a +52%) |
+| Soft grande | $3M - $6M | OK tal cual (+36 a +70%) |
+| Hora técnica | $30-45k/h | OK tal cual |
+| Retainers | $200-800k/mes | OK tal cual |
 
-**Coherencia:** el ticket medio CON-03 (ARS 4M mix 50/30/20) sigue
-dentro del rango → no rompe los escenarios de breakeven.
+**Solo 3 tiers requieren ajuste** (Landing, Auto básico, Auto intermedio).
+El resto ya era viable con la tarifa real.
 
-Opción B — **Reducir horas** (no recomendada): recortar scope para
-encajar en precios bajos → calidad baja, clientes insatisfechos.
+**Coherencia:** ticket medio CON-03 (ARS 4M mix 50/30/20) sigue dentro
+del rango → no rompe los escenarios de breakeven.
 
-## Decisión
+## Ancla FAQ actualizada (confirmada por el usuario)
 
-**Adoptar Opción A** — subir mínimos para que todo tier tenga margen
-≥ 20%. Los rangos de PRI-02 se actualizan a los ajustados. La ancla
-publicada "desde $150.000 ARS" queda **DESACTUALIZADA** → tarea de copy
-(FASE 6/DEP o fix directo en FAQ) para alinear a "desde $500.000 ARS".
-
-> **Nota para el usuario:** los números dependen de tu tarifa hora real.
-> Si tu costo hora es menor ($20/h → $22k ARS) los rangos originales
-> funcionan. Validar en la revisión.
+> **Decisión del usuario (2026-08-04):** "si. el valor hora real es 20 USD"
+> → Se actualiza la FAQ de index.astro de **$150.000 → $500.000 ARS**.
+> Con tarifa real $22k/h, el ancla $500k es el floor viable del tier
+> más bajo (Landing $500-700k) → coherente y con margen.
 
 ## Verification (bash ejecutable)
 
 ```bash
 #!/bin/bash
-# PRI-03 — breakeven por servicio
+# PRI-03 — breakeven por servicio (tarifa real)
 FILE="docs/tareas/PRI-03-breakeven-costos.md"
 echo "🧪 PRI-03 — Breakeven costos"
-grep -q '33k\|33.000\|tarifa hora' "$FILE" && echo "  ✅ tarifa hora documentada"
+grep -q '22k\|22.000\|20 USD' "$FILE" && echo "  ✅ tarifa real USD 20/h documentada"
 grep -q 'NEGATIVO' "$FILE" && echo "  ✅ problema de margen detectado"
-grep -q 'Opción A' "$FILE" && echo "  ✅ opcion A (subir precios)"
-grep -q 'margen' "$FILE" && echo "  ✅ margen calculado"
-grep -q 'DESACTUALIZADA' "$FILE" && echo "  ✅ ancla FAQ detectada desactualizada"
+grep -q 'Landing.*500k' "$FILE" && echo "  ✅ Landing ajustada a $500k"
+grep -q 'Auto básico.*500k' "$FILE" && echo "  ✅ Auto básico ajustada"
+grep -q 'Auto intermedio.*1.1M' "$FILE" && echo "  ✅ Auto intermedio ajustada"
+grep -q '150.000 → 500.000\|500.000 ARS' "$FILE" && echo "  ✅ ancla FAQ actualizada"
 echo "✅ PRI-03 — COMPLETA"
 ```
 
 ## Estado
-DONE — breakeven calculado; ajuste Opción A propuesto (pendiente
-confirmación del usuario antes de tocar FAQ/copy)
+DONE — breakeven recalculado con tarifa real USD 20/h; FAQ actualizada

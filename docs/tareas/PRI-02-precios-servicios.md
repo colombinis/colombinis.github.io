@@ -38,7 +38,7 @@ Scenario: Rangos de precios definidos por servicio
 
 | Tier | ARS | USD | Duration | Scope incluido |
 |------|-----|-----|----------|----------------|
-| **Landing** | $250k - $400k | $250 - $400 | 1-2 semanas | 1 página, diseño, formulario/WhatsApp, mobile, SEO básico, dominio+hosting (setup) |
+| **Landing** | $500k - $700k | $500 - $700 | 1-2 semanas | 1 página, diseño, formulario/WhatsApp, mobile, SEO básico, dominio+hosting (setup) |
 | **Sitio pro** | $600k - $1M | $600 - $1,000 | 2-4 semanas | 5-10 páginas, CMS fácil de editar, blog, optimización velocidad, SEO on-page, contacto |
 | **E-commerce** | $1.2M - $2M | $1,200 - $2,000 | 4-8 semanas | Tienda online completa (WooCommerce), catálogo, pagos, envíos, carrito, gestión de stock |
 
@@ -50,8 +50,8 @@ mantenimiento mensual (se ofrece como retainer).
 
 | Tier | ARS | USD | Duration | Scope incluido |
 |------|-----|-----|----------|----------------|
-| **Básico** | $400k - $600k | $400 - $600 | 1-3 semanas | 1-2 procesos: facturación, reportes, sincronización stock, recordatorios |
-| **Intermedio** | $800k - $1.2M | $800 - $1,200 | 3-6 semanas | 3-5 procesos + integración entre herramientas (tienda↔depósito, CRM, planillas) |
+| **Básico** | $500k - $750k | $500 - $750 | 1-3 semanas | 1-2 procesos: facturación, reportes, sincronización stock, recordatorios |
+| **Intermedio** | $1.1M - $1.6M | $1,100 - $1,600 | 3-6 semanas | 3-5 procesos + integración entre herramientas (tienda↔depósito, CRM, planillas) |
 
 **Excluido:** integraciones con sistemas legados muy complejos, data
 migration masiva, mantenimiento (retainer opcional).
@@ -83,11 +83,12 @@ migration masiva, mantenimiento (retainer opcional).
 
 ## Coherencia con el sitio
 
-- Ancla FAQ: "desde $150.000 ARS" → el tier más bajo (Landing $250k) lo
-  respeta (los $150k son "proyectos chicos" genéricos; el rango landing
-  empieza en $250k).
+- Ancla FAQ: "desde $500.000 ARS" (actualizada 2026-08-04 con tarifa real
+  USD 20/h) → el tier más bajo (Landing $500k) coincide exactamente.
 - Ticket medio CON-03 (ARS 4M): el mix 50/30/20 (presencia/auto/software)
   da ≈ ARS 4M → coherente con el rango "Sistema grande" $3M-6M.
+- Tarifa hora real confirmada: USD 20/h (~ARS 22k/h) → ver PRI-03 para
+  el breakeven por tier.
 
 ## Verification (bash ejecutable)
 
