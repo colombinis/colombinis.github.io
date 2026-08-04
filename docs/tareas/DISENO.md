@@ -6,18 +6,23 @@
 
 `/DESIGN.md` (raíz) es la **fuente canónica** de colores, tipografía, spacing y componentes. No se duplican acá para evitar drift. En el código, esos tokens se materializan como CSS custom properties en `src/styles/global.css`.
 
-### Tokens y drift pendiente
+### Tokens y drift (resuelto — T6)
 
-Hay diferencias entre `DESIGN.md` y lo implementado en `global.css` que conviene resolver (F5):
+El drift entre `DESIGN.md` y `global.css` fue reconciliado en la tarea T6
+(ver H8 en el historial). Estado actual:
 
-| Token en código | Valor en `global.css` | En `DESIGN.md` | Nota |
-|-----------------|-----------------------|----------------|------|
-| `--tertiary-dark` | `#0066CC` | no existe | Usado en hero; documentar o eliminar |
-| `--whatsapp-dark` | `#128C7E` | hover WhatsApp = `#1DA851` | Valores distintos; unificar |
-| hover `button-primary` | — | `#0A7CFF` (tertiary) | Verificar consistencia |
-| `--rounded-xs`, `--rounded-circle` | ausentes | definidos | Faltan en `global.css` |
+| Token | Valor en `global.css` | En `DESIGN.md` | Estado |
+|-------|-----------------------|----------------|--------|
+| `--tertiary` | `#0A7CFF` | `#0A7CFF` | ✅ sincronizado |
+| `--tertiary-dark` | `#0066CC` | no existe | Extensión accesible añadida al CSS para texto pequeño (labels/claims) sobre fondo claro. Decisión tomada en T6: justificada por contraste WCAG AA, se mantiene sin tocar DESIGN.md. |
+| `--whatsapp` | `#25D366` | `#25D366` | ✅ sincronizado |
+| `--whatsapp-hover` | `#1DA851` | `#1DA851` | ✅ sincronizado (antes era `#128C7E`, corregido) |
+| `--rounded-xs` | `4px` | `4px` | ✅ sincronizado |
+| `--rounded-sm/md/full/circle` | todos | todos | ✅ sincronizado |
 
-> Acción: elegir una única verdad (preferentemente ajustar `global.css` a `DESIGN.md`, o actualizar `DESIGN.md` si el código es el correcto) y dejar ambos sincronizados.
+> **Resuelto en T6:** `global.css` alineado a `DESIGN.md`. Si surgiera un
+> nuevo drift, corregir `global.css` hacia `DESIGN.md` (fuente canónica)
+> y registrar el cambio en `docs/tareas/`.
 
 ## Decisiones de diseño
 
