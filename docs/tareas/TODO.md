@@ -131,10 +131,10 @@ sostenible el modelo de negocio.
 
 | ID      | Título                                             | Estado | Archivo |
 |---------|----------------------------------------------------|--------|---------|
-| PRI-01  | Definir estructura de precios: hourly vs paquete   | TODO   | `docs/tareas/PRI-01-estructura-precios.md` |
-| PRI-02  | Precios por servicio: automatización, software, web | TODO   | `docs/tareas/PRI-02-precios-servicios.md` |
-| PRI-03  | Calcular break-even: costo operativo vs ingresos   | TODO   | `docs/tareas/PRI-03-break-even.md` |
-| PRI-04  | Definir tiers: entrada / estándar / premium        | TODO   | `docs/tareas/PRI-04-tiers-precios.md` |
+| PRI-01  | Definir modelo de precios: paquete vs retainer     | DONE   | `docs/tareas/PRI-01-modelo-precios.md` |
+| PRI-02  | Precios por servicio: automatización, software, web | DONE   | `docs/tareas/PRI-02-precios-servicios.md` |
+| PRI-03  | Calcular break-even: costo hora vs precio por tier  | DONE   | `docs/tareas/PRI-03-breakeven-costos.md` |
+| PRI-04  | Definir tiers: qué se publica vs guía interna       | DONE   | `docs/tareas/PRI-04-tiers-paquetes.md` |
 
 ---
 
