@@ -23,7 +23,7 @@ Scenario: El sitio comunica precios sin tabla completa
 
 ## Qué publicar (recomendado)
 
-### FAQ — ancla de precio (AJUSTAR tras PRI-03)
+### FAQ — ancla de precio (ACTUALIZADA 2026-08-04)
 
 ```text
 ¿Cuánto cuesta un desarrollo?
@@ -34,7 +34,8 @@ presupuesto claro y sin compromiso. No creemos en los misterios con
 los precios.
 ```
 
-> **Cambio:** $150.000 → $500.000 (alinear con breakeven PRI-03).
+> **Cambio ejecutado:** $150.000 → $500.000 (aprobado por el usuario
+> junto con la confirmación de tarifa real USD 20/h — PRI-03).
 > Es la ÚNICA mención de precio en todo el sitio.
 
 ### Copy de servicios — enfoque en valor, no en precio
@@ -93,5 +94,4 @@ echo "✅ PRI-04 — COMPLETA (con pendiente de confirmacion)"
 ```
 
 ## Estado
-DONE — estrategia definida; ajuste de FAQ pendiente de confirmación
-(PRI-03 Opción A) — NO tocar index.astro sin OK del usuario
+DONE — estrategia definida; FAQ actualizada a $500.000 ARS (2026-08-04)
