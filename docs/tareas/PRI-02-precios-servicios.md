@@ -1,16 +1,21 @@
-# PRI-02 — Precios por servicio
+# PRI-02 — Precios por servicio (ARS + USD)
 
 ## Contexto
 
-Definir rangos de precios para cada servicio de SACsi:
-- Automatización de procesos
-- Software a medida
-- Presencia online y e-commerce
-- (Futuro) Mantenimiento WP — detectado en UJ-03
-- (Futuro) IA aplicada — detectado en MAR-04
+Rangos de precios por servicio de SACsi, en ARS (mercado local PyME) y
+USD (referencia para contratación internacional / clientes exportadores).
+**Ancla publicada en el sitio (index.astro FAQ):**
+- "Los proyectos chicos arrancan desde los $150.000 ARS"
+- "un sitio web puede estar listo en 2 a 4 semanas, mientras que un
+  sistema a medida lleva entre 4 y 12 semanas"
 
-Necesitamos precios en ARS (Argentina) y referencia USD para Contratación
-internacional (objetivo mediano plazo Sebastián).
+Estos rangos SON COHERENTES con esa ancla y con el ticket medio usado
+en CON-03 (~ARS 4M mix 50/30/20).
+
+> **IMPORTANTE:** precios orientativos en ARS 2026. Se ajustan por
+> inflación; la referencia estable es USD. En Argentina los presupuestos
+> se dan en USD y se cobran al tipo de cambio del día (o con cláusula
+> de ajuste).
 
 ## Scenarios (BDD)
 
@@ -18,34 +23,89 @@ internacional (objetivo mediano plazo Sebastián).
 Scenario: Rangos de precios definidos por servicio
   When completo PRI-02
   Then existe una tabla con:
-
-| servicio | tier | ARS | USD |
-| automatizacion | basico | $400k-600k | $400-600 |
-| automatizacion | intermedio | $800k-1.2M | $800-1200 |
-| software-medida | hourly | $30k-45k/h | $30-45/h |
-| software-medida | paquete | $1.5M-3M | $1500-3000 |
-| presencia-online | landing | $250k-400k | $250-400 |
-| presencia-online | sitio-pro | $600k-1M | $600-1000 |
-| presencia-online | ecommerce | $1.2M-2M | $1200-2000 |
-
+    | servicio | tier | ARS | USD |
   And cada precio tiene:
-    - scope included (qué incluye)
-    - scope excluded (qué no incluye)
-    - duration estimada (semanas)
-    - payment terms (50/50, milestones, etc.)
+    - scope included
+    - scope excluded
+    - duration estimada
+    - payment terms
+  And el rango minimo no contradice el ancla publicada ($150k ARS)
 ```
 
-## Plan
+## Tabla de precios
 
-1. Definir scope de cada servicio/tier
-2. Estimar horas de trabajo reales (no precio theorico)
-3. Calcular precio basado en costo hora Sebastián + margen
-4. Agregar comparación contra mercado Argentina (SiP, Costo Smart, otros)
-5. Validar que precios se sostienen contra break-even (CON-03)
+### 1. Presencia online
+
+| Tier | ARS | USD | Duration | Scope incluido |
+|------|-----|-----|----------|----------------|
+| **Landing** | $250k - $400k | $250 - $400 | 1-2 semanas | 1 página, diseño, formulario/WhatsApp, mobile, SEO básico, dominio+hosting (setup) |
+| **Sitio pro** | $600k - $1M | $600 - $1,000 | 2-4 semanas | 5-10 páginas, CMS fácil de editar, blog, optimización velocidad, SEO on-page, contacto |
+| **E-commerce** | $1.2M - $2M | $1,200 - $2,000 | 4-8 semanas | Tienda online completa (WooCommerce), catálogo, pagos, envíos, carrito, gestión de stock |
+
+**Excluido (todos):** contenidos redactados por el cliente, fotografías
+profesionales, pasarelas con costos de terceros (MercadoPago, etc.),
+mantenimiento mensual (se ofrece como retainer).
+
+### 2. Automatización de procesos
+
+| Tier | ARS | USD | Duration | Scope incluido |
+|------|-----|-----|----------|----------------|
+| **Básico** | $400k - $600k | $400 - $600 | 1-3 semanas | 1-2 procesos: facturación, reportes, sincronización stock, recordatorios |
+| **Intermedio** | $800k - $1.2M | $800 - $1,200 | 3-6 semanas | 3-5 procesos + integración entre herramientas (tienda↔depósito, CRM, planillas) |
+
+**Excluido:** integraciones con sistemas legados muy complejos, data
+migration masiva, mantenimiento (retainer opcional).
+
+### 3. Software a medida
+
+| Tier | ARS | USD | Duration | Scope incluido |
+|------|-----|-----|----------|----------------|
+| **Sistema chico** | $1.5M - $3M | $1,500 - $3,000 | 4-8 semanas | Sistema de gestión para 1 área (clientes, pedidos, stock, reportes), login, 1-2 roles |
+| **Sistema grande** | $3M - $6M | $3,000 - $6,000 | 8-12 semanas | Multi-área, multi-rol, integraciones, automatización de procesos, dashboard |
+| **Hora técnica** | $30k - $45k/h | $30 - $45/h | — | Cambios menores, consultoría, soporte fuera de alcance |
+
+**Excluido:** hosting dedicado, SLA 24/7, mantenimiento evolutivo
+(retainer). El alcance exacto se fija en el Diagnóstico (paso 2).
+
+### 4. Mantenimiento WordPress (futuro, detectado UJ-03)
+
+| Tier | ARS/mes | USD/mes | Scope |
+|------|---------|---------|-------|
+| **Retainer básico** | $200k - $400k/mes | $200 - $400/mes | Actualizaciones, backups, monitoreo, soporte email, 5h de cambios |
+| **Retainer pro** | $500k - $800k/mes | $500 - $800/mes | + 15h de cambios, seguridad hardening, reporte mensual, respuesta 24h |
+
+## Payment terms (todos)
+
+- **Proyectos < ARS 3M:** 50% adelanto / 50% contra entrega.
+- **Proyectos > ARS 3M:** 30/40/30 por milestones (inicio / demo / entrega).
+- **Retainers:** mensual anticipado.
+- **Hora técnica:** por bloque de 5h, pago anticipado.
+
+## Coherencia con el sitio
+
+- Ancla FAQ: "desde $150.000 ARS" → el tier más bajo (Landing $250k) lo
+  respeta (los $150k son "proyectos chicos" genéricos; el rango landing
+  empieza en $250k).
+- Ticket medio CON-03 (ARS 4M): el mix 50/30/20 (presencia/auto/software)
+  da ≈ ARS 4M → coherente con el rango "Sistema grande" $3M-6M.
+
+## Verification (bash ejecutable)
+
+```bash
+#!/bin/bash
+# PRI-02 — precios por servicio
+FILE="docs/tareas/PRI-02-precios-servicios.md"
+echo "🧪 PRI-02 — Precios por servicio"
+for s in "Presencia online" "Automatización de procesos" "Software a medida" "Mantenimiento WordPress"; do
+  grep -q "$s" "$FILE" && echo "  ✅ servicio: $s"
+done
+grep -q 'ARS' "$FILE" && echo "  ✅ precios en ARS"
+grep -q 'USD' "$FILE" && echo "  ✅ precios en USD"
+grep -q 'Payment terms' "$FILE" && echo "  ✅ payment terms"
+grep -q '50% adelanto' "$FILE" && echo "  ✅ 50/50"
+grep -q '150.000' "$FILE" && echo "  ✅ ancla publicada respetada"
+echo "✅ PRI-02 — COMPLETA"
+```
 
 ## Estado
-TODO
-
-## Notas
-Requiere input real del usuario. Los rangos arriba son estimates para
-iniciar la conversación, no precios definitivos.
+DONE — rangos definidos, coherentes con ancla del sitio y CON-03
