@@ -99,20 +99,14 @@ h1, h2, h3 {
   margin: calc(var(--spacing-xl) * -1 + var(--spacing-sm)) auto var(--spacing-xl);
 }
 
-.cases-all__title {
-  text-align: center;
-  font-size: 1.2rem;
-  color: var(--primary);
-  margin: var(--spacing-xxl) 0 var(--spacing-lg);
-}
-
 /* ---------- Hero ---------- */
 .hero {
-  min-height: calc(100vh - 61px);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: var(--spacing-lg) var(--spacing-md);
+  justify-content: flex-start;
+  gap: var(--spacing-xxl);
+  padding: var(--spacing-xl) var(--spacing-md) var(--spacing-xxl);
   background: var(--surface);
   text-align: center;
 }
@@ -120,6 +114,20 @@ h1, h2, h3 {
 .hero__container {
   max-width: 720px;
   width: 100%;
+}
+
+.hero__cases {
+  width: 100%;
+  max-width: 1080px;
+}
+
+.hero__cases-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tertiary-dark);
+  margin-bottom: var(--spacing-lg);
 }
 
 .hero__label {
@@ -806,8 +814,7 @@ h1, h2, h3 {
   }
 
   .hero {
-    min-height: calc(100vh - 69px);
-    padding: var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-xxl) var(--spacing-lg);
   }
 
   .hero__actions {

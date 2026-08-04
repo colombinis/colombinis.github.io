@@ -25,6 +25,11 @@ import CasosCarousel from '../components/CasosCarousel.astro';
         <a class="hero__cta-secondary" href="/contacto/">Conocé más</a>
       </div>
     </div>
+
+    <div class="hero__cases">
+      <p class="hero__cases-label">Casos de éxito</p>
+      <CasosCarousel />
+    </div>
   </section>
 
   <section id="servicios" class="section">
@@ -170,12 +175,9 @@ import CasosCarousel from '../components/CasosCarousel.astro';
 
   <section id="casos-exito" class="section section--alt">
     <div class="container">
-      <h2 class="section__title">Casos de éxito</h2>
-      <p class="section__subtitle">Proyectos reales, resultados medibles. Deslizá para explorarlos.</p>
+      <h2 class="section__title">Todos los casos de éxito</h2>
+      <p class="section__subtitle">Proyectos reales, con resultados medibles.</p>
 
-      <CasosCarousel />
-
-      <h3 class="cases-all__title">Todos los casos</h3>
       <div class="cards-grid">
         <ServiceCard
           title="Tienda de ropa usada con pagos automáticos a donantes"
