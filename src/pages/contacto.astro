@@ -16,7 +16,7 @@ import Layout from '../layouts/Layout.astro';
           <p>Gracias por tu consulta, te responderemos a la brevedad</p>
         </div>
 
-        <form id="contact-form" action="mailto:colombinis@sacsi.com.ar" method="post" enctype="text/plain">
+        <form id="contact-form" action="mailto:sacsi@sacsi.com.ar" method="post" enctype="text/plain">
           <div class="form-row">
             <div class="form-group">
               <label for="nombre">Nombre</label>
@@ -49,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
         >WhatsApp</a>
         <div class="alt-contact__item">
           <span>✉</span>
-          <a href="mailto:colombinis@sacsi.com.ar">colombinis@sacsi.com.ar</a>
+          <a href="mailto:sacsi@sacsi.com.ar">sacsi@sacsi.com.ar</a>
         </div>
         <div class="alt-contact__item">
           <span>📞</span>
@@ -266,7 +266,7 @@ import Layout from '../layouts/Layout.astro';
                '%0AEmail: ' + encodeURIComponent(email) +
                '%0ATelefono: ' + encodeURIComponent(telefono) +
                '%0A%0AMensaje:%0A' + encodeURIComponent(mensaje);
-    var mailto = 'mailto:colombinis@sacsi.com.ar?subject=Consulta%20desde%20SACsi&body=' + body;
+    var mailto = 'mailto:sacsi@sacsi.com.ar?subject=Consulta%20desde%20SACsi&body=' + body;
 
     window.location.href = mailto;
 
