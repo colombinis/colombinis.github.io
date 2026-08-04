@@ -117,10 +117,10 @@ para que el modelo de negocio sea rentable.
 
 | ID      | Título                                             | Estado | Archivo |
 |---------|----------------------------------------------------|--------|---------|
-| CON-01  | Definir funnel: visitas → leads → clientes         | TODO   | `docs/tareas/CON-01-funnel-basico.md` |
-| CON-02  | Estimar tasas de conversión por canal              | TODO   | `docs/tareas/CON-02-tasas-conversion.md` |
-| CON-03  | Estimar tráfico necesario para break-even          | TODO   | `docs/tareas/CON-03-trafico-break-even.md` |
-| CON-04  | Validar tracking: GTM/GA4 eventos clave            | TODO   | `docs/tareas/CON-04-tracking-eventos.md` |
+| CON-01  | Definir funnel: visitas → leads → clientes         | DONE   | `docs/tareas/CON-01-funnel-basico.md` |
+| CON-02  | Estimar tasas de conversión por canal              | DONE   | `docs/tareas/CON-02-tasas-conversion.md` |
+| CON-03  | Estimar tráfico necesario para break-even          | DONE   | `docs/tareas/CON-03-trafico-breakeven.md` |
+| CON-04  | Implementar tracking: GTM/GA4 eventos clave        | DONE   | `docs/tareas/CON-04-tracking-gtm-ga4.md` |
 
 ---
 

@@ -102,5 +102,21 @@ const jsonLd = {
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      // CON-04: trackear clicks a WhatsApp (evento de conversion MOFU)
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (href.indexOf('api.whatsapp.com') !== -1) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'whatsapp_click',
+            link_text: (a.textContent || '').trim().slice(0, 80),
+            page: window.location.pathname
+          });
+        }
+      });
+    </script>
   </body>
 </html>
