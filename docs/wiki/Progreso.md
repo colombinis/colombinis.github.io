@@ -2,7 +2,7 @@
 
 > **Documento de tracking.** Registra los hallazgos del análisis del rebranding y el listado de tareas con estado para monitoreo. Actualizar este archivo cada vez que una tarea cambie de estado.
 
-- **Última actualización:** 2026-08-03
+- **Última actualización:** 2026-08-04
 - **Rama de trabajo:** `v0_alternativo_rebranding`
 - **Fuente de verdad:** esta wiki (ver [Home](Home))
 
@@ -92,6 +92,30 @@ Ordenadas por fase del [Roadmap](Roadmap). Cada tarea tiene un `estado:` para se
 - [x] **T11 — QA final + build + deploy.** `estado:DONE`
   - `npm run build` limpio (10 páginas + sitemap + CNAME). El deploy productivo se dispara al mergear a `master`.
   - **Pendiente sugerido:** correr Lighthouse sobre la URL productiva tras el primer deploy para confirmar score > 80.
+
+---
+
+## 2b. Mejoras de contenido y UX (2026-08-04)
+
+Trabajo posterior al cierre de fases, enfocado en contenido, conversión y correcciones puntuales.
+
+- [x] **T12 — Casos de éxito para perfil desarrollador WordPress.** `estado:DONE`
+  - Se agregaron **5 casos** (además de los 3 originales) que cubren competencias que un reclutador WP evalúa: tema a medida + Gutenberg/ACF, WooCommerce con suscripciones, WordPress headless + Next.js, rescate de rendimiento/seguridad, y plataforma LMS/membresías.
+  - Cada caso describe el **deseo del cliente** y **cómo visualizaba el logro**, más solución, stack técnico (chips) y métricas realistas.
+  - Nuevas páginas en `src/pages/casos-exito/` y estilos reutilizables (`.case-prose`, `.case-vision`, `.tech-stack`).
+- [x] **T13 — Carrusel de casos con render asíncrono.** `estado:DONE`
+  - `src/data/casos.js` (fuente única de los 8 casos) + endpoint estático `/casos.json`.
+  - Componente `CasosCarousel.astro`: muestra skeleton y luego hace `fetch('/casos.json')` para construir los slides en cliente. Cada slide enlaza al detalle del caso.
+  - Controles prev/next, dots, scroll-snap, responsive (1/2/3 slides) y accesible (`aria-label`, `prefers-reduced-motion`, fallback `<noscript>`).
+- [x] **T14 — Reubicar carrusel y reducir espacio en blanco del hero.** `estado:DONE`
+  - El carrusel se movió al hero (debajo de los CTAs). El hero pasó a layout en columna sin `min-height:100vh`, eliminando el espacio en blanco superior en mobile.
+- [x] **T15 — Email de contacto y footer.** `estado:DONE`
+  - Email actualizado a `sacsi@sacsi.com.ar` en las 7 ubicaciones (texto, `mailto:`, formulario y JSON-LD).
+  - Eliminado el link "WhatsApp" del footer (y su CSS `#menusocial` sin uso).
+- [x] **T16 — Correcciones de auditoría.** `estado:DONE`
+  - `meta theme-color` agregado; `vite.server.allowedHosts` habilitado para la preview cross-origin.
+
+> **Auditoría (build de producción):** Web Vitals excelentes (FCP/LCP ~148ms, CLS 0, TTFB 74ms). SEO impecable (lang, título/description únicos, un `<h1>`, OG/Twitter/canonical/JSON-LD, sitemap + robots). Accesibilidad: 0 imágenes sin `alt`, todos los `target="_blank"` con `rel="noopener"`.
 
 ---
 
