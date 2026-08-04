@@ -1,10 +1,18 @@
-// Fuente única de verdad de los casos de éxito.
+// Fuente única de verdad de los casos de éxito y proyectos tipo.
 // Consumido por el endpoint /casos.json (para el carrusel asíncrono)
 // y disponible para cualquier página que quiera listarlos.
+//
+// Campo `tipo`:
+//   'caso-exito'    — PyMEs reales con resultado verificable (3 casos)
+//   'proyecto-tipo' — Narrativas redactadas para mostrar capacidades
+//                     WordPress a dueños PyME y reclutadores tech.
+//                     Los testimonios son "Testimonio tipo" en la
+//                     página de detalle (ver MAR-03, 2026-08-04).
 
 export const casos = [
   {
     slug: 'tema-wordpress-a-medida-gutenberg',
+    tipo: 'proyecto-tipo',
     title: 'Estudio de arquitectura con tema WordPress a medida',
     category: 'WordPress · Gutenberg',
     metric: '75% más rápido',
@@ -13,6 +21,7 @@ export const casos = [
   },
   {
     slug: 'tienda-woocommerce-suscripciones',
+    tipo: 'proyecto-tipo',
     title: 'Club de café de especialidad con suscripciones en WooCommerce',
     category: 'WooCommerce · Suscripciones',
     metric: '+60% ingresos recurrentes',
@@ -21,6 +30,7 @@ export const casos = [
   },
   {
     slug: 'wordpress-headless-nextjs',
+    tipo: 'proyecto-tipo',
     title: 'Medio digital con WordPress headless y front-end en Next.js',
     category: 'Headless · Next.js',
     metric: 'LCP de 1.1s',
@@ -29,6 +39,7 @@ export const casos = [
   },
   {
     slug: 'rescate-rendimiento-seguridad-wordpress',
+    tipo: 'proyecto-tipo',
     title: 'Rescate de un e-commerce WordPress lento y hackeado',
     category: 'Performance · Seguridad',
     metric: 'De 8s a 1.5s',
@@ -37,6 +48,7 @@ export const casos = [
   },
   {
     slug: 'plataforma-cursos-lms-membresias',
+    tipo: 'proyecto-tipo',
     title: 'Academia online con LMS y membresías sobre WordPress',
     category: 'LMS · Membresías',
     metric: '+300 alumnos activos',
@@ -45,6 +57,7 @@ export const casos = [
   },
   {
     slug: 'tienda-ropa-usada',
+    tipo: 'caso-exito',
     title: 'Tienda de ropa usada con pagos automáticos a donantes',
     category: 'E-commerce · Automatización',
     metric: '-70% tareas administrativas',
@@ -53,6 +66,7 @@ export const casos = [
   },
   {
     slug: 'consultorio-psicologia',
+    tipo: 'caso-exito',
     title: 'Consultorio de psicología con alquiler de espacios de atención',
     category: 'Automatización · Agenda',
     metric: '-70% tareas administrativas',
@@ -61,6 +75,7 @@ export const casos = [
   },
   {
     slug: 'ferreteria-gas-plomeria',
+    tipo: 'caso-exito',
     title: 'Ferretería familiar sin tiempo para la tienda online',
     category: 'E-commerce · PyME',
     metric: 'Tienda online sin fricción',

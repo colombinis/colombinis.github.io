@@ -108,7 +108,27 @@ Hero (nombre + tagline)
 
 ### 4. (Futuro) Inteligencia Artificial
 
-Servicio potencial, aún **no implementado** (la vieja página `/inteligencia-artificial/` se eliminó con el legacy). Se puede integrar como cuarto servicio o como complemento transversal. Claim potencial: *"Machine learning y automatización inteligente para empresas que quieren dar el salto."*
+Servicio potencial, aún **no implementado** (la vieja página
+`/inteligencia-artificial/` se eliminó con el legacy).
+
+**Estado (MAR-04, 2026-08-04):** fuera del scope de la auditoría actual.
+Evaluado en fase 2 — la decisión fue NO agregar el 4to servicio IA en
+este ciclo. El gap queda documentado y se evaluará en una tarea futura
+post-auditoría (ver `docs/tareas/MAR-04-servicio-ia.md`).
+
+Claim potencial cuando se implemente: *"IA aplicada a tu negocio —
+chatbots de soporte, generación de contenido y automatización
+inteligente"*. Renombrar de "machine learning" (académico) a
+"IA aplicada" para alinear con el posicionamiento híbrido
+"PHP + IA aplicada" de la marca personal del fundador.
+
+Requerimientos para habilitar el servicio:
+- Renombrar el claim
+- Agregar página `src/pages/servicios/ia.astro`
+- Actualizar hero (`src/pages/index.astro`) para mencionar 4 servicios
+- Agregar 2-3 casos de IA en `src/data/casos.js`
+- Renombrar título de la sección "Soluciones" a "Soluciones" ( manter
+  3 → 4 cards en la grilla de homepage)
 
 ---
 
