@@ -25,7 +25,7 @@ Given Ana en la página del caso de rescate
 When lee el contenido
 Then ve "Limpieza de malware, hardening de seguridad y optimización de rendimiento"
 And ve "sin perder el catálogo ni el SEO" (su principal miedo)
-And ve métricas concretas: "De 8s a 1.5s", "PageSpeed 95", "0 reinfecciones"
+And ve métricas concretas: "De 8s a 1.5s", "PageSpeed 95"
 And el testimonio está marcado como "Testimonio tipo" (no se hace pasar por real)
 
 ### E3: Ana contacta por su canal preferido (email/formulario)
