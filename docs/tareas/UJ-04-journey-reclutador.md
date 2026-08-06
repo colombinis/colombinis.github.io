@@ -24,10 +24,10 @@ Given el reclutador está en github.com/colombinis (README personal)
 When busca el link a la web
 Then ve el link "Web - sacsi.com.ar" en la sección Contacto del README
 
-### E2: El reclutador evalúa competencias en los casos WordPress
+### E2: El reclutador evalúa competencias en los casos técnicos WordPress
 Given el reclutador en sacsi.com.ar
-When navega a la grilla de casos
-Then ve 5 casos con stack WordPress/tecnologías evaluables:
+When navega a la grilla de casos (8 casos totales: 5 PROYECTO TIPO + 3 CASO DE ÉXITO)
+Then ve 5 casos técnicos WordPress evaluables con stack demostrado:
   - tema-wordpress-a-medida-gutenberg (Gutenberg, block.json, ACF Pro)
   - tienda-woocommerce-suscripciones (WooCommerce, suscripciones)
   - wordpress-headless-nextjs (WPGraphQL, Next.js)

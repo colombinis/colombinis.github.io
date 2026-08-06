@@ -16,8 +16,8 @@ Given un visitante nuevo en `/`
 When ve el hero
 Then ve el label "SOLUCIONES INFORMÁTICAS"
 And ve un H1 que menciona PyMEs ("Tecnología simple para PyMEs que quieren crecer")
-And ve el CTA primario "Consultános sin cargo" apuntando a WhatsApp
-And ve el CTA secundario "Conocé más" apuntando a contacto
+Then ve el CTA primario "Consultános sin cargo" apuntando a WhatsApp
+And ve el CTA secundario "Ver servicios" apuntando a `/servicios/`
 
 ### E2: Carlos explora los 3 servicios
 Given Carlos en la homepage
@@ -57,7 +57,7 @@ echo "🧪 UJ-02 — Journey Carlos (PyME sin web)"
 grep -q 'SOLUCIONES INFORMÁTICAS' $D/index.html && echo "  ✅ E1 label"
 grep -q 'Tecnología simple para PyMEs' $D/index.html && echo "  ✅ E1 H1 PyME"
 grep -q 'Consultános sin cargo' $D/index.html && echo "  ✅ E1 CTA primario WhatsApp"
-grep -q 'Conocé más' $D/index.html && echo "  ✅ E1 CTA secundario contacto"
+grep -q 'Ver servicios' $D/index.html && echo "  ✅ E1 CTA secundario servicios"
 
 # E2: 3 servicios con CTA propio
 for s in "Automatización" "Software a Medida" "Presencia Online"; do
