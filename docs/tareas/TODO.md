@@ -199,6 +199,21 @@ si se implementa de inmediato o queda en backlog.
 
 ---
 
+## FASE 9 — Páginas detalle subnivel soluciones (SOL) **[PRIORIDAD ALTA — antes lanzamiento]**
+
+Objetivo: Agregar páginas de detalle navegables para los subniveles de soluciones
+(sin URL propia) actualmente renderizados como cards estáticos dentro de las
+páginas `/servicios/<servicio>/`.
+
+Data source: `src/data/soluciones.json` (ya completo — no modificar). Route
+dinámico: `src/pages/servicios/[servicio]/[categoria].astro` (SSG, getStaticPaths).
+
+| ID      | Título                                              | Estado | Archivo |
+|---------|-----------------------------------------------------|--------|---------|
+| SOL-01  | 9 páginas detalle subnivel + cross-link a casos     | DONE   | `docs/tareas/SOL-01-paginas-detalle-subnivel.md` |
+
+---
+
 ## Resumen de estado
 
 | Fase | Total | TODO | DOING | DONE | BLOCKED |
@@ -211,10 +226,10 @@ si se implementa de inmediato o queda en backlog.
 | 6 — Validación post-deploy | 1 | 0 | 0 | 0 | 1 |
 | 7 — Chatbot FAQ (deseable) | 4 | 2 | 0 | 2 | 0 |
 | 8 — Backlog (futuro) | 1 | 1 | 0 | 0 | 0 |
-| **Total** | **39** | **5** | **0** | **31** | **3** |
+| 9 — Detalle subnivel soluciones | 1 | 0 | 0 | 1 | 0 |
+| **Total** | **40** | **4** | **0** | **32** | **3** |
 
-> **Progreso real (2026-08-05):** 31/39 DONE (79%). FASE 1 completa (13 DONE + 2 BLOCKED chatbot), FASE 2, 3 y 5 completas.
-> FASE 1 expandida con 10 nuevas tareas de auditoría técnica (AUD-06 a AUD-15).
+> **Progreso real (2026-08-06):** 32/40 DONE (80%). FASE 1 completa (13 DONE + 2 BLOCKED chatbot), FASE 2, 3 y 5 completas. FASE 9 (SOL-01) implementada y verificada — 9 páginas de detalle subnivel + cross-link a casos.
 > El camino crítico para DESEBLOQUEAR DEP-01 (merge a master + post-deploy) es cerrar
 > AUD-01..15 (2 BLOCKED), MAR-02..05 (completas) y CON-04. La FASE 7 (chatbot) NO bloquea el deploy:
 > es la primera mejora post-deploy.
