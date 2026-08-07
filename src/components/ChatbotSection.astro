@@ -1,0 +1,109 @@
+---
+// ChatbotSection.astro
+//
+// Sección de chat interactivo usando Chrome AI Prompt API (Gemini Nano).
+// El chatbot SLM local está comentado temporalmente.
+//
+// Chrome AI (Gemini Nano):
+//    - Modelo built-in de Chrome (no descarga desde CDN externa)
+//    - Streaming nativo (promptStreaming)
+//    - Requiere Chrome 138+ con flag: chrome://flags/#prompt-api-for-gemini-nano
+//    - Ventana de contexto: 100K+ tokens (session-based)
+//
+// Carga lazy: el script se inyecta via requestIdleCallback para no
+// bloquear el render de la página.
+---
+
+<div class="chatbot-section">
+  <!-- Panel: Chrome AI chatbot (Gemini Nano) -->
+  <div class="chatbot-panel" data-panel="chrome" id="panel-chrome">
+    <chrome-ai-chat knowledge-src="/chatbot/knowledge.json">
+      <div slot="fallback" class="chatbot-placeholder">
+        <p class="chatbot-placeholder__text">Cargando asistente de Chrome AI…</p>
+      </div>
+    </chrome-ai-chat>
+  </div>
+
+  <!-- SLM CHATBOT COMENTADO TEMPORALMENTE -->
+  <!--
+  <div class="chatbot-panel hidden" data-panel="slm" id="panel-slm">
+    <slm-chat knowledge-src="/chatbot/knowledge.json">
+      <div slot="fallback" class="chatbot-placeholder">
+        <p class="chatbot-placeholder__text">Cargando asistente local…</p>
+      </div>
+    </slm-chat>
+  </div>
+  -->
+</div>
+
+<style>
+  .chatbot-section {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .chatbot-panel {
+    display: block;
+  }
+
+  .chatbot-panel.hidden {
+    display: none;
+  }
+
+  .chatbot-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: var(--surface);
+    border: 1px solid #E0E0E0;
+    border-radius: var(--rounded-md);
+    min-height: 120px;
+  }
+
+  .chatbot-placeholder__text {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+</style>
+
+<script is:inline>
+  // Lazy-load: inyectar el script del chatbot cuando el navegador este idle
+  (function() {
+    // Solo Chrome AI (SLM comentado temporalmente)
+    var scripts = [
+      '/chatbot/chrome-ai-chat.js',
+    ];
+
+    var injectScript = function(src) {
+      // Evitar doble inyección
+      if (document.querySelector('script[data-src="' + src + '"]')) return;
+      var script = document.createElement('script');
+      script.type = 'module';
+      script.src = src;
+      script.setAttribute('data-src', src);
+      document.head.appendChild(script);
+    };
+
+    var injectAll = function() {
+      scripts.forEach(injectScript);
+    };
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(injectAll, { timeout: 3000 });
+        } else {
+          setTimeout(injectAll, 1000);
+        }
+      });
+    } else {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(injectAll, { timeout: 3000 });
+      } else {
+        setTimeout(injectAll, 1000);
+      }
+    }
+  })();
+</script>
