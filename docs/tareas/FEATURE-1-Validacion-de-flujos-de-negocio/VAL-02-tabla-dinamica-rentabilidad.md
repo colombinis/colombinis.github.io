@@ -70,8 +70,9 @@ echo "✅ VAL-02 — COMPLETA"
 ```
 
 ## Estado
-DONE — tabla implementada y testeada (test-flujo-operativo.cjs 15/15)
+DONE — tabla implementada y testeada (test-flujo-operativo.cjs 16/16 + E2E Chromium 12/12)
 
 ## Notas
+- Bug detectado en E2E: `[...TRABAJOS]` es shallow copy → editar una fila mutaba el array base y "Restaurar" no volvía al valor original. Fix: `TRABAJOS.map(t => ({...t}))` en init y en reset (deep copy por objeto).
 - Reutiliza el estilo visual existente (CSS del HTML)
 - La tarifa ARS/h viene de la configuración superior (srv-usd × srv-fx)
