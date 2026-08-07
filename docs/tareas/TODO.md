@@ -250,14 +250,20 @@ reconciliaron las dos fuentes y este maestro ahora refleja la realidad:
   El archivo detalle dice "TODO → se implementa y verifica en esta fase" →
   corregido a TODO.
 
-### Trabajo NO commiteado en working tree (12 archivos modificados)
+### Trabajo commiteado (2026-08-07 — reconciliación)
 
-`CasosCarousel.astro`, `Footer.astro`, `Header.astro`, `Layout.astro`,
-`contacto.astro`, `index.astro`, 4 páginas de `servicios/*`,
-`sobre-nosotros.astro`, `global.css` están modificados respecto al último
-commit (`667e919`). La wiki `docs/wiki/` fue eliminada físicamente
-(AUD-04 DONE); nunca fue rastreada por git, así que no requiere commit
-de la eliminación.
+Todo el trabajo del working tree fue commiteado en 8 commits lógicos
+sobre `v0_alternativo_rebranding` (pendiente de push a origin + merge a master):
+
+1. `feat: componentes reutilizables + data JSON` — SolucionesSection, FaqSection, SocialProofSection, casos-exito.json, soluciones.json
+2. `refactor(home): reescritura del home` — index/Header/Footer/Layout/ServiceCard/global.css
+3. `refactor(pages): servicios + casos-exito + sobre-nosotros`
+4. `docs(audit): tareas detalle AUD-06..15 + CHAT-04/05 + flujos HTML`
+5. `docs: actualizar tareas existentes AUD-01..05 + MAR-01..05 + config`
+6. `feat(chatbot): trabajo preliminar SLM on-device + Chrome AI Prompt API`
+7. `chore: gitignore tool caches`
+
+Build verificado: 25 páginas, 0 errores. Working tree clean.
 
 ### Archivos duplicados en `docs/tareas/` (stubs viejos vs versión final)
 
