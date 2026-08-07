@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SolucionesSection from '../../components/SolucionesSection.astro';
 ---
 
 <Layout title="Presencia Online" description="Creamos tu sitio web profesional o tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.">
@@ -10,15 +11,6 @@ import Layout from '../../layouts/Layout.astro';
       <p class="hero__subtitle">
         Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.
       </p>
-      <div class="hero__actions">
-        <a
-          class="hero__cta"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico"
-          rel="noopener noreferrer"
-          target="_blank"
-        >Empezá hoy</a>
-        <a class="hero__cta-secondary" href="/contacto/">Conocé más</a>
-      </div>
     </div>
   </section>
 
@@ -28,20 +20,20 @@ import Layout from '../../layouts/Layout.astro';
       <div class="cards-grid">
         <article class="service-card">
           <div class="service-card__icon">🌐</div>
-          <h3>Sitio web institucional</h3>
-          <p>Diseño limpio, móvil-first, optimizado para buscadores y enfocado en convertir visitas en consultas.</p>
+          <h3><a href="/servicios/presencia-online/sitio-web-institucional/" style="color:inherit;text-decoration:none;">Sitio web institucional</a></h3>
+          <p>Diseño limpio, pensado para el celular, optimizado para buscadores y enfocado en convertir visitas en consultas.</p>
           <p class="service-card__claim">Tu mejor empleado, 24/7.</p>
         </article>
         <article class="service-card">
           <div class="service-card__icon">🛒</div>
-          <h3>Tienda online</h3>
+          <h3><a href="/servicios/presencia-online/tienda-online/" style="color:inherit;text-decoration:none;">Tienda online</a></h3>
           <p>Catálogo, carrito, pasarelas de pago y gestión de envíos. Sin suscripciones ocultas ni comisiones abusivas.</p>
           <p class="service-card__claim">Vendé sin depender de terceros.</p>
         </article>
         <article class="service-card">
           <div class="service-card__icon">📣</div>
-          <h3>Contenido y SEO básico</h3>
-          <p>Textos orientados a tu público, estructura semántica y metadatos para aparecer en Google.</p>
+          <h3><a href="/servicios/presencia-online/contenido-seo-basico/" style="color:inherit;text-decoration:none;">Contenido y SEO básico</a></h3>
+          <p>Textos orientados a tu público, con la estructura correcta para que Google te encuentre.</p>
           <p class="service-card__claim">Que te encuentren, no que te busquen.</p>
         </article>
       </div>
@@ -63,24 +55,5 @@ import Layout from '../../layouts/Layout.astro';
     </div>
   </section>
 
-  <section id="cta-final" class="cta-final">
-    <div class="container">
-      <h2>¿Empezamos?</h2>
-      <p class="cta-final__subtitle">
-        Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.
-      </p>
-      <div class="cta-final__actions">
-        <a
-          class="cta-final__whatsapp"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico"
-          rel="noopener noreferrer"
-          target="_blank"
-        >Escribinos por WhatsApp</a>
-        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
-      </div>
-      <p style="margin:var(--spacing-lg) 0 0;font-size:0.93rem;color:rgba(255,255,255,0.85);">
-        O escribinos a <a href="mailto:sacsi@sacsi.com.ar" style="color:#FFFFFF;text-decoration:underline;font-weight:600;">sacsi@sacsi.com.ar</a>
-      </p>
-    </div>
-  </section>
+  <SolucionesSection />
 </Layout>
