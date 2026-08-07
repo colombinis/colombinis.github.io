@@ -26,31 +26,135 @@
       "id": "automatizacion",
       "title": "Automatización de Procesos",
       "href": "/servicios/automatizacion/",
-      "icon": "/logo-autor.svg",
+      "icon": "/logo.svg",
       "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
-      "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo."
+      "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo.",
+      "categorias": [
+        {
+          "id": "facturacion-cobranzas",
+          "title": "Facturación y cobranzas",
+          "href": "/servicios/automatizacion/facturacion-cobranzas/",
+          "icon": "📊"
+        },
+        {
+          "id": "stock-logistica",
+          "title": "Stock y logística",
+          "href": "/servicios/automatizacion/stock-logistica/",
+          "icon": "📦"
+        },
+        {
+          "id": "reportes-dashboards",
+          "title": "Reportes y dashboards",
+          "href": "/servicios/automatizacion/reportes-dashboards/",
+          "icon": "📈"
+        }
+      ]
     },
     {
       "id": "software-a-medida",
       "title": "Software a Medida",
       "href": "/servicios/software-a-medida/",
-      "icon": "/logo-autor.svg",
+      "icon": "/logo.svg",
       "short": "Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.",
-      "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido."
+      "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido.",
+      "categorias": [
+        {
+          "id": "sistemas-gestion",
+          "title": "Sistemas de gestión",
+          "href": "/servicios/software-a-medida/sistemas-gestion/",
+          "icon": "🛠️"
+        },
+        {
+          "id": "integraciones",
+          "title": "Integraciones",
+          "href": "/servicios/software-a-medida/integraciones/",
+          "icon": "🔌"
+        },
+        {
+          "id": "apps-portales",
+          "title": "Apps y portales",
+          "href": "/servicios/software-a-medida/apps-portales/",
+          "icon": "📱"
+        }
+      ]
     },
     {
       "id": "presencia-online",
       "title": "Presencia Online",
       "href": "/servicios/presencia-online/",
-      "icon": "/logo-autor.svg",
-      "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.",
-      "claim": "Llevá tu negocio a internet y empezá a vender 24/7."
+      "icon": "/logo.svg",
+      "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compres sin vueltas.",
+      "claim": "Llevá tu negocio a internet y empezá a vender 24/7.",
+      "categorias": [
+        {
+          "id": "sitio-web-institucional",
+          "title": "Sitio web institucional",
+          "href": "/servicios/presencia-online/sitio-web-institucional/",
+          "icon": "🌐"
+        },
+        {
+          "id": "tienda-online",
+          "title": "Tienda online",
+          "href": "/servicios/presencia-online/tienda-online/",
+          "icon": "🛒"
+        },
+        {
+          "id": "contenido-seo-basico",
+          "title": "Contenido y SEO básico",
+          "href": "/servicios/presencia-online/contenido-seo-basico/",
+          "icon": "📣"
+        }
+      ]
     }
   ],
   "nav": {
     "links": [
-      { "href": "/servicios/", "label": "Servicios" },
-      { "href": "/sobre-nosotros/", "label": "Sobre nosotros" }
+      {
+        "label": "Servicios",
+        "href": "/servicios/",
+        "submenu": [
+          {
+            "label": "Automatización de Procesos",
+            "href": "/servicios/automatizacion/",
+            "icon": "🤖",
+            "submenu": [
+              { "label": "Facturación y cobranzas", "href": "/servicios/automatizacion/facturacion-cobranzas/" },
+              { "label": "Stock y logística", "href": "/servicios/automatizacion/stock-logistica/" },
+              { "label": "Reportes y dashboards", "href": "/servicios/automatizacion/reportes-dashboards/" }
+            ]
+          },
+          {
+            "label": "Software a Medida",
+            "href": "/servicios/software-a-medida/",
+            "icon": "💻",
+            "submenu": [
+              { "label": "Sistemas de gestión", "href": "/servicios/software-a-medida/sistemas-gestion/" },
+              { "label": "Integraciones", "href": "/servicios/software-a-medida/integraciones/" },
+              { "label": "Apps y portales", "href": "/servicios/software-a-medida/apps-portales/" }
+            ]
+          },
+          {
+            "label": "Presencia Online",
+            "href": "/servicios/presencia-online/",
+            "icon": "🌐",
+            "submenu": [
+              { "label": "Sitio web institucional", "href": "/servicios/presencia-online/sitio-web-institucional/" },
+              { "label": "Tienda online", "href": "/servicios/presencia-online/tienda-online/" },
+              { "label": "Contenido y SEO básico", "href": "/servicios/presencia-online/contenido-seo-basico/" }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Recursos",
+        "href": "/recursos/",
+        "submenu": [
+          { "label": "Blog", "href": "/recursos/blog/" },
+          { "label": "Recursos gratuitos", "href": "/recursos/gratuitos/" },
+          { "label": "Cursos", "href": "/recursos/cursos/" }
+        ]
+      },
+      { "label": "Sobre nosotros", "href": "/sobre-nosotros/" }
     ]
   }
 }
