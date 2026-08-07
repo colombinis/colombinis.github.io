@@ -105,6 +105,26 @@ else
   PASS=$((PASS + 1))
 fi
 
+# 14. Sub-menus no deben tener bullets/puntos (list-style: none en todos los ul/li)
+HEADER_FILE="$(dirname "$0")/../../src/components/Header.astro"
+if grep -q "list-style: none" "$HEADER_FILE" 2>/dev/null; then
+  echo "  ✅ Sub-menus: list-style: none aplicado (sin bullets)"
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ Sub-menus: list-style: none NO encontrado"
+  FAIL=$((FAIL + 1))
+fi
+
+# Verificar que todos los ul/li de dropdowns tengan list-style: none
+UL_COUNT=$(grep -c '\.nav-dropdown' "$HEADER_FILE" 2>/dev/null || echo 0)
+if grep -q '\.nav-dropdown > li' "$HEADER_FILE" 2>/dev/null; then
+  echo "  ✅ Sub-menus: <li> de dropdowns tienen list-style: none"
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ Sub-menus: <li> de dropdowns sin list-style: none"
+  FAIL=$((FAIL + 1))
+fi
+
 echo ""
 echo "📋 Resultado: $PASS ✅ / $FAIL ❌"
 
