@@ -4,11 +4,11 @@ name: SACsi Rebranding
 description: Identidad visual renovada para SACsi — soluciones informáticas con presencia robusta y tono profesional pero cercano.
 colors:
   primary: "#1A1A2E"
-  secondary: "#555555"
+  secondary: "#444444"
   tertiary: "#0A7CFF"
   neutral: "#FAFAFA"
   surface: "#FFFFFF"
-  muted: "#888888"
+  muted: "#6B6B6B"
   whatsapp: "#25D366"
 typography:
   h1:
@@ -125,11 +125,11 @@ Target: dueños de PyMEs y emprendedores que necesitan automatización y desarro
 La paleta está anclada en un navy profundo y grises neutros de alto contraste, con un solo acento de color para interacción.
 
 - **Primary (#1A1A2E):** Navy profundo. Se usa para fondos oscuros (CTA final, headlines principales) y texto de alto impacto. Transmite solidez, profesionalismo y confianza.
-- **Secondary (#555555):** Gris oscuro para texto corporal, navegación y metadatos secundarios. Mantiene buena legibilidad sin competir con primary.
+- **Secondary (#444444):** Gris oscuro para texto corporal, navegación y metadatos secundarios. Ajustado de #555555 para cumplir WCAG 2.1 AA (AUD-12).
 - **Tertiary (#0A7CFF):** Azul eléctrico. Es el único color de interacción — hover de botones, links, acentos. Señal de que algo es cliqueable.
 - **Neutral (#FAFAFA):** Fondo general de página. Casi blanco pero más suave, evita la dureza del blanco puro.
 - **Surface (#FFFFFF):** Fondos de cards, secciones destacadas, formularios. Separa contenido del fondo general.
-- **Muted (#888888):** Texto secundario, subtítulos, marcas de agua. Bajo contraste intencional para jerarquía visual.
+- **Muted (#6B6B6B):** Texto secundario, subtítulos, marcas de agua. Ajustado de #888888 para cumplir WCAG 2.1 AA (5.1:1 sobre neutral).
 - **WhatsApp (#25D366):** Exclusivo para el botón de contacto directo. No se usa en ningún otro contexto.
 
 ### Design Tokens
@@ -137,11 +137,11 @@ La paleta está anclada en un navy profundo y grises neutros de alto contraste, 
 ```yaml
 colors:
   primary: "#1A1A2E"
-  secondary: "#555555"
+  secondary: "#444444"
   tertiary: "#0A7CFF"
   neutral: "#FAFAFA"
   surface: "#FFFFFF"
-  muted: "#888888"
+  muted: "#6B6B6B"
   whatsapp: "#25D366"
 ```
 

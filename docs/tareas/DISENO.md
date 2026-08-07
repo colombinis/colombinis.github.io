@@ -17,6 +17,8 @@ El drift entre `DESIGN.md` y `global.css` fue reconciliado en la tarea T6
 | `--tertiary-dark` | `#0066CC` | no existe | Extensión accesible añadida al CSS para texto pequeño (labels/claims) sobre fondo claro. Decisión tomada en T6: justificada por contraste WCAG AA, se mantiene sin tocar DESIGN.md. |
 | `--whatsapp` | `#25D366` | `#25D366` | ✅ sincronizado |
 | `--whatsapp-hover` | `#1DA851` | `#1DA851` | ✅ sincronizado (antes era `#128C7E`, corregido) |
+| `--secondary` | `#444444` | `#444444` | ✅ sincronizado (AUD-12: antes `#555555`, oscurecido para WCAG AA) |
+| `--muted` | `#6B6B6B` | `#6B6B6B` | ✅ sincronizado (AUD-12: antes `#888888`, 3.4:1 → 5.1:1) |
 | `--rounded-xs` | `4px` | `4px` | ✅ sincronizado |
 | `--rounded-sm/md/full/circle` | todos | todos | ✅ sincronizado |
 

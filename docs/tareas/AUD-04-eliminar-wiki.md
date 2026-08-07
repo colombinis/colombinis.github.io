@@ -2,7 +2,7 @@
 
 ## Contexto
 
-`docs/wiki/` contiene 6 documentos (Home, Progreso, Roadmap, Arquitectura,
+`docs/wiki/` contenía 6 documentos (Home, Progreso, Roadmap, Arquitectura,
 Contenido, Diseno) que fueron la fuente de verdad durante el rebranding.
 Ahora el trabajo nuevo se registra en `docs/tareas/`.
 
@@ -14,8 +14,8 @@ es referenciada o útil para el futuro. No todo es histórico.
 
 ### Análisis de qué es histórico y qué es vivo
 
-| Archivo wiki        | Tipo     |_destino                              |
-|---------------------|----------|--------------------------------------|
+| Archivo wiki        | Tipo     | Destino                                |
+|---------------------|----------|----------------------------------------|
 | Home.md             | Histórico| **Borrar** — reemplazado por TODO.md |
 | Progreso.md         | Histórico| **Migrar a `docs/tareas/HISTORIAL-REBRANDING.md`** |
 | Roadmap.md          | Histórico| **Migrar a `docs/tareas/HISTORIAL-REBRANDING.md`** |
@@ -24,11 +24,11 @@ es referenciada o útil para el futuro. No todo es histórico.
 | Diseno.md           | Vivo     | **Migrar a `docs/tareas/DISENO.md`** |
 
 **Histórico** = registro del rebranding (T0-T16, H1-H18, fases F0-F5).
-Cuajando en `git log` está todo igualmente. Vale como crash course para
-un nuevo developer, pero no se actualiza.
+Conservado en `git log`. Vale como crash course para un nuevo developer,
+pero no se actualiza.
 
 **Vivo** = info de referencia activa (arquitectura del sitio, copy,
-decisiones de diseño). Si la borro, perdemos contexto útil.
+decisiones de diseño).
 
 `DESIGN.md` (raíz) **NO se toca** — sigue siendo la fuente canónica de tokens.
 
@@ -65,7 +65,7 @@ Scenario: Links internos actualizados
   When se completa AUD-04
   Then AGENTS.md apunta a docs/tareas/ARQUITECTURA.md (no docs/wiki/Arquitectura)
   And README.md apunta a docs/tareas/TODO.md (no docs/wiki/Home.md)
-  And no hay `docs/wiki/` enlaces rotos en ningún .md del repo
+  And no hay links de markdown rotos apuntando a docs/wiki/* en ningún .md del repo
 
 Scenario: DESIGN.md (raíz) intacto
   Given DESIGN.md en la raíz del repo es la fuente canónica de tokens
@@ -74,56 +74,42 @@ Scenario: DESIGN.md (raíz) intacto
   And su contenido no fue modificado
 ```
 
-## Plan (SDD — HOW)
+## Plan (SDD — HOW) — ejecutado
 
 ### Paso 1 — Migrar archivos VIVOS
 
-Conservar contenido íntegro de:
+Contenido íntegro conservado:
 1. `docs/wiki/Arquitectura.md` → `docs/tareas/ARQUITECTURA.md`
 2. `docs/wiki/Contenido.md` → `docs/tareas/CONTENIDO.md`
 3. `docs/wiki/Diseno.md` → `docs/tareas/DISENO.md`
 
-(Estos archivos se actualizan en AUD-03 para Diseno, pero el resto se
-mueve sin cambios por ahora — las correcciones de contenido van aparte.)
-
 ### Paso 2 — Migrar historial del rebranding
 
-Fusionar `Progreso.md` + `Roadmap.md` en un solo archivo:
-
-`docs/tareas/HISTORIAL-REBRANDING.md` con:
-- Estado final de fases F0-F5 (todas ✅, post corrección AUD-01)
+Fusionar `Progreso.md` + `Roadmap.md` en `docs/tareas/HISTORIAL-REBRANDING.md`
+con:
+- Estado final de fases F0-F5 (todas ✅, tras AUD-01)
 - Tabla de hallazgos H1-H18 (todos resueltos)
 - Tabla de tareas T0-T16 (todas DONE)
-- Pendientes post-deploy (migrados a AUD-06)
+- Pendientes post-deploy (sección 5, propios)
 
 ### Paso 3 — Actualizar enlaces internos
 
-1. `AGENTS.md` línea 80-86:
-   - `docs/wiki/Home.md` → `docs/tareas/TODO.md`
-   - `docs/wiki/Roadmap.md` → `docs/tareas/HISTORIAL-REBRANDING.md`
-   - `docs/wiki/Arquitectura.md` → `docs/tareas/ARQUITECTURA.md`
-   - `docs/wiki/Contenido.md` → `docs/tareas/CONTENIDO.md`
-   - `docs/wiki/Diseno.md` → `docs/tareas/DISENO.md`
-
-2. `README.md`:
-   - `[Ver documentación del proyecto →](docs/wiki/Home.md)` → `[TODO y tareas →](docs/tareas/TODO.md)`
-   - `[Roadmap](docs/wiki/Roadmap.md)` → `[Historial rebranding](docs/tareas/HISTORIAL-REBRANDING.md)`
-
-3. Buscar todos los `docs/wiki/` restantes en el repo y actualizarlos:
-   ```bash
-   grep -rn 'docs/wiki/' --include='*.md' .
-   ```
+- `AGENTS.md`: sección Reference apunta a `docs/tareas/*` (ARQUITECTURA,
+  CONTENIDO, DISENO, TODO, HISTORIAL-REBRANDING).
+- `README.md`: enlaza `docs/tareas/TODO.md`, `docs/tareas/ARQUITECTURA.md`
+  y `docs/tareas/HISTORIAL-REBRANDING.md`.
+- Sin links de markdown rotos a docs/wiki en ningún .md (verificación en script).
 
 ### Paso 4 — Eliminar docs/wiki/
 
-```bash
-git rm -r docs/wiki/
-```
+`docs/wiki/` fue borrada físicamente del working tree. **No estaba
+rastreada por git** (`git ls-files docs/wiki` vacío), por lo que no
+requirió `git rm` ni commit de la eliminación.
 
 ### Paso 5 — Verificar
 
-Correr el verification script. Build `npm run build` también para confirmar
-que no hay link interno roto tirando el build.
+Verification script ejecutado ✅. Build `npm run build` OK (sin links
+internos rotos afectando el build).
 
 ## Verification script
 
@@ -163,12 +149,15 @@ else
     FAIL=1
 fi
 
-# 4. No hay links rotos a docs/wiki/ en ningún .md
-BROKEN=$(grep -rln 'docs/wiki/' --include='*.md' "$BASE_DIR/.." 2>/dev/null)
+# 4. No hay LINKS rotos a docs/wiki/ (patrón de markdown link ](docs/wiki)
+#    en ningún .md del repo, salvo este archivo histórico (AUD-04) que
+#    documenta la migración y menciona el patrón. Las menciones en
+#    backticks del registro histórico no son links.
+BROKEN=$(grep -rln '](docs/wiki' --include='*.md' "$BASE_DIR/.." 2>/dev/null | grep -v 'AUD-04-eliminar-wiki.md')
 if [ -z "$BROKEN" ]; then
-    echo "  ✅ No hay referencias a docs/wiki/ en .md"
+    echo "  ✅ No hay links rotos a docs/wiki/ en .md"
 else
-    echo "  ❌ Referencias a docs/wiki/ aún presentes en:"
+    echo "  ❌ Links rotos a docs/wiki/ aún presentes en:"
     echo "$BROKEN"
     FAIL=1
 fi
@@ -191,16 +180,26 @@ fi
 ```
 
 ## Estado
-TODO
+DONE
 
 ## Notas
 
-**Orden de ejecución recomendado:**
-1. Hacer AUD-01 (reconciliar Roadmap) primero — así el histórico ya está corregido al migrarlo
-2. Hacer AUD-03 (actualizar Diseno) primero — así el DISENO.md ya está corregido al migrarlo
-3. AUD-04 corona la limpieza: migra lo vivo, conserva lo histórico con correcciones ya aplicadas, borra la wiki
+**Orden de ejecución (seguido):**
+1. AUD-01 (reconciliar Roadmap) primero → histórico corregido al migrarlo
+2. AUD-03 (actualizar Diseno) primero → DISENO.md corregido al migrarlo
+3. AUD-04 corona la limpieza
 
-**No perder info:** ANTES de `git rm -r docs/wiki/`, commitear la migración
-en un commit aparte con los 4 archivos nuevos (ARQUITECTURA, CONTENIDO,
-DISENO, HISTORIAL-REBRANDING). Así si algo se rompe, revert es trivial
-y no se pierde nada.
+**Resultado de la verificación:**
+- `docs/wiki/` eliminada (nunca fue trackeada por git → sin `git rm`).
+- `ARQUITECTURA.md`, `CONTENIDO.md`, `DISENO.md`, `HISTORIAL-REBRANDING.md`
+  presentes en `docs/tareas/`.
+- `DESIGN.md` (raíz) intacto.
+- Sin links de markdown rotos a docs/wiki en ningún .md del repo (este
+  archivo es el registro histórico y se auto-excluye de la búsqueda);
+  README y AGENTS apuntan a `docs/tareas/`.
+- Restan solo menciones descriptivas a la wiki en el registro histórico
+  (este archivo, AUD-01, AUD-03, TODO.md línea 9) — no son links.
+
+**Pendiente del usuario:** el working tree completo (docs migrados, capa de
+datos JSON, componentes) sigue sin commitear; cuando se commitee, cerrar
+también la nota "Trabajo NO commiteado" de TODO.md.

@@ -126,7 +126,7 @@ Requerimientos para habilitar el servicio:
 - Renombrar el claim
 - Agregar página `src/pages/servicios/ia.astro`
 - Actualizar hero (`src/pages/index.astro`) para mencionar 4 servicios
-- Agregar 2-3 casos de IA en `src/data/casos.js`
+- Agregar 2-3 casos de IA en `src/data/casos-exito.json`
 - Renombrar título de la sección "Soluciones" a "Soluciones" ( manter
   3 → 4 cards en la grilla de homepage)
 
@@ -134,7 +134,7 @@ Requerimientos para habilitar el servicio:
 
 ## Casos de éxito (8)
 
-La fuente de datos es `src/data/casos.js`; cada caso tiene su página de detalle en `src/pages/casos-exito/<slug>/`. Los 5 casos WordPress se sumaron para evidenciar competencias que un reclutador de ese perfil evalúa. Cada página de detalle sigue el patrón: **deseo del cliente → cómo visualizaba el logro → solución → stack técnico → métricas**.
+La fuente de datos es `src/data/casos-exito.json`; cada caso tiene su página de detalle en `src/pages/casos-exito/<slug>/`. Los 5 casos WordPress se sumaron para evidenciar competencias que un reclutador de ese perfil evalúa. Cada página de detalle sigue el patrón: **deseo del cliente → cómo visualizaba el logro → solución → stack técnico → métricas**.
 
 | # | Caso | Slug | Enfoque |
 |---|------|------|---------|

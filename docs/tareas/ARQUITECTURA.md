@@ -35,16 +35,20 @@ src/
 │   ├── ServiceCard.astro
 │   └── CasosCarousel.astro  # Carrusel con render asíncrono (fetch a /casos.json)
 ├── data/
-│   └── casos.js             # Fuente única de verdad de los 8 casos de éxito
+│   ├── soluciones.json                 # Servicios + categorías + beneficios concretos (relación con casos)
+│   ├── casos-exito.json                # Fuente única de verdad de los 8 casos de éxito
+│   └── preguntas-frecuentes-solucion.json  # FAQ con campo donde_mostrar (general / servicio / categoría)
 └── styles/
     └── global.css           # Design system: tokens + clases compartidas de todas las páginas
 ```
 
 `global.css` es donde los tokens de `DESIGN.md` se materializan como CSS custom properties **y** donde viven las clases compartidas del sitio (hero, secciones, cards, carrusel…). Es importado por `Layout.astro`, por lo que aplica a todas las páginas — los `<style>` de Astro son *scoped* por archivo, así que el CSS común **debe** estar aquí, no en páginas individuales (ver H11 en [Progreso](Progreso)).
 
-### Casos de éxito y carrusel
+### Capa de datos (JSON)
 
-- `src/data/casos.js` es la **fuente única** de los 8 casos. Para agregar/editar un caso se toca este archivo (y su página de detalle en `casos-exito/`).
+- `src/data/soluciones.json` — los 3 servicios con sus categorías. Cada categoría lista `beneficios` concretos (con su caso fuente) y los `casos` relacionados por slug.
+- `src/data/casos-exito.json` — la **fuente única** de los 8 casos (título, problema, deseo, visión, solución, stack, beneficios y tipo de solución). Para agregar/editar un caso se toca este archivo (y su página de detalle en `casos-exito/`).
+- `src/data/preguntas-frecuentes-solucion.json` — FAQ con campo `donde_mostrar` (nivel `general`, `servicio` o `categoria`). En la home se muestran solo las de nivel `general`.
 - `casos.json.js` genera `/casos.json` en el build; `CasosCarousel.astro` lo consume con `fetch` (render asíncrono en cliente) y arma los slides, cada uno enlazando a `/casos-exito/<slug>/`.
 
 ## Deploy (GitHub Pages)
