@@ -1,8 +1,9 @@
 ---
-// Componente reutilizable: Logo + texto "SOLUCIONES INTELIGENTES"
+// Componente reutilizable: Logo SACsi + texto tagline
 // Se usa en Header y Footer.
-// Nota: el texto "SOLUCIONES INTELIGENTES" se pasa como prop opcional.
-const { tagline = "SOLUCIONES INTELIGENTES" } = Astro.props;
+// Texto: "Soluciones Informáticas" — solo iniciales S e I en mayúscula
+// Logo: /logo.svg (nuevo branding navy #1A1A2E + blue #0A7CFF)
+const { tagline = "Soluciones Informáticas" } = Astro.props;
 ---
 
 <style>
@@ -34,7 +35,6 @@ const { tagline = "SOLUCIONES INTELIGENTES" } = Astro.props;
 </style>
 
 <a class="logo-brand" href="/" title="SACsi - Inicio">
-  <!-- Logo SACsi vectorial (SVG) - escalable sin pérdida de calidad -->
-  <img class="logo-brand__img" src="/logo-autor.svg" alt="Logo SACsi" type="image/svg+xml" />
+  <img class="logo-brand__img" src="/logo.svg" alt="Logo SACsi" type="image/svg+xml" />
   <span class="logo-brand__text">{tagline}</span>
 </a>
