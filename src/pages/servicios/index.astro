@@ -1,11 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import ServiceCard from '../../components/ServiceCard.astro';
+import SolucionesSection from '../../components/SolucionesSection.astro';
 ---
 
 <Layout
   title="Servicios"
-  description="Nuestros servicios: automatización de procesos, software a medida y presencia online para PyMEs en Rosario."
+  description="Servicios para PyMEs en Rosario: automatización de procesos, software a medida y presencia online, con más de 15 años de experiencia."
 >
   <section class="hero">
     <div class="hero__container">
@@ -17,57 +17,5 @@ import ServiceCard from '../../components/ServiceCard.astro';
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="cards-grid">
-        <ServiceCard
-          title="Automatización de Procesos"
-          href="/servicios/automatizacion/"
-          icon="/logo-autor.png"
-        >
-          Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.
-          <span slot="claim">Liberá hasta 65% del tiempo administrativo de tu equipo.</span>
-          <a slot="cta" class="service-card__cta" href="/servicios/automatizacion/">Ver servicio</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Software a Medida"
-          href="/servicios/software-a-medida/"
-          icon="/logo-autor.png"
-        >
-          Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.
-          <span slot="claim">Sistemas hechos a tu medida, hasta un 50% más rápido.</span>
-          <a slot="cta" class="service-card__cta" href="/servicios/software-a-medida/">Ver servicio</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Presencia Online"
-          href="/servicios/presencia-online/"
-          icon="/logo-autor.png"
-        >
-          Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.
-          <span slot="claim">Llevá tu negocio a internet y empezá a vender 24/7.</span>
-          <a slot="cta" class="service-card__cta" href="/servicios/presencia-online/">Ver servicio</a>
-        </ServiceCard>
-      </div>
-    </div>
-  </section>
-
-  <section id="cta-final" class="cta-final">
-    <div class="container">
-      <h2>¿No sabés cuál necesitás?</h2>
-      <p class="cta-final__subtitle">
-        Contanos tu proyecto sin compromiso. En 15 minutos podemos saber cómo ayudarte.
-      </p>
-      <div class="cta-final__actions">
-        <a
-          class="cta-final__whatsapp"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20asesoramiento%20sobre%20sus%20servicios"
-          rel="noopener noreferrer"
-          target="_blank"
-        >Escribinos por WhatsApp</a>
-        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
-      </div>
-    </div>
-  </section>
+  <SolucionesSection />
 </Layout>
