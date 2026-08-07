@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Flujo Operativo — SACsi</title>
+<style>
+:root{--bg:#0b0d12;--fg:#e8e8e8;--accent:#c2a87e;--card:#13141b;--muted:#9a9a9a;--red:#d15b5b;--green:#6ba75b;--amber:#c29848;--input:#1a1a2a;--border:#2a2a36;--header:#161622;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--fg);line-height:1.35;padding:2rem 1.25rem;max-width:1200px;margin:0 auto;}
+h1{font-size:1.6rem;color:var(--accent);margin-bottom:.15rem;letter-spacing:.02em;}
+.sub{color:var(--muted);font-size:.82rem;margin-bottom:1.5rem;}
+section{margin-bottom:1.6rem;}
+.card{background:var(--card);border:1px solid #23232e;border-radius:14px;padding:1.15rem 1.15rem 1rem;}
+.card h2{font-size:1.05rem;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.card h2 .id{font-size:.7rem;background:#1a1a2a;padding:.12rem .45rem;border-radius:6px;color:var(--muted);}
+
+/* Inputs */
+.var-input{background:var(--input);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;color:var(--fg);font-size:.82rem;font-family:inherit;width:100%;max-width:180px;transition:border-color .15s;}
+.var-input:focus{outline:none;border-color:var(--accent);}
+.var-input-sm{background:var(--input);border:1px solid var(--border);border-radius:6px;padding:.25rem .4rem;color:var(--fg);font-size:.78rem;font-family:inherit;width:70px;text-align:right;}
+.var-input-sm:focus{outline:none;border-color:var(--accent);}
+.var-input-text{background:var(--input);border:1px solid var(--border);border-radius:6px;padding:.25rem .4rem;color:var(--fg);font-size:.78rem;font-family:inherit;width:100%;min-width:140px;}
+.var-input-text:focus{outline:none;border-color:var(--accent);}
+.var-label{display:block;font-size:.7rem;color:var(--muted);margin-bottom:.15rem;}
+.var-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;}
+.var-row label{flex:1 1 160px;min-width:140px;}
+
+/* Botones */
+.btn{background:var(--accent);color:#0b0d12;border:none;border-radius:8px;padding:.5rem 1rem;font-size:.82rem;font-weight:600;cursor:pointer;transition:opacity .15s;}
+.btn:hover{opacity:.9;}
+.btn-secondary{background:#2a2a3a;color:var(--fg);}
+.btn-danger{background:#3a1616;color:#e07a7a;}
+.btn-sm{padding:.3rem .6rem;font-size:.75rem;}
+.btn-group{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem;}
+
+/* Tablas */
+.table-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:900px;}
+th{text-align:left;background:var(--header);color:var(--muted);font-weight:500;padding:.5rem .4rem;border-bottom:1px solid #262636;position:sticky;top:0;z-index:1;}
+td{padding:.4rem .4rem;border-bottom:1px solid #1a1a26;vertical-align:top;}
+tr:hover td{background:#161620;}
+.tnum{text-align:right;white-space:nowrap;}
+.tcenter{text-align:center;}
+.result-ok{color:var(--green);font-weight:600;}
+.result-warn{color:var(--amber);font-weight:600;}
+.result-bad{color:var(--red);font-weight:600;}
+.total-row{font-weight:700;background:#101018;}
+.total-row td{border-top:2px solid var(--accent);}
+
+/* Rentabilidad */
+.rentabilidad{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;padding:.8rem;background:#101018;border:1px solid #23232e;border-radius:10px;}
+.rent-item{flex:1 1 200px;}
+.rent-label{font-size:.7rem;color:var(--muted);margin-bottom:.15rem;}
+.rent-value{font-size:1.1rem;font-weight:700;}
+.rent-value.ok{color:var(--green);}
+.rent-value.warn{color:var(--amber);}
+.rent-value.bad{color:var(--red);}
+
+/* Colapsables */
+.details{margin-top:.6rem;}
+.details summary{cursor:pointer;color:var(--accent);font-size:.82rem;display:inline-block;padding:.15rem .35rem;background:#16161e;border-radius:8px;border:1px solid #25253a;}
+.details summary::-webkit-details-marker{display:none;}
+.details summary::before{content:'▶ ';font-size:.7rem;transition:transform .15s;}
+.details[open] summary::before{transform:rotate(90deg);}
+.details[open] summary{border-radius:8px 8px 0 0;border-bottom:1px solid #25253a;}
+.details-body{background:#0e0e14;border:1px solid #25253a;border-top:0;border-radius:0 0 8px 8px;padding:.8rem .9rem;font-size:.78rem;color:#c5c5c8;line-height:1.45;}
+.details-body ul{padding-left:1.1rem;}
+.details-body li{margin-bottom:.2rem;}
+
+/* Fila nueva vacía */
+tr.empty-row td{background:#0f0f14;color:var(--muted);text-align:center;font-style:italic;}
+
+footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(--muted);font-size:.75rem;}
+</style>
+</head>
+<body>
+
+<h1>Simulador de Flujo Operativo</h1>
+<p class="sub">SACsi.com.ar — Definí los pasos de cada servicio, editá horas, validá rentabilidad. Datos iniciales en JSON hardcoded.</p>
+
+<!-- 1. Configuración del servicio -->
+<section class="card">
+<h2>Configuración del servicio <span class="id">editable</span></h2>
+<div class="var-row">
+  <label>
+    <span class="var-label">Nombre del servicio</span>
+    <input type="text" class="var-input" id="srv-nombre" value="Landing page" placeholder="Ej: Landing page, Sitio pro, Automatización básico">
+  </label>
+  <label>
+    <span class="var-label">Precio cotizado (ARS k)</span>
+    <input type="number" class="var-input" id="srv-precio" value="500" step="10" min="10" max="20000">
+  </label>
+  <label>
+    <span class="var-label">Tarifa hora USD</span>
+    <input type="number" class="var-input" id="srv-usd" value="20" step="1" min="5" max="200">
+  </label>
+  <label>
+    <span class="var-label">Tipo de cambio (ARS/USD)</span>
+    <input type="number" class="var-input" id="srv-fx" value="1100" step="10" min="100" max="3000">
+  </label>
+</div>
+<div style="margin-top:.6rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
+  <span style="font-size:.75rem;color:var(--muted);">Tarifa ARS/h: <strong id="srv-tasa-ars">22.000</strong></span>
+  <span style="font-size:.75rem;color:var(--muted);">Costo hora interno: <strong id="srv-costo-hora">22.000</strong> ARS/h</span>
+</div>
+</section>
+
+<!-- 2. Tabla de pasos -->
+<section class="card">
+<h2>Pasos del flujo <span class="id">agregar/eliminar/editar</span></h2>
+<div class="btn-group">
+  <button class="btn" id="btn-add-step">+ Agregar paso</button>
+  <button class="btn btn-secondary" id="btn-reset">Restaurar ejemplo Landing</button>
+  <button class="btn btn-danger" id="btn-clear">Limpiar todo</button>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th style="width:50px;">#</th>
+  <th style="width:180px;">Paso</th>
+  <th style="width:200px;">Entradas</th>
+  <th style="width:200px;">Salidas</th>
+  <th style="width:300px;">Descripción</th>
+  <th class="tnum" style="width:80px;">Horas</th>
+  <th class="tcenter" style="width:60px;">Acción</th>
+</tr>
+</thead>
+<tbody id="steps-body"></tbody>
+<tfoot>
+<tr class="total-row">
+  <td colspan="5" style="text-align:right;padding-right:1rem;">TOTAL HORAS</td>
+  <td class="tnum" id="total-horas">0.0</td>
+  <td></td>
+</tr>
+</tfoot>
+</table>
+</div>
+
+<!-- 3. Rentabilidad -->
+<div class="rentabilidad" id="rent-box" style="display:none;">
+  <div class="rent-item">
+    <div class="rent-label">Horas totales</div>
+    <div class="rent-value" id="rent-horas">0.0 h</div>
+  </div>
+  <div class="rent-item">
+    <div class="rent-label">Costo total (horas × tarifa)</div>
+    <div class="rent-value" id="rent-costo">0 ARS</div>
+  </div>
+  <div class="rent-item">
+    <div class="rent-label">Precio cotizado</div>
+    <div class="rent-value" id="rent-precio">0 ARS</div>
+  </div>
+  <div class="rent-item">
+    <div class="rent-label">Margen bruto</div>
+    <div class="rent-value" id="rent-margen">0 ARS</div>
+  </div>
+  <div class="rent-item">
+    <div class="rent-label">% Margen</div>
+    <div class="rent-value" id="rent-pct">0%</div>
+  </div>
+  <div class="rent-item">
+    <div class="rent-label">Estado</div>
+    <div class="rent-value" id="rent-estado">—</div>
+  </div>
+</div>
+
+<details class="details">
+  <summary>Saber más: cómo interpretar la rentabilidad</summary>
+  <div class="details-body">
+    <ul>
+      <li><strong>Costo total</strong> = Horas totales × Tarifa ARS/h (calculada desde USD + tipo de cambio). Es tu costo de oportunidad interno.</li>
+      <li><strong>Margen bruto</strong> = Precio cotizado − Costo total. Si es negativo, el servicio pierde dinero a esa tarifa.</li>
+      <li><strong>% Margen</strong> = Margen / Precio × 100. Objetivo SACsi: ≥ 14% (según PRI-03).</li>
+      <li><strong>Estado</strong>: ✅ RENTABLE (margen ≥ 14%), ⚠️ AJUSTAR (margen 0-14%), ❌ NO RENTABLE (margen < 0).</li>
+      <li>Para mejorar rentabilidad: reducir horas (optimizar pasos), subir precio, o combinar ambos.</li>
+    </ul>
+  </div>
+</details>
+</section>
+
+<footer>
+Simulador SACsi — Flujo operativo por servicio. Datos iniciales: ejemplo Landing page (29.5h). Tarifa real: USD 20/h = ARS 22.000/h (a 1.100). Sin dependencias externas.
+</footer>
+
+<script>
+// ===== DATOS INICIALES HARDCODED (JSON) =====
+const FLUJO_INICIAL = [
+  {orden:1, paso:"Briefing y relevamiento", entradas:"Contacto inicial del cliente", salidas:"Documento de brief (objetivo, público, oferta)", descripcion:"Reunión o cuestionario para entender qué quiere vender la landing y qué acción busca del visitante", horas:1.5},
+  {orden:2, paso:"Cotización y aprobación", entradas:"Brief", salidas:"Propuesta aprobada / seña cobrada", descripcion:"Se arma el alcance y precio en base al brief, y se espera confirmación del cliente", horas:1},
+  {orden:3, paso:"Recopilación de contenido", entradas:"Brief aprobado", salidas:"Textos, imágenes, logo, referencias organizadas", descripcion:"Se pide y ordena el material que el cliente puede aportar; si no tiene, se define qué se va a redactar/generar", horas:2},
+  {orden:4, paso:"Wireframe y estructura", entradas:"Brief + contenido", salidas:"Boceto de secciones y jerarquía", descripcion:"Se define el orden de bloques (hero, beneficios, testimonios, CTA) sin diseño visual todavía", horas:2},
+  {orden:5, paso:"Diseño UI (mockup)", entradas:"Wireframe + referencias visuales", salidas:"Mockup de alta fidelidad", descripcion:"Se aplican colores, tipografía e imágenes reales sobre la estructura definida", horas:6},
+  {orden:6, paso:"Revisión de diseño", entradas:"Mockup", salidas:"Diseño aprobado (o ronda de cambios)", descripcion:"El cliente da feedback; suele incluir al menos una vuelta de ajustes", horas:1.5},
+  {orden:7, paso:"Desarrollo y maquetación", entradas:"Diseño aprobado", salidas:"Landing funcional (no publicada)", descripcion:"Codificación o armado en plataforma (WordPress, Webflow, HTML/CSS)", horas:8},
+  {orden:8, paso:"Integración de tracking", entradas:"Landing maqueta + accesos del cliente", salidas:"Pixel de Meta/Google, formulario, WhatsApp conectados", descripcion:"Se conecta la landing con las herramientas de medición y captura de leads que va a usar la pauta", horas:2},
+  {orden:9, paso:"QA y pruebas", entradas:"Landing con integraciones", salidas:"Reporte de bugs / checklist OK", descripcion:"Se revisa responsive, velocidad, links y que el formulario/pixel disparen correctamente", horas:2},
+  {orden:10, paso:"Ajustes finales", entradas:"Reporte de QA", salidas:"Landing lista para publicar", descripcion:"Se corrigen los issues detectados", horas:1.5},
+  {orden:11, paso:"Publicación (deploy)", entradas:"Landing corregida + dominio/hosting", salidas:"Landing en vivo", descripcion:"Se sube a producción y se verifica en el dominio real", horas:1},
+  {orden:12, paso:"Entrega y capacitación", entradas:"Landing publicada", salidas:"Cliente conforme / cierre del servicio", descripcion:"Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads", horas:1},
+];
+
+// ===== ESTADO =====
+let pasos = [...FLUJO_INICIAL];
+
+// ===== ELEMENTOS DOM =====
+const els = {
+  srvNombre: document.getElementById('srv-nombre'),
+  srvPrecio: document.getElementById('srv-precio'),
+  srvUsd: document.getElementById('srv-usd'),
+  srvFx: document.getElementById('srv-fx'),
+  srvTasaArs: document.getElementById('srv-tasa-ars'),
+  srvCostoHora: document.getElementById('srv-costo-hora'),
+  stepsBody: document.getElementById('steps-body'),
+  totalHoras: document.getElementById('total-horas'),
+  rentBox: document.getElementById('rent-box'),
+  rentHoras: document.getElementById('rent-horas'),
+  rentCosto: document.getElementById('rent-costo'),
+  rentPrecio: document.getElementById('rent-precio'),
+  rentMargen: document.getElementById('rent-margen'),
+  rentPct: document.getElementById('rent-pct'),
+  rentEstado: document.getElementById('rent-estado'),
+  btnAdd: document.getElementById('btn-add-step'),
+  btnReset: document.getElementById('btn-reset'),
+  btnClear: document.getElementById('btn-clear'),
+};
+
+// ===== FORMATERS =====
+const fmt = (n, dec=0) => n.toLocaleString('es-AR', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+const fmt1 = (n) => n.toLocaleString('es-AR', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+const fmtK = (n) => fmt(n) + 'k';
+
+// ===== RENDER TABLA =====
+function renderTable() {
+  let html = '';
+  pasos.forEach((p, i) => {
+    html += `
+      <tr data-id="${p.orden}">
+        <td class="tnum">${i+1}</td>
+        <td><input type="text" class="var-input-text" value="${p.paso}" data-field="paso" data-orden="${p.orden}"></td>
+        <td><input type="text" class="var-input-text" value="${p.entradas}" data-field="entradas" data-orden="${p.orden}"></td>
+        <td><input type="text" class="var-input-text" value="${p.salidas}" data-field="salidas" data-orden="${p.orden}"></td>
+        <td><input type="text" class="var-input-text" value="${p.descripcion}" data-field="descripcion" data-orden="${p.orden}"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${p.horas}" data-field="horas" data-orden="${p.orden}" step="0.5" min="0" max="200"></td>
+        <td class="tcenter"><button class="btn btn-danger btn-sm" data-delete="${p.orden}">🗑</button></td>
+      </tr>
+    `;
+  });
+  // Si no hay pasos, mostrar fila vacía
+  if (pasos.length === 0) {
+    html = `<tr class="empty-row"><td colspan="7">Sin pasos. Agregá uno con el botón "+ Agregar paso".</td></tr>`;
+  }
+  els.stepsBody.innerHTML = html;
+
+  // Event listeners para inputs de la tabla
+  els.stepsBody.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const orden = parseInt(inp.dataset.orden);
+      const field = inp.dataset.field;
+      const paso = pasos.find(p => p.orden === orden);
+      if (paso) {
+        if (field === 'horas') {
+          paso[field] = parseFloat(inp.value) || 0;
+        } else {
+          paso[field] = inp.value;
+        }
+        recalcAll();
+      }
+    });
+  });
+
+  // Botones delete
+  els.stepsBody.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const orden = parseInt(btn.dataset.delete);
+      pasos = pasos.filter(p => p.orden !== orden);
+      // Re-ordenar
+      pasos.forEach((p, i) => p.orden = i+1);
+      renderTable();
+      recalcAll();
+    });
+  });
+}
+
+// ===== RECALCULO TOTAL =====
+function recalcAll() {
+  // Tarifa ARS/h
+  const usd = parseFloat(els.srvUsd.value) || 20;
+  const fx = parseFloat(els.srvFx.value) || 1100;
+  const arsPorHora = usd * fx;
+  const precioK = parseFloat(els.srvPrecio.value) || 0;
+  const precioArs = precioK * 1000;
+
+  els.srvTasaArs.textContent = fmt(arsPorHora);
+  els.srvCostoHora.textContent = fmt(arsPorHora);
+
+  // Total horas
+  const totalHoras = pasos.reduce((sum, p) => sum + (p.horas || 0), 0);
+  els.totalHoras.textContent = fmt1(totalHoras);
+
+  // Costo total
+  const costoTotal = totalHoras * arsPorHora;
+  const margen = precioArs - costoTotal;
+  const pctMargen = precioArs > 0 ? (margen / precioArs) * 100 : 0;
+
+  // Rentabilidad
+  let estado = '—';
+  let estadoCls = '';
+  if (precioArs > 0) {
+    if (pctMargen >= 14) { estado = '✅ RENTABLE'; estadoCls = 'ok'; }
+    else if (pctMargen >= 0) { estado = '⚠️ AJUSTAR'; estadoCls = 'warn'; }
+    else { estado = '❌ NO RENTABLE'; estadoCls = 'bad'; }
+  }
+
+  // Mostrar box
+  els.rentBox.style.display = 'flex';
+  els.rentHoras.textContent = fmt1(totalHoras) + ' h';
+  els.rentCosto.textContent = fmt(Math.round(costoTotal/1000)) + 'k ARS';
+  els.rentPrecio.textContent = fmtK(precioK);
+  els.rentMargen.textContent = (margen >= 0 ? '+' : '') + fmt(Math.round(margen/1000)) + 'k ARS';
+  els.rentPct.textContent = pctMargen.toFixed(1).replace('.',',') + '%';
+  els.rentEstado.textContent = estado;
+  els.rentEstado.className = 'rent-value ' + estadoCls;
+}
+
+// ===== EVENTOS =====
+els.btnAdd.addEventListener('click', () => {
+  const newOrden = pasos.length > 0 ? Math.max(...pasos.map(p => p.orden)) + 1 : 1;
+  pasos.push({
+    orden: newOrden,
+    paso: 'Nuevo paso',
+    entradas: '',
+    salidas: '',
+    descripcion: '',
+    horas: 0
+  });
+  renderTable();
+  recalcAll();
+});
+
+els.btnReset.addEventListener('click', () => {
+  pasos = [...FLUJO_INICIAL];
+  els.srvNombre.value = 'Landing page';
+  els.srvPrecio.value = '500';
+  els.srvUsd.value = '20';
+  els.srvFx.value = '1100';
+  renderTable();
+  recalcAll();
+});
+
+els.btnClear.addEventListener('click', () => {
+  if (confirm('¿Borrar todos los pasos?')) {
+    pasos = [];
+    renderTable();
+    recalcAll();
+  }
+});
+
+// Configuración del servicio
+[els.srvNombre, els.srvPrecio, els.srvUsd, els.srvFx].forEach(inp => {
+  inp.addEventListener('input', recalcAll);
+});
+
+// Inicial
+renderTable();
+recalcAll();
+</script>
+</body>
+</html>
