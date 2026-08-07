@@ -77,12 +77,31 @@ check "Botón Contacto (CTA)" "header-cta"
 # 11. Footer tagline
 check "Footer: tagline 'Soluciones Inteligentes'" "Soluciones Inteligentes"
 
-# 12. Logo SVG no debe contener los viejos colores (#00A1F1 naranja / #F65314)
-if grep -q "#00A1F1\|#F65314" "$PAGE" 2>/dev/null; then
-  echo "  ❌ Logo antiguo: colores #00A1F1 o #F65314 aún presentes"
+# 12. Logo SVG debe contener los colores originales correctos (verificación directa en archivo SVG)
+SVG_FILE="$(dirname "$0")/../../public/logo.svg"
+
+if [ -f "$SVG_FILE" ] && grep -q "#00A1F1" "$SVG_FILE" 2>/dev/null; then
+  echo "  ✅ Logo: color azul #00A1F1 presente (fondo SAC)"
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ Logo: color azul #00A1F1 no encontrado en logo.svg"
+  FAIL=$((FAIL + 1))
+fi
+
+if [ -f "$SVG_FILE" ] && grep -q "#F16529" "$SVG_FILE" 2>/dev/null; then
+  echo "  ✅ Logo: color naranja #F16529 presente (fondo si)"
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ Logo: color naranja #F16529 no encontrado en logo.svg"
+  FAIL=$((FAIL + 1))
+fi
+
+# 13. Logo SVG no debe usar colores deprecated del old logo
+if [ -f "$SVG_FILE" ] && grep -q "#F65314" "$SVG_FILE" 2>/dev/null; then
+  echo "  ❌ Logo: color naranja deprecated #F65314 aún presente"
   FAIL=$((FAIL + 1))
 else
-  echo "  ✅ Logo antiguo: colores #00A1F1 y #F65314 eliminados"
+  echo "  ✅ Logo: color naranja #F65314 eliminado"
   PASS=$((PASS + 1))
 fi
 
