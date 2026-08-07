@@ -1,7 +1,8 @@
 ---
-// Carrusel de casos de éxito con render asíncrono.
-// El shell muestra un skeleton; el <script> hace fetch('/casos.json')
-// y construye los slides en el cliente. Cada slide navega al detalle.
+// Carrusel de casos de éxito — componente reutilizable
+// Cliente-asíncrono (island): el HTML se renderiza estáticamente con skeleton,
+// luego el <script> cliente hace fetch('/casos.json') y construye los slides.
+// No bloquea el renderizado de la página ni el LCP.
 ---
 
 <div class="carousel" data-carousel aria-roledescription="carrusel" aria-label="Casos de éxito destacados">
@@ -58,8 +59,11 @@
 </div>
 
 <script>
+  // Tipo de dato para los casos de éxito
   type Caso = {
     slug: string
+    tipo: string
+    label: string
     title: string
     category: string
     metric: string
@@ -90,9 +94,10 @@
     function render(casos: Caso[]) {
       track!.innerHTML = casos
         .map(
-          (c) => `
-          <li class="carousel__slide">
+          (c, i) => `
+          <li class="carousel__slide" data-slide-index="${i}">
             <a class="case-slide" href="/casos-exito/${c.slug}/" aria-label="Ver caso: ${c.title}">
+              <span class="case-slide__type case-slide__type--${c.tipo === 'proyecto-tipo' ? 'tipo' : 'exito'}">${c.label}</span>
               <span class="case-slide__tag">${c.category}</span>
               <span class="case-slide__metric">${c.metric}</span>
               <span class="case-slide__title">${c.title}</span>
@@ -103,7 +108,7 @@
         )
         .join('')
 
-      buildDots(casos.length)
+      buildDots(totalPositions())
       updateControls()
     }
 
@@ -128,11 +133,30 @@
     }
 
     function currentIndex() {
-      return Math.round(viewport!.scrollLeft / slideWidth())
+      const sw = slideWidth()
+      if (sw === 0) return 0
+      return Math.max(0, Math.min(
+        Math.round(viewport!.scrollLeft / sw),
+        totalPositions() - 1
+      ))
+    }
+
+    function totalSlides() {
+      const slides = track!.querySelectorAll('.carousel__slide[data-slide-index]')
+      return slides.length || 0
+    }
+
+    function totalPositions() {
+      const sw = slideWidth()
+      if (sw === 0) return 1
+      const maxScroll = viewport!.scrollWidth - viewport!.clientWidth
+      return Math.round(maxScroll / sw) + 1
     }
 
     function scrollToIndex(i: number) {
-      viewport!.scrollTo({ left: i * slideWidth(), behavior: 'smooth' })
+      const maxScroll = viewport!.scrollWidth - viewport!.clientWidth
+      const left = Math.min(i * slideWidth(), maxScroll)
+      viewport!.scrollTo({ left, behavior: 'smooth' })
     }
 
     function updateControls() {
@@ -147,18 +171,28 @@
       }
     }
 
-    prevBtn?.addEventListener('click', () => scrollToIndex(Math.max(0, currentIndex() - 1)))
-    nextBtn?.addEventListener('click', () => scrollToIndex(currentIndex() + 1))
+    prevBtn?.addEventListener('click', () => {
+      scrollToIndex(Math.max(0, currentIndex() - 1))
+    })
+    nextBtn?.addEventListener('click', () => {
+      scrollToIndex(Math.min(totalPositions() - 1, currentIndex() + 1))
+    })
 
     let raf = 0
     viewport.addEventListener('scroll', () => {
       cancelAnimationFrame(raf)
       raf = requestAnimationFrame(updateControls)
     })
-    window.addEventListener('resize', updateControls)
+    window.addEventListener('resize', () => {
+      if (dotsWrap && dotsWrap.children.length !== totalPositions()) {
+        buildDots(totalPositions())
+      }
+      updateControls()
+    })
 
     load()
   }
 
+  // Inicializar todos los carruseles en la página
   document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(initCarousel)
 </script>

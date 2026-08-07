@@ -1,13 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ServiceCard from '../components/ServiceCard.astro';
+import config from '../config/site.json';
+import SolucionesSection from '../components/SolucionesSection.astro';
 import CasosCarousel from '../components/CasosCarousel.astro';
+import TodosCasosSection from '../components/TodosCasosSection.astro';
+import SocialProofSection from '../components/SocialProofSection.astro';
+import FaqSection from '../components/FaqSection.astro';
 ---
 
 <Layout
   title="Inicio"
   description="SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
 >
+  <!-- Hero: label + propuesta de valor + CTAs -->
   <section id="hero" class="hero">
     <div class="hero__container">
       <p class="hero__label">SOLUCIONES INFORMÁTICAS</p>
@@ -17,76 +22,27 @@ import CasosCarousel from '../components/CasosCarousel.astro';
       </p>
       <div class="hero__actions">
         <a
-          class="hero__cta"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas"
+          class="hero__cta hero__cta--whatsapp"
+          href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20vi%20su%20web%20y%20quiero%20consultar%20sin%20compromiso`}
           rel="noopener noreferrer"
           target="_blank"
-        >Consultános sin cargo</a>
-        <a class="hero__cta-secondary" href="/contacto/">Conocé más</a>
+        >Consultar sin cargo</a>
+        <a class="hero__cta-secondary" href="/servicios/">Ver servicios</a>
       </div>
     </div>
 
+    <!-- Soluciones para tu negocio (componente reutilizable) -->
+    <SolucionesSection />
+  </section>
+
+  <!-- Carrusel de casos de éxito -->
+  <section id="casos-destacados" class="section section--alt">
     <div class="hero__cases">
-      <p class="hero__cases-label">Casos de éxito</p>
+      <h2 class="section__title">Casos de éxito</h2>
       <CasosCarousel />
     </div>
   </section>
-
-  <section id="servicios" class="section">
-    <div class="container">
-      <h2 class="section__title">Soluciones para tu negocio</h2>
-      <div class="cards-grid">
-        <ServiceCard
-          title="Automatización de Procesos"
-          href="/servicios/automatizacion/"
-          icon="/logo-autor.png"
-        >
-          Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.
-          <span slot="claim">Liberá hasta 65% del tiempo administrativo de tu equipo.</span>
-          <a
-            slot="cta"
-            class="service-card__cta"
-            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20automatizaci%C3%B3n%20de%20procesos"
-            rel="noopener noreferrer"
-            target="_blank"
-          >Consultá por este servicio</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Software a Medida"
-          href="/servicios/software-a-medida/"
-          icon="/logo-autor.png"
-        >
-          Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.
-          <span slot="claim">Sistemas hechos a tu medida, hasta un 50% más rápido.</span>
-          <a
-            slot="cta"
-            class="service-card__cta"
-            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20desarrollo%20de%20software%20a%20medida"
-            rel="noopener noreferrer"
-            target="_blank"
-          >Contanos tu idea</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Presencia Online"
-          href="/servicios/presencia-online/"
-          icon="/logo-autor.png"
-        >
-          Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.
-          <span slot="claim">Llevá tu negocio a internet y empezá a vender 24/7.</span>
-          <a
-            slot="cta"
-            class="service-card__cta"
-            href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20presencia%20online%20y%20comercio%20electr%C3%B3nico"
-            rel="noopener noreferrer"
-            target="_blank"
-          >Empezá hoy</a>
-        </ServiceCard>
-      </div>
-    </div>
-  </section>
-
+  <!-- Cómo trabajamos -->
   <section id="como-trabajamos" class="section section--alt">
     <div class="container">
       <h2 class="section__title">Cómo trabajamos</h2>
@@ -123,247 +79,16 @@ import CasosCarousel from '../components/CasosCarousel.astro';
     </div>
   </section>
 
-  <section id="social-proof" class="section">
-    <div class="container">
-      <h2 class="section__title">Resultados que hablan</h2>
-      <div class="metrics-grid">
-        <div class="metric">
-          <p class="metric__number">15+</p>
-          <p class="metric__label">años de experiencia</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">65%</p>
-          <p class="metric__label">del tiempo administrativo liberado</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">50+</p>
-          <p class="metric__label">clientes satisfechos</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">2</p>
-          <p class="metric__label">semanas a tu primer prototipo</p>
-        </div>
-      </div>
+  <!-- Resultados que hablan (componente reutilizable) -->
+  <SocialProofSection />
 
-      <div class="testimonials">
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
-            <p class="testimonial-card__quote">
-              "Trabajar con SACsi nos cambió la forma de administrar el negocio. Lo que antes nos llevaba días, ahora lo hacemos en horas. Son un golazo."
-            </p>
-            <p class="testimonial-card__author">Carina Mendoza</p>
-            <p class="testimonial-card__role">Gerenta de Administración — Distribuidora del Sur</p>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-card__quote">
-              "Necesitábamos una solución simple que nuestros empleados pudieran usar sin ser expertos en tecnología. SACsi entendió al toque lo que buscábamos."
-            </p>
-            <p class="testimonial-card__author">Gonzalo Martínez</p>
-            <p class="testimonial-card__role">Dueño — Ferretería Martínez Hnos.</p>
-          </div>
-          <div class="testimonial-card">
-            <p class="testimonial-card__quote">
-              "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos."
-            </p>
-            <p class="testimonial-card__author">Romina Paz</p>
-            <p class="testimonial-card__role">CEO — Grupo Logístico Central</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="casos-exito" class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Todos los casos de éxito</h2>
-      <p class="section__subtitle">Proyectos reales, con resultados medibles.</p>
-
-      <div class="cards-grid">
-        <ServiceCard
-          title="Tienda de ropa usada con pagos automáticos a donantes"
-          href="/casos-exito/tienda-ropa-usada/"
-          icon="/logo-autor.png"
-        >
-          Inventario que se registra en dos pasos, publicación automática y pagos a donantes sin mover efectivo. El administrativo se redujo un 70%.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/tienda-ropa-usada/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Consultorio de psicología con alquiler de espacios de atención"
-          href="/casos-exito/consultorio-psicologia/"
-          icon="/logo-autor.png"
-        >
-          Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada. El administrativo se redujo un 70%.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/consultorio-psicologia/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Ferretería familiar sin tiempo para la tienda online"
-          href="/casos-exito/ferreteria-gas-plomeria/"
-          icon="/logo-autor.png"
-        >
-          Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/ferreteria-gas-plomeria/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Estudio de arquitectura con tema WordPress a medida y bloques Gutenberg"
-          href="/casos-exito/tema-wordpress-a-medida-gutenberg/"
-          icon="/logo-autor.png"
-        >
-          Reemplazamos un sitio pesado hecho con page builder por un tema a medida con bloques Gutenberg editables. El equipo publica proyectos solo, sin romper el diseño, y la web carga 75% más rápido.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/tema-wordpress-a-medida-gutenberg/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Club de café de especialidad con suscripciones en WooCommerce"
-          href="/casos-exito/tienda-woocommerce-suscripciones/"
-          icon="/logo-autor.png"
-        >
-          Una marca que vendía por Instagram y cobraba por transferencia lanzó un club de suscripción con cobro recurrente automático y autogestión del cliente. +60% de ingresos recurrentes.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/tienda-woocommerce-suscripciones/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Medio digital con WordPress headless y front-end en Next.js"
-          href="/casos-exito/wordpress-headless-nextjs/"
-          icon="/logo-autor.png"
-        >
-          Velocidad extrema con arquitectura headless: WordPress como CMS vía WPGraphQL y front en Next.js. Los redactores siguen usando el editor de siempre. LCP de 1.1s y +40% páginas por sesión.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/wordpress-headless-nextjs/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Rescate de un e-commerce WordPress lento y hackeado"
-          href="/casos-exito/rescate-rendimiento-seguridad-wordpress/"
-          icon="/logo-autor.png"
-        >
-          Limpieza de malware, hardening de seguridad y optimización de rendimiento sin perder el catálogo ni el SEO. De 8s a 1.5s de carga, PageSpeed 95 y cero reinfecciones.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/rescate-rendimiento-seguridad-wordpress/">Ver más</a>
-        </ServiceCard>
-
-        <ServiceCard
-          title="Academia online con LMS y membresías sobre WordPress"
-          href="/casos-exito/plataforma-cursos-lms-membresias/"
-          icon="/logo-autor.png"
-        >
-          Una capacitadora pasó de Zoom y Drive a su propia academia: acceso por membresía con pago recurrente, progreso del alumno y certificados automáticos. +300 alumnos activos y cero gestión manual.
-          <a slot="cta" class="service-card__cta" href="/casos-exito/plataforma-cursos-lms-membresias/">Ver más</a>
-        </ServiceCard>
-      </div>
-    </div>
-  </section>
+  <TodosCasosSection />
 
   <section id="faq" class="section">
     <div class="container">
       <h2 class="section__title">Preguntas frecuentes</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
-            ¿Cuánto cuesta un desarrollo?
-          </button>
-          <div class="faq-answer" id="faq-answer-1">
-            <p>
-              Los proyectos chicos arrancan desde los $500.000 ARS. El precio final depende del alcance y la complejidad. Por eso primero tenemos una conversación sin cargo para entender tu proyecto, y ahí te damos un presupuesto claro y sin compromiso. No creemos en los misterios con los precios.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
-            ¿Cuánto tiempo lleva?
-          </button>
-          <div class="faq-answer" id="faq-answer-2">
-            <p>
-              Depende del proyecto: un sitio web puede estar listo en 2 a 4 semanas, mientras que un sistema a medida lleva entre 4 y 12 semanas. Trabajamos con entregas periódicas y siempre te mostramos avances constantes.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
-            ¿Necesito saber de tecnología?
-          </button>
-          <div class="faq-answer" id="faq-answer-3">
-            <p>
-              Para nada. Nosotros nos encargamos de toda la parte técnica. Vos solo necesitás contarnos qué problema querés resolver. Hablamos en tu idioma, no en código. Usamos tecnologías modernas como Python, JavaScript y bases de datos SQL para construir tu solución.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
-            ¿Dan soporte después de entregar?
-          </button>
-          <div class="faq-answer" id="faq-answer-4">
-            <p>
-              Sí, siempre. No somos de los que desaparecen. Te damos soporte continuo y hacemos los ajustes que sean necesarios después de la entrega.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
-            ¿Trabajan con empresas fuera de Rosario?
-          </button>
-          <div class="faq-answer" id="faq-answer-5">
-            <p>
-              ¡Sí! Trabajamos con clientes de toda Argentina y del exterior. Todo se coordina por videollamada, teléfono o mail. No hace falta que estés en Rosario.
-            </p>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
-            ¿Qué servicios ofrecen exactamente?
-          </button>
-          <div class="faq-answer" id="faq-answer-6">
-            <p>
-              Ofrecemos tres servicios principales: <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología), <strong>desarrollo de software a medida</strong> (creamos sistemas que se adaptan exactamente a tu negocio), y <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales). Si no estás seguro de cuál necesitás, podemos asesorarte sin compromiso.
-            </p>
-          </div>
-        </div>
-      </div>
+      <FaqSection />
     </div>
   </section>
 
-  <section id="cta-final" class="cta-final">
-    <div class="container">
-      <h2>¿Empezamos?</h2>
-      <p class="cta-final__subtitle">
-        Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.
-      </p>
-      <div class="cta-final__actions">
-        <a
-          class="cta-final__whatsapp"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas"
-          rel="noopener noreferrer"
-          target="_blank"
-        >Escribinos por WhatsApp</a>
-        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
-      </div>
-      <p style="margin:var(--spacing-lg) 0 0;font-size:0.93rem;color:rgba(255,255,255,0.85);">
-        O escribinos a <a href="mailto:sacsi@sacsi.com.ar" style="color:#FFFFFF;text-decoration:underline;font-weight:600;">sacsi@sacsi.com.ar</a>
-      </p>
-    </div>
-  </section>
 </Layout>
-
-<script>
-  // Acordeón de FAQ
-  document.querySelectorAll('.faq-question').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var answer = this.nextElementSibling;
-      var isOpen = answer.classList.contains('open');
-
-      document.querySelectorAll('.faq-answer.open').forEach(function (a) {
-        a.classList.remove('open');
-      });
-      document.querySelectorAll('.faq-question.active').forEach(function (q) {
-        q.classList.remove('active');
-        q.setAttribute('aria-expanded', 'false');
-      });
-
-      if (!isOpen) {
-        answer.classList.add('open');
-        this.classList.add('active');
-        this.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-</script>

@@ -1,72 +1,9 @@
 ---
-const { title, icon, href, claim } = Astro.props;
+const { title, icon, href, claim, label } = Astro.props;
 ---
 
-<style>
-  .service-card {
-    background: #F9F9FB;
-    border-radius: var(--rounded-md);
-    padding: 28px 24px 32px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
-  }
-
-  .service-card__icon {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-    line-height: 1;
-  }
-
-  .service-card h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--primary);
-    margin: 0 0 var(--spacing-sm);
-  }
-
-  .service-card h3 a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .service-card p {
-    font-size: 0.93rem;
-    line-height: 1.6;
-    color: var(--secondary);
-    margin: 0 0 var(--spacing-md);
-  }
-
-  .service-card__claim {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--tertiary-dark);
-    margin: 0 0 var(--spacing-md);
-  }
-
-  .service-card__cta {
-    display: inline-block;
-    background-color: var(--whatsapp);
-    color: #FFFFFF;
-    padding: 12px 24px;
-    border-radius: var(--rounded-sm);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .service-card__cta:hover {
-    background-color: var(--whatsapp-hover);
-    color: #FFFFFF;
-  }
-</style>
-
 <article class="service-card">
+  {label ? <span class="service-card__type">{label}</span> : ''}
   <div class="service-card__icon">
     {icon ? <img src={icon} alt={title} style="height:48px;width:auto;" /> : ''}
   </div>

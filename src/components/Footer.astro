@@ -1,36 +1,215 @@
+---
+// Footer consolidado con 3 columnas:
+// Col 1: Logo + texto "SOLUCIONES INTELIGENTES" (LogoBrand)
+// Col 2: Links de soluciones (solo títulos y sus categorias) desde src/data/soluciones.json
+// Col 3: Sección "¿Empezamos?" con WhatsApp + email
+// Fuentes: src/data/soluciones.json, src/config/site.json
+import LogoBrand from './LogoBrand.astro';
+import soluciones from '../data/soluciones.json';
+import config from '../config/site.json';
+---
+
 <style>
   #footer-container {
     background: var(--surface);
     border-top: 1px solid #E8E8E8;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xxl) var(--spacing-md);
   }
-
   footer.wrapper {
     max-width: var(--container);
     margin: 0 auto;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  /* Grid de 3 columnas */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+  }
+
+  .footer-col h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  /* Col 2: links de soluciones (títulos y categorías) */
+  .footer-solutions {
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-md);
-    flex-wrap: wrap;
+  }
+  .footer-solution-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  .footer-solution-title {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+  .footer-solution-title:hover {
+    color: var(--tertiary);
+  }
+  .footer-solution-categories {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin: 0 0 0 var(--spacing-sm);
+    padding: 0;
+    list-style: none;
+  }
+  .footer-solution-categories a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.86rem;
+    opacity: 0.9;
+    transition: color 0.2s ease;
+  }
+  .footer-solution-categories a:hover {
+    color: var(--tertiary);
+    opacity: 1;
+  }
+
+  /* Col 3: sección "¿Empezamos?" */
+  .footer__cta h2 {
+    color: var(--primary);
+    margin-bottom: var(--spacing-md);
+  }
+  .footer__cta p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  /* Fila de acciones: WhatsApp a la izquierda, email a la derecha */
+  .footer__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+
+  .footer__whatsapp {
+    display: inline-block;
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+    padding: 12px 28px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .footer__whatsapp:hover {
+    background-color: var(--whatsapp-hover);
+    color: #FFFFFF;
+  }
+
+  .footer__contact-row {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.93rem;
+    color: var(--secondary);
+    white-space: nowrap;
+  }
+  .footer__email {
+    color: var(--tertiary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer__email:hover {
+    text-decoration: underline;
   }
 
   .footer-copy {
     font-size: 0.85rem;
     color: var(--secondary);
+    text-align: center;
     margin: 0;
   }
 
+  /* Desktop: 3 columnas + acciones en fila */
+  @media (min-width: 601px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--spacing-xxl);
+    }
+    .footer__actions {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__whatsapp {
+      width: auto;
+    }
+  }
+
   @media (max-width: 600px) {
-    footer.wrapper {
+    .footer__actions {
       flex-direction: column;
-      align-items: flex-start;
     }
   }
 </style>
 
 <div id="footer-container">
   <footer class="wrapper">
-    <p class="footer-copy">&copy; SACsi — Soluciones Informáticas</p>
+    <div class="footer-grid">
+      <!-- Col 1: Logo + texto -->
+      <div class="footer-col">
+        <LogoBrand tagline="SOLUCIONES INTELIGENTES" />
+      </div>
+
+      <!-- Col 2: Links de soluciones (títulos y categorías) -->
+      <div class="footer-col">
+        <h3>Soluciones</h3>
+        <div class="footer-solutions">
+          {soluciones.servicios.map((sol) => (
+            <div class="footer-solution-group">
+              <a class="footer-solution-title" href={sol.href}>{sol.title}</a>
+              {sol.categorias?.length > 0 && (
+                <ul class="footer-solution-categories">
+                  {sol.categorias.map((cat) => (
+                    <li><a href={sol.href}>{cat.title}</a></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Col 3: Sección "¿Empezamos?" -->
+      <div class="footer-col footer__cta">
+        <h2>¿Empezamos?</h2>
+        <p>
+          Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.
+        </p>
+        <div class="footer__actions">
+          <a
+            class="footer__whatsapp"
+            href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >Escribinos por WhatsApp</a>
+          <div class="footer__contact-row">
+            <span aria-hidden="true">&#9993;</span>
+            <a class="footer__email" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-copy">&copy; {new Date().getFullYear()} {config.site.name} — {config.site.tagline}</p>
   </footer>
 </div>

@@ -1,10 +1,10 @@
 ---
-const links = [
-  { href: '/', label: 'Inicio' },
-  { href: '/servicios/', label: 'Servicios' },
-  { href: '/sobre-nosotros/', label: 'Sobre nosotros' },
-  { href: '/contacto/', label: 'Contacto' },
-];
+// Header con: logo + texto "SOLUCIONES INFORMÁTICAS", navegación sin "Inicio"
+// Usa componente LogoBrand reutilizable y config/site.json
+import LogoBrand from './LogoBrand.astro';
+import config from '../config/site.json';
+
+const links = config.nav.links;
 ---
 
 <style>
@@ -21,17 +21,6 @@ const links = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-  }
-
-  .logo img {
-    height: 28px;
-    width: auto;
-    display: block;
   }
 
   nav ul {
@@ -55,15 +44,19 @@ const links = [
     display: flex;
   }
 
-  nav ul li a {
+  .nav-link {
     font-size: 0.93rem;
     color: var(--secondary);
     font-weight: 500;
     transition: color 0.2s ease;
   }
 
-  nav ul li a:hover {
+  .nav-link:hover {
     color: var(--tertiary);
+  }
+
+  .header-cta {
+    display: none;
   }
 
   .hamburger {
@@ -78,10 +71,6 @@ const links = [
   }
 
   @media (min-width: 601px) {
-    .logo img {
-      height: 36px;
-    }
-
     .hamburger {
       display: none;
     }
@@ -97,6 +86,10 @@ const links = [
       z-index: auto;
     }
 
+    .header-cta {
+      display: inline-block;
+    }
+
     header.wrapper {
       padding: var(--spacing-md) var(--spacing-lg);
     }
@@ -105,9 +98,7 @@ const links = [
 
 <div id="header-container">
   <header class="wrapper">
-    <a class="logo" href="/" title="SACsi - soluciones informáticas">
-      <img src="/logo-autor.png" alt="SACsi - Soluciones Informáticas" />
-    </a>
+    <LogoBrand tagline="SOLUCIONES INFORMÁTICAS" />
     <nav>
       <button
         class="hamburger"
@@ -121,9 +112,16 @@ const links = [
       <ul id="nav-menu" class="nav-menu">
         {links.map((link) => (
           <li>
-            <a href={link.href}>{link.label}</a>
+            <a class="nav-link" href={link.href}>{link.label}</a>
           </li>
         ))}
+        <li>
+          <a
+            class="header-cta"
+            style="background-color: var(--whatsapp); color: #FFFFFF; padding: 10px 20px; border-radius: var(--rounded-sm); font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: background-color 0.2s ease;"
+            href="/contacto/"
+          >Contacto</a>
+        </li>
       </ul>
     </nav>
   </header>

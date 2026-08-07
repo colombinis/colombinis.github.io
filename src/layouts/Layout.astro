@@ -2,33 +2,36 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import config from '../config/site.json';
 
 interface Props {
   title: string;
   description?: string;
   image?: string;
+  robots?: string;
 }
 
 const {
   title,
-  description = 'Soluciones informáticas para PyMEs en Rosario: automatización de procesos, software a medida y presencia online.',
+  description = config.site.description,
   image = '/og-image.png',
+  robots,
 } = Astro.props;
 
 const GTM_ID = 'GTM-T7PWJ99';
-const siteName = 'SACsi';
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://sacsi.com.ar');
-const socialImage = new URL(image, Astro.site ?? 'https://sacsi.com.ar');
+const siteName = config.site.name;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? config.site.url);
+const socialImage = new URL(image, Astro.site ?? config.site.url);
 const fullTitle = `${title} | ${siteName}`;
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'SACsi — Soluciones Informáticas',
+  name: `${config.site.name} — ${config.site.tagline}`,
   description,
-  url: 'https://sacsi.com.ar',
-  telephone: '+54-341-519-7937',
-  email: 'sacsi@sacsi.com.ar',
+  url: config.site.url,
+  telephone: config.contact.phone_display,
+  email: config.contact.email,
   image: socialImage.toString(),
   address: {
     '@type': 'PostalAddress',
@@ -50,6 +53,7 @@ const jsonLd = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Open Graph -->
@@ -63,6 +67,8 @@ const jsonLd = {
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={config.social.twitter_site} />
+    <meta name="twitter:creator" content={config.social.twitter_creator} />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
@@ -80,7 +86,7 @@ const jsonLd = {
           dl = l != 'dataLayer' ? '&l=' + l : '';
         j.async = true;
         j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
+        f.parentNode.insertBefore(j, d.getElementsByTagName('script')[0]);
       })(window, document, 'script', 'dataLayer', GTM_ID);
     </script>
     <!-- End Google Tag Manager -->
