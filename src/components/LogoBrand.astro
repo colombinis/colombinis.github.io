@@ -1,0 +1,40 @@
+---
+// Componente reutilizable: Logo + texto "SOLUCIONES INTELIGENTES"
+// Se usa en Header y Footer.
+// Nota: el texto "SOLUCIONES INTELIGENTES" se pasa como prop opcional.
+const { tagline = "SOLUCIONES INTELIGENTES" } = Astro.props;
+---
+
+<style>
+  .logo-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-decoration: none;
+    color: var(--primary);
+  }
+
+  .logo-brand__img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+
+  .logo-brand__text {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+
+  @media (min-width: 601px) {
+    .logo-brand__img {
+      height: 36px;
+    }
+  }
+</style>
+
+<a class="logo-brand" href="/" title="SACsi - Inicio">
+  <!-- Logo SACsi vectorial (SVG) - escalable sin pérdida de calidad -->
+  <img class="logo-brand__img" src="/logo-autor.svg" alt="Logo SACsi" type="image/svg+xml" />
+  <span class="logo-brand__text">{tagline}</span>
+</a>
