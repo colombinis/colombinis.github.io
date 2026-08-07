@@ -3,7 +3,8 @@
 ## Contexto
 Para validar la rentabilidad de cada servicio, se necesita una fuente de
 datos única con los trabajos ofrecidos. Antes existían listados duplicados:
-`SERVICIOS` hardcoded en `flujo-uj-con-pri.html` (10 items) y datos en
+La tabla "Precios y horas por servicio" de `listado-trabajos.html` se cargaba
+con datos embebidos (10 items). Para validar la rentabilidad de cada trabajo,
 PRI-02/PRI-03. Esto genera drift.
 
 ## Spec (SDD — WHAT)
