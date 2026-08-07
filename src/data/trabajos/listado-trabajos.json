@@ -1,0 +1,129 @@
+{
+  "$schema": "listado-trabajos.schema.json",
+  "meta": {
+    "fuente": "PRI-02 precios-servicios + PRI-03 breakeven-costos (tarifa real USD 20/h ≈ ARS 22k/h)",
+    "unidades_precio": "ARS k (miles)",
+    "unidades_horas": "horas",
+    "unidades_costo_fijo": "ARS (pesos)",
+    "costo_fijo_default": 0,
+    "objetivo_margen_pct": 14,
+    "actualizado": "2026-08-07"
+  },
+  "categorias_servicio": {
+    "presencia-online": ["sitio-web-institucional", "tienda-online", "contenido-seo-basico"],
+    "automatizacion": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards"],
+    "software-a-medida": ["sistemas-gestion", "integraciones", "apps-portales"]
+  },
+  "trabajos": [
+    {
+      "id": "landing",
+      "nombre": "Landing page",
+      "categorias": ["presencia-online/sitio-web-institucional", "presencia-online/contenido-seo-basico"],
+      "precioMin": 500,
+      "precioMax": 700,
+      "horasMin": 15,
+      "horasMax": 20,
+      "costoFijo": 0,
+      "nota": "Ajustado en PRI-03 de $250-400k a $500-700k para cubrir 15-20h @22k/h con margen 14-52%"
+    },
+    {
+      "id": "sitio-pro",
+      "nombre": "Sitio pro",
+      "categorias": ["presencia-online/sitio-web-institucional", "presencia-online/contenido-seo-basico"],
+      "precioMin": 600,
+      "precioMax": 1000,
+      "horasMin": 25,
+      "horasMax": 35,
+      "costoFijo": 0,
+      "nota": "Margen +9% a +30% con tarifa real"
+    },
+    {
+      "id": "ecommerce",
+      "nombre": "E-commerce",
+      "categorias": ["presencia-online/tienda-online", "automatizacion/stock-logistica"],
+      "precioMin": 1200,
+      "precioMax": 2000,
+      "horasMin": 50,
+      "horasMax": 70,
+      "costoFijo": 0,
+      "nota": "Margen +9% a +30% con tarifa real"
+    },
+    {
+      "id": "auto-basico",
+      "nombre": "Automatización básico",
+      "categorias": ["automatizacion/facturacion-cobranzas", "automatizacion/reportes-dashboards"],
+      "precioMin": 500,
+      "precioMax": 750,
+      "horasMin": 20,
+      "horasMax": 30,
+      "costoFijo": 0,
+      "nota": "Ajustado en PRI-03 de $400-600k a $500-750k (margen 14-25%)"
+    },
+    {
+      "id": "auto-int",
+      "nombre": "Automatización intermedio",
+      "categorias": ["automatizacion/facturacion-cobranzas", "automatizacion/stock-logistica", "automatizacion/reportes-dashboards", "software-a-medida/integraciones"],
+      "precioMin": 1100,
+      "precioMax": 1600,
+      "horasMin": 40,
+      "horasMax": 60,
+      "costoFijo": 0,
+      "nota": "Ajustado en PRI-03 de $800-1200k a $1.1-1.6M (margen 21-25%)"
+    },
+    {
+      "id": "soft-chico",
+      "nombre": "Software chico",
+      "categorias": ["software-a-medida/sistemas-gestion"],
+      "precioMin": 1500,
+      "precioMax": 3000,
+      "horasMin": 60,
+      "horasMax": 90,
+      "costoFijo": 0,
+      "nota": "Margen +14% a +52% con tarifa real"
+    },
+    {
+      "id": "soft-grande",
+      "nombre": "Software grande",
+      "categorias": ["software-a-medida/sistemas-gestion", "software-a-medida/integraciones", "software-a-medida/apps-portales"],
+      "precioMin": 3000,
+      "precioMax": 6000,
+      "horasMin": 100,
+      "horasMax": 160,
+      "costoFijo": 0,
+      "nota": "Margen +36% a +70% con tarifa real"
+    },
+    {
+      "id": "hora-tec",
+      "nombre": "Hora técnica",
+      "categorias": ["software-a-medida/sistemas-gestion", "software-a-medida/integraciones"],
+      "precioMin": 30,
+      "precioMax": 45,
+      "horasMin": 1,
+      "horasMax": 1,
+      "costoFijo": 0,
+      "nota": "Precio por hora ARS k. Margen +36% a +105%"
+    },
+    {
+      "id": "ret-basico",
+      "nombre": "Retainer básico /mes",
+      "categorias": ["presencia-online/sitio-web-institucional", "automatizacion/reportes-dashboards"],
+      "precioMin": 200,
+      "precioMax": 400,
+      "horasMin": 5,
+      "horasMax": 5,
+      "costoFijo": 0,
+      "nota": "5h/mes incluidas. Margen +82% a +264%"
+    },
+    {
+      "id": "ret-pro",
+      "nombre": "Retainer pro /mes",
+      "categorias": ["presencia-online/sitio-web-institucional", "software-a-medida/sistemas-gestion", "software-a-medida/integraciones"],
+      "precioMin": 500,
+      "precioMax": 800,
+      "horasMin": 15,
+      "horasMax": 15,
+      "costoFijo": 0,
+      "nota": "15h/mes incluidas. Margen +52% a +142%"
+    }
+  ]
+}

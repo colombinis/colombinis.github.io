@@ -181,8 +181,53 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </details>
 </section>
 
+<!-- 3. Tabla dinámica de rentabilidad por trabajo -->
+<section class="card">
+<h2>Precios y horas por servicio <span class="id">agregar/eliminar/editar — rentabilidad</span></h2>
+<p style="font-size:.82rem;color:var(--muted);margin-bottom:.6rem;">Validá si cada trabajo es rentable. Editá <strong>Precio min/max</strong> (ARS k), <strong>Horas min/max</strong>, y <strong>Costo fijo</strong> (ARS). Los márgenes y el estado OK/NO RENTABLE se recalculan al instante. Fuente: <code>src/data/trabajos/listado-trabajos.json</code>.</p>
+<div class="btn-group">
+  <button class="btn" id="btn-add-trabajo">+ Agregar trabajo</button>
+  <button class="btn btn-secondary" id="btn-reset-trabajos">Restaurar listado</button>
+  <button class="btn btn-danger" id="btn-clear-trabajos">Limpiar todo</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+  <th style="min-width:180px;">Trabajo</th>
+  <th style="width:90px;">Precio min (ARS k)</th>
+  <th style="width:90px;">Precio max (ARS k)</th>
+  <th style="width:70px;">Horas min</th>
+  <th style="width:70px;">Horas max</th>
+  <th style="width:110px;">Costo fijo (ARS)</th>
+  <th class="tnum" style="width:90px;">Costo min @ARS/h</th>
+  <th class="tnum" style="width:90px;">Costo max @ARS/h</th>
+  <th class="tnum" style="width:90px;">Margen min</th>
+  <th class="tnum" style="width:90px;">Margen max</th>
+  <th style="width:110px;">Estado</th>
+  <th class="tcenter" style="width:50px;">Acción</th>
+</tr>
+</thead>
+<tbody id="trabajos-body"></tbody>
+</table>
+</div>
+<details class="details">
+  <summary>Saber más: cómo se calcula cada fila</summary>
+  <div class="details-body">
+    <ul>
+      <li><strong>Precio (ARS k)</strong>: rango que paga el cliente (PRI-02, ajustado en PRI-03). <em>Editable</em> para testear descuentos o presupuestos.</li>
+      <li><strong>Horas min/max</strong>: rango estimado para el alcance. <em>Editable</em>.</li>
+      <li><strong>Costo fijo (ARS)</strong>: gastos directos del trabajo (dominios, plugins, pasarelas). Default 0. Se suma al costo por horas.</li>
+      <li><strong>Costo min/max</strong>: horas × tarifa ARS/h + costo fijo. La tarifa sale de la configuración superior (USD × FX).</li>
+      <li><strong>Margen min/max %</strong>: (precio − costo) / precio × 100. Objetivo SACsi ≥ 14%.</li>
+      <li><strong>Estado</strong>: ✅ OK si margen min y max ≥ 0; ❌ NO RENTABLE si cualquiera es negativo.</li>
+    </ul>
+  </div>
+</details>
+</section>
+
 <footer>
-Simulador SACsi — Flujo operativo por servicio. Datos iniciales: ejemplo Landing page (29.5h). Tarifa real: USD 20/h = ARS 22.000/h (a 1.100). Sin dependencias externas.
+Simulador SACsi — Flujo operativo por servicio + tabla de rentabilidad por trabajo (agregar/eliminar/editar). Datos iniciales: ejemplo Landing page (29.5h). Listado de trabajos embebido desde src/data/trabajos/listado-trabajos.json. Tarifa real: USD 20/h = ARS 22.000/h (a 1.100). Sin dependencias externas.
 </footer>
 
 <script>
@@ -202,8 +247,28 @@ const FLUJO_INICIAL = [
   {orden:12, paso:"Entrega y capacitación", entradas:"Landing publicada", salidas:"Cliente conforme / cierre del servicio", descripcion:"Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads", horas:1},
 ];
 
+// ===== LISTADO DE TRABAJOS (objeto JS embebido) =====
+// Fuente de verdad: src/data/trabajos/listado-trabajos.json
+// Si cambia el JSON, actualizar este objeto (regla doc/code consistente).
+// Unidades: precioMin/precioMax en ARS k; horasMin/horasMax en horas;
+// costoFijo en ARS (pesos).
+const TRABAJOS = [
+  {id:'landing',    nombre:'Landing page',                categorias:['presencia-online/sitio-web-institucional','presencia-online/contenido-seo-basico'], precioMin:500, precioMax:700,  horasMin:15, horasMax:20, costoFijo:0},
+  {id:'sitio-pro',  nombre:'Sitio pro',                   categorias:['presencia-online/sitio-web-institucional','presencia-online/contenido-seo-basico'], precioMin:600, precioMax:1000, horasMin:25, horasMax:35, costoFijo:0},
+  {id:'ecommerce',  nombre:'E-commerce',                  categorias:['presencia-online/tienda-online','automatizacion/stock-logistica'], precioMin:1200,precioMax:2000, horasMin:50, horasMax:70, costoFijo:0},
+  {id:'auto-basico',nombre:'Automatización básico',       categorias:['automatizacion/facturacion-cobranzas','automatizacion/reportes-dashboards'], precioMin:500, precioMax:750,  horasMin:20, horasMax:30, costoFijo:0},
+  {id:'auto-int',   nombre:'Automatización intermedio',   categorias:['automatizacion/facturacion-cobranzas','automatizacion/stock-logistica','automatizacion/reportes-dashboards','software-a-medida/integraciones'], precioMin:1100,precioMax:1600, horasMin:40, horasMax:60, costoFijo:0},
+  {id:'soft-chico', nombre:'Software chico',              categorias:['software-a-medida/sistemas-gestion'], precioMin:1500,precioMax:3000, horasMin:60, horasMax:90, costoFijo:0},
+  {id:'soft-grande',nombre:'Software grande',             categorias:['software-a-medida/sistemas-gestion','software-a-medida/integraciones','software-a-medida/apps-portales'], precioMin:3000,precioMax:6000, horasMin:100,horasMax:160, costoFijo:0},
+  {id:'hora-tec',   nombre:'Hora técnica',                categorias:['software-a-medida/sistemas-gestion','software-a-medida/integraciones'], precioMin:30,  precioMax:45,   horasMin:1,  horasMax:1,  costoFijo:0},
+  {id:'ret-basico', nombre:'Retainer básico /mes',        categorias:['presencia-online/sitio-web-institucional','automatizacion/reportes-dashboards'], precioMin:200, precioMax:400,  horasMin:5,  horasMax:5,  costoFijo:0},
+  {id:'ret-pro',    nombre:'Retainer pro /mes',           categorias:['presencia-online/sitio-web-institucional','software-a-medida/sistemas-gestion','software-a-medida/integraciones'], precioMin:500, precioMax:800,  horasMin:15, horasMax:15, costoFijo:0},
+];
+
 // ===== ESTADO =====
 let pasos = [...FLUJO_INICIAL];
+let trabajos = [...TRABAJOS];
+let nuevoIdCounter = 1;
 
 // ===== ELEMENTOS DOM =====
 const els = {
@@ -225,6 +290,11 @@ const els = {
   btnAdd: document.getElementById('btn-add-step'),
   btnReset: document.getElementById('btn-reset'),
   btnClear: document.getElementById('btn-clear'),
+  // Trabajos
+  trabajosBody: document.getElementById('trabajos-body'),
+  btnAddTrabajo: document.getElementById('btn-add-trabajo'),
+  btnResetTrabajos: document.getElementById('btn-reset-trabajos'),
+  btnClearTrabajos: document.getElementById('btn-clear-trabajos'),
 };
 
 // ===== FORMATERS =====
@@ -284,6 +354,67 @@ function renderTable() {
   });
 }
 
+// ===== RENDER TABLA TRABAJOS (rentabilidad) =====
+function renderTrabajos(arsPorHora) {
+  const tasa = arsPorHora || 0;
+  let html = '';
+  trabajos.forEach((t) => {
+    const costoMin = t.horasMin * tasa + (t.costoFijo || 0);
+    const costoMax = t.horasMax * tasa + (t.costoFijo || 0);
+    const precioMinArs = (t.precioMin || 0) * 1000;
+    const precioMaxArs = (t.precioMax || 0) * 1000;
+    const margenMin = precioMinArs > 0 ? ((precioMinArs - costoMin) / precioMinArs) * 100 : 0;
+    const margenMax = precioMaxArs > 0 ? ((precioMaxArs - costoMax) / precioMaxArs) * 100 : 0;
+    const ok = margenMin >= 0 && margenMax >= 0;
+    const cls = ok ? 'result-ok' : 'result-bad';
+    const estado = ok ? '✅ OK' : '❌ NO RENTABLE';
+
+    html += `
+      <tr data-id="${t.id}">
+        <td><input type="text" class="var-input-text" value="${t.nombre}" data-id="${t.id}" data-field="nombre"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${t.precioMin}" data-id="${t.id}" data-field="precioMin" min="1" max="10000" step="10"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${t.precioMax}" data-id="${t.id}" data-field="precioMax" min="1" max="10000" step="10"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${t.horasMin}" data-id="${t.id}" data-field="horasMin" min="0" max="500" step="0.5"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${t.horasMax}" data-id="${t.id}" data-field="horasMax" min="0" max="500" step="0.5"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${t.costoFijo || 0}" data-id="${t.id}" data-field="costoFijo" min="0" max="10000000" step="1000" style="width:100px;"></td>
+        <td class="tnum">${fmt(Math.round(costoMin/1000))}k</td>
+        <td class="tnum">${fmt(Math.round(costoMax/1000))}k</td>
+        <td class="tnum ${margenMin < 0 ? 'result-bad' : 'result-ok'}">${margenMin.toFixed(1).replace('.',',')}%</td>
+        <td class="tnum ${margenMax < 0 ? 'result-bad' : 'result-ok'}">${margenMax.toFixed(1).replace('.',',')}%</td>
+        <td><span class="${cls}">${estado}</span></td>
+        <td class="tcenter"><button class="btn btn-danger btn-sm" data-delete-trabajo="${t.id}">🗑</button></td>
+      </tr>
+    `;
+  });
+  if (trabajos.length === 0) {
+    html = `<tr class="empty-row"><td colspan="12">Sin trabajos. Agregá uno con el botón "+ Agregar trabajo".</td></tr>`;
+  }
+  els.trabajosBody.innerHTML = html;
+
+  // Editar en vivo
+  els.trabajosBody.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const id = inp.dataset.id;
+      const field = inp.dataset.field;
+      const t = trabajos.find(x => x.id === id);
+      if (t) {
+        if (field === 'nombre') { t[field] = inp.value; }
+        else { t[field] = parseFloat(inp.value) || 0; }
+        renderTrabajos(arsPorHora);
+      }
+    });
+  });
+
+  // Eliminar fila
+  els.trabajosBody.querySelectorAll('[data-delete-trabajo]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.deleteTrabajo;
+      trabajos = trabajos.filter(x => x.id !== id);
+      renderTrabajos(arsPorHora);
+    });
+  });
+}
+
 // ===== RECALCULO TOTAL =====
 function recalcAll() {
   // Tarifa ARS/h
@@ -323,6 +454,9 @@ function recalcAll() {
   els.rentPct.textContent = pctMargen.toFixed(1).replace('.',',') + '%';
   els.rentEstado.textContent = estado;
   els.rentEstado.className = 'rent-value ' + estadoCls;
+
+  // Tabla de trabajos (usa la misma tarifa)
+  renderTrabajos(arsPorHora);
 }
 
 // ===== EVENTOS =====
@@ -361,6 +495,34 @@ els.btnClear.addEventListener('click', () => {
 // Configuración del servicio
 [els.srvNombre, els.srvPrecio, els.srvUsd, els.srvFx].forEach(inp => {
   inp.addEventListener('input', recalcAll);
+});
+
+// ===== EVENTOS TABLA TRABAJOS =====
+els.btnAddTrabajo.addEventListener('click', () => {
+  const id = 'nuevo-' + (nuevoIdCounter++);
+  trabajos.push({
+    id: id,
+    nombre: 'Nuevo trabajo',
+    categorias: [],
+    precioMin: 500,
+    precioMax: 700,
+    horasMin: 15,
+    horasMax: 20,
+    costoFijo: 0
+  });
+  recalcAll();
+});
+
+els.btnResetTrabajos.addEventListener('click', () => {
+  trabajos = [...TRABAJOS];
+  recalcAll();
+});
+
+els.btnClearTrabajos.addEventListener('click', () => {
+  if (confirm('¿Borrar todos los trabajos?')) {
+    trabajos = [];
+    recalcAll();
+  }
 });
 
 // Inicial
