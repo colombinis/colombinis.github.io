@@ -8,7 +8,7 @@ servicio (configuración arriba + pasos del flujo).
 
 ## Spec (SDD — WHAT)
 - En `flujo-operativo-servicio.html`, agregar la tabla **"Precios y horas
-  por servicio"** (estilo de la que ya existe en `flujo-uj-con-pri.html`)
+  por servicio"** (estilo de la que ya existe en `listado-trabajos.html`)
 - Columnas por fila:
   | Solución/Trabajo | Precio min (ARS k) | Precio max (ARS k) | Horas min | Horas max | Costo fijo (ARS) | Costo min @ARS/h | Costo max @ARS/h | Margen min % | Margen max % | Estado |
 - El **costo fijo** es un campo editable (default 0)

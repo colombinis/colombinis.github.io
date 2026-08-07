@@ -3,7 +3,7 @@
 ## Contexto
 El dueño pide que la tabla de trabajos tenga la misma interactividad que
 la tabla "Pasos del flujo" del mismo HTML: **agregar / eliminar / editar**
-filas en vivo. Hoy la tabla de precios/horas (en flujo-uj-con-pri.html)
+filas en vivo. Hoy la tabla de precios/horas (en `listado-trabajos.html`)
 permite editar inputs pero NO agregar ni eliminar filas.
 
 ## Spec (SDD — WHAT)

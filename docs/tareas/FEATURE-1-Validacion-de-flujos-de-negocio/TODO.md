@@ -23,7 +23,7 @@ relacionado a 1 o más categorías de servicios.
 
 **Referencias movidas a esta feature:**
 - `flujo-operativo-servicio.html` (Simulador de flujo operativo por servicio)
-- `flujo-uj-con-pri.html` (Flujo UJ → CON → PRI interactivo)
+- `listado-trabajos.html` (tabla de trabajos cargada desde JSON — fuente de verdad única)
 
 ## Estados
 
@@ -42,7 +42,7 @@ relacionado a 1 o más categorías de servicios.
 | VAL-02  | Tabla dinámica de rentabilidad en flujo-operativo-servicio.html | DONE   | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-02-tabla-dinamica-rentabilidad.md` |
 | VAL-03  | Precarga de tabla "Precios y horas" desde objeto JS embebido    | DONE   | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-03-precarga-js-embebido.md` |
 | VAL-04  | Integrar add/remove/editar filas (como Pasos del flujo)         | DONE   | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-04-add-remove-editar-filas.md` |
-| VAL-05  | Reutilizar listado en flujo-uj-con-pri.html                     | DONE   | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-05-reutilizar-listado-uj-pri.md` |
+| VAL-05  | Cargar tabla desde listado-trabajos.json (fuente única)       | DONE   | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-05-listado-trabajos-json.md` |
 
 ## Resumen
 

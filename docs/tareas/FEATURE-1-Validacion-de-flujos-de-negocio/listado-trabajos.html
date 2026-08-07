@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flujo UJ → CON → PRI — SACsi (Interactivo)</title>
+<title>Listado de trabajos — SACsi (Precios, horas y rentabilidad)</title>
 <style>
 :root{--bg:#0b0d12;--fg:#e8e8e8;--accent:#c2a87e;--card:#13141b;--muted:#9a9a9a;--red:#d15b5b;--green:#6ba75b;--amber:#c29848;--input:#1a1a2a;--border:#2a2a36;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -68,8 +68,8 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </head>
 <body>
 
-<h1>Flujo UJ → CON → PRI</h1>
-<p class="sub">SACsi.com.ar — Interactivo: cambiá las variables arriba y todos los cálculos se actualizan en vivo.</p>
+<h1>Listado de trabajos</h1>
+<p class="sub">SACsi.com.ar — Tabla de precios, horas y rentabilidad por trabajo. Los datos se cargan de <code>src/data/trabajos/listado-trabajos.json</code> (fuente de verdad única).</p>
 
 <!-- 1. Analogía -->
 <section class="card">
@@ -211,10 +211,10 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 <details class="details"><summary>Saber más: paso a paso C</summary><div class="details-body"><div class="steps" id="stepsC"></div></div></details>
 </section>
 
-<!-- 5. Tabla de servicios con horas (variable crítica) -->
+<!-- 5. Tabla de trabajos (cargada desde JSON) -->
 <section class="card">
-<h2>Precios y horas por servicio <span class="id">variables críticas: precio + horas</span></h2>
-<p style="font-size:.82rem;color:var(--muted);margin-bottom:.6rem;">Editá <strong>Precio min/max</strong> (ARS k) y <strong>Horas min/max</strong>. Los márgenes y el estado OK/NEGATIVO se recalculan al instante. Útil para testear descuentos en el primer trabajo (ej: Landing a 400k).</p>
+<h2>Precios y horas por trabajo <span class="id">cargado de listado-trabajos.json</span></h2>
+<p style="font-size:.82rem;color:var(--muted);margin-bottom:.6rem;">Datos cargados en runtime desde <code>src/data/trabajos/listado-trabajos.json</code> (fuente de verdad única). Editá <strong>Precio min/max</strong> (ARS k), <strong>Horas min/max</strong> y <strong>Costo fijo</strong> (ARS). Los márgenes y el estado OK/NO RENTABLE se recalculan al instante. Requiere servir el repo por HTTP (<code>python3 -m http.server</code>) — no funciona con <code>file://</code>.</p>
 
 <table>
 <thead>
@@ -234,7 +234,7 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </thead>
 <tbody id="servicios-body"></tbody>
 </table>
-<p class="note">Nota: listado de trabajos embebido desde <code>src/data/trabajos/listado-trabajos.json</code> (misma fuente que el simulador de flujo operativo). Los precios de Landing se ajustaron de $150k-400k (originales) a $500k-700k (corregidos con tarifa real). El costo fijo (ARS) se suma al costo por horas para el cálculo de margen. Las horas son el supuesto más sensible: si un servicio toma más horas de las estimadas, el margen cae o se vuelve negativo.</p>
+<p class="note">Nota: la tabla se carga de <code>src/data/trabajos/listado-trabajos.json</code> con <code>fetch()</code> — ese archivo es la fuente de verdad única (no hay datos duplicados en este HTML). Los precios de Landing se ajustaron de $150k-400k (originales) a $500k-700k (corregidos con tarifa real). El costo fijo (ARS) se suma al costo por horas para el cálculo de margen. Las horas son el supuesto más sensible: si un trabajo toma más horas de las estimadas, el margen cae o se vuelve negativo.</p>
 
 <details class="details">
   <summary>Saber más: cómo se calcula cada fila</summary>
@@ -252,26 +252,16 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </section>
 
 <footer>
-Documento interactivo SACsi — Fases UJ (3), CON (4), PRI (5). Referencias: docs/tareas/UJ-01..05, CON-01..04, PRI-01..04. Variables de horas: ver PRI-02. Variables de tasa: ver CON-02. Tarifa real: USD 20/h (ARS 22k/h a 1.100). Actualizado 2026-08-05.
+Listado de trabajos SACsi — tabla cargada de <code>src/data/trabajos/listado-trabajos.json</code> (fuente de verdad única). Incluye escenarios de simulación UJ → CON → PRI (referencias: docs/tareas/UJ-01..05, CON-01..04, PRI-01..04). Tarifa real: USD 20/h (ARS 22k/h a 1.100). Actualizado 2026-08-07.
 </footer>
 
 <script>
-// ===== DATOS BASE DE SERVICIOS =====
-// Fuente de verdad: src/data/trabajos/listado-trabajos.json
-// Si cambia el JSON, actualizar este array (regla doc/code consistente).
-// Unidades: precio en ARS k; horas en horas; costoFijo en ARS (pesos).
-const SERVICIOS = [
-  {id:'landing',    nombre:'Landing page',                precioMin:500, precioMax:700,  horasMin:15, horasMax:20, costoFijo:0},
-  {id:'sitio-pro',  nombre:'Sitio pro',                   precioMin:600, precioMax:1000, horasMin:25, horasMax:35, costoFijo:0},
-  {id:'ecommerce',  nombre:'E-commerce',                  precioMin:1200,precioMax:2000, horasMin:50, horasMax:70, costoFijo:0},
-  {id:'auto-basico',nombre:'Automatización básico',       precioMin:500, precioMax:750,  horasMin:20, horasMax:30, costoFijo:0},
-  {id:'auto-int',   nombre:'Automatización intermedio',   precioMin:1100,precioMax:1600, horasMin:40, horasMax:60, costoFijo:0},
-  {id:'soft-chico', nombre:'Software chico',              precioMin:1500,precioMax:3000, horasMin:60, horasMax:90, costoFijo:0},
-  {id:'soft-grande',nombre:'Software grande',             precioMin:3000,precioMax:6000, horasMin:100,horasMax:160, costoFijo:0},
-  {id:'hora-tec',   nombre:'Hora técnica',                precioMin:30,  precioMax:45,   horasMin:1,  horasMax:1,  costoFijo:0},
-  {id:'ret-basico', nombre:'Retainer básico /mes',        precioMin:200, precioMax:400,  horasMin:5,  horasMax:5,  costoFijo:0},
-  {id:'ret-pro',    nombre:'Retainer pro /mes',           precioMin:500, precioMax:800,  horasMin:15, horasMax:15, costoFijo:0},
-];
+// ===== DATOS BASE =====
+// Fuente de verdad ÚNICA: src/data/trabajos/listado-trabajos.json
+// La tabla se carga con fetch() en runtime (función cargarTrabajos).
+// Requiere servir el repo por HTTP (python3 -m http.server) — no file://.
+const JSON_URL = '../../../src/data/trabajos/listado-trabajos.json';
+let SERVICIOS = [];
 
 // ===== ELEMENTOS DOM =====
 const els = {
@@ -462,6 +452,27 @@ function renderServicios(arsPorHora) {
   });
 }
 
+// ===== CARGA DESDE JSON (fuente de verdad) =====
+async function cargarTrabajos() {
+  try {
+    const res = await fetch(JSON_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    SERVICIOS = (data.trabajos || []).map(t => ({
+      id: t.id,
+      nombre: t.nombre,
+      precioMin: t.precioMin,
+      precioMax: t.precioMax,
+      horasMin: t.horasMin,
+      horasMax: t.horasMax,
+      costoFijo: t.costoFijo || 0,
+    }));
+  } catch (e) {
+    els.serviciosBody.innerHTML = '<tr><td colspan="11" style="color:var(--red);padding:.8rem;">⚠️ No se pudo cargar <code>src/data/trabajos/listado-trabajos.json</code> (' + e.message + '). Serví el repo por HTTP (ej: <code>python3 -m http.server</code>) — no funciona abriendo el archivo con file://.</td></tr>';
+  }
+  recalcAll();
+}
+
 // ===== EVENT LISTENERS GLOBALES =====
 const allInputs = [
   els.vUsd, els.vFx, els.vTasaMofu, els.vTasaBofu,
@@ -472,8 +483,9 @@ const allInputs = [
 ];
 allInputs.forEach(inp => inp.addEventListener('input', recalcAll));
 
-// Inicial
+// Inicial: render inmediato (tabla vacía hasta que cargue el JSON) + carga async
 recalcAll();
+cargarTrabajos();
 </script>
 </body>
 </html>
