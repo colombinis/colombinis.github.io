@@ -11,9 +11,12 @@ const links = config.nav.links;
 
 <style>
   #header-container {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background: var(--surface);
     border-bottom: 1px solid #E8E8E8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   header.wrapper {
