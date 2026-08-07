@@ -1,0 +1,428 @@
+[
+  {
+    "slug": "tema-wordpress-a-medida-gutenberg",
+    "tipo": "proyecto-tipo",
+    "label": "PROYECTO TIPO",
+    "title": "Estudio de arquitectura con tema WordPress a medida y bloques Gutenberg editables",
+    "category": "WordPress · Gutenberg",
+    "metric": "75% más rápido",
+    "excerpt": "Reemplazamos un sitio pesado hecho con page builder por un tema a medida con bloques Gutenberg editables. El equipo publica proyectos solo, sin romper el diseño.",
+    "subtitle": "Un estudio de arquitectura con un sitio lento hecho en Elementor que su equipo no podía actualizar sin romper el diseño. Querían identidad propia, velocidad y autonomía total sobre el contenido.",
+    "problema": "Un sitio armado con un page builder cargado de plugins: cada cambio terminaba desalineando la grilla o rompiendo la versión mobile, dependían de un freelance externo y la web tardaba más de 6 segundos en cargar en el celular.",
+    "deseo": [
+      "El estudio tenía un sitio armado con un page builder cargado de plugins. Cada vez que el equipo de marketing quería publicar un proyecto nuevo, terminaba desalineando la grilla, cambiando tipografías sin querer o rompiendo la versión mobile. Para cualquier cambio dependían de un freelance externo, y la web tardaba más de 6 segundos en cargar en el celular.",
+      "Su deseo era doble: tener un sitio con identidad visual propia —no una plantilla reconocible— que transmitiera el nivel de sus obras, y sobre todo dejar de depender de un desarrollador para publicar contenido. Querían que su equipo interno pudiera armar y actualizar páginas de proyectos sin conocimientos técnicos y sin miedo a romper nada."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Quiero poder armar la página de una obra nueva arrastrando bloques con nuestra estética —una portada, una galería, una ficha técnica— en diez minutos, desde mi notebook, sin llamar a nadie y sabiendo que va a quedar impecable en la compu y en el celular."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🎨",
+          "title": "Tema a medida desde cero",
+          "text": "Desarrollamos un tema propio en PHP siguiendo el template hierarchy de WordPress, sin page builders ni plugins innecesarios. El diseño replica exactamente la identidad del estudio."
+        },
+        {
+          "icon": "🧱",
+          "title": "Bloques Gutenberg a medida",
+          "text": "Creamos bloques propios (portada de obra, galería, ficha técnica) con ACF. El equipo los combina en el editor nativo con estilos bloqueados: imposible romper el diseño."
+        },
+        {
+          "icon": "⚡",
+          "title": "Rendimiento y autonomía",
+          "text": "Sin el peso del builder, el sitio carga en menos de 2 segundos. Entregamos una guía de estilos y capacitación para que marketing publique solo."
+        }
+      ]
+    },
+    "stack": ["WordPress", "PHP", "Tema a medida", "Bloques Gutenberg (block.json)", "ACF Pro", "SCSS", "Template Hierarchy"],
+    "beneficios": {
+      "metricas": [
+        { "numero": "94", "label": "PageSpeed mobile" },
+        { "numero": "-75%", "label": "tiempo de carga" },
+        { "numero": "0", "label": "dependencia de un dev para publicar" }
+      ],
+      "testimonio": {
+        "quote": "Ahora publicamos una obra nueva en minutos y siempre queda perfecta. Dejamos de depender de terceros para cada cambio y la web por fin se ve como nuestro trabajo.",
+        "autor": "Testimonio tipo — Estudio de arquitectura",
+        "rol": "Rosario, Santa Fe"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "presencia-online",
+      "categoria": "sitio-web-institucional",
+      "etiqueta": "Presencia Online > Sitio web institucional"
+    }
+  },
+  {
+    "slug": "tienda-woocommerce-suscripciones",
+    "tipo": "proyecto-tipo",
+    "label": "PROYECTO TIPO",
+    "title": "Marca de café de especialidad con club de suscripción en WooCommerce",
+    "category": "WooCommerce · Suscripciones",
+    "metric": "+60% ingresos recurrentes",
+    "excerpt": "Una marca que vendía por Instagram y cobraba por transferencia lanzó un club de suscripción con cobro recurrente automático y autogestión del cliente.",
+    "subtitle": "Una marca de café de especialidad que vendía por mensajes de Instagram y cobraba por transferencia. Querían un club de suscripción mensual con cobro automático y cero seguimiento manual de pagos.",
+    "problema": "Ventas 100% manuales por Instagram: el cliente mandaba un DM, coordinaban la molienda a mano, pasaban un alias y esperaban la transferencia. Cada mes perseguían a cada suscriptor para que pagara y anotaban en una planilla quién había abonado.",
+    "deseo": [
+      "La marca crecía a pura fuerza de Instagram: el cliente mandaba un DM, coordinaban la molienda, pasaban un alias y esperaban la transferencia. Cada mes tenían que reescribirle a cada suscriptor recordándole que pague, chequear comprobantes a mano y anotar en una planilla quién había abonado. A más clientes, más caos.",
+      "Su deseo era transformar esa venta artesanal en un club de suscripción de verdad: que el cliente eligiera su café (grano o molido, tamaño de bolsa), se suscribiera una sola vez y el cobro se hiciera solo todos los meses. Y que pudiera pausar, cambiar o cancelar sin escribirles."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Sueño con abrir el panel a fin de mes y ver que los cobros ya se hicieron solos, que a cada suscriptor le sale su café automáticamente y que si alguien quiere pausar el mes que se va de vacaciones, lo haga desde su cuenta sin escribirme a mí."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "☕",
+          "title": "Catálogo con variaciones",
+          "text": "Productos WooCommerce con variaciones de molienda y tamaño, y planes de suscripción mensual, trimestral o por regalo."
+        },
+        {
+          "icon": "🔄",
+          "title": "Cobro recurrente automático",
+          "text": "Integramos la pasarela local (Mercado Pago) con WooCommerce Subscriptions para debitar cada mes sin intervención manual."
+        },
+        {
+          "icon": "👤",
+          "title": "Autogestión del cliente",
+          "text": "Panel donde cada suscriptor pausa, cambia de plan o cancela solo, con emails automáticos de cobro y renovación."
+        }
+      ]
+    },
+    "stack": ["WordPress", "WooCommerce", "WooCommerce Subscriptions", "Gateway Mercado Pago", "Hooks & Filters", "Webhooks", "WooCommerce REST API"],
+    "beneficios": {
+      "metricas": [
+        { "numero": "+60%", "label": "ingresos recurrentes" },
+        { "numero": "0", "label": "cobros perseguidos a mano" },
+        { "numero": "-40%", "label": "consultas de \"¿cómo pago?\"" }
+      ],
+      "testimonio": {
+        "quote": "Pasamos de perseguir transferencias todos los meses a tener ingresos que entran solos. Ahora sé cuánto voy a facturar antes de que empiece el mes.",
+        "autor": "Testimonio tipo — Marca de café de especialidad",
+        "rol": "Rosario, Santa Fe"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "presencia-online",
+      "categoria": "tienda-online",
+      "etiqueta": "Presencia Online > Tienda online"
+    }
+  },
+  {
+    "slug": "wordpress-headless-nextjs",
+    "tipo": "proyecto-tipo",
+    "label": "PROYECTO TIPO",
+    "title": "Medio digital con WordPress headless y front-end en Next.js",
+    "category": "Headless · Next.js",
+    "metric": "LCP de 1.1s",
+    "excerpt": "Arquitectura headless: WordPress como CMS vía WPGraphQL y front en Next.js. Los redactores siguen usando el editor de siempre.",
+    "subtitle": "Un medio digital con mucho tráfico y una web lenta que perdía lectores. Querían un sitio ultrarrápido y moderno, pero sin obligar a su redacción a abandonar el editor de WordPress que ya dominaba.",
+    "problema": "Un WordPress tradicional con años de plugins acumulados que se arrastraba en horarios pico. Los lectores llegaban desde redes, esperaban una carga instantánea y muchos se iban antes de que apareciera el contenido: la velocidad les costaba lectores y publicidad.",
+    "deseo": [
+      "El medio publicaba decenas de notas por día y su WordPress tradicional, con años de plugins acumulados, se arrastraba en horarios pico. Los lectores llegaban desde redes, esperaban una carga instantánea y muchos se iban antes de que apareciera el contenido. La velocidad les estaba costando lectores y publicidad.",
+      "Pero había una línea roja: la redacción tenía 15 personas acostumbradas al editor de WordPress. El deseo era claro: una experiencia de lectura tan rápida como una app, moderna y estable ante picos de tráfico, sin cambiarle la herramienta a los redactores ni frenar el ritmo de publicación."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Quiero que cuando alguien toque el link de una nota en Instagram, la página aparezca al instante, como una app. Pero mis redactores tienen que seguir escribiendo en el WordPress de siempre, sin darse cuenta de que por detrás cambió toda la tecnología."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🧩",
+          "title": "WordPress como CMS headless",
+          "text": "Mantuvimos WordPress solo como backend de contenidos y expusimos las notas vía WPGraphQL. La redacción sigue usando el mismo editor de siempre."
+        },
+        {
+          "icon": "🚀",
+          "title": "Front-end en Next.js",
+          "text": "Construimos el sitio público en Next.js con renderizado incremental (ISR): las notas se sirven estáticas y se revalidan al publicar."
+        },
+        {
+          "icon": "📈",
+          "title": "Escala ante picos",
+          "text": "Despliegue en la CDN con caché global. El tráfico de picos ya no golpea a WordPress, así que el sitio no se cae en las notas virales."
+        }
+      ]
+    },
+    "stack": ["WordPress (headless)", "WPGraphQL", "Next.js", "React", "ISR", "Vercel / CDN", "Core Web Vitals"],
+    "beneficios": {
+      "metricas": [
+        { "numero": "1.1s", "label": "LCP en mobile" },
+        { "numero": "+40%", "label": "páginas por sesión" },
+        { "numero": "0", "label": "caídas en notas virales" }
+      ],
+      "testimonio": {
+        "quote": "El sitio vuela y ya no se cae cuando una nota explota. Lo mejor es que mi equipo ni se enteró del cambio: siguen escribiendo igual que siempre.",
+        "autor": "Testimonio tipo — Medio digital",
+        "rol": "Argentina"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "presencia-online",
+      "categoria": "sitio-web-institucional",
+      "etiqueta": "Presencia Online > Sitio web institucional"
+    }
+  },
+  {
+    "slug": "rescate-rendimiento-seguridad-wordpress",
+    "tipo": "proyecto-tipo",
+    "label": "PROYECTO TIPO",
+    "title": "Rescate de un e-commerce WordPress lento y hackeado",
+    "category": "Performance · Seguridad",
+    "metric": "De 8s a 1.5s",
+    "excerpt": "Limpieza de malware, hardening de seguridad y optimización de rendimiento sin perder el catálogo ni el SEO. PageSpeed 95 y cero reinfecciones.",
+    "subtitle": "Un e-commerce con más de 2.000 productos que fue hackeado —redirecciones a sitios de spam— y que además tardaba 8 segundos en abrir. Perdía ventas y Google lo marcaba como inseguro.",
+    "problema": "La tienda redirigía a los visitantes a páginas de spam y Google mostraba la advertencia de \"sitio peligroso\". Las ventas se desplomaron y, cuando el sitio cargaba, tardaba casi 8 segundos: años de plugins, imágenes sin optimizar y una base de datos inflada.",
+    "deseo": [
+      "El dueño descubrió que su tienda redirigía a los visitantes a páginas de spam y que Google había empezado a mostrar la advertencia de \"sitio peligroso\". Las ventas se desplomaron de un día para el otro. Encima, cuando el sitio sí cargaba, tardaba casi 8 segundos: años de plugins, imágenes sin optimizar y una base de datos inflada.",
+      "Su deseo era, ante todo, volver a confiar en su propia web: recuperarla limpia, rápida y segura, sin perder los 2.000 productos ni el posicionamiento SEO que había construido durante años. Y quería quedarse tranquilo de que no lo iban a volver a hackear."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Quiero abrir mi tienda y que cargue rápido, que Google deje de decir que es peligrosa y que mis clientes vuelvan a comprar sin miedo. Y sobre todo, no tener que despertarme pensando si hoy me hackearon de nuevo."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🧹",
+          "title": "Limpieza de malware",
+          "text": "Auditamos el sitio, eliminamos el código malicioso y las puertas traseras, y pedimos la re-revisión a Google para sacar la advertencia."
+        },
+        {
+          "icon": "🔒",
+          "title": "Hardening de seguridad",
+          "text": "WAF, doble factor, permisos de archivos correctos, actualizaciones al día, backups automáticos y monitoreo de integridad."
+        },
+        {
+          "icon": "⚡",
+          "title": "Optimización de rendimiento",
+          "text": "Caché de página y de objetos, CDN, compresión de imágenes, limpieza de la base de datos y optimización de queries lentas."
+        }
+      ]
+    },
+    "stack": ["WordPress", "WooCommerce", "Limpieza de malware", "Hardening / WAF", "Object Cache + CDN", "Optimización MySQL", "Core Web Vitals"],
+    "beneficios": {
+      "metricas": [
+        { "numero": "1.5s", "label": "carga (antes 8s)" },
+        { "numero": "95", "label": "PageSpeed" },
+        { "numero": "0", "label": "reinfecciones" }
+      ],
+      "testimonio": {
+        "quote": "Recuperé mi tienda en tiempo récord y sin perder nada. Ahora carga rapidísimo, Google la volvió a marcar como segura y las ventas se normalizaron.",
+        "autor": "Testimonio tipo — E-commerce de indumentaria",
+        "rol": "Argentina"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "presencia-online",
+      "categoria": "tienda-online",
+      "etiqueta": "Presencia Online > Tienda online"
+    }
+  },
+  {
+    "slug": "plataforma-cursos-lms-membresias",
+    "tipo": "proyecto-tipo",
+    "label": "PROYECTO TIPO",
+    "title": "Academia online con LMS y membresías sobre WordPress",
+    "category": "LMS · Membresías",
+    "metric": "+300 alumnos activos",
+    "excerpt": "Una capacitadora pasó de Zoom y Drive a su propia academia: acceso por membresía con pago recurrente, progreso del alumno y certificados automáticos.",
+    "subtitle": "Una capacitadora que dictaba cursos por Zoom y compartía el material por Drive, con los pagos y accesos gestionados a mano. Quería su propia plataforma con contenido pago, progreso y certificados.",
+    "problema": "La operación era un rompecabezas: cobraba por transferencia, sumaba a cada alumno a mano a una carpeta de Drive, mandaba los links de Zoom por WhatsApp y armaba los certificados uno por uno. Cada nueva camada de alumnos multiplicaba el trabajo administrativo.",
+    "deseo": [
+      "Sus cursos funcionaban, pero la operación era un rompecabezas: cobraba por transferencia, sumaba a cada alumno a mano a una carpeta de Drive, mandaba los links de Zoom por WhatsApp y armaba los certificados uno por uno en un editor de imágenes. Cada nueva camada de alumnos multiplicaba el trabajo administrativo y no escalaba.",
+      "Su deseo era tener su propia academia online: un lugar donde el alumno pagara, entrara solo, viera las clases en orden, avanzara a su ritmo y, al terminar, obtuviera su certificado. Todo automático, con su marca, sin que ella tuviera que dar accesos ni perseguir pagos manualmente."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Imagino mi academia funcionando sola: el alumno paga, entra, ve las clases en orden, va avanzando y cuando termina descarga su certificado con mi logo. Yo mientras tanto grabo el próximo curso, sin mandar un solo link a mano."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🎓",
+          "title": "Cursos con LMS",
+          "text": "Montamos los cursos en LearnDash: lecciones en orden, contenido liberado por etapas (drip) y evaluaciones al final de cada módulo."
+        },
+        {
+          "icon": "🔑",
+          "title": "Membresías con pago recurrente",
+          "text": "El acceso se otorga solo al pagar: membresías con cobro recurrente y altas/bajas automáticas, sin gestión manual de accesos."
+        },
+        {
+          "icon": "📜",
+          "title": "Progreso y certificados",
+          "text": "Cada alumno ve su avance y descarga su certificado personalizado al completar el curso. Emails automáticos en cada hito."
+        }
+      ]
+    },
+    "stack": ["WordPress", "LearnDash (LMS)", "MemberPress", "Pagos recurrentes", "ACF", "Drip content", "Integración de email"],
+    "beneficios": {
+      "metricas": [
+        { "numero": "300+", "label": "alumnos activos" },
+        { "numero": "0", "label": "accesos dados a mano" },
+        { "numero": "100%", "label": "certificados automáticos" }
+      ],
+      "testimonio": {
+        "quote": "Dejé de ser la secretaria de mis propios cursos. Ahora la academia funciona sola: los alumnos entran, avanzan y se certifican mientras yo preparo el próximo contenido.",
+        "autor": "Testimonio tipo — Academia de capacitación profesional",
+        "rol": "Argentina"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "software-a-medida",
+      "categoria": "apps-portales",
+      "etiqueta": "Software a Medida > Apps y portales"
+    }
+  },
+  {
+    "slug": "tienda-ropa-usada",
+    "tipo": "caso-exito",
+    "label": "CASO DE ÉXITO",
+    "title": "Tienda de ropa usada con pagos automáticos a donantes",
+    "category": "E-commerce · Automatización",
+    "metric": "-70% tareas administrativas",
+    "excerpt": "Inventario que se registra en dos pasos, publicación automática y pagos a donantes sin mover efectivo.",
+    "subtitle": "Cómo una PyME de ropa usada escaló registrando prendas en dos pasos, publicando automáticamente y pagando a donantes sin mover efectivo.",
+    "problema": "El administrativo se comía gran parte del día: cargar stock, sacar fotos, publicar en la tienda y conciliar los pagos de los donantes. Crecían las ventas pero también los errores y las horas de trabajo.",
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "📦",
+          "title": "Registro express",
+          "text": "Formulario guiado para cargar prendas en dos pasos, con validaciones y generación automática de código."
+        },
+        {
+          "icon": "🖼️",
+          "title": "Publicación automática",
+          "text": "Cada carga se publica directo en la tienda online, con imágenes, talles y precios sincronizados."
+        },
+        {
+          "icon": "💸",
+          "title": "Pagos a donantes",
+          "text": "Liquidación automática por venta y payout a donantes sin mover efectivo ni cargar transferencias manualmente."
+        }
+      ]
+    },
+    "beneficios": {
+      "metricas": [
+        { "numero": "70%", "label": "menos tiempo administrativo" },
+        { "numero": "2", "label": "pasos por carga de prenda" }
+      ],
+      "testimonio": {
+        "quote": "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock.",
+        "autor": "Dueña — Tienda de ropa usada",
+        "rol": "Rosario, Santa Fe"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "automatizacion",
+      "categoria": "facturacion-cobranzas",
+      "etiqueta": "Automatización de Procesos > Facturación y cobranzas"
+    }
+  },
+  {
+    "slug": "consultorio-psicologia",
+    "tipo": "caso-exito",
+    "label": "CASO DE ÉXITO",
+    "title": "Consultorio de psicología con alquiler de espacios de atención",
+    "category": "Automatización · Agenda",
+    "metric": "-70% tareas administrativas",
+    "excerpt": "Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada.",
+    "subtitle": "Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada.",
+    "problema": "La administración del consultorio era manual: agenda por WhatsApp, turnos cruzados, facturación a obras sociales en PDF y alquiler de consultorios por separado. Con el crecimiento se volvió inmanejable.",
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "📅",
+          "title": "Agenda online",
+          "text": "Turnos autogestionados por pacientes, recordatorios automáticos y lista de espera inteligente."
+        },
+        {
+          "icon": "🏠",
+          "title": "Alquiler de espacios",
+          "text": "Calendario de disponibilidad, reservas automáticas y reglas de precio por franja horaria."
+        },
+        {
+          "icon": "📄",
+          "title": "Obras sociales",
+          "text": "Presentación centralizada de prestaciones, seguimiento de autorizaciones y facturación unificada."
+        }
+      ]
+    },
+    "beneficios": {
+      "metricas": [
+        { "numero": "70%", "label": "menos carga administrativa" },
+        { "numero": "0", "label": "turnos cruzados" }
+      ],
+      "testimonio": {
+        "quote": "El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender.",
+        "autor": "Directora — Consultorio de psicología",
+        "rol": "Rosario, Santa Fe"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "software-a-medida",
+      "categoria": "sistemas-gestion",
+      "etiqueta": "Software a Medida > Sistemas de gestión"
+    }
+  },
+  {
+    "slug": "ferreteria-gas-plomeria",
+    "tipo": "caso-exito",
+    "label": "CASO DE ÉXITO",
+    "title": "Ferretería familiar sin tiempo para la tienda online",
+    "category": "E-commerce · PyME",
+    "metric": "Tienda online sin fricción",
+    "excerpt": "Un negocio de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas cargando stock ni configurando pagos.",
+    "subtitle": "Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas.",
+    "problema": "El dueño no tenía tiempo ni conocimientos para armar una tienda. Quería un canal de venta simple, con pasarelas integradas y sin mantenimiento diario.",
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🛒",
+          "title": "Tienda online simple",
+          "text": "Catálogo por categorías, carrito y checkout listo para usar."
+        },
+        {
+          "icon": "💳",
+          "title": "Pagos y envíos",
+          "text": "Mercado Pago y correo integrados. Sin comisiones ocultas."
+        },
+        {
+          "icon": "📦",
+          "title": "Stock bajo control",
+          "text": "Actualización automática y alertas de mínimo stock."
+        }
+      ]
+    },
+    "beneficios": {
+      "metricas": [
+        { "numero": "+35%", "label": "ventas online - 3 meses" },
+        { "numero": "0", "label": "configuración diaria" }
+      ],
+      "testimonio": {
+        "quote": "Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes.",
+        "autor": "Dueño — Ferretería de gas y plomería",
+        "rol": "Rosario, Santa Fe"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "presencia-online",
+      "categoria": "tienda-online",
+      "etiqueta": "Presencia Online > Tienda online"
+    }
+  }
+]
