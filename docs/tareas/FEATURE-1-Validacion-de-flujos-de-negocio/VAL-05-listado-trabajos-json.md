@@ -73,8 +73,8 @@ DONE — HTML renombrado, tabla cargada por fetch del JSON (fuente única),
 test con mock fetch 9/9 OK + E2E Chromium (verificado vía HTTP).
 
 ## Notas
-- `flujo-operativo-servicio.html` sigue con el objeto `TRABAJOS` embebido
-  (referencia el mismo JSON como fuente documentada). Si se quiere, puede
-  migrarse al mismo patrón fetch — pendiente de decisión.
+- `flujo-operativo-trabajo.html` (el simulador) también se migró al patrón
+  fetch: carga el selector y la tabla desde `listado-trabajos.json` y los
+  pasos del flujo desde `trabajo_<id>.json` (ver VAL-03 y VAL-06).
 - La ruta `../../../src/data/trabajos/listado-trabajos.json` es relativa al
   HTML dentro de `docs/tareas/FEATURE-1-.../`; requiere servir el repo por HTTP.

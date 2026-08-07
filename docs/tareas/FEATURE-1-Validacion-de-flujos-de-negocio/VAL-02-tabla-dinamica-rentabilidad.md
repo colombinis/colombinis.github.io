@@ -1,13 +1,13 @@
-# VAL-02 — Tabla dinámica de rentabilidad en flujo-operativo-servicio.html
+# VAL-02 — Tabla dinámica de rentabilidad en flujo-operativo-trabajo.html
 
 ## Contexto
 El dueño quiere validar la rentabilidad de TODOS los trabajos en una tabla
 dinámica (agregar/quitar filas), no solo de un servicio aislado. El
-`flujo-operativo-servicio.html` actual solo calcula rentabilidad de UN
+`flujo-operativo-trabajo.html` actual solo calcula rentabilidad de UN
 servicio (configuración arriba + pasos del flujo).
 
 ## Spec (SDD — WHAT)
-- En `flujo-operativo-servicio.html`, agregar la tabla **"Precios y horas
+- En `flujo-operativo-trabajo.html`, agregar la tabla **"Precios y horas
   por servicio"** (estilo de la que ya existe en `listado-trabajos.html`)
 - Columnas por fila:
   | Solución/Trabajo | Precio min (ARS k) | Precio max (ARS k) | Horas min | Horas max | Costo fijo (ARS) | Costo min @ARS/h | Costo max @ARS/h | Margen min % | Margen max % | Estado |
@@ -50,7 +50,8 @@ Scenario: Cálculo con costo fijo
 ## Plan (SDD — HOW)
 1. Agregar sección `<section class="card">` con tabla de trabajos
 2. Botones: `+ Agregar trabajo`, `Restaurar listado`, `Limpiar todo`
-3. JS: función `renderTrabajos()` que recorre el array `TRABAJOS` (objeto JS embebido, ver VAL-03)
+3. JS: función `renderTrabajos()` que recorre `trabajos` (cargado desde
+   `listado-trabajos.json` vía fetch, ver VAL-03)
 4. Event listeners para editar inputs en vivo (re-render)
 5. Botón delete por fila + botón add (nueva fila con defaults)
 6. Estado de rentabilidad por fila (tag OK / NO RENTABLE)
@@ -59,7 +60,7 @@ Scenario: Cálculo con costo fijo
 ```bash
 #!/bin/bash
 # VAL-02 — tabla dinámica de rentabilidad
-F="docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-servicio.html"
+F="docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-trabajo.html"
 echo "🧪 VAL-02 — Tabla dinámica rentabilidad"
 grep -q "Precios y horas por servicio" "$F" && echo "  ✅ tabla precios/horas presente"
 grep -q "btn-add-trabajo" "$F" && echo "  ✅ botón agregar trabajo"
@@ -70,9 +71,12 @@ echo "✅ VAL-02 — COMPLETA"
 ```
 
 ## Estado
-DONE — tabla implementada y testeada (test-flujo-operativo.cjs 16/16 + E2E Chromium 12/12)
+DONE — tabla implementada y testeada (test-flujo-operativo-trabajo.cjs 19/19 + E2E Chromium 14/14)
 
 ## Notas
-- Bug detectado en E2E: `[...TRABAJOS]` es shallow copy → editar una fila mutaba el array base y "Restaurar" no volvía al valor original. Fix: `TRABAJOS.map(t => ({...t}))` en init y en reset (deep copy por objeto).
+- Bug detectado en E2E: la copia shallow (`[...trabajos]`) mutaba el array
+  base al editar una fila → "Restaurar listado" no volvía al valor original.
+  Fix: `trabajosOriginales` con deep copy por objeto (`map(t => ({...t, categorias:[...t.categorias]}))`)
+  en init y en reset.
 - Reutiliza el estilo visual existente (CSS del HTML)
 - La tarifa ARS/h viene de la configuración superior (srv-usd × srv-fx)

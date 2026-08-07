@@ -76,15 +76,21 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </head>
 <body>
 
-<h1>Simulador de Flujo Operativo</h1>
-<p class="sub">SACsi.com.ar — Definí los pasos de cada servicio, editá horas, validá rentabilidad. Datos iniciales en JSON hardcoded.</p>
+<h1>Flujo operativo por trabajo</h1>
+<p class="sub">SACsi.com.ar — Seleccioná un trabajo, se cargan sus pasos desde <code>src/data/trabajos/trabajo_&lt;id&gt;.json</code>. Editá horas, validá rentabilidad.</p>
 
-<!-- 1. Configuración del servicio -->
+<!-- 1. Configuración del trabajo -->
 <section class="card">
-<h2>Configuración del servicio <span class="id">editable</span></h2>
+<h2>Configuración del trabajo <span class="id">selector + editable</span></h2>
 <div class="var-row">
+  <label style="flex:2 1 260px;min-width:220px;">
+    <span class="var-label">Trabajo (cargado de listado-trabajos.json)</span>
+    <select class="var-input" id="trabajo-select" style="max-width:280px;">
+      <option value="">Cargando trabajos…</option>
+    </select>
+  </label>
   <label>
-    <span class="var-label">Nombre del servicio</span>
+    <span class="var-label">Nombre del trabajo</span>
     <input type="text" class="var-input" id="srv-nombre" value="Landing page" placeholder="Ej: Landing page, Sitio pro, Automatización básico">
   </label>
   <label>
@@ -111,7 +117,7 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 <h2>Pasos del flujo <span class="id">agregar/eliminar/editar</span></h2>
 <div class="btn-group">
   <button class="btn" id="btn-add-step">+ Agregar paso</button>
-  <button class="btn btn-secondary" id="btn-reset">Restaurar ejemplo Landing</button>
+  <button class="btn btn-secondary" id="btn-reset">Restaurar flujo del trabajo</button>
   <button class="btn btn-danger" id="btn-clear">Limpiar todo</button>
 </div>
 
@@ -227,53 +233,30 @@ footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(
 </section>
 
 <footer>
-Simulador SACsi — Flujo operativo por servicio + tabla de rentabilidad por trabajo (agregar/eliminar/editar). Datos iniciales: ejemplo Landing page (29.5h). Listado de trabajos embebido desde src/data/trabajos/listado-trabajos.json. Tarifa real: USD 20/h = ARS 22.000/h (a 1.100). Sin dependencias externas.
+Simulador SACsi — Flujo operativo por trabajo + tabla de rentabilidad. El selector carga los trabajos de src/data/trabajos/listado-trabajos.json y los pasos de src/data/trabajos/trabajo_<id>.json (fuente de verdad). Tarifa real: USD 20/h = ARS 22.000/h (a 1.100). Sin dependencias externas.
 </footer>
 
 <script>
-// ===== DATOS INICIALES HARDCODED (JSON) =====
-const FLUJO_INICIAL = [
-  {orden:1, paso:"Briefing y relevamiento", entradas:"Contacto inicial del cliente", salidas:"Documento de brief (objetivo, público, oferta)", descripcion:"Reunión o cuestionario para entender qué quiere vender la landing y qué acción busca del visitante", horas:1.5},
-  {orden:2, paso:"Cotización y aprobación", entradas:"Brief", salidas:"Propuesta aprobada / seña cobrada", descripcion:"Se arma el alcance y precio en base al brief, y se espera confirmación del cliente", horas:1},
-  {orden:3, paso:"Recopilación de contenido", entradas:"Brief aprobado", salidas:"Textos, imágenes, logo, referencias organizadas", descripcion:"Se pide y ordena el material que el cliente puede aportar; si no tiene, se define qué se va a redactar/generar", horas:2},
-  {orden:4, paso:"Wireframe y estructura", entradas:"Brief + contenido", salidas:"Boceto de secciones y jerarquía", descripcion:"Se define el orden de bloques (hero, beneficios, testimonios, CTA) sin diseño visual todavía", horas:2},
-  {orden:5, paso:"Diseño UI (mockup)", entradas:"Wireframe + referencias visuales", salidas:"Mockup de alta fidelidad", descripcion:"Se aplican colores, tipografía e imágenes reales sobre la estructura definida", horas:6},
-  {orden:6, paso:"Revisión de diseño", entradas:"Mockup", salidas:"Diseño aprobado (o ronda de cambios)", descripcion:"El cliente da feedback; suele incluir al menos una vuelta de ajustes", horas:1.5},
-  {orden:7, paso:"Desarrollo y maquetación", entradas:"Diseño aprobado", salidas:"Landing funcional (no publicada)", descripcion:"Codificación o armado en plataforma (WordPress, Webflow, HTML/CSS)", horas:8},
-  {orden:8, paso:"Integración de tracking", entradas:"Landing maqueta + accesos del cliente", salidas:"Pixel de Meta/Google, formulario, WhatsApp conectados", descripcion:"Se conecta la landing con las herramientas de medición y captura de leads que va a usar la pauta", horas:2},
-  {orden:9, paso:"QA y pruebas", entradas:"Landing con integraciones", salidas:"Reporte de bugs / checklist OK", descripcion:"Se revisa responsive, velocidad, links y que el formulario/pixel disparen correctamente", horas:2},
-  {orden:10, paso:"Ajustes finales", entradas:"Reporte de QA", salidas:"Landing lista para publicar", descripcion:"Se corrigen los issues detectados", horas:1.5},
-  {orden:11, paso:"Publicación (deploy)", entradas:"Landing corregida + dominio/hosting", salidas:"Landing en vivo", descripcion:"Se sube a producción y se verifica en el dominio real", horas:1},
-  {orden:12, paso:"Entrega y capacitación", entradas:"Landing publicada", salidas:"Cliente conforme / cierre del servicio", descripcion:"Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads", horas:1},
-];
-
-// ===== LISTADO DE TRABAJOS (objeto JS embebido) =====
-// Fuente de verdad: src/data/trabajos/listado-trabajos.json
-// Si cambia el JSON, actualizar este objeto (regla doc/code consistente).
-// Unidades: precioMin/precioMax en ARS k; horasMin/horasMax en horas;
-// costoFijo en ARS (pesos).
-const TRABAJOS = [
-  {id:'landing',    nombre:'Landing page',                categorias:['presencia-online/sitio-web-institucional','presencia-online/contenido-seo-basico'], precioMin:500, precioMax:700,  horasMin:15, horasMax:20, costoFijo:0},
-  {id:'sitio-pro',  nombre:'Sitio pro',                   categorias:['presencia-online/sitio-web-institucional','presencia-online/contenido-seo-basico'], precioMin:600, precioMax:1000, horasMin:25, horasMax:35, costoFijo:0},
-  {id:'ecommerce',  nombre:'E-commerce',                  categorias:['presencia-online/tienda-online','automatizacion/stock-logistica'], precioMin:1200,precioMax:2000, horasMin:50, horasMax:70, costoFijo:0},
-  {id:'auto-basico',nombre:'Automatización básico',       categorias:['automatizacion/facturacion-cobranzas','automatizacion/reportes-dashboards'], precioMin:500, precioMax:750,  horasMin:20, horasMax:30, costoFijo:0},
-  {id:'auto-int',   nombre:'Automatización intermedio',   categorias:['automatizacion/facturacion-cobranzas','automatizacion/stock-logistica','automatizacion/reportes-dashboards','software-a-medida/integraciones'], precioMin:1100,precioMax:1600, horasMin:40, horasMax:60, costoFijo:0},
-  {id:'soft-chico', nombre:'Software chico',              categorias:['software-a-medida/sistemas-gestion'], precioMin:1500,precioMax:3000, horasMin:60, horasMax:90, costoFijo:0},
-  {id:'soft-grande',nombre:'Software grande',             categorias:['software-a-medida/sistemas-gestion','software-a-medida/integraciones','software-a-medida/apps-portales'], precioMin:3000,precioMax:6000, horasMin:100,horasMax:160, costoFijo:0},
-  {id:'hora-tec',   nombre:'Hora técnica',                categorias:['software-a-medida/sistemas-gestion','software-a-medida/integraciones'], precioMin:30,  precioMax:45,   horasMin:1,  horasMax:1,  costoFijo:0},
-  {id:'ret-basico', nombre:'Retainer básico /mes',        categorias:['presencia-online/sitio-web-institucional','automatizacion/reportes-dashboards'], precioMin:200, precioMax:400,  horasMin:5,  horasMax:5,  costoFijo:0},
-  {id:'ret-pro',    nombre:'Retainer pro /mes',           categorias:['presencia-online/sitio-web-institucional','software-a-medida/sistemas-gestion','software-a-medida/integraciones'], precioMin:500, precioMax:800,  horasMin:15, horasMax:15, costoFijo:0},
-];
+// ===== FUENTES DE DATOS (JSON) =====
+// Selector de trabajos:   src/data/trabajos/listado-trabajos.json
+// Pasos del flujo:        src/data/trabajos/trabajo_<id>.json
+// Fuente de verdad única: los JSON (no hay datos hardcodeados acá).
+// Requiere servir el repo por HTTP (python3 -m http.server) — no file://.
+const LISTADO_URL = '../../../src/data/trabajos/listado-trabajos.json';
+const trabajoUrl = (id) => `../../../src/data/trabajos/trabajo_${id}.json`;
 
 // ===== ESTADO =====
-let pasos = [...FLUJO_INICIAL];
-// Copia PROFUNDA por objeto: editar la tabla NO debe mutar TRABAJOS original
-// (el array base es la "fuente" para Restaurar listado)
-let trabajos = TRABAJOS.map(t => ({ ...t, categorias: [...t.categorias] }));
+let pasos = [];                    // pasos del trabajo seleccionado (editable)
+let pasosOriginales = [];          // copia para "Restaurar flujo del trabajo"
+let trabajos = [];                 // listado completo (tabla de rentabilidad)
+let trabajosOriginales = [];       // copia para "Restaurar listado"
+let trabajoActual = null;          // trabajo seleccionado {id, nombre, ...}
 let nuevoIdCounter = 1;
+let cargandoTrabajo = null;        // guard contra cargas concurrentes
 
 // ===== ELEMENTOS DOM =====
 const els = {
+  trabajoSelect: document.getElementById('trabajo-select'),
   srvNombre: document.getElementById('srv-nombre'),
   srvPrecio: document.getElementById('srv-precio'),
   srvUsd: document.getElementById('srv-usd'),
@@ -417,6 +400,60 @@ function renderTrabajos(arsPorHora) {
   });
 }
 
+// ===== CARGA DESDE JSON =====
+async function cargarListado() {
+  try {
+    const res = await fetch(LISTADO_URL);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    trabajos = (data.trabajos || []).map(t => ({ ...t, categorias: [...(t.categorias || [])] }));
+    trabajosOriginales = trabajos.map(t => ({ ...t, categorias: [...t.categorias] }));
+
+    // Llenar el selector
+    const opts = ['<option value="">— Seleccionar trabajo —</option>'];
+    trabajos.forEach(t => {
+      opts.push(`<option value="${t.id}">${t.nombre}</option>`);
+    });
+    els.trabajoSelect.innerHTML = opts.join('');
+
+    // Cargar el primero por defecto
+    if (trabajos.length > 0) {
+      await cargarTrabajo(trabajos[0].id);
+    }
+  } catch (e) {
+    els.trabajoSelect.innerHTML = '<option value="">⚠️ No se pudo cargar listado-trabajos.json</option>';
+    els.stepsBody.innerHTML = `<tr class="empty-row"><td colspan="7">⚠️ No se pudo cargar <code>src/data/trabajos/listado-trabajos.json</code> (${e.message}). Serví el repo por HTTP (ej: <code>python3 -m http.server</code>) — no funciona con file://.</td></tr>`;
+  }
+}
+
+async function cargarTrabajo(id) {
+  if (!id) return;
+  cargandoTrabajo = id;
+  try {
+    const res = await fetch(trabajoUrl(id));
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (cargandoTrabajo !== id) return; // cambió el selector mientras cargaba
+
+    pasos = (data.flujo || []).map(p => ({ ...p }));
+    pasosOriginales = pasos.map(p => ({ ...p }));
+    trabajoActual = trabajos.find(t => t.id === id) || { id, nombre: data.nombre || id };
+
+    // Configurar inputs con los valores del trabajo (si existen)
+    if (data.nombre) els.srvNombre.value = data.nombre;
+    if (data.precioMin) els.srvPrecio.value = data.precioMin;
+    els.trabajoSelect.value = id;
+
+    renderTable();
+    recalcAll();
+  } catch (e) {
+    if (cargandoTrabajo !== id) return;
+    els.stepsBody.innerHTML = `<tr class="empty-row"><td colspan="7">⚠️ No se pudo cargar <code>trabajo_${id}.json</code> (${e.message}).</td></tr>`;
+  } finally {
+    if (cargandoTrabajo === id) cargandoTrabajo = null;
+  }
+}
+
 // ===== RECALCULO TOTAL =====
 function recalcAll() {
   // Tarifa ARS/h
@@ -477,9 +514,12 @@ els.btnAdd.addEventListener('click', () => {
 });
 
 els.btnReset.addEventListener('click', () => {
-  pasos = [...FLUJO_INICIAL];
-  els.srvNombre.value = 'Landing page';
-  els.srvPrecio.value = '500';
+  // Restaurar los pasos originales del trabajo seleccionado (desde su JSON)
+  pasos = pasosOriginales.map(p => ({ ...p }));
+  if (trabajoActual) {
+    els.srvNombre.value = trabajoActual.nombre || '';
+    els.srvPrecio.value = trabajoActual.precioMin || '';
+  }
   els.srvUsd.value = '20';
   els.srvFx.value = '1100';
   renderTable();
@@ -494,7 +534,12 @@ els.btnClear.addEventListener('click', () => {
   }
 });
 
-// Configuración del servicio
+// Selector de trabajo → carga el flujo del JSON específico
+els.trabajoSelect.addEventListener('change', () => {
+  cargarTrabajo(els.trabajoSelect.value);
+});
+
+// Configuración del trabajo
 [els.srvNombre, els.srvPrecio, els.srvUsd, els.srvFx].forEach(inp => {
   inp.addEventListener('input', recalcAll);
 });
@@ -516,7 +561,7 @@ els.btnAddTrabajo.addEventListener('click', () => {
 });
 
 els.btnResetTrabajos.addEventListener('click', () => {
-  trabajos = TRABAJOS.map(t => ({ ...t, categorias: [...t.categorias] }));
+  trabajos = trabajosOriginales.map(t => ({ ...t, categorias: [...t.categorias] }));
   recalcAll();
 });
 
@@ -527,9 +572,10 @@ els.btnClearTrabajos.addEventListener('click', () => {
   }
 });
 
-// Inicial
+// Inicial: render vacío + carga async del listado y primer trabajo
 renderTable();
 recalcAll();
+cargarListado();
 </script>
 </body>
 </html>
