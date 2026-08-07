@@ -1,4 +1,4 @@
-import { casos } from '../data/casos.js'
+import casos from '../data/casos-exito.json'
 
 // Endpoint estático: en el build se genera /casos.json
 // El carrusel de la home lo consume con fetch() (render asíncrono en cliente).
