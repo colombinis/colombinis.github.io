@@ -109,7 +109,7 @@ echo "✅ AUD-14 — COMPLETA"
 ```
 
 ## Estado
-TODO
+BLOCKED — ver nota en el archivo
 
 ## Notas
 - Crítico para Core Web Vitals en mobile (LCP, TBT)

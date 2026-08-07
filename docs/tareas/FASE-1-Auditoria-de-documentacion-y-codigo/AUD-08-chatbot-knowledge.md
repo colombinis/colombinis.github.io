@@ -109,7 +109,7 @@ echo "✅ AUD-08 — COMPLETA"
 ```
 
 ## Estado
-TODO
+BLOCKED — ver nota en el archivo
 
 ## Notas
 - El knowledge.json actual es solo 7 entradas de FAQ genéricas
