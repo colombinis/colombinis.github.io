@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
-  SACsi Logo — Versión Rebranding 2026
+  SACsi Logo — Versión Rebranding 2026 (colores originales preservados)
   ======================================
-  Paleta: Navy profundo (#1A1A2E) + Azul eléctrico (#0A7CFF)
+  Paleta: Azul original #00A1F1 (izquierda) + Naranja original #F16529 (derecha)
   Estilo: minimalista, flat, tipografía del sistema
-  Layout: "SAC" sobre navy, "si" sobre azul eléctrico — unificado en una sola base
+  Layout: "SAC" sobre azul (#00A1F1), "si" sobre naranja (#F16529)
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="280" height="100" viewBox="0 0 280 100">
-  <desc>Logo SACsi: "SAC" texto sobre fondo navy (#1A1A2E), "si" sobre azul eléctrico (#0A7CFF). Diseño plano, tipografía bold sans-serif.</desc>
+  <desc>Logo SACsi: "SAC" texto sobre fondo azul (#00A1F1), "si" sobre fondo naranja (#F16529). Diseño plano, tipografía bold sans-serif.</desc>
 
-  <!-- Navy background (left half) -->
-  <rect x="0" y="0" width="140" height="100" fill="#1A1A2E"/>
+  <!-- Azul background (left half) -->
+  <rect x="0" y="0" width="140" height="100" fill="#00A1F1"/>
 
-  <!-- Electricity blue background (right half) -->
-  <rect x="140" y="0" width="140" height="100" fill="#0A7CFF"/>
+  <!-- Naranja background (right half) -->
+  <rect x="140" y="0" width="140" height="100" fill="#F16529"/>
 
-  <!-- Texto "SAC" sobre navy -->
+  <!-- Texto "SAC" sobre azul -->
   <text x="70" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="-1">SAC</text>
 
-  <!-- Texto "si" sobre azul eléctrico -->
+  <!-- Texto "si" sobre naranja -->
   <text x="210" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="46" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="-1">si</text>
 </svg>
