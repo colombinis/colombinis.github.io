@@ -116,7 +116,6 @@
           {
             "label": "Automatización de Procesos",
             "href": "/servicios/automatizacion/",
-            "icon": "🤖",
             "submenu": [
               { "label": "Facturación y cobranzas", "href": "/servicios/automatizacion/facturacion-cobranzas/" },
               { "label": "Stock y logística", "href": "/servicios/automatizacion/stock-logistica/" },
@@ -126,7 +125,6 @@
           {
             "label": "Software a Medida",
             "href": "/servicios/software-a-medida/",
-            "icon": "💻",
             "submenu": [
               { "label": "Sistemas de gestión", "href": "/servicios/software-a-medida/sistemas-gestion/" },
               { "label": "Integraciones", "href": "/servicios/software-a-medida/integraciones/" },
@@ -136,7 +134,6 @@
           {
             "label": "Presencia Online",
             "href": "/servicios/presencia-online/",
-            "icon": "🌐",
             "submenu": [
               { "label": "Sitio web institucional", "href": "/servicios/presencia-online/sitio-web-institucional/" },
               { "label": "Tienda online", "href": "/servicios/presencia-online/tienda-online/" },
