@@ -125,6 +125,15 @@ else
   FAIL=$((FAIL + 1))
 fi
 
+# 15. No deben aparecer iconos (emoji) en los sub-menus del nav
+if grep -q '🤖\|💻\|🌐' "${DIST_DIR}/index.html" 2>/dev/null; then
+  echo "  ❌ Iconos emoji encontrados en sub-menus del nav"
+  FAIL=$((FAIL + 1))
+else
+  echo "  ✅ Sub-menus: sin iconos (emoji eliminados)"
+  PASS=$((PASS + 1))
+fi
+
 echo ""
 echo "📋 Resultado: $PASS ✅ / $FAIL ❌"
 
