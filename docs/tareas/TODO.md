@@ -8,6 +8,24 @@
 > **Fecha inicio:** 2026-08-04
 > **Wiki previa:** `docs/wiki/` fue eliminada; info viva migrada a `docs/tareas/`, historial del rebranding en `docs/tareas/HISTORIAL-REBRANDING.md`.
 
+## Sub-maestros por fase
+
+Las fases con tareas en estado distinto de `DONE` tienen su propio
+`TODO.md` en una subcarpeta `FASE-N-<nombre>/`, que agrupa las tareas
+pendientes de esa fase y sus archivos detalle. Este maestro global es la
+fuente única de verdad; los sub-maestros son vistas filtradas para
+trabajar fase por fase.
+
+| Subcarpeta | Fase | Tareas no-DONE |
+|------------|------|----------------|
+| `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/` | FASE 1 — Auditoría docs/código | AUD-08, AUD-14 (BLOCKED) |
+| `docs/tareas/FASE-4-Conversion-y-trafico/` | FASE 4 — Conversión y tráfico | CON-04 (TODO) |
+| `docs/tareas/FASE-6-Validacion-post-deploy/` | FASE 6 — Validación post-deploy | DEP-01 (BLOCKED) |
+| `docs/tareas/FASE-7-Chatbot-FAQ/` | FASE 7 — Chatbot FAQ | CHAT-01, CHAT-?? (TODO) |
+| `docs/tareas/FASE-8-Backlog/` | FASE 8 — Backlog | FUT-01 (TODO) |
+
+> Las fases 2, 3, 5 y 9 están 100% DONE → no tienen subcarpeta.
+
 ---
 
 ## Convenciones
@@ -79,13 +97,13 @@ La rama debe ser consistente: docs = código = realidad.
 | AUD-05  | Verificar build de producción limpio               | DONE   | `docs/tareas/AUD-05-build-produccion.md` |
 | AUD-06  | Hero sin CTA primario en página de inicio          | DONE   | `docs/tareas/AUD-06-hero-sin-cta.md` |
 | AUD-07  | Falta formulario de contacto funcional (solo mailto)| DONE   | `docs/tareas/AUD-07-formulario-contacto.md` |
-| AUD-08  | Chatbot: knowledge.json incompleto y sin validación | BLOCKED   | `docs/tareas/AUD-08-chatbot-knowledge.md` |
+| AUD-08  | Chatbot: knowledge.json incompleto y sin validación | BLOCKED   | `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/AUD-08-chatbot-knowledge.md` |
 | AUD-09  | CSS duplicado: ServiceCard en global.css y ServiceCard.astro | DONE   | `docs/tareas/AUD-09-css-duplicado.md` |
 | AUD-10  | Falta sitemap.xml y robots.txt no referencia sitemap-index.xml correctamente | DONE   | `docs/tareas/AUD-10-sitemap-robots.md` |
 | AUD-11  | Carrusel de casos: endpoint /casos.json no existe (404 en producción) | DONE   | `docs/tareas/AUD-11-casos-json-endpoint.md` |
 | AUD-12  | Accesibilidad: contraste, focus states, ARIA labels faltantes | DONE   | `docs/tareas/AUD-12-accesibilidad.md` |
 | AUD-13  | Meta tags incompletos: falta description única por página, og:image genérico | DONE   | `docs/tareas/AUD-13-meta-tags-seo.md` |
-| AUD-14  | Chatbot: slm-chatbot.js carga modelo 0.5B sin control de presupuesto de red | BLOCKED   | `docs/tareas/AUD-14-chatbot-network-budget.md` |
+| AUD-14  | Chatbot: slm-chatbot.js carga modelo 0.5B sin control de presupuesto de red | BLOCKED   | `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/AUD-14-chatbot-network-budget.md` |
 | AUD-15  | Footer: email de contacto no renderiza (falta en template) | DONE   | `docs/tareas/AUD-15-footer-email.md` |
 
 ---
@@ -130,7 +148,7 @@ para que el modelo de negocio sea rentable.
 | CON-01  | Definir funnel: visitas → leads → clientes         | DONE   | `docs/tareas/CON-01-funnel-basico.md` |
 | CON-02  | Estimar tasas de conversión por canal              | DONE   | `docs/tareas/CON-02-tasas-conversion.md` |
 | CON-03  | Estimar tráfico necesario para break-even          | DONE   | `docs/tareas/CON-03-trafico-breakeven.md` |
-| CON-04  | Implementar tracking: GTM/GA4 eventos clave        | TODO   | `docs/tareas/CON-04-tracking-gtm-ga4.md` |
+| CON-04  | Implementar tracking: GTM/GA4 eventos clave        | TODO   | `docs/tareas/FASE-4-Conversion-y-trafico/CON-04-tracking-gtm-ga4.md` |
 
 ---
 
@@ -160,7 +178,7 @@ tiene sentido validar un deploy cuyo contenido va a cambiar.
 
 | ID      | Título                                             | Estado | Archivo |
 |---------|----------------------------------------------------|--------|---------|
-| DEP-01  | Pendientes post-deploy → validación en producción  | BLOCKED | `docs/tareas/DEP-01-post-deploy-validacion.md` |
+| DEP-01  | Pendientes post-deploy → validación en producción  | BLOCKED | `docs/tareas/FASE-6-Validacion-post-deploy/DEP-01-post-deploy-validacion.md` |
 
 > DEP-01 es la antigua AUD-06, reubicada. Su Depends-on son TODAS las
 > fases anteriores y el merge a master.
@@ -184,7 +202,7 @@ si se implementa de inmediato o queda en backlog.
 
 | ID      | Título                                             | Estado | Archivo |
 |---------|----------------------------------------------------|--------|---------|
-| CHAT-01 | Verificar build del chatbot (script)                | TODO   | `docs/tareas/CHAT-01-verify.sh` |
+| CHAT-01 | Verificar build del chatbot (script)                | TODO   | `docs/tareas/FASE-7-Chatbot-FAQ/CHAT-01-verify.sh` |
 | CHAT-04 | Análisis: Chrome AI Prompt API vs SLM-chatbot       | DONE   | `docs/tareas/CHAT-04-analysis-chrome-ai.md` |
 | CHAT-05 | Arquitectura del chatbot (detalle técnico)          | DONE   | `docs/tareas/CHAT-05-arquitectura-chatbot.md` |
 | CHAT-?? | Decisión: implementar ahora o backlog               | TODO   | (pendiente crear — ver nota) |
@@ -227,11 +245,12 @@ dinámico: `src/pages/servicios/[servicio]/[categoria].astro` (SSG, getStaticPat
 | 7 — Chatbot FAQ (deseable) | 4 | 2 | 0 | 2 | 0 |
 | 8 — Backlog (futuro) | 1 | 1 | 0 | 0 | 0 |
 | 9 — Detalle subnivel soluciones | 1 | 0 | 0 | 1 | 0 |
-| **Total** | **40** | **4** | **0** | **32** | **3** |
+| **Total** | **40** | **4** | **0** | **33** | **3** |
 
-> **Progreso real (2026-08-06):** 32/40 DONE (80%). FASE 1 completa (13 DONE + 2 BLOCKED chatbot), FASE 2, 3 y 5 completas. FASE 9 (SOL-01) implementada y verificada — 9 páginas de detalle subnivel + cross-link a casos.
+> **Progreso real (2026-08-07):** 33/40 DONE (82%). FASE 1 completa (13 DONE + 2 BLOCKED chatbot), FASE 2, 3, 5 y 9 completas. SOL-01 verificado (9 páginas detalle subnivel + cross-link a casos, build OK).
+> **Estructura actualizada:** las fases con tareas no-DONE tienen subcarpeta propia con TODO.md + archivos detalle (ver "Sub-maestros por fase" arriba).
 > El camino crítico para DESEBLOQUEAR DEP-01 (merge a master + post-deploy) es cerrar
-> AUD-01..15 (2 BLOCKED), MAR-02..05 (completas) y CON-04. La FASE 7 (chatbot) NO bloquea el deploy:
+> AUD-01..15 (2 BLOCKED), y CON-04. La FASE 7 (chatbot) NO bloquea el deploy:
 > es la primera mejora post-deploy.
 
 ### Correcciones de drift aplicadas en esta revisión (2026-08-05)

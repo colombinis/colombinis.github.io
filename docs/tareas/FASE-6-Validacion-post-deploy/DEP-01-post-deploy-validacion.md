@@ -136,7 +136,7 @@ fi
 ```
 
 ## Estado
-TODO
+BLOCKED — ver nota en el archivo
 
 ## Notas
 Esta tarea NO se puede completar hasta que la rama esté mergeada a master

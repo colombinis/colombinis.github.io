@@ -107,7 +107,7 @@ echo "✅ SOL-01 — COMPLETA (9 detalles subnivel + cross-links)"
 ```
 
 ## Estado
-TODO — pendiente implementación (prioridad alta, antes del lanzamiento)
+DONE — 9 páginas de detalle generadas, build OK, cross-links verificados (commits a6fcc4b + 043b4d9 + 56d36fe)
 
 ## Notas
 - Las páginas `/servicios/<servicio>/` deben seguir funcionando (no breaking change)
