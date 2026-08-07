@@ -1,0 +1,299 @@
+---
+// Ruta dinámica: detalle de cada trabajo
+// URL: /trabajos/<id>/
+// Data source: src/data/trabajos/listado-trabajos.json + src/data/trabajos/trabajo_<id>.json (flujo detallado)
+import Layout from '../../layouts/Layout.astro';
+import config from '../../config/site.json';
+import trabajosData from '../../data/trabajos/listado-trabajos.json';
+import fs from 'fs';
+import path from 'path';
+
+interface Props {
+  params: { trabajo: string };
+}
+
+// Genera una ruta estática por cada trabajo
+export async function getStaticPaths() {
+  return trabajosData.trabajos.map((t) => ({
+    params: { trabajo: t.id },
+  }));
+}
+
+const trabajoId = Astro.params.trabajo;
+const trabajoSimple = trabajosData.trabajos.find((t) => t.id === trabajoId);
+
+if (!trabajoSimple) {
+  throw new Error(`No se encontró el trabajo: ${trabajoId}`);
+}
+
+// Carga el flujo detallado desde el archivo JSON correspondiente
+const trabajoDir = path.join(
+  process.cwd(),
+  'src/data/trabajos/trabajo_' + trabajoId + '.json'
+);
+let trabajoDetalle = null;
+
+if (fs.existsSync(trabajoDir)) {
+  const raw = fs.readFileSync(trabajoDir, 'utf-8');
+  trabajoDetalle = JSON.parse(raw);
+}
+
+// Mapeo de precios: convierte ARS k a formato legible
+function formatearPrecio(min, max) {
+  if (min === max) return `$${min}k ARS`;
+  return `$${min}k - $${max}k ARS`;
+}
+
+// Mapeo de horas
+function formatearHoras(min, max) {
+  if (min === max) return `${min}h`;
+  return `${min}-${max}h`;
+}
+
+// Analogía fútbol: cada fase del flujo tiene un paralel con posiciones del fútbol
+// Portero = recepción/briefing, Defensa = estructura/planificación,
+// Mediocampo = desarrollo/construcción, Delantero = entrega/resultados
+function getFutbolPosition(orden, total) {
+  const ratio = orden / total;
+  if (ratio <= 0.25) return { posicion: 'Portero', emoji: '🧤' };
+  if (ratio <= 0.5) return { posicion: 'Defensa', emoji: '🛡️' };
+  if (ratio <= 0.75) return { posicion: 'Mediocampista', emoji: '⚽' };
+  return { posicion: 'Delantero', emoji: '🎯' };
+}
+
+const flujo = trabajoDetalle?.flujo || [];
+const totalPasos = flujo.length;
+
+// Categorías
+const categoriasList = trabajoSimple.categorias;
+
+// Hero claim
+const heroClaim = `Precio: ${formatearPrecio(trabajoSimple.precioMin, trabajoSimple.precioMax)} · ${formatearHoras(trabajoSimple.horasMin, trabajoSimple.horasMax)}`;
+---
+
+<Layout title={`${trabajoSimple.nombre} — SACsi`} description={trabajoDetalle?.flujo?.[0]?.descripcion || trabajoSimple.nombre}>
+  <!-- Hero -->
+  <section class="hero hero--trabajo">
+    <div class="hero__container">
+      <p class="hero__label">TRABAJO</p>
+      <h1 class="hero__title">{trabajoSimple.nombre}</h1>
+      <p class="hero__claim">{heroClaim}</p>
+      <p class="hero__subtitle">
+        {trabajoDetalle
+          ? trabajoDetalle.flujo[0].descripcion
+          : 'Un paquete de trabajo estructurado para resolver un desafío puntual de tu negocio.'}
+      </p>
+    </div>
+  </section>
+
+  <!-- Categorías -->
+  {categoriasList.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">En qué categorías aplica</h2>
+        <div style="display: flex; flex-wrap: gap: 8px; justify-content: center;">
+          {categoriasList.map((cat) => (
+            <span style="
+              background: rgba(10, 124, 255, 0.08);
+              color: #0A7CFF;
+              border-radius: 100px;
+              padding: 6px 16px;
+              font-size: 0.8rem;
+              font-weight: 600;
+              letter-spacing: 0.06em;
+              text-transform: uppercase;
+            ">{cat}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Flujo de trabajo: analogia de fútbol -->
+  {flujo.length > 0 && (
+    <section class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">
+          Cómo se juega este trabajo <br/>
+          <span style="font-size: 1.1rem; font-weight: 500; color: var(--secondary);">
+            (analogía: cada fase es una posición en el campo)
+          </span>
+        </h2>
+
+        <div class="trabajo-flow">
+          {flujo.map((paso) => {
+            const { posicion, emoji } = getFutbolPosition(paso.orden, totalPasos);
+            return (
+              <div class="trabajo-step">
+                <div class="trabajo-step__header">
+                  <span class="trabajo-step__number">{paso.orden}</span>
+                  <div>
+                    <h3 class="trabajo-step__title">{paso.paso}</h3>
+                    <span class="trabajo-step__posicion">
+                      {emoji} {posicion}
+                    </span>
+                  </div>
+                  <span class="trabajo-step__horas">{paso.horas}h</span>
+                </div>
+                <div class="trabajo-step__body">
+                  <p class="trabajo-step__descripcion">{paso.descripcion}</p>
+                  <div class="trabajo-step__datos">
+                    <div class="trabajo-dato">
+                      <strong>Entradas:</strong> {paso.entradas}
+                    </div>
+                    <div class="trabajo-dato">
+                      <strong>Salidas:</strong> {paso.salidas}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <!-- Leyenda de posiciones -->
+        <div class="trabajo-leyenda">
+          <h3 style="margin-bottom: var(--spacing-sm);">Posiciones en el campo</h3>
+          <div class="leyenda-grid">
+            <div class="leyenda-item">
+              <span class="leyenda-emoji">🧤</span>
+              <span class="leyenda-text"><strong>Portero</strong>: la recepción del trabajo — entendemos qué necesitás</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="leyenda-emoji">🛡️</span>
+              <span class="leyenda-text"><strong>Defensa</strong>: la estructura — armamos el plan y la arquitectura</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="leyenda-emoji">⚽</span>
+              <span class="leyenda-text"><strong>Mediocampista</strong>: el desarrollo — construimos y conectamos todo</span>
+            </div>
+            <div class="leyenda-item">
+              <span class="leyenda-emoji">🎯</span>
+              <span class="leyenda-text"><strong>Delantero</strong>: la entrega — el resultado final que usás</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="text-align: center; margin-top: var(--spacing-xl);">
+          <a href="/contacto/" class="hero__cta" style="display: inline-block;">Consultar este trabajo</a>
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  .hero--trabajo {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  .hero__claim {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--tertiary);
+    margin: var(--spacing-sm) 0 var(--spacing-lg);
+  }
+
+  .trabajo-flow {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .trabajo-step {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid #E8E8E8;
+  }
+  .trabajo-step:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .trabajo-step__header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+  .trabajo-step__number {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: #FFFFFF;
+    border-radius: var(--rounded-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .trabajo-step__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 2px;
+  }
+  .trabajo-step__posicion {
+    font-size: 0.8rem;
+    color: var(--tertiary-dark);
+    font-weight: 500;
+  }
+  .trabajo-step__horas {
+    margin-left: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--tertiary);
+    flex-shrink: 0;
+  }
+  .trabajo-step__descripcion {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-sm);
+  }
+  .trabajo-step__datos {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+  }
+  .trabajo-dato {
+    color: var(--muted);
+  }
+  .trabajo-dato strong {
+    color: var(--secondary);
+  }
+
+  .trabajo-leyenda {
+    background: #F9F9FB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
+  .leyenda-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+  .leyenda-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+  .leyenda-emoji {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .leyenda-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--secondary);
+  }
+  @media (min-width: 601px) {
+    .leyenda-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

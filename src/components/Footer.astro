@@ -1,18 +1,21 @@
 ---
-// Footer consolidado con 3 columnas:
-// Col 1: Logo + texto "Soluciones Inteligentes" (LogoBrand)
-// Col 2: Links de soluciones (solo títulos y sus categorias) desde src/data/soluciones.json
+// Footer con 3 columnas:
+// Col 1: Logo + texto "Soluciones Inteligentes" + links de servicios
+// Col 2: Listado de trabajos (desde src/data/trabajos/listado-trabajos.json)
 // Col 3: Sección "¿Empezamos?" con WhatsApp + email
-// Fuentes: src/data/soluciones.json, src/config/site.json
+// Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
 import soluciones from '../data/soluciones.json';
+import trabajosData from '../data/trabajos/listado-trabajos.json';
 import config from '../config/site.json';
+
+const trabajos = trabajosData.trabajos;
 ---
 
 <style>
   #footer-container {
-    background: var(--surface);
-    border-top: 1px solid #E8E8E8;
+    background: #252628;
+    border-top: 1px solid #3a3b3f;
     padding: var(--spacing-xxl) var(--spacing-md);
   }
   footer.wrapper {
@@ -33,11 +36,11 @@ import config from '../config/site.json';
   .footer-col h3 {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--primary);
+    color: #E0E0E0;
     margin: 0 0 var(--spacing-md);
   }
 
-  /* Col 2: links de soluciones (títulos y categorías) */
+  /* ---------- Col 1: Logo + servicios ---------- */
   .footer-solutions {
     display: flex;
     flex-direction: column;
@@ -49,7 +52,7 @@ import config from '../config/site.json';
     gap: var(--spacing-xs);
   }
   .footer-solution-title {
-    color: var(--secondary);
+    color: #B0B0B0;
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 600;
@@ -67,7 +70,7 @@ import config from '../config/site.json';
     list-style: none;
   }
   .footer-solution-categories a {
-    color: var(--secondary);
+    color: #909090;
     text-decoration: none;
     font-size: 0.86rem;
     opacity: 0.9;
@@ -78,15 +81,49 @@ import config from '../config/site.json';
     opacity: 1;
   }
 
-  /* Col 3: sección "¿Empezamos?" */
+  /* ---------- Col 2: Listado de trabajos ---------- */
+  .footer-trabajos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .footer-trabajo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 4px 0;
+    border-bottom: 1px solid #3a3b3f;
+  }
+  .footer-trabajo:last-child {
+    border-bottom: none;
+  }
+  .footer-trabajo__name {
+    color: #B0B0B0;
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .footer-trabajo__name:hover {
+    color: var(--tertiary);
+  }
+  .footer-trabajo__precio {
+    color: var(--tertiary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ---------- Col 3: Sección "¿Empezamos?" ---------- */
   .footer__cta h2 {
-    color: var(--primary);
+    color: #E0E0E0;
     margin-bottom: var(--spacing-md);
   }
   .footer__cta p {
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--secondary);
+    color: #B0B0B0;
     margin: 0 0 var(--spacing-md);
   }
 
@@ -120,7 +157,7 @@ import config from '../config/site.json';
     align-items: center;
     gap: var(--spacing-xs);
     font-size: 0.93rem;
-    color: var(--secondary);
+    color: #909090;
     white-space: nowrap;
   }
   .footer__email {
@@ -134,7 +171,7 @@ import config from '../config/site.json';
 
   .footer-copy {
     font-size: 0.85rem;
-    color: var(--secondary);
+    color: #909090;
     text-align: center;
     margin: 0;
   }
@@ -165,14 +202,9 @@ import config from '../config/site.json';
 <div id="footer-container">
   <footer class="wrapper">
     <div class="footer-grid">
-      <!-- Col 1: Logo + texto -->
+      <!-- Col 1: Logo + servicios -->
       <div class="footer-col">
         <LogoBrand tagline="Soluciones Inteligentes" />
-      </div>
-
-      <!-- Col 2: Links de soluciones (títulos y categorías) -->
-      <div class="footer-col">
-        <h3>Soluciones</h3>
         <div class="footer-solutions">
           {soluciones.servicios.map((sol) => (
             <div class="footer-solution-group">
@@ -184,6 +216,22 @@ import config from '../config/site.json';
                   ))}
                 </ul>
               )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Col 2: Listado de trabajos -->
+      <div class="footer-col">
+        <h3>Trabajos</h3>
+        <div class="footer-trabajos">
+          {trabajos.map((trabajo) => (
+            <div class="footer-trabajo">
+              <a
+                class="footer-trabajo__name"
+                href={`/trabajos/${trabajo.id}/`}
+              >{trabajo.nombre}</a>
+              <span class="footer-trabajo__precio">${trabajo.precioMin}k - ${trabajo.precioMax}k</span>
             </div>
           ))}
         </div>
