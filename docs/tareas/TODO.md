@@ -23,6 +23,7 @@ trabajar fase por fase.
 | `docs/tareas/FASE-6-Validacion-post-deploy/` | FASE 6 — Validación post-deploy | DEP-01 (BLOCKED) |
 | `docs/tareas/FASE-7-Chatbot-FAQ/` | FASE 7 — Chatbot FAQ | CHAT-01, CHAT-?? (TODO) |
 | `docs/tareas/FASE-8-Backlog/` | FASE 8 — Backlog | FUT-01 (TODO) |
+| `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/` | FEATURE 1 — Validación flujos de negocio | 5 tareas DONE (VAL-01..05) |
 
 > Las fases 2, 3, 5 y 9 están 100% DONE → no tienen subcarpeta.
 
