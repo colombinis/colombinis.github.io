@@ -107,8 +107,14 @@ fi
 ```
 
 ## Estado
-TODO
+DONE
 
 ## Notas
-Puedo ejecutar el build en el sandbox ahora mismo (Node 20 disponible).
-El usuario debe re-ejecutar en su host antes del merge real a master.
+Verificación ejecutada (Node 22.20.0, npm 10.9.3):
+- `npm run build` → exit 0, sin errores ni warnings.
+- 16 páginas generadas (incluye `/casos-exito/*` 8, `/servicios/*` 4,
+  `contacto`, `sobre-nosotros`, `index`, `chatbot-test`).
+- `dist/casos.json` presente; `sitemap-0.xml` + `sitemap-index.xml`
+  generados por @astrojs/sitemap; `dist/CNAME` presente.
+- El usuario debe re-ejecutar el build en su host antes del merge real a
+  master (el script de verificación lo hace).

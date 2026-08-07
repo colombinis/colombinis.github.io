@@ -63,8 +63,13 @@ echo "✅ AUD-02 — COMPLETA"
 ```
 
 ## Estado
-TODO
+DONE
 
 ## Notas
 AGENTS.md es el archivo que guía a agentes AI (Claude, Codex, etc.) que
 trabajen en el repo. Debe ser lo más preciso posible.
+
+El fix ya estaba aplicado en AGENTS.md (tabla F0-F5 ✅, notas post-deploy
+apuntando a `docs/tareas/DEP-01`). Se ejecutó el verification script:
+sin 🔄/⬜, sin "GTM placeholder" → tarea completa sin cambios adicionales.
+

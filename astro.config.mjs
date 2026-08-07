@@ -4,7 +4,11 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://sacsi.com.ar',
   base: '/',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/chatbot-test/'),
+    }),
+  ],
   server: {
     port: 8000,
     host: true,

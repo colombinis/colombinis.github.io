@@ -70,7 +70,7 @@ asume clientes que no existieron.
   "¿Querés un proyecto así?")
 - Mantener testimonios ficticios pero marcarlos como "Testimonio tipo"
   o eliminarlos (preferible eliminar si el caso no existió)
-- Actualizar `src/data/casos.js` `category` para WP:
+- Actualizar `src/data/casos-exito.json` `category` para WP:
   agregar prefijo "WordPress · " si no lo tiene
 
 ### H-MAR-03: Falta CTA para reclutadores
@@ -161,7 +161,7 @@ DONE — decisiones del usuario tomadas el 2026-08-04 (ver sección 6)
 | Hallazgo | Decisión del usuario | Implementación |
 |----------|----------------------|-----------------|
 | H-MAR-01 | **Mantener "Somos un equipo".** Hoy está solo pero siempre trabaja con colegas o subcontrata en picos de trabajo. La intención de "equipo" es real y proyecta como crecerá SACsi. | No tocar `sobre-nosotros.astro` por esta razón. |
-| H-MAR-02 | **Marcar los 5 casos WP como "Proyectos tipo"** + dejar los testimonios ficticios marcados como "Testimonio tipo". | Tarea MAR-03 — implementar en 5 archivos .astro + casos.js |
+| H-MAR-02 | **Marcar los 5 casos WP como "Proyectos tipo"** + dejar los testimonios ficticios marcados como "Testimonio tipo". | Tarea MAR-03 — implementar en 5 archivos .astro + casos-exito.json |
 | H-MAR-03 | **No agregar bloque de links personales** (GitHub/LinkedIn) en este ciclo. | No implementar. La narrativa "equipo" + casos WP sirve de puente a portfolio sin explicitar CTA reclutadores todavía. |
 | H-MAR-04 | **No agregar servicio IA** en este ciclo. Documentar el gap. | Tarea MAR-04 — actualizar CONTENIDO.md con status claro |
 | H-MAR-05 | **Unificar 4-pasos "Cómo trabajamos"** a "Descubrimiento/Diagnóstico/Prototipo/Producción" en about también. | Tarea MAR-05 — reescribir sección pasos en sobre-nosotros.astro |
