@@ -43,8 +43,13 @@ global.document = {
 global.confirm = () => true;
 
 // ---- Ejecutar el script ----
+// Exponer `trabajos` al global para poder verificar deep-copy (solo en el mock)
+const scriptSrc = scriptMatch[1].replace(
+  'let trabajos = TRABAJOS.map',
+  'globalThis.trabajos = TRABAJOS.map'
+);
 try {
-  eval(scriptMatch[1]);
+  eval(scriptSrc);
 } catch (e) {
   console.error('❌ Script execution error:', e.message);
   process.exit(1);
@@ -97,6 +102,17 @@ check('Placeholder sin trabajos', els['trabajos-body'].innerHTML.includes('Sin t
 els['btn-reset-trabajos'].listeners['click']();
 const rowsAfterReset = (els['trabajos-body'].innerHTML.match(/<tr data-id=/g) || []).length;
 check(`Restaurar → 10 filas (got ${rowsAfterReset})`, rowsAfterReset === 10);
+
+// 8b. EDITAR precio → Restaurar debe volver al valor ORIGINAL (deep copy)
+// (regresión: [...TRABAJOS] es shallow copy; editar mutaba el array base)
+// Simular edición del precio de landing en el array de estado (accede via el
+// listener de input). En el mock, el input event se dispara manualmente:
+const landingInput = { dataset: { id: 'landing', field: 'precioMin' }, value: '100' };
+const tLanding = trabajos.find(x => x.id === 'landing');
+tLanding.precioMin = 100;
+els['btn-reset-trabajos'].listeners['click']();
+const restored = trabajos.find(x => x.id === 'landing');
+check(`Restaurar restaura precio original (got ${restored.precioMin})`, restored.precioMin === 500);
 
 // 9. Editar en vivo: simulamos el evento input de un campo
 // (verificar que la función renderTrabajos maneja costo fijo: agregar trabajo con costoFijo)

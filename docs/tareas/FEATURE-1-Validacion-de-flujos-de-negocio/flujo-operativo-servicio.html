@@ -267,7 +267,9 @@ const TRABAJOS = [
 
 // ===== ESTADO =====
 let pasos = [...FLUJO_INICIAL];
-let trabajos = [...TRABAJOS];
+// Copia PROFUNDA por objeto: editar la tabla NO debe mutar TRABAJOS original
+// (el array base es la "fuente" para Restaurar listado)
+let trabajos = TRABAJOS.map(t => ({ ...t, categorias: [...t.categorias] }));
 let nuevoIdCounter = 1;
 
 // ===== ELEMENTOS DOM =====
@@ -514,7 +516,7 @@ els.btnAddTrabajo.addEventListener('click', () => {
 });
 
 els.btnResetTrabajos.addEventListener('click', () => {
-  trabajos = [...TRABAJOS];
+  trabajos = TRABAJOS.map(t => ({ ...t, categorias: [...t.categorias] }));
   recalcAll();
 });
 
