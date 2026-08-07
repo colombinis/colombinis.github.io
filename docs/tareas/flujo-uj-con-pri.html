@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flujo UJ → CON → PRI — SACsi (Interactivo)</title>
+<style>
+:root{--bg:#0b0d12;--fg:#e8e8e8;--accent:#c2a87e;--card:#13141b;--muted:#9a9a9a;--red:#d15b5b;--green:#6ba75b;--amber:#c29848;--input:#1a1a2a;--border:#2a2a36;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--fg);line-height:1.35;padding:2rem 1.25rem;max-width:980px;margin:0 auto;}
+h1{font-size:1.6rem;color:var(--accent);margin-bottom:.15rem;letter-spacing:.02em;}
+.sub{color:var(--muted);font-size:.82rem;margin-bottom:1.5rem;}
+section{margin-bottom:1.6rem;}
+.card{background:var(--card);border:1px solid #23232e;border-radius:14px;padding:1.15rem 1.15rem 1rem;}
+.card h2{font-size:1.05rem;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;}
+.card h2 .id{font-size:.7rem;background:#1a1a2a;padding:.12rem .45rem;border-radius:6px;color:var(--muted);}
+
+/* Inputs */
+.var-input{background:var(--input);border:1px solid var(--border);border-radius:8px;padding:.4rem .6rem;color:var(--fg);font-size:.82rem;font-family:inherit;width:100%;max-width:140px;transition:border-color .15s;}
+.var-input:focus{outline:none;border-color:var(--accent);}
+.var-input-sm{background:var(--input);border:1px solid var(--border);border-radius:6px;padding:.25rem .4rem;color:var(--fg);font-size:.78rem;font-family:inherit;width:70px;text-align:right;}
+.var-input-sm:focus{outline:none;border-color:var(--accent);}
+.var-label{display:block;font-size:.7rem;color:var(--muted);margin-bottom:.15rem;}
+.var-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-end;}
+.var-row label{flex:1 1 140px;min-width:120px;}
+
+/* Tablas */
+table{width:100%;border-collapse:collapse;font-size:.82rem;}
+th{text-align:left;color:var(--muted);font-weight:500;padding:.35rem .35rem .35rem 0;border-bottom:1px solid #262636;}
+td{padding:.35rem .35rem .35rem 0;border-bottom:1px solid #1a1a26;vertical-align:top;}
+tr:hover td{background:#161620;}
+.tnum{text-align:right;white-space:nowrap;}
+.result-ok{color:var(--green);font-weight:600;}
+.result-warn{color:var(--amber);font-weight:600;}
+.result-bad{color:var(--red);font-weight:600;}
+
+/* Estados */
+.tag{display:inline-block;padding:.08rem .35rem;border-radius:6px;font-size:.7rem;font-weight:600;margin-left:.35rem;}
+.ok{background:#1b3a1b;color:#8fd68f;}.warn{background:#3a2a0f;color:#e8c070;}.bad{background:#3a1616;color:#e07a7a;}
+
+/* Colapsables - OCULTOS POR DEFECTO */
+.details{margin-top:.6rem;}
+.details summary{cursor:pointer;color:var(--accent);font-size:.82rem;display:inline-block;padding:.15rem .35rem;background:#16161e;border-radius:8px;border:1px solid #25253a;}
+.details summary::-webkit-details-marker{display:none;}
+.details summary::before{content:'▶ ';font-size:.7rem;transition:transform .15s;}
+.details[open] summary::before{transform:rotate(90deg);}
+.details[open] summary{border-radius:8px 8px 0 0;border-bottom:1px solid #25253a;}
+.details-body{background:#0e0e14;border:1px solid #25253a;border-top:0;border-radius:0 0 8px 8px;padding:.8rem .9rem;font-size:.78rem;color:#c5c5c8;line-height:1.45;}
+.details-body ul{padding-left:1.1rem;}
+.details-body li{margin-bottom:.2rem;}
+
+/* Pasos */
+.steps{margin-top:.8rem;}
+.steps .step{border-left:2px solid #23233a;padding-left:.7rem;margin:.35rem 0;}
+.steps .step-title{font-weight:600;color:#ccc;font-size:.82rem;margin-bottom:.1rem;}
+.steps .step-body{font-size:.78rem;color:var(--muted);}
+
+/* Colores servicios */
+.p{color:#8fb8e0;}.a{color:#d0a878;}.s{color:#8bd68b;}
+
+h3{font-size:.95rem;color:#ccc;margin:1rem 0 .35rem;}
+.note{font-size:.75rem;color:var(--muted);margin-top:.4rem;}
+footer{margin-top:2rem;padding-top:.8rem;border-top:1px solid #23232e;color:var(--muted);font-size:.75rem;}
+
+/* Grid */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.7rem;margin-top:.6rem;}
+</style>
+</head>
+<body>
+
+<h1>Flujo UJ → CON → PRI</h1>
+<p class="sub">SACsi.com.ar — Interactivo: cambiá las variables arriba y todos los cálculos se actualizan en vivo.</p>
+
+<!-- 1. Analogía -->
+<section class="card">
+<h2>Analogía <span class="id">UJ · CON · PRI</span></h2>
+<div style="background:linear-gradient(180deg,#12121a,#0f0f18);border-left:3px solid var(--accent);padding:1rem 1.15rem;border-radius:0 12px 12px 0;">
+<p><strong>Es como planear un viaje en auto.</strong></p>
+<p><strong>UJ (User Journey)</strong> = el mapa y las paradas: quién viaja (personas), qué ruta toma (homepage → servicio → contacto), qué señales ve (CTAs). Sin mapa no sabés si llegás.</p>
+<p><strong>CON (Conversión y tráfico)</strong> = contar autos en la ruta: cuántos entran (visitas TOFU), cuántos paran a preguntar (leads MOFU), cuántos compran pasaje (clientes BOFU). También calculás cuánto combustible necesitás para llegar al destino (breakeven).</p>
+<p><strong>PRI (Modelo de precios)</strong> = cuánto cuesta cada servicio de transporte: cuántas horas consume cada tipo de auto (horas estimadas × tarifa $22k/h), cuál es el precio del pasaje, y si ganás o perdés con cada ruta.</p>
+<p style="margin-top:.35rem;color:var(--accent);font-size:.8rem;">Regla: UJ define el destino → CON mide el tráfico → PRI calcula la rentabilidad. Si cambian las horas o precios en PRI, los cálculos de CON se recalculan solos.</p>
+</div>
+</section>
+
+<!-- 2. Variables editables (reactivas) -->
+<section class="card">
+<h2>Variables asumidas <span class="id">editables — recalcula en vivo</span></h2>
+<div class="var-row">
+  <label>
+    <span class="var-label">Tarifa hora USD</span>
+    <input type="number" class="var-input" id="v-usd" value="20" step="1" min="5" max="200">
+  </label>
+  <label>
+    <span class="var-label">Tipo de cambio (ARS/USD)</span>
+    <input type="number" class="var-input" id="v-fx" value="1100" step="10" min="100" max="3000">
+  </label>
+  <label>
+    <span class="var-label">Tasa visita → lead (MOFU) %</span>
+    <input type="number" class="var-input" id="v-tasa-mofu" value="2" step="0.1" min="0.1" max="20">
+  </label>
+  <label>
+    <span class="var-label">Tasa lead → cliente (BOFU) %</span>
+    <input type="number" class="var-input" id="v-tasa-bofu" value="25" step="1" min="1" max="100">
+  </label>
+  <label>
+    <span class="var-label">Ticket medio (ARS M)</span>
+    <input type="number" class="var-input" id="v-ticket" value="1.5" step="0.1" min="0.1" max="20">
+  </label>
+  <label>
+    <span class="var-label">Costo cash mensual (ARS k)</span>
+    <input type="number" class="var-input" id="v-cash" value="300" step="50" min="0" max="2000">
+  </label>
+  <label>
+    <span class="var-label">Horas objetivo/mes (cubrir tiempo)</span>
+    <input type="number" class="var-input" id="v-horas-obj" value="60" step="5" min="10" max="300">
+  </label>
+</div>
+<div style="margin-top:.6rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;">
+  <span style="font-size:.75rem;color:var(--muted);">Tarifa ARS/h calculada: <strong id="out-tasa-ars">22.000</strong></span>
+  <span style="font-size:.75rem;color:var(--muted);">Ingreso objetivo tiempo: <strong id="out-ing-obj">1.320.000</strong> ARS/mes</span>
+</div>
+
+<details class="details">
+  <summary>Saber más: qué hace cada variable</summary>
+  <div class="details-body">
+    <ul>
+      <li><strong>Tarifa USD + Tipo de cambio</strong> → definen el costo por hora interno (ARS/h). Es la variable madre: todo margen depende de ella.</li>
+      <li><strong>Tasa visita→lead (MOFU)</strong> → % de visitantes que clickean WhatsApp o envían form. Si baja a 1%, el tráfico necesario se duplica. Punto más sensible.</li>
+      <li><strong>Tasa lead→cliente (BOFU)</strong> → % de leads que cierran proyecto. 20-30% típico en servicios B2B.</li>
+      <li><strong>Ticket medio</strong> → ingreso promedio por cliente. CON-03 usaba 4M; con precios reales de PRI-03 ajustados baja a ~1.5M. Cambiar esto recalcula todos los escenarios.</li>
+      <li><strong>Costo cash mensual</strong> → hosting + ads + herramientas. Breakeven "cash" = cubrir esto.</li>
+      <li><strong>Horas objetivo/mes</strong> → cuántas horas querés facturar para "pagarte" tu tiempo. Breakeven "tiempo" = horas × tarifa ARS/h.</li>
+    </ul>
+  </div>
+</details>
+</section>
+
+<!-- 3. Relación entre fases -->
+<section class="card">
+<h2>Cómo se conectan <span class="id">3 fases → 1 flujo</span></h2>
+<div class="grid-3">
+  <div class="card" style="padding:.85rem;">
+    <h3 class="p">UJ — Mapa del viaje</h3>
+    <p style="font-size:.78rem;color:var(--muted);">3 personas (Carlos: PyME sin web; Ana: WP roto; Lucas: reclutador). Cada persona recorre homepage → servicio → contacto (WhatsApp o formulario). 15/15 páginas con CTA claro (UJ-05). El funnel existe; falta trackearlo (CON-04).</p>
+    <div class="var-row" style="margin-top:.5rem;">
+      <label><span class="var-label">Personas</span><input type="number" class="var-input" value="3" readonly></label>
+      <label><span class="var-label">CTAs</span><input type="number" class="var-input" value="15" readonly></label>
+    </div>
+  </div>
+  <div class="card" style="padding:.85rem;">
+    <h3 class="a">CON — Tráfico y breakeven</h3>
+    <p style="font-size:.78rem;color:var(--muted);">Funnel TOFU/MOFU/BOFU. 3 escenarios recalculados en vivo según tus variables. El escenario A cubre cash desde mes 1; B es rentable con ads; C requiere equipo (subcontratación).</p>
+    <div class="var-row" style="margin-top:.5rem;">
+      <label><span class="var-label">Tasas</span><input type="text" class="var-input" value="2% / 25%" readonly style="max-width:100px;"></label>
+      <label><span class="var-label">Meta cash</span><input type="text" class="var-input" id="out-meta-cash" value="300k" readonly style="max-width:100px;"></label>
+    </div>
+  </div>
+  <div class="card" style="padding:.85rem;">
+    <h3 class="s">PRI — Costos y precios</h3>
+    <p style="font-size:.78rem;color:var(--muted);">Tarifa real (USD/h → ARS/h). Cada servicio tiene horas estimadas y precio ajustado. 3 tiers con margen negativo ya corregidos. El breakeven se valida comparando ingreso (CON) vs costo horas (PRI).</p>
+    <div class="var-row" style="margin-top:.5rem;">
+      <label><span class="var-label">Tarifa real</span><input type="text" class="var-input" id="out-tarifa-real" value="20 USD/h" readonly></label>
+      <label><span class="var-label">Ancla FAQ</span><input type="text" class="var-input" value="500k ARS" readonly style="max-width:100px;"></label>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 4. Escenarios calculados en vivo -->
+<section class="card">
+<h2>Escenarios de breakeven <span class="id">reactivos</span></h2>
+
+<!-- Escenario A -->
+<h3>Escenario A — Conservador (orgánico, sin ads)</h3>
+<div class="var-row" style="margin-bottom:.6rem;">
+  <label><span class="var-label">Visitas/mes</span><input type="number" class="var-input" id="eA-visitas" value="150" step="10"></label>
+  <label><span class="var-label">Leads/mes</span><input type="text" class="var-input" id="eA-leads" readonly></label>
+  <label><span class="var-label">Clientes/mes</span><input type="text" class="var-input" id="eA-clientes" readonly></label>
+  <label><span class="var-label">Ingreso/mes (ARS M)</span><input type="text" class="var-input" id="eA-ingreso" readonly></label>
+  <label><span class="var-label">Cash flow</span><input type="text" class="var-input" id="eA-cash" readonly></label>
+  <label><span class="var-label">Cubre tiempo</span><input type="text" class="var-input" id="eA-tiempo" readonly></label>
+</div>
+<details class="details"><summary>Saber más: paso a paso A</summary><div class="details-body"><div class="steps" id="stepsA"></div></div></details>
+
+<!-- Escenario B -->
+<h3>Escenario B — Realista (orgánico + ads ligeros)</h3>
+<div class="var-row" style="margin-bottom:.6rem;">
+  <label><span class="var-label">Visitas/mes</span><input type="number" class="var-input" id="eB-visitas" value="500" step="50"></label>
+  <label><span class="var-label">Tasa visita→lead %</span><input type="number" class="var-input" id="eB-tasa" value="2.5" step="0.1"></label>
+  <label><span class="var-label">Leads/mes</span><input type="text" class="var-input" id="eB-leads" readonly></label>
+  <label><span class="var-label">Clientes/mes</span><input type="text" class="var-input" id="eB-clientes" readonly></label>
+  <label><span class="var-label">Ingreso/mes (ARS M)</span><input type="text" class="var-input" id="eB-ingreso" readonly></label>
+  <label><span class="var-label">Ads (ARS k)</span><input type="number" class="var-input" id="eB-ads" value="200" step="50"></label>
+  <label><span class="var-label">Net (ARS M)</span><input type="text" class="var-input" id="eB-net" readonly></label>
+</div>
+<details class="details"><summary>Saber más: paso a paso B</summary><div class="details-body"><div class="steps" id="stepsB"></div></div></details>
+
+<!-- Escenario C -->
+<h3>Escenario C — Escalado (agresivo, requiere subcontratación)</h3>
+<div class="var-row" style="margin-bottom:.6rem;">
+  <label><span class="var-label">Visitas/mes</span><input type="number" class="var-input" id="eC-visitas" value="2000" step="100"></label>
+  <label><span class="var-label">Tasa visita→lead %</span><input type="number" class="var-input" id="eC-tasa" value="2.5" step="0.1"></label>
+  <label><span class="var-label">Tasa lead→cliente % (dilución)</span><input type="number" class="var-input" id="eC-bofu" value="20" step="1"></label>
+  <label><span class="var-label">Leads/mes</span><input type="text" class="var-input" id="eC-leads" readonly></label>
+  <label><span class="var-label">Clientes/mes</span><input type="text" class="var-input" id="eC-clientes" readonly></label>
+  <label><span class="var-label">Ingreso/mes (ARS M)</span><input type="text" class="var-input" id="eC-ingreso" readonly></label>
+  <label><span class="var-label">Ads (ARS k)</span><input type="number" class="var-input" id="eC-ads" value="800" step="50"></label>
+  <label><span class="var-label">Net (ARS M)</span><input type="text" class="var-input" id="eC-net" readonly></label>
+</div>
+<details class="details"><summary>Saber más: paso a paso C</summary><div class="details-body"><div class="steps" id="stepsC"></div></div></details>
+</section>
+
+<!-- 5. Tabla de servicios con horas (variable crítica) -->
+<section class="card">
+<h2>Precios y horas por servicio <span class="id">variables críticas: precio + horas</span></h2>
+<p style="font-size:.82rem;color:var(--muted);margin-bottom:.6rem;">Editá <strong>Precio min/max</strong> (ARS k) y <strong>Horas min/max</strong>. Los márgenes y el estado OK/NEGATIVO se recalculan al instante. Útil para testear descuentos en el primer trabajo (ej: Landing a 400k).</p>
+
+<table>
+<thead>
+<tr>
+  <th>Servicio / Tier</th>
+  <th>Precio min (ARS k)</th>
+  <th>Precio max (ARS k)</th>
+  <th>Horas min</th>
+  <th>Horas max</th>
+  <th>Costo min @ARS/h</th>
+  <th>Costo max @ARS/h</th>
+  <th>Margen min</th>
+  <th>Margen max</th>
+  <th>Estado</th>
+</tr>
+</thead>
+<tbody id="servicios-body"></tbody>
+</table>
+<p class="note">Nota: los precios de Landing se ajustaron de $150k-400k (originales) a $500k-700k (corregidos con tarifa real). Las horas son el supuesto más sensible: si un servicio toma más horas de las estimadas, el margen cae o se vuelve negativo.</p>
+
+<details class="details">
+  <summary>Saber más: cómo se calcula cada fila</summary>
+  <div class="details-body">
+    <ul>
+      <li><strong>Precio (ARS)</strong>: valor que paga el cliente, definido en PRI-02 (ajustado en PRI-03). <em>Editable</em>: para testear descuentos o presupuestos reales.</li>
+      <li><strong>Horas est.</strong>: rango estimado para completar el alcance. <em>Editable</em>: si una tarea real toma más horas, el costo sube.</li>
+      <li><strong>Costo @ARS/h</strong>: horas × tarifa ARS/h (calculada desde USD + tipo de cambio). Variable madre que conecta PRI con CON.</li>
+      <li><strong>Margen min / max</strong>: (precio - costo) / precio. Si baja de 0%, el servicio pierde dinero.</li>
+      <li><strong>Estado OK / NEGATIVO</strong>: indica si el rango cubre el costo con margen positivo.</li>
+    </ul>
+  </div>
+</details>
+</section>
+
+<footer>
+Documento interactivo SACsi — Fases UJ (3), CON (4), PRI (5). Referencias: docs/tareas/UJ-01..05, CON-01..04, PRI-01..04. Variables de horas: ver PRI-02. Variables de tasa: ver CON-02. Tarifa real: USD 20/h (ARS 22k/h a 1.100). Actualizado 2026-08-05.
+</footer>
+
+<script>
+// ===== DATOS BASE DE SERVICIOS (de PRI-02/03) =====
+const SERVICIOS = [
+  {id:'landing',    nombre:'Landing (ajustado)',       precioMin:500, precioMax:700,  horasMin:15, horasMax:20},
+  {id:'sitio-pro',  nombre:'Sitio pro',                precioMin:600, precioMax:1000, horasMin:25, horasMax:35},
+  {id:'ecommerce',  nombre:'E-commerce',               precioMin:1200,precioMax:2000, horasMin:50, horasMax:70},
+  {id:'auto-basico',nombre:'Automatización básico',    precioMin:500, precioMax:750,  horasMin:20, horasMax:30},
+  {id:'auto-int',   nombre:'Automatización intermedio', precioMin:1100,precioMax:1600, horasMin:40, horasMax:60},
+  {id:'soft-chico', nombre:'Software chico',           precioMin:1500,precioMax:3000, horasMin:60, horasMax:90},
+  {id:'soft-grande',nombre:'Software grande',          precioMin:3000,precioMax:6000, horasMin:100,horasMax:160},
+  {id:'hora-tec',   nombre:'Hora técnica',             precioMin:30,  precioMax:45,    horasMin:1,  horasMax:1},
+  {id:'ret-basico', nombre:'Retainer básico /mes',     precioMin:200, precioMax:400,  horasMin:5,  horasMax:5},
+  {id:'ret-pro',    nombre:'Retainer pro /mes',        precioMin:500, precioMax:800,  horasMin:15, horasMax:15},
+];
+
+// ===== ELEMENTOS DOM =====
+const els = {
+  vUsd: document.getElementById('v-usd'),
+  vFx: document.getElementById('v-fx'),
+  vTasaMofu: document.getElementById('v-tasa-mofu'),
+  vTasaBofu: document.getElementById('v-tasa-bofu'),
+  vTicket: document.getElementById('v-ticket'),
+  vCash: document.getElementById('v-cash'),
+  vHorasObj: document.getElementById('v-horas-obj'),
+  outTasaArs: document.getElementById('out-tasa-ars'),
+  outIngObj: document.getElementById('out-ing-obj'),
+  outMetaCash: document.getElementById('out-meta-cash'),
+  outTarifaReal: document.getElementById('out-tarifa-real'),
+  // Escenario A
+  eAVisitas: document.getElementById('eA-visitas'),
+  eALeads: document.getElementById('eA-leads'),
+  eAClientes: document.getElementById('eA-clientes'),
+  eAIngreso: document.getElementById('eA-ingreso'),
+  eACash: document.getElementById('eA-cash'),
+  eATiempo: document.getElementById('eA-tiempo'),
+  stepsA: document.getElementById('stepsA'),
+  // Escenario B
+  eBVisitas: document.getElementById('eB-visitas'),
+  eBTasa: document.getElementById('eB-tasa'),
+  eBLeads: document.getElementById('eB-leads'),
+  eBClientes: document.getElementById('eB-clientes'),
+  eBIngreso: document.getElementById('eB-ingreso'),
+  eBAds: document.getElementById('eB-ads'),
+  eBNet: document.getElementById('eB-net'),
+  stepsB: document.getElementById('stepsB'),
+  // Escenario C
+  eCVisitas: document.getElementById('eC-visitas'),
+  eCTasa: document.getElementById('eC-tasa'),
+  eCBofu: document.getElementById('eC-bofu'),
+  eCLeads: document.getElementById('eC-leads'),
+  eCClientes: document.getElementById('eC-clientes'),
+  eCIngreso: document.getElementById('eC-ingreso'),
+  eCAds: document.getElementById('eC-ads'),
+  eCNet: document.getElementById('eC-net'),
+  stepsC: document.getElementById('stepsC'),
+  // Servicios
+  serviciosBody: document.getElementById('servicios-body'),
+};
+
+// ===== FORMATERS =====
+const fmt = (n, dec=0) => n.toLocaleString('es-AR', {minimumFractionDigits: dec, maximumFractionDigits: dec});
+const fmtM = (n) => (n/1000).toFixed(2).replace('.',',') + ' M'; // ARS k → M
+const fmtK = (n) => fmt(n) + 'k';
+const pct = (n) => (n*100).toFixed(1).replace('.',',') + '%';
+
+// ===== CÁLCULO CENTRAL =====
+function recalcAll() {
+  // Variables base
+  const usd = parseFloat(els.vUsd.value) || 20;
+  const fx  = parseFloat(els.vFx.value) || 1100;
+  const tasaMofu = (parseFloat(els.vTasaMofu.value) || 2) / 100;
+  const tasaBofu = (parseFloat(els.vTasaBofu.value) || 25) / 100;
+  const ticketM = (parseFloat(els.vTicket.value) || 1.5); // en M ARS
+  const cashK = parseFloat(els.vCash.value) || 300; // en k ARS
+  const horasObj = parseFloat(els.vHorasObj.value) || 60;
+
+  const arsPorHora = usd * fx;
+  const ingresoObjMes = horasObj * arsPorHora;
+
+  // Actualizar outputs base
+  els.outTasaArs.textContent = fmt(arsPorHora) + ' ARS/h';
+  els.outIngObj.textContent = fmtK(Math.round(ingresoObjMes/1000)) + ' ARS/mes';
+  els.outMetaCash.textContent = fmtK(cashK) + ' ARS/mes';
+  els.outTarifaReal.textContent = usd + ' USD/h = ' + fmt(arsPorHora) + ' ARS/h';
+
+  // ===== ESCENARIO A =====
+  const aVisitas = parseFloat(els.eAVisitas.value) || 150;
+  const aLeads = aVisitas * tasaMofu;
+  const aClientes = aLeads * tasaBofu;
+  const aIngresoK = aClientes * ticketM * 1000; // k ARS
+  const aCashFlow = aIngresoK - cashK;
+  const aCubreTiempo = (aIngresoK / ingresoObjMes) * 100;
+
+  els.eALeads.value = aLeads.toFixed(1);
+  els.eAClientes.value = aClientes.toFixed(2);
+  els.eAIngreso.value = fmtM(aIngresoK);
+  els.eACash.value = aCashFlow >= 0 ? '✅ +' + fmtK(Math.round(aCashFlow)) : '❌ ' + fmtK(Math.round(aCashFlow));
+  els.eATiempo.value = aCubreTiempo.toFixed(0) + '%';
+
+  // Pasos A
+  els.stepsA.innerHTML = `
+    <div class="step"><div class="step-title">Paso 1 — Tráfico TOFU</div><div class="step-body">${fmt(aVisitas)} visitas/mes (orgánico local + referral). No hay ads.</div></div>
+    <div class="step"><div class="step-title">Paso 2 — Leads MOFU</div><div class="step-body">${fmt(aVisitas)} × ${pct(tasaMofu)} = ${aLeads.toFixed(1)} leads/mes (WhatsApp click + form submit).</div></div>
+    <div class="step"><div class="step-title">Paso 3 — Clientes BOFU</div><div class="step-body">${aLeads.toFixed(1)} × ${pct(tasaBofu)} = ${aClientes.toFixed(2)} clientes/mes.</div></div>
+    <div class="step"><div class="step-title">Paso 4 — Ingreso mensual</div><div class="step-body">${aClientes.toFixed(2)} × ${ticketM}M ARS = <strong>${fmtM(aIngresoK)}</strong>.</div></div>
+    <div class="step"><div class="step-title">Paso 5 — Breakeven cash</div><div class="step-body">${fmtM(aIngresoK)} > ${fmtK(cashK)} → ${aCashFlow >= 0 ? '✅ Sí, cubre gastos' : '❌ No cubre'} (${aCashFlow >= 0 ? '+' : ''}${fmtK(Math.round(aCashFlow))}).</div></div>
+    <div class="step"><div class="step-title">Paso 6 — Breakeven tiempo</div><div class="step-body">${horasObj}h × ${fmt(arsPorHora)} ARS/h = ${fmtK(Math.round(ingresoObjMes/1000))} ARS/mes. ${fmtM(aIngresoK)} / ${fmtK(Math.round(ingresoObjMes/1000))} = <strong>${aCubreTiempo.toFixed(0)}%</strong>. ${aCubreTiempo >= 100 ? '✅ Cubre' : '❌ No cubre'} el valor del tiempo.</div></div>
+  `;
+
+  // ===== ESCENARIO B =====
+  const bVisitas = parseFloat(els.eBVisitas.value) || 500;
+  const bTasaMofu = (parseFloat(els.eBTasa.value) || 2.5) / 100;
+  const bLeads = bVisitas * bTasaMofu;
+  const bClientes = bLeads * tasaBofu;
+  const bIngresoK = bClientes * ticketM * 1000;
+  const bAdsK = parseFloat(els.eBAds.value) || 200;
+  const bNetK = bIngresoK - bAdsK;
+
+  els.eBLeads.value = bLeads.toFixed(1);
+  els.eBClientes.value = bClientes.toFixed(1);
+  els.eBIngreso.value = fmtM(bIngresoK);
+  els.eBNet.value = fmtM(bNetK);
+
+  els.stepsB.innerHTML = `
+    <div class="step"><div class="step-title">Tráfico</div><div class="step-body">${fmt(bVisitas)} visitas (orgánico + ads locales: "desarrollo web Rosario", "automatización PyME").</div></div>
+    <div class="step"><div class="step-title">Leads</div><div class="step-body">${fmt(bVisitas)} × ${pct(bTasaMofu)} = ${bLeads.toFixed(1)} leads/mes.</div></div>
+    <div class="step"><div class="step-title">Clientes</div><div class="step-body">${bLeads.toFixed(1)} × ${pct(tasaBofu)} = ${bClientes.toFixed(1)} clientes/mes.</div></div>
+    <div class="step"><div class="step-title">Ingreso</div><div class="step-body">${bClientes.toFixed(1)} × ${ticketM}M = <strong>${fmtM(bIngresoK)}</strong>. Ads = ${fmtK(bAdsK)}. Net = <strong>${fmtM(bNetK)}</strong>.</div></div>
+    <div class="step"><div class="step-title">Breakeven tiempo</div><div class="step-body">${fmtM(bNetK)} > ${fmtK(Math.round(ingresoObjMes/1000))} → Cubre con margen del <strong>${((bNetK/ingresoObjMes)*100).toFixed(0)}%</strong>.</div></div>
+  `;
+
+  // ===== ESCENARIO C =====
+  const cVisitas = parseFloat(els.eCVisitas.value) || 2000;
+  const cTasaMofu = (parseFloat(els.eCTasa.value) || 2.5) / 100;
+  const cTasaBofu = (parseFloat(els.eCBofu.value) || 20) / 100;
+  const cLeads = cVisitas * cTasaMofu;
+  const cClientes = cLeads * cTasaBofu;
+  const cIngresoK = cClientes * ticketM * 1000;
+  const cAdsK = parseFloat(els.eCAds.value) || 800;
+  const cNetK = cIngresoK - cAdsK;
+
+  els.eCLeads.value = cLeads.toFixed(0);
+  els.eCClientes.value = cClientes.toFixed(0);
+  els.eCIngreso.value = fmtM(cIngresoK);
+  els.eCNet.value = fmtM(cNetK);
+
+  els.stepsC.innerHTML = `
+    <div class="step"><div class="step-title">Tráfico</div><div class="step-body">${fmt(cVisitas)} visitas (orgánico + ads escalados).</div></div>
+    <div class="step"><div class="step-title">Leads</div><div class="step-body">${fmt(cVisitas)} × ${pct(cTasaMofu)} = ${cLeads.toFixed(0)} leads/mes.</div></div>
+    <div class="step"><div class="step-title">Clientes</div><div class="step-body">${cLeads.toFixed(0)} × ${pct(cTasaBofu)} (dilución) = ${cClientes.toFixed(0)} clientes/mes.</div></div>
+    <div class="step"><div class="step-title">Ingreso</div><div class="step-body">${cClientes.toFixed(0)} × ${ticketM}M = <strong>${fmtM(cIngresoK)}</strong>. Ads = ${fmtK(cAdsK)}. Net = <strong>${fmtM(cNetK)}</strong>.</div></div>
+    <div class="step"><div class="step-title">Capacidad</div><div class="step-body">${cClientes.toFixed(0)} proyectos/mes requiere subcontratar o aliarse (decisión H-MAR-01). Modelo pasa de solopreneur a estudio.</div></div>
+  `;
+
+  // ===== TABLA SERVICIOS =====
+  renderServicios(arsPorHora);
+}
+
+// ===== RENDER TABLA SERVICIOS =====
+function renderServicios(arsPorHora) {
+  let html = '';
+  SERVICIOS.forEach(s => {
+    const costoMin = s.horasMin * arsPorHora;
+    const costoMax = s.horasMax * arsPorHora;
+    const margenMin = ((s.precioMin * 1000 - costoMin) / (s.precioMin * 1000)) * 100;
+    const margenMax = ((s.precioMax * 1000 - costoMax) / (s.precioMax * 1000)) * 100;
+    const ok = margenMin >= 0 && margenMax >= 0;
+    const cls = ok ? 'ok' : 'bad';
+    const tag = ok ? '✅ OK' : '❌ NEGATIVO';
+
+    html += `
+      <tr>
+        <td>${s.nombre}</td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${s.precioMin}" data-id="${s.id}" data-field="precioMin" min="1" max="10000" step="10"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${s.precioMax}" data-id="${s.id}" data-field="precioMax" min="1" max="10000" step="10"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${s.horasMin}" data-id="${s.id}" data-field="horasMin" min="1" max="500"></td>
+        <td class="tnum"><input type="number" class="var-input-sm" value="${s.horasMax}" data-id="${s.id}" data-field="horasMax" min="1" max="500"></td>
+        <td class="tnum">${fmtK(Math.round(costoMin/1000))}</td>
+        <td class="tnum">${fmtK(Math.round(costoMax/1000))}</td>
+        <td class="tnum">${margenMin.toFixed(1).replace('.',',')}%</td>
+        <td class="tnum">${margenMax.toFixed(1).replace('.',',')}%</td>
+        <td><span class="tag ${cls}">${tag}</span></td>
+      </tr>
+    `;
+  });
+  els.serviciosBody.innerHTML = html;
+
+  // Event listeners para inputs de la tabla (precios + horas)
+  els.serviciosBody.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      const id = inp.dataset.id;
+      const field = inp.dataset.field;
+      const svc = SERVICIOS.find(s => s.id === id);
+      if (svc) {
+        svc[field] = parseFloat(inp.value) || svc[field];
+        // Re-render tabla completa (simple y rápido para 10 filas)
+        renderServicios(arsPorHora);
+      }
+    });
+  });
+}
+
+// ===== EVENT LISTENERS GLOBALES =====
+const allInputs = [
+  els.vUsd, els.vFx, els.vTasaMofu, els.vTasaBofu,
+  els.vTicket, els.vCash, els.vHorasObj,
+  els.eAVisitas,
+  els.eBVisitas, els.eBTasa, els.eBAds,
+  els.eCVisitas, els.eCTasa, els.eCBofu, els.eCAds,
+];
+allInputs.forEach(inp => inp.addEventListener('input', recalcAll));
+
+// Inicial
+recalcAll();
+</script>
+</body>
+</html>
