@@ -25,3 +25,9 @@ pnpm-debug.log*
 *.log
 .vscode/
 .idea/
+
+# tool caches (playwright, npm, etc)
+.cache/
+.config/
+.npm/
+.playwright-mcp/
