@@ -130,8 +130,18 @@ if grep -q '🤖\|💻\|🌐' "${DIST_DIR}/index.html" 2>/dev/null; then
   echo "  ❌ Iconos emoji encontrados en sub-menus del nav"
   FAIL=$((FAIL + 1))
 else
-  echo "  ✅ Sub-menus: sin iconos (emoji eliminados)"
+  echo "  ✅ Sub-menus: sin iconos (emoji eliminidos)"
   PASS=$((PASS + 1))
+fi
+
+# 16. Header debe ser sticky (position: sticky + top: 0)
+if grep -q 'position.*sticky.*top:0\|position:sticky.*top:0\|position: sticky.*top: 0' "${DIST_DIR}/_astro/Layout.D9CEtLbj.css" 2>/dev/null || \
+   grep -rq 'position:sticky.*top:0\|position: sticky.*top: 0' "${DIST_DIR}/_astro/" 2>/dev/null; then
+  echo "  ✅ Header: position sticky + top:0 aplicado"
+  PASS=$((PASS + 1))
+else
+  echo "  ❌ Header: position sticky no encontrado en CSS buildeado"
+  FAIL=$((FAIL + 1))
 fi
 
 echo ""
