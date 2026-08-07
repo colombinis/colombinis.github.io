@@ -12,7 +12,7 @@ permite editar inputs pero NO agregar ni eliminar filas.
   horasMin: 15, horasMax: 20, costoFijo: 0, categorias: []}`
 - Botón `🗑` por fila → elimina esa fila del array y re-renderiza
 - Inputs editables: nombre, precio min/max, horas min/max, costo fijo
-- Botón `Restaurar listado` → vuelve al estado inicial (TRABAJOS embebido)
+- Botón `Restaurar listado` → vuelve al estado inicial (copia `trabajosOriginales` cargada del JSON)
 - Botón `Limpiar todo` → vacía la tabla (con confirm)
 - Todos los cambios recalculan márgenes al instante
 
@@ -46,7 +46,8 @@ Scenario: Limpiar todo
 
 ## Plan (SDD — HOW)
 1. Agregar `btn-group` con 3 botones (add / restore / clear)
-2. Estado `let trabajos = [...TRABAJOS]`
+2. Estado `let trabajos = trabajosOriginales.map(t => ({...t, categorias:[...t.categorias]}))`
+   (deep copy; `trabajosOriginales` se llena en `cargarListado()` desde el JSON)
 3. `renderTrabajos()` re-renderiza `<tbody id="trabajos-body">`
 4. Event listeners: input → update array + recalc; delete → filter; add → push defaults
 5. Confirmación en "Limpiar todo"
@@ -56,7 +57,7 @@ Scenario: Limpiar todo
 ```bash
 #!/bin/bash
 # VAL-04 — add/remove/editar filas
-F="docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-servicio.html"
+F="docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-trabajo.html"
 echo "🧪 VAL-04 — Add/remove/editar filas"
 grep -q "btn-add-trabajo" "$F" && echo "  ✅ btn-add-trabajo"
 grep -q "btn-reset-trabajos" "$F" && echo "  ✅ btn-reset-trabajos"

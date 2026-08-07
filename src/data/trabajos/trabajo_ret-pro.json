@@ -1,0 +1,64 @@
+{
+  "id": "ret-pro",
+  "nombre": "Retainer pro /mes",
+  "categorias": [
+    "presencia-online/sitio-web-institucional",
+    "software-a-medida/sistemas-gestion",
+    "software-a-medida/integraciones"
+  ],
+  "precioMin": 500,
+  "precioMax": 800,
+  "horasMin": 15,
+  "horasMax": 15,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento y plan mensual",
+      "entradas": "Contrato de retainer",
+      "salidas": "Plan de trabajo del mes",
+      "descripcion": "Se define qué se va a hacer: mantenimiento + mejoras + soporte",
+      "horas": 1
+    },
+    {
+      "orden": 2,
+      "paso": "Mantenimiento y monitoreo",
+      "entradas": "Plan del mes",
+      "salidas": "Sistemas actualizados y estables",
+      "descripcion": "Actualizaciones, backups, seguridad y monitoreo de los activos",
+      "horas": 4
+    },
+    {
+      "orden": 3,
+      "paso": "Mejoras y desarrollo menor",
+      "entradas": "Backlog priorizado",
+      "salidas": "Mejoras implementadas (pantallas, flujos, reportes)",
+      "descripcion": "Desarrollo de mejoras menores acordadas en el plan",
+      "horas": 5
+    },
+    {
+      "orden": 4,
+      "paso": "Soporte y consultas",
+      "entradas": "Consultas del cliente",
+      "salidas": "Incidentes resueltos",
+      "descripcion": "Atención de dudas, errores y cambios urgentes",
+      "horas": 3
+    },
+    {
+      "orden": 5,
+      "paso": "Reporte mensual",
+      "entradas": "Trabajo del mes",
+      "salidas": "Reporte con horas, logros y propuestas",
+      "descripcion": "Transparencia del retainer: qué se hizo y qué conviene el próximo mes",
+      "horas": 1
+    },
+    {
+      "orden": 6,
+      "paso": "Sesión de planificación",
+      "entradas": "Reporte",
+      "salidas": "Backlog del próximo mes",
+      "descripcion": "Reunión breve para priorizar el siguiente ciclo",
+      "horas": 1
+    }
+  ]
+}

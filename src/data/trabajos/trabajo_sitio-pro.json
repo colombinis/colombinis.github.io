@@ -1,0 +1,103 @@
+{
+  "id": "sitio-pro",
+  "nombre": "Sitio pro",
+  "categorias": [
+    "presencia-online/sitio-web-institucional",
+    "presencia-online/contenido-seo-basico"
+  ],
+  "precioMin": 600,
+  "precioMax": 1000,
+  "horasMin": 25,
+  "horasMax": 35,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Briefing y relevamiento",
+      "entradas": "Contacto inicial del cliente",
+      "salidas": "Documento de brief (objetivo, público, secciones)",
+      "descripcion": "Reunión para entender el negocio, objetivos y qué secciones necesita el sitio (inicio, servicios, nosotros, contacto)",
+      "horas": 2
+    },
+    {
+      "orden": 2,
+      "paso": "Cotización y aprobación",
+      "entradas": "Brief",
+      "salidas": "Propuesta aprobada / seña cobrada",
+      "descripcion": "Se arma alcance, mapa del sitio y precio; se espera confirmación",
+      "horas": 1.5
+    },
+    {
+      "orden": 3,
+      "paso": "Recopilación de contenido",
+      "entradas": "Brief aprobado",
+      "salidas": "Textos, imágenes, logo, referencias",
+      "descripcion": "Se pide el material; se define qué redactar o generar",
+      "horas": 3
+    },
+    {
+      "orden": 4,
+      "paso": "Arquitectura y wireframes",
+      "entradas": "Brief + contenido",
+      "salidas": "Mapa del sitio + wireframes de secciones clave",
+      "descripcion": "Se definen páginas, jerarquía y navegación antes del diseño",
+      "horas": 3
+    },
+    {
+      "orden": 5,
+      "paso": "Diseño UI (mockup)",
+      "entradas": "Wireframes",
+      "salidas": "Mockup de alta fidelidad",
+      "descripcion": "Diseño visual de páginas principales con identidad de marca",
+      "horas": 6
+    },
+    {
+      "orden": 6,
+      "paso": "Revisión de diseño",
+      "entradas": "Mockup",
+      "salidas": "Diseño aprobado",
+      "descripcion": "Feedback del cliente y ajustes de una o dos vueltas",
+      "horas": 2
+    },
+    {
+      "orden": 7,
+      "paso": "Desarrollo",
+      "entradas": "Diseño aprobado",
+      "salidas": "Sitio funcional (no publicado)",
+      "descripcion": "Maquetación y desarrollo (WordPress o HTML/CSS/JS)",
+      "horas": 10
+    },
+    {
+      "orden": 8,
+      "paso": "Integraciones y SEO básico",
+      "entradas": "Sitio maquetado",
+      "salidas": "Formularios, mapas, GTM/GA4, meta tags",
+      "descripcion": "Se conectan formularios, analytics, mapa y SEO on-page básico",
+      "horas": 3
+    },
+    {
+      "orden": 9,
+      "paso": "QA y pruebas",
+      "entradas": "Sitio con integraciones",
+      "salidas": "Checklist OK",
+      "descripcion": "Responsive, velocidad, links, formularios y SEO técnico",
+      "horas": 2.5
+    },
+    {
+      "orden": 10,
+      "paso": "Publicación (deploy)",
+      "entradas": "Sitio corregido",
+      "salidas": "Sitio en vivo",
+      "descripcion": "Deploy a producción y verificación en dominio real",
+      "horas": 1.5
+    },
+    {
+      "orden": 11,
+      "paso": "Entrega y capacitación",
+      "entradas": "Sitio publicado",
+      "salidas": "Cliente conforme",
+      "descripcion": "Entrega de accesos y explicación de cómo editar contenido básico",
+      "horas": 1
+    }
+  ]
+}
