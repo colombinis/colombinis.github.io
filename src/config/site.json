@@ -1,0 +1,56 @@
+{
+  "site": {
+    "name": "SACsi",
+    "tagline": "Soluciones Informáticas",
+    "url": "https://sacsi.com.ar/",
+    "description": "SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
+  },
+  "contact": {
+    "whatsapp": {
+      "phone": "5493415197937",
+      "base_url": "https://api.whatsapp.com/send"
+    },
+    "email": "sacsi@sacsi.com.ar",
+    "phone_display": "+54-341-519-7937",
+    "form_endpoint": "https://formspree.io/f/mljrdlka"
+  },
+  "social": {
+    "instagram": "https://instagram.com/sacsi",
+    "youtube": "https://youtube.com/@sacsi",
+    "linkedin": "https://linkedin.com/company/sacsi",
+    "twitter_site": "@sacsi",
+    "twitter_creator": "@sebastiancolombini"
+  },
+  "services": [
+    {
+      "id": "automatizacion",
+      "title": "Automatización de Procesos",
+      "href": "/servicios/automatizacion/",
+      "icon": "/logo-autor.svg",
+      "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
+      "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo."
+    },
+    {
+      "id": "software-a-medida",
+      "title": "Software a Medida",
+      "href": "/servicios/software-a-medida/",
+      "icon": "/logo-autor.svg",
+      "short": "Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.",
+      "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido."
+    },
+    {
+      "id": "presencia-online",
+      "title": "Presencia Online",
+      "href": "/servicios/presencia-online/",
+      "icon": "/logo-autor.svg",
+      "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.",
+      "claim": "Llevá tu negocio a internet y empezá a vender 24/7."
+    }
+  ],
+  "nav": {
+    "links": [
+      { "href": "/servicios/", "label": "Servicios" },
+      { "href": "/sobre-nosotros/", "label": "Sobre nosotros" }
+    ]
+  }
+}
