@@ -54,7 +54,8 @@
       "servicio": "presencia-online",
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
-    }
+    },
+    "trabajo_relacionado": "sitio-pro"
   },
   {
     "slug": "tienda-woocommerce-suscripciones",
@@ -65,7 +66,7 @@
     "metric": "+60% ingresos recurrentes",
     "excerpt": "Una marca que vendía por Instagram y cobraba por transferencia lanzó un club de suscripción con cobro recurrente automático y autogestión del cliente.",
     "subtitle": "Una marca de café de especialidad que vendía por mensajes de Instagram y cobraba por transferencia. Querían un club de suscripción mensual con cobro automático y cero seguimiento manual de pagos.",
-    "problema": "Ventas 100% manuales por Instagram: el cliente mandaba un DM, coordinaban la molienda a mano, pasaban un alias y esperaban la transferencia. Cada mes perseguían a cada suscriptor para que pagara y anotaban en una planilla quién había abonado.",
+    "problema": "Ventas 100% manuales por Instagram: el cliente mandaba un DM, coordinaban la molienda a mano, pasaban un alias y esperaban la transferencia. Cada mes perseguían a cada suscriptor para que pague y anotaban en una planilla quién había abonado.",
     "deseo": [
       "La marca crecía a pura fuerza de Instagram: el cliente mandaba un DM, coordinaban la molienda, pasaban un alias y esperaban la transferencia. Cada mes tenían que reescribirle a cada suscriptor recordándole que pague, chequear comprobantes a mano y anotar en una planilla quién había abonado. A más clientes, más caos.",
       "Su deseo era transformar esa venta artesanal en un club de suscripción de verdad: que el cliente eligiera su café (grano o molido, tamaño de bolsa), se suscribiera una sola vez y el cobro se hiciera solo todos los meses. Y que pudiera pausar, cambiar o cancelar sin escribirles."
@@ -111,7 +112,8 @@
       "servicio": "presencia-online",
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
-    }
+    },
+    "trabajo_relacionado": "ecommerce"
   },
   {
     "slug": "wordpress-headless-nextjs",
@@ -168,7 +170,8 @@
       "servicio": "presencia-online",
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
-    }
+    },
+    "trabajo_relacionado": "sitio-pro"
   },
   {
     "slug": "rescate-rendimiento-seguridad-wordpress",
@@ -225,7 +228,8 @@
       "servicio": "presencia-online",
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
-    }
+    },
+    "trabajo_relacionado": "ecommerce"
   },
   {
     "slug": "plataforma-cursos-lms-membresias",
@@ -282,7 +286,8 @@
       "servicio": "software-a-medida",
       "categoria": "apps-portales",
       "etiqueta": "Software a Medida > Apps y portales"
-    }
+    },
+    "trabajo_relacionado": "soft-grande"
   },
   {
     "slug": "tienda-ropa-usada",
@@ -329,7 +334,8 @@
       "servicio": "automatizacion",
       "categoria": "facturacion-cobranzas",
       "etiqueta": "Automatización de Procesos > Facturación y cobranzas"
-    }
+    },
+    "trabajo_relacionado": "ecommerce"
   },
   {
     "slug": "consultorio-psicologia",
@@ -376,7 +382,8 @@
       "servicio": "software-a-medida",
       "categoria": "sistemas-gestion",
       "etiqueta": "Software a Medida > Sistemas de gestión"
-    }
+    },
+    "trabajo_relacionado": "soft-chico"
   },
   {
     "slug": "ferreteria-gas-plomeria",
@@ -423,6 +430,7 @@
       "servicio": "presencia-online",
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
-    }
+    },
+    "trabajo_relacionado": "ecommerce"
   }
 ]
