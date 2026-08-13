@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sacsi.com.ar/schemas/schema_trabajo.json",
+  "title": "Trabajo",
+  "description": "Un paquete de trabajo (servicio comercial). Incluye pricing, estimación de horas y flujo de ejecución detallado.",
+  "type": "object",
+  "required": ["id", "nombre", "categorias", "precioMin", "precioMax", "horasMin", "horasMax", "costoFijo", "nota", "flujo"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Identificador único del trabajo. Usado en URLs: /trabajos/<id>/.",
+      "examples": ["landing", "sitio-pro", "ecommerce", "auto-basico", "auto-int", "soft-chico", "soft-grande", "hora-tec", "ret-basico", "ret-pro"]
+    },
+    "nombre": {
+      "type": "string",
+      "description": "Nombre legible del trabajo."
+    },
+    "categorias": {
+      "type": "array",
+      "description": "Lista de refs 'servicio/categoria' a las que aplica este trabajo.",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "examples": ["presencia-online/sitio-web-institucional", "automatizacion/facturacion-cobranzas"]
+    },
+    "precioMin": {
+      "type": "number",
+      "description": "Precio mínimo en ARS k (miles).",
+      "minimum": 0
+    },
+    "precioMax": {
+      "type": "number",
+      "description": "Precio máximo en ARS k (miles).",
+      "minimum": 0
+    },
+    "horasMin": {
+      "type": "number",
+      "description": "Horas mínimas estimadas.",
+      "minimum": 0
+    },
+    "horasMax": {
+      "type": "number",
+      "description": "Horas máximas estimadas.",
+      "minimum": 0
+    },
+    "costoFijo": {
+      "type": "number",
+      "description": "Costo fijo asociado (ARS k). Default: 0.",
+      "default": 0
+    },
+    "nota": {
+      "type": "string",
+      "description": "Nota interna sobre fijación de precios o márgenes."
+    },
+    "flujo": {
+      "type": "array",
+      "description": "Pasos secuenciales del flujo de trabajo.",
+      "items": {
+        "type": "object",
+        "required": ["orden", "paso", "entradas", "salidas", "descripcion", "horas"],
+        "properties": {
+          "orden": { "type": "integer", "minimum": 1 },
+          "paso": { "type": "string" },
+          "entradas": { "type": "string" },
+          "salidas": { "type": "string" },
+          "descripcion": { "type": "string" },
+          "horas": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

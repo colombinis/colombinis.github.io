@@ -1,0 +1,28 @@
+{
+  "id": "sitio-web-institucional",
+  "servicio_id": "presencia-online",
+  "title": "Sitio web institucional",
+  "icon": "🌐",
+  "descripcion": "Diseño limpio, móvil-first, optimizado para buscadores y enfocado en convertir visitas en consultas.",
+  "claim": "Tu mejor empleado, 24/7.",
+  "beneficios": [
+    {
+      "texto": "Tema a medida sin page builders: el equipo publica contenido sin romper el diseño.",
+      "caso": "tema-wordpress-a-medida-gutenberg"
+    },
+    {
+      "texto": "Identidad visual propia, no una plantilla reconocible.",
+      "caso": "tema-wordpress-a-medida-gutenberg"
+    },
+    {
+      "texto": "Carga hasta 75% más rápida al sacar el peso de los page builders.",
+      "caso": "tema-wordpress-a-medida-gutenberg"
+    },
+    {
+      "texto": "Sitio estable ante picos de tráfico, sin caídas en notas virales.",
+      "caso": "wordpress-headless-nextjs"
+    }
+  ],
+  "casos": ["tema-wordpress-a-medida-gutenberg", "wordpress-headless-nextjs"],
+  "trabajos": ["landing", "sitio-pro", "ret-basico", "ret-pro"]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "software-a-medida",
+  "title": "Software a Medida",
+  "href": "/servicios/software-a-medida/",
+  "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido.",
+  "short": "Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.",
+  "hero_label": "DESARROLLO",
+  "categoria_section_title": "¿Qué construimos?",
+  "testimonios_section_title": "Nuestro enfoque",
+  "testimonios": [
+    {
+      "quote": "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos.",
+      "autor": "Romina Paz",
+      "rol": "CEO — Grupo Logístico Central"
+    }
+  ],
+  "categorias_ids": ["sistemas-gestion", "integraciones", "apps-portales"]
+}
