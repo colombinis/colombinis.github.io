@@ -31,3 +31,8 @@ pnpm-debug.log*
 .config/
 .npm/
 .playwright-mcp/
+
+# n8n automation runtime data (docker-compose named volumes materialized under docs/)
+docs/automatizacion/postgres_data/
+docs/automatizacion/clientes_db_data/
+docs/automatizacion/n8n_data/
