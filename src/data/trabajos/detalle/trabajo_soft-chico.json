@@ -1,0 +1,78 @@
+{
+  "id": "soft-chico",
+  "nombre": "Software chico",
+  "categorias": [
+    "sistemas-gestion"
+  ],
+  "precioMin": 1500,
+  "precioMax": 3000,
+  "horasMin": 60,
+  "horasMax": 90,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento y especificación",
+      "entradas": "Solicitud del cliente",
+      "salidas": "Documento de especificación funcional",
+      "descripcion": "Se detallan usuarios, pantallas, reglas de negocio y datos",
+      "horas": 6
+    },
+    {
+      "orden": 2,
+      "paso": "Propuesta y aprobación",
+      "entradas": "Especificación",
+      "salidas": "Contrato / alcance aprobado",
+      "descripcion": "Se cotiza por módulos y se acuerda el alcance",
+      "horas": 3
+    },
+    {
+      "orden": 3,
+      "paso": "Diseño de solución",
+      "entradas": "Especificación aprobada",
+      "salidas": "Arquitectura + diseño de BD",
+      "descripcion": "Modelo de datos, APIs y stack técnico",
+      "horas": 6
+    },
+    {
+      "orden": 4,
+      "paso": "Desarrollo backend",
+      "entradas": "Diseño técnico",
+      "salidas": "APIs y lógica de negocio",
+      "descripcion": "Implementación de módulos core (usuarios, datos, reglas)",
+      "horas": 20
+    },
+    {
+      "orden": 5,
+      "paso": "Desarrollo frontend",
+      "entradas": "APIs listas",
+      "salidas": "Interfaz funcional",
+      "descripcion": "Pantallas, formularios y flujos de usuario",
+      "horas": 15
+    },
+    {
+      "orden": 6,
+      "paso": "Testing",
+      "entradas": "Sistema integrado",
+      "salidas": "Casos de prueba OK",
+      "descripcion": "Pruebas funcionales y corrección de bugs",
+      "horas": 10
+    },
+    {
+      "orden": 7,
+      "paso": "Deploy y migración",
+      "entradas": "Sistema probado",
+      "salidas": "Sistema en producción con datos",
+      "descripcion": "Instalación en servidor, migración de datos y configuración",
+      "horas": 5
+    },
+    {
+      "orden": 8,
+      "paso": "Capacitación y entrega",
+      "entradas": "Sistema en producción",
+      "salidas": "Cliente operando + documentación",
+      "descripcion": "Sesión de capacitación y manual de uso",
+      "horas": 5
+    }
+  ]
+}

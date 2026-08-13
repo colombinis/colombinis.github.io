@@ -1,0 +1,23 @@
+{
+  "id": "hora-tec",
+  "nombre": "Hora técnica",
+  "categorias": [
+    "sistemas-gestion",
+    "integraciones"
+  ],
+  "precioMin": 30,
+  "precioMax": 45,
+  "horasMin": 1,
+  "horasMax": 1,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Sesión técnica",
+      "entradas": "Pedido puntual del cliente",
+      "salidas": "Problema resuelto / tarea completada / recomendación",
+      "descripcion": "Hora de consultoría o desarrollo puntual: se resuelve el tema y se entrega el resultado o recomendación",
+      "horas": 1
+    }
+  ]
+}
