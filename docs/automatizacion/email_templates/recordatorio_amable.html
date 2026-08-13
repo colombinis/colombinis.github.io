@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- Email template: Recordatorio amable (24-72h de inactividad) -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Necesitás ayuda? — SACsi</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FAFAFA; color: #444; margin: 0; padding: 20px; }
+    .container { max-width: 600px; margin: 0 auto; background: #FFF; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .header { background: linear-gradient(135deg, #1A1A2E 0%, #0A7CFF 100%); padding: 32px 24px; text-align: center; }
+    .header h1 { color: #FFF; font-size: 22px; margin: 0; }
+    .content { padding: 32px 24px; text-align: center; }
+    .content p { line-height: 1.6; margin-bottom: 20px; }
+    .form-url { display: inline-block; background: #0A7CFF; color: #FFF; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; margin: 16px 0; }
+    .footer { background: #F9F9FB; padding: 20px 24px; text-align: center; font-size: 12px; color: #6B6B6B; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>¿Necesitás ayuda con tu formulario?</h1>
+    </div>
+    <div class="content">
+      <p>{{nombre}}, notamos que no completaste tu formulario de información todavía.</p>
+      <p>¿Te pasó algún problema técnico? ¿Tenés dudas sobre qué información necesitamos?</p>
+      <p>No te preocupes — podés continuar cuando quieras. El formulario guarda tu progreso automáticamente.</p>
+      <a href="{{form_url}}" class="form-url">Continuar formulario</a>
+      <p style="font-size: 14px; color: #6B6B6B;">O escribime por WhatsApp al +54 341 519-7937 — respondo en 1 mensaje.</p>
+    </div>
+    <div class="footer">
+      <p>Tu formulario vence el {{fecha_vencimiento}}.</p>
+    </div>
+  </div>
+</body>
+</html>

@@ -18,11 +18,10 @@ trabajar fase por fase.
 
 | Subcarpeta | Fase | Tareas no-DONE |
 |------------|------|----------------|
-| `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/` | FASE 1 — Auditoría docs/código | AUD-08, AUD-14 (BLOCKED) |
+| `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/` | FASE 1 — Auditoría docs/código | (ninguna — AUD-08, AUD-14 movidas a FASE-8) |
 | `docs/tareas/FASE-4-Conversion-y-trafico/` | FASE 4 — Conversión y tráfico | CON-04 (TODO) |
 | `docs/tareas/FASE-6-Validacion-post-deploy/` | FASE 6 — Validación post-deploy | DEP-01 (BLOCKED) |
-| `docs/tareas/FASE-7-Chatbot-FAQ/` | FASE 7 — Chatbot FAQ | CHAT-01, CHAT-?? (TODO) |
-| `docs/tareas/FASE-8-Backlog/` | FASE 8 — Backlog | FUT-01 (TODO) |
+| `docs/tareas/FASE-8-Backlog/` | FASE 8 — Backlog (consolidado chatbot) | FUT-01, AUD-08, AUD-14, CHAT-01, CHAT-04, CHAT-05, CHAT-06 (TODO/DONE/BLOCKED) |
 | `docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/` | FEATURE 1 — Validación flujos de negocio | 5 tareas DONE (VAL-01..05) |
 
 > Las fases 2, 3, 5 y 9 están 100% DONE → no tienen subcarpeta.
@@ -98,13 +97,13 @@ La rama debe ser consistente: docs = código = realidad.
 | AUD-05  | Verificar build de producción limpio               | DONE   | `docs/tareas/AUD-05-build-produccion.md` |
 | AUD-06  | Hero sin CTA primario en página de inicio          | DONE   | `docs/tareas/AUD-06-hero-sin-cta.md` |
 | AUD-07  | Falta formulario de contacto funcional (solo mailto)| DONE   | `docs/tareas/AUD-07-formulario-contacto.md` |
-| AUD-08  | Chatbot: knowledge.json incompleto y sin validación | BLOCKED   | `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/AUD-08-chatbot-knowledge.md` |
+| AUD-08  | Chatbot: knowledge.json incompleto y sin validación | **MOVIDA A FASE-8**   | `docs/tareas/FASE-8-Backlog/chatbot-artifacts/AUD-08-chatbot-knowledge.md` |
 | AUD-09  | CSS duplicado: ServiceCard en global.css y ServiceCard.astro | DONE   | `docs/tareas/AUD-09-css-duplicado.md` |
 | AUD-10  | Falta sitemap.xml y robots.txt no referencia sitemap-index.xml correctamente | DONE   | `docs/tareas/AUD-10-sitemap-robots.md` |
 | AUD-11  | Carrusel de casos: endpoint /casos.json no existe (404 en producción) | DONE   | `docs/tareas/AUD-11-casos-json-endpoint.md` |
 | AUD-12  | Accesibilidad: contraste, focus states, ARIA labels faltantes | DONE   | `docs/tareas/AUD-12-accesibilidad.md` |
 | AUD-13  | Meta tags incompletos: falta description única por página, og:image genérico | DONE   | `docs/tareas/AUD-13-meta-tags-seo.md` |
-| AUD-14  | Chatbot: slm-chatbot.js carga modelo 0.5B sin control de presupuesto de red | BLOCKED   | `docs/tareas/FASE-1-Auditoria-de-documentacion-y-codigo/AUD-14-chatbot-network-budget.md` |
+| AUD-14  | Chatbot: slm-chatbot.js carga modelo 0.5B sin control de presupuesto de red | **MOVIDA A FASE-8**   | `docs/tareas/FASE-8-Backlog/chatbot-artifacts/AUD-14-chatbot-network-budget.md` |
 | AUD-15  | Footer: email de contacto no renderiza (falta en template) | DONE   | `docs/tareas/AUD-15-footer-email.md` |
 
 ---
@@ -186,35 +185,13 @@ tiene sentido validar un deploy cuyo contenido va a cambiar.
 
 ---
 
-## FASE 7 — Chatbot FAQ (CHAT) — DESEABLE
+## FASE 7 — Chatbot FAQ (CHAT) — **CONSOLIDADA EN FASE-8-Backlog**
 
-Objetivo: integrar un chatbot SLM on-device en el sitio para responder
-preguntas frecuentes de leads y filtrar/auto-responder consultas repetitivas.
-Es una mejora deseable, NO bloqueante para el deploy: el sitio funciona sin
-chatbot, el chatbot agrega valor de conversión/UX.
-
-**Precondición:** DEP-01 completo (sitio en producción). El chatbot es la
-primera mejora post-deploy y requiere haber validado que el sitio base
-responde y convierte.
-
-**Naturaleza:** ya existe trabajo preliminar en el working tree
-(investigación + arquitectura). Esta fase formaliza ese trabajo y decide
-si se implementa de inmediato o queda en backlog.
-
-| ID      | Título                                             | Estado | Archivo |
-|---------|----------------------------------------------------|--------|---------|
-| CHAT-01 | Verificar build del chatbot (script)                | TODO   | `docs/tareas/FASE-7-Chatbot-FAQ/CHAT-01-verify.sh` |
-| CHAT-04 | Análisis: Chrome AI Prompt API vs SLM-chatbot       | DONE   | `docs/tareas/CHAT-04-analysis-chrome-ai.md` |
-| CHAT-05 | Arquitectura del chatbot (detalle técnico)          | DONE   | `docs/tareas/CHAT-05-arquitectura-chatbot.md` |
-| CHAT-?? | Decisión: implementar ahora o backlog               | TODO   | (pendiente crear — ver nota) |
-
-> **Nota:** CHAT-01/04/05 son nombres existentes del trabajo preliminar.
-> Hay que renombrarlos a IDs secuenciales (CHAT-01..NN) y crear las tareas
-> faltantes (decisión, implementación, integración, verificación). El
-> inventario completo de artefactos en working tree:
-> `src/components/ChatbotFAQ.astro`, `ChatbotSection.astro`, `FaqSection.astro`,
-> `public/chatbot/`, `docs/SLM-chatbot/`, `src/config/`, `src/data/preguntas-frecuentes-solucion.json`.
-> Todos sin commitear — ver sección "Trabajo no commiteado".
+> **Nota (2026-08-07):** Esta fase se consolidó en `FASE-8-Backlog/chatbot-artifacts/`.
+> Todas las tareas relacionadas (AUD-08, AUD-14, CHAT-01, CHAT-04, CHAT-05, CHAT-06) ahora viven en:
+> `docs/tareas/FASE-8-Backlog/chatbot-artifacts/` con su `TODO.md` unificado.
+>
+> La subcarpeta `FASE-7-Chatbot-FAQ/` y su `TODO.md` pueden eliminarse.
 
 ---
 
@@ -237,22 +214,20 @@ dinámico: `src/pages/servicios/[servicio]/[categoria].astro` (SSG, getStaticPat
 
 | Fase | Total | TODO | DOING | DONE | BLOCKED |
 |------|-------|------|-------|------|---------|
-| 1 — Auditoría docs/código | 15 | 0 | 0 | 13 | 2 |
+| 1 — Auditoría docs/código | 13 | 0 | 0 | 13 | 0 |
 | 2 — Auditoría de marca | 5 | 0 | 0 | 5 | 0 |
 | 3 — User Journey | 5 | 0 | 0 | 5 | 0 |
 | 4 — Conversión y tráfico | 4 | 1 | 0 | 3 | 0 |
 | 5 — Modelo de precios | 4 | 0 | 0 | 4 | 0 |
 | 6 — Validación post-deploy | 1 | 0 | 0 | 0 | 1 |
-| 7 — Chatbot FAQ (deseable) | 4 | 2 | 0 | 2 | 0 |
-| 8 — Backlog (futuro) | 1 | 1 | 0 | 0 | 0 |
+| 7 — Chatbot FAQ (CONSOLIDADA EN FASE-8) | 0 | 0 | 0 | 0 | 0 |
+|| 8 — Backlog (consolidado chatbot) | 8 | 4 | 0 | 2 | 2 |
 | 9 — Detalle subnivel soluciones | 1 | 0 | 0 | 1 | 0 |
-| **Total** | **40** | **4** | **0** | **33** | **3** |
+| **Total** | **40** | **3** | **0** | **33** | **4** |
 
-> **Progreso real (2026-08-07):** 33/40 DONE (82%). FASE 1 completa (13 DONE + 2 BLOCKED chatbot), FASE 2, 3, 5 y 9 completas. SOL-01 verificado (9 páginas detalle subnivel + cross-link a casos, build OK).
+> **Progreso real (2026-08-07):** 33/40 DONE (82%). FASE 1 completa (13 DONE, 0 BLOCKED — chatbot movido a FASE-8), FASE 2, 3, 5 y 9 completas. SOL-01 verificado (9 páginas detalle subnivel + cross-link a casos, build OK).
 > **Estructura actualizada:** las fases con tareas no-DONE tienen subcarpeta propia con TODO.md + archivos detalle (ver "Sub-maestros por fase" arriba).
-> El camino crítico para DESEBLOQUEAR DEP-01 (merge a master + post-deploy) es cerrar
-> AUD-01..15 (2 BLOCKED), y CON-04. La FASE 7 (chatbot) NO bloquea el deploy:
-> es la primera mejora post-deploy.
+> El camino crítico para DESEBLOQUEAR DEP-01 (merge a master + post-deploy) es cerrar CON-04. La FASE 8 (chatbot consolidado) NO bloquea el deploy: es mejora post-deploy.
 
 ### Correcciones de drift aplicadas en esta revisión (2026-08-05)
 
@@ -319,5 +294,7 @@ de negocio lo justifique. NO bloquean el deploy.
 > el servicio cuando corresponda. Requirements listados en `MAR-04-servicio-ia.md`
 > y en `CONTENIDO.md` §4 (claim "IA aplicada", página `/servicios/ia/`,
 > hero con 4 servicios, 2-3 casos IA en `casos-exito.json`).
+>
+> **Nota (2026-08-07):** FUT-01 ahora se referencia desde `FASE-8-Backlog/TODO.md` (backlog consolidado).
 
 ---

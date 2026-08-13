@@ -1,0 +1,591 @@
+{
+  "name": "Funnel Automatizado SACsi (Genérico)",
+  "id": "3c8ff3a1-7b70-4f8d-9fe7-0053a5ed53f0",
+  "nodes": [
+    {
+      "parameters": {
+        "json": {
+          "status": "approved",
+          "email": "test@sacsi.com.ar",
+          "nombre": "Test User",
+          "telefono": "+5493415197937",
+          "trabajo_id": "trabajo-demo",
+          "payment_id": "test-123"
+        }
+      },
+      "id": "manual-trigger-test-001",
+      "name": "ManualTriggerTest",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        50,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webhook/pago-confirmado"
+      },
+      "id": "c8a1324c-4d0d-4b12-b472-e116096592f2",
+      "name": "WebhookPagoConfirmado",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "sacsi-webhook-pago-confirmado"
+    },
+    {
+      "parameters": {
+        "keepOnlySet": true,
+        "values": {
+          "string": [
+            {
+              "name": "SACSI_DEFAULT_EMAIL_TO",
+              "value": "fallback@sacsi.com.ar"
+            },
+            {
+              "name": "SACSI_DEFAULT_FROM_EMAIL",
+              "value": "SACsi <sacsi@sacsi.com.ar>"
+            },
+            {
+              "name": "SACSI_WHATSAPP_PHONE",
+              "value": "+5493415197937"
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "SetDefaults",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [
+        50,
+        250
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.status }}",
+              "operation": "equal",
+              "value2": "approved"
+            }
+          ]
+        }
+      },
+      "id": "1b41aa43-caf2-4d33-8c73-7832eef7a352",
+      "name": "ValidarPago",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "clientes",
+        "columns": {
+          "email": "={{ $json.email }}",
+          "nombre": "={{ $json.nombre }}",
+          "telefono_whatsapp": "={{ $json.telefono }}",
+          "trabajo_id": "={{ $json.trabajo_id }}",
+          "payment_id": "={{ $json.payment_id }}",
+          "payment_status": "approved",
+          "estado": "inicio_formulario",
+          "pasos_completados": "{}"
+        }
+      },
+      "id": "3c365aee-b611-4bec-aead-6d78584aeb10",
+      "name": "CrearClienteDB",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        650,
+        200
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "P0DIf3MNyaju38Rj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "table": "clientes",
+        "query": "UPDATE clientes SET estado = 'inicio_formulario', pasos_completados = '{}' WHERE id = '{{ $json.id }}'",
+        "queryReplacement": "={{ $json.id }}"
+      },
+      "id": "2cc9f962-0141-4cbe-b5eb-2b5fedc10b1f",
+      "name": "InicializarProgreso",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        650,
+        400
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "P0DIf3MNyaju38Rj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": [
+          "const clienteId = items[0].json.id;",
+          "const trabajoId = items[0].json.trabajo_id;",
+          "const baseUrl = $workflow.staticData.SACSI_FORM_BASE_URL || process.env.SACSI_FORM_BASE_URL || 'https://sacsi.com.ar/formulario';",
+          "const formUrl = `${baseUrl}/${trabajoId}/${clienteId}/`;",
+          "return [{",
+          "  json: {",
+          "    cliente_id: clienteId,",
+          "    trabajo_id: trabajoId,",
+          "    form_url: formUrl,",
+          "    email: items[0].json.email,",
+          "    nombre: items[0].json.nombre,",
+          "    telefono_whatsapp: items[0].json.telefono_whatsapp",
+          "  }",
+          "];"
+        ]
+      },
+      "id": "598112d5-df4f-4b1d-8ab8-323f2455fb7f",
+      "name": "GenerarURLFormulario",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        800,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('SetDefaults').item.json.SACSI_DEFAULT_FROM_EMAIL }}",
+        "to": "={{ $json.email || $('SetDefaults').item.json.SACSI_DEFAULT_EMAIL_TO }}",
+        "subject": "Gracias por su compra — SACsi",
+        "text": "={{ $json.nombre }}, tu proyecto está por arrancar. Formulario: {{ $json.form_url }}",
+        "html": "<p>Hola {{ $json.nombre }},</p><p>Tu proyecto está por arrancar. Completá tu formulario acá: <a href=\"{{ $json.form_url }}\">{{ $json.form_url }}</a></p>"
+      },
+      "id": "18f192f3-2b1e-4be1-bd3d-520d060ac90d",
+      "name": "EmailBienvenida",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        950,
+        200
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wvDIuLZfDuGxju2d",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('SetDefaults').item.json.SACSI_DEFAULT_FROM_EMAIL }}",
+        "to": "={{ ($('SetDefaults').item.json.SACSI_WHATSAPP_PHONE || '') + '@s.whatsapp.com' }}",
+        "subject": "Nuevo cliente: {{ $json.nombre }} — {{ $json.trabajo_id }}",
+        "text": "Nuevo cliente completó el pago.\n\nNombre: {{ $json.nombre }}\nEmail: {{ $json.email }}\nTrabajo: {{ $json.trabajo_id }}\nFormulario: {{ $json.form_url }}\n\nEstado inicial: inicio_formulario"
+      },
+      "id": "fb9f664a-102a-4aa8-ae31-cae56517f6d8",
+      "name": "NotificacionInterna",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        950,
+        400
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wvDIuLZfDuGxju2d",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "hour": 9,
+              "minute": 0
+            },
+            {
+              "hour": 15,
+              "minute": 0
+            }
+          ]
+        }
+      },
+      "id": "370654b2-0ca3-4828-a4e7-2fa3128a5665",
+      "name": "MonitorAbandonoTrigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        250,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "table": "clientes",
+        "query": "SELECT * FROM clientes_en_riesgo WHERE horas_inactivas >= 24 ORDER BY horas_inactivas DESC"
+      },
+      "id": "faf60a9f-43db-40d1-a2ee-166ce87f6772",
+      "name": "BuscarClientesEnRiesgo",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2,
+      "position": [
+        450,
+        700
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "P0DIf3MNyaju38Rj",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.horas_inactivas }}",
+              "operation": ">=",
+              "value2": 168
+            }
+          ]
+        }
+      },
+      "id": "cd8a2e81-ace9-4b20-9d36-1a81fa79f2cd",
+      "name": "EsCasoCritico",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        650,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.horas_inactivas }}",
+              "operation": "between",
+              "value2": 24,
+              "value3": 72
+            }
+          ]
+        }
+      },
+      "id": "12603861-aee9-4dc8-b46e-80ec5afcf36a",
+      "name": "EsRecordatorioAmable",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        650,
+        850
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.horas_inactivas }}",
+              "operation": "between",
+              "value2": 72,
+              "value3": 168
+            }
+          ]
+        }
+      },
+      "id": "e007f062-b956-4463-99cf-174d12c3b4bd",
+      "name": "EsRecordatorioUrgente",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [
+        650,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('SetDefaults').item.json.SACSI_DEFAULT_FROM_EMAIL }}",
+        "to": "={{ $json.email || $('SetDefaults').item.json.SACSI_DEFAULT_EMAIL_TO }}",
+        "subject": "¿Necesitás ayuda con tu formulario?",
+        "text": "={{ $json.nombre }}, notamos que no completaste tu formulario todavía. ¿Te pasó algún problema?\n\nPodés continuar acá: {{ $json.form_url }}\n\nSi preferís, escribime por WhatsApp al {{ $('SetDefaults').item.json.SACSI_WHATSAPP_PHONE }}.\n\n¡Estoy acá para ayudarte!"
+      },
+      "id": "92df0f70-050c-43e2-9198-176a8af9412a",
+      "name": "EmailRecordatorioAmable",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        850,
+        850
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wvDIuLZfDuGxju2d",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $('SetDefaults').item.json.SACSI_DEFAULT_FROM_EMAIL }}",
+        "to": "={{ $json.email || $('SetDefaults').item.json.SACSI_DEFAULT_EMAIL_TO }}",
+        "subject": "Últimos pasos pendientes — completá antes de que se cierre",
+        "text": "={{ $json.nombre }}, quedan pasos sin completar. Tu formulario se cierra en 24h.\n\nLink: {{ $json.form_url }}\n\nSi necesitás ayuda, ¡escribime por WhatsApp! {{ $('SetDefaults').item.json.SACSI_WHATSAPP_PHONE }}"
+      },
+      "id": "fda33291-413e-451e-be05-2b282f2fff3f",
+      "name": "EmailRecordatorioUrgente",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2,
+      "position": [
+        850,
+        1000
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "wvDIuLZfDuGxju2d",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $workflow.staticData.SACSI_SLACK_WEBHOOK || process.env.SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/TU/SLACK/WEBHOOK' }}",
+        "body": {
+          "text": "🚨 CASO CRÍTICO — Cliente sin completar formulario > 1 semana",
+          "attachments": [
+            {
+              "color": "warning",
+              "fields": [
+                {
+                  "title": "Cliente",
+                  "value": "{{ $json.nombre }} ({{ $json.email }})",
+                  "short": true
+                },
+                {
+                  "title": "Trabajo",
+                  "value": "{{ $json.trabajo_id }}",
+                  "short": true
+                },
+                {
+                  "title": "Días inactivo",
+                  "value": "={{ Math.floor($json.horas_inactivas / 24) }}",
+                  "short": true
+                },
+                {
+                  "title": "Última actividad",
+                  "value": "{{ $json.ultima_actividad }}",
+                  "short": true
+                }
+              ]
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "options": {
+          "batching": {},
+          "timeout": 5000
+        }
+      },
+      "id": "b536b27a-eeb6-416d-9aa6-63ea870f79d1",
+      "name": "NotificacionCriticaSlack",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        850,
+        650
+      ]
+    }
+  ],
+  "connections": {
+    "ManualTriggerTest": {
+      "main": [
+        [
+          {
+            "node": "SetDefaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WebhookPagoConfirmado": {
+      "main": [
+        [
+          {
+            "node": "SetDefaults",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SetDefaults": {
+      "main": [
+        [
+          {
+            "node": "ValidarPago",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ValidarPago": {
+      "main": [
+        [
+          {
+            "node": "CrearClienteDB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "CrearClienteDB": {
+      "main": [
+        [
+          {
+            "node": "InicializarProgreso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "InicializarProgreso": {
+      "main": [
+        [
+          {
+            "node": "GenerarURLFormulario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GenerarURLFormulario": {
+      "main": [
+        [
+          {
+            "node": "EmailBienvenida",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "NotificacionInterna",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MonitorAbandonoTrigger": {
+      "main": [
+        [
+          {
+            "node": "BuscarClientesEnRiesgo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BuscarClientesEnRiesgo": {
+      "main": [
+        [
+          {
+            "node": "EsCasoCritico",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EsCasoCritico": {
+      "main": [
+        [
+          {
+            "node": "NotificacionCriticaSlack",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "EsRecordatorioAmable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EsRecordatorioAmable": {
+      "main": [
+        [
+          {
+            "node": "EmailRecordatorioAmable",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "EsRecordatorioUrgente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "EsRecordatorioUrgente": {
+      "main": [
+        [
+          {
+            "node": "EmailRecordatorioUrgente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "sacsi-funnel-automatizado-generico",
+    "templateCredsSetup": true,
+    "notes": [
+      "Este workflow es GENÉRICO: se reutiliza para todos los trabajos de SACsi.",
+      "FIX: typeVersion=1 para SetDefaults (compat n8n 2.8.4)",
+      "Las variables globales (SACSI_DEFAULT_EMAIL_TO, SACSI_DEFAULT_FROM_EMAIL, SACSI_WHATSAPP_PHONE) definidas en SetDefaults node"
+    ]
+  }
+}
