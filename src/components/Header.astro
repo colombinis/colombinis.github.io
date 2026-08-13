@@ -1,12 +1,26 @@
 ---
 // Header con: logo + texto "Soluciones Informáticas", navegación jerárquica
-// Usa componente LogoBrand reutilizable y config/site.json
-// Menú: Servicios (3 niveles) + Recursos (2 niveles) + Sobre nosotros
+// Menú: Servicios (submenu generado dinámicamente desde src/data/servicios/ + categorias/)
+//       + Recursos (2 niveles desde config) + Sobre nosotros
 // Mobile: hamburguesa; Desktop: dropdowns anidados con flechas
 import LogoBrand from './LogoBrand.astro';
 import config from '../config/site.json';
+import { getNavServicios } from '../lib/data-utils';
 
-const links = config.nav.links;
+// En Astro, el import de config devuelve el JSON parseado.
+const configLinks = config.nav.links;
+
+// Generamos el submenu de Servicios desde datos normalizados.
+// Analogia Laravel: Nav::servicios() → array de { label, href, submenu }
+const serviciosNav = getNavServicios();
+
+// Mezclamos: el primer link "Servicios" pasa a tener submenu dinámico,
+// el resto (Recursos, Sobre nosotros) viene de config.
+const links = configLinks.map((link) =>
+  link.label === 'Servicios'
+    ? { ...link, submenu: serviciosNav }
+    : link
+);
 ---
 
 <style>
