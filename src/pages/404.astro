@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import config from '../config/site.json';
+
+const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20estaba%20navegando%20por%20el%20sitio%20y%20necesito%20ayuda`;
+---
+
+<Layout
+  title="Página no encontrada"
+  description="La página que buscás no existe. Volvé a la página de inicio o contactanos por WhatsApp."
+  robots="noindex, follow"
+>
+  <section class="hero">
+    <div class="hero__container">
+      <div class="not-found__badge">
+        <Icon name="alert-triangle" size={24} />
+      </div>
+      <p class="hero__label">404</p>
+      <h1 class="hero__title">Página no encontrada</h1>
+      <p class="hero__subtitle">
+        La página que estás buscando no existe o fue movida. No te preocupes, podés volver a la página de inicio o escribirnos directamente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="not-found-grid">
+        <div class="not-found__actions">
+          <a href="/" class="hero__cta">
+            <Icon name="home" size={20} />
+            <span>Volver a la página de inicio</span>
+          </a>
+          <a href={whatsappUrl} class="hero__cta--whatsapp" rel="noopener noreferrer" target="_blank">
+            <Icon name="brand-whatsapp" size={20} />
+            <span>Hablar por WhatsApp</span>
+          </a>
+          <a href="/contacto/" class="hero__cta-secondary">
+            <Icon name="mail" size={20} />
+            <span>Ver contacto</span>
+          </a>
+        </div>
+
+        <div class="not-found__tips">
+          <h2>¿Qué podés hacer?</h2>
+          <ul class="not-found-list">
+            <li>
+              <Icon name="settings" size={18} class="not-found__tip-icon" />
+              <span>Revisar la URL escrita — a veces hay un error de tipeo.</span>
+            </li>
+            <li>
+              <Icon name="home" size={18} class="not-found__tip-icon" />
+              <span>Volver a la <a href="/">página de inicio</a> y navegar desde ahí.</span>
+            </li>
+            <li>
+              <Icon name="brand-whatsapp" size={18} class="not-found__tip-icon" />
+              <span>Escribinos por WhatsApp — te ayudamos a encontrar lo que necesitás.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <h2>¿Listo para empezar?</h2>
+    <p class="cta-final__subtitle">Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.</p>
+    <div class="cta-final__actions">
+      <a href={whatsappUrl} class="cta-final__whatsapp" rel="noopener noreferrer" target="_blank">
+        <Icon name="brand-whatsapp" size={20} />
+        <span>Escribinos por WhatsApp</span>
+      </a>
+      <a href="/contacto/" class="cta-final__outline">
+        <Icon name="mail" size={20} />
+        <span>Ver formulario de contacto</span>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Badge con icono de alerta */
+  .not-found__badge {
+    width: 64px;
+    height: 64px;
+    background: rgba(10, 127, 255, 0.1);
+    border-radius: var(--rounded-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    color: var(--tertiary);
+  }
+
+  /* Grid de acciones: ahora los botones tienen iconos + texto */
+  .not-found__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 100%;
+  }
+
+  .hero__cta,
+  .hero__cta--whatsapp,
+  .hero__cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+  }
+
+  /* Tips list con iconos */
+  .not-found__tips h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .not-found-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: left;
+  }
+
+  .not-found-list li {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .not-found__tip-icon {
+    color: var(--tertiary);
+    margin-top: 1px;
+  }
+
+  .not-found-list a {
+    color: var(--tertiary);
+    font-weight: 500;
+  }
+
+  /* CTA final con iconos */
+  .cta-final__whatsapp,
+  .cta-final__outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  @media (min-width: 601px) {
+    .hero__cta,
+    .hero__cta--whatsapp,
+    .hero__cta-secondary {
+      width: auto;
+    }
+
+    .not-found-list {
+      text-align: left;
+    }
+  }
+</style>

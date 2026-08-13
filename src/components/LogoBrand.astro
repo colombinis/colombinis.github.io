@@ -3,7 +3,7 @@
 // Se usa en Header y Footer.
 // Texto: "Soluciones Informáticas" — solo iniciales S e I en mayúscula
 // Logo: /logo.svg (nuevo branding navy #1A1A2E + blue #0A7CFF)
-const { tagline = "Soluciones Informáticas" } = Astro.props;
+const { tagline = "Soluciones Informáticas", "sin-texto": sinTexto = false } = Astro.props;
 ---
 
 <style>
@@ -36,5 +36,5 @@ const { tagline = "Soluciones Informáticas" } = Astro.props;
 
 <a class="logo-brand" href="/" title="SACsi - Inicio">
   <img class="logo-brand__img" src="/logo.svg" alt="Logo SACsi" type="image/svg+xml" />
-  <span class="logo-brand__text">{tagline}</span>
+  {!sinTexto && <span class="logo-brand__text">{tagline}</span>}
 </a>
