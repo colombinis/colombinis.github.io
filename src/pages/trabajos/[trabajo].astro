@@ -1,7 +1,7 @@
 ---
 // Ruta dinámica: detalle de cada trabajo
 // URL: /trabajos/<id>/
-// Data source: src/data/trabajos/listado-trabajos.json + src/data/trabajos/trabajo_<id>.json (flujo detallado)
+// Data source: src/data/trabajos/listado-trabajos.json + src/data/trabajos/detalle/trabajo_<id>.json (flujo detallado)
 import Layout from '../../layouts/Layout.astro';
 import config from '../../config/site.json';
 import trabajosData from '../../data/trabajos/listado-trabajos.json';
@@ -29,7 +29,7 @@ if (!trabajoSimple) {
 // Carga el flujo detallado desde el archivo JSON correspondiente
 const trabajoDir = path.join(
   process.cwd(),
-  'src/data/trabajos/trabajo_' + trabajoId + '.json'
+  'src/data/trabajos/detalle/trabajo_' + trabajoId + '.json'
 );
 let trabajoDetalle = null;
 

@@ -1,15 +1,16 @@
 ---
 // Footer con 3 columnas:
-// Col 1: Logo + texto "Soluciones Inteligentes" + links de servicios
+// Col 1: Logo + texto "Soluciones Inteligentes" + links de servicios (desde src/data/servicios/ + categorias/)
 // Col 2: Listado de trabajos (desde src/data/trabajos/listado-trabajos.json)
 // Col 3: Sección "¿Empezamos?" con WhatsApp + email
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
-import soluciones from '../data/soluciones.json';
-import trabajosData from '../data/trabajos/listado-trabajos.json';
+import { getServicios, getCategoriasByServicio, getTrabajos } from '../lib/data-utils';
 import config from '../config/site.json';
 
-const trabajos = trabajosData.trabajos;
+// Datos normalizados: servicios + categorías
+const servicios = getServicios();
+const trabajos = getTrabajos();
 ---
 
 <style>
@@ -108,12 +109,6 @@ const trabajos = trabajosData.trabajos;
   .footer-trabajo__name:hover {
     color: var(--tertiary);
   }
-  .footer-trabajo__precio {
-    color: var(--tertiary);
-    font-size: 0.85rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
 
   /* ---------- Col 3: Sección "¿Empezamos?" ---------- */
   .footer__cta h2 {
@@ -134,7 +129,6 @@ const trabajos = trabajosData.trabajos;
     gap: var(--spacing-sm);
     align-items: center;
   }
-
   .footer__whatsapp {
     display: inline-block;
     background-color: var(--whatsapp);
@@ -204,16 +198,19 @@ const trabajos = trabajosData.trabajos;
     <div class="footer-grid">
       <!-- Col 1: Logo + servicios -->
       <div class="footer-col">
-        <LogoBrand tagline="Soluciones Inteligentes" />
+        <LogoBrand tagline="Soluciones Inteligentes" sin-texto="true"/>
         <div class="footer-solutions">
-          {soluciones.servicios.map((sol) => (
+          {servicios.map((sol) => (
             <div class="footer-solution-group">
               <a class="footer-solution-title" href={sol.href}>{sol.title}</a>
-              {sol.categorias?.length > 0 && (
+              {sol.categorias_ids.length > 0 && (
                 <ul class="footer-solution-categories">
-                  {sol.categorias.map((cat) => (
-                    <li><a href={sol.href}>{cat.title}</a></li>
-                  ))}
+                  {sol.categorias_ids.map((catId) => {
+                    const cat = getCategoriasByServicio(sol.id).find((c) => c.id === catId);
+                    return cat ? (
+                      <li><a href={`${sol.href}${cat.id}/`}>{cat.title}</a></li>
+                    ) : null;
+                  })}
                 </ul>
               )}
             </div>
@@ -231,7 +228,6 @@ const trabajos = trabajosData.trabajos;
                 class="footer-trabajo__name"
                 href={`/trabajos/${trabajo.id}/`}
               >{trabajo.nombre}</a>
-              <span class="footer-trabajo__precio">${trabajo.precioMin}k - ${trabajo.precioMax}k</span>
             </div>
           ))}
         </div>
@@ -246,7 +242,7 @@ const trabajos = trabajosData.trabajos;
         <div class="footer__actions">
           <a
             class="footer__whatsapp"
-            href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones%20inform%C3%A1ticas`}
+            href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20más%20sobre%20sus%20soluciones%20informáticas`}
             rel="noopener noreferrer"
             target="_blank"
           >Escribinos por WhatsApp</a>

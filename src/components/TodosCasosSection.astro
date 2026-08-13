@@ -1,9 +1,12 @@
 ---
 // Componente reutilizable: listado completo de casos de éxito en grilla.
 // Se renderiza del lado del servidor (SSG estático), sin carga asíncrona.
-// Fuente única de verdad: src/data/casos-exito.json (la misma que el carrusel).
+// Fuente única de verdad: src/data/casos-exito.json (la misma que el carrusel)
+// Acceso normalizado vía data-utils.ts (single source of truth).
 import ServiceCard from './ServiceCard.astro';
-import casos from '../data/casos-exito.json';
+import { getCasos } from '../lib/data-utils';
+
+const casos = getCasos();
 ---
 
 <section id="casos-exito" class="section section--alt">

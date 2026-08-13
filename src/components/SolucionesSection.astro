@@ -1,9 +1,11 @@
 ---
 // Componente reutilizable: Sección "Soluciones para tu negocio"
 // Se renderiza del lado del servidor (SSG estático) — sin carga asíncrona.
-// Fuente única de verdad: src/data/soluciones.json
+// Fuente única de verdad: src/data/servicios/servicio_*.json (datos normalizados)
 import ServiceCard from './ServiceCard.astro';
-import soluciones from '../data/soluciones.json';
+import { getServicios } from '../lib/data-utils';
+
+const servicios = getServicios();
 ---
 
 <style>
@@ -22,7 +24,7 @@ import soluciones from '../data/soluciones.json';
   <div class="container">
     <h2 class="soluciones__title">Soluciones para tu negocio</h2>
     <div class="cards-grid">
-      {soluciones.servicios.map((service) => (
+      {servicios.map((service) => (
         <ServiceCard
           title={service.title}
           href={service.href}
