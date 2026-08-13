@@ -1,0 +1,28 @@
+{
+  "id": "sistemas-gestion",
+  "servicio_id": "software-a-medida",
+  "title": "Sistemas de gestión",
+  "icon": "🛠️",
+  "descripcion": "Paneles administrativos, control de stock, facturación y reportes adaptados a tu operación.",
+  "claim": "Hasta un 50% más rápido en procesos clave.",
+  "beneficios": [
+    {
+      "texto": "Agenda online autogestionada: los pacientes reservan solos y desaparecen los turnos cruzados.",
+      "caso": "consultorio-psicologia"
+    },
+    {
+      "texto": "Recordatorios automáticos de turno y lista de espera inteligente.",
+      "caso": "consultorio-psicologia"
+    },
+    {
+      "texto": "Alquiler de espacios con reservas automáticas y reglas de precio por franja horaria.",
+      "caso": "consultorio-psicologia"
+    },
+    {
+      "texto": "Presentación centralizada a obras sociales con seguimiento y facturación unificada.",
+      "caso": "consultorio-psicologia"
+    }
+  ],
+  "casos": ["consultorio-psicologia"],
+  "trabajos": ["soft-chico", "soft-grande", "hora-tec", "ret-pro"]
+}

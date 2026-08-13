@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sacsi.com.ar/schemas/schema_servicio.json",
+  "title": "Servicio",
+  "description": "Un servicio principal de SACsi. Cada servicio agrupa de 2 a 3 categorías de solución. Incluye metadatos para renderizar su página de detalle.",
+  "type": "object",
+  "required": ["id", "title", "href", "claim", "short", "hero_label", "categoria_section_title", "testimonios_section_title", "testimonios", "categorias_ids"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Slug único del servicio. Usado como clave primaria y en URLs.",
+      "examples": ["automatizacion", "software-a-medida", "presencia-online"],
+      "pattern": "^[a-z]+(?:-[a-z]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "description": "Nombre legible del servicio."
+    },
+    "href": {
+      "type": "string",
+      "description": "URL canónica de la página de servicio.",
+      "examples": ["/servicios/automatizacion/"]
+    },
+    "claim": {
+      "type": "string",
+      "description": "Frase de impacto asociada al servicio."
+    },
+    "short": {
+      "type": "string",
+      "description": "Descripción corta (1-2 líneas) del servicio."
+    },
+    "hero_label": {
+      "type": "string",
+      "description": "Etiqueta uppercase mostrada en el hero de la página de servicio. Ej: 'AUTOMATIZACIÓN', 'DESARROLLO', 'PRESENCIA ONLINE'."
+    },
+    "categoria_section_title": {
+      "type": "string",
+      "description": "Título de la sección de cards de categorías. Ej: '¿Qué automatizamos?', '¿Qué construimos?', '¿Qué incluye?'."
+    },
+    "testimonios_section_title": {
+      "type": "string",
+      "description": "Título de la sección de testimonios/social proof."
+    },
+    "testimonios": {
+      "type": "array",
+      "description": "Testimonios de clientes reales o tipo asociados a este servicio.",
+      "items": {
+        "type": "object",
+        "required": ["quote", "autor", "rol"],
+        "properties": {
+          "quote": { "type": "string" },
+          "autor": { "type": "string" },
+          "rol": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "categorias_ids": {
+      "type": "array",
+      "description": "Lista de IDs de categorías que pertenecen a este servicio (FK → categorias/).",
+      "items": { "type": "string" },
+      "minItems": 1
+    }
+  },
+  "additionalProperties": false
+}

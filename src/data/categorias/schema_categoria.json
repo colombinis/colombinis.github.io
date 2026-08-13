@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sacsi.com.ar/schemas/schema_categoria.json",
+  "title": "Categoria",
+  "description": "Una categoría de servicio. Pertenece a un servicio y agrupa beneficios, casos y trabajos.",
+  "type": "object",
+  "required": ["id", "servicio_id", "title", "icon", "descripcion", "claim", "beneficios", "casos", "trabajos"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Slug único de la categoría. Usado en URLs: /servicios/<servicio>/<categoria>/",
+      "examples": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards"]
+    },
+    "servicio_id": {
+      "type": "string",
+      "description": "FK → servicio al que pertenece esta categoría."
+    },
+    "title": {
+      "type": "string",
+      "description": "Nombre legible de la categoría."
+    },
+    "icon": {
+      "type": "string",
+      "description": "Emoji representativo de la categoría."
+    },
+    "descripcion": {
+      "type": "string",
+      "description": "Descripción breve de qué abarca la categoría."
+    },
+    "claim": {
+      "type": "string",
+      "description": "Frase de impacto corta."
+    },
+    "beneficios": {
+      "type": "array",
+      "description": "Lista de beneficios concretos con su caso asociado (si aplica).",
+      "items": {
+        "type": "object",
+        "required": ["texto"],
+        "properties": {
+          "texto": { "type": "string" },
+          "caso": {
+            "type": "string",
+            "description": "Slug de caso de éxito relacionado (opcional). Debe existir en casos-exito.json."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "casos": {
+      "type": "array",
+      "description": "Slugs de casos de éxito asociados a esta categoría.",
+      "items": { "type": "string" }
+    },
+    "trabajos": {
+      "type": "array",
+      "description": "IDs de trabajos asociados a esta categoría (FK → trabajos).",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}
