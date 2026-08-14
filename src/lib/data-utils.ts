@@ -227,6 +227,38 @@ export function getTrabajoDetalle(id: string): TrabajoDetalle | null {
 }
 
 /**
+ * Devuelve todos los trabajos (índice maestro) que tienen asociada una categoría.
+ * La pertenencia se lee del campo `categorias` de cada detalle trabajo_<id>.json
+ * (fuente de verdad). Analogia Laravel: Categoria::find($id)->trabajos
+ */
+export function getTrabajosByCategoria(categoriaId: string): TrabajoSimple[] {
+  return loadCache().trabajos.filter((t) =>
+    getTrabajoDetalle(t.id)?.categorias.includes(categoriaId)
+  );
+}
+
+/**
+ * Devuelve solo las categorías que tienen ≥1 trabajo asociado (CA-02).
+ * Analogia Laravel: Categoria::whereHas('trabajos')->get()
+ */
+export function getCategoriasConTrabajos(): Categoria[] {
+  return loadCache().categorias.filter(
+    (c) => getTrabajosByCategoria(c.id).length > 0
+  );
+}
+
+/**
+ * Devuelve solo los servicios que tienen ≥1 categoría con ≥1 trabajo (CA-02).
+ * Analogia Laravel: Servicio::whereHas('categorias.trabajos')->get()
+ */
+export function getServiciosConTrabajos(): Servicio[] {
+  const catsConTrabajos = getCategoriasConTrabajos();
+  return loadCache().servicios.filter((s) =>
+    catsConTrabajos.some((c) => c.servicio_id === s.id)
+  );
+}
+
+/**
  * Devuelve todos los casos de éxito.
  */
 export function getCasos(): CasoExito[] {
