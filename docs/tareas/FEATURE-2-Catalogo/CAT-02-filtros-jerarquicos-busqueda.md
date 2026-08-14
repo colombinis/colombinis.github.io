@@ -75,7 +75,10 @@ echo "✅ CAT-02 — COMPLETA (falta E2E interactivo en CAT-04)"
 ```
 
 ## Estado
-TODO — sin empezar
+DONE — verificado E2E (Chromium real): jerarquía servicio→categoría, búsqueda
+sin tildes, AND, reset, contador, estado vacío con CTA, URL compartible
+(`?servicio=&categoria=&q=`) y popstate. Implementado en
+`src/pages/catalogo.astro` (script vanilla JS client-side).
 
 ## Notas
 - Vanilla JS (convención del repo). No usar deps npm.
