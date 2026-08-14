@@ -95,11 +95,11 @@ const breadcrumb = [
           <select id="filtro-categoria" name="categoria">
             <option value="">Todas las categorías</option>
             {servicios.map((s) => (
-              <optgroup label={s.title}>
+              <optgroup label={s.title} data-servicio={s.id}>
                 {categorias
                   .filter((c) => c.servicio_id === s.id)
                   .map((c) => (
-                    <option value={c.id}>
+                    <option value={c.id} data-servicio={s.id}>
                       {c.icon} {c.title}
                     </option>
                   ))}
@@ -156,9 +156,133 @@ const breadcrumb = [
           );
         })}
       </div>
+      <div id="catalogo-vacio" class="catalogo-vacio" hidden>
+        <p>No encontramos trabajos con esos filtros.</p>
+        <p>
+          ¿Querés ver qué podemos hacer por tu negocio? Contanos tu caso y te
+          armamos una propuesta a medida.
+        </p>
+        <a class="hero__cta" href="/contacto/" style="display:inline-block;">
+          Consultar sin cargo
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  const filtroServicio = document.getElementById('filtro-servicio') as HTMLSelectElement;
+  const filtroCategoria = document.getElementById('filtro-categoria') as HTMLSelectElement;
+  const filtroTexto = document.getElementById('filtro-texto') as HTMLInputElement;
+  const botonReset = document.getElementById('filtro-reset') as HTMLButtonElement;
+  const grilla = document.getElementById('catalogo-grilla') as HTMLElement;
+  const contador = document.getElementById('catalogo-contador') as HTMLElement;
+  const vacio = document.getElementById('catalogo-vacio') as HTMLElement;
+
+  const tarjetas = Array.from(grilla.querySelectorAll('.service-card'));
+
+  function normalizar(texto: string): string {
+    return texto
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function aplicarJerarquia(): void {
+    const servicio = filtroServicio.value;
+    filtroCategoria.querySelectorAll('optgroup').forEach((grupo) => {
+      const coincide = servicio === '' || grupo.dataset.servicio === servicio;
+      grupo.hidden = !coincide;
+      grupo.querySelectorAll('option').forEach((op) => {
+        op.hidden = !coincide;
+      });
+    });
+    const valor = filtroCategoria.value;
+    if (valor) {
+      const op = filtroCategoria.querySelector(
+        `option[value="${valor}"]`,
+      ) as HTMLOptionElement | null;
+      if (op && op.hidden) filtroCategoria.value = '';
+    }
+  }
+
+  function aplicarFiltros(): void {
+    const servicio = filtroServicio.value;
+    const categoria = filtroCategoria.value;
+    const texto = normalizar(filtroTexto.value.trim());
+
+    let visibles = 0;
+    tarjetas.forEach((tarjeta) => {
+      const servicios = (tarjeta.dataset.servicio || '').split(' ');
+      const categorias = (tarjeta.dataset.categoria || '').split(' ');
+      const cumpleServicio = servicio === '' || servicios.includes(servicio);
+      const cumpleCategoria = categoria === '' || categorias.includes(categoria);
+      const cumpleTexto =
+        texto === '' || normalizar(tarjeta.dataset.nombre || '').includes(texto);
+      const visible = cumpleServicio && cumpleCategoria && cumpleTexto;
+      tarjeta.hidden = !visible;
+      if (visible) visibles++;
+    });
+
+    contador.textContent = `${visibles} trabajo${visibles === 1 ? '' : 's'} disponible${visibles === 1 ? '' : 's'}`;
+    vacio.hidden = visibles > 0;
+  }
+
+  function escribirEstado(push: boolean): void {
+    const params = new URLSearchParams();
+    if (filtroServicio.value) params.set('servicio', filtroServicio.value);
+    if (filtroCategoria.value) params.set('categoria', filtroCategoria.value);
+    if (filtroTexto.value.trim()) params.set('q', filtroTexto.value.trim());
+    const qs = params.toString();
+    const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+    if (push) {
+      window.history.pushState({}, '', url);
+    } else {
+      window.history.replaceState({}, '', url);
+    }
+  }
+
+  function leerEstado(): void {
+    const params = new URLSearchParams(window.location.search);
+    const servicio = params.get('servicio');
+    const categoria = params.get('categoria');
+    const q = params.get('q');
+    if (servicio) filtroServicio.value = servicio;
+    if (categoria) filtroCategoria.value = categoria;
+    if (q) filtroTexto.value = q;
+  }
+
+  filtroServicio.addEventListener('change', () => {
+    aplicarJerarquia();
+    aplicarFiltros();
+    escribirEstado(true);
+  });
+  filtroCategoria.addEventListener('change', () => {
+    aplicarFiltros();
+    escribirEstado(true);
+  });
+  filtroTexto.addEventListener('input', () => {
+    aplicarFiltros();
+    escribirEstado(false);
+  });
+  botonReset.addEventListener('click', () => {
+    filtroServicio.value = '';
+    filtroCategoria.value = '';
+    filtroTexto.value = '';
+    aplicarJerarquia();
+    aplicarFiltros();
+    escribirEstado(true);
+  });
+  window.addEventListener('popstate', () => {
+    leerEstado();
+    aplicarJerarquia();
+    aplicarFiltros();
+  });
+
+  leerEstado();
+  aplicarJerarquia();
+  aplicarFiltros();
+</script>
 
 <style>
   /* Breadcrumb (mismo patrón que las páginas de servicio/categoría) */
@@ -253,6 +377,26 @@ const breadcrumb = [
     color: var(--muted);
     font-size: 0.9rem;
     margin: 0 0 var(--spacing-lg);
+  }
+
+  /* Tarjetas ocultas por los filtros */
+  .service-card[hidden] {
+    display: none;
+  }
+
+  /* Estado sin resultados */
+  .catalogo-vacio {
+    text-align: center;
+    color: var(--secondary);
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: #F9F9FB;
+    border-radius: var(--rounded-md);
+  }
+  .catalogo-vacio p {
+    margin: 0 0 var(--spacing-sm);
+  }
+  .catalogo-vacio a {
+    margin-top: var(--spacing-md);
   }
 
   @media (min-width: 601px) {
