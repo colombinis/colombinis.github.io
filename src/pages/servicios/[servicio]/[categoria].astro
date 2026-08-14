@@ -4,7 +4,7 @@
 // Data source: src/data/servicios/servicio_*.json + src/data/categorias/categoria_*.json (normalizados)
 // Analogia Laravel: Route::get('/servicios/{servicio}/{categoria}', ...) → Service::find($id)->categoria($cat)
 import Layout from '../../../layouts/Layout.astro';
-import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio } from '../../../lib/data-utils';
+import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio, getTrabajosByCategoria } from '../../../lib/data-utils';
 
 interface Props {
   params: { servicio: string; categoria: string };
@@ -34,6 +34,19 @@ if (!servicio || !categoria) {
 
 const { title: svcTitle, href: svcHref } = servicio;
 const { title: catTitle, descripcion, claim, beneficios, casos } = categoria;
+
+// Trabajos asociados a esta categoría (según el campo categorias de cada detalle trabajo_<id>.json)
+const trabajosCategoria = getTrabajosByCategoria(categoria.id);
+
+// Formateo de precios (ARS k) y horas para las tarjetas
+function formatearPrecio(min: number, max: number) {
+  if (min === max) return `$${min}k ARS`;
+  return `$${min}k - $${max}k ARS`;
+}
+function formatearHoras(min: number, max: number) {
+  if (min === max) return `${min}h`;
+  return `${min}-${max}h`;
+}
 
 // Breadcrumb
 const breadcrumb = [
@@ -102,6 +115,34 @@ const breadcrumb = [
       </div>
     </div>
   </section>
+
+  <!-- En qué nos especializamos (trabajos con esta categoría) -->
+  {trabajosCategoria.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Nos especializamos en hacer</h2>
+        <div class="cards-grid">
+          {trabajosCategoria.map((trabajo) => (
+            <article class="service-card">
+              <span class="service-card__type">Trabajo</span>
+              <h3>
+                <a href={`/trabajos/${trabajo.id}/`}>{trabajo.nombre}</a>
+              </h3>
+              <p class="service-card__claim">
+                {formatearPrecio(trabajo.precioMin, trabajo.precioMax)} ·{' '}
+                {formatearHoras(trabajo.horasMin, trabajo.horasMax)}
+              </p>
+              <a
+                class="service-card__cta"
+                href={`/trabajos/${trabajo.id}/`}
+                >Ver detalle del trabajo</a
+              >
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Casos relacionados -->
   {casos.length > 0 && (

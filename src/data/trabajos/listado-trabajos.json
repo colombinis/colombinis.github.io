@@ -101,7 +101,7 @@
     {
       "id": "ret-basico",
       "nombre": "Retainer básico",
-      "categorias": ["reportes-dashboards", "facturacion-cobranzas"],
+      "categorias": ["sitio-web-institucional", "reportes-dashboards"],
       "precioMin": 600,
       "precioMax": 800,
       "horasMin": 27,
@@ -112,7 +112,7 @@
     {
       "id": "ret-pro",
       "nombre": "Retainer pro",
-      "categorias": ["reportes-dashboards", "integraciones", "sistemas-gestion"],
+      "categorias": ["sitio-web-institucional", "sistemas-gestion", "integraciones"],
       "precioMin": 1300,
       "precioMax": 1900,
       "horasMin": 59,
