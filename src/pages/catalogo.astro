@@ -1,0 +1,270 @@
+---
+// Ruta: /catalogo/ — Catálogo global de trabajos contratables (US-01)
+// Datos normalizados desde src/lib/data-utils.ts (sin hardcodear IDs).
+// Render inicial SSG con solo servicios/categorías que tienen trabajos (CA-02);
+// los filtros interactivos (cambio/input) se resuelven client-side en CAT-02.
+import Layout from '../layouts/Layout.astro';
+import {
+  getTrabajos,
+  getTrabajoDetalle,
+  getCategoriasConTrabajos,
+  getServiciosConTrabajos,
+} from '../lib/data-utils';
+
+const servicios = getServiciosConTrabajos();
+const categorias = getCategoriasConTrabajos();
+const trabajos = getTrabajos();
+
+// Formateo de precios (ARS k) y horas para las tarjetas
+function formatearPrecio(min: number, max: number): string {
+  if (min === max) return `$${min}k ARS`;
+  return `$${min}k - $${max}k ARS`;
+}
+function formatearHoras(min: number, max: number): string {
+  if (min === max) return `${min}h`;
+  return `${min}-${max}h`;
+}
+
+// Categorías y servicios de cada trabajo, desde el detalle trabajo_<id>.json
+// (fuente de verdad de la pertenencia trabajo→categoría)
+const categoriasDeTrabajo = new Map<string, string[]>();
+const serviciosDeTrabajo = new Map<string, string[]>();
+for (const t of trabajos) {
+  const catIds = getTrabajoDetalle(t.id)?.categorias ?? [];
+  const cats = categorias.filter((c) => catIds.includes(c.id));
+  categoriasDeTrabajo.set(t.id, cats.map((c) => c.id));
+  const serviciosIds: string[] = [];
+  for (const c of cats) {
+    if (!serviciosIds.includes(c.servicio_id)) serviciosIds.push(c.servicio_id);
+  }
+  serviciosDeTrabajo.set(t.id, serviciosIds);
+}
+
+const breadcrumb = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Catálogo', href: Astro.url.pathname },
+];
+---
+
+<Layout
+  title="Catálogo de trabajos"
+  description="Explorá todos los trabajos contratables de SACsi en un solo lugar: filtrá por servicio, categoría o buscá por nombre el trabajo que necesitás."
+>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      {breadcrumb.map((b) => (
+        <li>
+          {b.href === Astro.url.pathname ? (
+            <span aria-current="page">{b.label}</span>
+          ) : (
+            <a href={b.href}>{b.label}</a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero--detail">
+    <div class="hero__container">
+      <p class="hero__label">CATÁLOGO</p>
+      <h1 class="hero__title">Catálogo de trabajos</h1>
+      <p class="hero__subtitle">
+        Todos los trabajos que podés contratar en SACsi. Filtralos por servicio,
+        categoría o buscá por nombre el que necesitás.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filtros: markup data-driven (CA-02). La interactividad se agrega en CAT-02 -->
+  <section class="section section--filtros">
+    <div class="container">
+      <div class="catalogo-filtros">
+        <div class="catalogo-filtros__campo">
+          <label for="filtro-servicio">Servicio</label>
+          <select id="filtro-servicio" name="servicio">
+            <option value="">Todos los servicios</option>
+            {servicios.map((s) => (
+              <option value={s.id}>{s.title}</option>
+            ))}
+          </select>
+        </div>
+        <div class="catalogo-filtros__campo">
+          <label for="filtro-categoria">Categoría</label>
+          <select id="filtro-categoria" name="categoria">
+            <option value="">Todas las categorías</option>
+            {servicios.map((s) => (
+              <optgroup label={s.title}>
+                {categorias
+                  .filter((c) => c.servicio_id === s.id)
+                  .map((c) => (
+                    <option value={c.id}>
+                      {c.icon} {c.title}
+                    </option>
+                  ))}
+              </optgroup>
+            ))}
+          </select>
+        </div>
+        <div class="catalogo-filtros__campo">
+          <label for="filtro-texto">Buscar</label>
+          <input
+            id="filtro-texto"
+            type="search"
+            name="q"
+            placeholder="Buscá un trabajo…"
+          />
+        </div>
+        <button id="filtro-reset" class="catalogo-filtros__reset" type="button">
+          Limpiar filtros
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grilla de trabajos (base; pulido de tarjetas en CAT-03) -->
+  <section class="section">
+    <div class="container">
+      <p class="catalogo-contador" id="catalogo-contador" aria-live="polite">
+        {trabajos.length} trabajo{trabajos.length === 1 ? '' : 's'} disponibles
+      </p>
+      <div class="cards-grid" id="catalogo-grilla">
+        {trabajos.map((t) => {
+          const cats = categoriasDeTrabajo.get(t.id) ?? [];
+          const serviciosIds = serviciosDeTrabajo.get(t.id) ?? [];
+          return (
+            <article
+              class="service-card"
+              data-trabajo-id={t.id}
+              data-servicio={serviciosIds.join(' ')}
+              data-categoria={cats.join(' ')}
+              data-nombre={t.nombre}
+            >
+              <span class="service-card__type">Trabajo</span>
+              <h3>
+                <a href={`/trabajos/${t.id}/`}>{t.nombre}</a>
+              </h3>
+              <p class="service-card__claim">
+                {formatearPrecio(t.precioMin, t.precioMax)} ·{' '}
+                {formatearHoras(t.horasMin, t.horasMax)}
+              </p>
+              <a class="service-card__cta" href={`/trabajos/${t.id}/`}
+                >Ver detalle del trabajo</a
+              >
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Breadcrumb (mismo patrón que las páginas de servicio/categoría) */
+  .breadcrumb {
+    font-size: 0.9rem;
+  }
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    list-style: none;
+    margin: 0;
+    padding: var(--spacing-md) var(--spacing-md) 0;
+  }
+  .breadcrumb li {
+    color: var(--secondary);
+  }
+  .breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb [aria-current='page'] {
+    color: var(--muted);
+  }
+
+  .hero--detail {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+
+  /* Filtros (móvil-first) */
+  .section--filtros {
+    padding-top: 0;
+  }
+  .catalogo-filtros {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    background: var(--surface);
+    border: 1px solid #E8E8E8;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+  }
+  .catalogo-filtros__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .catalogo-filtros label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  .catalogo-filtros select,
+  .catalogo-filtros input[type='search'] {
+    padding: 10px 12px;
+    border: 1px solid #DDDDDD;
+    border-radius: var(--rounded-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--secondary);
+    background: var(--neutral);
+  }
+  .catalogo-filtros select:focus,
+  .catalogo-filtros input[type='search']:focus {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 1px;
+    border-color: var(--tertiary);
+  }
+  .catalogo-filtros__reset {
+    padding: 10px 16px;
+    border: 1.5px solid #DDDDDD;
+    border-radius: var(--rounded-sm);
+    background: transparent;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 100%;
+  }
+  .catalogo-filtros__reset:hover {
+    border-color: var(--primary);
+  }
+
+  /* Contador de resultados */
+  .catalogo-contador {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0 0 var(--spacing-lg);
+  }
+
+  @media (min-width: 601px) {
+    .breadcrumb ol {
+      padding: var(--spacing-lg) var(--spacing-lg) 0;
+    }
+    .catalogo-filtros {
+      grid-template-columns: repeat(3, 1fr) auto;
+      align-items: end;
+    }
+    .catalogo-filtros__reset {
+      width: auto;
+    }
+  }
+</style>
