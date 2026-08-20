@@ -1,3 +1,12 @@
+---
+id: CAT-02
+title: Filtros jerárquicos servicio→categoría + búsqueda textual
+affects:
+  pages: [catalogo]
+  components: []
+  behaviors: [filtros-jerarquicos]
+---
+
 # CAT-02 — Filtros jerárquicos servicio→categoría + búsqueda textual
 
 ## Contexto
