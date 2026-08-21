@@ -5,8 +5,8 @@
 // 2. Cálculo de márgenes correcto (con costo fijo)
 // 3. Costo fijo editable afecta margen
 const fs = require('fs');
-
-const htmlPath = process.argv[2] || 'docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/listado-trabajos.html';
+const path = require('path');
+const htmlPath = process.argv[2] || path.join(__dirname, '../../../docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/listado-trabajos.html');
 const jsonPath = 'src/data/trabajos/listado-trabajos.json';
 const html = fs.readFileSync(htmlPath, 'utf8');
 const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
