@@ -54,7 +54,7 @@ echo "🧪 VAL-06 — Selector de trabajo + pasos desde JSON"
 grep -q 'id="trabajo-select"' "$F" && echo "  ✅ selector presente"
 grep -q "cargarTrabajo(" "$F" && echo "  ✅ cargarTrabajo presente"
 grep -q "cargarListado()" "$F" && echo "  ✅ cargarListado presente"
-ls src/data/trabajos/trabajo_*.json | wc -l
+ls src/data/trabajos/detalle/trabajo_*.json | wc -l
 ```
 
 ## Estado

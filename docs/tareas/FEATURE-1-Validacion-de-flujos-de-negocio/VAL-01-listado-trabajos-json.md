@@ -44,16 +44,16 @@ Scenario: Misma data que PRI-02/03
 F="src/data/trabajos/listado-trabajos.json"
 echo "🧪 VAL-01 — Listado trabajos JSON"
 python3 -c "import json; d=json.load(open('$F')); assert len(d['trabajos'])>=10, 'faltan trabajos'; print('  ✅ JSON parsea OK,', len(d['trabajos']), 'trabajos')"
-python3 -c "
+python3 -c '
 import json
-d=json.load(open('$F'))
-for t in d['trabajos']:
-    for k in ['id','nombre','categorias','precioMin','precioMax','horasMin','horasMax']:
-        assert k in t, f'{t.get(\"id\")} falta {k}'
-    assert len(t['categorias'])>=1, f'{t[\"id\"]} sin categorias'
-    assert 'costoFijo' in t, f'{t[\"id\"]} sin costoFijo'
-print('  ✅ cada trabajo tiene campos requeridos + categorias + costoFijo')
-"
+d=json.load(open("$F"))
+for t in d["trabajos"]:
+    for k in ["id","nombre","categorias","precioMin","precioMax","horasMin","horasMax"]:
+        assert k in t, t.get("id") + " falta " + k
+    assert len(t["categorias"])>=1, t.get("id") + " sin categorias"
+    assert "costoFijo" in t, t.get("id") + " sin costoFijo"
+print("  ✅ cada trabajo tiene campos requeridos + categorias + costoFijo")
+'
 echo "✅ VAL-01 — COMPLETA"
 ```
 
