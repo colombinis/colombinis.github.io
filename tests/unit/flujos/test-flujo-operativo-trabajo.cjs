@@ -10,8 +10,8 @@
 // 5. Restaurar flujo vuelve a los pasos originales del trabajo
 // 6. Add/delete/reset de la tabla de trabajos sigue funcionando
 const fs = require('fs');
-
-const BASE = 'docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio';
+const path = require('path');
+const BASE = path.join(__dirname, '../../../docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio');
 const htmlPath = `${BASE}/flujo-operativo-trabajo.html`;
 const html = fs.readFileSync(htmlPath, 'utf8');
 const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
@@ -49,7 +49,7 @@ global.confirm = () => true;
 // ---- Mock fetch: lee los JSON REALES del repo ----
 const listado = JSON.parse(fs.readFileSync('src/data/trabajos/listado-trabajos.json', 'utf8'));
 function readTrabajo(id) {
-  const p = `src/data/trabajos/trabajo_${id}.json`;
+  const p = `src/data/trabajos/detalle/trabajo_${id}.json`;
   return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : null;
 }
 global.fetch = (url) => {
