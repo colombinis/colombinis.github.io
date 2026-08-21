@@ -24,7 +24,7 @@
 | CHAT-04 | Análisis: Chrome AI Prompt API vs SLM-chatbot                  | DONE     | `docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-04-analysis-chrome-ai.md` |
 | CHAT-05 | Arquitectura del chatbot (detalle técnico)                     | DONE     | `docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-05-arquitectura-chatbot.md` |
 | CHAT-06 | Decisión: implementar ahora o backlog                          | TODO     | `docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-06-decision-implement.md` |
-| FUT-01  | Evaluar agregar 4to servicio de IA a SACsi post-auditoría      | TODO     | `docs/tareas/MAR-04-servicio-ia.md` |
+| FUT-01  | Evaluar agregar 4to servicio de IA a SACsi post-auditoría      | TODO     | `docs/tareas/archived/MAR-04-servicio-ia.md` |
 
 ## Resumen
 
