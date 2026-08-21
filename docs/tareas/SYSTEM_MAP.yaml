@@ -90,7 +90,7 @@ behaviors:
     desc: "Filtros servicio→categoría + búsqueda textual (inline en catalogo.astro, vanilla JS)"
     source_specs: [CAT-02]    # 🟢 definido en spec FEATURE-2
     depends_on: [data-utils]
-    code_artifact: "catalogo-filtros"   # clase CSS/HTML en src/pages/catalogo.astro
+    code_artifact: "catalogo.astro"   # filtros inline en src/pages/catalogo.astro (vanilla JS)
 
 # ── RECURSOS (dependencias HOJA, NO superficies) ─────────────────
 resources:
