@@ -32,7 +32,7 @@ pnpm-debug.log*
 .npm/
 .playwright-mcp/
 
-# n8n automation runtime data (docker-compose named volumes materialized under docs/)
-docs/automatizacion/postgres_data/
-docs/automatizacion/clientes_db_data/
-docs/automatizacion/n8n_data/
+# n8n automation runtime data (docker-compose named volumes materialized under _ai_context/docs/)
+_ai_context/docs/automatizacion/postgres_data/
+_ai_context/docs/automatizacion/clientes_db_data/
+_ai_context/docs/automatizacion/n8n_data/

@@ -21,7 +21,7 @@ The repo currently holds **two versions**, but they are not equal:
 1. **Astro v7** (`src/` directory) — **official stack**. Builds to `dist/`, deployed via GitHub Pages (`CNAME` → sacsi.com.ar). Make all changes here.
 2. **Static HTML** (`.html` files at root) — **legacy**, being deprecated. Do not build on it. Will be removed in Fase 5.
 
-See `docs/tareas/ARQUITECTURA.md` for the full legacy inventory and cleanup plan.
+See `_ai_context/docs/tareas/ARQUITECTURA.md` for the full legacy inventory and cleanup plan.
 
 ### Astro source structure
 
@@ -43,7 +43,7 @@ Every HTML page repeats the same `:root` variables. Edits must stay in sync with
 - **No CI, no tests, no linter, no formatter, no .gitignore**
 - **No external npm deps** beyond Astro itself (pure vanilla JS for client scripts)
 - **Domain:** sacsi.com.ar (via `CNAME`) — do not change `CNAME` unless asked
-- **Analytics:** GTM + GA4 (`GTM-T7PWJ99` in Layout.astro head; post-deploy: validate events — see `docs/tareas/DEP-01`)
+- **Analytics:** GTM + GA4 (`GTM-T7PWJ99` in Layout.astro head; post-deploy: validate events — see `_ai_context/docs/tareas/DEP-01`)
 - **CI:** `.github/workflows/deploy.yml` (builds Astro and deploys to GitHub Pages on push to `master`)
 
 ## Legacy / do-not-touch files
@@ -70,15 +70,15 @@ Every HTML page repeats the same `:root` variables. Edits must stay in sync with
 | Fase 1 — Structure (brand research, content arch, UI/UX) | ✅ Done |
 | Fase 2 — Build (homepage, service pages, "How we work") | ✅ Done (migrated to Astro; QA re-run on .astro pages) |
 | Fase 3 — Conversion (social proof, FAQ, contact CTA) | ✅ Done |
-| Fase 4 — Growth (SEO, analytics, meta tags) | ✅ Done (GTM `GTM-T7PWJ99` active; post-deploy: validate events — see `docs/tareas/DEP-01`) |
-| Fase 5 — Close (QA on Astro, legacy cleanup, deployment) | ✅ Done (deploy workflow created; post-deploy: Lighthouse > 80 — see `docs/tareas/DEP-01`) |
+| Fase 4 — Growth (SEO, analytics, meta tags) | ✅ Done (GTM `GTM-T7PWJ99` active; post-deploy: validate events — see `_ai_context/docs/tareas/DEP-01`) |
+| Fase 5 — Close (QA on Astro, legacy cleanup, deployment) | ✅ Done (deploy workflow created; post-deploy: Lighthouse > 80 — see `_ai_context/docs/tareas/DEP-01`) |
 
-Full status: `docs/tareas/TODO.md` (active tasks) and `docs/tareas/HISTORIAL-REBRANDING.md` (closed rebranding phases).
+Full status: `_ai_context/docs/tareas/TODO.md` (active tasks) and `_ai_context/docs/tareas/HISTORIAL-REBRANDING.md` (closed rebranding phases).
 
 ## Reference
 
 - `DESIGN.md` — colors, typography, spacing, components (canonical tokens)
-- `docs/tareas/TODO.md` — active task master (source of truth for ongoing work)
-- `docs/tareas/ARQUITECTURA.md` — Astro structure, legacy files, deploy, SEO
-- `docs/tareas/CONTENIDO.md` — content architecture + service copy
-- `docs/tareas/DISENO.md` — design rationale + glossary + token drift
+- `_ai_context/docs/tareas/TODO.md` — active task master (source of truth for ongoing work)
+- `_ai_context/docs/tareas/ARQUITECTURA.md` — Astro structure, legacy files, deploy, SEO
+- `_ai_context/docs/tareas/CONTENIDO.md` — content architecture + service copy
+- `_ai_context/docs/tareas/DISENO.md` — design rationale + glossary + token drift
