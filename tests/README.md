@@ -25,7 +25,7 @@ tests/
 
 ## Inventario completo
 
-Ver `docs/tareas/FEATURE-3-Tests-E2E-UserJourneys/TODO.md` (categorías A-E:
+Ver `_ai_context/docs/tareas/FEATURE-3-Tests-E2E-UserJourneys/TODO.md` (categorías A-E:
 journey mapeo, journey E2E, catálogo E2E, unit flujos, post-deploy).
 
 ## Estado

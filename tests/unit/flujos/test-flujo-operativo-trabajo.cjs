@@ -11,7 +11,7 @@
 // 6. Add/delete/reset de la tabla de trabajos sigue funcionando
 const fs = require('fs');
 const path = require('path');
-const BASE = path.join(__dirname, '../../../docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio');
+const BASE = path.join(__dirname, '../../../_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio');
 const htmlPath = `${BASE}/flujo-operativo-trabajo.html`;
 const html = fs.readFileSync(htmlPath, 'utf8');
 const scriptMatch = html.match(/<script>([\s\S]*?)<\/script>/);
