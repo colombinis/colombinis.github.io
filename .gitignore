@@ -36,3 +36,7 @@ pnpm-debug.log*
 _ai_context/docs/automatizacion/postgres_data/
 _ai_context/docs/automatizacion/clientes_db_data/
 _ai_context/docs/automatizacion/n8n_data/
+
+# generated docs (output of scripts/report-status.py, etc. — not hand-edited)
+_ai_context/docs/tareas/STATUS.md
+_ai_context/docs/tareas/generated/
