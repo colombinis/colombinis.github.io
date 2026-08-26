@@ -74,11 +74,11 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 - **Backlog comercial:** chatbot knowledge/arquitectura documentada, pero **sin decisión** de implementar (`CHAT-06` TODO).
 - **Automatización n8n** (`AUT-01`): workflow y DB diseñados; integración con checkout pendiente.
 
-### D) Tracking y conversión (FASE-4 / FASE-6) — 🟡 Incompleto
+### D) Tracking y conversión (FASE-4 / FASE-6) — 🟢 FASE-4 código / 🟡 DEP-01
 
-- Evento `form_submit`: presente.
-- Evento `whatsapp_click` + verificación en producción: **TODO** (`CON-04`).
-- Validación post-deploy completa (`DEP-01`): **BLOCKED** hasta merge a master + FASE-4.
+- Evento `form_submit`: **DONE** — dispara en envío exitoso del formulario (`contacto.astro`).
+- Evento `whatsapp_click`: **DONE (código, verificado en build)** — listener global en `Layout.astro`, presente en las 36 páginas (`CON-04`). Falta confirmar recepción en GA4 real → `DEP-01`.
+- Validación post-deploy (`DEP-01`): **BLOCKED** en espera de merge `v0_alternativo_rebranding` → `master` (decisión owner). Dependencias técnicas cumplidas (CON-04 DONE, FASE 1-5 completas). Hallazgo corregido: `deploy.yml` ahora usa Node 22 (Astro v7 exige ≥22.12).
 
 ### E) Calidad y pruebas (FEATURE-3) — 🟢 Unit, 🔴 E2E journeys
 
@@ -116,6 +116,8 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 | P2 | Medir antes de automatizar | `CON-04`, `DEP-01` | Datos reales de conversión para definir reglas n8n |
 | P3 | Decidir chatbot | `CHAT-06` | Implementar o mantener backlog |
 | P4 | E2E journeys | `FEATURE-3` | Bloquear regresiones en futuras features |
+
+> **Estado P0 (2026-08-26):** FASE-4 cerrada a nivel código — `CON-04` DONE (eventos `whatsapp_click` global en `Layout.astro` + `form_submit` en contacto, ambos verificados en build de 36 páginas). `DEP-01` desbloqueada en dependencias pero **BLOCKED por merge `v0_alternativo_rebranding` → `master`** (pendiente autorización owner). CI corregido: `deploy.yml` usa Node 22 (Astro v7 exige ≥22.12). Plan de merge: `_ai_context/docs/tareas/FASE-6-Validacion-post-deploy/PLAN-MERGE-v0-a-master.md`.
 
 ---
 
