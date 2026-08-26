@@ -1,12 +1,19 @@
 # CON-04 — Implementar tracking GTM/GA4 (eventos de conversión)
 
+> **gate prd:** §5 Roadmap P0 ("Cerrar FASE-4 y FASE-6") + §4 Métricas de éxito
+> (Conversión: % visitors → WhatsApp/email vía GTM-T7PWJ99 / CON-04).
+
 ## Contexto
 
 Estado verificado 2026-08-04:
 - GTM-T7PWJ99 activo en `src/layouts/Layout.astro` (snippet + noscript).
-- **Solo pageview** — cero `dataLayer.push` en todo `src/`.
-- Form de contacto: `mailto:` via JS (`contacto.astro:256-276`).
-- WhatsApp links: `<a href="https://api.whatsapp.com/send?...">` sin tracking.
+- **Implementado y verificado (2026-08-26):** listener global `whatsapp_click`
+  en `Layout.astro:111-126` (delegación de eventos en `<body>`).
+- **Implementado y verificado (2026-08-26):** `form_submit` en
+  `contacto.astro:117-123` (en envío exitoso del formulario mailto).
+- Ambos eventos presentes en el build (`dist/`, 36 páginas con `whatsapp_click`).
+- **Pendiente de confirmación en producción (DEP-01):** que GTM-T7PWJ99 reenvíe
+  `whatsapp_click` y `form_submit` a GA4 reales.
 
 Sin eventos personalizados, GA4 solo muestra "cuánta gente vino", no
 "quién convirtió". El funnel CON-01 exige medir:
@@ -127,4 +134,7 @@ echo "✅ CON-04 — COMPLETA"
 ```
 
 ## Estado
-TODO → se implementa y verifica en esta fase
+**DONE (código)** — implementado y verificado en build (2026-08-26):
+`whatsapp_click` (Layout global, 36 páginas) y `form_submit` (contacto) presentes
+en `dist/`. La **confirmación de recepción en GA4 real** queda en DEP-01
+(post-merge, validación producción).
