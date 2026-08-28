@@ -1,0 +1,101 @@
+---
+// Componente reutilizable: FAQ con datos desde archivo JSON
+// Fuente única de verdad: src/data/preguntas-frecuentes-solucion.json
+// En la home se muestran solo las preguntas de nivel "general".
+import FAQData from '../data/preguntas-frecuentes-solucion.json';
+---
+
+<style>
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid #E0E0E0;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: var(--spacing-md) 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+    font-family: var(--font-stack);
+  }
+  .faq-question::after {
+    content: '+';
+    font-size: 1.3rem;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+  .faq-question.active::after {
+    content: '−';
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .faq-answer.open {
+    max-height: 500px;
+  }
+  .faq-answer p {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+</style>
+
+<div class="faq-list">
+  {FAQData.preguntas
+    .filter((item) => item.donde_mostrar.nivel === 'general')
+    .map((item, i) => (
+      <div class="faq-item">
+        <button
+          class="faq-question"
+          aria-expanded="false"
+          aria-controls={`faq-answer-${i + 1}`}
+          id={`faq-question-${i + 1}`}
+        >
+          {item.titulo}
+        </button>
+        <div class="faq-answer" id={`faq-answer-${i + 1}`}>
+          <p set:html={item.respuesta} />
+        </div>
+      </div>
+    ))}
+</div>
+
+<script>
+  // Acordeón de FAQ (cliente)
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const answer = this.nextElementSibling as HTMLElement;
+        const isOpen = answer.classList.contains('open');
+
+        // Cerrar todos
+        document.querySelectorAll('.faq-answer.open').forEach(function (a) {
+          a.classList.remove('open');
+        });
+        document.querySelectorAll('.faq-question.active').forEach(function (q) {
+          q.classList.remove('active');
+          q.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          answer.classList.add('open');
+          this.classList.add('active');
+          this.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>

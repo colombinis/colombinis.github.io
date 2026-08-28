@@ -1,0 +1,73 @@
+{
+  "id": "auto-int",
+  "nombre": "Automatización intermedio",
+  "categorias": [
+    "facturacion-cobranzas",
+    "stock-logistica",
+    "reportes-dashboards",
+    "integraciones"
+  ],
+  "precioMin": 1100,
+  "precioMax": 1600,
+  "horasMin": 40,
+  "horasMax": 60,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento integral",
+      "entradas": "Solicitud del cliente",
+      "salidas": "Mapa de procesos + sistemas actuales",
+      "descripcion": "Se documentan procesos manuales, herramientas y datos que circulan",
+      "horas": 5
+    },
+    {
+      "orden": 2,
+      "paso": "Arquitectura de integraciones",
+      "entradas": "Mapa de procesos",
+      "salidas": "Diseño técnico de la solución",
+      "descripcion": "Se definen APIs, bases, flujos y herramientas (n8n, scripts, conectores)",
+      "horas": 5
+    },
+    {
+      "orden": 3,
+      "paso": "Desarrollo de integraciones",
+      "entradas": "Diseño aprobado",
+      "salidas": "Integraciones funcionando (API a API)",
+      "descripcion": "Conexión entre sistemas: facturación, stock, reportes, CRMs",
+      "horas": 15
+    },
+    {
+      "orden": 4,
+      "paso": "Automatización de flujos",
+      "entradas": "Integraciones listas",
+      "salidas": "Workflows automáticos operativos",
+      "descripcion": "Orquestación de tareas: disparadores, condiciones, notificaciones",
+      "horas": 12
+    },
+    {
+      "orden": 5,
+      "paso": "Testing integral",
+      "entradas": "Flujos armados",
+      "salidas": "Escenarios E2E OK",
+      "descripcion": "Pruebas de extremo a extremo con datos reales",
+      "horas": 8
+    },
+    {
+      "orden": 6,
+      "paso": "Documentación y capacitación",
+      "entradas": "Solución probada",
+      "salidas": "Guías + equipo capacitado",
+      "descripcion": "Manual de operación y sesión con el equipo del cliente",
+      "horas": 5
+    },
+    {
+      "orden": 7,
+      "paso": "Estabilización",
+      "entradas": "Solución entregada",
+      "salidas": "Solución estable en producción",
+      "descripcion": "Soporte intensivo las primeras semanas y ajustes",
+      "horas": 6
+    }
+  ]
+}

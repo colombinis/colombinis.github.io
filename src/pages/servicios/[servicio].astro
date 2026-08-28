@@ -1,0 +1,114 @@
+---
+// Route dinámico: detalle de servicio
+// URL: /servicios/<servicio>/
+// Data source: src/data/servicios/servicio_*.json + src/data/categorias/categoria_*.json (normalizados)
+// Reemplaza a: servicios/automatizacion.astro, servicios/software-a-medida.astro, servicios/presencia-online.astro
+// Analogia Laravel: Route::get('/servicios/{servicio}', ...) → ServicioController@show
+import Layout from '../../layouts/Layout.astro';
+import SolucionesSection from '../../components/SolucionesSection.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import { getServicio, getCategoriasByServicio } from '../../lib/data-utils';
+
+interface Props {
+  params: { servicio: string };
+}
+
+// Genera 3 rutas estáticas (una por servicio)
+export async function getStaticPaths() {
+  const { getServicios } = await import('../../lib/data-utils.ts');
+  return getServicios().map((svc) => ({
+    params: { servicio: svc.id },
+  }));
+}
+
+const servicio = getServicio(Astro.params.servicio);
+
+if (!servicio) {
+  throw new Error(`No se encontró servicio=${Astro.params.servicio}`);
+}
+
+const {
+  title: svcTitle,
+  href: svcHref,
+  claim: svcClaim,
+  short: svcShort,
+  hero_label,
+  categoria_section_title,
+  testimonios_section_title,
+  testimonios,
+} = servicio;
+
+const categorias = getCategoriasByServicio(servicio.id);
+---
+
+<Layout
+  title={svcTitle}
+  description={svcShort}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">{hero_label}</p>
+      <h1 class="hero__title">{svcTitle}</h1>
+      <p class="hero__subtitle">
+        {svcShort}
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--whatsapp"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20consultar%20sobre%20{servicio.id}"
+          rel="noopener noreferrer"
+          target="_blank"
+          >Consultar sin cargo</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías con cards -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">{categoria_section_title}</h2>
+      <div class="cards-grid">
+        {categorias.map((cat) => (
+          <article class="service-card">
+            <div class="service-card__icon">{cat.icon}</div>
+            <h3><a href={cat.id.startsWith(servicio.id + '/') ? `${svcHref}${cat.id}/` : `${svcHref}${cat.id}/`} style="color:inherit;text-decoration:none;">{cat.title}</a></h3>
+            <p>{cat.descripcion}</p>
+            <p class="service-card__claim">{cat.claim}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios / Social proof -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">{testimonios_section_title}</h2>
+      <div class="testimonials-grid">
+        {testimonios.map((t) => (
+          <div class="testimonial-card">
+            <p class="testimonial-card__quote">
+              "{t.quote}"
+            </p>
+            <p class="testimonial-card__author">{t.autor}</p>
+            <p class="testimonial-card__role">{t.rol}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Soluciones para tu negocio (componente reutilizable) -->
+  <SolucionesSection />
+</Layout>
+
+<style>
+  .service-card__claim {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--tertiary);
+    margin-top: var(--spacing-xs);
+  }
+</style>

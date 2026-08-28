@@ -1,0 +1,206 @@
+---
+// Route dinámico: detalle de subnivel de solución
+// URL: /servicios/<servicio>/<categoria>/
+// Data source: src/data/servicios/servicio_*.json + src/data/categorias/categoria_*.json (normalizados)
+// Analogia Laravel: Route::get('/servicios/{servicio}/{categoria}', ...) → Service::find($id)->categoria($cat)
+import Layout from '../../../layouts/Layout.astro';
+import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio, getTrabajosByCategoria } from '../../../lib/data-utils';
+
+interface Props {
+  params: { servicio: string; categoria: string };
+}
+
+// Genera 9 rutas estáticas (3 servicios × 3 categorías)
+export async function getStaticPaths() {
+  const paths: { params: { servicio: string; categoria: string } }[] = [];
+  for (const svc of getServicios()) {
+    for (const cat of getCategoriasByServicio(svc.id)) {
+      paths.push({
+        params: { servicio: svc.id, categoria: cat.id },
+      });
+    }
+  }
+  return paths;
+}
+
+const servicio = getServicio(Astro.params.servicio);
+const categoria = getCategoriaByServicio(Astro.params.servicio!, Astro.params.categoria!);
+
+if (!servicio || !categoria) {
+  throw new Error(
+    `No se encontró servicio=${Astro.params.servicio} categoría=${Astro.params.categoria}`
+  );
+}
+
+const { title: svcTitle, href: svcHref } = servicio;
+const { title: catTitle, descripcion, claim, beneficios, casos } = categoria;
+
+// Trabajos asociados a esta categoría (según el campo categorias de cada detalle trabajo_<id>.json)
+const trabajosCategoria = getTrabajosByCategoria(categoria.id);
+
+// Formateo de precios (ARS k) y horas para las tarjetas
+function formatearPrecio(min: number, max: number) {
+  if (min === max) return `$${min}k ARS`;
+  return `$${min}k - $${max}k ARS`;
+}
+function formatearHoras(min: number, max: number) {
+  if (min === max) return `${min}h`;
+  return `${min}-${max}h`;
+}
+
+// Breadcrumb
+const breadcrumb = [
+  { label: 'Inicio', href: '/' },
+  { label: svcTitle, href: svcHref },
+  { label: catTitle, href: Astro.url.pathname },
+];
+---
+
+<Layout
+  title={`${catTitle} | ${svcTitle} | SACsi`}
+  description={descripcion}
+>
+  <!-- Breadcrumb (arriba del hero) -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      {breadcrumb.map((b) => (
+        <li>
+          {b.href ? <a href={b.href}>{b.label}</a> : <span>{b.label}</span>}
+        </li>
+      ))}
+    </ol>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero--detail">
+    <div class="hero__container">
+      <p class="hero__label">{svcTitle.toUpperCase()}</p>
+      <h1 class="hero__title">{catTitle}</h1>
+      <p class="hero__subtitle">{descripcion}</p>
+      <p class="hero__claim">{claim}</p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--whatsapp"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20vi%20su%20web%20y%20quiero%20consultar%20sobre%20{categoria.id}"
+          rel="noopener noreferrer"
+          target="_blank"
+          >Consultar sin cargo</a
+        >
+        <a class="hero__cta-secondary" href="/contacto/">Ver formulario</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios con links a casos -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Beneficios concretos</h2>
+      <div class="cards-grid">
+        {beneficios.map((beneficio) => (
+          <article class="service-card">
+            <div class="service-card__icon">{categoria.icon}</div>
+            <h3>{categoria.title}</h3>
+            <p>{beneficio.texto}</p>
+            {beneficio.caso ? (
+              <a
+                class="service-card__cta"
+                href={`/casos-exito/${beneficio.caso}/`}
+                >Ver caso relacionado</a
+              >
+            ) : (
+              <span class="service-card__cta">Sin caso asociado</span>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- En qué nos especializamos (trabajos con esta categoría) -->
+  {trabajosCategoria.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Nos especializamos en hacer</h2>
+        <div class="cards-grid">
+          {trabajosCategoria.map((trabajo) => (
+            <article class="service-card">
+              <span class="service-card__type">Trabajo</span>
+              <h3>
+                <a href={`/trabajos/${trabajo.id}/`}>{trabajo.nombre}</a>
+              </h3>
+              <p class="service-card__claim">
+                {formatearPrecio(trabajo.precioMin, trabajo.precioMax)} ·{' '}
+                {formatearHoras(trabajo.horasMin, trabajo.horasMax)}
+              </p>
+              <a
+                class="service-card__cta"
+                href={`/trabajos/${trabajo.id}/`}
+                >Ver detalle del trabajo</a
+              >
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Casos relacionados -->
+  {casos.length > 0 && (
+    <section class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">Casos relacionados</h2>
+        <div class="cards-grid">
+          {casos.map((casoSlug) => (
+            <article class="service-card">
+              <div class="service-card__icon">📄</div>
+              <h3>
+                <a href={`/casos-exito/${casoSlug}/`}>Caso: {casoSlug}</a>
+              </h3>
+              <a
+                class="service-card__cta"
+                href={`/casos-exito/${casoSlug}/`}
+                >Ver caso</a
+              >
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  /* Inline styles consistent with global.css vars */
+  .hero--detail {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  .hero__claim {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--tertiary);
+    margin: var(--spacing-sm) 0 var(--spacing-lg);
+  }
+  .breadcrumb {
+    font-size: 0.9rem;
+  }
+  .breadcrumb ol {
+    display: flex;
+    gap: var(--spacing-sm);
+    list-style: none;
+  }
+  .breadcrumb li {
+    color: var(--secondary);
+  }
+  .breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .service-card__cta {
+    color: var(--whatsapp);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+</style>

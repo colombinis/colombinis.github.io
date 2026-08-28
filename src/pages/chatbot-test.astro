@@ -1,0 +1,40 @@
+---
+// Página de pruebas de chatbots — aislada de la home.
+// No indexada y sin enlaces desde la navegación.
+// Incluye los dos chatbots de la fuente (sin tocar la fuente):
+//   - ChatbotSection: Chrome AI (Gemini Nano, promptStreaming)
+//   - ChatbotFAQ: SLM local (Transformers.js)
+import Layout from '../layouts/Layout.astro';
+import ChatbotSection from '../components/ChatbotSection.astro';
+import ChatbotFAQ from '../components/ChatbotFAQ.astro';
+---
+
+<Layout
+  title="Prueba de chatbot"
+  description="Página aislada para probar los chatbots sin afectar la home."
+  robots="noindex, nofollow"
+>
+  <section class="section">
+    <div class="container">
+      <h1 class="section__title">Prueba de chatbot</h1>
+      <p class="section__subtitle">
+        Página aislada para probar los chatbots. No aparece en la navegación ni
+        en la home y está marcada como no indexable.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Chrome AI (Gemini Nano)</h2>
+      <ChatbotSection />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">SLM local (Transformers.js)</h2>
+      <ChatbotFAQ />
+    </div>
+  </section>
+</Layout>

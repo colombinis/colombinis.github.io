@@ -1,0 +1,23 @@
+{
+  "id": "contenido-seo-basico",
+  "servicio_id": "presencia-online",
+  "title": "Contenido y SEO básico",
+  "icon": "📣",
+  "descripcion": "Textos orientados a tu público, estructura semántica y metadatos para aparecer en Google.",
+  "claim": "Que te encuentren, no que te busquen.",
+  "beneficios": [
+    {
+      "texto": "SEO preservado en la migración: sin perder el posicionamiento construido en años.",
+      "caso": "rescate-rendimiento-seguridad-wordpress"
+    },
+    {
+      "texto": "Google vuelve a marcar el sitio como seguro y las ventas se normalizan.",
+      "caso": "rescate-rendimiento-seguridad-wordpress"
+    },
+    {
+      "texto": "Estructura semántica y metadatos pensados para aparecer en Google."
+    }
+  ],
+  "casos": ["rescate-rendimiento-seguridad-wordpress", "tema-wordpress-a-medida-gutenberg"],
+  "trabajos": ["landing", "sitio-pro"]
+}

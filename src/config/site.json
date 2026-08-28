@@ -1,0 +1,42 @@
+{
+  "site": {
+    "name": "SACsi",
+    "tagline": "Soluciones Informáticas",
+    "url": "https://sacsi.com.ar/",
+    "description": "SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
+  },
+  "contact": {
+    "whatsapp": {
+      "phone": "5493415197937",
+      "base_url": "https://api.whatsapp.com/send"
+    },
+    "email": "sacsi@sacsi.com.ar",
+    "phone_display": "+54-341-519-7937",
+    "form_endpoint": "https://formspree.io/f/mljrdlka"
+  },
+  "social": {
+    "instagram": "https://instagram.com/sacsi",
+    "youtube": "https://youtube.com/@sacsi",
+    "linkedin": "https://linkedin.com/company/sacsi",
+    "twitter_site": "@sacsi",
+    "twitter_creator": "@sebastiancolombini"
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Servicios",
+        "href": "/servicios/"
+      },
+      {
+        "label": "Recursos",
+        "href": "/recursos/",
+        "submenu": [
+          { "label": "Blog", "href": "/recursos/blog/" },
+          { "label": "Recursos gratuitos", "href": "/recursos/gratuitos/" },
+          { "label": "Cursos", "href": "/recursos/cursos/" }
+        ]
+      },
+      { "label": "Sobre nosotros", "href": "/sobre-nosotros/" }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "automatizacion",
+  "title": "Automatización de Procesos",
+  "href": "/servicios/automatizacion/",
+  "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo.",
+  "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
+  "hero_label": "AUTOMATIZACIÓN",
+  "categoria_section_title": "¿Qué automatizamos?",
+  "testimonios_section_title": "Beneficios concretos",
+  "testimonios": [
+    {
+      "quote": "Pasamos de cargar 3 horas por día a que el sistema lo haga solo. El retorno fue inmediato.",
+      "autor": "Carina Mendoza",
+      "rol": "Gerenta de Administración — Distribuidora del Sur"
+    },
+    {
+      "quote": "Dejamos de perder ventas por stock desactualizado. Ahora la web refleja lo que tenemos en tiempo real.",
+      "autor": "Gonzalo Martínez",
+      "rol": "Dueño — Ferretería Martínez Hnos."
+    }
+  ],
+  "categorias_ids": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards"]
+}

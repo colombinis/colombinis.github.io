@@ -1,0 +1,24 @@
+{
+  "id": "apps-portales",
+  "servicio_id": "software-a-medida",
+  "title": "Apps y portales",
+  "icon": "📱",
+  "descripcion": "Plataformas web para clientes, proveedores o equipos internos con acceso seguro y roles.",
+  "claim": "Acceso centralizado y seguro.",
+  "beneficios": [
+    {
+      "texto": "Acceso por membresía con cobro recurrente: el cliente paga y entra solo.",
+      "caso": "plataforma-cursos-lms-membresias"
+    },
+    {
+      "texto": "Alta y baja automática de usuarios, sin gestión manual de accesos.",
+      "caso": "plataforma-cursos-lms-membresias"
+    },
+    {
+      "texto": "Progreso por alumno y certificados personalizados que se descargan solos al completar.",
+      "caso": "plataforma-cursos-lms-membresias"
+    }
+  ],
+  "casos": ["plataforma-cursos-lms-membresias"],
+  "trabajos": ["soft-grande"]
+}

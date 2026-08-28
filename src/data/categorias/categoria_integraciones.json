@@ -1,0 +1,24 @@
+{
+  "id": "integraciones",
+  "servicio_id": "software-a-medida",
+  "title": "Integraciones",
+  "icon": "🔌",
+  "descripcion": "Conectamos tus herramientas actuales: CRM, ERP, pasarelas de pago, marketplaces y más.",
+  "claim": "Sin silos de información.",
+  "beneficios": [
+    {
+      "texto": "Pasarelas de pago locales integradas (Mercado Pago) para cobrar y debitar de forma automática.",
+      "caso": "tienda-woocommerce-suscripciones"
+    },
+    {
+      "texto": "WordPress como CMS conectado a un front-end moderno vía WPGraphQL, sin cambiar la herramienta del equipo.",
+      "caso": "wordpress-headless-nextjs"
+    },
+    {
+      "texto": "Emails automáticos en cada hito: cobro, renovación y avisos al cliente.",
+      "caso": "tienda-woocommerce-suscripciones"
+    }
+  ],
+  "casos": ["tienda-woocommerce-suscripciones", "wordpress-headless-nextjs"],
+  "trabajos": ["auto-int", "soft-grande", "hora-tec", "ret-pro"]
+}

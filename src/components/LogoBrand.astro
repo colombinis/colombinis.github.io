@@ -1,0 +1,40 @@
+---
+// Componente reutilizable: Logo SACsi + texto tagline
+// Se usa en Header y Footer.
+// Texto: "Soluciones Informáticas" — solo iniciales S e I en mayúscula
+// Logo: /logo.svg (nuevo branding navy #1A1A2E + blue #0A7CFF)
+const { tagline = "Soluciones Informáticas", "sin-texto": sinTexto = false } = Astro.props;
+---
+
+<style>
+  .logo-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    text-decoration: none;
+    color: var(--primary);
+  }
+
+  .logo-brand__img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+
+  .logo-brand__text {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+  }
+
+  @media (min-width: 601px) {
+    .logo-brand__img {
+      height: 36px;
+    }
+  }
+</style>
+
+<a class="logo-brand" href="/" title="SACsi - Inicio">
+  <img class="logo-brand__img" src="/logo.svg" alt="Logo SACsi" type="image/svg+xml" />
+  {!sinTexto && <span class="logo-brand__text">{tagline}</span>}
+</a>

@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = 'Academia online con LMS y membresías sobre WordPress';
+---
+
+<Layout title={title} description="Caso de éxito: una capacitadora pasó de dar cursos por Zoom y Drive a su propia academia online con acceso por membresía, progreso y certificados automáticos sobre WordPress.">
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">PROYECTO TIPO</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">
+        Una capacitadora que dictaba cursos por Zoom y compartía el material por Drive, con los pagos y accesos gestionados a mano. Quería su propia plataforma con contenido pago, progreso y certificados.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/#casos-exito">Ver otros casos</a>
+        <a class="hero__cta-secondary" href="/contacto/">Consultá por este resultado</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El deseo del cliente</h2>
+      <div class="case-prose">
+        <p>
+          Sus cursos funcionaban, pero la operación era un rompecabezas: cobraba por transferencia, sumaba a cada alumno a mano a una carpeta de Drive, mandaba los links de Zoom por WhatsApp y armaba los certificados uno por uno en un editor de imágenes. Cada nueva camada de alumnos multiplicaba el trabajo administrativo y no escalaba.
+        </p>
+        <p>
+          Su deseo era tener <strong>su propia academia online</strong>: un lugar donde el alumno pagara, entrara solo, viera las clases en orden, avanzara a su ritmo y, al terminar, obtuviera su certificado. Todo <strong>automático, con su marca</strong>, sin que ella tuviera que dar accesos ni perseguir pagos manualmente.
+        </p>
+      </div>
+
+      <div class="case-vision">
+        <p class="case-vision__label">Cómo imaginaba el éxito</p>
+        <p class="case-vision__quote">
+          "Imagino mi academia funcionando sola: el alumno paga, entra, ve las clases en orden, va avanzando y cuando termina descarga su certificado con mi logo. Yo mientras tanto grabo el próximo curso, sin mandar un solo link a mano."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">La solución</h2>
+      <div class="cards-grid">
+        <article class="service-card">
+          <div class="service-card__icon">🎓</div>
+          <h3>Cursos con LMS</h3>
+          <p>Montamos los cursos en una plataforma de aprendizaje online (LearnDash): lecciones en orden, contenido liberado por etapas y evaluaciones al final de cada módulo.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">🔑</div>
+          <h3>Membresías con pago recurrente</h3>
+          <p>El acceso se otorga solo al pagar: membresías con cobro recurrente y altas/bajas automáticas, sin gestión manual de accesos.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">📜</div>
+          <h3>Progreso y certificados</h3>
+          <p>Cada alumno ve su avance y descarga su certificado personalizado al completar el curso. Emails automáticos en cada hito.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Stack técnico</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">WordPress</span>
+        <span class="tech-tag">LearnDash (LMS)</span>
+        <span class="tech-tag">MemberPress</span>
+        <span class="tech-tag">Pagos recurrentes</span>
+        <span class="tech-tag">ACF</span>
+        <span class="tech-tag">Drip content</span>
+        <span class="tech-tag">Integración de email</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            "Dejé de ser la secretaria de mis propios cursos. Ahora la academia funciona sola: los alumnos entran, avanzan y se certifican mientras yo preparo el próximo contenido."
+          </p>
+          <p class="testimonial-card__author">Testimonio tipo — Academia de capacitación profesional</p>
+          <p class="testimonial-card__role">Argentina</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        <div class="metric">
+          <p class="metric__number">300+</p>
+          <p class="metric__label">alumnos activos</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">0</p>
+          <p class="metric__label">accesos dados a mano</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">100%</p>
+          <p class="metric__label">certificados automáticos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Te gustaría un proyecto así?</h2>
+      <p class="cta-final__subtitle">Contanos tu caso y te mostramos cómo montar tu academia online sobre WordPress.</p>
+      <div class="cta-final__actions">
+        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20el%20caso%20de%20academia%20online%20con%20LMS" rel="noopener noreferrer" target="_blank">Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>

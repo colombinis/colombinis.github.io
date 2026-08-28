@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  SACsi Logo - SVG Vectorial
+  ==========================
+  Fondo: azul (#00A1F1) izquierda + naranja (#F65314) derecha con transición diagonal
+  Texto: "SAC" sobre fondo azul (izquierda), "si" sobre fondo naranja (derecha)
+  Tipografía: DejaVu Sans Bold (fallback: Arial, sans-serif)
+  Posiciones: texto centrado horizontalmente en cada sección
+
+  Layout (287x100):
+  - Blue bg: x=0 to ~180 (diagonal boundary varies by row)
+  - Orange bg: x=180 to 287
+  - SAC centered at x~92 (blue section)
+  - si centered at x~230 (orange section)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="287" height="100" viewBox="0 0 287 100">
+  <desc>SACsi logo: diagonal blue+orange background. 'SAC' text on blue (center ~x=92), 'si' text on orange (center ~x=230).</desc>
+
+  <!-- Blue background (left) with diagonal edge -->
+  <path d="M0,0 L175.0,0.0 L178.5,16.0 L182.0,33.0 L186.0,49.0 L183.0,66.0 L179.0,82.0 L175.0,99.0 L0,100 Z" fill="#00A1F1"/>
+
+  <!-- Orange background (right) with diagonal edge -->
+  <path d="M175.0,0.0 L186.5,0 L287,0 L287,100 L182.0,33.0 L186.0,49.0 L183.0,66.0 L179.0,82.0 L178.5,16.0 L175.0,0.0 Z" fill="#F65314"/>
+
+  <!-- Texto "SAC" sobre fondo azul (centrado ~x=92) -->
+  <text x="70" y="62" font-family="'DejaVu Sans', Arial, sans-serif" font-size="44" font-weight="700" fill="#FFFFFF" letter-spacing="-1">SAC</text>
+
+  <!-- Texto "si" sobre fondo naranja (centrado ~x=230) -->
+  <text x="210" y="62" font-family="'DejaVu Sans', Arial, sans-serif" font-size="44" font-weight="700" fill="#FFFFFF" letter-spacing="-1">si</text>
+</svg>

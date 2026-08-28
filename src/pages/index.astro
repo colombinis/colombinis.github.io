@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import config from '../config/site.json';
+import SolucionesSection from '../components/SolucionesSection.astro';
+import CasosCarousel from '../components/CasosCarousel.astro';
+import SocialProofSection from '../components/SocialProofSection.astro';
+import FaqSection from '../components/FaqSection.astro';
+---
+
+<Layout
+  title="Inicio"
+  description="SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
+>
+  <!-- Hero: label + propuesta de valor + CTAs -->
+  <section id="hero" class="hero">
+    <div class="hero__container">
+      <p class="hero__label">SOLUCIONES INFORMÁTICAS</p>
+      <h1 class="hero__title">Tecnología simple para PyMEs que quieren crecer</h1>
+      <p class="hero__subtitle">
+        Automatizamos procesos, desarrollamos software a medida y potenciamos tu presencia online. Más de 15 años ayudando a empresas como la tuya a ganar tiempo, reducir costos y vender más.
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--whatsapp"
+          href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20vi%20su%20web%20y%20quiero%20consultar%20sin%20compromiso`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >Consultar sin cargo</a>
+        <a class="hero__cta-secondary" href="/servicios/">Ver servicios</a>
+      </div>
+    </div>
+
+    <!-- Soluciones para tu negocio (componente reutilizable) -->
+    <SolucionesSection />
+  </section>
+
+  <!-- Carrusel de casos de éxito -->
+  <section id="casos-destacados" class="section section--alt">
+    <div class="hero__cases">
+      <h2 class="section__title">Casos de éxito</h2>
+      <CasosCarousel />
+    </div>
+  </section>
+  <!-- Cómo trabajamos -->
+  <section id="como-trabajamos" class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Cómo trabajamos</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step__number">1</div>
+          <h3>Descubrimiento</h3>
+          <p>
+            Analizamos tu negocio, tus procesos y tus necesidades. Recibís un diagnóstico claro con las oportunidades de mejora identificadas.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">2</div>
+          <h3>Diagnóstico</h3>
+          <p>
+            Evaluamos la mejor solución técnica para tu caso. Recibís una propuesta con alcance, tiempos y presupuesto sin sorpresas.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">3</div>
+          <h3>Prototipo</h3>
+          <p>
+            Construimos una versión funcional de la solución. Recibís entregas periódicas con avances visibles para que puedas sugerir ajustes.
+          </p>
+        </div>
+        <div class="step">
+          <div class="step__number">4</div>
+          <h3>Producción</h3>
+          <p>
+            Ponemos la solución en marcha y te acompañamos. Recibís soporte continuo y garantía de funcionamiento post-entrega.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultados que hablan (componente reutilizable) -->
+  <SocialProofSection />
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section__title">Preguntas frecuentes</h2>
+      <FaqSection />
+    </div>
+  </section>
+
+</Layout>

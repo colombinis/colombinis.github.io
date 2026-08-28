@@ -1,0 +1,28 @@
+{
+  "id": "stock-logistica",
+  "servicio_id": "automatizacion",
+  "title": "Stock y logística",
+  "icon": "📦",
+  "descripcion": "Sincronización de inventario en tiempo real entre tu local, proveedores y canales de venta.",
+  "claim": "Stock siempre al día.",
+  "beneficios": [
+    {
+      "texto": "Inventario que se registra en dos pasos, con validaciones y generación automática de código.",
+      "caso": "tienda-ropa-usada"
+    },
+    {
+      "texto": "Cada carga se publica directo en la tienda online con imágenes, talles y precios sincronizados.",
+      "caso": "tienda-ropa-usada"
+    },
+    {
+      "texto": "Stock sincronizado en tiempo real entre el local y los canales de venta: la web refleja lo que hay.",
+      "caso": "ferreteria-gas-plomeria"
+    },
+    {
+      "texto": "Alertas de mínimo stock para reponer a tiempo y no quedarse sin producto.",
+      "caso": "ferreteria-gas-plomeria"
+    }
+  ],
+  "casos": ["tienda-ropa-usada", "ferreteria-gas-plomeria"],
+  "trabajos": ["auto-int", "ecommerce"]
+}

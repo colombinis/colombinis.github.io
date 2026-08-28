@@ -1,0 +1,28 @@
+{
+  "id": "facturacion-cobranzas",
+  "servicio_id": "automatizacion",
+  "title": "Facturación y cobranzas",
+  "icon": "📊",
+  "descripcion": "Emisión automática de comprobantes, recordatorios de pago y conciliación bancaria sin intervención manual.",
+  "claim": "Reducí errores y olvidos.",
+  "beneficios": [
+    {
+      "texto": "Cobro recurrente automático con Mercado Pago: los pagos entran solos cada mes, sin perseguir transferencias.",
+      "caso": "tienda-woocommerce-suscripciones"
+    },
+    {
+      "texto": "Liquidación automática por venta y pagos a donantes sin mover efectivo ni cargar transferencias a mano.",
+      "caso": "tienda-ropa-usada"
+    },
+    {
+      "texto": "Ingresos previsibles: se sabe cuánto se va a facturar antes de que empiece el mes.",
+      "caso": "tienda-woocommerce-suscripciones"
+    },
+    {
+      "texto": "Menos consultas de \"¿cómo pago?\": el cliente se autogestiona desde su cuenta.",
+      "caso": "tienda-woocommerce-suscripciones"
+    }
+  ],
+  "casos": ["tienda-woocommerce-suscripciones", "tienda-ropa-usada"],
+  "trabajos": ["auto-basico", "auto-int"]
+}

@@ -1,0 +1,339 @@
+---
+import Layout from '../layouts/Layout.astro';
+import config from '../config/site.json';
+
+const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
+---
+
+<Layout title="Contacto" description="Contactanos sin compromiso para tu proyecto. Contanos tu idea y te respondemos en 24 h por WhatsApp, email o redes sociales.">
+  <div class="page-header">
+    <h1>Contactanos</h1>
+    <p class="page-header__subtitle">Estamos listos para escucharte. Respondemos por WhatsApp, mail o las redes que prefieras.</p>
+  </div>
+
+  <section class="contact-section">
+    <div class="contact-grid">
+      <form id="contact-form" class="contact-form" action={config.contact.form_endpoint} method="POST">
+        <input type="hidden" name="_subject" value="Consulta desde sacsi.com.ar" />
+        <input type="hidden" name="_replyto" value="email" />
+        <p class="contact-form__title">Escribinos por formulario</p>
+
+        <div class="contact-form__field">
+          <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+          <input id="contact-email" name="email" type="email" required autocomplete="email" placeholder="tucorreo@ejemplo.com" />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="contact-message">Mensaje <span aria-hidden="true">*</span></label>
+          <textarea id="contact-message" name="message" rows="5" required placeholder="Contanos qué necesitás"></textarea>
+        </div>
+
+        <div class="contact-form__honeypot" aria-hidden="true">
+          <label for="contact-website">No completar este campo</label>
+          <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <p class="contact-form__status" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="contact-form__submit">Enviar mensaje</button>
+      </form>
+
+      <div class="alt-contact">
+        <p class="alt-contact__title">Contactanos a través de:</p>
+        <a
+          class="alt-contact__whatsapp"
+          href={whatsappUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+        >WhatsApp</a>
+        <div class="alt-contact__item">
+          <span>✉</span>
+          <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
+        </div>
+      </div>
+
+      <div class="social-links">
+        <p class="social-links__title">Seguinos en:</p>
+        <div class="social-grid">
+          <a
+            class="social-item"
+            href={config.social.instagram}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label="Instagram"
+          >
+            <span class="social-icon">📷</span>
+            Instagram
+          </a>
+          <a
+            class="social-item"
+            href={config.social.youtube}
+            rel="noopener noreferrer"
+            target="_blank"
+            aria-label="YouTube"
+          >
+            <span class="social-icon">▶️</span>
+            YouTube
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    const statusEl = contactForm.querySelector('.contact-form__status');
+    const submitBtn = contactForm.querySelector('.contact-form__submit');
+
+    contactForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Honeypot anti-spam: si está completo, hay un bot → ignorar silenciosamente
+      const website = contactForm.querySelector('[name="website"]');
+      if (website && website.value) {
+        return;
+      }
+
+      const data = new FormData(contactForm);
+      const email = data.get('email').trim();
+      const message = data.get('message').trim();
+
+      // UI: estado loading
+      statusEl.textContent = 'Enviando...';
+      statusEl.classList.remove('contact-form__status--success', 'contact-form__status--error');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (response.ok) {
+          // Tracking de conversión: solo en envío exitoso
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'form_submit',
+            form_name: 'contacto',
+            lead_email: email,
+          });
+
+          statusEl.textContent = '¡Mensaje enviado! Te respondemos en 24 h.';
+          statusEl.classList.add('contact-form__status--success');
+          contactForm.reset();
+        } else {
+          // Formspree devuelve errores de validación (400) o rate limit (429)
+          let errorText = 'Error al enviar. Por favor, intentá de nuevo.';
+          try {
+            const err = await response.json();
+            if (err.message) errorText = err.message;
+          } catch (e) { /* mantén mensaje genérico */ }
+          statusEl.textContent = errorText;
+          statusEl.classList.add('contact-form__status--error');
+        }
+      } catch (err) {
+        statusEl.textContent = 'Error de conexión. Por favor, escribimos por WhatsApp.';
+        statusEl.classList.add('contact-form__status--error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar mensaje';
+      }
+    });
+  }
+</script>
+
+<style>
+  .page-header {
+    padding: var(--spacing-xxl) var(--spacing-lg) 0;
+    text-align: center;
+  }
+  .page-header__subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 auto var(--spacing-xl);
+    max-width: 560px;
+  }
+  .contact-section {
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xxl);
+  }
+  .contact-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background: var(--surface);
+    border: 1px solid #E8E8E8;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+  }
+  .contact-form__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .contact-form__field label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .contact-form__field input,
+  .contact-form__field textarea {
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--primary);
+    background: #FFFFFF;
+    border: 1.5px solid #DDDDDD;
+    border-radius: var(--rounded-xs);
+    padding: 10px 12px;
+    transition: border-color 0.2s ease;
+  }
+  .contact-form__field input:focus,
+  .contact-form__field textarea:focus {
+    outline: none;
+    border-color: var(--tertiary);
+  }
+  .contact-form__honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  .contact-form__status {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    margin: 0;
+    min-height: 1.2em;
+  }
+  .contact-form__status--success {
+    color: #128C7E;
+    font-weight: 600;
+  }
+  .contact-form__status--error {
+    color: #E53935;
+    font-weight: 500;
+  }
+  .contact-form__submit {
+    background-color: var(--primary);
+    color: #FFFFFF;
+    padding: 14px 24px;
+    border: none;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .contact-form__submit:hover {
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+  }
+  .contact-form__submit:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+  }
+  .contact-form__submit:disabled {
+    opacity: 0.7;
+    cursor: wait;
+  }
+  .alt-contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    text-align: center;
+  }
+  .alt-contact__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+  .alt-contact__item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.93rem;
+  }
+  .alt-contact__item a {
+    color: var(--secondary);
+    font-weight: 500;
+  }
+  .alt-contact__item a:hover {
+    color: var(--tertiary);
+  }
+  .alt-contact__whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+    padding: 14px 24px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 0.93rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+  }
+  .alt-contact__whatsapp:hover {
+    background-color: var(--whatsapp-hover);
+    color: #FFFFFF;
+  }
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: center;
+    text-align: center;
+  }
+  .social-links__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+  .social-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+  .social-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 10px 20px;
+    border-radius: var(--rounded-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.93rem;
+    color: var(--primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .social-item:hover {
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+  }
+  .social-icon {
+    font-size: 1.1rem;
+  }
+</style>

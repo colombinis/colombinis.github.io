@@ -1,0 +1,119 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = 'Marca de café de especialidad con club de suscripción en WooCommerce';
+---
+
+<Layout title={title} description="Caso de éxito: una marca de café que vendía por Instagram lanzó un club de suscripción con cobro recurrente automático y autogestión del cliente sobre WooCommerce.">
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">PROYECTO TIPO</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">
+        Una marca de café de especialidad que vendía por mensajes de Instagram y cobraba por transferencia. Querían un club de suscripción mensual con cobro automático y cero seguimiento manual de pagos.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/#casos-exito">Ver otros casos</a>
+        <a class="hero__cta-secondary" href="/contacto/">Consultá por este resultado</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El deseo del cliente</h2>
+      <div class="case-prose">
+        <p>
+          La marca crecía a pura fuerza de Instagram: el cliente mandaba un DM, coordinaban la molienda, pasaban un alias y esperaban la transferencia. Cada mes tenían que <strong>reescribirle a cada suscriptor recordándole que pague</strong>, chequear comprobantes a mano y anotar en una planilla quién había abonado. A más clientes, más caos.
+        </p>
+        <p>
+          Su deseo era transformar esa venta artesanal en un <strong>club de suscripción de verdad</strong>: que el cliente eligiera su café (grano o molido, tamaño de bolsa), se suscribiera una sola vez y el cobro se hiciera solo todos los meses. Y que pudiera pausar, cambiar o cancelar sin escribirles.
+        </p>
+      </div>
+
+      <div class="case-vision">
+        <p class="case-vision__label">Cómo imaginaba el éxito</p>
+        <p class="case-vision__quote">
+          "Sueño con abrir el panel a fin de mes y ver que los cobros ya se hicieron solos, que a cada suscriptor le sale su café automáticamente y que si alguien quiere pausar el mes que se va de vacaciones, lo haga desde su cuenta sin escribirme a mí."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">La solución</h2>
+      <div class="cards-grid">
+        <article class="service-card">
+          <div class="service-card__icon">☕</div>
+          <h3>Catálogo con variaciones</h3>
+          <p>Catálogo de productos con variaciones de molienda y tamaño, y planes de suscripción mensual, trimestral o por regalo.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">🔄</div>
+          <h3>Cobro recurrente automático</h3>
+          <p>Integramos la pasarela local (Mercado Pago) con el módulo de cobros recurrentes para debitar cada mes sin intervención manual.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">👤</div>
+          <h3>Autogestión del cliente</h3>
+          <p>Panel donde cada suscriptor pausa, cambia de plan o cancela solo, con emails automáticos de cobro y renovación.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Stack técnico</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">WordPress</span>
+        <span class="tech-tag">WooCommerce</span>
+        <span class="tech-tag">WooCommerce Subscriptions</span>
+        <span class="tech-tag">Gateway Mercado Pago</span>
+        <span class="tech-tag">Hooks &amp; Filters</span>
+        <span class="tech-tag">Webhooks</span>
+        <span class="tech-tag">WooCommerce REST API</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            "Pasamos de perseguir transferencias todos los meses a tener ingresos que entran solos. Ahora sé cuánto voy a facturar antes de que empiece el mes."
+          </p>
+          <p class="testimonial-card__author">Testimonio tipo — Marca de café de especialidad</p>
+          <p class="testimonial-card__role">Rosario, Santa Fe</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        <div class="metric">
+          <p class="metric__number">+60%</p>
+          <p class="metric__label">ingresos recurrentes</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">0</p>
+          <p class="metric__label">cobros perseguidos a mano</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">-40%</p>
+          <p class="metric__label">consultas de "¿cómo pago?"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Te gustaría un proyecto así?</h2>
+      <p class="cta-final__subtitle">Contanos tu caso y te mostramos cómo montar tu club de suscripción.</p>
+      <div class="cta-final__actions">
+        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20el%20caso%20de%20tienda%20WooCommerce%20con%20suscripciones" rel="noopener noreferrer" target="_blank">Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>

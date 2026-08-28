@@ -1,0 +1,430 @@
+---
+// Header con: logo + texto "Soluciones Informáticas", navegación jerárquica
+// Menú: Servicios (submenu generado dinámicamente desde src/data/servicios/ + categorias/)
+//       + Recursos (2 niveles desde config) + Sobre nosotros
+// Mobile: hamburguesa; Desktop: dropdowns anidados con flechas
+import LogoBrand from './LogoBrand.astro';
+import config from '../config/site.json';
+import { getNavServicios } from '../lib/data-utils';
+
+// En Astro, el import de config devuelve el JSON parseado.
+const configLinks = config.nav.links;
+
+// Generamos el submenu de Servicios desde datos normalizados.
+// Analogia Laravel: Nav::servicios() → array de { label, href, submenu }
+const serviciosNav = getNavServicios();
+
+// Mezclamos: el primer link "Servicios" pasa a tener submenu dinámico,
+// el resto (Recursos, Sobre nosotros) viene de config.
+const links = configLinks.map((link) =>
+  link.label === 'Servicios'
+    ? { ...link, submenu: serviciosNav }
+    : link
+);
+---
+
+<style>
+  #header-container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--surface);
+    border-bottom: 1px solid #E8E8E8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  header.wrapper {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ---------- Desktop navigation ---------- */
+  nav.desktop-nav {
+    display: none;
+  }
+
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 4px;
+  }
+
+  .nav-link:hover {
+    color: var(--tertiary);
+  }
+
+  .nav-link__arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .nav-item--active > .nav-link__arrow,
+  .nav-item:hover > .nav-link__arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown nivel 2 */
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    background: var(--surface);
+    border: 1px solid #E8E8E8;
+    border-radius: var(--rounded-sm);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: var(--spacing-sm) 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    display: none;
+  }
+
+  .nav-item--active > .nav-dropdown,
+  .nav-item:hover > .nav-dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown,
+  .nav-dropdown__list,
+  .nav-dropdown > li,
+  .nav-dropdown__item,
+  .nav-dropdown--level3,
+  .nav-dropdown--level3 > li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-dropdown__item {
+    position: relative;
+  }
+
+  .nav-dropdown__link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-dropdown__link:hover {
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .nav-dropdown__link__arrow {
+    margin-left: auto;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .nav-dropdown__link:hover .nav-dropdown__link__arrow {
+    color: #FFFFFF;
+  }
+
+  /* Dropdown nivel 3 (anidado dentro de nivel 2) */
+  .nav-dropdown--level3 {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    min-width: 200px;
+    background: var(--surface);
+    border: 1px solid #E8E8E8;
+    border-radius: var(--rounded-sm);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: var(--spacing-sm) 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+    display: none;
+  }
+
+  .nav-dropdown__item--active > .nav-dropdown--level3,
+  .nav-dropdown__item:hover > .nav-dropdown--level3 {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown--level3 .nav-dropdown__link {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .header-cta {
+    display: inline-block;
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .header-cta:hover {
+    background-color: var(--whatsapp-hover);
+  }
+
+  /* ---------- Mobile navigation ---------- */
+  .mobile-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  .nav-menu-mobile {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    gap: var(--spacing-sm);
+    z-index: 100;
+  }
+
+  .nav-menu-mobile.active {
+    display: flex;
+  }
+
+  .nav-menu-mobile .nav-link {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+  }
+
+  @media (min-width: 601px) {
+    .hamburger {
+      display: none;
+    }
+
+    nav.mobile-nav {
+      display: none;
+    }
+
+    nav.desktop-nav {
+      display: block;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav.desktop-nav {
+      display: none;
+    }
+
+    .header-cta {
+      display: none;
+    }
+  }
+</style>
+
+<div id="header-container">
+  <header class="wrapper">
+    <LogoBrand tagline="Soluciones Informáticas" />
+
+    <!-- Desktop navigation -->
+    <nav class="desktop-nav" role="navigation" aria-label="Navegación principal">
+      <ul class="nav-list">
+        {links.map((link) => (
+          <>
+            {link.submenu ? (
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href={link.href}
+                >
+                  {link.label}
+                  <span class="nav-link__arrow" aria-hidden="true">▼</span>
+                </a>
+                <ul class="nav-dropdown" role="menu">
+                  {link.submenu.map((sub) => (
+                    <li class="nav-dropdown__item">
+                      {sub.submenu ? (
+                        <>
+                          <a
+                            class="nav-dropdown__link"
+                            href={sub.href}
+                            role="menuitem"
+                          >
+                            <span>{sub.icon || ''}</span>
+                            {sub.label}
+                            <span class="nav-dropdown__link__arrow" aria-hidden="true">▶</span>
+                          </a>
+                          <ul class="nav-dropdown--level3" role="menu">
+                            {sub.submenu.map((sub2) => (
+                              <li>
+                                <a
+                                  class="nav-dropdown__link"
+                                  href={sub2.href}
+                                  role="menuitem"
+                                >{sub2.label}</a>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
+                      ) : (
+                        <a
+                          class="nav-dropdown__link"
+                          href={sub.href}
+                          role="menuitem"
+                        >
+                          <span>{sub.icon || ''}</span>
+                          {sub.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ) : (
+              <li>
+                <a class="nav-link" href={link.href}>{link.label}</a>
+              </li>
+            )}
+          </>
+        ))}
+        <li>
+          <a
+            class="header-cta"
+            href="/contacto/"
+            >Contacto</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile navigation -->
+    <nav class="mobile-nav" role="navigation" aria-label="Navegación móvil">
+      <button
+        class="hamburger"
+        id="nav-toggle"
+        aria-label="Abrir menú de navegación"
+        aria-controls="nav-menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+      <ul id="nav-menu" class="nav-menu-mobile">
+        {links.map((link) => (
+          <>
+            {link.submenu ? (
+              <li>
+                <details class="nav-mobile-group">
+                  <summary class="nav-link" style="cursor:pointer; list-style:none;">
+                    {link.label} <span style="float:right;">▼</span>
+                  </summary>
+                  {link.submenu.map((sub) => (
+                    <a class="nav-link" href={sub.href} style="padding:6px 0; border-bottom:none;">
+                      {sub.label}
+                    </a>
+                  ))}
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a class="nav-link" href={link.href}>{link.label}</a>
+              </li>
+            )}
+          </>
+        ))}
+        <li>
+          <a class="nav-link" href="/contacto/">Contacto</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</div>
+
+<script>
+  // Toggle del menú móvil
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', function () {
+      const isOpen = menu.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+      );
+    });
+  }
+
+  // Desktop dropdown — toggle hover activo con click también (para touch)
+  document.addEventListener('click', function (e) {
+    // Cerrar dropdowns si se hace click fuera
+    if (!e.target.closest('.nav-item')) {
+      document.querySelectorAll('.nav-item').forEach(function (item) {
+        item.classList.remove('nav-item--active');
+      });
+    }
+  });
+
+  // Toggle de submenues en desktop (click en el link con flecha)
+  document.querySelectorAll('.nav-link').forEach(function (link) {
+    const arrow = link.querySelector('.nav-link__arrow');
+    if (arrow) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const item = link.parentElement;
+        item.classList.toggle('nav-item--active');
+      });
+    }
+  });
+</script>

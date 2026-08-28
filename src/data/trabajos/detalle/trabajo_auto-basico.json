@@ -1,0 +1,63 @@
+{
+  "id": "auto-basico",
+  "nombre": "Automatización básico",
+  "categorias": [
+    "facturacion-cobranzas",
+    "reportes-dashboards"
+  ],
+  "precioMin": 500,
+  "precioMax": 750,
+  "horasMin": 20,
+  "horasMax": 30,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento de proceso",
+      "entradas": "Solicitud del cliente",
+      "salidas": "Documento del proceso actual (pasos, herramientas, fricciones)",
+      "descripcion": "Se mapea qué hace hoy la persona: planilla, mails, tareas manuales",
+      "horas": 3
+    },
+    {
+      "orden": 2,
+      "paso": "Diseño de la automatización",
+      "entradas": "Proceso documentado",
+      "salidas": "Flujo propuesto (qué se conecta con qué)",
+      "descripcion": "Se define el workflow: disparadores, acciones y excepciones",
+      "horas": 3
+    },
+    {
+      "orden": 3,
+      "paso": "Configuración (n8n/Zapier/APIs)",
+      "entradas": "Accesos del cliente",
+      "salidas": "Automatización armada y conectada",
+      "descripcion": "Se arma el workflow con las herramientas que ya usa el cliente",
+      "horas": 8
+    },
+    {
+      "orden": 4,
+      "paso": "Pruebas del flujo",
+      "entradas": "Workflow armado",
+      "salidas": "Casos de prueba OK (incluye excepciones)",
+      "descripcion": "Se corren escenarios reales y se ajustan errores",
+      "horas": 5
+    },
+    {
+      "orden": 5,
+      "paso": "Documentación y entrega",
+      "entradas": "Flujo probado",
+      "salidas": "Guía de uso + flujo entregado",
+      "descripcion": "Se documenta cómo funciona y qué hace cada parte",
+      "horas": 3
+    },
+    {
+      "orden": 6,
+      "paso": "Acompañamiento inicial",
+      "entradas": "Entrega hecha",
+      "salidas": "Cliente usa la automatización solo",
+      "descripcion": "Semanas iniciales de soporte y ajustes menores",
+      "horas": 4
+    }
+  ]
+}
