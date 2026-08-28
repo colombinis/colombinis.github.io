@@ -1,0 +1,124 @@
+{
+  "$schema": "detalle/schema_trabajo.json",
+  "meta": {
+    "fuente": "PRI-02 precios-servicios + PRI-03 breakeven-costos (tarifa real USD 20/h ≈ ARS 22k/h)",
+    "unidades_precio": "ARS k (miles)",
+    "unidades_horas": "horas",
+    "unidades_costo_fijo": "ARS (pesos)",
+    "costo_fijo_default": 0,
+    "objetivo_margen_pct": 14,
+    "actualizado": "2026-08-07"
+  },
+  "trabajos": [
+    {
+      "id": "landing",
+      "nombre": "Landing page",
+      "categorias": ["sitio-web-institucional", "contenido-seo-basico"],
+      "precioMin": 500,
+      "precioMax": 700,
+      "horasMin": 15,
+      "horasMax": 20,
+      "costoFijo": 0,
+      "nota": "Ajustado en PRI-03 de $250-400k a $500-700k para cubrir 15-20h @22k/h con margen 14-52%"
+    },
+    {
+      "id": "sitio-pro",
+      "nombre": "Sitio pro",
+      "categorias": ["sitio-web-institucional", "contenido-seo-basico"],
+      "precioMin": 600,
+      "precioMax": 1000,
+      "horasMin": 25,
+      "horasMax": 35,
+      "costoFijo": 0,
+      "nota": "Margen +9% a +30% con tarifa real"
+    },
+    {
+      "id": "ecommerce",
+      "nombre": "E-commerce",
+      "categorias": ["tienda-online", "stock-logistica"],
+      "precioMin": 1200,
+      "precioMax": 2000,
+      "horasMin": 50,
+      "horasMax": 80,
+      "costoFijo": 150,
+      "nota": "Incluye pasarela + gestión envíos + sincronización stock"
+    },
+    {
+      "id": "auto-basico",
+      "nombre": "Automatización básico",
+      "categorias": ["facturacion-cobranzas", "reportes-dashboards"],
+      "precioMin": 360,
+      "precioMax": 580,
+      "horasMin": 16,
+      "horasMax": 26,
+      "costoFijo": 0,
+      "nota": "Flujo simple: 1-2 herramientas, output en Google Sheets/Docs"
+    },
+    {
+      "id": "auto-int",
+      "nombre": "Automatización intermedio",
+      "categorias": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards", "integraciones"],
+      "precioMin": 580,
+      "precioMax": 920,
+      "horasMin": 26,
+      "horasMax": 42,
+      "costoFijo": 200,
+      "nota": "Flujo de 3-4 herramientas con sync bidireccional + integración ERP"
+    },
+    {
+      "id": "soft-chico",
+      "nombre": "Software chico",
+      "categorias": ["sistemas-gestion"],
+      "precioMin": 280,
+      "precioMax": 420,
+      "horasMin": 12,
+      "horasMax": 19,
+      "costoFijo": 0,
+      "nota": "Admin simple con alta/baja + 1 reporte, sin autenticando ni sync con terceros"
+    },
+    {
+      "id": "soft-grande",
+      "nombre": "Software grande",
+      "categorias": ["sistemas-gestion", "integraciones", "apps-portales"],
+      "precioMin": 1200,
+      "precioMax": 2200,
+      "horasMin": 50,
+      "horasMax": 100,
+      "costoFijo": 300,
+      "nota": "Sistema completo con auth, sync, API propia, y 3+ roles"
+    },
+    {
+      "id": "hora-tec",
+      "nombre": "Hora técnica",
+      "categorias": ["integraciones", "sistemas-gestion"],
+      "precioMin": 18,
+      "precioMax": 18,
+      "horasMin": 1,
+      "horasMax": 1,
+      "costoFijo": 0,
+      "nota": "1h técnica para consultas puntuales, debug o asistencia"
+    },
+    {
+      "id": "ret-basico",
+      "nombre": "Retainer básico",
+      "categorias": ["sitio-web-institucional", "reportes-dashboards"],
+      "precioMin": 600,
+      "precioMax": 800,
+      "horasMin": 27,
+      "horasMax": 36,
+      "costoFijo": 0,
+      "nota": "8h/mes dedicadas a automatización + reportes + casos críticos"
+    },
+    {
+      "id": "ret-pro",
+      "nombre": "Retainer pro",
+      "categorias": ["sitio-web-institucional", "sistemas-gestion", "integraciones"],
+      "precioMin": 1300,
+      "precioMax": 1900,
+      "horasMin": 59,
+      "horasMax": 86,
+      "costoFijo": 0,
+      "nota": "20h/mes dedicadas a mantenimiento y evolución continua + prioridad absoluta"
+    }
+  ]
+}

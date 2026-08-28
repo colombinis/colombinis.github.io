@@ -1,0 +1,247 @@
+{
+  "servicios": [
+    {
+      "id": "automatizacion",
+      "title": "Automatización de Procesos",
+      "href": "/servicios/automatizacion/",
+      "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo.",
+      "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
+      "categorias": [
+        {
+          "id": "facturacion-cobranzas",
+          "title": "Facturación y cobranzas",
+          "icon": "📊",
+          "descripcion": "Emisión automática de comprobantes, recordatorios de pago y conciliación bancaria sin intervención manual.",
+          "claim": "Reducí errores y olvidos.",
+          "beneficios": [
+            {
+              "texto": "Cobro recurrente automático con Mercado Pago: los pagos entran solos cada mes, sin perseguir transferencias.",
+              "caso": "tienda-woocommerce-suscripciones"
+            },
+            {
+              "texto": "Liquidación automática por venta y pagos a donantes sin mover efectivo ni cargar transferencias a mano.",
+              "caso": "tienda-ropa-usada"
+            },
+            {
+              "texto": "Ingresos previsibles: se sabe cuánto se va a facturar antes de que empiece el mes.",
+              "caso": "tienda-woocommerce-suscripciones"
+            },
+            {
+              "texto": "Menos consultas de \"¿cómo pago?\": el cliente se autogestiona desde su cuenta.",
+              "caso": "tienda-woocommerce-suscripciones"
+            }
+          ],
+          "casos": ["tienda-woocommerce-suscripciones", "tienda-ropa-usada"]
+        },
+        {
+          "id": "stock-logistica",
+          "title": "Stock y logística",
+          "icon": "📦",
+          "descripcion": "Sincronización de inventario en tiempo real entre tu local, proveedores y canales de venta.",
+          "claim": "Stock siempre al día.",
+          "beneficios": [
+            {
+              "texto": "Inventario que se registra en dos pasos, con validaciones y generación automática de código.",
+              "caso": "tienda-ropa-usada"
+            },
+            {
+              "texto": "Cada carga se publica directo en la tienda online con imágenes, talles y precios sincronizados.",
+              "caso": "tienda-ropa-usada"
+            },
+            {
+              "texto": "Stock sincronizado en tiempo real entre el local y los canales de venta: la web refleja lo que hay.",
+              "caso": "ferreteria-gas-plomeria"
+            },
+            {
+              "texto": "Alertas de mínimo stock para reponer a tiempo y no quedarse sin producto.",
+              "caso": "ferreteria-gas-plomeria"
+            }
+          ],
+          "casos": ["tienda-ropa-usada", "ferreteria-gas-plomeria"]
+        },
+        {
+          "id": "reportes-dashboards",
+          "title": "Reportes y dashboards",
+          "icon": "📈",
+          "descripcion": "Informes automáticos de ventas, costos y desempeño. Recibirlos por mail o acceder a un panel en línea.",
+          "claim": "Decisiones con datos, no con corazonadas.",
+          "beneficios": [
+            {
+              "texto": "Ver el estado del negocio sin planillas: el panel muestra cobros, ventas y desempeño al instante.",
+              "caso": "tienda-woocommerce-suscripciones"
+            },
+            {
+              "texto": "Seguimiento centralizado de prestaciones y autorizaciones para rendir a obras sociales.",
+              "caso": "consultorio-psicologia"
+            },
+            {
+              "texto": "Decisiones con datos reales: informes automáticos sin armar planillas a mano."
+            }
+          ],
+          "casos": ["tienda-woocommerce-suscripciones", "consultorio-psicologia"]
+        }
+      ]
+    },
+    {
+      "id": "software-a-medida",
+      "title": "Software a Medida",
+      "href": "/servicios/software-a-medida/",
+      "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido.",
+      "short": "Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.",
+      "categorias": [
+        {
+          "id": "sistemas-gestion",
+          "title": "Sistemas de gestión",
+          "icon": "🛠️",
+          "descripcion": "Paneles administrativos, control de stock, facturación y reportes adaptados a tu operación.",
+          "claim": "Hasta un 50% más rápido en procesos clave.",
+          "beneficios": [
+            {
+              "texto": "Agenda online autogestionada: los pacientes reservan solos y desaparecen los turnos cruzados.",
+              "caso": "consultorio-psicologia"
+            },
+            {
+              "texto": "Recordatorios automáticos de turno y lista de espera inteligente.",
+              "caso": "consultorio-psicologia"
+            },
+            {
+              "texto": "Alquiler de espacios con reservas automáticas y reglas de precio por franja horaria.",
+              "caso": "consultorio-psicologia"
+            },
+            {
+              "texto": "Presentación centralizada a obras sociales con seguimiento y facturación unificada.",
+              "caso": "consultorio-psicologia"
+            }
+          ],
+          "casos": ["consultorio-psicologia"]
+        },
+        {
+          "id": "integraciones",
+          "title": "Integraciones",
+          "icon": "🔌",
+          "descripcion": "Conectamos tus herramientas actuales: CRM, ERP, pasarelas de pago, marketplaces y más.",
+          "claim": "Sin silos de información.",
+          "beneficios": [
+            {
+              "texto": "Pasarelas de pago locales integradas (Mercado Pago) para cobrar y debitar de forma automática.",
+              "caso": "tienda-woocommerce-suscripciones"
+            },
+            {
+              "texto": "WordPress como CMS conectado a un front-end moderno vía WPGraphQL, sin cambiar la herramienta del equipo.",
+              "caso": "wordpress-headless-nextjs"
+            },
+            {
+              "texto": "Emails automáticos en cada hito: cobro, renovación y avisos al cliente.",
+              "caso": "tienda-woocommerce-suscripciones"
+            }
+          ],
+          "casos": ["tienda-woocommerce-suscripciones", "wordpress-headless-nextjs"]
+        },
+        {
+          "id": "apps-portales",
+          "title": "Apps y portales",
+          "icon": "📱",
+          "descripcion": "Plataformas web para clientes, proveedores o equipos internos con acceso seguro y roles.",
+          "claim": "Acceso centralizado y seguro.",
+          "beneficios": [
+            {
+              "texto": "Acceso por membresía con cobro recurrente: el cliente paga y entra solo.",
+              "caso": "plataforma-cursos-lms-membresias"
+            },
+            {
+              "texto": "Alta y baja automática de usuarios, sin gestión manual de accesos.",
+              "caso": "plataforma-cursos-lms-membresias"
+            },
+            {
+              "texto": "Progreso por alumno y certificados personalizados que se descargan solos al completar.",
+              "caso": "plataforma-cursos-lms-membresias"
+            }
+          ],
+          "casos": ["plataforma-cursos-lms-membresias"]
+        }
+      ]
+    },
+    {
+      "id": "presencia-online",
+      "title": "Presencia Online",
+      "href": "/servicios/presencia-online/",
+      "claim": "Llevá tu negocio a internet y empezá a vender 24/7.",
+      "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compren sin vueltas.",
+      "categorias": [
+        {
+          "id": "sitio-web-institucional",
+          "title": "Sitio web institucional",
+          "icon": "🌐",
+          "descripcion": "Diseño limpio, móvil-first, optimizado para buscadores y enfocado en convertir visitas en consultas.",
+          "claim": "Tu mejor empleado, 24/7.",
+          "beneficios": [
+            {
+              "texto": "Tema a medida sin page builders: el equipo publica contenido sin romper el diseño.",
+              "caso": "tema-wordpress-a-medida-gutenberg"
+            },
+            {
+              "texto": "Identidad visual propia, no una plantilla reconocible.",
+              "caso": "tema-wordpress-a-medida-gutenberg"
+            },
+            {
+              "texto": "Carga hasta 75% más rápida al sacar el peso de los page builders.",
+              "caso": "tema-wordpress-a-medida-gutenberg"
+            },
+            {
+              "texto": "Sitio estable ante picos de tráfico, sin caídas en notas virales.",
+              "caso": "wordpress-headless-nextjs"
+            }
+          ],
+          "casos": ["tema-wordpress-a-medida-gutenberg", "wordpress-headless-nextjs"]
+        },
+        {
+          "id": "tienda-online",
+          "title": "Tienda online",
+          "icon": "🛒",
+          "descripcion": "Catálogo, carrito, pasarelas de pago y gestión de envíos. Sin suscripciones ocultas ni comisiones abusivas.",
+          "claim": "Vendé sin depender de terceros.",
+          "beneficios": [
+            {
+              "texto": "Tienda online que trabaja sola: se actualizan precio y stock sin mantenimiento diario.",
+              "caso": "ferreteria-gas-plomeria"
+            },
+            {
+              "texto": "Catálogo, carrito, pagos y envíos integrados sin suscripciones ocultas.",
+              "caso": "ferreteria-gas-plomeria"
+            },
+            {
+              "texto": "Club de suscripción con cobro recurrente automático y autogestión del cliente.",
+              "caso": "tienda-woocommerce-suscripciones"
+            },
+            {
+              "texto": "Recuperación de una tienda hackeada sin perder catálogo ni posicionamiento.",
+              "caso": "rescate-rendimiento-seguridad-wordpress"
+            }
+          ],
+          "casos": ["ferreteria-gas-plomeria", "tienda-woocommerce-suscripciones", "rescate-rendimiento-seguridad-wordpress", "tienda-ropa-usada"]
+        },
+        {
+          "id": "contenido-seo-basico",
+          "title": "Contenido y SEO básico",
+          "icon": "📣",
+          "descripcion": "Textos orientados a tu público, estructura semántica y metadatos para aparecer en Google.",
+          "claim": "Que te encuentren, no que te busquen.",
+          "beneficios": [
+            {
+              "texto": "SEO preservado en la migración: sin perder el posicionamiento construido en años.",
+              "caso": "rescate-rendimiento-seguridad-wordpress"
+            },
+            {
+              "texto": "Google vuelve a marcar el sitio como seguro y las ventas se normalizan.",
+              "caso": "rescate-rendimiento-seguridad-wordpress"
+            },
+            {
+              "texto": "Estructura semántica y metadatos pensados para aparecer en Google."
+            }
+          ],
+          "casos": ["rescate-rendimiento-seguridad-wordpress", "tema-wordpress-a-medida-gutenberg"]
+        }
+      ]
+    }
+  ]
+}

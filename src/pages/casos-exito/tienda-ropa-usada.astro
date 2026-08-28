@@ -1,0 +1,84 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = 'Tienda de ropa usada con pagos automáticos a donantes';
+---
+
+<Layout title={title} description="Caso de éxito: digitalización de una tienda de ropa usada con pagos automáticos a donantes y catálogo online.">
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">CASO DE ÉXITO</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">
+        Cómo una PyME de ropa usada escaló registrando prendas en dos pasos, publicando automáticamente y pagando a donantes sin mover efectivo.
+      </p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/#casos-exito">Ver otros casos</a>
+        <a class="hero__cta-secondary" href="/contacto/">Consultá por este resultado</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El problema</h2>
+      <div style="max-width:720px;margin:0 auto;color:var(--secondary);">
+        <p>El administrativo se comía gran parte del día: cargar stock, sacar fotos, publicar en la tienda y conciliar los pagos de los donantes. Crecían las ventas pero también los errores y las horas de trabajo.</p>
+      </div>
+
+      <h2 class="section__title" style="margin-top:var(--spacing-xxl);">La solución</h2>
+      <div class="cards-grid">
+        <article class="service-card">
+          <div class="service-card__icon">📦</div>
+          <h3> Registro express</h3>
+          <p>Formulario guiado para cargar prendas en dos pasos, con validaciones y generación automática de código.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">🖼️</div>
+          <h3>Publicación automática</h3>
+          <p>Cada carga se publica directo en la tienda online, con imágenes, talles y precios sincronizados.</p>
+        </article>
+        <article class="service-card">
+          <div class="service-card__icon">💸</div>
+          <h3>Pagos a donantes</h3>
+          <p>Liquidación automática por venta y payout a donantes sin mover efectivo ni cargar transferencias manualmente.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">
+            "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock."
+          </p>
+          <p class="testimonial-card__author">Dueña — Tienda de ropa usada</p>
+          <p class="testimonial-card__role">Rosario, Santa Fe</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        <div class="metric">
+          <p class="metric__number">70%</p>
+          <p class="metric__label">menos tiempo administrativo</p>
+        </div>
+        <div class="metric">
+          <p class="metric__number">2</p>
+          <p class="metric__label">pasos por carga de prenda</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <h2>¿Querés un resultado igual?</h2>
+      <p class="cta-final__subtitle">Contanos tu caso y te mostramos cómo aplicar la misma lógica a tu negocio.</p>
+      <div class="cta-final__actions">
+        <a class="cta-final__whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20el%20caso%20de%20tienda%20de%20ropa%20usada" rel="noopener noreferrer" target="_blank">Escribinos por WhatsApp</a>
+        <a class="cta-final__outline" href="/contacto/">Completá el formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>

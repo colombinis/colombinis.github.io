@@ -1,0 +1,732 @@
+---
+// Ruta dinámica: detalle de cada trabajo (PDP de e-commerce)
+// URL: /trabajos/<id>/
+// Data source: src/data/trabajos/listado-trabajos.json + src/data/trabajos/detalle/trabajo_<id>.json
+// Patrón: Product Detail Page — breadcrumb, precio desde*, qué incluye,
+//         proceso, trabajos relacionados, FAQ y CTA final.
+import Layout from '../../layouts/Layout.astro';
+import config from '../../config/site.json';
+import FAQData from '../../data/preguntas-frecuentes-solucion.json';
+import {
+  getTrabajos,
+  getTrabajoDetalle,
+  getCategoria,
+  getServicio,
+} from '../../lib/data-utils';
+
+interface Props {
+  params: { trabajo: string };
+}
+
+// Genera una ruta estática por cada trabajo
+export async function getStaticPaths() {
+  return getTrabajos().map((t) => ({
+    params: { trabajo: t.id },
+  }));
+}
+
+const trabajoId = Astro.params.trabajo;
+const trabajo = getTrabajos().find((t) => t.id === trabajoId);
+
+if (!trabajo) {
+  throw new Error(`No se encontró el trabajo: ${trabajoId}`);
+}
+
+const detalle = getTrabajoDetalle(trabajo.id);
+const flujo = detalle?.flujo ?? [];
+
+// --- Formatos de presentación ---
+// Los precios de los datos están en ARS "k" (miles): 500 → $500.000
+const arsFormatter = new Intl.NumberFormat('es-AR', {
+  style: 'currency',
+  currency: 'ARS',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+});
+
+function formatearARS(miles: number): string {
+  return arsFormatter.format(Math.round(miles * 1000));
+}
+
+function formatearHoras(min: number, max: number): string {
+  return min === max ? `${min} h` : `${min}-${max} h`;
+}
+
+// --- Categorías + breadcrumb (Inicio › Servicio › Categoría › Trabajo) ---
+const categorias = (trabajo.categorias ?? [])
+  .map((id) => getCategoria(id))
+  .filter((c): c is NonNullable<typeof c> => Boolean(c));
+
+const categoriaPrincipal = categorias[0];
+const servicio = categoriaPrincipal ? getServicio(categoriaPrincipal.servicio_id) : undefined;
+
+const breadcrumb = [
+  { label: 'Inicio', href: '/' },
+  ...(servicio ? [{ label: servicio.title, href: servicio.href }] : []),
+  ...(servicio && categoriaPrincipal
+    ? [{ label: categoriaPrincipal.title, href: `${servicio.href}${categoriaPrincipal.id}/` }]
+    : []),
+  { label: trabajo.nombre, href: Astro.url.pathname },
+];
+
+// --- Descripción (meta + bloque de producto) ---
+const descripcion =
+  detalle?.flujo?.[0]?.descripcion ||
+  'Un paquete de trabajo estructurado para resolver un desafío puntual de tu negocio.';
+
+// --- Trabajos relacionados (comparten al menos una categoría) ---
+const relacionados = getTrabajos()
+  .filter(
+    (t) =>
+      t.id !== trabajo.id &&
+      (t.categorias ?? []).some((cat) => (trabajo.categorias ?? []).includes(cat))
+  )
+  .slice(0, 3);
+
+// --- FAQ del PDP: generales + específicas de la categoría ---
+const faqs = FAQData.preguntas.filter(
+  (q) =>
+    q.donde_mostrar.nivel === 'general' ||
+    (categoriaPrincipal && q.donde_mostrar.categoria === categoriaPrincipal.id)
+);
+
+// --- Structured data (schema.org Product) ---
+const jsonLdProduct = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: trabajo.nombre,
+  description: descripcion,
+  ...(categoriaPrincipal ? { category: categoriaPrincipal.title } : {}),
+  offers: {
+    '@type': 'AggregateOffer',
+    priceCurrency: 'ARS',
+    lowPrice: trabajo.precioMin * 1000,
+    highPrice: trabajo.precioMax * 1000,
+    availability: 'https://schema.org/InStock',
+  },
+};
+
+// --- Links de contacto ---
+const whatsappUrl =
+  `${config.contact.whatsapp.base_url}?` +
+  new URLSearchParams({
+    phone: config.contact.whatsapp.phone,
+    text: `Hola, vi el trabajo "${trabajo.nombre}" y quiero consultarlo.`,
+  }).toString();
+
+const esRango = trabajo.precioMax > trabajo.precioMin;
+const totalPasos = flujo.length;
+const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
+---
+
+<Layout title={trabajo.nombre} description={descripcion}>
+  <!-- Structured data del producto -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdProduct)} />
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      {breadcrumb.map((item) => (
+        <li>
+          {item.href === Astro.url.pathname ? (
+            <span aria-current="page">{item.label}</span>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+
+  <!-- Producto: info + caja de precio / compra -->
+  <section class="pdp">
+    <div class="container pdp__grid">
+      <div class="pdp__left">
+        {categoriaPrincipal && (
+          <div class="pdp__media" aria-hidden="true">
+            <span class="pdp__media-icon">{categoriaPrincipal.icon}</span>
+            <span class="pdp__media-label">{categoriaPrincipal.title}</span>
+          </div>
+        )}
+        <div class="pdp__info">
+          <span class="pdp__tag">Trabajo a medida</span>
+          <h1 class="pdp__title">{trabajo.nombre}</h1>
+          <p class="pdp__desc">{descripcion}</p>
+          <ul class="pdp__chips">
+            <li>Tiempo estimado: {horasTotales}</li>
+            {totalPasos > 0 && (
+              <li>{totalPasos} {totalPasos === 1 ? 'paso' : 'pasos'} de ejecución</li>
+            )}
+          </ul>
+          {categorias.length > 0 && (
+            <div class="pdp__cats">
+              {categorias.map((cat) => (
+                <span class="pdp__cat">{cat.title}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <aside class="pdp__buybox" aria-label="Precio y consulta">
+        <p class="pdp__price-label">
+          Precio desde<sup aria-hidden="true">*</sup>
+        </p>
+        <p class="pdp__price">{formatearARS(trabajo.precioMin)}</p>
+        {esRango && <p class="pdp__price-old">{formatearARS(trabajo.precioMax)}</p>}
+        <p class="pdp__note">
+          <sup aria-hidden="true">*</sup>
+          Precios expresados en pesos argentinos (ARS) y válidos para clientes que ya tienen
+          productos contratados con SACsi.
+        </p>
+        <div class="pdp__actions">
+          <a
+            class="pdp__cta pdp__cta--whatsapp"
+            href={whatsappUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+            >Consultar por WhatsApp</a
+          >
+          <a class="pdp__cta pdp__cta--outline" href="/contacto/">Dejar una consulta</a>
+        </div>
+        <ul class="pdp__trust">
+          <li>Primera consulta sin cargo</li>
+          <li>Presupuesto claro y sin compromiso</li>
+          <li>Avances en cada etapa</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Qué incluye (especificaciones del producto) -->
+  {flujo.length > 0 && (
+    <section class="section section--alt" aria-labelledby="incluye-titulo">
+      <div class="container">
+        <h2 class="section__title" id="incluye-titulo">Qué incluye este trabajo</h2>
+        <div class="incluye__grid">
+          <div class="incluye__col">
+            <h3 class="incluye__subtitle">Recibís</h3>
+            <ul class="incluye__list">
+              {flujo.map((paso) => (
+                <li class="incluye__item">
+                  <span class="incluye__num">{paso.orden}</span>
+                  <span>{paso.salidas}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="incluye__col">
+            <h3 class="incluye__subtitle">Qué necesitamos de vos</h3>
+            <ul class="incluye__list">
+              {flujo.map((paso) => (
+                <li class="incluye__item">
+                  <span class="incluye__num">{paso.orden}</span>
+                  <span>{paso.entradas}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Cómo se ejecuta (proceso) -->
+  {flujo.length > 0 && (
+    <section class="section" aria-labelledby="proceso-titulo">
+      <div class="container">
+        <h2 class="section__title" id="proceso-titulo">Cómo se ejecuta</h2>
+        <p class="pasos__intro">
+          El trabajo se entrega en {totalPasos} pasos ordenados, con avances visibles en cada
+          etapa y una estimación de horas.
+        </p>
+        <ol class="pasos">
+          {flujo.map((paso) => (
+            <li class="paso">
+              <div class="paso__num" aria-hidden="true">{paso.orden}</div>
+              <div class="paso__body">
+                <div class="paso__head">
+                  <h3 class="paso__title">{paso.paso}</h3>
+                  <span class="paso__horas">{paso.horas} h</span>
+                </div>
+                <p class="paso__desc">{paso.descripcion}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  )}
+
+  <!-- Trabajos relacionados (cross-sell) -->
+  {relacionados.length > 0 && (
+    <section class="section section--alt" aria-labelledby="relacionados-titulo">
+      <div class="container">
+        <h2 class="section__title" id="relacionados-titulo">Trabajos relacionados</h2>
+        <div class="cards-grid">
+          {relacionados.map((t) => {
+            const resumen = getTrabajoDetalle(t.id)?.flujo?.[0]?.descripcion || '';
+            return (
+              <article class="service-card">
+                <span class="service-card__type">Trabajo</span>
+                <h3>
+                  <a href={`/trabajos/${t.id}/`}>{t.nombre}</a>
+                </h3>
+                <p class="service-card__claim">
+                  Desde {formatearARS(t.precioMin)} · {formatearHoras(t.horasMin, t.horasMax)}
+                </p>
+                {resumen && <p>{resumen}</p>}
+                <a class="service-card__cta" href={`/trabajos/${t.id}/`}
+                  >Ver trabajo</a
+                >
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- FAQ -->
+  <section class="section" aria-labelledby="faq-titulo">
+    <div class="container">
+      <h2 class="section__title" id="faq-titulo">Preguntas frecuentes</h2>
+      <div class="faq-list">
+        {faqs.map((faq, i) => (
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+              aria-expanded="false"
+              aria-controls={`faq-answer-${i}`}
+              id={`faq-question-${i}`}
+            >
+              {faq.titulo}
+            </button>
+            <div class="faq-answer" id={`faq-answer-${i}`}>
+              <p set:html={faq.respuesta} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="cta-final">
+    <div class="container">
+      <h2>¿{trabajo.nombre} es lo que tu negocio necesita?</h2>
+      <p class="cta-final__subtitle">
+        Contanos tu proyecto sin compromiso. En 15 minutos sabemos si podemos ayudarte y cómo.
+      </p>
+      <div class="cta-final__actions">
+        <a
+          class="cta-final__whatsapp"
+          href={whatsappUrl}
+          rel="noopener noreferrer"
+          target="_blank"
+          >Consultar por WhatsApp</a
+        >
+        <a class="cta-final__outline" href="/contacto/">Ir al formulario</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  // Acordeón de FAQ del PDP
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      const item = this.closest('.faq-item') as HTMLElement;
+      const answer = item.querySelector('.faq-answer') as HTMLElement;
+      const isOpen = this.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll('.faq-question[aria-expanded="true"]').forEach(function (openBtn) {
+        openBtn.setAttribute('aria-expanded', 'false');
+        const openItem = (openBtn as HTMLElement).closest('.faq-item') as HTMLElement;
+        openItem.querySelector('.faq-answer')?.classList.remove('open');
+      });
+
+      if (!isOpen) {
+        this.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    });
+  });
+</script>
+
+<style>
+  /* ---------- Breadcrumb ---------- */
+  .breadcrumb {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: var(--spacing-lg) var(--spacing-md) 0;
+    font-size: 0.9rem;
+  }
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .breadcrumb li {
+    color: var(--secondary);
+  }
+  .breadcrumb li + li::before {
+    content: '›';
+    margin: 0 var(--spacing-sm);
+    color: var(--muted);
+  }
+  .breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb [aria-current='page'] {
+    color: var(--tertiary-dark);
+    font-weight: 600;
+  }
+
+  /* ---------- Layout del producto ---------- */
+  .pdp {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  .pdp__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  /* Media / galería decorativa */
+  .pdp__media {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xxl) var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #ECECEF;
+    border-radius: var(--rounded-md);
+    text-align: center;
+  }
+  .pdp__media-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+  }
+  .pdp__media-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+  }
+
+  /* Info del producto */
+  .pdp__tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+    background: rgba(0, 122, 255, 0.08);
+    border-radius: var(--rounded-full);
+    padding: 4px 12px;
+    margin-bottom: var(--spacing-md);
+  }
+  .pdp__title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+  }
+  .pdp__desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-lg);
+    max-width: 60ch;
+  }
+  .pdp__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-lg);
+  }
+  .pdp__chips li {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--surface);
+    border: 1px solid #E0E0E0;
+    border-radius: var(--rounded-full);
+    padding: 6px 16px;
+  }
+  .pdp__cats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+  .pdp__cat {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--secondary);
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: var(--rounded-full);
+    padding: 4px 12px;
+  }
+
+  /* Caja de precio / compra */
+  .pdp__buybox {
+    align-self: start;
+    background: var(--surface);
+    border: 1px solid #ECECEF;
+    border-radius: var(--rounded-md);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    padding: var(--spacing-xl);
+  }
+  .pdp__price-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-xs);
+  }
+  .pdp__price {
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+  }
+  .pdp__price-old {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: line-through;
+    margin: 0 0 var(--spacing-md);
+  }
+  .pdp__note {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--muted);
+    border-top: 1px solid #ECECEF;
+    padding-top: var(--spacing-md);
+    margin: 0 0 var(--spacing-lg);
+  }
+  .pdp__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .pdp__cta {
+    display: block;
+    text-align: center;
+    padding: 14px 24px;
+    border-radius: var(--rounded-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .pdp__cta--whatsapp {
+    background-color: var(--whatsapp);
+    color: #FFFFFF;
+  }
+  .pdp__cta--whatsapp:hover {
+    background-color: var(--whatsapp-hover);
+    color: #FFFFFF;
+  }
+  .pdp__cta--outline {
+    background-color: transparent;
+    color: var(--primary);
+    border: 1.5px solid #DDDDDD;
+  }
+  .pdp__cta--outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .pdp__trust {
+    list-style: none;
+    padding: var(--spacing-md) 0 0;
+    margin: var(--spacing-lg) 0 0;
+    border-top: 1px solid #ECECEF;
+  }
+  .pdp__trust li {
+    position: relative;
+    font-size: 0.85rem;
+    color: var(--secondary);
+    padding-left: 24px;
+    margin-bottom: var(--spacing-sm);
+  }
+  .pdp__trust li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--whatsapp);
+    font-weight: 700;
+  }
+
+  /* ---------- Qué incluye ---------- */
+  .incluye__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .incluye__col {
+    background: #F9F9FB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+  }
+  .incluye__subtitle {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+  }
+  .incluye__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .incluye__item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--secondary);
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #E8E8E8;
+  }
+  .incluye__item:last-child {
+    border-bottom: none;
+  }
+  .incluye__num {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--rounded-full);
+    background: var(--tertiary);
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  /* ---------- Cómo se ejecuta ---------- */
+  .pasos__intro {
+    max-width: 620px;
+    margin: calc(var(--spacing-xl) * -1 + var(--spacing-sm)) auto var(--spacing-xl);
+    text-align: center;
+    color: var(--secondary);
+  }
+  .pasos {
+    list-style: none;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .paso {
+    position: relative;
+    display: flex;
+    gap: var(--spacing-md);
+    padding-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+  .paso:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 46px;
+    bottom: -4px;
+    width: 2px;
+    background: #E0E0E0;
+  }
+  .paso__num {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rounded-circle);
+    background: var(--primary);
+    color: #FFFFFF;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .paso__body {
+    flex: 1;
+    min-width: 0;
+  }
+  .paso__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+  }
+  .paso__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+  .paso__horas {
+    flex-shrink: 0;
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--tertiary-dark);
+    background: rgba(0, 122, 255, 0.08);
+    border-radius: var(--rounded-full);
+    padding: 2px 10px;
+  }
+  .paso__desc {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width: 601px) {
+    .pdp {
+      padding: var(--spacing-xxl) var(--spacing-lg);
+    }
+    .pdp__title {
+      font-size: 2.4rem;
+    }
+    .incluye__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 901px) {
+    .pdp__grid {
+      grid-template-columns: 1.4fr 1fr;
+      gap: var(--spacing-xxl);
+      align-items: start;
+    }
+    .pdp__buybox {
+      position: sticky;
+      top: var(--spacing-lg);
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+{
+  "preguntas": [
+    {
+      "id": "costo-desarrollo",
+      "titulo": "¿Cuánto cuesta un desarrollo?",
+      "respuesta": "Hay distintos tipos y personalizaciones. Por eso primero tenemos una conversación sin cargo para entender tu proyecto, y ahí te damos un presupuesto claro y sin compromiso. No creemos en los misterios con los precios.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "tiempo-desarrollo",
+      "titulo": "¿Cuánto tiempo lleva?",
+      "respuesta": "Depende del proyecto: un sitio web puede estar listo en 2 a 4 semanas, mientras que un sistema a medida lleva entre 4 y 12 semanas. Trabajamos con entregas periódicas y siempre te mostramos avances constantes.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "conocimientos-tecnicos",
+      "titulo": "¿Necesito saber de tecnología?",
+      "respuesta": "Para nada. Nosotros nos encargamos de toda la parte técnica. Vos solo necesitás contarnos qué problema querés resolver. Hablamos en tu idioma, no en código. Usamos tecnologías modernas como Python, JavaScript y bases de datos SQL para construir tu solución.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "soporte-post-entrega",
+      "titulo": "¿Dan soporte después de entregar?",
+      "respuesta": "Sí, siempre. No somos de los que desaparecen. Te damos soporte continuo y hacemos los ajustes que sean necesarios después de la entrega.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "clientes-fuera-de-rosario",
+      "titulo": "¿Trabajan con empresas fuera de Rosario?",
+      "respuesta": "¡Sí! Trabajamos con clientes de toda Argentina y del exterior. Todo se coordina por videollamada, teléfono o mail. No hace falta que estés en Rosario.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "que-servicios-ofrecen",
+      "titulo": "¿Qué servicios ofrecen exactamente?",
+      "respuesta": "Ofrecemos tres servicios principales: <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología), <strong>desarrollo de software a medida</strong> (creamos sistemas que se adaptan exactamente a tu negocio), y <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales). Si no estás seguro de cuál necesitás, podemos asesorarte sin compromiso.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "automatizacion-herramientas-actuales",
+      "titulo": "¿Tengo que cambiar mis herramientas actuales para automatizar?",
+      "respuesta": "No. Automatizamos sobre lo que ya usás: conectamos tus planillas, tu sistema de facturación y tus canales de venta para que trabajen solos. En los casos de ropa usada y de la marca de café no cambiamos su forma de vender, eliminamos la parte manual que les robaba horas.",
+      "donde_mostrar": {
+        "nivel": "categoria",
+        "servicio": "automatizacion",
+        "categoria": "facturacion-cobranzas"
+      }
+    },
+    {
+      "id": "stock-sin-cargar-a-mano",
+      "titulo": "¿Voy a tener que cargar el stock y configurar pagos todos los días?",
+      "respuesta": "No. Sincronizamos tu inventario con la tienda online y las pasarelas de pago: registrás una carga y se publica sola, con alertas de mínimo stock para reponer a tiempo. Es la misma lógica que usamos en la ferretería de gas y plomería, donde la tienda trabaja sin configuración diaria.",
+      "donde_mostrar": {
+        "nivel": "categoria",
+        "servicio": "presencia-online",
+        "categoria": "tienda-online"
+      }
+    },
+    {
+      "id": "cobro-recurrente-mercado-pago",
+      "titulo": "¿El cobro recurrente se puede automatizar con Mercado Pago?",
+      "respuesta": "Sí. Integramos la pasarela local con WooCommerce Subscriptions para debitar cada mes de forma automática. El cliente se suscribe una sola vez, elige su plan y el cobro se hace solo; además puede pausar o cambiar su plan sin escribirte. Así lo montamos en el club de café de especialidad.",
+      "donde_mostrar": {
+        "nivel": "categoria",
+        "servicio": "presencia-online",
+        "categoria": "tienda-online"
+      }
+    },
+    {
+      "id": "acceso-clientes-por-membresia",
+      "titulo": "¿Puedo darles acceso a mis clientes por membresía con roles?",
+      "respuesta": "Sí. Creamos portales con acceso seguro y roles: el cliente paga y entra solo, y el acceso se da o se quita automáticamente. Lo aplicamos en la academia online con LMS, donde cada alumno avanza a su ritmo y descarga su certificado al completar el curso.",
+      "donde_mostrar": {
+        "nivel": "categoria",
+        "servicio": "software-a-medida",
+        "categoria": "apps-portales"
+      }
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+---
+// Carrusel de casos de éxito — componente reutilizable
+// Cliente-asíncrono (island): el HTML se renderiza estáticamente con skeleton,
+// luego el <script> cliente hace fetch('/casos.json') y construye los slides.
+// No bloquea el renderizado de la página ni el LCP.
+---
+
+<div class="carousel" data-carousel aria-roledescription="carrusel" aria-label="Casos de éxito destacados">
+  <button
+    type="button"
+    class="carousel__btn carousel__btn--prev"
+    data-prev
+    aria-label="Caso anterior"
+    disabled
+  >
+    <span aria-hidden="true">&#8249;</span>
+  </button>
+
+  <div class="carousel__viewport" data-viewport>
+    <ul class="carousel__track" data-track aria-live="polite">
+      <!-- Skeleton inicial (se reemplaza al cargar los datos) -->
+      <li class="carousel__slide carousel__slide--skeleton" aria-hidden="true">
+        <div class="skeleton skeleton--tag"></div>
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text skeleton--short"></div>
+      </li>
+      <li class="carousel__slide carousel__slide--skeleton" aria-hidden="true">
+        <div class="skeleton skeleton--tag"></div>
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text skeleton--short"></div>
+      </li>
+      <li class="carousel__slide carousel__slide--skeleton" aria-hidden="true">
+        <div class="skeleton skeleton--tag"></div>
+        <div class="skeleton skeleton--title"></div>
+        <div class="skeleton skeleton--text"></div>
+        <div class="skeleton skeleton--text skeleton--short"></div>
+      </li>
+    </ul>
+  </div>
+
+  <button
+    type="button"
+    class="carousel__btn carousel__btn--next"
+    data-next
+    aria-label="Caso siguiente"
+  >
+    <span aria-hidden="true">&#8250;</span>
+  </button>
+
+  <div class="carousel__dots" data-dots aria-hidden="true"></div>
+
+  <noscript>
+    <p class="carousel__fallback">
+      Activá JavaScript para ver el carrusel interactivo, o mirá el listado completo debajo.
+    </p>
+  </noscript>
+</div>
+
+<script>
+  // Tipo de dato para los casos de éxito
+  type Caso = {
+    slug: string
+    tipo: string
+    label: string
+    title: string
+    category: string
+    metric: string
+    excerpt: string
+  }
+
+  function initCarousel(root: HTMLElement) {
+    const track = root.querySelector('[data-track]') as HTMLElement | null
+    const viewport = root.querySelector('[data-viewport]') as HTMLElement | null
+    const prevBtn = root.querySelector('[data-prev]') as HTMLButtonElement | null
+    const nextBtn = root.querySelector('[data-next]') as HTMLButtonElement | null
+    const dotsWrap = root.querySelector('[data-dots]') as HTMLElement | null
+    if (!track || !viewport) return
+
+    async function load() {
+      try {
+        const res = await fetch('/casos.json')
+        if (!res.ok) throw new Error('HTTP ' + res.status)
+        const casos: Caso[] = await res.json()
+        render(casos)
+      } catch (err) {
+        console.log('[v0] Error cargando casos del carrusel:', err)
+        track!.innerHTML =
+          '<li class="carousel__slide carousel__slide--error">No pudimos cargar los casos. <a href="#casos-exito">Ver el listado</a>.</li>'
+      }
+    }
+
+    function render(casos: Caso[]) {
+      track!.innerHTML = casos
+        .map(
+          (c, i) => `
+          <li class="carousel__slide" data-slide-index="${i}">
+            <a class="case-slide" href="/casos-exito/${c.slug}/" aria-label="Ver caso: ${c.title}">
+              <span class="case-slide__type case-slide__type--${c.tipo === 'proyecto-tipo' ? 'tipo' : 'exito'}">${c.label}</span>
+              <span class="case-slide__tag">${c.category}</span>
+              <span class="case-slide__metric">${c.metric}</span>
+              <span class="case-slide__title">${c.title}</span>
+              <span class="case-slide__excerpt">${c.excerpt}</span>
+              <span class="case-slide__more">Ver caso <span aria-hidden="true">&rarr;</span></span>
+            </a>
+          </li>`
+        )
+        .join('')
+
+      buildDots(totalPositions())
+      updateControls()
+    }
+
+    function buildDots(count: number) {
+      if (!dotsWrap) return
+      dotsWrap.innerHTML = ''
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button')
+        dot.type = 'button'
+        dot.className = 'carousel__dot'
+        dot.setAttribute('aria-label', 'Ir al caso ' + (i + 1))
+        dot.addEventListener('click', () => scrollToIndex(i))
+        dotsWrap.appendChild(dot)
+      }
+    }
+
+    function slideWidth() {
+      const slide = track!.querySelector('.carousel__slide') as HTMLElement | null
+      if (!slide) return viewport!.clientWidth
+      const gap = parseFloat(getComputedStyle(track!).columnGap || '0') || 0
+      return slide.offsetWidth + gap
+    }
+
+    function currentIndex() {
+      const sw = slideWidth()
+      if (sw === 0) return 0
+      return Math.max(0, Math.min(
+        Math.round(viewport!.scrollLeft / sw),
+        totalPositions() - 1
+      ))
+    }
+
+    function totalSlides() {
+      const slides = track!.querySelectorAll('.carousel__slide[data-slide-index]')
+      return slides.length || 0
+    }
+
+    function totalPositions() {
+      const sw = slideWidth()
+      if (sw === 0) return 1
+      const maxScroll = viewport!.scrollWidth - viewport!.clientWidth
+      return Math.round(maxScroll / sw) + 1
+    }
+
+    function scrollToIndex(i: number) {
+      const maxScroll = viewport!.scrollWidth - viewport!.clientWidth
+      const left = Math.min(i * slideWidth(), maxScroll)
+      viewport!.scrollTo({ left, behavior: 'smooth' })
+    }
+
+    function updateControls() {
+      const i = currentIndex()
+      const maxScroll = viewport!.scrollWidth - viewport!.clientWidth - 1
+      if (prevBtn) prevBtn.disabled = viewport!.scrollLeft <= 1
+      if (nextBtn) nextBtn.disabled = viewport!.scrollLeft >= maxScroll
+      if (dotsWrap) {
+        dotsWrap.querySelectorAll('.carousel__dot').forEach((d, idx) => {
+          d.classList.toggle('is-active', idx === i)
+        })
+      }
+    }
+
+    prevBtn?.addEventListener('click', () => {
+      scrollToIndex(Math.max(0, currentIndex() - 1))
+    })
+    nextBtn?.addEventListener('click', () => {
+      scrollToIndex(Math.min(totalPositions() - 1, currentIndex() + 1))
+    })
+
+    let raf = 0
+    viewport.addEventListener('scroll', () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(updateControls)
+    })
+    window.addEventListener('resize', () => {
+      if (dotsWrap && dotsWrap.children.length !== totalPositions()) {
+        buildDots(totalPositions())
+      }
+      updateControls()
+    })
+
+    load()
+  }
+
+  // Inicializar todos los carruseles en la página
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(initCarousel)
+</script>

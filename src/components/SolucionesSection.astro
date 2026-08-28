@@ -1,0 +1,39 @@
+---
+// Componente reutilizable: Sección "Soluciones para tu negocio"
+// Se renderiza del lado del servidor (SSG estático) — sin carga asíncrona.
+// Fuente única de verdad: src/data/servicios/servicio_*.json (datos normalizados)
+import ServiceCard from './ServiceCard.astro';
+import { getServicios } from '../lib/data-utils';
+
+const servicios = getServicios();
+---
+
+<style>
+  .soluciones__title {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+  @media (min-width: 601px) {
+    .cards-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+<section id="soluciones" class="section">
+  <div class="container">
+    <h2 class="soluciones__title">Soluciones para tu negocio</h2>
+    <div class="cards-grid">
+      {servicios.map((service) => (
+        <ServiceCard
+          title={service.title}
+          href={service.href}
+        >
+          {service.short}
+          <span slot="claim">{service.claim}</span>
+          <a slot="cta" class="service-card__cta" href={service.href}>Ver servicio</a>
+        </ServiceCard>
+      ))}
+    </div>
+  </div>
+</section>

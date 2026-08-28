@@ -1,0 +1,34 @@
+---
+// Componente reutilizable: listado completo de casos de éxito en grilla.
+// Se renderiza del lado del servidor (SSG estático), sin carga asíncrona.
+// Fuente única de verdad: src/data/casos-exito.json (la misma que el carrusel)
+// Acceso normalizado vía data-utils.ts (single source of truth).
+import ServiceCard from './ServiceCard.astro';
+import { getCasos } from '../lib/data-utils';
+
+const casos = getCasos();
+---
+
+<section id="casos-exito" class="section section--alt">
+  <div class="container">
+    <h2 class="section__title">Todos los casos de éxito</h2>
+    <p class="section__subtitle">Casos reales y proyectos tipo, con resultados medibles.</p>
+
+    <div class="cards-grid">
+      {casos.map((caso) => (
+        <ServiceCard
+          title={caso.title}
+          href={`/casos-exito/${caso.slug}/`}
+          icon="/logo-autor.svg"
+          label={caso.label}
+        >
+          {caso.excerpt}
+          <span slot="claim">{caso.metric}</span>
+          <a slot="cta" class="service-card__cta" href={`/casos-exito/${caso.slug}/`}>
+            Ver más
+          </a>
+        </ServiceCard>
+      ))}
+    </div>
+  </div>
+</section>

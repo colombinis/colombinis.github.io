@@ -1,0 +1,23 @@
+{
+  "id": "reportes-dashboards",
+  "servicio_id": "automatizacion",
+  "title": "Reportes y dashboards",
+  "icon": "📈",
+  "descripcion": "Informes automáticos de ventas, costos y desempeño. Recibirlos por mail o acceder a un panel en línea.",
+  "claim": "Decisiones con datos, no con corazonadas.",
+  "beneficios": [
+    {
+      "texto": "Ver el estado del negocio sin planillas: el panel muestra cobros, ventas y desempeño al instante.",
+      "caso": "tienda-woocommerce-suscripciones"
+    },
+    {
+      "texto": "Seguimiento centralizado de prestaciones y autorizaciones para rendir a obras sociales.",
+      "caso": "consultorio-psicologia"
+    },
+    {
+      "texto": "Decisiones con datos reales: informes automáticos sin armar planillas a mano."
+    }
+  ],
+  "casos": ["tienda-woocommerce-suscripciones", "consultorio-psicologia"],
+  "trabajos": ["auto-basico", "auto-int", "ret-basico"]
+}

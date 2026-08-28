@@ -1,0 +1,42 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# environment
+.env
+.env.production
+.env.development.local
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS / editor
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# tool caches (playwright, npm, etc)
+.cache/
+.config/
+.npm/
+.playwright-mcp/
+
+# n8n automation runtime data (docker-compose named volumes materialized under _ai_context/docs/)
+_ai_context/docs/automatizacion/postgres_data/
+_ai_context/docs/automatizacion/clientes_db_data/
+_ai_context/docs/automatizacion/n8n_data/
+
+# generated docs (output of scripts/report-status.py, etc. — not hand-edited)
+_ai_context/docs/tareas/STATUS.md
+_ai_context/docs/tareas/generated/

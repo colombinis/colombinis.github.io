@@ -1,0 +1,128 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import config from '../config/site.json';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  robots?: string;
+}
+
+const {
+  title,
+  description = config.site.description,
+  image = '/og-image.png',
+  robots,
+} = Astro.props;
+
+const GTM_ID = 'GTM-T7PWJ99';
+const siteName = config.site.name;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? config.site.url);
+const socialImage = new URL(image, Astro.site ?? config.site.url);
+const fullTitle = `${title} | ${siteName}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: `${config.site.name} — ${config.site.tagline}`,
+  description,
+  url: config.site.url,
+  telephone: config.contact.phone_display,
+  email: config.contact.email,
+  image: socialImage.toString(),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Rosario',
+    addressRegion: 'Santa Fe',
+    addressCountry: 'AR',
+  },
+  areaServed: 'Argentina',
+  sameAs: ['https://api.whatsapp.com/send?phone=5493415197937'],
+};
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1A1A2E" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={config.social.twitter_site} />
+    <meta name="twitter:creator" content={config.social.twitter_creator} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Google Tag Manager -->
+    <script is:inline define:vars={{ GTM_ID }}>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, d.getElementsByTagName('script')[0]);
+      })(window, document, 'script', 'dataLayer', GTM_ID);
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline>
+      // CON-04: trackear clicks a WhatsApp (evento de conversion MOFU)
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a') : null;
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        if (href.indexOf('api.whatsapp.com') !== -1) {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'whatsapp_click',
+            link_text: (a.textContent || '').trim().slice(0, 80),
+            page: window.location.pathname
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

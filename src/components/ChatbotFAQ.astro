@@ -1,0 +1,78 @@
+---
+// ChatbotFAQ.astro
+// Web component <slm-chat> integrado bajo la sección de Preguntas frecuentes.
+//
+// OPTIMIZADO: el chatbot corre 100% en el navegador con un Small Language
+// Model (Transformers.js + WebGPU/WASM). El knowledge.json se pasa como
+// contexto fijo del system prompt (no se usa modelo de embeddings).
+//
+// Carga no-bloqueante: el script del web component se inyecta de forma
+// dinámica mediante requestIdleCallback, sin bloquear el render de la página.
+//
+// Assets estáticos: /public/chatbot/slm-chatbot.js + /public/chatbot/knowledge.json
+---
+
+<div class="chatbot-wrapper">
+  <slm-chat knowledge-src="/chatbot/knowledge.json" is:raw>
+    <!-- Placeholder visible mientras el modelo se descarga -->
+    <div slot="fallback" class="chatbot-placeholder">
+      <p class="chatbot-placeholder__text">Cargando asistente de IA local…</p>
+    </div>
+  </slm-chat>
+</div>
+
+<style>
+  .chatbot-wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .chatbot-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: var(--surface);
+    border: 1px solid #E0E0E0;
+    border-radius: var(--rounded-md);
+    min-height: 120px;
+  }
+
+  .chatbot-placeholder__text {
+    font-size: 0.93rem;
+    color: var(--secondary);
+    margin: 0;
+  }
+</style>
+
+<script is:inline>
+  // Lazy-load del Web Component: se descarga el script solo cuando el navegador
+  // esta idle. Así el render de la página y las interacciones no se bloquean.
+  (function() {
+    var inject = function() {
+      var script = document.createElement('script');
+      script.type = 'module';
+      script.src = '/chatbot/slm-chatbot.js';
+      document.head.appendChild(script);
+    };
+
+    if (document.readyState === 'loading') {
+      // La página aún está cargando: esperar al load
+      window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(inject, { timeout: 3000 });
+        } else {
+          // Fallback: setTimeout de 1 segundo
+          setTimeout(inject, 1000);
+        }
+      });
+    } else {
+      // La página ya está cargada
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(inject, { timeout: 3000 });
+      } else {
+        setTimeout(inject, 1000);
+      }
+    }
+  })();
+</script>

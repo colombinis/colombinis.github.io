@@ -1,0 +1,28 @@
+{
+  "id": "tienda-online",
+  "servicio_id": "presencia-online",
+  "title": "Tienda online",
+  "icon": "🛒",
+  "descripcion": "Catálogo, carrito, pasarelas de pago y gestión de envíos. Sin suscripciones ocultas ni comisiones abusivas.",
+  "claim": "Vendé sin depender de terceros.",
+  "beneficios": [
+    {
+      "texto": "Tienda online que trabaja sola: se actualizan precio y stock sin mantenimiento diario.",
+      "caso": "ferreteria-gas-plomeria"
+    },
+    {
+      "texto": "Catálogo, carrito, pagos y envíos integrados sin suscripciones ocultas.",
+      "caso": "ferreteria-gas-plomeria"
+    },
+    {
+      "texto": "Club de suscripción con cobro recurrente automático y autogestión del cliente.",
+      "caso": "tienda-woocommerce-suscripciones"
+    },
+    {
+      "texto": "Recuperación de una tienda hackeada sin perder catálogo ni posicionamiento.",
+      "caso": "rescate-rendimiento-seguridad-wordpress"
+    }
+  ],
+  "casos": ["ferreteria-gas-plomeria", "tienda-woocommerce-suscripciones", "rescate-rendimiento-seguridad-wordpress", "tienda-ropa-usada"],
+  "trabajos": ["ecommerce"]
+}
