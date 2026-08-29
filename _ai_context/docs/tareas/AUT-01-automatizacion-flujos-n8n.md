@@ -3,6 +3,8 @@
 ## Estado: ✅ En implementación
 
 ## Contexto
+**prd:** §1.1 — "Escalar preventa sin sumar heads" y "Reducir el tiempo administrativo del cliente" (feature C, §3.1). Automatiza el funnel de ventas para no sumar heads humanos.
+
 
 Se necesita automatizar el funnel de ventas de cada trabajo/servicio de SACsi para minimizar intervención humana: desde el cliente elige un servicio y paga, hasta que completa la información requerida. El sistema debe detectar abandono, enviar recordatorios escalonados y elevar casos críticos (>1 semana) al humano.
 

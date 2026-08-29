@@ -1,6 +1,8 @@
 # CAT-04 — Verificación (build + E2E) + integrar navegación a `/catalogo`
 
 ## Contexto
+**prd:** §1.1 — "Convertir visitas en consultas comerciales" (feature B, §3.1). La navegación integrada hace al catálogo descubrible; sin ella, la vitrina no recibe tráfico.
+
 CAT-01..CAT-03 construyen la página. Esta tarea cierra la feature: verifica
 que el catálogo funcione de punta a punta y lo hace descubrible desde la
 navegación del sitio (header/footer), siguiendo la convención de verificación
@@ -62,7 +64,7 @@ echo "✅ CAT-04 — COMPLETA"
 ```
 
 ## Estado
-TODO — sin empezar
+DONE — build exit 0, dist/catalogo/index.html generado, navegación a /catalogo/ integrada (header vía site.json + footer "Ver todos")
 
 ## Notas
 - La posición del link "Catálogo" en el header es una decisión de negocio

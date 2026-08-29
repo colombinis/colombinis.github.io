@@ -1,6 +1,8 @@
 # CHAT-06 — Decisión: implementar chatbot ahora o backlog
 
 ## Contexto
+**prd:** §1.1 — "Recuperar proyectos WP deteriorados" y "Escalar preventa sin sumar heads" (feature F, §3.1). El chatbot es soporte/post-venta que libera tiempo humano.
+
 Este documento formaliza la decisión sobre si implementar el chatbot FAQ (SLM on-device) en el ciclo actual post-deploy o dejarlo en backlog para una iteración futura.
 
 **Hechos establecidos (CHAT-04, CHAT-05 DONE):**
@@ -77,9 +79,35 @@ Este documento formaliza la decisión sobre si implementar el chatbot FAQ (SLM o
 ---
 
 ## Estado
-**TODO** — Pendiente confirmación del dueño (reunión 2026-08-07)
+**BACKLOG** (decisión tomada 2026-08-28, pendiente aprobación del dueño) — Opción B: no implementar en el ciclo de lanzamiento actual.
 
 ## Notas
 - Esta decisión NO afecta el camino crítico a producción (FASE 1-6)
 - CHAT-04 y CHAT-05 quedan como DONE (artefactos de análisis/arquitectura válidos por sí mismos)
 - El branch `feature/chatbot-faq` sirve de base si se reactiva
+
+---
+
+## Decisión
+
+**Estado: BACKLOG** — El chatbot FAQ (SLM on-device) NO se implementa en el ciclo de lanzamiento actual. La decisión queda formalizada como **Opción B (backlog / evaluar post-estabilización)**, pendiente de aprobación del dueño.
+
+**Justificación:**
+1. **No bloquea el lanzamiento**: el sitio funciona completamente sin chatbot; el camino crítico a producción (FASE 1-6, DEP-01) es independiente de esta feature.
+2. **Gap de tiempo/recursos**: en el sprint de lanzamiento el foco debe estar en validar que el sitio base convierte (CON-04, DEP-01). Destinar 2-3 sprints ahora desvía esfuerzo del objetivo primario.
+3. **Arquitectura ya documentada para futura implementación**: CHAT-04 (análisis Chrome AI vs SLM) y CHAT-05 (arquitectura dual + opciones) están DONE. La base técnica (Web Component `<sacsi-chat>`, feature-detection, knowledge.json, scripts de verificación) ya existe en working tree, por lo que retomar la implementación tiene costo de arranque bajo.
+4. **Datos > supuestos**: el knowledge.json actual (7 entradas genéricas) se basa en supuestos; post-lanzamiento, las consultas reales (WhatsApp + formulario) alimentarán un knowledge.json basado en evidencia.
+5. **Maduración de Chrome AI**: en 3-6 meses la Prompt API (Gemini Nano, streaming, shared cache, sin descarga por sitio) será viable como primario; implementar dual hoy implicaría rehacer pronto.
+
+**Triggers de reactivación (cualquiera de los siguientes):**
+- **Post-lanzamiento, si el volumen de consultas repetitivas supera las 20/semana** (medido vía WhatsApp + formulario de contacto) durante 30 días consecutivos.
+- **Si un cliente PyME pide soporte automatizado / chatbot de FAQ** como parte de un contrato o propuesta comercial.
+- **Sitio en producción 30+ días con métricas de conversión estables** y Chrome 138+ representando > 60% del tráfico (analytics).
+- **Si surge un caso de portfolio concreto** de consultoría IA que justifique demostrar "PHP + IA aplicada" en vivo.
+
+**Acciones asociadas (ver CHAT-06-issue.md):**
+- Commitear el trabajo preliminar en `feature/chatbot-faq` (tag `chatbot-preliminary-2026-08-07`) sin merge a master.
+- Crear issue GitHub "Chatbot FAQ (SLM on-device) — Backlog" con criterios de aceptación y dependencias (CHAT-04/CHAT-05 DONE).
+- AUD-08 y AUD-14 quedan BLOCKED hasta reactivar (referenciadas desde la issue).
+
+**Fecha de decisión:** 2026-08-28 (pendiente aprobación del dueño).

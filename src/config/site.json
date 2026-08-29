@@ -28,6 +28,10 @@
         "href": "/servicios/"
       },
       {
+        "label": "Catálogo",
+        "href": "/catalogo/"
+      },
+      {
         "label": "Recursos",
         "href": "/recursos/",
         "submenu": [

@@ -10,6 +10,8 @@ affects:
 # E2E-01 — Inventario y estructura de tests E2E
 
 ## Contexto
+**prd:** §1.1 — "Posicionar como proveedor confiable" (feature E, §3.1). Los E2E previenen regresiones que dañarían la confianza y sumarían trabajo de soporte.
+
 
 El proyecto SACsi no contaba con una carpeta `tests/` centralizada. Los
 tests existían sueltos en carpetas de tareas o como intenciones en specs.

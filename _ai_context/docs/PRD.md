@@ -20,11 +20,9 @@
 
 ### 1.2 Problemas a resolver hoy
 
-- **Falta visibilidad única** del estado del proyecto: las tareas están fragmentadas en carpetas y el documento maestro `TODO.md` no existe en el árbol actual.
-- **No hay documento de negocio** que explique el “por qué” de cada feature ni cómo se relacionan entre sí.
-- **Gaps funcionales abiertos:** catálogo incompleto (CAT-03/04), tracking GTM parcial (CON-04), validación post-deploy bloqueada (DEP-01), backlog chatbot sin decisión (CHAT-06).
+- ~~Gaps funcionales abiertos~~: **RESUELTO** (2026-08-28) — CAT-03/CAT-04 DONE, CHAT-06 = backlog formal, CON-04 DONE en código (resta validar GA4 en DEP-01), DEP-01 atado al release (no push hasta cerrar todo).
 - **Forma de pago + entrega no integrada:** el funnel es manual; AUT-01 define la automatización, pero sigue pendiente.
-- **Experiencia mixta:** sitio público Astro + herramienta standalone `flujo-operativo-trabajo.html` (datan JSON, no del build).
+- ~~Experiencia mixta~~: **RESUELTO** (2026-08-28) — convertidas a páginas Astro estáticas bajo `/padmin/` (`listado-trabajos.astro` ✅ + `flujo-operativo.astro` ✅, ambas build exit 0)., legacy archivado en `_legacy/`. Protección real: Cloudflare Basic Auth en `/padmin/*` (Owner). sitio sigue static GitHub Pages, no toca deploy.yml. Tests `rentabilidad.ts` 15/15 ✅.
 
 ---
 
@@ -64,7 +62,7 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 ### B) Catálogo de trabajos (FEATURE-2) — 🟡 Parcial
 
 - Ruta `/catalogo` y filtros jerárquicos: **DONE**.
-- Grid de tarjetas + navegación integrada: **TODO** (`CAT-03`, `CAT-04`).
+- Grid de tarjetas + navegación integrada: **DONE** (`CAT-03` DONE, `CAT-04` DONE — build exit 0).
 - Permite la experiencia e-commerce estándar que pide la persona Carlos.
 
 ### C) Flujos de negocio (FEATURE-1 + FASE 8 Backlog) — 🟢 Base, 🔴 Escala
@@ -93,13 +91,53 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 
 ---
 
+### 3.1 Matriz feature → objetivo de negocio
+
+> Cierra el gap de trazabilidad inverso (PRD §1.2 P2): cada feature agrupada en §3
+> mapea a uno o más objetivos de §1.1. Esto es el "por qué" de cada feature.
+
+| Feature (§3) | Objetivos de negocio (§1.1) que sirve |
+|---|---|
+| **A) Núcleo del sitio** | Posicionar como proveedor confiable (Lighthouse/SEO) · Convertir visitas en consultas (contenido, FAQ, contacto) · Reducir tiempo administrativo (base del funnel) |
+| **B) Catálogo de trabajos** | Convertir visitas en consultas (experiencia e-commerce estándar que pide la persona Carlos) · Escalar preventa sin sumar heads (catálogo auto-califica el interés) |
+| **C) Flujos de negocio** | Asegurar trazabilidad del trabajo vendido (herramienta de rentabilidad) · Recuperar proyectos WP deteriorados (rescate) · Escalar preventa (automatización n8n, `AUT-01`) |
+| **D) Tracking y conversión** | Convertir visitas en consultas (medir tasa consulta/visita, clicks WhatsApp) · Escalar preventa (auto-calificar leads vía eventos GA4) |
+| **E) Calidad y pruebas** | Posicionar como proveedor confiable (Lighthouse >80, sin errores JS) · Reducir tiempo administrativo (menos regresiones = menos trabajo manual de soporte) |
+| **F) Backlog diferenciador** | Recuperar proyectos WP deteriorados (chatbot de soporte) · Escalar preventa (4to servicio IA, `FUT-01`) |
+
+### 3.2 Interrelaciones entre features
+
+> Cierra el gap "cómo se relacionan entre sí" (PRD §1.2 P2).
+
+- **A es la base de todo**: todas las demás features se montan sobre el núcleo Astro (tokens, `Layout.astro`, `data-utils.ts`, GTM). Sin A, B–F no se despliegan.
+- **B depende de C**: el catálogo consume los datos normalizados de `NOR-01` (C) vía `data-utils.ts`; B es la cara pública de esos datos.
+- **C alimenta D**: la normalización de datos (C) habilita el tracking de conversión (D) porque cada trabajo/categoría es identificable y trazable en GA4.
+- **D valida A, B y C**: los eventos GA4 (`CON-04`) miden si el núcleo, el catálogo y los flujos efectivamente convierten — cierra el loop de negocio.
+- **E protege A–D**: los tests E2E previenen regresiones en el núcleo y el catálogo tras cada cambio.
+- **F es opcional y post-lanzamiento**: chatbot (`CHAT-06`) y 4to servicio (`FUT-01`) extienden C y la preventa, pero no bloquean el release.
+
+### 3.3 Convención de trazabilidad (gate `prd:` en specs)
+
+> Para que el PRD sea el documento de negocio canónico, **toda spec nueva o modificada debe citar su objetivo de negocio** con un bloque `prd:` en su `## Contexto`. Hoy solo 1 de ~30 specs (`CON-04`) lo hace.
+
+Formato obligatorio (ejemplo para `CAT-03`):
+
+```markdown
+## Contexto
+**prd:** §1.1 — "Convertir visitas en consultas comerciales" (feature B, §3.1)
+**por qué:** el grid de tarjetas es la vitrina que convierte la visita de la persona Carlos en click a detalle/trabajo.
+```
+
+Backfill acordado (solo specs críticas del roadmap activo, no las 29 de una): `CAT-03`, `CAT-04`, `CHAT-06`, `DEP-01`, `AUT-01`, `E2E-01..04`. El resto se actualiza en mantenimiento ordinario.
+
+
 ## 4) Métricas de éxito
 
 | Métrica | Target | Cómo medir |
 |---|---|---|
 | Performance/UX | Lighthouse >80 (performance, a11y, SEO, best practices) | `DEP-01` |
 | Conversión | % de visitors que llegan a WhatsApp/email por sesión | GA4 `GTM-T7PWJ99` eventos (`CON-04`) |
-| Rentabilidad por servicio | Márgenes OK/NO RENTABLE por trabajo | `FEATURE-1` tablas + JSON |
+| Rentabilidad por servicio | Márgenes OK/NO RENTABLE por trabajo | `/padmin/flujo-operativo/` (Astro, Cloudflare auth) |
 | Disponibilidad catálogo | `/catalogo` funcional con filtros y tarjetas | `CAT-04` |
 | Cobertura funcional | % behaviors cubiertos por specs DONE | `index-system-map.py` |
 | Estabilidad | 0 errores JS en journeys principales | E2E `FEATURE-3` |
@@ -126,3 +164,77 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 - No incluye nuevos servicios ni expansión geográfica en este ciclo.
 - No incluye login/autenticación de usuarios.
 - No incluye backend de pagos end-to-end; se diseña primero el funnel y medición.
+
+---
+
+## 7) Tareas a definir (post-deploy de master a producción)
+
+> **Propósito de esta sección:** recolección viva de todo lo que queda por hacer **después** de pushear `master` a producción (GitHub Pages). Se va poblando durante la sesión y al final se consolidará en el plan de trabajo post-deploy.
+>
+> Criterio: cada ítem debe ser accionable y, cuando sea posible, tener un verify script o un responsable (owner). Lo que dependa de sesión autenticada del owner (GTM/GA4/Chrome) se marca explícitamente.
+>
+> **Criterio de release (decisión owner, 2026-08-28):** NO se hará push de `master` a producción (GitHub Pages) hasta que **TODAS** las tareas del PRD estén cerradas. El merge local v0→master (commit `214ca49`) ya está hecho, pero el push dispara el deploy y se reserva para el cierre total. Esto anula la recomendación de los sub-agentes de P3/P4 de pushear pronto.
+
+### 7.0 Análisis de problemas (sección 1.2 del PRD)
+
+> Los 5 puntos de "1.2 Problemas a resolver hoy" fueron delegados a sub-agentes en lectura (sin edits). Cada reporte queda volcado aquí para su análisis conjunto. Estado: ⏳ en curso / ✅ recibido.
+
+#### P2 — No hay documento de negocio que explique el "por qué" — ✅ RESUELTO (2026-08-28)
+- **Sub-agente:** `sa-1-0d8b7745` · **Estado:** ✅ recibido (batch deleg_af42f11a) · **Resolución:** implementadas propuestas 1, 2 y 3
+- **Diagnóstico original:** PRD.md definía objetivos (§1.1) y features A–F (§3) pero no mapeaba feature→objetivo ni interrelaciones, y solo 1 de ~30 specs citaba el PRD (`prd:`).
+- **Resolución aplicada:**
+  - **(1) Matriz feature→objetivo:** sección **3.1** en PRD mapea A–F a los 6 objetivos de §1.1.
+  - **(3) Interrelaciones:** sección **3.2** en PRD describe cómo se relacionan A–F entre sí.
+  - **(2) Gate `prd:` en specs:** sección **3.3** establece la convención obligatoria; se aplicó el backfill a las specs críticas del roadmap activo (CAT-03, CAT-04, CHAT-06, DEP-01, AUT-01, E2E-01). Ahora **7 specs** citan el PRD vía `prd:` (era 1).
+- **Nota:** el backfill completo de las ~29 specs restantes queda como mantenimiento ordinario (no bloquea release).
+
+#### P3 — Gaps funcionales abiertos (CAT-03/04, CON-04, DEP-01, CHAT-06) — ✅ RESUELTO (2026-08-28)
+- **Sub-agente original:** `sa-2-20e90d66` · **Estado:** ✅ recibido (batch deleg_af42f11a)
+- **Resolución aplicada (delegación atómica deleg_eabdb663):**
+  - **CAT-03** (`sa-0-5152e25d`): verificado que `catalogo.astro` renderiza el grid de tarjetas con link a `/trabajos/<id>/`; verify exit 0; marcado **DONE**. FEATURE-2 Resumen: 4/0/0/4/0.
+  - **CAT-04** (`sa-1-4eabd324`): la navegación a `/catalogo/` ya existía en `src/config/site.json` (l.32) y `Footer.astro` (l.236); build exit 0; marcado **DONE**.
+  - **CHAT-06** (`sa-2-dc189839`): decisión formal **Opción B = BACKLOG**, con justificación + triggers de reactivación; borrador `CHAT-06-issue.md` creado; marcado **DONE**.
+  - **CON-04**: ya DONE a nivel código (verificado en build de 36-37 páginas); remanente = confirmar recepción en GA4 real → cae en DEP-01.
+  - **DEP-01**: BLOCKED solo por el PUSH a `origin` (regla owner: no push hasta cerrar TODAS las tareas). Queda como pendiente de release, no de desarrollo.
+- **Resultado:** el maestro global pasó de 45% → **59% DONE** (9 pendientes). CON-04 y DEP-01 quedan atadas al release, no a trabajo de features.
+
+#### P4 — Forma de pago + entrega no integrada (AUT-01)
+- **Sub-agente:** `sa-0-148d745e` · **Estado:** ✅ recibido (batch deleg_536332f2)
+- **Diagnóstico:** El funnel es **100% manual hoy**: todos los CTAs de servicios/casos son links a `api.whatsapp.com` — no existe ningún botón "Comprar/Pagar/Checkout" en el sitio. El tramo pago→entrega lo maneja el humano a mano. **AUT-01 tiene el diseño completo** (workflow n8n con webhook MP→DB→email→monitor de abandono, docker-compose, schema SQL con vistas `funnel_stats`/`clientes_en_riesgo`, 4 templates, `verify-setup.sh`) pero sus **pasos 5–8 siguen PENDIENTES** (formulario progresivo, botones checkout, webhooks MP, testing) → diseñado pero no conectado. **P2 del PRD impone "Medir antes de automatizar"** (depende de CON-04 + DEP-01): CON-04 DONE en código pero DEP-01 BLOCKED por el merge v0→master, así que **no hay datos reales para calibrar reglas n8n**.
+- **Propuestas:**
+  - **(1) Manual con plantillas:** mantener WhatsApp + plantillas de propuesta/pago. Pros: cero costo, control humano. Contras: no escala, sin trazabilidad. Esfuerzo: bajo. Dep: ninguna.
+  - **(2) n8n full (AUT-01):** conectar sitio→MP→DB→email→monitor. Pros: automatización total. Contras: requiere DEP-01 + datos reales para calibrar umbrales; riesgo si se hace de una. Esfuerzo: alto. Dep: DEP-01, CON-04, MP API.
+  - **(3) Híbrido incremental (recomendada):** 4 pasos secuenciales — (a) formulario progresivo, (b) botones checkout, (c) webhook MP→formulario que abre onboarding, (d) calibrar y activar monitor de abandono con umbrales basados en datos reales. Pros: respeta P2 "medir antes de automatizar". Contras: más iteraciones. Esfuerzo: medio. Dep: DEP-01 para (d).
+- **Recomendación:** Ejecutar la **propuesta 3 (híbrida incremental)**: arrancar con formulario progresivo y botones checkout, y conectar el webhook MP a un formulario que abre onboarding, **sin encender aún el monitor de abandono**; luego calibrar y activar el monitor con umbrales basados en datos reales. **No** ejecutar la propuesta 2 (n8n full) de una sola vez ni fijar umbrales 24/72/168h a ciegas: el PRD ya establece que las reglas n8n deben definirse tras medir (CON-04 + DEP-01). AUT-01 ya tiene todo el diseño listo para reutilizarse; lo que falta es la conexión al sitio/pago y la calibración con datos, no rediseñar.
+
+#### P5 — Experiencia mixta (sitio Astro + HTML standalone) — ✅ RESUELTO (2026-08-28)
+- **Decisión de arquitectura:** Opción C — las herramientas de rentabilidad/flujos se **convierten a PÁGINAS ASTRO ESTÁTICAS** bajo `/padmin/` (ej: `/padmin/flujo-operativo/`, `/padmin/listado-trabajos/`), usando `src/lib/rentabilidad.ts` + `src/lib/data-utils.ts` (build-time, sin `fetch` a rutas relativas). Sitio sigue `output: static` GitHub Pages; protección real via **Cloudflare Basic Auth en `/padmin/*`** (Owner la configura fuera del repo; no toca deploy.yml ni adapter).
+- **Estado por herramienta:**
+  - `listado-trabajos.html` → **`src/pages/padmin/listado-trabajos.astro`** ✅ DONE. Creado (288 líneas), `dist/padmin/listado-trabajos/index.html` generado (build exit 0)., **HTML legacy archivado** en `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/_legacy/listado-trabajos.html` + `README.md`.
+  - `flujo-operativo-trabajo.html` → **`src/pages/padmin/flujo-operativo.astro`** ✅ DONE (implementación manual 2026-08-28 tras truncarse el sub-agente P5a). Creado, importa `getTrabajos()` + `calcularRentabilidad()`, tabla de rentabilidad build-time embebida (con datos reales: ecommerce, landing), simulador cliente inline (fórmula de `rentabilidad.ts` replicada en JS puro para el ajuste rápido). `npm run build` → exit 0 (39 page built), `dist/padmin/flujo-operativo/index.html` = 29241 b. `noindex,nofollow` seteado. HTML legacy **ya estaba archivado** en `_legacy/flujo-operativo-trabajo.html` + `README.md`.
+- **`rentabilidad.ts`:** extraído + **tests 15/15 ✅** (`npm run test`). Base reutilizable para páginas `/padmin/` y futuro catálogo público (rangos sin costo interno).
+- **NOTE/P3 (status global):** P5 completo → el maestro SSOT (`scripts/generate-todos.py`, generado al final de esta sesión) refleja el % DONE actualizado. La tabla FEATURE-1 (VAL-01..06) sigue 6/6 DONE (comportamiento validado); la migración a Astro `/padmin/` se registra aquí como cierre cross-feature del P5 de 1.2, no como spec nueva.
+
+### 7.1 Consolidado (se completa al cerrar la sesión)
+
+**Estado global del proyecto (maestro SSOT, `scripts/generate-todos.py`, última generación: 2026-08-29 00:48 UTC (post-P5)):** 22 tareas · TODO=6 · DOING=0 · DONE=13 · BLOCKED=3 · **59% DONE** · 9 pendientes.
+
+**Problemas 1.2 (sección 1.2 del PRD) — estado final tras esta sesión:**
+
+| # | Problema | Estado | Qué se hizo | Qué queda |
+|---|---------|--------|-------------|-----------|
+| **P1** | Falta visibilidad única del estado del proyecto | ✅ RESUELTO | `scripts/generate-todos.py` + `TODO.md` maestro (SSOT, excluye `archived/`) + `generated/system-map-coverage.json`. AGENTS.md actualizado. | Ninguna (código + docs DONE). |
+| **P2** | No hay documento de negocio que explique el "por qué" | ✅ RESUELTO | Matriz feature→objetivo (§3.1), interrelaciones (§3.2), convención gate `prd:` (§3.3) aplicada a 7 specs (CON-04 + 6 nuevas). | Backfill de ~15 specs restantes = mantenimiento ordinario post-release (no bloqueante). |
+| **P3** | Gaps funcionales abiertos (CAT-03/04, CON-04, DEP-01, CHAT-06) | ✅ RESUELTO | CAT-03 DONE (grid en catalogo.astro + verify exit 0). CAT-04 DONE (navegación `/catalogo/` en site.json + Footer.astro, build exit 0). CHAT-06 = backlog formal (Opción B) + `CHAT-06-issue.md`. CON-04 DONE en código (whatsapp_click + form_submit verificados en build; falta confirmar GA4 real → DEP-01). | DEP-01 BLOCKED por push (tu regla de release). CON-04 recibe GA4 en producción post-deploy. |
+| **P4** | Forma de pago + entrega no integrada (AUT-01) | 🔴 PENDIENTE | Sub-agente recomendó híbrido incremental (4 pasos secuenciales: formulario progresivo → botones checkout → webhook MP→onboarding → monitor de abandono con umbrales reales). **AUT-01 tiene diseño completo** (workflow n8n, docker-compose, schema SQL, 4 templates, verify-setup.sh) pero no conectado al sitio/pago. | Conectar al sitio + calibrar con datos reales post-deploy. Depende de DEP-01 para umbrales n8n. Por tu regla "medir antes de automatizar" → post-release. |
+| **P5** | Experiencia mixta (sitio Astro + HTML standalone) | ✅ RESUELTO | Decision arquitectura (2026-08-28): convertir a páginas Astro estáticas bajo `/padmin/` + Cloudflare Basic Auth en `/padmin/*`. `listado-trabajos.html` → `src/pages/padmin/listado-trabajos.astro` ✅. `flujo-operativo-trabajo.html` → `src/pages/padmin/flujo-operativo.astro` ✅ (build 0, tabla rentabilidad build-time, simulador cliente, tests rentabilidad.ts 15/15 ✅). Legacy archivado a `_legacy/`. | Ninguna — backoffice `/padmin/` funcional. Cierre cross-feature del P5. |
+
+### 7.2 Notas / pendientes sueltas
+
+- **Release bloqueado por criterio owner:** NO push a `origin` hasta cerrar TODAS las tareas del PRD (ver criterio en 7.0). El merge local v0→master (commit `214ca49`, `--no-ff`) ya está hecho; queda pendiente el push (non-fast-forward → `--force-with-lease`, elimina el `Jenkinsfile` legacy de `origin/master`). **El push es el último paso, no el primero.**
+- DEP-01 (validación producción) queda bloqueada hasta el push real (no-fast-forward → `--force-with-lease`).
+- El plan de trabajo post-deploy (DEP-01 automático + manuales owner) vive en `FASE-6-Validacion-post-deploy/DEP-01-post-deploy-validacion.md` y `PLAN-MERGE-v0-a-master.md`.
+- **Cloudflare Basic Auth en `/padmin/*`** (ref: privatizar-backoffice.md, project.md): lo configura el Owner fuera del repo (no es un cambio de código). Mientras tanto, las páginas `/padmin/*` no se linkean desde el sitio público (no están en Header/Footer); queda solo la ruta accesible si alguien conoce la URL.
+- **`rentabilidad.ts`** (`src/lib/rentabilidad.ts` + `rentabilidad.test.ts`): módulo extraído con tests. Base reutilizable para las páginas `/padmin/`. Validar que los tests corran (pre-commit / build).
+- **Scope interno vs. público:** las páginas `/padmin/*` son para el equipo comercial/SACsi, no para clientes. Si en el futuro se quiere contenido "interno" para clientes (ej: shared client workspace), eso es una capacidad aparte con su propio scope — decisión de negocio, no técnica.
+- **Backend ausente en el release current:** todo el sitio actual es frontend. Para un formulario real de contacto (no mailto), se necesitaría un backend real (Node + cloud escuchando, o SaaS de email, o Copilot en el repo). Scope separado, no parte del release actual.

@@ -23,14 +23,14 @@
 | CHAT-01 | Verificar build del chatbot (script)                           | TODO     | `_ai_context/docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-01-verify.sh` |
 | CHAT-04 | Análisis: Chrome AI Prompt API vs SLM-chatbot                  | DONE     | `_ai_context/docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-04-analysis-chrome-ai.md` |
 | CHAT-05 | Arquitectura del chatbot (detalle técnico)                     | DONE     | `_ai_context/docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-05-arquitectura-chatbot.md` |
-| CHAT-06 | Decisión: implementar ahora o backlog                          | TODO     | `_ai_context/docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-06-decision-implement.md` |
+| CHAT-06 | Decisión: implementar ahora o backlog | DONE     | `_ai_context/docs/tareas/FASE-8-Backlog/chatbot-artifacts/CHAT-06-decision-implement.md` |
 | FUT-01  | Evaluar agregar 4to servicio de IA a SACsi post-auditoría      | TODO     | `_ai_context/docs/tareas/archived/MAR-04-servicio-ia.md` |
 
 ## Resumen
 
 | Total | TODO | DOING | DONE | BLOCKED |
 |-------|------|-------|------|---------|
-| 8     | 4    | 0     | 2    | 2       |
+| 7     | 2    | 0     | 3    | 2       |
 
 ---
 
