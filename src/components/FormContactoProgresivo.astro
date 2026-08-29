@@ -15,7 +15,7 @@
 //   - Debajo del submit: botón WhatsApp (con icono) + botón "Preferís email?" (estilo botón, scroll al email).
 //   - Redes sociales con iconos SVG de la misma familia que el icono de WhatsApp (no emojis).
 //   - Eventos GTM (dataLayer.push): form_submit (onsubmit), checkout_started (en click de enviar).
-//   - NO jQuery. Vanilla JS inline solo para validación + toggle "otro" + GTM.
+//   - NO jQuery. Vanilla JS inline solo para validación + GTM.
 //   - Build-time: getServicios() + getCategoriasByServicio() popular el select jerarquizado.
 import { getServicios, getCategoriasByServicio } from '../lib/data-utils';
 import config from '../config/site.json';
@@ -68,18 +68,6 @@ const sourceDefault = source ?? 'contacto-progresivo';
         <option value="otro" selected={categoria === 'otro' ? true : undefined}>Otro (especificar)</option>
       </optgroup>
     </select>
-  </div>
-
-  <!-- texto libre si elige "Otro" -->
-  <div class="form-group" id="pf-otro-wrap" hidden>
-    <label for="pf-categoria-otro">Especificá el servicio</label>
-    <input
-      type="text"
-      id="pf-categoria-otro"
-      name="categoria_otro"
-      placeholder="Ej: integración de pagos"
-      maxlength="80"
-    >
   </div>
 
   <!-- 2. Email (requerido) -->
@@ -259,8 +247,6 @@ const sourceDefault = source ?? 'contacto-progresivo';
     if (!form) return;
 
     var categoria = form.querySelector('#pf-categoria');
-    var categoriaOtro = form.querySelector('#pf-categoria-otro');
-    var otroWrap = form.querySelector('#pf-otro-wrap');
     var email = form.querySelector('#pf-email');
     var brief = form.querySelector('#pf-brief');
     var submitBtn = form.querySelector('#pf-submit');
@@ -269,10 +255,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
     var source = form.getAttribute('data-source') || 'contacto-progresivo';
 
     function categoriaValida() {
-      var v = categoria.value;
-      if (!v) return false;
-      if (v === 'otro') return categoriaOtro.value.trim().length > 0;
-      return true;
+      return !!categoria.value;
     }
     function contactoValido() {
       return email.value.trim().length > 0 && email.value.indexOf('@') > -1 &&
@@ -282,12 +265,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
       submitBtn.disabled = !(categoriaValida() && contactoValido());
     }
 
-    if (categoria) categoria.addEventListener('change', function () {
-      otroWrap.hidden = categoria.value !== 'otro';
-      if (categoria.value !== 'otro') categoriaOtro.value = '';
-      updateSubmit();
-    });
-    if (categoriaOtro) categoriaOtro.addEventListener('input', updateSubmit);
+    if (categoria) categoria.addEventListener('change', updateSubmit);
     if (email) email.addEventListener('input', updateSubmit);
     if (brief) brief.addEventListener('input', updateSubmit);
 
@@ -323,7 +301,6 @@ const sourceDefault = source ?? 'contacto-progresivo';
             statusEl.textContent = '¡Mensaje enviado! Te respondemos en 24 h.';
             statusEl.className = 'form-status form-status--success';
             form.reset();
-            otroWrap.hidden = true;
           } else {
             statusEl.textContent = 'Error al enviar. Por favor, intentá de nuevo.';
             statusEl.className = 'form-status form-status--error';

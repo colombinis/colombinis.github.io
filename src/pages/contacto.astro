@@ -8,23 +8,29 @@
 // Se deriva el "asunto" readable desde la categoria (o se pasa explicito).
 //
 // Props del componente: categoria? (precarga select), asunto? (readonly), source? (tracking).
-import Layout from '../layouts/Layout.astro';
-import FormContactoProgresivo from '../components/FormContactoProgresivo.astro';
-import config from '../config/site.json';
+import Layout from "../layouts/Layout.astro";
+import FormContactoProgresivo from "../components/FormContactoProgresivo.astro";
+import config from "../config/site.json";
 
 // Whatsapp como fallback secundario (el usuario lo conserva en /contacto como alternativa).
 const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
 
 // Precargo categoria/asunto desde query-string (link desde servicios/* → /contacto/?categoria=<slug>).
 // Astro expone Astro.url en SSR/prerender: searchParams.get() resuelve el query.
-const categoria = Astro.url.searchParams.get('categoria') ?? undefined;
-const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
+const categoria = Astro.url.searchParams.get("categoria") ?? undefined;
+const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
 ---
 
-<Layout title="Contacto" description="Contactanos sin compromiso para tu proyecto. Contanos tu idea y te respondemos en 24 h por WhatsApp, email o redes sociales.">
+<Layout
+  title="Contacto"
+  description="Contactanos sin compromiso para tu proyecto. Contanos tu idea y te respondemos en 24 h por WhatsApp, email o redes sociales."
+>
   <div class="page-header">
     <h1>Contactanos</h1>
-    <p class="page-header__subtitle">Estamos listos para escucharte. Respondemos por WhatsApp, mail o las redes que prefieras.</p>
+    <p class="page-header__subtitle">
+      Estamos listos para escucharte. Respondemos por WhatsApp, mail o las redes
+      que prefieras.
+    </p>
   </div>
 
   <section class="contact-section">
@@ -37,46 +43,7 @@ const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
         source="contacto-page"
       />
 
-      <!-- WhatsApp fallback (alternativo, no reemplazado — decisión del owner) -->
-      <div class="alt-contact">
-        <p class="alt-contact__title">Preferís WhatsApp?</p>
-        <a
-          class="alt-contact__whatsapp"
-          href={whatsappUrl}
-          rel="noopener noreferrer"
-          target="_blank"
-        >WhatsApp</a>
-        <div class="alt-contact__item">
-          <span>✉</span>
-          <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
-        </div>
-      </div>
-
-      <div class="social-links">
-        <p class="social-links__title">Seguinos en:</p>
-        <div class="social-grid">
-          <a
-            class="social-item"
-            href={config.social.instagram}
-            rel="noopener noreferrer"
-            target="_blank"
-            aria-label="Instagram"
-          >
-            <span class="social-icon">📷</span>
-            Instagram
-          </a>
-          <a
-            class="social-item"
-            href={config.social.youtube}
-            rel="noopener noreferrer"
-            target="_blank"
-            aria-label="YouTube"
-          >
-            <span class="social-icon">▶️</span>
-            YouTube
-          </a>
-        </div>
-      </div>
+      
     </div>
   </section>
 </Layout>
@@ -134,7 +101,7 @@ const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
     align-items: center;
     gap: var(--spacing-sm);
     background-color: var(--whatsapp);
-    color: #FFFFFF;
+    color: #ffffff;
     padding: 14px 24px;
     border-radius: var(--rounded-sm);
     font-weight: 600;
@@ -145,7 +112,7 @@ const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
   }
   .alt-contact__whatsapp:hover {
     background-color: var(--whatsapp-hover);
-    color: #FFFFFF;
+    color: #ffffff;
   }
   .social-links {
     display: flex;
@@ -176,11 +143,13 @@ const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
     font-weight: 600;
     font-size: 0.93rem;
     color: var(--primary);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
   .social-item:hover {
     background-color: var(--whatsapp);
-    color: #FFFFFF;
+    color: #ffffff;
   }
   .social-icon {
     font-size: 1.1rem;
