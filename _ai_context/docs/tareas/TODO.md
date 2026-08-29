@@ -1,7 +1,7 @@
 # TODO — Maestro global (fuente única de verdad)
 
 > **Generado automáticamente** por `scripts/generate-todos.py` — no editar a mano. Se deriva escaneando `_ai_context/docs/tareas/**/TODO.md` según el contrato de `SYSTEM_MAP.yaml`.
-> Última generación: 2026-08-29 00:48 UTC
+> Última generación: 2026-08-29 18:11 UTC
 
 ## Resumen global
 
