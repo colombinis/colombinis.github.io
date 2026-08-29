@@ -1,0 +1,266 @@
+---
+// Ruta: src/components/FormContactoProgresivo.astro
+// Componentes/Formulario de contacto progresivo reutilizable (reemplaza formulario simple de contacto.astro y el CTA de WhatsApp).
+// Páginas/landing que usan este componente reutilizan en: contacto.astro, servicios/*, landing/marketing.
+//
+// Props (build-time, reutilizables por página/marketing):
+//   categoria?:  opcional, precarga el select de step1 (p.ej. "automatizacion").
+//   asunto?:     opcional, precarga el campo "asunto" de step2 (readonly). Se deriva de la categoria.
+//   source?:     opcional, identificador de la campaña/marketing que disparó el formulario
+//                (p.ej. "header", "servicio-automatizacion", "whatsapp-funnel-v2").
+//
+// Arquitectura:
+//   - 3 stages visibles uno a la vez (CSS :target / data-step). Solo el activo se muestra.
+//   - Accesible: labels asociados a inputs, foco al cambiar de step, botón "Siguiente"
+//     disabled si campos requeridos vacíos (step1: categoria o "otro"+texto; step2: nombre+email).
+//   - Mobile-first (ancho 100%, var(--space-md) margen).
+//   - Eventos GTM (dataLayer.push): form_step (on advance), form_submit (onsubmit),
+//     checkout_started (botón de confirmación step3). Patrón identico a contacto.astro
+//     (Formspree POSTea a config.contact.form_endpoint).
+//   - NO jQuery. Vanilla JS inline <script> solo para next/prev + validación de campos.
+//   - Build-time: getTrabajos() popular el select de categorías (importado de data-utils).
+//
+// NOTA: esta página NO se linkea desde el sitio público directamente en este componente;
+// la página contenedora (contacto.astro) se encarga de la CTA. El componente es genérico.
+// Protección: el formulario envía a Formspree (config.contact.form_endpoint); los datos
+// viajan en HTTPS (Formspree es HTTPS). No expone internos de SACsi (solo captura leads).
+import { getTrabajos } from '../lib/data-utils';
+import type { TrabajoSimple } from '../lib/data-utils';
+import config from '../config/site.json';
+
+interface Props {
+  categoria?: string;
+  asunto?: string;
+  source?: string;
+}
+
+const { categoria, asunto, source } = Astro.props as Props;
+// Endpoint real de Formspree (misma config que contacto.astro). Envío a HTTPS.
+const formEndpoint = config.contact.form_endpoint;
+
+// NOTA: la data real usa `categorias: string[]` (plural). La categoría principal
+// de cada trabajo es categorias[0] (misma convención que TrabajoSimple en data-utils.ts).
+const trabajos = getTrabajos();
+const categorias = Array.from(
+  new Map(
+    trabajos
+      .filter((t: TrabajoSimple) => Array.isArray(t.categorias) && t.categorias.length > 0)
+      .map((t: TrabajoSimple) => [
+        t.categorias[0].toLowerCase().replace(/\s+/g, '-'),
+        {
+          slug: t.categorias[0].toLowerCase().replace(/\s+/g, '-'),
+          label: t.categorias[0],
+          count: trabajos.filter(
+            (tt: TrabajoSimple) =>
+              Array.isArray(tt.categorias) && tt.categorias[0] === t.categorias[0],
+          ).length,
+        },
+      ]),
+  ).values(),
+);
+// Añado la opción "otro" para permitir libertad de texto.
+const opcionesCategoria = [
+  ...categorias,
+  { slug: 'otro', label: 'Otro', count: null as number | null },
+];
+
+// Derivo un asunto readable si no se pasa explícito.
+const asuntoDefault = asunto ?? (categoria ? `Consulta sobre ${categoria}` : 'Consulta SACsi');
+const sourceDefault = source ?? 'contacto-progresivo';
+---
+<form
+  id="form-contacto-progresivo"
+  class="progressive-form"
+  method="POST"
+  action={formEndpoint}
+  data-source={sourceDefault}
+  autocomplete="on"
+>
+  <!-- STEP 1: selección de servicio -->
+  <section class="progressive-step" data-step="1" aria-label="Paso 1: selección de servicio" hidden>
+    <h3 class="step-title">¿Sobre qué necesitás información?</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="pf-categoria">Seleccioná un servicio <span aria-hidden="true">*</span></label>
+        <select id="pf-categoria" name="categoria" required>
+          <option value="" disabled selected={categoria ? undefined : true}>Elegí una opción</option>
+          {opcionesCategoria.map((opt) => (
+            <option
+              value={opt.slug}
+              selected={categoria === opt.slug ? true : undefined}
+              disabled={opt.slug === 'otro' && categoria === 'otro' ? false : undefined}
+            >
+              {opt.label}{opt.count ? ` (${opt.count})` : ''}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <!-- texto "otro" -->
+      <div class="form-group" id="pf-otro-wrap" hidden>
+        <label for="pf-categoria-otro">Especificá el servicio</label>
+        <input
+          type="text"
+          id="pf-categoria-otro"
+          name="categoria_otro"
+          placeholder="Ej: integración de pagos"
+          maxlength="80"
+        >
+      </div>
+    </div>
+
+    <div class="form-nav">
+      <button type="button" class="btn btn--next" id="pf-btn-next-1" disabled>Siguiente</button>
+    </div>
+  </section>
+
+  <!-- STEP 2: datos de contacto -->
+  <section class="progressive-step" data-step="2" aria-label="Paso 2: datos de contacto" hidden>
+    <h3 class="step-title">Dejanos tus datos</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="pf-nombre">Nombre y apellido <span aria-hidden="true">*</span></label>
+        <input type="text" id="pf-nombre" name="name" placeholder="Ej: María González" required maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="pf-email">Email <span aria-hidden="true">*</span></label>
+        <input type="email" id="pf-email" name="email" required maxlength="100" placeholder="tu@email.com">
+      </div>
+      <div class="form-group">
+        <label for="pf-asunto">Asunto (no editable)</label>
+        <input type="text" id="pf-asunto" name="_subject" readonly value={asuntoDefault} class="input--readonly">
+        <!-- Formspree interpreta _subject como asunto del email recibido -->
+        <p class="hint">El asunto refleja el servicio que elegiste.</p>
+      </div>
+      <div class="form-group">
+        <label for="pf-brief">Cuéntanos brevemente qué necesitás (opcional)</label>
+        <textarea id="pf-brief" name="message" rows="3" maxlength="500" placeholder="Máximo 500 caracteres..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-nav">
+      <button type="button" class="btn btn--prev">Volver</button>
+      <button type="submit" class="btn btn--primary" id="pf-submit">
+        Confirmar y enviar
+      </button>
+    </div>
+  </section>
+</form>
+
+<style>
+  .progressive-form { display: grid; gap: var(--space-md, 1.5rem); }
+  .progressive-step { position: relative; }
+  .progressive-step[hidden] { display: none; }
+  .step-title { font-size: 1.15rem; margin-bottom: var(--space-sm, .75rem); color: var(--foreground, #222); }
+  .form-grid { display: grid; gap: var(--space-sm, .75rem); }
+  .form-group { display: flex; flex-column; gap: .25rem; }
+  .form-group label { font-size: .8rem; color: var(--muted-foreground, #666); font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: .5rem .7rem; border: 1px solid var(--border, #ccc);
+    border-radius: 8px; font: var(--font-size, .9rem) ui-system, sans-serif; color: var(--foreground, #222);
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: 2px solid var(--accent, var(--tertiary, #0066cc)); outline-offset: 1px;
+  }
+  .input--readonly { background: var(--muted, #f4f4f4); cursor: not-allowed; }
+  .form-nav { display: flex; gap: var(--space-sm, .75rem); justify-content: flex-end; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+    border: none; border-radius: 8px; padding: .5rem 1rem; font-size: .9rem; font: 600 ui-system, sans-serif;
+  }
+  .btn--next, .btn--primary { background: var(--primary, #0066cc); color: #fff; }
+  .btn--next:disabled, .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
+  .btn--prev { background: var(--muted, #e0e0e0); color: var(--foreground, #222); }
+  .hint { font-size: .75rem; color: var(--muted-foreground, #666); }
+  @media (max-width: 600px) { .form-nav { flex-direction: column-reverse; } .btn { width: 100%; } }
+</style>
+
+<script>
+  // Progressive disclosure + validación + GTM (patrón contacto.astro + dataLayer.push).
+  // NO depende de .ts cliente (build estático); lógica de UI pura.
+  (function () {
+    var form = document.getElementById('form-contacto-progresivo');
+    if (!form) return;
+
+    var steps = form.querySelectorAll('.progressive-step');
+    var categoria = form.querySelector('#pf-categoria');
+    var categoriaOtro = form.querySelector('#pf-categoria-otro');
+    var otroWrap = form.querySelector('#pf-otro-wrap');
+    var btnNext = form.querySelector('#pf-btn-next-1');
+    var btnsPrev = form.querySelectorAll('.btn--prev');
+    var submitBtn = form.querySelector('#pf-submit');
+    var nombre = form.querySelector('#pf-nombre');
+    var email = form.querySelector('#pf-email');
+    var source = form.getAttribute('data-source') || 'contacto-progresivo';
+
+    function push(step, extra) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({
+        event: 'form_step_' + step,
+        source: source,
+        form_name: 'contacto-progresivo',
+      }, extra || {}));
+    }
+
+    function showStep(n) {
+      steps.forEach(function (s, i) {
+        var is = Number(s.getAttribute('data-step')) === n;
+        s.hidden = !is;
+        if (is) s.querySelector('input,select,textarea,button') && s.querySelector('input,select,textarea,button').focus();
+      });
+      updateNext();
+      if (n === 2) { push(2); }
+      else if (n === 1) { push(1); }
+    }
+
+    function categoriaValida() {
+      var v = categoria.value;
+      if (!v) return false;
+      if (v === 'otro') return categoriaOtro.value.trim().length > 0;
+      return true;
+    }
+    function contactoValido() {
+      return nombre.value.trim().length > 0 && email.value.trim().length > 0 && email.value.indexOf('@') > -1;
+    }
+    function updateNext() {
+      if (btnNext) btnNext.disabled = !categoriaValida();
+      if (submitBtn) submitBtn.disabled = !contactoValido();
+    }
+
+    if (categoria) categoria.addEventListener('change', function () {
+      otroWrap.hidden = categoria.value !== 'otro';
+      categoriaOtro.value = '';
+      updateNext();
+    });
+    if (categoriaOtro) categoriaOtro.addEventListener('input', updateNext);
+    if (nombre) nombre.addEventListener('input', updateNext);
+    if (email) email.addEventListener('input', updateNext);
+
+    if (btnNext) btnNext.addEventListener('click', function () {
+      if (!categoriaValida()) return;
+      form.querySelector('#pf-categoria-otro') &&
+        (form.querySelector('#pf-categoria_otro_hidden') || true);
+      showStep(2);
+    });
+    btnsPrev.forEach(function (b) { b.addEventListener('click', function () { showStep(1); }); });
+
+    // Submit → checkout_started (simulado) + form_submit (Formspree).
+    form.addEventListener('submit', function (e) {
+      if (!categoriaValida()) { e.preventDefault(); return; }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'checkout_started', source: source, categoria: categoria.value });
+      // form_submit se dispara después del submit en Formspree (como en contacto.astro).
+      setTimeout(function () {
+        window.dataLayer.push({
+          event: 'form_submit',
+          form_name: 'contacto-progresivo',
+          source: source,
+          categoria: categoria.value,
+        });
+      }, 100);
+    });
+
+    // Estado inicial
+    categoria && categoria.value && categoria.value !== '' ? showStep(2) : showStep(1);
+  })();
+</script>
