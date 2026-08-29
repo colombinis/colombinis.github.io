@@ -78,7 +78,7 @@ Full status: `_ai_context/docs/tareas/TODO.md` (active tasks) and `_ai_context/d
 ## Reference
 
 - `DESIGN.md` — colors, typography, spacing, components (canonical tokens)
-- `_ai_context/docs/tareas/TODO.md` — active task master (source of truth for ongoing work)
+- `_ai_context/docs/tareas/TODO.md` — **active task master (source of truth for ongoing work)**. Es **generado automáticamente**, NO se edita a mano: se deriva escaneando `_ai_context/docs/tareas/**/TODO.md` (excl. `archived/`). Regenerar con: `python3 _ai_context/docs/tareas/scripts/generate-todos.py` (produce también `generated/system-map-coverage.json`).
 - `_ai_context/docs/tareas/ARQUITECTURA.md` — Astro structure, legacy files, deploy, SEO
 - `_ai_context/docs/tareas/CONTENIDO.md` — content architecture + service copy
 - `_ai_context/docs/tareas/DISENO.md` — design rationale + glossary + token drift

@@ -1,6 +1,8 @@
 # AUD-06 — Pendientes post-deploy → tareas concretas
 
 ## Contexto
+**prd:** §1.1 — "Posicionar como proveedor confiable" y "Convertir visitas en consultas" (features A/D, §3.1). La validación en producción cierra la trazabilidad del funnel.
+
 
 `Roadmap.md` sección "Monitoreo post-lanzamiento" (líneas 118-124) lista
 6 items unchecked:

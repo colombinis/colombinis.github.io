@@ -1,6 +1,8 @@
 # CAT-03 — Grid de tarjetas de trabajos con link a detalle
 
 ## Contexto
+**prd:** §1.1 — "Convertir visitas en consultas comerciales" (feature B, §3.1). El grid de tarjetas es la vitrina que convierte la visita de la persona Carlos en click a detalle/trabajo.
+
 CA-03 pide que los trabajos se muestren en forma de tarjeta y que elegir "más
 detalle" lleve a la página de detalle del trabajo (`/trabajos/<id>/`, ya
 existente). Las tarjetas son el elemento central del catálogo y deben seguir
@@ -66,7 +68,7 @@ echo "✅ CAT-03 — COMPLETA"
 ```
 
 ## Estado
-TODO — sin empezar
+DONE — verificado (grid + link a detalle)
 
 ## Notas
 - El CTA de cada tarjeta usa el patrón visual `service-card__cta` ya existente.

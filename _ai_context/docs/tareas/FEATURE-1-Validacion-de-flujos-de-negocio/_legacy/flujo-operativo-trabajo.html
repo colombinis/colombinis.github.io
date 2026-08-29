@@ -242,8 +242,8 @@ Simulador SACsi — Flujo operativo por trabajo + tabla de rentabilidad. El sele
 // Pasos del flujo:        src/data/trabajos/trabajo_<id>.json
 // Fuente de verdad única: los JSON (no hay datos hardcodeados acá).
 // Requiere servir el repo por HTTP (python3 -m http.server) — no file://.
-const LISTADO_URL = '../../../src/data/trabajos/listado-trabajos.json';
-const trabajoUrl = (id) => `../../../src/data/trabajos/trabajo_${id}.json`;
+const LISTADO_URL = '../../../../src/data/trabajos/listado-trabajos.json';
+const trabajoUrl = (id) => `../../../../src/data/trabajos/detalle/trabajo_${id}.json`;
 
 // ===== ESTADO =====
 let pasos = [];                    // pasos del trabajo seleccionado (editable)

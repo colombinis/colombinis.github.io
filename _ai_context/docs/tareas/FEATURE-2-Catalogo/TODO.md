@@ -57,14 +57,14 @@ trabajos disponibles y filtrarlos por servicio, categoría y texto.
 |--------|----------------------------------------------------------------------|--------|---------|
 | CAT-01 | Crear ruta `/catalogo` con datos normalizados (solo opciones con trabajos) | DONE   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-01-ruta-catalogo-datos.md` |
 | CAT-02 | Filtros jerárquicos servicio→categoría + búsqueda textual (sin opciones vacías) | DONE   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-02-filtros-jerarquicos-busqueda.md` |
-| CAT-03 | Grid de tarjetas de trabajos con link a detalle                      | TODO   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-03-grid-tarjetas-trabajos.md` |
-| CAT-04 | Verificación (build + E2E) + integrar navegación a `/catalogo`        | TODO   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-04-verificacion-integrar-navegacion.md` |
+| CAT-03 | Grid de tarjetas de trabajos con link a detalle                      | DONE   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-03-grid-tarjetas-trabajos.md` |
+| CAT-04 | Verificación (build + E2E) + integrar navegación a `/catalogo`        | DONE   | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-04-verificacion-integrar-navegacion.md` |
 
 ## Resumen
 
 | Total | TODO | DOING | DONE | BLOCKED |
 |-------|------|-------|------|---------|
-| 4     | 2    | 0     | 2    | 0       |
+| 4     | 0    | 0     | 4    | 0       |
 
 ## Verificación
 
