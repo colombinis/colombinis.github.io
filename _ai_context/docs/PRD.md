@@ -21,7 +21,7 @@
 ### 1.2 Problemas a resolver hoy
 
 - ~~Gaps funcionales abiertos~~: **RESUELTO** (2026-08-28) — CAT-03/CAT-04 DONE, CHAT-06 = backlog formal, CON-04 DONE en código (resta validar GA4 en DEP-01), DEP-01 atado al release (no push hasta cerrar todo).
-- **Forma de pago + entrega no integrada:** el funnel era manual (WhatsApp); se creó formulario progresivo + /contacto-v2 (P4-step(a) ✅) para capturar funnel real ANTES de MP/n8n (regla 'medir antes de automatizar'). AUT-01 con workflow n8n completo (ver §3.3, 7.0 P4). Pasos (b)/(c)/(d) post-push.
+- **Forma de pago + entrega no integrada:** el funnel era manual (WhatsApp); se reutilizó `/contacto/` (entry point único) con `FormContactoProgresivo` (P4-step a) para capturar funnel real ANTES de MP/n8n (regla 'medir antes de automatizar'). AUT-01 con workflow n8n completo (ver §3.3, 7.0 P4). Pasos (b)/(c)/(d) post-push.
 - ~~Experiencia mixta~~: **RESUELTO** (2026-08-28) — convertidas a páginas Astro estáticas bajo `/padmin/` (`listado-trabajos.astro` ✅ + `flujo-operativo.astro` ✅, ambas build exit 0)., legacy archivado en `_legacy/`. Protección real: Cloudflare Basic Auth en `/padmin/*` (Owner). sitio sigue static GitHub Pages, no toca deploy.yml. Tests `rentabilidad.ts` 15/15 ✅.
 
 ---
@@ -202,14 +202,14 @@ Backfill acordado (solo specs críticas del roadmap activo, no las 29 de una): `
 - **Sub-agente original:** `sa-0-148d745e` · **Diagnóstico inicial:** ✅ recibido (batch deleg_536332f2) — funnel 100% manual (WhatsApp), AUT-01 con workflow n8n completo pero no conectado.
 - **Avance P4-step(a) (2026-08-29):** ✅ DONE — formulario progresivo como base de datos de funnel real ANTES de MP/n8n (cumple P2 "medir antes de automatizar").
   - `src/components/FormContactoProgresivo.astro`: 3 stages (select categoría desde getTrabajos() build-time → nombre/email/brief → recap checkout simulado), Formspree POST, eventos GTM `checkout_started`+`form_submit`+`form_step_*` en dataLayer, noscript fallback.
-  - `src/pages/contacto-v2.astro`: página pública `/contacto-v2/` (action Formspree, no WhatsApp). Build 40 pages, `dist/contacto-v2/index.html` (26767 b), categorías reales renderizadas (5 + "Otro"). Tests rentabilidad.ts 15/15 ✅ (no regresión).
+  - `src/pages/contacto.astro`: **migrado a `<FormContactoProgresivo>`** (reemplazó form simple; NO se creó `/contacto-v2/` paralelo). Soporta query-string `?categoria=<slug>` para precargar el select step1. Conserva WhatsApp fallback como alternativa secundaria. Build exit 0, Formspree POST (`mljrdlka`), eventos GTM `checkout_started`/`form_submit`. Tests `rentabilidad.ts` 15/15 ✅.
   - **Sin commit/push** (regla release). Legacy HTML archivado en `_legacy/`.
 - **Propuestas (revisadas tras step a):**
-  - **(3) Híbrido incremental (recomendada):** (a) formulario progresivo ✅ DONE, (b) reemplazar CTAs WhatsApp→/contacto-v2 en servicios+footer, (c) webhook MP→onboarding (docker-compose AUT-01 reutilizable), (d) monitor de abandono con umbrales reales. Pros: respeta "medir antes de automatizar"; el form (a) ya produce datos de funnel. Dep: DEP-01 para (c)/(d).
+  - **(3) Híbrido incremental (recomendada):** (a) formulario progresivo ✅ DONE, (b) reemplazar CTAs WhatsApp→/contacto/?categoria= en servicios/*, (c) webhook MP→onboarding (docker-compose AUT-01 reutilizable), (d) monitor de abandono con umbrales reales. Pros: respeta "medir antes de automatizar"; el form (a) ya produce datos de funnel. Dep: DEP-01 para (c)/(d).
   - **(1) Manual:** WhatsApp + plantillas. Pros: cero costo. Contras: no escala, sin trazabilidad. Dep: ninguna.
   - **(2) n8n full (AUT-01):** conectar sitio→MP→DB→email→monitor. Contras: requiere DEP-01 + datos reales para calibrar umbrales (24/72/168h); riesgo a ciegas. Dep: DEP-01, CON-04, MP API.
 - **Decisión:** Ejecutar propuesta 3 (híbrido incremental). Steps (a) DONE. **Los steps (b)/(c)/(d) quedan POST-PUSH** — dependen de que el formulario vaya a producción (DEP-01) para medir funnel real (tasa abandono/step, tiempo submit) y luego calibrar/umbrales del workflow n8n (`funnel_stats`/`clientes_en_riesgo`). No se conecta MP ni se fijan umbrales a ciegas. AUT-01 mantiene diseño completo (workflow n8n, docker-compose, schema SQL, 4 templates, verify-setup.sh) listo para reusarse en (c).
-- **Pendiente de release:** migrar CTA WhatsApp del footer/servicios → /contacto-v2 (step b) — post-push para validar datos primero.
+- **Pendiente de release:** migrar CTA WhatsApp → /contacto/?categoria= en servicios/* (step b) — COMPLETADO (2026-08-29, commit 9842c3e). El WhatsApp del **footer público** se conserva como fallback global (decisión owner); solo los CTAs `hero__cta--whatsapp` primarios de servicios fueron migrados a `hero__cta--form`.
 #### P5 — Experiencia mixta (sitio Astro + HTML standalone) — ✅ RESUELTO (2026-08-28)
 - **Decisión de arquitectura:** Opción C — las herramientas de rentabilidad/flujos se **convierten a PÁGINAS ASTRO ESTÁTICAS** bajo `/padmin/` (ej: `/padmin/flujo-operativo/`, `/padmin/listado-trabajos/`), usando `src/lib/rentabilidad.ts` + `src/lib/data-utils.ts` (build-time, sin `fetch` a rutas relativas). Sitio sigue `output: static` GitHub Pages; protección real via **Cloudflare Basic Auth en `/padmin/*`** (Owner la configura fuera del repo; no toca deploy.yml ni adapter).
 - **Estado por herramienta:**
