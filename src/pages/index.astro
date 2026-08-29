@@ -21,12 +21,10 @@ import FaqSection from '../components/FaqSection.astro';
       </p>
       <div class="hero__actions">
         <a
-          class="hero__cta hero__cta--whatsapp"
-          href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20vi%20su%20web%20y%20quiero%20consultar%20sin%20compromiso`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >Consultar sin cargo</a>
-        <a class="hero__cta-secondary" href="/servicios/">Ver servicios</a>
+          class="hero__cta hero__cta--form"
+          href="/contacto/?categoria=otros&asunto=Consulta%20desde%20home"
+          >Consultar sin cargo</a>
+        <a class="hero__cta-secondary" href="/catalogo/">Ver servicios</a>
       </div>
     </div>
 
