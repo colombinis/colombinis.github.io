@@ -55,10 +55,8 @@ const categorias = getCategoriasByServicio(servicio.id);
       </p>
       <div class="hero__actions">
         <a
-          class="hero__cta hero__cta--whatsapp"
-          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20quiero%20consultar%20sobre%20{servicio.id}"
-          rel="noopener noreferrer"
-          target="_blank"
+          class="hero__cta hero__cta--form"
+          href={`/contacto/?categoria=${servicio.id}&asunto=Consulta%20sobre%20${servicio.title}`}
           >Consultar sin cargo</a
         >
       </div>
