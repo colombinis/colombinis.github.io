@@ -1,8 +1,24 @@
 ---
+// contacto.astro — página pública /contacto/
+//
+// REUTILIZA FormContactoProgresivo (componente genérico) en lugar de un formulario simple.
+// Esto CIERRA el error P4: no hay /contacto-v2 paralelo; /contacto/ es el entry point único.
+//
+// Query-string ?categoria=<slug> precarga el select del step 1 (p.ej. ?categoria=facturacion-cobranzas).
+// Se deriva el "asunto" readable desde la categoria (o se pasa explicito).
+//
+// Props del componente: categoria? (precarga select), asunto? (readonly), source? (tracking).
 import Layout from '../layouts/Layout.astro';
+import FormContactoProgresivo from '../components/FormContactoProgresivo.astro';
 import config from '../config/site.json';
 
+// Whatsapp como fallback secundario (el usuario lo conserva en /contacto como alternativa).
 const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
+
+// Precargo categoria/asunto desde query-string (link desde servicios/* → /contacto/?categoria=<slug>).
+// Astro expone Astro.url en SSR/prerender: searchParams.get() resuelve el query.
+const categoria = Astro.url.searchParams.get('categoria') ?? undefined;
+const asunto = Astro.url.searchParams.get('asunto') ?? undefined;
 ---
 
 <Layout title="Contacto" description="Contactanos sin compromiso para tu proyecto. Contanos tu idea y te respondemos en 24 h por WhatsApp, email o redes sociales.">
@@ -13,33 +29,17 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
 
   <section class="contact-section">
     <div class="contact-grid">
-      <form id="contact-form" class="contact-form" action={config.contact.form_endpoint} method="POST">
-        <input type="hidden" name="_subject" value="Consulta desde sacsi.com.ar" />
-        <input type="hidden" name="_replyto" value="email" />
-        <p class="contact-form__title">Escribinos por formulario</p>
+      <!-- Formulario progresivo reutilizable (3 steps, Formspree, GTM) -->
+      <!-- source="contacto-page" identifica el entry point en GA4/dataLayer -->
+      <FormContactoProgresivo
+        categoria={categoria}
+        asunto={asunto}
+        source="contacto-page"
+      />
 
-        <div class="contact-form__field">
-          <label for="contact-email">Email <span aria-hidden="true">*</span></label>
-          <input id="contact-email" name="email" type="email" required autocomplete="email" placeholder="tucorreo@ejemplo.com" />
-        </div>
-
-        <div class="contact-form__field">
-          <label for="contact-message">Mensaje <span aria-hidden="true">*</span></label>
-          <textarea id="contact-message" name="message" rows="5" required placeholder="Contanos qué necesitás"></textarea>
-        </div>
-
-        <div class="contact-form__honeypot" aria-hidden="true">
-          <label for="contact-website">No completar este campo</label>
-          <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-        </div>
-
-        <p class="contact-form__status" role="status" aria-live="polite"></p>
-
-        <button type="submit" class="contact-form__submit">Enviar mensaje</button>
-      </form>
-
+      <!-- WhatsApp fallback (alternativo, no reemplazado — decisión del owner) -->
       <div class="alt-contact">
-        <p class="alt-contact__title">Contactanos a través de:</p>
+        <p class="alt-contact__title">Preferís WhatsApp?</p>
         <a
           class="alt-contact__whatsapp"
           href={whatsappUrl}
@@ -81,72 +81,6 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
   </section>
 </Layout>
 
-<script>
-  const contactForm = document.getElementById('contact-form');
-
-  if (contactForm) {
-    const statusEl = contactForm.querySelector('.contact-form__status');
-    const submitBtn = contactForm.querySelector('.contact-form__submit');
-
-    contactForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      // Honeypot anti-spam: si está completo, hay un bot → ignorar silenciosamente
-      const website = contactForm.querySelector('[name="website"]');
-      if (website && website.value) {
-        return;
-      }
-
-      const data = new FormData(contactForm);
-      const email = data.get('email').trim();
-      const message = data.get('message').trim();
-
-      // UI: estado loading
-      statusEl.textContent = 'Enviando...';
-      statusEl.classList.remove('contact-form__status--success', 'contact-form__status--error');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Enviando...';
-
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' },
-        });
-
-        if (response.ok) {
-          // Tracking de conversión: solo en envío exitoso
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'form_submit',
-            form_name: 'contacto',
-            lead_email: email,
-          });
-
-          statusEl.textContent = '¡Mensaje enviado! Te respondemos en 24 h.';
-          statusEl.classList.add('contact-form__status--success');
-          contactForm.reset();
-        } else {
-          // Formspree devuelve errores de validación (400) o rate limit (429)
-          let errorText = 'Error al enviar. Por favor, intentá de nuevo.';
-          try {
-            const err = await response.json();
-            if (err.message) errorText = err.message;
-          } catch (e) { /* mantén mensaje genérico */ }
-          statusEl.textContent = errorText;
-          statusEl.classList.add('contact-form__status--error');
-        }
-      } catch (err) {
-        statusEl.textContent = 'Error de conexión. Por favor, escribimos por WhatsApp.';
-        statusEl.classList.add('contact-form__status--error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Enviar mensaje';
-      }
-    });
-  }
-</script>
-
 <style>
   .page-header {
     padding: var(--spacing-xxl) var(--spacing-lg) 0;
@@ -168,91 +102,6 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
-  }
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    background: var(--surface);
-    border: 1px solid #E8E8E8;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
-  }
-  .contact-form__title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin: 0;
-  }
-  .contact-form__field {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .contact-form__field label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--primary);
-  }
-  .contact-form__field input,
-  .contact-form__field textarea {
-    font-family: inherit;
-    font-size: 1rem;
-    color: var(--primary);
-    background: #FFFFFF;
-    border: 1.5px solid #DDDDDD;
-    border-radius: var(--rounded-xs);
-    padding: 10px 12px;
-    transition: border-color 0.2s ease;
-  }
-  .contact-form__field input:focus,
-  .contact-form__field textarea:focus {
-    outline: none;
-    border-color: var(--tertiary);
-  }
-  .contact-form__honeypot {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-  }
-  .contact-form__status {
-    font-size: 0.93rem;
-    color: var(--secondary);
-    margin: 0;
-    min-height: 1.2em;
-  }
-  .contact-form__status--success {
-    color: #128C7E;
-    font-weight: 600;
-  }
-  .contact-form__status--error {
-    color: #E53935;
-    font-weight: 500;
-  }
-  .contact-form__submit {
-    background-color: var(--primary);
-    color: #FFFFFF;
-    padding: 14px 24px;
-    border: none;
-    border-radius: var(--rounded-sm);
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  .contact-form__submit:hover {
-    background-color: var(--tertiary);
-    color: #FFFFFF;
-  }
-  .contact-form__submit:focus-visible {
-    outline: 2px solid var(--tertiary);
-    outline-offset: 2px;
-  }
-  .contact-form__submit:disabled {
-    opacity: 0.7;
-    cursor: wait;
   }
   .alt-contact {
     display: flex;
