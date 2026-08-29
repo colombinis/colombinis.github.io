@@ -45,12 +45,13 @@ sus **pasos del flujo** (fuente de verdad del simulador).
 | VAL-04  | Integrar add/remove/editar filas (como Pasos del flujo)         | DONE   | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-04-add-remove-editar-filas.md` |
 | VAL-05  | Cargar tabla desde listado-trabajos.json (fuente única)       | DONE   | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-05-listado-trabajos-json.md` |
 | VAL-06  | Selector de trabajo + pasos del flujo desde trabajo_<id>.json   | DONE   | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-06-selector-trabajo-pasos-json.md` |
+| CONT-01 | Formulario progresivo multi-step + página /contacto-v2 (P4-step a) | DONE   | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/CONT-01-formulario-progresivo.md` | verify-CONT-01.sh |
 
 ## Resumen
 
 | Total | TODO | DOING | DONE | BLOCKED |
 |-------|------|-------|------|---------|
-| 6     | 0    | 0     | 6    | 0       |
+| 7     | 0    | 0     | 7    | 0       |
 
 ## Verificación
 
@@ -58,7 +59,8 @@ sus **pasos del flujo** (fuente de verdad del simulador).
 - `test-listado-trabajos.cjs`: 9/9 ✅ (tabla desde JSON)
 - E2E Chromium real (HTTP): `flujo-operativo-trabajo.html` 14/14 ✅ (selector, cambio de trabajo, pasos, rentabilidad, 0 errores JS)
 - Sintaxis JS validada con `node --check` en ambos HTML
-- JSONs parsean OK (listado 10 trabajos + 10 `trabajo_<id>.json` con flujos)
+| JSONs parsean OK (listado 10 trabajos + 10 `trabajo_<id>.json` con flujos)
+- `verify-CONT-01.sh`: PASS ✅ — formulario progresivo (`/contacto-v2/`) con Formspree POST, categorías reales (build-time), eventos GTM `checkout_started`/`form_submit`, tests rentabilidad.ts 15/15.
 
 ## Notas
 
