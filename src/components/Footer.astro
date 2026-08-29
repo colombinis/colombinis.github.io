@@ -247,11 +247,9 @@ const trabajos = getTrabajos();
         </p>
         <div class="footer__actions">
           <a
-            class="footer__whatsapp"
-            href={`${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20más%20sobre%20sus%20soluciones%20informáticas`}
-            rel="noopener noreferrer"
-            target="_blank"
-          >Escribinos por WhatsApp</a>
+            class="footer__cta footer__cta--form"
+            href="/contacto/?categoria=otros&asunto=Consulta%20desde%20footer"
+            >Escribinos por formulario</a>
           <div class="footer__contact-row">
             <span aria-hidden="true">&#9993;</span>
             <a class="footer__email" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
