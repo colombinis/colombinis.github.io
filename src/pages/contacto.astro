@@ -15,8 +15,11 @@ import config from "../config/site.json";
 // Whatsapp como fallback secundario (el usuario lo conserva en /contacto como alternativa).
 const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
 
-// Precargo categoria/asunto desde query-string (link desde servicios/* → /contacto/?categoria=<slug>).
-// Astro expone Astro.url en SSR/prerender: searchParams.get() resuelve el query.
+// Precarga de categoría: el sitio es ESTÁTICO (GitHub Pages), así que la
+// query-string NO existe en build-time (Astro.url.searchParams es la del build).
+// La precarga real se hace en cliente dentro de FormContactoProgresivo (lee
+// window.location.search). Acá solo pasamos defaultToOtros para que, sin
+// parámetro, quede seleccionado "Otros".
 const categoria = Astro.url.searchParams.get("categoria") ?? undefined;
 const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
 ---
@@ -41,6 +44,7 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
         categoria={categoria}
         asunto={asunto}
         source="contacto-page"
+        defaultToOtros={true}
       />
 
       
