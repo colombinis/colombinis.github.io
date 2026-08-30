@@ -2,7 +2,9 @@
 // Ruta: src/components/FormContactoProgresivo.astro
 // Formulario de contacto REUTILIZABLE (reemplaza formulario simple de contacto.astro y CTAs WhatsApp).
 // UNA SOLA VISTA: todos los campos visibles por defecto (sin steps). Jerarquía en el select:
-//   <optgroup label="Servicio"> → categorías del servicio; + <optgroup label="Otro">.
+//   <optgroup label="Servicio"> → opción del servicio (value=svc.id) + categorías del servicio (value=cat.id); + <optgroup label="Otro">.
+//   El select lista servicios Y categorías (todos los ids de los .json de fuente de verdad),
+//   para que ?categoria=<svc.id> o ?categoria=<cat.id> precarguen correctamente.
 //
 // Props (build-time, reutilizables por página/marketing):
 //   categoria?:  opcional, precarga el select (p.ej. "facturacion-cobranzas").
@@ -59,6 +61,9 @@ const sourceDefault = source ?? 'contacto-progresivo';
       <option value="" disabled selected={categoria ? undefined : true}>Elegí una opción</option>
       {servicios.map((svc) => (
         <optgroup label={svc.title}>
+          <option value={svc.id} selected={categoria === svc.id ? true : undefined}>
+            {svc.title}
+          </option>
           {svc.categorias.map((cat) => (
             <option value={cat.id} selected={categoria === cat.id ? true : undefined}>
               {cat.title}
