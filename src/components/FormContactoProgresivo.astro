@@ -94,7 +94,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
       <img class="ic" src="/icons/brand-whatsapp.svg" alt="" width="18" height="18" />
       Escribir por WhatsApp
     </a>
-    <button type="button" class="btn btn--email" id="pf-prefiere-email">
+    <button type="button" class="btn btn--email" id="pf-prefiere-email" data-email={config.contact.email}>
       <img class="ic" src="/icons/mail.svg" alt="" width="18" height="18" />
       Escribinos por Email
     </button>
@@ -270,8 +270,12 @@ const sourceDefault = source ?? 'contacto-progresivo';
     if (brief) brief.addEventListener('input', updateSubmit);
 
     if (prefiereEmail) prefiereEmail.addEventListener('click', function () {
-      email.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      email.focus();
+      var dest = prefiereEmail.getAttribute('data-email') || 'sacsi@sacsi.com.ar';
+      var catLabel = categoria && categoria.options[categoria.selectedIndex]
+        ? categoria.options[categoria.selectedIndex].text
+        : '';
+      var subject = 'Consulta desde sacsi.com.ar' + (catLabel ? ' - ' + catLabel.trim() : '');
+      window.location.href = 'mailto:' + dest + '?subject=' + encodeURIComponent(subject);
     });
 
     form.addEventListener('submit', function (e) {
