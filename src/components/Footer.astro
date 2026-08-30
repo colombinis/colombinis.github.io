@@ -5,12 +5,13 @@
 // Col 3: Sección "¿Empezamos?" con WhatsApp + email
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
-import { getServicios, getCategoriasByServicio, getTrabajos } from '../lib/data-utils';
+import { getServicios, getCategoriasByServicio, getTrabajos, getCasos } from '../lib/data-utils';
 import config from '../config/site.json';
 
 // Datos normalizados: servicios + categorías
 const servicios = getServicios();
 const trabajos = getTrabajos();
+const casos = getCasos();
 ---
 
 <style>
@@ -110,6 +111,34 @@ const trabajos = getTrabajos();
     color: var(--tertiary);
   }
 
+  /* ---------- Col 3: Listado de casos de éxito ---------- */
+  .footer-casos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  .footer-caso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 4px 0;
+    border-bottom: 1px solid #3a3b3f;
+  }
+  .footer-caso:last-child {
+    border-bottom: none;
+  }
+  .footer-caso__name {
+    color: #B0B0B0;
+    text-decoration: none;
+    font-size: 0.93rem;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .footer-caso__name:hover {
+    color: var(--tertiary);
+  }
+
   /* ---------- Col 3: Sección "¿Empezamos?" ---------- */
   .footer__cta h2 {
     color: #E0E0E0;
@@ -192,7 +221,22 @@ const trabajos = getTrabajos();
     }
   }
 </style>
-
+  <section id="cta-final" class="cta-final">
+    <div class="container">
+      <div class="footer-col footer__cta">
+        <h2>¿Tenes alguna pregunta?</h2>
+        <p>
+          En 5 minutos podes saber como podemos ayudarte.
+        </p>
+        <div class="footer__actions">
+          <a
+            class="footer__cta footer__cta--form"
+            href="/contacto/?categoria=otros&asunto=Consulta%20desde%20footer"
+            >Consultanos sin compromiso</a>
+        </div>
+      </div>
+    </div>
+  </section>
 <div id="footer-container">
   <footer class="wrapper">
     <div class="footer-grid">
@@ -239,20 +283,23 @@ const trabajos = getTrabajos();
         </div>
       </div>
 
-      <!-- Col 3: Sección "¿Empezamos?" -->
-      <div class="footer-col footer__cta">
-        <h2>¿Empezamos?</h2>
-        <p>
-          Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.
-        </p>
-        <div class="footer__actions">
-          <a
-            class="footer__cta footer__cta--form"
-            href="/contacto/?categoria=otros&asunto=Consulta%20desde%20footer"
-            >Escribinos por formulario</a>
-          <div class="footer__contact-row">
-            <span aria-hidden="true">&#9993;</span>
-            <a class="footer__email" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
+      <!-- Col 3: Listado de casos de éxito -->
+      <div class="footer-col">
+        <h3>Casos de éxito</h3>
+        <div class="footer-casos">
+          {casos.map((caso) => (
+            <div class="footer-caso">
+              <a
+                class="footer-caso__name"
+                href={`/casos-exito/${caso.slug}/`}
+              >{caso.title}</a>
+            </div>
+          ))}
+          <div class="footer-caso">
+            <a
+              class="footer-caso__name"
+              href="/casos-exito/"
+            >Ver todos</a>
           </div>
         </div>
       </div>
