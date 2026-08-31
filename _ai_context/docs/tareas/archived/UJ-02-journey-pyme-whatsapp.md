@@ -30,7 +30,7 @@ Given Carlos en la homepage
 When scrollea a "Casos de éxito"
 Then ve el caso "Ferretería familiar sin tiempo para la tienda online"
 And el caso está etiquetado como "CASO DE ÉXITO" (no proyecto tipo)
-And puede ir a la página del caso y ver el CTA "Consultá por este resultado"
+And puede ir a la página del caso y ver el CTA "¿Tenés preguntas?. Consultanos ahora !!!"
 
 ### E4: Carlos convierte por WhatsApp
 Given Carlos en cualquier página del sitio
@@ -66,7 +66,7 @@ done
 
 # E3: caso ferretería = CASO DE ÉXITO con CTA
 grep -q 'CASO DE ÉXITO' $D/casos-exito/ferreteria-gas-plomeria/index.html && echo "  ✅ E3 caso ferretería CASO DE ÉXITO"
-grep -q 'Consultá por este resultado' $D/casos-exito/ferreteria-gas-plomeria/index.html && echo "  ✅ E3 CTA del caso"
+grep -q '¿Tenés preguntas?. Consultanos ahora !!!' $D/casos-exito/ferreteria-gas-plomeria/index.html && echo "  ✅ E3 CTA del caso"
 
 # E4: WhatsApp pre-cargado en funnel
 for p in index.html servicios/presencia-online/index.html casos-exito/ferreteria-gas-plomeria/index.html; do
