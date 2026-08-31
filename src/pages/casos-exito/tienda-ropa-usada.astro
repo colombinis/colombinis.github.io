@@ -1,73 +1,28 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
 const title = 'Tienda de ropa usada con pagos automáticos a donantes';
+const description = 'Caso de éxito: digitalización de una tienda de ropa usada con pagos automáticos a donantes y catálogo online.';
 ---
 
-<Layout title={title} description="Caso de éxito: digitalización de una tienda de ropa usada con pagos automáticos a donantes y catálogo online.">
-  <section class="hero">
-    <div class="hero__container">
-      <p class="hero__label">CASO DE ÉXITO</p>
-      <h1 class="hero__title">{title}</h1>
-      <p class="hero__subtitle">
-        Cómo una PyME de ropa usada escaló registrando prendas en dos pasos, publicando automáticamente y pagando a donantes sin mover efectivo.
-      </p>
-      <div class="hero__actions">
-        
-        <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">El problema</h2>
-      <div style="max-width:720px;margin:0 auto;color:var(--secondary);">
-        <p>El administrativo se comía gran parte del día: cargar stock, sacar fotos, publicar en la tienda y conciliar los pagos de los donantes. Crecían las ventas pero también los errores y las horas de trabajo.</p>
-      </div>
-
-      <h2 class="section__title" style="margin-top:var(--spacing-xxl);">La solución</h2>
-      <div class="cards-grid">
-        <article class="service-card">
-          <div class="service-card__icon">📦</div>
-          <h3> Registro express</h3>
-          <p>Formulario guiado para cargar prendas en dos pasos, con validaciones y generación automática de código.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">🖼️</div>
-          <h3>Publicación automática</h3>
-          <p>Cada carga se publica directo en la tienda online, con imágenes, talles y precios sincronizados.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">💸</div>
-          <h3>Pagos a donantes</h3>
-          <p>Liquidación automática por venta y payout a donantes sin mover efectivo ni cargar transferencias manualmente.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Resultado</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock."
-          </p>
-          <p class="testimonial-card__author">Dueña — Tienda de ropa usada</p>
-          <p class="testimonial-card__role">Rosario, Santa Fe</p>
-        </div>
-      </div>
-      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
-        <div class="metric">
-          <p class="metric__number">70%</p>
-          <p class="metric__label">menos tiempo administrativo</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">2</p>
-          <p class="metric__label">pasos por carga de prenda</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</Layout>
+<CaseStudyLayout
+  title={title}
+  description={description}
+  heroLabel="CASO DE ÉXITO"
+  heroSubtitle="Cómo una PyME de ropa usada escaló registrando prendas en dos pasos, publicando automáticamente y pagando a donantes sin mover efectivo."
+  problema="El administrativo se comía gran parte del día: cargar stock, sacar fotos, publicar en la tienda y conciliar los pagos de los donantes. Crecían las ventas pero también los errores y las horas de trabajo."
+  solutions={[
+    { icon: '📦', title: 'Registro express', text: 'Formulario guiado para cargar prendas en dos pasos, con validaciones y generación automática de código.' },
+    { icon: '🖼️', title: 'Publicación automática', text: 'Cada carga se publica directo en la tienda online, con imágenes, talles y precios sincronizados.' },
+    { icon: '💸', title: 'Pagos a donantes', text: 'Liquidación automática por venta y payout a donantes sin mover efectivo ni cargar transferencias manualmente.' },
+  ]}
+  testimonial={{
+    quote: 'El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock.',
+    author: 'Dueña — Tienda de ropa usada',
+    role: 'Rosario, Santa Fe',
+  }}
+  metrics={[
+    { value: '70%', label: 'menos tiempo administrativo' },
+    { value: '2', label: 'pasos por carga de prenda' },
+  ]}
+/>

@@ -1,0 +1,127 @@
+---
+import Layout from './Layout.astro';
+
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface SolutionCard {
+  icon: string;
+  title: string;
+  text: string;
+}
+
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  heroLabel?: string;
+  heroSubtitle: string;
+  problema: string;
+  problemaExtra?: string;
+  vision?: string;
+  solutions: SolutionCard[];
+  stack?: string[];
+  testimonial: Testimonial;
+  metrics: Metric[];
+}
+
+const {
+  title,
+  description,
+  heroLabel = 'PROYECTO TIPO',
+  heroSubtitle,
+  problema,
+  problemaExtra,
+  vision,
+  solutions,
+  stack,
+  testimonial,
+  metrics,
+} = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">{heroLabel}</p>
+      <h1 class="hero__title">{title}</h1>
+      <p class="hero__subtitle">{heroSubtitle}</p>
+      <div class="hero__actions">
+        <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">El deseo del cliente</h2>
+      <div class="case-prose">
+        <p>{problema}</p>
+        {problemaExtra && <p set:html={problemaExtra} />}
+      </div>
+
+      {vision && (
+        <div class="case-vision">
+          <p class="case-vision__label">Cómo imaginaba el éxito</p>
+          <p class="case-vision__quote">{vision}</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">La solución</h2>
+      <div class="cards-grid">
+        {solutions.map((s) => (
+          <article class="service-card">
+            <div class="service-card__icon">{s.icon}</div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {stack && stack.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section__title">Stack técnico</h2>
+        <div class="tech-stack">
+          {stack.map((t) => (
+            <span class="tech-tag">{t}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Resultado</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">{testimonial.quote}</p>
+          <p class="testimonial-card__author">{testimonial.author}</p>
+          <p class="testimonial-card__role">{testimonial.role}</p>
+        </div>
+      </div>
+      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
+        {metrics.map((m) => (
+          <div class="metric">
+            <p class="metric__number">{m.value}</p>
+            <p class="metric__label">{m.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

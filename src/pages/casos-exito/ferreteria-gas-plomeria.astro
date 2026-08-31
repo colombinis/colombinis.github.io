@@ -1,73 +1,28 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
 const title = 'Ferretería familiar sin tiempo para la tienda online';
+const description = 'Caso de éxito: ferretería de accesorios de gas y plomería que pasó de no tener tienda online a vender sin cargar stock ni configurar pagos.';
 ---
 
-<Layout title={title} description="Caso de éxito: ferretería de accesorios de gas y plomería que pasó de no tener tienda online a vender sin cargar stock ni configurar pagos.">
-  <section class="hero">
-    <div class="hero__container">
-      <p class="hero__label">CASO DE ÉXITO</p>
-      <h1 class="hero__title">{title}</h1>
-      <p class="hero__subtitle">
-        Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas.
-      </p>
-      <div class="hero__actions">
-        
-        <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">El problema</h2>
-      <div style="max-width:720px;margin:0 auto;color:var(--secondary);">
-        <p>El owner no tenía tiempo ni conocimientos para armar una tienda. Quería un canal de venta simple, con pasarelas integradas y sin mantenimiento diario.</p>
-      </div>
-
-      <h2 class="section__title" style="margin-top:var(--spacing-xxl);">La solución</h2>
-      <div class="cards-grid">
-        <article class="service-card">
-          <div class="service-card__icon">🛒</div>
-          <h3>Tienda online simple</h3>
-          <p>Catálogo por categorías, carrito y checkout listo para usar.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">💳</div>
-          <h3>Pagos y envíos</h3>
-          <p>Mercado Pago y correo integrados. Sin comisiones ocultas.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">📦</div>
-          <h3>Stock bajo control</h3>
-          <p>Actualización automática y alertas de mínimo stock.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Resultado</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes."
-          </p>
-          <p class="testimonial-card__author">Dueño — Ferretería de gas y plomería</p>
-          <p class="testimonial-card__role">Rosario, Santa Fe</p>
-        </div>
-      </div>
-      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
-        <div class="metric">
-          <p class="metric__number">+35%</p>
-          <p class="metric__label">ventas online - 3 meses</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">0</p>
-          <p class="metric__label">configuración diaria</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</Layout>
+<CaseStudyLayout
+  title={title}
+  description={description}
+  heroLabel="CASO DE ÉXITO"
+  heroSubtitle="Dueño de una PyME de accesorios de gas y plomería que necesitaba vender más por internet sin perder horas en cargar stock, configurar pagos ni aprender herramientas complicadas."
+  problema="El owner no tenía tiempo ni conocimientos para armar una tienda. Quería un canal de venta simple, con pasarelas integradas y sin mantenimiento diario."
+  solutions={[
+    { icon: '🛒', title: 'Tienda online simple', text: 'Catálogo por categorías, carrito y checkout listo para usar.' },
+    { icon: '💳', title: 'Pagos y envíos', text: 'Mercado Pago y correo integrados. Sin comisiones ocultas.' },
+    { icon: '📦', title: 'Stock bajo control', text: 'Actualización automática y alertas de mínimo stock.' },
+  ]}
+  testimonial={{
+    quote: 'Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes.',
+    author: 'Dueño — Ferretería de gas y plomería',
+    role: 'Rosario, Santa Fe',
+  }}
+  metrics={[
+    { value: '+35%', label: 'ventas online - 3 meses' },
+    { value: '0', label: 'configuración diaria' },
+  ]}
+/>
