@@ -1,108 +1,31 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
 const title = 'Estudio de arquitectura con tema WordPress a medida y bloques Gutenberg editables';
+const description = 'Caso de éxito: reemplazamos un sitio pesado hecho con page builder por un tema WordPress a medida con bloques Gutenberg editables por el propio equipo de marketing.';
 ---
 
-<Layout title={title} description="Caso de éxito: reemplazamos un sitio pesado hecho con page builder por un tema WordPress a medida con bloques Gutenberg editables por el propio equipo de marketing.">
-  <section class="hero">
-    <div class="hero__container">
-      <p class="hero__label">PROYECTO TIPO</p>
-      <h1 class="hero__title">{title}</h1>
-      <p class="hero__subtitle">
-        Un estudio de arquitectura con un sitio lento armado con un editor visual que su equipo no podía actualizar sin romper el diseño. Querían identidad propia, velocidad y autonomía total sobre el contenido.
-      </p>
-      <div class="hero__actions">
-        
-        <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">El deseo del cliente</h2>
-      <div class="case-prose">
-        <p>
-          El estudio tenía un sitio armado con un editor visual de arrastrar y soltar, cargado de complementos. Cada vez que el equipo de marketing quería publicar un proyecto nuevo, terminaba desalineando la grilla, cambiando tipografías sin querer o rompiendo la versión para celular. Para cualquier cambio dependían de un freelance externo, y la web tardaba más de 6 segundos en cargar en el celular.
-        </p>
-        <p>
-          Su deseo era doble: tener un sitio con <strong>identidad visual propia</strong> —no una plantilla reconocible— que transmitiera el nivel de sus obras, y sobre todo <strong>dejar de depender de un desarrollador para publicar contenido</strong>. Querían que su equipo interno pudiera armar y actualizar páginas de proyectos sin conocimientos técnicos y sin miedo a romper nada.
-        </p>
-      </div>
-
-      <div class="case-vision">
-        <p class="case-vision__label">Cómo imaginaba el éxito</p>
-        <p class="case-vision__quote">
-          "Quiero poder armar la página de una obra nueva arrastrando bloques con nuestra estética —una portada, una galería, una ficha técnica— en diez minutos, desde mi notebook, sin llamar a nadie y sabiendo que va a quedar impecable en la compu y en el celular."
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">La solución</h2>
-      <div class="cards-grid">
-        <article class="service-card">
-          <div class="service-card__icon">🎨</div>
-          <h3>Tema a medida desde cero</h3>
-          <p>Desarrollamos un tema propio en PHP siguiendo la estructura de plantillas de WordPress, sin editores visuales ni complementos innecesarios. El diseño replica exactamente la identidad del estudio.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">🧱</div>
-          <h3>Bloques Gutenberg a medida</h3>
-          <p>Creamos bloques propios (portada de obra, galería, ficha técnica) con el editor de bloques de WordPress (Gutenberg) y campos personalizados (ACF). El equipo los combina en el editor nativo con estilos bloqueados: imposible romper el diseño.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">⚡</div>
-          <h3>Rendimiento y autonomía</h3>
-          <p>Sin el peso del builder, el sitio carga en menos de 2 segundos. Entregamos una guía de estilos y capacitación para que marketing publique solo.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">Stack técnico</h2>
-      <div class="tech-stack">
-        <span class="tech-tag">WordPress</span>
-        <span class="tech-tag">PHP</span>
-        <span class="tech-tag">Tema a medida</span>
-        <span class="tech-tag">Bloques Gutenberg (block.json)</span>
-        <span class="tech-tag">ACF Pro</span>
-        <span class="tech-tag">SCSS</span>
-        <span class="tech-tag">Template Hierarchy</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Resultado</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "Ahora publicamos una obra nueva en minutos y siempre queda perfecta. Dejamos de depender de terceros para cada cambio y la web por fin se ve como nuestro trabajo."
-          </p>
-          <p class="testimonial-card__author">Testimonio tipo — Estudio de arquitectura</p>
-          <p class="testimonial-card__role">Rosario, Santa Fe</p>
-        </div>
-      </div>
-      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
-        <div class="metric">
-          <p class="metric__number">94</p>
-          <p class="metric__label">PageSpeed mobile</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">-75%</p>
-          <p class="metric__label">tiempo de carga</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">0</p>
-          <p class="metric__label">dependencia de un dev para publicar</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</Layout>
+<CaseStudyLayout
+  title={title}
+  description={description}
+  heroSubtitle="Un estudio de arquitectura con un sitio lento armado con un editor visual que su equipo no podía actualizar sin romper el diseño. Querían identidad propia, velocidad y autonomía total sobre el contenido."
+  problema="El estudio tenía un sitio armado con un editor visual de arrastrar y soltar, cargado de complementos. Cada vez que el equipo de marketing quería publicar un proyecto nuevo, terminaba desalineando la grilla, cambiando tipografías sin querer o rompiendo la versión para celular. Para cualquier cambio dependían de un freelance externo, y la web tardaba más de 6 segundos en cargar en el celular."
+  problemaExtra="Su deseo era doble: tener un sitio con <strong>identidad visual propia</strong> —no una plantilla reconocible— que transmitiera el nivel de sus obras, y sobre todo <strong>dejar de depender de un desarrollador para publicar contenido</strong>. Querían que su equipo interno pudiera armar y actualizar páginas de proyectos sin conocimientos técnicos y sin miedo a romper nada."
+  vision="Quiero poder armar la página de una obra nueva arrastrando bloques con nuestra estética —una portada, una galería, una ficha técnica— en diez minutos, desde mi notebook, sin llamar a nadie y sabiendo que va a quedar impecable en la compu y en el celular."
+  solutions={[
+    { icon: '🎨', title: 'Tema a medida desde cero', text: 'Desarrollamos un tema propio en PHP siguiendo la estructura de plantillas de WordPress, sin editores visuales ni complementos innecesarios. El diseño replica exactamente la identidad del estudio.' },
+    { icon: '🧱', title: 'Bloques Gutenberg a medida', text: 'Creamos bloques propios (portada de obra, galería, ficha técnica) con el editor de bloques de WordPress (Gutenberg) y campos personalizados (ACF). El equipo los combina en el editor nativo con estilos bloqueados: imposible romper el diseño.' },
+    { icon: '⚡', title: 'Rendimiento y autonomía', text: 'Sin el peso del builder, el sitio carga en menos de 2 segundos. Entregamos una guía de estilos y capacitación para que marketing publique solo.' },
+  ]}
+  stack={['WordPress', 'PHP', 'Tema a medida', 'Bloques Gutenberg (block.json)', 'ACF Pro', 'SCSS', 'Template Hierarchy']}
+  testimonial={{
+    quote: 'Ahora publicamos una obra nueva en minutos y siempre queda perfecta. Dejamos de depender de terceros para cada cambio y la web por fin se ve como nuestro trabajo.',
+    author: 'Testimonio tipo — Estudio de arquitectura',
+    role: 'Rosario, Santa Fe',
+  }}
+  metrics={[
+    { value: '94', label: 'PageSpeed mobile' },
+    { value: '-75%', label: 'tiempo de carga' },
+    { value: '0', label: 'dependencia de un dev para publicar' },
+  ]}
+/>

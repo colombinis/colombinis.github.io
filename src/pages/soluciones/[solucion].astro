@@ -6,6 +6,7 @@
 //         proceso, soluciones relacionadas, FAQ y CTA final.
 import Layout from '../../layouts/Layout.astro';
 import FAQData from '../../data/preguntas-frecuentes-solucion.json';
+import SocialProofSection from '../../components/SocialProofSection.astro';
 import {
   getSoluciones,
   getSolucionDetalle,
@@ -270,6 +271,10 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
       </div>
     </div>
   </section>
+  
+  <!-- Resultados que hablan (componente reutilizable) -->
+  <SocialProofSection />
+
 </Layout>
 
 <script>

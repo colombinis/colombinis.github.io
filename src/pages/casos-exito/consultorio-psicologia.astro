@@ -1,73 +1,28 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
 const title = 'Consultorio de psicología con alquiler de espacios de atención';
+const description = 'Caso de éxito: consultorio de psicología con agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada.';
 ---
 
-<Layout title={title} description="Caso de éxito: consultorio de psicología con agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada.">
-  <section class="hero">
-    <div class="hero__container">
-      <p class="hero__label">CASO DE ÉXITO</p>
-      <h1 class="hero__title">{title}</h1>
-      <p class="hero__subtitle">
-        Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada.
-      </p>
-      <div class="hero__actions">
-        
-        <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">El problema</h2>
-      <div style="max-width:720px;margin:0 auto;color:var(--secondary);">
-        <p>La administración del consultorio era manual: agenda por WhatsApp, turnos cruzados, facturación a obras sociales en PDF y alquiler de consultorios por separado. Con el crecimiento se volvió inmanejable.</p>
-      </div>
-
-      <h2 class="section__title" style="margin-top:var(--spacing-xxl);">La solución</h2>
-      <div class="cards-grid">
-        <article class="service-card">
-          <div class="service-card__icon">📅</div>
-          <h3>Agenda online</h3>
-          <p>Turnos autogestionados por pacientes, recordatorios automáticos y lista de espera inteligente.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">🏠</div>
-          <h3>Alquiler de espacios</h3>
-          <p>Calendario de disponibilidad, reservas automáticas y reglas de precio por franja horaria.</p>
-        </article>
-        <article class="service-card">
-          <div class="service-card__icon">📄</div>
-          <h3>Obras sociales</h3>
-          <p>Presentación centralizada de prestaciones, seguimiento de autorizaciones y facturación unificada.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Resultado</h2>
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender."
-          </p>
-          <p class="testimonial-card__author">Directora — Consultorio de psicología</p>
-          <p class="testimonial-card__role">Rosario, Santa Fe</p>
-        </div>
-      </div>
-      <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
-        <div class="metric">
-          <p class="metric__number">70%</p>
-          <p class="metric__label">menos carga administrativa</p>
-        </div>
-        <div class="metric">
-          <p class="metric__number">0</p>
-          <p class="metric__label">turnos cruzados</p>
-        </div>
-      </div>
-    </div>
-  </section>
-</Layout>
+<CaseStudyLayout
+  title={title}
+  description={description}
+  heroLabel="CASO DE ÉXITO"
+  heroSubtitle="Agenda online, alquiler de consultorios automatizado y presentación a obras sociales centralizada."
+  problema="La administración del consultorio era manual: agenda por WhatsApp, turnos cruzados, facturación a obras sociales en PDF y alquiler de consultorios por separado. Con el crecimiento se volvió inmanejable."
+  solutions={[
+    { icon: '📅', title: 'Agenda online', text: 'Turnos autogestionados por pacientes, recordatorios automáticos y lista de espera inteligente.' },
+    { icon: '🏠', title: 'Alquiler de espacios', text: 'Calendario de disponibilidad, reservas automáticas y reglas de precio por franja horaria.' },
+    { icon: '📄', title: 'Obras sociales', text: 'Presentación centralizada de prestaciones, seguimiento de autorizaciones y facturación unificada.' },
+  ]}
+  testimonial={{
+    quote: 'El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender.',
+    author: 'Directora — Consultorio de psicología',
+    role: 'Rosario, Santa Fe',
+  }}
+  metrics={[
+    { value: '70%', label: 'menos carga administrativa' },
+    { value: '0', label: 'turnos cruzados' },
+  ]}
+/>
