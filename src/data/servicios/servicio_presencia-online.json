@@ -6,13 +6,5 @@
   "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compres sin vueltas.",
   "hero_label": "PRESENCIA ONLINE",
   "categoria_section_title": "¿Qué incluye?",
-  "testimonios_section_title": "Resultados esperados",
-  "testimonios": [
-    {
-      "quote": "Pasamos de tener una página vieja a recibir consultas todos los días por el formulario.",
-      "autor": "Romina Paz",
-      "rol": "CEO — Grupo Logístico Central"
-    }
-  ],
   "categorias_ids": ["sitio-web-institucional", "tienda-online", "contenido-seo-basico"]
 }

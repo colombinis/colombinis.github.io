@@ -5,7 +5,6 @@
 // Patrón: Product Detail Page — breadcrumb, precio desde*, qué incluye,
 //         proceso, soluciones relacionadas, FAQ y CTA final.
 import Layout from '../../layouts/Layout.astro';
-import config from '../../config/site.json';
 import FAQData from '../../data/preguntas-frecuentes-solucion.json';
 import {
   getSoluciones,
@@ -107,14 +106,7 @@ const jsonLdProduct = {
 };
 
 // --- Links de contacto ---
-const whatsappUrl =
-  `${config.contact.whatsapp.base_url}?` +
-  new URLSearchParams({
-    phone: config.contact.whatsapp.phone,
-    text: `Hola, vi la solución "${solucion.nombre}" y quiero consultarla.`,
-  }).toString();
-
-// URL del nuevo formulario de contacto con la categoría de la solución precargada
+// URL del formulario de contacto con la categoría y asunto precargados
 const contactoUrl = categoriaPrincipal
   ? `/contacto/?categoria=${categoriaPrincipal.id}&asunto=${encodeURIComponent(solucion.nombre)}`
   : `/contacto/?asunto=${encodeURIComponent(solucion.nombre)}`;
@@ -188,14 +180,7 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
           <a
             class="pdp__cta pdp__cta--primary"
             href={contactoUrl}
-            >Consultar esta solución</a
-          >
-          <a
-            class="pdp__cta pdp__cta--whatsapp"
-            href={whatsappUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-            >Consultar por WhatsApp</a
+            >Quiero recibir mas info</a
           >
         </div>
         <ul class="pdp__trust">
@@ -235,33 +220,6 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Cómo se ejecuta (proceso) -->
-  {flujo.length > 0 && (
-    <section class="section" aria-labelledby="proceso-titulo">
-      <div class="container">
-        <h2 class="section__title" id="proceso-titulo">Cómo se ejecuta</h2>
-        <p class="pasos__intro">
-          La solución se entrega en {totalPasos} pasos ordenados, con avances visibles en cada
-          etapa y una estimación de horas.
-        </p>
-        <ol class="pasos">
-          {flujo.map((paso) => (
-            <li class="paso">
-              <div class="paso__num" aria-hidden="true">{paso.orden}</div>
-              <div class="paso__body">
-                <div class="paso__head">
-                  <h3 class="paso__title">{paso.paso}</h3>
-                  <span class="paso__horas">{paso.horas} h</span>
-                </div>
-                <p class="paso__desc">{paso.descripcion}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   )}
@@ -525,14 +483,6 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
   }
   .pdp__cta--primary:hover {
     background-color: var(--tertiary-dark);
-    color: #FFFFFF;
-  }
-  .pdp__cta--whatsapp {
-    background-color: var(--whatsapp);
-    color: #FFFFFF;
-  }
-  .pdp__cta--whatsapp:hover {
-    background-color: var(--whatsapp-hover);
     color: #FFFFFF;
   }
   .pdp__trust {
