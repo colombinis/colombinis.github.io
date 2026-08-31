@@ -114,6 +114,11 @@ const whatsappUrl =
     text: `Hola, vi el trabajo "${trabajo.nombre}" y quiero consultarlo.`,
   }).toString();
 
+// URL del nuevo formulario de contacto con la categoría del trabajo precargada
+const contactoUrl = categoriaPrincipal
+  ? `/contacto/?categoria=${categoriaPrincipal.id}&asunto=${encodeURIComponent(trabajo.nombre)}`
+  : `/contacto/?asunto=${encodeURIComponent(trabajo.nombre)}`;
+
 const esRango = trabajo.precioMax > trabajo.precioMin;
 const totalPasos = flujo.length;
 const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
@@ -181,16 +186,19 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
         </p>
         <div class="pdp__actions">
           <a
+            class="pdp__cta pdp__cta--primary"
+            href={contactoUrl}
+            >Consultar este trabajo</a
+          >
+          <a
             class="pdp__cta pdp__cta--whatsapp"
             href={whatsappUrl}
             rel="noopener noreferrer"
             target="_blank"
             >Consultar por WhatsApp</a
           >
-          <a class="pdp__cta pdp__cta--outline" href="/contacto/">Dejar una consulta</a>
         </div>
         <ul class="pdp__trust">
-          <li>Primera consulta sin cargo</li>
           <li>Presupuesto claro y sin compromiso</li>
           <li>Avances en cada etapa</li>
         </ul>
@@ -268,17 +276,10 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
             const resumen = getTrabajoDetalle(t.id)?.flujo?.[0]?.descripcion || '';
             return (
               <article class="service-card">
-                <span class="service-card__type">Trabajo</span>
                 <h3>
                   <a href={`/trabajos/${t.id}/`}>{t.nombre}</a>
                 </h3>
-                <p class="service-card__claim">
-                  Desde {formatearARS(t.precioMin)} · {formatearHoras(t.horasMin, t.horasMax)}
-                </p>
-                {resumen && <p>{resumen}</p>}
-                <a class="service-card__cta" href={`/trabajos/${t.id}/`}
-                  >Ver trabajo</a
-                >
+                {resumen && <p>{resumen}</p>}                
               </article>
             );
           })}
@@ -312,25 +313,6 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
     </div>
   </section>
 
-  <!-- CTA final -->
-  <section class="cta-final">
-    <div class="container">
-      <h2>¿{trabajo.nombre} es lo que tu negocio necesita?</h2>
-      <p class="cta-final__subtitle">
-        Contanos tu proyecto sin compromiso. En 15 minutos sabemos si podemos ayudarte y cómo.
-      </p>
-      <div class="cta-final__actions">
-        <a
-          class="cta-final__whatsapp"
-          href={whatsappUrl}
-          rel="noopener noreferrer"
-          target="_blank"
-          >Consultar por WhatsApp</a
-        >
-        <a class="cta-final__outline" href="/contacto/">Ir al formulario</a>
-      </div>
-    </div>
-  </section>
 </Layout>
 
 <script>
@@ -546,6 +528,14 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
   }
   .pdp__cta--whatsapp:hover {
     background-color: var(--whatsapp-hover);
+    color: #FFFFFF;
+  }
+  .pdp__cta--primary {
+    background-color: var(--primary);
+    color: #FFFFFF;
+  }
+  .pdp__cta--primary:hover {
+    background-color: var(--tertiary-dark);
     color: #FFFFFF;
   }
   .pdp__cta--outline {
