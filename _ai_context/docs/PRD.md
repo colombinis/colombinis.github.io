@@ -1,8 +1,4 @@
 # PRD — SACsi (sitio público + backend comercial)
-
-> **Estado:** Propuesta. Pensalo como borrador vivo; actualizalo según tu feedback.
-> **Fuentes analizadas:** `DESIGN.md`, `ARQUITECTURA.md`, `CONTENIDO.md`, `HISTORIAL-REBRANDING.md`, `SYSTEM_MAP.yaml`, specs `MAR-*`, `NOR-01`, `AUT-01`, `FEATURE-*`, `FASE-*`, `FASE-8-Backlog`, `archived/UJ-*`.
-
 ---
 
 ## 1) Negocio: objetivos
