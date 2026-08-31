@@ -59,7 +59,7 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 - **Contenido:** homepage, servicios (3), sobre-nosotros, contacto, casos de éxito (8), FAQ, métricas.
 - **SEO/analítica:** sitemap automático, metadatos por página, GTM `GTM-T7PWJ99` instalado.
 
-### B) Catálogo de trabajos (FEATURE-2) — 🟡 Parcial
+### B) Catálogo de soluciones (FEATURE-2) — 🟡 Parcial
 
 - Ruta `/catalogo` y filtros jerárquicos: **DONE**.
 - Grid de tarjetas + navegación integrada: **DONE** (`CAT-03` DONE, `CAT-04` DONE — build exit 0).
@@ -67,8 +67,8 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 
 ### C) Flujos de negocio (FEATURE-1 + FASE 8 Backlog) — 🟢 Base, 🔴 Escala
 
-- **Datos normalizados** (`NOR-01`): servicios → categorías → trabajos, fuentes JSON únicas.
-- **Herramienta de rentabilidad** standalone: DONE (10 trabajos, cálculo márgenes).
+- **Datos normalizados** (`NOR-01`): servicios → categorías → soluciones, fuentes JSON únicas.
+- **Herramienta de rentabilidad** standalone: DONE (10 soluciones, cálculo márgenes).
 - **Backlog comercial:** chatbot knowledge/arquitectura documentada, pero **sin decisión** de implementar (`CHAT-06` TODO).
 - **Automatización n8n** (`AUT-01`): workflow y DB diseñados; integración con checkout pendiente.
 
@@ -99,8 +99,8 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 | Feature (§3) | Objetivos de negocio (§1.1) que sirve |
 |---|---|
 | **A) Núcleo del sitio** | Posicionar como proveedor confiable (Lighthouse/SEO) · Convertir visitas en consultas (contenido, FAQ, contacto) · Reducir tiempo administrativo (base del funnel) |
-| **B) Catálogo de trabajos** | Convertir visitas en consultas (experiencia e-commerce estándar que pide la persona Carlos) · Escalar preventa sin sumar heads (catálogo auto-califica el interés) |
-| **C) Flujos de negocio** | Asegurar trazabilidad del trabajo vendido (herramienta de rentabilidad) · Recuperar proyectos WP deteriorados (rescate) · Escalar preventa (automatización n8n, `AUT-01`) |
+| **B) Catálogo de soluciones** | Convertir visitas en consultas (experiencia e-commerce estándar que pide la persona Carlos) · Escalar preventa sin sumar heads (catálogo auto-califica el interés) |
+| **C) Flujos de negocio** | Asegurar trazabilidad de la solución vendida (herramienta de rentabilidad) · Recuperar proyectos WP deteriorados (rescate) · Escalar preventa (automatización n8n, `AUT-01`) |
 | **D) Tracking y conversión** | Convertir visitas en consultas (medir tasa consulta/visita, clicks WhatsApp) · Escalar preventa (auto-calificar leads vía eventos GA4) |
 | **E) Calidad y pruebas** | Posicionar como proveedor confiable (Lighthouse >80, sin errores JS) · Reducir tiempo administrativo (menos regresiones = menos trabajo manual de soporte) |
 | **F) Backlog diferenciador** | Recuperar proyectos WP deteriorados (chatbot de soporte) · Escalar preventa (4to servicio IA, `FUT-01`) |
@@ -111,7 +111,7 @@ Backoffice: tablero rentabilidad + catálogo trabajos → cierre comercial
 
 - **A es la base de todo**: todas las demás features se montan sobre el núcleo Astro (tokens, `Layout.astro`, `data-utils.ts`, GTM). Sin A, B–F no se despliegan.
 - **B depende de C**: el catálogo consume los datos normalizados de `NOR-01` (C) vía `data-utils.ts`; B es la cara pública de esos datos.
-- **C alimenta D**: la normalización de datos (C) habilita el tracking de conversión (D) porque cada trabajo/categoría es identificable y trazable en GA4.
+- **C alimenta D**: la normalización de datos (C) habilita el tracking de conversión (D) porque cada solución/categoría es identificable y trazable en GA4.
 - **D valida A, B y C**: los eventos GA4 (`CON-04`) miden si el núcleo, el catálogo y los flujos efectivamente convierten — cierra el loop de negocio.
 - **E protege A–D**: los tests E2E previenen regresiones en el núcleo y el catálogo tras cada cambio.
 - **F es opcional y post-lanzamiento**: chatbot (`CHAT-06`) y 4to servicio (`FUT-01`) extienden C y la preventa, pero no bloquean el release.
@@ -137,7 +137,7 @@ Backfill acordado (solo specs críticas del roadmap activo, no las 29 de una): `
 |---|---|---|
 | Performance/UX | Lighthouse >80 (performance, a11y, SEO, best practices) | `DEP-01` |
 | Conversión | % de visitors que llegan a WhatsApp/email por sesión | GA4 `GTM-T7PWJ99` eventos (`CON-04`) |
-| Rentabilidad por servicio | Márgenes OK/NO RENTABLE por trabajo | `/padmin/flujo-operativo/` (Astro, Cloudflare auth) |
+| Rentabilidad por servicio | Márgenes OK/NO RENTABLE por solución | `/padmin/flujo-operativo/` (Astro, Cloudflare auth) |
 | Disponibilidad catálogo | `/catalogo` funcional con filtros y tarjetas | `CAT-04` |
 | Cobertura funcional | % behaviors cubiertos por specs DONE | `index-system-map.py` |
 | Estabilidad | 0 errores JS en journeys principales | E2E `FEATURE-3` |
@@ -201,7 +201,7 @@ Backfill acordado (solo specs críticas del roadmap activo, no las 29 de una): `
 #### P4 — Forma de pago + entrega no integrada (AUT-01) — 🟡 EN PROGRESO / POST-RELEASE
 - **Sub-agente original:** `sa-0-148d745e` · **Diagnóstico inicial:** ✅ recibido (batch deleg_536332f2) — funnel 100% manual (WhatsApp), AUT-01 con workflow n8n completo pero no conectado.
 - **Avance P4-step(a) (2026-08-29):** ✅ DONE — formulario progresivo como base de datos de funnel real ANTES de MP/n8n (cumple P2 "medir antes de automatizar").
-  - `src/components/FormContactoProgresivo.astro`: 3 stages (select categoría desde getTrabajos() build-time → nombre/email/brief → recap checkout simulado), Formspree POST, eventos GTM `checkout_started`+`form_submit`+`form_step_*` en dataLayer, noscript fallback.
+  - `src/components/FormContactoProgresivo.astro`: 3 stages (select categoría desde getSoluciones() build-time → nombre/email/brief → recap checkout simulado), Formspree POST, eventos GTM `checkout_started`+`form_submit`+`form_step_*` en dataLayer, noscript fallback.
   - `src/pages/contacto.astro`: **migrado a `<FormContactoProgresivo>`** (reemplazó form simple; NO se creó `/contacto-v2/` paralelo). Soporta query-string `?categoria=<slug>` para precargar el select step1. Conserva WhatsApp fallback como alternativa secundaria. Build exit 0, Formspree POST (`mljrdlka`), eventos GTM `checkout_started`/`form_submit`. Tests `rentabilidad.ts` 15/15 ✅.
   - **Sin commit/push** (regla release). Legacy HTML archivado en `_legacy/`.
 - **Propuestas (revisadas tras step a):**
@@ -213,8 +213,8 @@ Backfill acordado (solo specs críticas del roadmap activo, no las 29 de una): `
 #### P5 — Experiencia mixta (sitio Astro + HTML standalone) — ✅ RESUELTO (2026-08-28)
 - **Decisión de arquitectura:** Opción C — las herramientas de rentabilidad/flujos se **convierten a PÁGINAS ASTRO ESTÁTICAS** bajo `/padmin/` (ej: `/padmin/flujo-operativo/`, `/padmin/listado-trabajos/`), usando `src/lib/rentabilidad.ts` + `src/lib/data-utils.ts` (build-time, sin `fetch` a rutas relativas). Sitio sigue `output: static` GitHub Pages; protección real via **Cloudflare Basic Auth en `/padmin/*`** (Owner la configura fuera del repo; no toca deploy.yml ni adapter).
 - **Estado por herramienta:**
-  - `listado-trabajos.html` → **`src/pages/padmin/listado-trabajos.astro`** ✅ DONE. Creado (288 líneas), `dist/padmin/listado-trabajos/index.html` generado (build exit 0)., **HTML legacy archivado** en `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/_legacy/listado-trabajos.html` + `README.md`.
-  - `flujo-operativo-trabajo.html` → **`src/pages/padmin/flujo-operativo.astro`** ✅ DONE (implementación manual 2026-08-28 tras truncarse el sub-agente P5a). Creado, importa `getTrabajos()` + `calcularRentabilidad()`, tabla de rentabilidad build-time embebida (con datos reales: ecommerce, landing), simulador cliente inline (fórmula de `rentabilidad.ts` replicada en JS puro para el ajuste rápido). `npm run build` → exit 0 (39 page built), `dist/padmin/flujo-operativo/index.html` = 29241 b. `noindex,nofollow` seteado. HTML legacy **ya estaba archivado** en `_legacy/flujo-operativo-trabajo.html` + `README.md`.
+  - `listado-soluciones.html` → **`src/pages/padmin/listado-soluciones.astro`** ✅ DONE. Creado (288 líneas), `dist/padmin/listado-soluciones/index.html` generado (build exit 0)., **HTML legacy archivado** en `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/_legacy/listado-soluciones.html` + `README.md`.
+  - `flujo-operativo-solucion.html` → **`src/pages/padmin/flujo-operativo.astro`** ✅ DONE (implementación manual 2026-08-28 tras truncarse el sub-agente P5a). Creado, importa `getSoluciones()` + `calcularRentabilidad()`, tabla de rentabilidad build-time embebida (con datos reales: ecommerce, landing), simulador cliente inline (fórmula de `rentabilidad.ts` replicada en JS puro para el ajuste rápido). `npm run build` → exit 0 (39 page built), `dist/padmin/flujo-operativo/index.html` = 29241 b. `noindex,nofollow` seteado. HTML legacy **ya estaba archivado** en `_legacy/flujo-operativo-solucion.html` + `README.md`.
 - **`rentabilidad.ts`:** extraído + **tests 15/15 ✅** (`npm run test`). Base reutilizable para páginas `/padmin/` y futuro catálogo público (rangos sin costo interno).
 - **NOTE/P3 (status global):** P5 completo → el maestro SSOT (`scripts/generate-todos.py`, generado al final de esta sesión) refleja el % DONE actualizado. La tabla FEATURE-1 (VAL-01..06) sigue 6/6 DONE (comportamiento validado); la migración a Astro `/padmin/` se registra aquí como cierre cross-feature del P5 de 1.2, no como spec nueva.
 

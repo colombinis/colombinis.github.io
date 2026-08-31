@@ -1,7 +1,7 @@
-# VAL-05 — Cargar tabla desde listado-trabajos.json (fuente única)
+# VAL-05 — Cargar tabla desde listado-soluciones.json (fuente única)
 
 ## Contexto
-`listado-trabajos.html` (antes `flujo-uj-con-pri.html`) tenía la tabla
+`listado-soluciones.html` (antes `flujo-uj-con-pri.html`) tenía la tabla
 "Precios y horas por servicio" con el array `SERVICIOS` **hardcodeado**
 (10 items duplicados). Para mantener una única fuente de verdad, la tabla
 debe cargarse en runtime desde `src/data/trabajos/listado-trabajos.json`
