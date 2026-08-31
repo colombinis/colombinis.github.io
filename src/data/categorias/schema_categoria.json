@@ -2,9 +2,9 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://sacsi.com.ar/schemas/schema_categoria.json",
   "title": "Categoria",
-  "description": "Una categoría de servicio. Pertenece a un servicio y agrupa beneficios, casos y trabajos.",
+  "description": "Una categoría de servicio. Pertenece a un servicio y agrupa beneficios, casos y soluciones.",
   "type": "object",
-  "required": ["id", "servicio_id", "title", "icon", "descripcion", "claim", "beneficios", "casos", "trabajos"],
+  "required": ["id", "servicio_id", "title", "icon", "descripcion", "claim", "beneficios", "casos", "soluciones"],
   "properties": {
     "id": {
       "type": "string",
@@ -52,9 +52,9 @@
       "description": "Slugs de casos de éxito asociados a esta categoría.",
       "items": { "type": "string" }
     },
-    "trabajos": {
+    "soluciones": {
       "type": "array",
-      "description": "IDs de trabajos asociados a esta categoría (FK → trabajos).",
+      "description": "IDs de soluciones asociadas a esta categoría (FK → soluciones).",
       "items": { "type": "string" }
     }
   },

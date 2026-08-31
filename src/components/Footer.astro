@@ -1,16 +1,16 @@
 ---
 // Footer con 3 columnas:
 // Col 1: Logo + texto "Soluciones Inteligentes" + links de servicios (desde src/data/servicios/ + categorias/)
-// Col 2: Listado de trabajos (desde src/data/trabajos/listado-trabajos.json)
+// Col 2: Listado de soluciones (desde src/data/soluciones/listado-soluciones.json)
 // Col 3: Sección "¿Empezamos?" con WhatsApp + email
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
-import { getServicios, getCategoriasByServicio, getTrabajos, getCasos } from '../lib/data-utils';
+import { getServicios, getCategoriasByServicio, getSoluciones, getCasos } from '../lib/data-utils';
 import config from '../config/site.json';
 
 // Datos normalizados: servicios + categorías
 const servicios = getServicios();
-const trabajos = getTrabajos();
+const soluciones = getSoluciones();
 const casos = getCasos();
 ---
 
@@ -83,13 +83,13 @@ const casos = getCasos();
     opacity: 1;
   }
 
-  /* ---------- Col 2: Listado de trabajos ---------- */
-  .footer-trabajos {
+  /* ---------- Col 2: Listado de soluciones ---------- */
+  .footer-soluciones {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
   }
-  .footer-trabajo {
+  .footer-solucion {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,17 +97,17 @@ const casos = getCasos();
     padding: 4px 0;
     border-bottom: 1px solid #3a3b3f;
   }
-  .footer-trabajo:last-child {
+  .footer-solucion:last-child {
     border-bottom: none;
   }
-  .footer-trabajo__name {
+  .footer-solucion__name {
     color: #B0B0B0;
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 500;
     transition: color 0.2s ease;
   }
-  .footer-trabajo__name:hover {
+  .footer-solucion__name:hover {
     color: var(--tertiary);
   }
 
@@ -228,7 +228,7 @@ const casos = getCasos();
   <section id="cta-final" class="cta-final">
     <div class="container">
       <div class="footer-col footer__cta">
-        <h2>¿Tenes alguna pregunta?</h2>
+        <h2>Tenes alguna pregunta?</h2>
         <p>
           En 15 minutos podes saber como podemos ayudarte.
         </p>
@@ -266,23 +266,23 @@ const casos = getCasos();
         </div>
       </div>
 
-      <!-- Col 2: Listado de trabajos -->
+      <!-- Col 2: Listado de soluciones -->
       <div class="footer-col">
-        <h3>Trabajos</h3>
-        <div class="footer-trabajos">
-          {trabajos.map((trabajo) => (
-            <div class="footer-trabajo">
+        <h3>Soluciones</h3>
+        <div class="footer-soluciones">
+          {soluciones.map((solucion) => (
+            <div class="footer-solucion">
               <a
-                class="footer-trabajo__name"
-                href={`/trabajos/${trabajo.id}/`}
-              >{trabajo.nombre}</a>
+                class="footer-solucion__name"
+                href={`/soluciones/${solucion.id}/`}
+              >{solucion.nombre}</a>
             </div>
           ))}
-          <div class="footer-trabajo">
+          <div class="footer-solucion">
             <a
-              class="footer-trabajo__name"
+              class="footer-solucion__name"
               href="/catalogo/"
-            >Ver todos</a>
+            >Ver todas</a>
           </div>
         </div>
       </div>

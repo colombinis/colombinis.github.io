@@ -3,8 +3,8 @@
  * ----------------------------------------------------------------------------
  * Lógica pura de cálculo de rentabilidad / breakeven extraída de las
  * herramientas standalone del backoffice comercial:
- *   - _ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-trabajo.html
- *   - _ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/listado-trabajos.html
+ *   - _ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/flujo-operativo-solucion.html
+ *   - _ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/listado-soluciones.html
  *
  * Extraído para cerrar FEATURE-3 (tests de lógica de negocio) y reutilizarse
  * luego en el catálogo público (mostrando rangos sin costo interno).
@@ -25,7 +25,7 @@ export const UMBRAL_RENTABLE_PCT = 14;
 export const UMBRAL_MARGO_MINIMO_PCT = 0;
 
 // ===== TIPOS =====
-export interface TrabajoRentabilidad {
+export interface SolucionRentabilidad {
   /** Precio mínimo del rango, en miles de ARS (k). */
   precioMin: number;
   /** Precio máximo del rango, en miles de ARS (k). */
@@ -44,7 +44,7 @@ export type EstadoRentabilidad = 'OK' | 'NO RENTABLE';
 export type ClasificacionMargen = 'RENTABLE' | 'AJUSTAR' | 'NO RENTABLE';
 
 export interface Breakeven {
-  /** Horas de trabajo facturables necesarias para cubrir solo el costo fijo, a la tarifa dada. */
+  /** Horas facturables necesarias para cubrir solo el costo fijo, a la tarifa dada. */
   horasFijo: number;
   /** Precio piso (k) para margen 0 en el escenario de horas mínimas. */
   precioMinK: number;
@@ -90,7 +90,7 @@ export function calcularCosto(
 
 /**
  * Margen porcentual = (precioArs - costoArs) / precioArs * 100.
- * Si el precio es <= 0 no hay base: devuelve 0 (guard fiel a flujo-operativo-trabajo.html,
+ * Si el precio es <= 0 no hay base: devuelve 0 (guard fiel a flujo-operativo-solucion.html,
  * que usa `precioMinArs > 0 ? ... : 0`).
  */
 export function calcularMargenPct(precioArs: number, costoArs: number): number {
@@ -103,7 +103,7 @@ export function calcularMargenPct(precioArs: number, costoArs: number): number {
  *   >= 14%  -> RENTABLE
  *   0..14%  -> AJUSTAR
  *   < 0%    -> NO RENTABLE
- * Fuente: `recalcAll()` en flujo-operativo-trabajo.html.
+ * Fuente: `recalcAll()` en flujo-operativo-solucion.html.
  */
 export function clasificarMargenPct(pct: number): ClasificacionMargen {
   if (pct >= UMBRAL_RENTABLE_PCT) return 'RENTABLE';
@@ -126,14 +126,14 @@ export function estadoRentabilidad(
 }
 
 /**
- * Calcula la rentabilidad completa de un trabajo a partir de su rango de
+ * Calcula la rentabilidad completa de una solución a partir de su rango de
  * precios/horas, costo fijo y tarifa por hora.
  *
  * Devuelve costos y márgenes en pesimista (precioMin/horasMax) y optimista
  * (precioMax/horasMin), el estado OK/NO RENTABLE, la clasificación comercial
  * (umbral 14%) y los puntos de breakeven.
  */
-export function calcularRentabilidad(t: TrabajoRentabilidad): ResultadoRentabilidad {
+export function calcularRentabilidad(t: SolucionRentabilidad): ResultadoRentabilidad {
   const costoFijo = t.costoFijo || 0;
   const tarifa = t.tarifaPorHora || 0;
 

@@ -1,10 +1,10 @@
 ---
 // Ruta: /padmin/flujo-operativo/ — Área interna SACsi (protegida por Cloudflare Basic Auth)
 // Página estática que convierte la calculadora de rentabilidad standalone
-// (flujo-operativo-trabajo.html) en una página Astro build-time.
+// (flujo-operativo-solucion.html) en una página Astro build-time.
 //
 // Reúso: src/lib/rentabilidad.ts (calcularRentabilidad, formatoPorcentaje, formatoMiles)
-//         src/lib/data-utils.ts (getTrabajos, getTrabajoDetalle)
+//         src/lib/data-utils.ts (getSoluciones, getSolucionDetalle)
 //
 // NO se linkea desde el sitio público. El acceso se protege via Cloudflare
 // Basic Auth en /padmin/* (configurado por el owner, no en este repo).
@@ -13,22 +13,23 @@
 // a rutas relativas desde el browser). El simulador editable en cliente es un
 // adorno ligero; los cálculos base están en el HTML estático embebido.
 import Layout from '../../layouts/Layout.astro';
-import { getTrabajos } from '../../lib/data-utils';
+import { getSoluciones } from '../../lib/data-utils';
 import {
   calcularRentabilidad,
   formatoPorcentaje,
   formatoMiles,
   UMBRAL_RENTABLE_PCT,
 } from '../../lib/rentabilidad';
+import type { SolucionRentabilidad } from '../../lib/rentabilidad';
 import type { ResultadoRentabilidad } from '../../lib/rentabilidad';
 
 // Tarifa interna USD 20/h * tipo de cambio 1100 ARS/USD = 22.000 ARS/h
 const TARIFA_POR_HORA = 22000;
 
-const trabajos = getTrabajos();
+const soluciones = getSoluciones();
 
-// En build-time: calculamos la rentabilidad para cada trabajo.
-interface TrabajoConRentabilidad {
+// En build-time: calculamos la rentabilidad para cada solución.
+interface SolucionConRentabilidad {
   id: string;
   nombre: string;
   categoria: string;
@@ -40,24 +41,25 @@ interface TrabajoConRentabilidad {
   resultado: ResultadoRentabilidad;
 }
 
-const trabajosRentables: TrabajoConRentabilidad[] = trabajos.map((t) => {
-  const resultado = calcularRentabilidad({
-    precioMin: t.precioMin,
-    precioMax: t.precioMax,
-    horasMin: t.horasMin,
-    horasMax: t.horasMax,
+const solucionesRentables: SolucionConRentabilidad[] = soluciones.map((s) => {
+  const params: SolucionRentabilidad = {
+    precioMin: s.precioMin,
+    precioMax: s.precioMax,
+    horasMin: s.horasMin,
+    horasMax: s.horasMax,
     tarifaPorHora: TARIFA_POR_HORA,
-    costoFijo: t.costoFijo ?? 0,
-  });
+    costoFijo: s.costoFijo ?? 0,
+  };
+  const resultado = calcularRentabilidad(params);
   return {
-    id: t.id,
-    nombre: t.nombre,
-    categoria: t.categoria,
-    precioMin: t.precioMin,
-    precioMax: t.precioMax,
-    horasMin: t.horasMin,
-    horasMax: t.horasMax,
-    costoFijo: t.costoFijo ?? 0,
+    id: s.id,
+    nombre: s.nombre,
+    categoria: s.categoria,
+    precioMin: s.precioMin,
+    precioMax: s.precioMax,
+    horasMin: s.horasMin,
+    horasMax: s.horasMax,
+    costoFijo: s.costoFijo ?? 0,
     resultado,
   };
 });
@@ -70,13 +72,14 @@ function estadoClase(ok: boolean): string {
   return ok ? 'estado-ok' : 'estado-no';
 }
 ---
-<Layout title="Flujo operativo · Área interna SACsi" description="Calculadora de rentabilidad de trabajos SACsi — área interna comercial, protegida." robots="noindex,nofollow">
+
+<Layout title="Flujo operativo · Área interna SACsi" description="Calculadora de rentabilidad de soluciones SACsi — área interna comercial, protegida." robots="noindex,nofollow">
   <main class="container">
     <header class="page-header">
       <span class="badge badge--internal">Área interna</span>
-      <h1>Flujo operativo · Rentabilidad de trabajos</h1>
+      <h1>Flujo operativo · Rentabilidad de soluciones</h1>
       <p class="sub">
-        SACsi.com.ar — Cálculo de margen/breakeven por trabajo (ARS). Tarifa interna
+        SACsi.com.ar — Cálculo de margen/breakeven por solución (ARS). Tarifa interna
         USD&nbsp;20/h × $1.&nbsp;100 = <strong>$22.000 ARS/h</strong>. Umbral
         comercial: margen &ge;&nbsp;<strong>{UMBRAL_RENTABLE_PCT}%</strong>.
       </p>
@@ -94,7 +97,7 @@ function estadoClase(ok: boolean): string {
           <thead>
             <tr>
               <th style="width:5%">ID</th>
-              <th style="width:18%">Trabajo</th>
+              <th style="width:18%">Solución</th>
               <th style="width:8%">Precio (k)</th>
               <th style="width:8%">Horas</th>
               <th style="width:8%">Costo min (ARS)</th>
@@ -107,19 +110,19 @@ function estadoClase(ok: boolean): string {
             </tr>
           </thead>
           <tbody>
-            {trabajosRentables.map((t) => (
+            {solucionesRentables.map((s) => (
               <tr>
-                <td class="tnum">{t.id}</td>
-                <td>{t.nombre}</td>
-                <td class="tnum">{formatoMiles(t.precioMin)} – {formatoMiles(t.precioMax)}</td>
-                <td class="tnum">{t.horasMin} – {t.horasMax}</td>
-                <td class="tnum">{formatoMiles(t.resultado.costoMinArs)}</td>
-                <td class="tnum">{formatoMiles(t.resultado.costoMaxArs)}</td>
-                <td class="tnum">{formatoPorcentaje(t.resultado.margenMinPct)}</td>
-                <td class="tnum">{formatoPorcentaje(t.resultado.margenMaxPct)}</td>
-                <td><span class={`badge ${estadoClase(t.resultado.ok)}`}>{estadoLabel(t.resultado.ok)}</span></td>
-                <td>{t.resultado.clasificacion}</td>
-                <td class="tnum">{formatoMiles(t.resultado.breakeven.horasFijo)}</td>
+                <td class="tnum">{s.id}</td>
+                <td>{s.nombre}</td>
+                <td class="tnum">{formatoMiles(s.precioMin)} – {formatoMiles(s.precioMax)}</td>
+                <td class="tnum">{s.horasMin} – {s.horasMax}</td>
+                <td class="tnum">{formatoMiles(s.resultado.costoMinArs)}</td>
+                <td class="tnum">{formatoMiles(s.resultado.costoMaxArs)}</td>
+                <td class="tnum">{formatoPorcentaje(s.resultado.margenMinPct)}</td>
+                <td class="tnum">{formatoPorcentaje(s.resultado.margenMaxPct)}</td>
+                <td><span class={`badge ${estadoClase(s.resultado.ok)}`}>{estadoLabel(s.resultado.ok)}</span></td>
+                <td>{s.resultado.clasificacion}</td>
+                <td class="tnum">{formatoMiles(s.resultado.breakeven.horasFijo)}</td>
               </tr>
             ))}
           </tbody>

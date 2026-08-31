@@ -1,23 +1,23 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://sacsi.com.ar/schemas/schema_trabajo.json",
-  "title": "Trabajo",
-  "description": "Un paquete de trabajo (servicio comercial). Incluye pricing, estimación de horas y flujo de ejecución detallado.",
+  "$id": "https://sacsi.com.ar/schemas/schema_solucion.json",
+  "title": "Solucion",
+  "description": "Un paquete de solución (servicio comercial). Incluye pricing, estimación de horas y flujo de ejecución detallado.",
   "type": "object",
   "required": ["id", "nombre", "categorias", "precioMin", "precioMax", "horasMin", "horasMax", "costoFijo", "nota", "flujo"],
   "properties": {
     "id": {
       "type": "string",
-      "description": "Identificador único del trabajo. Usado en URLs: /trabajos/<id>/.",
+      "description": "Identificador único de la solución. Usado en URLs: /soluciones/<id>/.",
       "examples": ["landing", "sitio-pro", "ecommerce", "auto-basico", "auto-int", "soft-chico", "soft-grande", "hora-tec", "ret-basico", "ret-pro"]
     },
     "nombre": {
       "type": "string",
-      "description": "Nombre legible del trabajo."
+      "description": "Nombre legible de la solución."
     },
     "categorias": {
       "type": "array",
-      "description": "Lista de refs 'servicio/categoria' a las que aplica este trabajo.",
+      "description": "Lista de refs 'servicio/categoria' a las que aplica esta solución.",
       "items": { "type": "string" },
       "minItems": 1,
       "examples": ["presencia-online/sitio-web-institucional", "automatizacion/facturacion-cobranzas"]
@@ -53,7 +53,7 @@
     },
     "flujo": {
       "type": "array",
-      "description": "Pasos secuenciales del flujo de trabajo.",
+      "description": "Pasos secuenciales del flujo de la solución.",
       "items": {
         "type": "object",
         "required": ["orden", "paso", "entradas", "salidas", "descripcion", "horas"],
