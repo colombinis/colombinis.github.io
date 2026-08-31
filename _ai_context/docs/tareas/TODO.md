@@ -1,7 +1,7 @@
 # TODO — Maestro global (fuente única de verdad)
 
 > **Generado automáticamente** por `scripts/generate-todos.py` — no editar a mano. Se deriva escaneando `_ai_context/docs/tareas/**/TODO.md` según el contrato de `SYSTEM_MAP.yaml`.
-> Última generación: 2026-08-29 18:11 UTC
+> Última generación: 2026-08-31 19:33 UTC
 
 ## Resumen global
 
@@ -47,20 +47,20 @@
 
 | ID | Título | Estado | Archivo |
 |----|--------|--------|---------|
-| VAL-01 | Crear listado-trabajos.json con trabajos y categorías | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-01-listado-trabajos-json.md` |
+| VAL-01 | Crear listado-soluciones.json con soluciones y categorías | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-01-listado-trabajos-json.md` |
 | VAL-02 | Tabla dinámica de rentabilidad en flujo-operativo-trabajo.html | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-02-tabla-dinamica-rentabilidad.md` |
 | VAL-03 | Cargar tabla + selector desde JSON por fetch (fuente única) | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-03-carga-json-fetch.md` |
 | VAL-04 | Integrar add/remove/editar filas (como Pasos del flujo) | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-04-add-remove-editar-filas.md` |
-| VAL-05 | Cargar tabla desde listado-trabajos.json (fuente única) | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-05-listado-trabajos-json.md` |
-| VAL-06 | Selector de trabajo + pasos del flujo desde trabajo_<id>.json | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-06-selector-trabajo-pasos-json.md` |
+| VAL-05 | Cargar tabla desde listado-soluciones.json (fuente única) | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-05-listado-trabajos-json.md` |
+| VAL-06 | Selector de solución + pasos del flujo desde solucion_<id>.json | DONE | `_ai_context/docs/tareas/FEATURE-1-Validacion-de-flujos-de-negocio/VAL-06-selector-trabajo-pasos-json.md` |
 
 ### FEATURE-2-Catalogo (4/4 DONE)
 
 | ID | Título | Estado | Archivo |
 |----|--------|--------|---------|
-| CAT-01 | Crear ruta `/catalogo` con datos normalizados (solo opciones con trabajos) | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-01-ruta-catalogo-datos.md` |
+| CAT-01 | Crear ruta `/catalogo` con datos normalizados (solo opciones con soluciones) | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-01-ruta-catalogo-datos.md` |
 | CAT-02 | Filtros jerárquicos servicio→categoría + búsqueda textual (sin opciones vacías) | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-02-filtros-jerarquicos-busqueda.md` |
-| CAT-03 | Grid de tarjetas de trabajos con link a detalle | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-03-grid-tarjetas-trabajos.md` |
+| CAT-03 | Grid de tarjetas de soluciones con link a detalle | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-03-grid-tarjetas-trabajos.md` |
 | CAT-04 | Verificación (build + E2E) + integrar navegación a `/catalogo` | DONE | `_ai_context/docs/tareas/FEATURE-2-Catalogo/CAT-04-verificacion-integrar-navegacion.md` |
 
 ### FEATURE-3-Tests-E2E-UserJourneys (0/4 DONE)

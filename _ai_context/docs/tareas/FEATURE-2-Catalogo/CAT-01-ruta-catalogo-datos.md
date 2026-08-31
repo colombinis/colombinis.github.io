@@ -1,9 +1,9 @@
-# CAT-01 — Crear ruta `/catalogo` con datos normalizados
+# CAT-01 — Crear ruta `/catalogo` con datos normalizados de soluciones
 
 ## Contexto
-No existe una vista global que liste todos los trabajos contratables. Para
+No existe una vista global que liste todas las soluciones contratables. Para
 soportar la US-01 (CA-01/CA-02/CA-04) hace falta una ruta `/catalogo` que
-exponga la jerarquía **servicio → categoría → trabajos** usando los datos ya
+servicio → categoría → **soluciones** usando los datos ya
 normalizados en `src/lib/data-utils.ts`, de forma que solo se muestren
 servicios y categorías que tengan trabajos para listar.
 

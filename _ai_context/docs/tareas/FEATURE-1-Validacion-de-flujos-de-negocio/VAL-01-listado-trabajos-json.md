@@ -1,4 +1,4 @@
-# VAL-01 — Crear listado-trabajos.json con trabajos y categorías
+# VAL-01 — Crear listado-soluciones.json con soluciones y categorías
 
 ## Contexto
 Para validar la rentabilidad de cada servicio, se necesita una fuente de

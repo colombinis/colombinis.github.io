@@ -1,9 +1,9 @@
-# CAT-03 — Grid de tarjetas de trabajos con link a detalle
+# CAT-03 — Grid de tarjetas de soluciones con link a detalle
 
 ## Contexto
 **prd:** §1.1 — "Convertir visitas en consultas comerciales" (feature B, §3.1). El grid de tarjetas es la vitrina que convierte la visita de la persona Carlos en click a detalle/trabajo.
 
-CA-03 pide que los trabajos se muestren en forma de tarjeta y que elegir "más
+CA-03 pide que las soluciones se muestren en forma de tarjeta y que elegir "más
 detalle" lleve a la página de detalle del trabajo (`/trabajos/<id>/`, ya
 existente). Las tarjetas son el elemento central del catálogo y deben seguir
 el estilo del sitio (mobile-first, tokens de `DESIGN.md`).
