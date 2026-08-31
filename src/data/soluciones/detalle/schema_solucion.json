@@ -4,7 +4,7 @@
   "title": "Solucion",
   "description": "Un paquete de solución (servicio comercial). Incluye pricing, estimación de horas y flujo de ejecución detallado.",
   "type": "object",
-  "required": ["id", "nombre", "categorias", "precioMin", "precioMax", "horasMin", "horasMax", "costoFijo", "nota", "flujo"],
+  "required": ["id", "nombre", "categorias", "precioMin", "precioMax", "horasMin", "horasMax", "costoFijo", "nota"],
   "properties": {
     "id": {
       "type": "string",
