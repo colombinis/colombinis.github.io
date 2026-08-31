@@ -37,7 +37,8 @@ const testimoniosData = getTestimoniosGenerales();
                 "{t.quote}"
               </p>
               <p class="testimonial-card__author">{t.autor}</p>
-              <p class="testimonial-card__role">{t.rol}</p>
+              {t.rol && <p class="testimonial-card__role">{t.rol}</p>}
+              {t.ubicacion && <p class="testimonial-card__role">{t.ubicacion}</p>}
             </div>
           ))}
         </div>
