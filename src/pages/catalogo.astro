@@ -113,7 +113,7 @@ const breadcrumb = [
             id="filtro-texto"
             type="search"
             name="q"
-            placeholder="Buscá un trabajo…"
+            placeholder="Ingresá palabras clave del trabajo"
           />
         </div>
         <button id="filtro-reset" class="catalogo-filtros__reset" type="button">
@@ -141,13 +141,11 @@ const breadcrumb = [
               data-categoria={cats.join(' ')}
               data-nombre={t.nombre}
             >
-              <span class="service-card__type">Trabajo</span>
               <h3>
                 <a href={`/trabajos/${t.id}/`}>{t.nombre}</a>
               </h3>
               <p class="service-card__claim">
-                {formatearPrecio(t.precioMin, t.precioMax)} ·{' '}
-                {formatearHoras(t.horasMin, t.horasMax)}
+                {t.nota}
               </p>
               <a class="service-card__cta" href={`/trabajos/${t.id}/`}
                 >Ver detalle del trabajo</a
