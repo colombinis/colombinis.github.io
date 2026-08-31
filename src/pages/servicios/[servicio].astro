@@ -57,8 +57,7 @@ const categorias = getCategoriasByServicio(servicio.id);
         <a
           class="hero__cta hero__cta--form"
           href={`/contacto/?categoria=${servicio.id}&asunto=Consulta%20sobre%20${servicio.title}`}
-          >Consultar sin cargo</a
-        >
+          >Consultar sin cargo</a>
       </div>
     </div>
   </section>
@@ -74,6 +73,12 @@ const categorias = getCategoriasByServicio(servicio.id);
             <h3><a href={cat.id.startsWith(servicio.id + '/') ? `${svcHref}${cat.id}/` : `${svcHref}${cat.id}/`} style="color:inherit;text-decoration:none;">{cat.title}</a></h3>
             <p>{cat.descripcion}</p>
             <p class="service-card__claim">{cat.claim}</p>
+            <div class="hero__actions">
+              <a
+                class="hero__cta-secondary"
+                href={cat.id.startsWith(servicio.id + '/') ? `${svcHref}${cat.id}/` : `${svcHref}${cat.id}/`}
+                >Ver +</a>
+            </div>
           </article>
         ))}
       </div>
@@ -98,8 +103,6 @@ const categorias = getCategoriasByServicio(servicio.id);
     </div>
   </section>
 
-  <!-- Soluciones para tu negocio (componente reutilizable) -->
-  <SolucionesSection />
 </Layout>
 
 <style>

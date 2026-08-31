@@ -95,17 +95,15 @@ const breadcrumb = [
       <div class="cards-grid">
         {beneficios.map((beneficio) => (
           <article class="service-card">
-            <div class="service-card__icon">{categoria.icon}</div>
-            <h3>{categoria.title}</h3>
             <p>{beneficio.texto}</p>
             {beneficio.caso ? (
               <a
-                class="service-card__cta"
+                class="hero__cta-secondary"
                 href={`/casos-exito/${beneficio.caso}/`}
-                >Ver caso relacionado</a
+                >Ver caso de exito</a
               >
             ) : (
-              <span class="service-card__cta">Sin caso asociado</span>
+              <span class="hero__cta-secondary">Sin caso asociado</span>
             )}
           </article>
         ))}
@@ -117,23 +115,20 @@ const breadcrumb = [
   {trabajosCategoria.length > 0 && (
     <section class="section">
       <div class="container">
-        <h2 class="section__title">Nos especializamos en hacer</h2>
+        <h2 class="section__title">Comparar precios de los planes</h2>
         <div class="cards-grid">
           {trabajosCategoria.map((trabajo) => (
             <article class="service-card">
-              <span class="service-card__type">Trabajo</span>
               <h3>
                 <a href={`/trabajos/${trabajo.id}/`}>{trabajo.nombre}</a>
               </h3>
               <p class="service-card__claim">
-                {formatearPrecio(trabajo.precioMin, trabajo.precioMax)} ·{' '}
-                {formatearHoras(trabajo.horasMin, trabajo.horasMax)}
+                Desde {trabajo.precioMin}
               </p>
               <a
-                class="service-card__cta"
+                class="hero__cta-secondary"
                 href={`/trabajos/${trabajo.id}/`}
-                >Ver detalle del trabajo</a
-              >
+                >Ver detalle </a>
             </article>
           ))}
         </div>
@@ -141,29 +136,7 @@ const breadcrumb = [
     </section>
   )}
 
-  <!-- Casos relacionados -->
-  {casos.length > 0 && (
-    <section class="section section--alt">
-      <div class="container">
-        <h2 class="section__title">Casos relacionados</h2>
-        <div class="cards-grid">
-          {casos.map((casoSlug) => (
-            <article class="service-card">
-              <div class="service-card__icon">📄</div>
-              <h3>
-                <a href={`/casos-exito/${casoSlug}/`}>Caso: {casoSlug}</a>
-              </h3>
-              <a
-                class="service-card__cta"
-                href={`/casos-exito/${casoSlug}/`}
-                >Ver caso</a
-              >
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+
 </Layout>
 
 <style>
@@ -195,8 +168,7 @@ const breadcrumb = [
   .breadcrumb a:hover {
     text-decoration: underline;
   }
-  .service-card__cta {
-    color: var(--whatsapp);
+  .hero__cta-secondary {
     font-weight: 600;
     font-size: 0.9rem;
   }
