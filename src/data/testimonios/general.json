@@ -1,45 +1,37 @@
 {
-  "section_title": "Resultados que hablan",
+  "section_title": "Testimonios",
   "testimonios": [
     {
       "quote": "Ahora publicamos una obra nueva en minutos y siempre queda perfecta. Dejamos de depender de terceros para cada cambio y la web por fin se ve como nuestro trabajo.",
-      "autor": "Testimonio tipo — Estudio de arquitectura",
-      "ubicacion": "Rosario, Santa Fe"
+      "autor": "Estudio de arquitectura"
     },
     {
       "quote": "Pasamos de perseguir transferencias todos los meses a tener ingresos que entran solos. Ahora sé cuánto voy a facturar antes de que empiece el mes.",
-      "autor": "Testimonio tipo — Marca de café de especialidad",
-      "ubicacion": "Rosario, Santa Fe"
+      "autor": "Marca de café de especialidad"
     },
     {
       "quote": "El sitio vuela y ya no se cae cuando una nota explota. Lo mejor es que mi equipo ni se enteró del cambio: siguen escribiendo igual que siempre.",
-      "autor": "Testimonio tipo — Medio digital",
-      "ubicacion": "Argentina"
+      "autor": "Medio digital"
     },
     {
       "quote": "Recuperé mi tienda en tiempo récord y sin perder nada. Ahora carga rapidísimo, Google la volvió a marcar como segura y las ventas se normalizaron.",
-      "autor": "Testimonio tipo — E-commerce de indumentaria",
-      "ubicacion": "Argentina"
+      "autor": "E-commerce de indumentaria"
     },
     {
       "quote": "Dejé de ser la secretaria de mis propios cursos. Ahora la academia funciona sola: los alumnos entran, avanzan y se certifican mientras yo preparo el próximo contenido.",
-      "autor": "Testimonio tipo — Academia de capacitación profesional",
-      "ubicacion": "Argentina"
+      "autor": "Academia de capacitación profesional"
     },
     {
       "quote": "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock.",
-      "autor": "Dueña — Tienda de ropa usada",
-      "ubicacion": "Rosario, Santa Fe"
+      "autor": "Dueña — Tienda de ropa usada"
     },
     {
       "quote": "El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender.",
-      "autor": "Directora — Consultorio de psicología",
-      "ubicacion": "Rosario, Santa Fe"
+      "autor": "Directora — Consultorio de psicología"
     },
     {
       "quote": "Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes.",
-      "autor": "Dueño — Ferretería de gas y plomería",
-      "ubicacion": "Rosario, Santa Fe"
+      "autor": "Dueño — Ferretería de gas y plomería"
     }
   ]
 }
