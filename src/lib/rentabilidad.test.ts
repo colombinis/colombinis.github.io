@@ -60,7 +60,7 @@ test('estadoRentabilidad: OK solo si AMBOS margenes >= 0', () => {
   assert.equal(estadoRentabilidad(10, -5), 'NO RENTABLE');
 });
 
-test('CASO OK: trabajo rentable en todo el rango', () => {
+test('CASO OK: solución rentable en todo el rango', () => {
   const r = calcularRentabilidad({
     precioMin: 500,
     precioMax: 700,

@@ -55,7 +55,7 @@
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
     },
-    "trabajo_relacionado": "sitio-pro"
+    "solucion_relacionada": "sitio-pro"
   },
   {
     "slug": "tienda-woocommerce-suscripciones",
@@ -113,7 +113,7 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "trabajo_relacionado": "ecommerce"
+    "solucion_relacionada": "ecommerce"
   },
   {
     "slug": "wordpress-headless-nextjs",
@@ -171,7 +171,7 @@
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
     },
-    "trabajo_relacionado": "sitio-pro"
+    "solucion_relacionada": "sitio-pro"
   },
   {
     "slug": "rescate-rendimiento-seguridad-wordpress",
@@ -229,7 +229,7 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "trabajo_relacionado": "ecommerce"
+    "solucion_relacionada": "ecommerce"
   },
   {
     "slug": "plataforma-cursos-lms-membresias",
@@ -287,7 +287,7 @@
       "categoria": "apps-portales",
       "etiqueta": "Software a Medida > Apps y portales"
     },
-    "trabajo_relacionado": "soft-grande"
+    "solucion_relacionada": "soft-grande"
   },
   {
     "slug": "tienda-ropa-usada",
@@ -335,7 +335,7 @@
       "categoria": "facturacion-cobranzas",
       "etiqueta": "Automatización de Procesos > Facturación y cobranzas"
     },
-    "trabajo_relacionado": "ecommerce"
+    "solucion_relacionada": "ecommerce"
   },
   {
     "slug": "consultorio-psicologia",
@@ -383,7 +383,7 @@
       "categoria": "sistemas-gestion",
       "etiqueta": "Software a Medida > Sistemas de gestión"
     },
-    "trabajo_relacionado": "soft-chico"
+    "solucion_relacionada": "soft-chico"
   },
   {
     "slug": "ferreteria-gas-plomeria",
@@ -431,6 +431,6 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "trabajo_relacionado": "ecommerce"
+    "solucion_relacionada": "ecommerce"
   }
 ]

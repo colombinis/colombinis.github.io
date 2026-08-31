@@ -4,7 +4,7 @@
 // Data source: src/data/servicios/servicio_*.json + src/data/categorias/categoria_*.json (normalizados)
 // Analogia Laravel: Route::get('/servicios/{servicio}/{categoria}', ...) → Service::find($id)->categoria($cat)
 import Layout from '../../../layouts/Layout.astro';
-import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio, getTrabajosByCategoria } from '../../../lib/data-utils';
+import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio, getSolucionesByCategoria } from '../../../lib/data-utils';
 
 interface Props {
   params: { servicio: string; categoria: string };
@@ -35,8 +35,8 @@ if (!servicio || !categoria) {
 const { title: svcTitle, href: svcHref } = servicio;
 const { title: catTitle, descripcion, claim, beneficios, casos } = categoria;
 
-// Trabajos asociados a esta categoría (según el campo categorias de cada detalle trabajo_<id>.json)
-const trabajosCategoria = getTrabajosByCategoria(categoria.id);
+// Soluciones asociadas a esta categoría (según el campo categorias de cada detalle solucion_<id>.json)
+const solucionesCategoria = getSolucionesByCategoria(categoria.id);
 
 // Formateo de precios (ARS k) y horas para las tarjetas
 function formatearPrecio(min: number, max: number) {
@@ -111,23 +111,23 @@ const breadcrumb = [
     </div>
   </section>
 
-  <!-- En qué nos especializamos (trabajos con esta categoría) -->
-  {trabajosCategoria.length > 0 && (
+  <!-- En qué nos especializamos (soluciones con esta categoría) -->
+  {solucionesCategoria.length > 0 && (
     <section class="section">
       <div class="container">
         <h2 class="section__title">Comparar precios de los planes</h2>
         <div class="cards-grid">
-          {trabajosCategoria.map((trabajo) => (
+          {solucionesCategoria.map((solucion) => (
             <article class="service-card">
               <h3>
-                <a href={`/trabajos/${trabajo.id}/`}>{trabajo.nombre}</a>
+                <a href={`/soluciones/${solucion.id}/`}>{solucion.nombre}</a>
               </h3>
               <p class="service-card__claim">
-                Desde {trabajo.precioMin}
+                Desde {solucion.precioMin}
               </p>
               <a
                 class="hero__cta-secondary"
-                href={`/trabajos/${trabajo.id}/`}
+                href={`/soluciones/${solucion.id}/`}
                 >Ver detalle </a>
             </article>
           ))}

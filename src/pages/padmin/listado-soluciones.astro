@@ -1,16 +1,16 @@
 ---
-// Ruta: /padmin/listado-trabajos/ — Área interna SACsi (protegida por Cloudflare Basic Auth)
-// Convierte el HTML legacy listado-trabajos.html a una página Astro estática
-// que renderiza en build-time la tabla de todos los trabajos desde
-// src/lib/data-utils.ts (getTrabajos / getTrabajoDetalle), con un detalle
-// expandible de pasos por trabajo.
+// Ruta: /padmin/listado-soluciones/ — Área interna SACsi (protegida por Cloudflare Basic Auth)
+// Convierte el HTML legacy listado-soluciones.html a una página Astro estática
+// que renderiza en build-time la tabla de todas las soluciones desde
+// src/lib/data-utils.ts (getSoluciones / getSolucionDetalle), con un detalle
+// expandible de pasos por solución.
 //
 // NOTA: esta página vive bajo /padmin/* y NO debe ser linkeada desde el sitio
 // público. El acceso se protege a nivel de Cloudflare (Basic Auth en /padmin/*).
 import Layout from '../../layouts/Layout.astro';
-import { getTrabajos, getTrabajoDetalle, getCategoria } from '../../lib/data-utils';
+import { getSoluciones, getSolucionDetalle, getCategoria } from '../../lib/data-utils';
 
-const trabajos = getTrabajos();
+const soluciones = getSoluciones();
 
 // Formato de precios: los datos vienen en ARS "k" (miles) → pesos argentinos.
 const arsFormatter = new Intl.NumberFormat('es-AR', {
@@ -31,9 +31,9 @@ function formatearHoras(min: number, max: number): string {
   return `${min}–${max} h`;
 }
 
-// Resuelve los títulos de las categorías de cada trabajo (fuente: detalle trabajo_<id>.json)
+// Resuelve los títulos de las categorías de cada solución (fuente: detalle solucion_<id>.json)
 function categoriasDe(id: string): string[] {
-  const detalle = getTrabajoDetalle(id);
+  const detalle = getSolucionDetalle(id);
   const ids = detalle?.categorias ?? [];
   return ids
     .map((catId) => getCategoria(catId)?.title ?? catId)
@@ -43,16 +43,16 @@ function categoriasDe(id: string): string[] {
 
 <Layout
   title="Área interna SACsi — protegida"
-  description="Listado interno de trabajos de SACsi: precios, horas y flujo de ejecución por trabajo. Área protegida."
+  description="Listado interno de soluciones de SACsi: precios, horas y flujo de ejecución por solución. Área protegida."
   robots="noindex, nofollow"
 >
   <section class="section">
     <div class="container">
       <p class="padmin__eyebrow">ÁREA INTERNA · PROTEGIDA</p>
-      <h1 class="padmin__title">Listado de trabajos</h1>
+      <h1 class="padmin__title">Listado de soluciones</h1>
       <p class="padmin__subtitle">
-        Tabla de precios, horas y flujo de ejecución por trabajo. Los datos se
-        cargan en build-time desde <code>src/data/trabajos/listado-trabajos.json</code>
+        Tabla de precios, horas y flujo de ejecución por solución. Los datos se
+        cargan en build-time desde <code>src/data/soluciones/listado-soluciones.json</code>
         (fuente de verdad única). Esta página no está linkeada desde el sitio público.
       </p>
 
@@ -69,14 +69,14 @@ function categoriasDe(id: string): string[] {
             </tr>
           </thead>
           <tbody>
-            {trabajos.map((t) => {
-              const detalle = getTrabajoDetalle(t.id);
+            {soluciones.map((s) => {
+              const detalle = getSolucionDetalle(s.id);
               const flujo = detalle?.flujo ?? [];
-              const cats = categoriasDe(t.id);
+              const cats = categoriasDe(s.id);
               return (
                 <tr>
-                  <td class="padmin__id">{t.id}</td>
-                  <td class="padmin__nombre">{t.nombre}</td>
+                  <td class="padmin__id">{s.id}</td>
+                  <td class="padmin__nombre">{s.nombre}</td>
                   <td class="padmin__categorias">
                     {cats.length > 0 ? (
                       <ul class="padmin__cats">
@@ -88,8 +88,8 @@ function categoriasDe(id: string): string[] {
                       <span class="padmin__muted">—</span>
                     )}
                   </td>
-                  <td class="tnum">{formatearPrecio(t.precioMin, t.precioMax)}</td>
-                  <td class="tnum">{formatearHoras(t.horasMin, t.horasMax)}</td>
+                  <td class="tnum">{formatearPrecio(s.precioMin, s.precioMax)}</td>
+                  <td class="tnum">{formatearHoras(s.horasMin, s.horasMax)}</td>
                   <td class="padmin__flujo">
                     {flujo.length > 0 ? (
                       <details class="padmin__details">
@@ -124,7 +124,7 @@ function categoriasDe(id: string): string[] {
       <p class="padmin__note">
         Nota: los precios se expresan en pesos argentinos (ARS). La tabla se
         genera en build-time desde la fuente de verdad única
-        (<code>src/data/trabajos/</code>); no requiere fetch en runtime.
+        (<code>src/data/soluciones/</code>); no requiere fetch en runtime.
       </p>
     </div>
   </section>

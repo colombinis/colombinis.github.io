@@ -19,5 +19,5 @@
     }
   ],
   "casos": ["tienda-woocommerce-suscripciones", "consultorio-psicologia"],
-  "trabajos": ["auto-basico", "auto-int", "ret-basico"]
+  "soluciones": ["auto-basico", "auto-int", "ret-basico"]
 }

@@ -1,41 +1,41 @@
 ---
-// Ruta dinámica: detalle de cada trabajo (PDP de e-commerce)
-// URL: /trabajos/<id>/
-// Data source: src/data/trabajos/listado-trabajos.json + src/data/trabajos/detalle/trabajo_<id>.json
+// Ruta dinámica: detalle de cada solución (PDP de e-commerce)
+// URL: /soluciones/<id>/
+// Data source: src/data/soluciones/listado-soluciones.json + src/data/soluciones/detalle/solucion_<id>.json
 // Patrón: Product Detail Page — breadcrumb, precio desde*, qué incluye,
-//         proceso, trabajos relacionados, FAQ y CTA final.
+//         proceso, soluciones relacionadas, FAQ y CTA final.
 import Layout from '../../layouts/Layout.astro';
 import config from '../../config/site.json';
 import FAQData from '../../data/preguntas-frecuentes-solucion.json';
 import {
-  getTrabajos,
-  getTrabajoDetalle,
+  getSoluciones,
+  getSolucionDetalle,
   getCategoria,
   getServicio,
 } from '../../lib/data-utils';
 
 interface Props {
-  params: { trabajo: string };
+  params: { solucion: string };
 }
 
-// Genera una ruta estática por cada trabajo
+// Genera una ruta estática por cada solución
 export async function getStaticPaths() {
-  return getTrabajos().map((t) => ({
-    params: { trabajo: t.id },
+  return getSoluciones().map((s) => ({
+    params: { solucion: s.id },
   }));
 }
 
-const trabajoId = Astro.params.trabajo;
-const trabajo = getTrabajos().find((t) => t.id === trabajoId);
+const solucionId = Astro.params.solucion;
+const solucion = getSoluciones().find((s) => s.id === solucionId);
 
-if (!trabajo) {
-  throw new Error(`No se encontró el trabajo: ${trabajoId}`);
+if (!solucion) {
+  throw new Error(`No se encontró la solución: ${solucionId}`);
 }
 
-const detalle = getTrabajoDetalle(trabajo.id);
+const detalle = getSolucionDetalle(solucion.id);
 const flujo = detalle?.flujo ?? [];
 
-// --- Formatos de presentación ---
+// --- Formatos de presentación --
 // Los precios de los datos están en ARS "k" (miles): 500 → $500.000
 const arsFormatter = new Intl.NumberFormat('es-AR', {
   style: 'currency',
@@ -52,8 +52,8 @@ function formatearHoras(min: number, max: number): string {
   return min === max ? `${min} h` : `${min}-${max} h`;
 }
 
-// --- Categorías + breadcrumb (Inicio › Servicio › Categoría › Trabajo) ---
-const categorias = (trabajo.categorias ?? [])
+// --- Categorías + breadcrumb (Inicio › Servicio › Categoría › Solución) ---
+const categorias = (solucion.categorias ?? [])
   .map((id) => getCategoria(id))
   .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
@@ -66,20 +66,20 @@ const breadcrumb = [
   ...(servicio && categoriaPrincipal
     ? [{ label: categoriaPrincipal.title, href: `${servicio.href}${categoriaPrincipal.id}/` }]
     : []),
-  { label: trabajo.nombre, href: Astro.url.pathname },
+  { label: solucion.nombre, href: Astro.url.pathname },
 ];
 
 // --- Descripción (meta + bloque de producto) ---
 const descripcion =
   detalle?.flujo?.[0]?.descripcion ||
-  'Un paquete de trabajo estructurado para resolver un desafío puntual de tu negocio.';
+  'Un paquete de solución estructurada para resolver un desafío puntual de tu negocio.';
 
-// --- Trabajos relacionados (comparten al menos una categoría) ---
-const relacionados = getTrabajos()
+// --- Soluciones relacionadas (comparten al menos una categoría) ---
+const relacionadas = getSoluciones()
   .filter(
-    (t) =>
-      t.id !== trabajo.id &&
-      (t.categorias ?? []).some((cat) => (trabajo.categorias ?? []).includes(cat))
+    (s) =>
+      s.id !== solucion.id &&
+      (s.categorias ?? []).some((cat) => (solucion.categorias ?? []).includes(cat))
   )
   .slice(0, 3);
 
@@ -94,14 +94,14 @@ const faqs = FAQData.preguntas.filter(
 const jsonLdProduct = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name: trabajo.nombre,
+  name: solucion.nombre,
   description: descripcion,
   ...(categoriaPrincipal ? { category: categoriaPrincipal.title } : {}),
   offers: {
     '@type': 'AggregateOffer',
     priceCurrency: 'ARS',
-    lowPrice: trabajo.precioMin * 1000,
-    highPrice: trabajo.precioMax * 1000,
+    lowPrice: solucion.precioMin * 1000,
+    highPrice: solucion.precioMax * 1000,
     availability: 'https://schema.org/InStock',
   },
 };
@@ -111,20 +111,20 @@ const whatsappUrl =
   `${config.contact.whatsapp.base_url}?` +
   new URLSearchParams({
     phone: config.contact.whatsapp.phone,
-    text: `Hola, vi el trabajo "${trabajo.nombre}" y quiero consultarlo.`,
+    text: `Hola, vi la solución "${solucion.nombre}" y quiero consultarla.`,
   }).toString();
 
-// URL del nuevo formulario de contacto con la categoría del trabajo precargada
+// URL del nuevo formulario de contacto con la categoría de la solución precargada
 const contactoUrl = categoriaPrincipal
-  ? `/contacto/?categoria=${categoriaPrincipal.id}&asunto=${encodeURIComponent(trabajo.nombre)}`
-  : `/contacto/?asunto=${encodeURIComponent(trabajo.nombre)}`;
+  ? `/contacto/?categoria=${categoriaPrincipal.id}&asunto=${encodeURIComponent(solucion.nombre)}`
+  : `/contacto/?asunto=${encodeURIComponent(solucion.nombre)}`;
 
-const esRango = trabajo.precioMax > trabajo.precioMin;
+const esRango = solucion.precioMax > solucion.precioMin;
 const totalPasos = flujo.length;
-const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
+const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
 ---
 
-<Layout title={trabajo.nombre} description={descripcion}>
+<Layout title={solucion.nombre} description={descripcion}>
   <!-- Structured data del producto -->
   <script type="application/ld+json" set:html={JSON.stringify(jsonLdProduct)} />
 
@@ -154,8 +154,8 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
           </div>
         )}
         <div class="pdp__info">
-          <span class="pdp__tag">Trabajo a medida</span>
-          <h1 class="pdp__title">{trabajo.nombre}</h1>
+          <span class="pdp__tag">Solución a medida</span>
+          <h1 class="pdp__title">{solucion.nombre}</h1>
           <p class="pdp__desc">{descripcion}</p>
           <ul class="pdp__chips">
             <li>Tiempo estimado: {horasTotales}</li>
@@ -177,8 +177,8 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
         <p class="pdp__price-label">
           Precio desde<sup aria-hidden="true">*</sup>
         </p>
-        <p class="pdp__price">{formatearARS(trabajo.precioMin)}</p>
-        {esRango && <p class="pdp__price-old">{formatearARS(trabajo.precioMax)}</p>}
+        <p class="pdp__price">{formatearARS(solucion.precioMin)}</p>
+        {esRango && <p class="pdp__price-old">{formatearARS(solucion.precioMax)}</p>}
         <p class="pdp__note">
           <sup aria-hidden="true">*</sup>
           Precios expresados en pesos argentinos (ARS) y válidos para clientes que ya tienen
@@ -188,7 +188,7 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
           <a
             class="pdp__cta pdp__cta--primary"
             href={contactoUrl}
-            >Consultar este trabajo</a
+            >Consultar esta solución</a
           >
           <a
             class="pdp__cta pdp__cta--whatsapp"
@@ -210,7 +210,7 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
   {flujo.length > 0 && (
     <section class="section section--alt" aria-labelledby="incluye-titulo">
       <div class="container">
-        <h2 class="section__title" id="incluye-titulo">Qué incluye este trabajo</h2>
+        <h2 class="section__title" id="incluye-titulo">Qué incluye esta solución</h2>
         <div class="incluye__grid">
           <div class="incluye__col">
             <h3 class="incluye__subtitle">Recibís</h3>
@@ -245,7 +245,7 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
       <div class="container">
         <h2 class="section__title" id="proceso-titulo">Cómo se ejecuta</h2>
         <p class="pasos__intro">
-          El trabajo se entrega en {totalPasos} pasos ordenados, con avances visibles en cada
+          La solución se entrega en {totalPasos} pasos ordenados, con avances visibles en cada
           etapa y una estimación de horas.
         </p>
         <ol class="pasos">
@@ -266,18 +266,18 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
     </section>
   )}
 
-  <!-- Trabajos relacionados (cross-sell) -->
-  {relacionados.length > 0 && (
-    <section class="section section--alt" aria-labelledby="relacionados-titulo">
+  <!-- Soluciones relacionadas (cross-sell) -->
+  {relacionadas.length > 0 && (
+    <section class="section section--alt" aria-labelledby="relacionadas-titulo">
       <div class="container">
-        <h2 class="section__title" id="relacionados-titulo">Trabajos relacionados</h2>
+        <h2 class="section__title" id="relacionadas-titulo">Soluciones relacionadas</h2>
         <div class="cards-grid">
-          {relacionados.map((t) => {
-            const resumen = getTrabajoDetalle(t.id)?.flujo?.[0]?.descripcion || '';
+          {relacionadas.map((s) => {
+            const resumen = getSolucionDetalle(s.id)?.flujo?.[0]?.descripcion || '';
             return (
               <article class="service-card">
                 <h3>
-                  <a href={`/trabajos/${t.id}/`}>{t.nombre}</a>
+                  <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
                 </h3>
                 {resumen && <p>{resumen}</p>}                
               </article>
@@ -312,7 +312,6 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
       </div>
     </div>
   </section>
-
 </Layout>
 
 <script>
@@ -500,27 +499,33 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
     margin: 0 0 var(--spacing-md);
   }
   .pdp__note {
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.88rem;
     color: var(--muted);
-    border-top: 1px solid #ECECEF;
-    padding-top: var(--spacing-md);
-    margin: 0 0 var(--spacing-lg);
+    margin: 0 0 var(--spacing-md);
   }
   .pdp__actions {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
   }
   .pdp__cta {
-    display: block;
+    display: inline-block;
     text-align: center;
     padding: 14px 24px;
     border-radius: var(--rounded-sm);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-decoration: none;
     transition: background-color 0.2s ease;
+  }
+  .pdp__cta--primary {
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+  }
+  .pdp__cta--primary:hover {
+    background-color: var(--tertiary-dark);
+    color: #FFFFFF;
   }
   .pdp__cta--whatsapp {
     background-color: var(--whatsapp);
@@ -530,193 +535,25 @@ const horasTotales = formatearHoras(trabajo.horasMin, trabajo.horasMax);
     background-color: var(--whatsapp-hover);
     color: #FFFFFF;
   }
-  .pdp__cta--primary {
-    background-color: var(--primary);
-    color: #FFFFFF;
-  }
-  .pdp__cta--primary:hover {
-    background-color: var(--tertiary-dark);
-    color: #FFFFFF;
-  }
-  .pdp__cta--outline {
-    background-color: transparent;
-    color: var(--primary);
-    border: 1.5px solid #DDDDDD;
-  }
-  .pdp__cta--outline:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
   .pdp__trust {
     list-style: none;
-    padding: var(--spacing-md) 0 0;
-    margin: var(--spacing-lg) 0 0;
-    border-top: 1px solid #ECECEF;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
   }
   .pdp__trust li {
-    position: relative;
     font-size: 0.85rem;
-    color: var(--secondary);
-    padding-left: 24px;
-    margin-bottom: var(--spacing-sm);
-  }
-  .pdp__trust li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: var(--whatsapp);
-    font-weight: 700;
+    color: var(--muted);
   }
 
-  /* ---------- Qué incluye ---------- */
-  .incluye__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-xl);
-    max-width: 860px;
-    margin: 0 auto;
-  }
-  .incluye__col {
-    background: #F9F9FB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
-  }
-  .incluye__subtitle {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin: 0 0 var(--spacing-md);
-  }
-  .incluye__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .incluye__item {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: var(--secondary);
-    padding: var(--spacing-sm) 0;
-    border-bottom: 1px solid #E8E8E8;
-  }
-  .incluye__item:last-child {
-    border-bottom: none;
-  }
-  .incluye__num {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    border-radius: var(--rounded-full);
-    background: var(--tertiary);
-    color: #FFFFFF;
-    font-size: 0.75rem;
-    font-weight: 700;
-    margin-top: 2px;
-  }
-
-  /* ---------- Cómo se ejecuta ---------- */
-  .pasos__intro {
-    max-width: 620px;
-    margin: calc(var(--spacing-xl) * -1 + var(--spacing-sm)) auto var(--spacing-xl);
-    text-align: center;
-    color: var(--secondary);
-  }
-  .pasos {
-    list-style: none;
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  .paso {
-    position: relative;
-    display: flex;
-    gap: var(--spacing-md);
-    padding-bottom: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
-  }
-  .paso:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 21px;
-    top: 46px;
-    bottom: -4px;
-    width: 2px;
-    background: #E0E0E0;
-  }
-  .paso__num {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: var(--rounded-circle);
-    background: var(--primary);
-    color: #FFFFFF;
-    font-weight: 700;
-    z-index: 1;
-  }
-  .paso__body {
-    flex: 1;
-    min-width: 0;
-  }
-  .paso__head {
-    display: flex;
-    align-items: baseline;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-xs);
-  }
-  .paso__title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin: 0;
-  }
-  .paso__horas {
-    flex-shrink: 0;
-    margin-left: auto;
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--tertiary-dark);
-    background: rgba(0, 122, 255, 0.08);
-    border-radius: var(--rounded-full);
-    padding: 2px 10px;
-  }
-  .paso__desc {
-    font-size: 0.93rem;
-    line-height: 1.6;
-    color: var(--secondary);
-    margin: 0;
-  }
-
-  /* ---------- Responsive ---------- */
   @media (min-width: 601px) {
-    .pdp {
-      padding: var(--spacing-xxl) var(--spacing-lg);
-    }
-    .pdp__title {
-      font-size: 2.4rem;
-    }
-    .incluye__grid {
+    .pdp__grid {
       grid-template-columns: 1fr 1fr;
     }
-  }
-
-  @media (min-width: 901px) {
-    .pdp__grid {
-      grid-template-columns: 1.4fr 1fr;
-      gap: var(--spacing-xxl);
-      align-items: start;
-    }
-    .pdp__buybox {
-      position: sticky;
-      top: var(--spacing-lg);
+    .pdp__actions {
+      flex-direction: row;
     }
   }
 </style>

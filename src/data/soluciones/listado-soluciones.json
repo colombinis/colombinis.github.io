@@ -1,5 +1,5 @@
 {
-  "$schema": "detalle/schema_trabajo.json",
+  "$schema": "detalle/schema_solucion.json",
   "meta": {
     "fuente": "PRI-02 precios-servicios + PRI-03 breakeven-costos (tarifa real USD 20/h ≈ ARS 22k/h)",
     "unidades_precio": "ARS k (miles)",
@@ -9,7 +9,7 @@
     "objetivo_margen_pct": 14,
     "actualizado": "2026-08-07"
   },
-  "trabajos": [
+  "soluciones": [
     {
       "id": "landing",
       "nombre": "Landing page",

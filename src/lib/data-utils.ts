@@ -40,11 +40,11 @@ interface Categoria {
   descripcion: string;
   claim: string;
   beneficios: { texto: string; caso?: string }[];
-  casos: string[];
-  trabajos: string[];
+  soluciones: string[];
+  soluciones: string[];
 }
 
-interface TrabajoSimple {
+interface SolucionSimple {
   id: string;
   nombre: string;
   categorias: string[];
@@ -65,7 +65,7 @@ interface PasoFlujo {
   horas: number;
 }
 
-interface TrabajoDetalle {
+interface SolucionDetalle {
   id: string;
   nombre: string;
   categorias: string[];
@@ -90,13 +90,13 @@ interface CasoExito {
     categoria: string;
     etiqueta: string;
   };
-  trabajo_relacionado?: string;
+  solucion_relacionada?: string;
 }
 
 interface DatosNormalizados {
   servicios: Servicio[];
   categorias: Categoria[];
-  trabajos: TrabajoSimple[];
+  soluciones: SolucionSimple[];
   casos: CasoExito[];
 }
 
@@ -135,17 +135,17 @@ function loadCache(): DatosNormalizados {
     categorias.push(data as Categoria);
   }
 
-  // 3. Cargar listado de trabajos (índice maestro)
-  const listadoPath = join(DATA_DIR, 'trabajos', 'listado-trabajos.json');
+  // 3. Cargar listado de soluciones (índice maestro)
+  const listadoPath = join(DATA_DIR, 'soluciones', 'listado-soluciones.json');
   const listado = JSON.parse(readFileSync(listadoPath, 'utf-8'));
-  const trabajos: TrabajoSimple[] = listado.trabajos;
+  const soluciones: SolucionSimple[] = listado.soluciones;
 
   // 4. Cargar casos de éxito
   const casosPath = join(DATA_DIR, 'casos-exito.json');
   const casosData = JSON.parse(readFileSync(casosPath, 'utf-8'));
   casos.push(...casosData);
 
-  _cache = { servicios, categorias, trabajos, casos };
+  _cache = { servicios, categorias, soluciones, casos };
   return _cache as DatosNormalizados;
 }
 
@@ -200,61 +200,61 @@ export function getCategoriaByServicio(
 }
 
 /**
- * Devuelve todos los trabajos (índice maestro).
+ * Devuelve todas las soluciones (índice maestro).
  */
-export function getTrabajos(): TrabajoSimple[] {
-  return loadCache().trabajos;
+export function getSoluciones(): SolucionSimple[] {
+  return loadCache().soluciones;
 }
 
 /**
- * Devuelve un trabajo por ID (índice maestro).
+ * Devuelve una solución por ID (índice maestro).
  */
-export function getTrabajo(id: string): TrabajoSimple | undefined {
-  return loadCache().trabajos.find((t) => t.id === id);
+export function getSolucion(id: string): SolucionSimple | undefined {
+  return loadCache().soluciones.find((s) => s.id === id);
 }
 
 /**
- * Carga el detalle (flujo) de un trabajo desde trabajos/detalle/trabajo_<id>.json.
- * Analogia: Trabajo::find($id) con eager-load del flujo.
+ * Carga el detalle (flujo) de una solución desde soluciones/detalle/solucion_<id>.json.
+ * Analogia: Solucion::find($id) con eager-load del flujo.
  */
-export function getTrabajoDetalle(id: string): TrabajoDetalle | null {
-  const detallePath = join(DATA_DIR, 'trabajos', 'detalle', `trabajo_${id}.json`);
+export function getSolucionDetalle(id: string): SolucionDetalle | null {
+  const detallePath = join(DATA_DIR, 'soluciones', 'detalle', `solucion_${id}.json`);
   try {
-    return JSON.parse(readFileSync(detallePath, 'utf-8')) as TrabajoDetalle;
+    return JSON.parse(readFileSync(detallePath, 'utf-8')) as SolucionDetalle;
   } catch {
     return null;
   }
 }
 
 /**
- * Devuelve todos los trabajos (índice maestro) que tienen asociada una categoría.
- * La pertenencia se lee del campo `categorias` de cada detalle trabajo_<id>.json
- * (fuente de verdad). Analogia Laravel: Categoria::find($id)->trabajos
+ * Devuelve todas las soluciones (índice maestro) que tienen asociada una categoría.
+ * La pertenencia se lee del campo `categorias` de cada detalle solucion_<id>.json
+ * (fuente de verdad). Analogia Laravel: Categoria::find($id)->soluciones
  */
-export function getTrabajosByCategoria(categoriaId: string): TrabajoSimple[] {
-  return loadCache().trabajos.filter((t) =>
-    getTrabajoDetalle(t.id)?.categorias.includes(categoriaId)
+export function getSolucionesByCategoria(categoriaId: string): SolucionSimple[] {
+  return loadCache().soluciones.filter((s) =>
+    getSolucionDetalle(s.id)?.categorias.includes(categoriaId)
   );
 }
 
 /**
- * Devuelve solo las categorías que tienen ≥1 trabajo asociado (CA-02).
- * Analogia Laravel: Categoria::whereHas('trabajos')->get()
+ * Devuelve solo las categorías que tienen ≥1 solución asociada (CA-02).
+ * Analogia Laravel: Categoria::whereHas('soluciones')->get()
  */
-export function getCategoriasConTrabajos(): Categoria[] {
+export function getCategoriasConSoluciones(): Categoria[] {
   return loadCache().categorias.filter(
-    (c) => getTrabajosByCategoria(c.id).length > 0
+    (c) => getSolucionesByCategoria(c.id).length > 0
   );
 }
 
 /**
- * Devuelve solo los servicios que tienen ≥1 categoría con ≥1 trabajo (CA-02).
- * Analogia Laravel: Servicio::whereHas('categorias.trabajos')->get()
+ * Devuelve solo los servicios que tienen ≥1 categoría con ≥1 solución (CA-02).
+ * Analogia Laravel: Servicio::whereHas('categorias.soluciones')->get()
  */
-export function getServiciosConTrabajos(): Servicio[] {
-  const catsConTrabajos = getCategoriasConTrabajos();
+export function getServiciosConSoluciones(): Servicio[] {
+  const catsConSoluciones = getCategoriasConSoluciones();
   return loadCache().servicios.filter((s) =>
-    catsConTrabajos.some((c) => c.servicio_id === s.id)
+    catsConSoluciones.some((c) => c.servicio_id === s.id)
   );
 }
 
