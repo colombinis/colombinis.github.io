@@ -1,0 +1,16 @@
+{
+  "servicio_id": "automatizacion",
+  "section_title": "Beneficios concretos",
+  "testimonios": [
+    {
+      "quote": "Pasamos de cargar 3 horas por día a que el sistema lo haga solo. El retorno fue inmediato.",
+      "autor": "Carina Mendoza",
+      "rol": "Gerenta de Administración — Distribuidora del Sur"
+    },
+    {
+      "quote": "Dejamos de perder ventas por stock desactualizado. Ahora la web refleja lo que tenemos en tiempo real.",
+      "autor": "Gonzalo Martínez",
+      "rol": "Dueño — Ferretería Martínez Hnos."
+    }
+  ]
+}

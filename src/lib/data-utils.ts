@@ -27,8 +27,6 @@ interface Servicio {
   short: string;
   hero_label: string;
   categoria_section_title: string;
-  testimonios_section_title: string;
-  testimonios: { quote: string; autor: string; rol: string }[];
   categorias_ids: string[];
 }
 
@@ -40,7 +38,7 @@ interface Categoria {
   descripcion: string;
   claim: string;
   beneficios: { texto: string; caso?: string }[];
-  soluciones: string[];
+  casos: string[];
   soluciones: string[];
 }
 
@@ -93,11 +91,24 @@ interface CasoExito {
   solucion_relacionada?: string;
 }
 
+interface Testimonio {
+  quote: string;
+  autor: string;
+  rol: string;
+}
+
+interface TestimonioData {
+  servicio_id?: string;
+  section_title: string;
+  testimonios: Testimonio[];
+}
+
 interface DatosNormalizados {
   servicios: Servicio[];
   categorias: Categoria[];
   soluciones: SolucionSimple[];
   casos: CasoExito[];
+  testimonios: TestimonioData[];
 }
 
 /**
@@ -110,6 +121,7 @@ function loadCache(): DatosNormalizados {
   const servicios: Servicio[] = [];
   const categorias: Categoria[] = [];
   const casos: CasoExito[] = [];
+  const testimonios: TestimonioData[] = [];
 
   // 1. Cargar servicios (src/data/servicios/servicio_*.json)
   const serviciosDir = join(DATA_DIR, 'servicios');
@@ -145,7 +157,19 @@ function loadCache(): DatosNormalizados {
   const casosData = JSON.parse(readFileSync(casosPath, 'utf-8'));
   casos.push(...casosData);
 
-  _cache = { servicios, categorias, soluciones, casos };
+  // 5. Cargar testimonios (src/data/testimonios/*.json)
+  const testimoniosDir = join(DATA_DIR, 'testimonios');
+  const testimonioFiles = readdirSync(testimoniosDir).filter(
+    (f) => f.endsWith('.json')
+  );
+  for (const file of testimonioFiles) {
+    const data = JSON.parse(
+      readFileSync(join(testimoniosDir, file), 'utf-8')
+    );
+    testimonios.push(data as TestimonioData);
+  }
+
+  _cache = { servicios, categorias, soluciones, casos, testimonios };
   return _cache as DatosNormalizados;
 }
 
@@ -270,6 +294,23 @@ export function getCasos(): CasoExito[] {
  */
 export function getCaso(slug: string): CasoExito | undefined {
   return loadCache().casos.find((c) => c.slug === slug);
+}
+
+/**
+ * Devuelve los testimonios asociados a un servicio específico.
+ * Si no hay testimonios específicos, devuelve null.
+ */
+export function getTestimoniosByServicio(servicioId: string): TestimonioData | null {
+  const found = loadCache().testimonios.find((t) => t.servicio_id === servicioId);
+  return found ?? null;
+}
+
+/**
+ * Devuelve los testimonios generales (homepage).
+ */
+export function getTestimoniosGenerales(): TestimonioData | null {
+  const found = loadCache().testimonios.find((t) => t.servicio_id === undefined);
+  return found ?? null;
 }
 
 /**

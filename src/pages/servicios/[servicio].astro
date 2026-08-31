@@ -7,7 +7,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SolucionesSection from '../../components/SolucionesSection.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
-import { getServicio, getCategoriasByServicio } from '../../lib/data-utils';
+import { getServicio, getCategoriasByServicio, getTestimoniosByServicio } from '../../lib/data-utils';
 
 interface Props {
   params: { servicio: string };
@@ -34,11 +34,10 @@ const {
   short: svcShort,
   hero_label,
   categoria_section_title,
-  testimonios_section_title,
-  testimonios,
 } = servicio;
 
 const categorias = getCategoriasByServicio(servicio.id);
+const testimoniosData = getTestimoniosByServicio(servicio.id);
 ---
 
 <Layout
@@ -86,22 +85,24 @@ const categorias = getCategoriasByServicio(servicio.id);
   </section>
 
   <!-- Testimonios / Social proof -->
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">{testimonios_section_title}</h2>
-      <div class="testimonials-grid">
-        {testimonios.map((t) => (
-          <div class="testimonial-card">
-            <p class="testimonial-card__quote">
-              "{t.quote}"
-            </p>
-            <p class="testimonial-card__author">{t.autor}</p>
-            <p class="testimonial-card__role">{t.rol}</p>
-          </div>
-        ))}
+  {testimoniosData && (
+    <section class="section section--alt">
+      <div class="container">
+        <h2 class="section__title">{testimoniosData.section_title}</h2>
+        <div class="testimonials-grid">
+          {testimoniosData.testimonios.map((t) => (
+            <div class="testimonial-card">
+              <p class="testimonial-card__quote">
+                "{t.quote}"
+              </p>
+              <p class="testimonial-card__author">{t.autor}</p>
+              <p class="testimonial-card__role">{t.rol}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
 </Layout>
 

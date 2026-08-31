@@ -1,0 +1,20 @@
+{
+  "section_title": "Resultados que hablan",
+  "testimonios": [
+    {
+      "quote": "Trabajar con SACsi nos cambió la forma de administrar el negocio. Lo que antes nos llevaba días, ahora lo hacemos en horas. Son un golazo.",
+      "autor": "Carina Mendoza",
+      "rol": "Gerenta de Administración — Distribuidora del Sur"
+    },
+    {
+      "quote": "Necesitábamos una solución simple que nuestros empleados pudieran usar sin ser expertos en tecnología. SACsi entendió al toque lo que buscábamos.",
+      "autor": "Gonzalo Martínez",
+      "rol": "Dueño — Ferretería Martínez Hnos."
+    },
+    {
+      "quote": "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos.",
+      "autor": "Romina Paz",
+      "rol": "CEO — Grupo Logístico Central"
+    }
+  ]
+}

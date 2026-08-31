@@ -1,11 +1,14 @@
 ---
 // Componente reutilizable: sección "Resultados que hablan" (social proof)
-// Métricas + testimonios. Se renderiza del lado del servidor (SSG estático).
+// Métricas + testimonios generales (homepage). Se renderiza SSG estático.
+import { getTestimoniosGenerales } from '../lib/data-utils';
+
+const testimoniosData = getTestimoniosGenerales();
 ---
 
 <section id="social-proof" class="section">
   <div class="container">
-    <h2 class="section__title">Resultados que hablan</h2>
+    <h2 class="section__title">{testimoniosData?.section_title ?? 'Resultados que hablan'}</h2>
     <div class="metrics-grid">
       <div class="metric">
         <p class="metric__number">15+</p>
@@ -25,30 +28,20 @@
       </div>
     </div>
 
-    <div class="testimonials">
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "Trabajar con SACsi nos cambió la forma de administrar el negocio. Lo que antes nos llevaba días, ahora lo hacemos en horas. Son un golazo."
-          </p>
-          <p class="testimonial-card__author">Carina Mendoza</p>
-          <p class="testimonial-card__role">Gerenta de Administración — Distribuidora del Sur</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "Necesitábamos una solución simple que nuestros empleados pudieran usar sin ser expertos en tecnología. SACsi entendió al toque lo que buscábamos."
-          </p>
-          <p class="testimonial-card__author">Gonzalo Martínez</p>
-          <p class="testimonial-card__role">Dueño — Ferretería Martínez Hnos.</p>
-        </div>
-        <div class="testimonial-card">
-          <p class="testimonial-card__quote">
-            "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos."
-          </p>
-          <p class="testimonial-card__author">Romina Paz</p>
-          <p class="testimonial-card__role">CEO — Grupo Logístico Central</p>
+    {testimoniosData && (
+      <div class="testimonials">
+        <div class="testimonials-grid">
+          {testimoniosData.testimonios.map((t) => (
+            <div class="testimonial-card">
+              <p class="testimonial-card__quote">
+                "{t.quote}"
+              </p>
+              <p class="testimonial-card__author">{t.autor}</p>
+              <p class="testimonial-card__role">{t.rol}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    )}
   </div>
 </section>

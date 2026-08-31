@@ -4,7 +4,7 @@
   "title": "Servicio",
   "description": "Un servicio principal de SACsi. Cada servicio agrupa de 2 a 3 categorías de solución. Incluye metadatos para renderizar su página de detalle.",
   "type": "object",
-  "required": ["id", "title", "href", "claim", "short", "hero_label", "categoria_section_title", "testimonios_section_title", "testimonios", "categorias_ids"],
+  "required": ["id", "title", "href", "claim", "short", "hero_label", "categoria_section_title", "categorias_ids"],
   "properties": {
     "id": {
       "type": "string",
@@ -36,24 +36,6 @@
     "categoria_section_title": {
       "type": "string",
       "description": "Título de la sección de cards de categorías. Ej: '¿Qué automatizamos?', '¿Qué construimos?', '¿Qué incluye?'."
-    },
-    "testimonios_section_title": {
-      "type": "string",
-      "description": "Título de la sección de testimonios/social proof."
-    },
-    "testimonios": {
-      "type": "array",
-      "description": "Testimonios de clientes reales o tipo asociados a este servicio.",
-      "items": {
-        "type": "object",
-        "required": ["quote", "autor", "rol"],
-        "properties": {
-          "quote": { "type": "string" },
-          "autor": { "type": "string" },
-          "rol": { "type": "string" }
-        },
-        "additionalProperties": false
-      }
     },
     "categorias_ids": {
       "type": "array",
