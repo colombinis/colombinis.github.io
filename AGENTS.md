@@ -2,6 +2,17 @@
 
 Rebranding SACsi (soluciones informáticas, Rosario, Argentina). All user-facing content in Argentine Spanish.
 
+## ⚠️ Split de repositorios (2026-08-31)
+
+Este repositorio (**público**) contiene **solo el sitio web desplegable**. La documentación interna, specs, backoffice y datos sensibles están en el repositorio privado `colombinis/sacsi-interno`.
+
+| Repositorio | Contenido | Acceso |
+|-------------|-----------|--------|
+| `colombinis/colombinis.github.io` (este) | Sitio Astro v7, `src/`, `public/`, `CNAME`, CI/CD | Público — GitHub Pages |
+| `colombinis/sacsi-interno` | `_ai_context/`, `src/pages/padmin/`, `src/lib/rentabilidad.*`, specs, tareas, scripts | Privado — solo owner |
+
+**Regla:** Si un archivo no es necesario para el build de Astro, vive en el privado. Si Astro lo importa o lo consume en `src/data/`, vive aquí.
+
 ## Quick reference
 
 | What | How |
@@ -21,7 +32,7 @@ The repo currently holds **two versions**, but they are not equal:
 1. **Astro v7** (`src/` directory) — **official stack**. Builds to `dist/`, deployed via GitHub Pages (`CNAME` → sacsi.com.ar). Make all changes here.
 2. **Static HTML** (`.html` files at root) — **legacy**, being deprecated. Do not build on it. Will be removed in Fase 5.
 
-See `_ai_context/docs/tareas/ARQUITECTURA.md` for the full legacy inventory and cleanup plan.
+> **Nota:** La documentación de arquitectura legacy ahora vive en el repo privado (`_ai_context/docs/tareas/ARQUITECTURA.md`).
 
 ### Astro source structure
 
@@ -30,6 +41,8 @@ src/
 ├── pages/           # Routes mirror the HTML site: index, contacto, sobre-nosotros, servicios/*, casos-exito/*
 ├── layouts/         # Layout.astro (shared shell: Header+Footer+global.css), CaseStudyLayout.astro
 ├── components/      # Header.astro, Footer.astro, ServiceCard.astro
+├── data/            # Catálogo público: soluciones, categorías, casos, testimonios (consumido por Astro)
+├── lib/             # data-utils.ts (utilidades compartidas)
 └── styles/
     └── global.css   # CSS custom properties (--primary, --tertiary, --whatsapp, etc.)
 ```
@@ -43,7 +56,7 @@ Every HTML page repeats the same `:root` variables. Edits must stay in sync with
 - **No CI, no tests, no linter, no formatter, no .gitignore**
 - **No external npm deps** beyond Astro itself (pure vanilla JS for client scripts)
 - **Domain:** sacsi.com.ar (via `CNAME`) — do not change `CNAME` unless asked
-- **Analytics:** GTM + GA4 (`GTM-T7PWJ99` in Layout.astro head; post-deploy: validate events — see `_ai_context/docs/tareas/DEP-01`)
+- **Analytics:** GTM + GA4 (`GTM-T7PWJ99` in Layout.astro head; post-deploy: validate events)
 - **CI:** `.github/workflows/deploy.yml` (builds Astro and deploys to GitHub Pages on push to `master`)
 
 ## Legacy / do-not-touch files
@@ -70,14 +83,13 @@ Every HTML page repeats the same `:root` variables. Edits must stay in sync with
 | Fase 1 — Structure (brand research, content arch, UI/UX) | ✅ Done |
 | Fase 2 — Build (homepage, service pages, "How we work") | ✅ Done (migrated to Astro; QA re-run on .astro pages) |
 | Fase 3 — Conversion (social proof, FAQ, contact CTA) | ✅ Done |
-| Fase 4 — Growth (SEO, analytics, meta tags) | ✅ Done (GTM `GTM-T7PWJ99` active; post-deploy: validate events — see `_ai_context/docs/tareas/DEP-01`) |
-| Fase 5 — Close (QA on Astro, legacy cleanup, deployment) | ✅ Done (deploy workflow created; post-deploy: Lighthouse > 80 — see `_ai_context/docs/tareas/DEP-01`) |
+| Fase 4 — Growth (SEO, analytics, meta tags) | ✅ Done (GTM `GTM-T7PWJ99` active; post-deploy: validate events) |
+| Fase 5 — Close (QA on Astro, legacy cleanup, deployment) | ✅ Done (deploy workflow created; post-deploy: Lighthouse > 80) |
 
-Full status: `_ai_context/docs/tareas/TODO.md` (active tasks) and `_ai_context/docs/tareas/HISTORIAL-REBRANDING.md` (closed rebranding phases).
+> **Nota:** El estado completo de tareas y el historial de rebranding ahora viven en el repo privado (`_ai_context/docs/tareas/TODO.md` y `_ai_context/docs/tareas/HISTORIAL-REBRANDING.md`).
 
 ## Reference
 
 - `DESIGN.md` — colors, typography, spacing, components (canonical tokens) + design rationale + glossary
-- `_ai_context/docs/tareas/TODO.md` — **active task master (source of truth for ongoing work)**. Es **generado automáticamente**, NO se edita a mano: se deriva escaneando `_ai_context/docs/tareas/**/TODO.md` (excl. `archived/`). Regenerar con: `python3 _ai_context/docs/tareas/scripts/generate-todos.py` (produce también `generated/system-map-coverage.json`).
-- `_ai_context/docs/tareas/ARQUITECTURA.md` — Astro structure, legacy files, deploy, SEO
-- `_ai_context/docs/tareas/CONTENIDO.md` — content architecture + service copy
+- `src/data/` — catálogo público de soluciones, categorías, casos de éxito, testimonios (consumido por Astro)
+- Repo privado (`colombinis/sacsi-interno`) — documentación interna, specs, tareas, backoffice, scripts
