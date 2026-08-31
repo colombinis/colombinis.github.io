@@ -18,7 +18,7 @@ Given Ana busca "rescate WordPress" o scrollea casos en `/`
 When ve la grilla de casos
 Then ve "Rescate de un e-commerce WordPress lento y hackeado"
 And el caso está etiquetado como "PROYECTO TIPO" (transparente)
-And el CTA dice "Consultá por este resultado"
+And el CTA dice "¿Tenés preguntas?. Consultanos ahora !!!"
 
 ### E2: Ana valida que entienden su dolor
 Given Ana en la página del caso de rescate
@@ -55,7 +55,7 @@ CASO=$D/casos-exito/rescate-rendimiento-seguridad-wordpress/index.html
 # E1: caso visible y etiquetado transparente
 grep -q 'Rescate de un e-commerce WordPress' $CASO && echo "  ✅ E1 caso rescate"
 grep -q 'PROYECTO TIPO' $CASO && echo "  ✅ E1 etiqueta PROYECTO TIPO"
-grep -q 'Consultá por este resultado' $CASO && echo "  ✅ E1 CTA del caso"
+grep -q '¿Tenés preguntas?. Consultanos ahora !!!' $CASO && echo "  ✅ E1 CTA del caso"
 
 # E2: dolor + métricas + testimonio tipo
 grep -q 'malware' $CASO && echo "  ✅ E2 menciona malware"
