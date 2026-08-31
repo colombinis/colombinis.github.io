@@ -23,60 +23,6 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
       </p>
     </div>
   </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <div class="not-found-grid">
-        <div class="not-found__actions">
-          <a href="/" class="hero__cta">
-            <Icon name="home" size={20} />
-            <span>Volver a la página de inicio</span>
-          </a>
-          <a href={whatsappUrl} class="hero__cta--whatsapp" rel="noopener noreferrer" target="_blank">
-            <Icon name="brand-whatsapp" size={20} />
-            <span>Hablar por WhatsApp</span>
-          </a>
-          <a href="/contacto/" class="hero__cta-secondary">
-            <Icon name="mail" size={20} />
-            <span>Ver contacto</span>
-          </a>
-        </div>
-
-        <div class="not-found__tips">
-          <h2>¿Qué podés hacer?</h2>
-          <ul class="not-found-list">
-            <li>
-              <Icon name="settings" size={18} class="not-found__tip-icon" />
-              <span>Revisar la URL escrita — a veces hay un error de tipeo.</span>
-            </li>
-            <li>
-              <Icon name="home" size={18} class="not-found__tip-icon" />
-              <span>Volver a la <a href="/">página de inicio</a> y navegar desde ahí.</span>
-            </li>
-            <li>
-              <Icon name="brand-whatsapp" size={18} class="not-found__tip-icon" />
-              <span>Escribinos por WhatsApp — te ayudamos a encontrar lo que necesitás.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-final">
-    <h2>¿Listo para empezar?</h2>
-    <p class="cta-final__subtitle">Contanos tu proyecto sin compromiso. En 15 minutos podemos saber si podemos ayudarte y cómo.</p>
-    <div class="cta-final__actions">
-      <a href={whatsappUrl} class="cta-final__whatsapp" rel="noopener noreferrer" target="_blank">
-        <Icon name="brand-whatsapp" size={20} />
-        <span>Escribinos por WhatsApp</span>
-      </a>
-      <a href="/contacto/" class="cta-final__outline">
-        <Icon name="mail" size={20} />
-        <span>Ver formulario de contacto</span>
-      </a>
-    </div>
-  </section>
 </Layout>
 
 <style>
