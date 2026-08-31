@@ -94,7 +94,8 @@ interface CasoExito {
 interface Testimonio {
   quote: string;
   autor: string;
-  rol: string;
+  rol?: string;
+  ubicacion?: string;
 }
 
 interface TestimonioData {
