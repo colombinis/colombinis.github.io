@@ -36,12 +36,29 @@
         }
       ]
     },
-    "stack": ["WordPress", "PHP", "Tema a medida", "Bloques Gutenberg (block.json)", "ACF Pro", "SCSS", "Template Hierarchy"],
+    "stack": [
+      "WordPress",
+      "PHP",
+      "Tema a medida",
+      "Bloques Gutenberg (block.json)",
+      "ACF Pro",
+      "SCSS",
+      "Template Hierarchy"
+    ],
     "beneficios": {
       "metricas": [
-        { "numero": "94", "label": "PageSpeed mobile" },
-        { "numero": "-75%", "label": "tiempo de carga" },
-        { "numero": "0", "label": "dependencia de un dev para publicar" }
+        {
+          "numero": "94",
+          "label": "PageSpeed mobile"
+        },
+        {
+          "numero": "-75%",
+          "label": "tiempo de carga"
+        },
+        {
+          "numero": "0",
+          "label": "dependencia de un dev para publicar"
+        }
       ],
       "testimonio": {
         "quote": "Ahora publicamos una obra nueva en minutos y siempre queda perfecta. Dejamos de depender de terceros para cada cambio y la web por fin se ve como nuestro trabajo.",
@@ -93,12 +110,29 @@
         }
       ]
     },
-    "stack": ["WordPress", "WooCommerce", "WooCommerce Subscriptions", "Gateway Mercado Pago", "Hooks & Filters", "Webhooks", "WooCommerce REST API"],
+    "stack": [
+      "WordPress",
+      "WooCommerce",
+      "WooCommerce Subscriptions",
+      "Gateway Mercado Pago",
+      "Hooks & Filters",
+      "Webhooks",
+      "WooCommerce REST API"
+    ],
     "beneficios": {
       "metricas": [
-        { "numero": "+60%", "label": "ingresos recurrentes" },
-        { "numero": "0", "label": "cobros perseguidos a mano" },
-        { "numero": "-40%", "label": "consultas de \"¿cómo pago?\"" }
+        {
+          "numero": "+60%",
+          "label": "ingresos recurrentes"
+        },
+        {
+          "numero": "0",
+          "label": "cobros perseguidos a mano"
+        },
+        {
+          "numero": "-40%",
+          "label": "consultas de \"¿cómo pago?\""
+        }
       ],
       "testimonio": {
         "quote": "Pasamos de perseguir transferencias todos los meses a tener ingresos que entran solos. Ahora sé cuánto voy a facturar antes de que empiece el mes.",
@@ -150,12 +184,29 @@
         }
       ]
     },
-    "stack": ["WordPress (headless)", "WPGraphQL", "Next.js", "React", "ISR", "Vercel / CDN", "Core Web Vitals"],
+    "stack": [
+      "WordPress (headless)",
+      "WPGraphQL",
+      "Next.js",
+      "React",
+      "ISR",
+      "Vercel / CDN",
+      "Core Web Vitals"
+    ],
     "beneficios": {
       "metricas": [
-        { "numero": "1.1s", "label": "LCP en mobile" },
-        { "numero": "+40%", "label": "páginas por sesión" },
-        { "numero": "0", "label": "caídas en notas virales" }
+        {
+          "numero": "1.1s",
+          "label": "LCP en mobile"
+        },
+        {
+          "numero": "+40%",
+          "label": "páginas por sesión"
+        },
+        {
+          "numero": "0",
+          "label": "caídas en notas virales"
+        }
       ],
       "testimonio": {
         "quote": "El sitio vuela y ya no se cae cuando una nota explota. Lo mejor es que mi equipo ni se enteró del cambio: siguen escribiendo igual que siempre.",
@@ -207,12 +258,29 @@
         }
       ]
     },
-    "stack": ["WordPress", "WooCommerce", "Limpieza de malware", "Hardening / WAF", "Object Cache + CDN", "Optimización MySQL", "Core Web Vitals"],
+    "stack": [
+      "WordPress",
+      "WooCommerce",
+      "Limpieza de malware",
+      "Hardening / WAF",
+      "Object Cache + CDN",
+      "Optimización MySQL",
+      "Core Web Vitals"
+    ],
     "beneficios": {
       "metricas": [
-        { "numero": "1.5s", "label": "carga (antes 8s)" },
-        { "numero": "95", "label": "PageSpeed" },
-        { "numero": "0", "label": "reinfecciones" }
+        {
+          "numero": "1.5s",
+          "label": "carga (antes 8s)"
+        },
+        {
+          "numero": "95",
+          "label": "PageSpeed"
+        },
+        {
+          "numero": "0",
+          "label": "reinfecciones"
+        }
       ],
       "testimonio": {
         "quote": "Recuperé mi tienda en tiempo récord y sin perder nada. Ahora carga rapidísimo, Google la volvió a marcar como segura y las ventas se normalizaron.",
@@ -264,12 +332,29 @@
         }
       ]
     },
-    "stack": ["WordPress", "LearnDash (LMS)", "MemberPress", "Pagos recurrentes", "ACF", "Drip content", "Integración de email"],
+    "stack": [
+      "WordPress",
+      "LearnDash (LMS)",
+      "MemberPress",
+      "Pagos recurrentes",
+      "ACF",
+      "Drip content",
+      "Integración de email"
+    ],
     "beneficios": {
       "metricas": [
-        { "numero": "300+", "label": "alumnos activos" },
-        { "numero": "0", "label": "accesos dados a mano" },
-        { "numero": "100%", "label": "certificados automáticos" }
+        {
+          "numero": "300+",
+          "label": "alumnos activos"
+        },
+        {
+          "numero": "0",
+          "label": "accesos dados a mano"
+        },
+        {
+          "numero": "100%",
+          "label": "certificados automáticos"
+        }
       ],
       "testimonio": {
         "quote": "Dejé de ser la secretaria de mis propios cursos. Ahora la academia funciona sola: los alumnos entran, avanzan y se certifican mientras yo preparo el próximo contenido.",
@@ -316,8 +401,14 @@
     },
     "beneficios": {
       "metricas": [
-        { "numero": "70%", "label": "menos tiempo administrativo" },
-        { "numero": "2", "label": "pasos por carga de prenda" }
+        {
+          "numero": "70%",
+          "label": "menos tiempo administrativo"
+        },
+        {
+          "numero": "2",
+          "label": "pasos por carga de prenda"
+        }
       ],
       "testimonio": {
         "quote": "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock.",
@@ -364,8 +455,14 @@
     },
     "beneficios": {
       "metricas": [
-        { "numero": "70%", "label": "menos carga administrativa" },
-        { "numero": "0", "label": "turnos cruzados" }
+        {
+          "numero": "70%",
+          "label": "menos carga administrativa"
+        },
+        {
+          "numero": "0",
+          "label": "turnos cruzados"
+        }
       ],
       "testimonio": {
         "quote": "El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender.",
@@ -412,8 +509,14 @@
     },
     "beneficios": {
       "metricas": [
-        { "numero": "+35%", "label": "ventas online - 3 meses" },
-        { "numero": "0", "label": "configuración diaria" }
+        {
+          "numero": "+35%",
+          "label": "ventas online - 3 meses"
+        },
+        {
+          "numero": "0",
+          "label": "configuración diaria"
+        }
       ],
       "testimonio": {
         "quote": "Ahora la tienda trabaja sola. Subo el precio, actualizo el stock y listo. Las ventas online crecen mes a mes.",
@@ -427,5 +530,85 @@
       "etiqueta": "Presencia Online > Tienda online"
     },
     "solucion_relacionada": "ecommerce"
+  },
+  {
+    "slug": "chatbot-ia-local-sacsi",
+    "tipo": "proyecto-tipo",
+    "title": "Chatbot IA local para SACsi",
+    "category": "Desarrollo de software a medida",
+    "metric": "100% cliente-side",
+    "excerpt": "Un asistente virtual con IA que corre en el navegador del usuario, sin backend, sin costos de servidor y con respuestas automáticas basadas en conocimiento real del negocio.",
+    "subtitle": "SACsi recibe consultas frecuentes sobre servicios, precios y tiempos de implementación. La atención manual consume tiempo que podría destinarse a tareas de mayor valor.",
+    "problema": "Las preguntas frecuentes sobre servicios, precios y alcances técnicos consumen tiempo de atención que podría destinarse a tareas de mayor valor. No siempre hay personal disponible para responder en el momento, y los potenciales clientes pueden desanimarse al no obtener respuesta inmediata.",
+    "deseo": [
+      "SACsi necesitaba atender consultas frecuentes las 24 horas del día sin incrementar costos operativos. Las preguntas sobre precios, tiempos de implementación y servicios ofrecidos se repiten constantemente, y cada consulta no atendida representa un potencial cliente perdido.",
+      "El objetivo era claro: ofrecer respuestas inmediatas y disponibles todo el día, sin depender de personal humano conectado, y sin incurrir en costos de infraestructura adicionales. Una solución que escalara sin esfuerzo."
+    ],
+    "vision": {
+      "label": "Cómo imaginaba el éxito",
+      "quote": "Quiero que cualquier persona que visite mi sitio pueda preguntar lo que necesite y obtener una respuesta clara al instante, aunque sea las 3 de la mañana. Y que eso me cueste absolutamente nada en servidor."
+    },
+    "solucion": {
+      "titulo": "La solución",
+      "cards": [
+        {
+          "icon": "🤖",
+          "title": "IA que corre en el navegador",
+          "text": "Implementamos un chatbot con un modelo de lenguaje pequeño (~0.5B parámetros) que se ejecuta completamente en el navegador del usuario usando Transformers.js y WebGPU. No hay backend propio: los pesos del modelo se descargan una sola vez y se cachean localmente."
+        },
+        {
+          "icon": "💰",
+          "title": "Costo cero en infraestructura",
+          "text": "Todo el procesamiento ocurre del lado del cliente. El sitio web no necesita servidor adicional para el chatbot: el modelo se carga desde CDN y corre en el dispositivo del usuario. Cero costos de hosting, cero servidores que mantener."
+        },
+        {
+          "icon": "📚",
+          "title": "Conocimiento basado en datos reales",
+          "text": "El chatbot se alimenta de un knowledge base con información real de SACsi: servicios, precios referenciales, tiempos estimados y FAQs. Las respuestas son consistentes y alineadas con la propuesta de valor del negocio."
+        },
+        {
+          "icon": "⚠️",
+          "title": "Transparencia sobre limitaciones",
+          "text": "Se incluye un disclaimer claro indicando que la tecnología está en desarrollo y las respuestas pueden contener información incorrecta. Se recomienda verificar datos críticos por canales oficiales (WhatsApp, email o formulario de contacto)."
+        }
+      ]
+    },
+    "stack": [
+      "Transformers.js",
+      "WebGPU / WASM",
+      "Qwen2.5-0.5B-Instruct",
+      "Custom Elements (Web Components)",
+      "Astro",
+      "JavaScript vanilla",
+      "Knowledge-based prompting"
+    ],
+    "beneficios": {
+      "metricas": [
+        {
+          "numero": "24/7",
+          "label": "disponibilidad"
+        },
+        {
+          "numero": "$0",
+          "label": "costo infraestructura"
+        },
+        {
+          "numero": "~0.5B",
+          "label": "parámetros del modelo"
+        }
+      ],
+      "testimonio": {
+        "quote": "La tecnología de inteligencia artificial local aún está en desarrollo activo. Las respuestas son orientativas y pueden contener imprecisiones. Para información precisa, contactanos por WhatsApp, email o completando el formulario de contacto.",
+        "autor": "SACsi",
+        "rol": "Soluciones Informáticas"
+      }
+    },
+    "tipo_solucion": {
+      "servicio": "software-a-medida",
+      "categoria": "apps-portales",
+      "etiqueta": "Software a Medida > Apps y portales"
+    },
+    "solucion_relacionada": "soft-chico",
+    "disclaimer": "Este chatbot utiliza tecnología de inteligencia artificial local en pleno desarrollo. Las respuestas son generadas por un modelo de lenguaje pequeño (~0.5B parámetros) que corre en el navegador. La información proporcionada es orientativa y puede contener errores. Para datos precisos sobre servicios, precios o tiempos, te recomendamos contactarnos por los canales oficiales."
   }
 ]

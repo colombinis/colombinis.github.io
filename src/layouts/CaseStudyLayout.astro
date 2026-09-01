@@ -30,12 +30,13 @@ interface Props {
   stack?: string[];
   testimonial: Testimonial;
   metrics: Metric[];
+  disclaimer?: string;
 }
 
 const {
   title,
   description,
-  
+  heroLabel,
   heroSubtitle,
   problema,
   problemaExtra,
@@ -44,6 +45,7 @@ const {
   stack,
   testimonial,
   metrics,
+  disclaimer,
 } = Astro.props;
 ---
 
@@ -123,4 +125,16 @@ const {
       </div>
     </div>
   </section>
+
+  {disclaimer && (
+    <section class="section">
+      <div class="container">
+        <div class="case-disclaimer" style="padding:var(--spacing-md);background:#FFF3CD;border-radius:var(--rounded-sm);border:1.5px solid #FFD93D;">
+          <p style="margin:0;font-size:0.9rem;color:#856404;">
+            <strong>⚠️ Nota importante:</strong> {disclaimer}
+          </p>
+        </div>
+      </div>
+    </section>
+  )}
 </Layout>
