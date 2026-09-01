@@ -28,15 +28,9 @@
         "href": "/servicios/"
       },
       {
-        "label": "Recursos",
-        "href": "/recursos/",
-        "submenu": [
-          { "label": "Blog", "href": "/recursos/blog/" },
-          { "label": "Recursos gratuitos", "href": "/recursos/gratuitos/" },
-          { "label": "Cursos", "href": "/recursos/cursos/" }
-        ]
-      },
-      { "label": "Sobre nosotros", "href": "/sobre-nosotros/" }
+        "label": "Sobre nosotros",
+        "href": "/sobre-nosotros/"
+      }
     ]
   }
 }
