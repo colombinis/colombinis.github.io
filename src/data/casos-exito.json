@@ -2,7 +2,6 @@
   {
     "slug": "tema-wordpress-a-medida-gutenberg",
     "tipo": "proyecto-tipo",
-    "label": "PROYECTO TIPO",
     "title": "Estudio de arquitectura con tema WordPress a medida y bloques Gutenberg editables",
     "category": "WordPress · Gutenberg",
     "metric": "75% más rápido",
@@ -60,7 +59,6 @@
   {
     "slug": "tienda-woocommerce-suscripciones",
     "tipo": "proyecto-tipo",
-    "label": "PROYECTO TIPO",
     "title": "Marca de café de especialidad con club de suscripción en WooCommerce",
     "category": "WooCommerce · Suscripciones",
     "metric": "+60% ingresos recurrentes",
@@ -118,7 +116,6 @@
   {
     "slug": "wordpress-headless-nextjs",
     "tipo": "proyecto-tipo",
-    "label": "PROYECTO TIPO",
     "title": "Medio digital con WordPress headless y front-end en Next.js",
     "category": "Headless · Next.js",
     "metric": "LCP de 1.1s",
@@ -176,7 +173,6 @@
   {
     "slug": "rescate-rendimiento-seguridad-wordpress",
     "tipo": "proyecto-tipo",
-    "label": "PROYECTO TIPO",
     "title": "Rescate de un e-commerce WordPress lento y hackeado",
     "category": "Performance · Seguridad",
     "metric": "De 8s a 1.5s",
@@ -234,7 +230,6 @@
   {
     "slug": "plataforma-cursos-lms-membresias",
     "tipo": "proyecto-tipo",
-    "label": "PROYECTO TIPO",
     "title": "Academia online con LMS y membresías sobre WordPress",
     "category": "LMS · Membresías",
     "metric": "+300 alumnos activos",
