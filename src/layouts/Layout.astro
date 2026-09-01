@@ -92,6 +92,8 @@ const jsonLd = {
     <!-- End Google Tag Manager -->
   </head>
   <body>
+    <!-- Skip link para navegación por teclado (WCAG 2.1 AA) -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe
@@ -104,7 +106,7 @@ const jsonLd = {
     <!-- End Google Tag Manager (noscript) -->
 
     <Header />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer />
