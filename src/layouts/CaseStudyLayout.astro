@@ -35,7 +35,7 @@ interface Props {
 const {
   title,
   description,
-  heroLabel = 'PROYECTO TIPO',
+  
   heroSubtitle,
   problema,
   problemaExtra,
@@ -50,7 +50,6 @@ const {
 <Layout title={title} description={description}>
   <section class="hero">
     <div class="hero__container">
-      <p class="hero__label">{heroLabel}</p>
       <h1 class="hero__title">{title}</h1>
       <p class="hero__subtitle">{heroSubtitle}</p>
       <div class="hero__actions">
