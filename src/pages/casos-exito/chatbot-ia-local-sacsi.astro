@@ -1,0 +1,32 @@
+---
+import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+
+const title = 'Chatbot IA local para SACsi';
+const description = 'Caso de éxito: chatbot de inteligencia artificial que corre en el navegador del usuario, sin backend, sin costos de servidor y con respuestas automáticas.';
+---
+
+<CaseStudyLayout
+  title={title}
+  description={description}
+  heroSubtitle="SACsi recibe consultas frecuentes sobre servicios, precios y tiempos de implementación. La atención manual consume tiempo que podría destinarse a tareas de mayor valor."
+  problema="Las preguntas frecuentes sobre servicios, precios y alcances técnicos consumen tiempo de atención que podría destinarse a tareas de mayor valor. No siempre hay personal disponible para responder en el momento, y los potenciales clientes pueden desanimarse al no obtener respuesta inmediata."
+  problemaExtra="SACsi necesitaba atender consultas frecuentes las <strong>24 horas del día</strong> sin incrementar costos operativos. Cada consulta no atendida representaba un potencial cliente perdido, y las respuestas debían ser consistentes con la propuesta de valor del negocio."
+  vision="Quiero que cualquier persona que visite mi sitio pueda preguntar lo que necesite y obtener una respuesta clara al instante, aunque sea las 3 de la mañana. Y que eso me cueste absolutamente nada en servidor."
+  solutions={[
+    { icon: '🤖', title: 'IA que corre en el navegador', text: 'Implementamos un chatbot con un modelo de lenguaje pequeño (~0.5B parámetros) que se ejecuta completamente en el navegador del usuario usando Transformers.js y WebGPU. No hay backend propio: los pesos del modelo se descargan una sola vez y se cachean localmente.' },
+    { icon: '💰', title: 'Costo cero en infraestructura', text: 'Todo el procesamiento ocurre del lado del cliente. El sitio web no necesita servidor adicional para el chatbot: el modelo se carga desde CDN y corre en el dispositivo del usuario. Cero costos de hosting, cero servidores que mantener.' },
+    { icon: '📚', title: 'Conocimiento basado en datos reales', text: 'El chatbot se alimenta de un knowledge base con información real de SACsi: servicios, precios referenciales, tiempos estimados y FAQs. Las respuestas son consistentes y alineadas con la propuesta de valor del negocio.' },
+  ]}
+  stack={['Transformers.js', 'WebGPU / WASM', 'Qwen2.5-0.5B-Instruct', 'Custom Elements (Web Components)', 'Astro', 'JavaScript vanilla', 'Knowledge-based prompting']}
+  testimonial={{
+    quote: 'Esta tecnología de inteligencia artificial local está en desarrollo activo. Las respuestas son orientativas y pueden contener imprecisiones. Para información precisa, contactate con nosotros.',
+    author: 'SACsi',
+    role: 'Soluciones Informáticas',
+  }}
+  metrics={[
+    { value: '24/7', label: 'disponibilidad' },
+    { value: '$0', label: 'costo infraestructura' },
+    { value: '~0.5B', label: 'parámetros del modelo' },
+  ]}
+  disclaimer="Este chatbot utiliza tecnología de inteligencia artificial local en pleno desarrollo. Las respuestas son generadas por un modelo de lenguaje pequeño (~0.5B parámetros) que corre en el navegador. La información proporcionada es orientativa y puede contener errores. Para datos precisos sobre servicios, precios o tiempos, te recomendamos contactarnos por los canales oficiales."
+/>
