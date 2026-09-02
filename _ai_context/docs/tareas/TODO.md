@@ -8,9 +8,9 @@
 
 | Total | TODO | DOING | DONE | BLOCKED | % DONE |
 |-------|------|-------|------|---------|--------|
-| 10 | 4 | 0 | 4 | 2 | 40% |
+| 10 | 4 | 0 | 5 | 1 | 50% |
 
-## Pendientes (no-DONE): 6
+## Pendientes (no-DONE): 5
 
 | ID | Título | Estado | Carpeta | Archivo |
 |----|--------|--------|---------|---------|
@@ -23,11 +23,11 @@
 
 ## Por carpeta
 
-### FASE-6-Validacion-post-deploy (0/1 DONE)
+### FASE-6-Validacion-post-deploy (1/1 DONE)
 
 | ID | Título | Estado | Archivo |
 |----|--------|--------|---------|
-| DEP-01 | Validación post-deploy | BLOCKED | `_ai_context/docs/tareas/FASE-6-Validacion-post-deploy/DEP-01-post-deploy-validacion.md` |
+| DEP-01 | Validación post-deploy | DONE | FASE-6-Validacion-post-deploy | `_ai_context/docs/tareas/FASE-6-Validacion-post-deploy/DEP-01-post-deploy-validacion.md` |
 
 ### FEATURE-3-Tests-E2E-UserJourneys (0/4 DONE)
 
@@ -67,4 +67,4 @@
 ---
 
 *Última actualización: 2026-09-01*
-*Próxima revisión: Al completar DEP-01 (push a master)*
+*Próxima revisión: Al completar P0 (DEP-01) o iniciar P2 (MVP 2 marca personal)*
