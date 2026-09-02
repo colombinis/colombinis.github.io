@@ -21,7 +21,6 @@ Este repositorio (**público**) contiene **solo el sitio web desplegable**. La d
 | Build (Astro) | `npm run build` — outputs to `dist/` |
 | Preview build | `npm run preview` — serves `dist/` on port 8000 |
 | Serve static HTML | `python3 -m http.server 8000` (no build needed) |
-| Working branch | `v0_alternativo_rebranding` — never commit to `master` |
 | Commit style | Conventional commits: `feat:`, `fix:`, `refactor:`, `docs:`, `style:` |
 | Design source | `DESIGN.md` — single source of truth for all design decisions |
 
