@@ -12,8 +12,8 @@
 //   source?:     opcional, identificador de campaña para dataLayer (p.ej. "header", "contacto-page").
 //
 // Arquitectura:
-//   - Un solo paso: select servicio/categoría (requerido) + email (requerido) + brief (requerido).
-//   - Submit único "Enviar mensaje" → POST Formspree (config.contact.form_endpoint).
+//   - Un solo paso: nombre + select servicio/categoría + email + brief (requeridos).
+//   - Submit único "Enviar mensaje" → POST al backend configurado en site.json.
 //   - Debajo del submit: botón WhatsApp (con icono) + botón "Preferís email?" (estilo botón, scroll al email).
 //   - Redes sociales con iconos SVG de la misma familia que el icono de WhatsApp (no emojis).
 //   - Eventos GTM (dataLayer.push): form_submit (onsubmit), checkout_started (en click de enviar).
@@ -77,16 +77,28 @@ const sourceDefault = source ?? 'contacto-progresivo';
     </select>
   </div>
 
-  <!-- 2. Email (requerido) -->
+  <!-- 2. Nombre (requerido) -->
   <div class="form-group">
-    <label for="pf-email">Email <span aria-hidden="true">*</span></label>
-    <input type="email" id="pf-email" name="email" required maxlength="100" placeholder="tu@email.com">
+    <label for="pf-nombre">Nombre <span aria-hidden="true">*</span></label>
+    <input type="text" id="pf-nombre" name="nombre" required maxlength="100" autocomplete="name" placeholder="Tu nombre">
   </div>
 
-  <!-- 3. Cuéntanos brevemente (requerido) -->
+  <!-- 3. Email (requerido) -->
+  <div class="form-group">
+    <label for="pf-email">Email <span aria-hidden="true">*</span></label>
+    <input type="email" id="pf-email" name="email" required maxlength="254" autocomplete="email" placeholder="tu@email.com">
+  </div>
+
+  <!-- 4. Cuéntanos brevemente (requerido) -->
   <div class="form-group">
     <label for="pf-brief">Cuéntanos brevemente qué necesitás <span aria-hidden="true">*</span></label>
     <textarea id="pf-brief" name="message" rows="4" required maxlength="500" placeholder="Máximo 500 caracteres..."></textarea>
+  </div>
+
+  <!-- Honeypot anti-spam: debe permanecer vacío y no es visible para usuarios. -->
+  <div class="form-trap" aria-hidden="true">
+    <label for="pf-website">Sitio web</label>
+    <input type="text" id="pf-website" name="website" tabindex="-1" autocomplete="off">
   </div>
 
   <!-- Botón único de envío -->
@@ -158,6 +170,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
     border-color: var(--tertiary, #0066cc);
   }
   .form-group textarea { resize: vertical; }
+  .form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
   /* Botones */
   .btn {
@@ -256,6 +269,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
     if (!form) return;
 
     var categoria = form.querySelector('#pf-categoria');
+    var nombre = form.querySelector('#pf-nombre');
     var email = form.querySelector('#pf-email');
     var brief = form.querySelector('#pf-brief');
     var submitBtn = form.querySelector('#pf-submit');
@@ -267,7 +281,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
       return !!categoria.value;
     }
     function contactoValido() {
-      return email.value.trim().length > 0 && email.value.indexOf('@') > -1 &&
+      return nombre.value.trim().length > 0 && email.value.trim().length > 0 && email.value.indexOf('@') > -1 &&
              brief.value.trim().length > 0;
     }
     function updateSubmit() {
@@ -275,6 +289,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
     }
 
     if (categoria) categoria.addEventListener('change', updateSubmit);
+    if (nombre) nombre.addEventListener('input', updateSubmit);
     if (email) email.addEventListener('input', updateSubmit);
     if (brief) brief.addEventListener('input', updateSubmit);
 
