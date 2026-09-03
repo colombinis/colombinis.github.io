@@ -12,7 +12,7 @@
     },
     "email": "sacsi@sacsi.com.ar",
     "phone_display": "+54-341-519-7937",
-    "form_endpoint": "https://formspree.io/f/mljrdlka"
+    "form_endpoint": "https://sacsi-contacto.colombinis.workers.dev/api/contacto"
   },
   "social": {
     "instagram": "https://instagram.com/sacsi",
