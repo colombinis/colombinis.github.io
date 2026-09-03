@@ -40,6 +40,8 @@ La documentación de arquitectura, tareas, specs y el backoffice están en el re
 - **Repo privado:** `colombinis/sacsi-interno`
 - **Contenido:** `_ai_context/`, `src/pages/padmin/`, `src/lib/rentabilidad.*`, scripts, diseño
 
+Las nuevas Features y tareas se crean exclusivamente en `colombinis/sacsi-interno`, siguiendo el protocolo de trazabilidad negocio → Feature → tarea → Issue → GitHub Project 4.
+
 ## Design tokens
 
 Los colores, tipografía y espaciados están definidos en [DESIGN.md](DESIGN.md) como fuente única de verdad.

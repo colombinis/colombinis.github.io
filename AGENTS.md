@@ -6,6 +6,8 @@ Rebranding SACsi (soluciones informáticas, Rosario, Argentina). All user-facing
 
 Este repositorio (**público**) contiene **solo el sitio web desplegable**. La documentación interna, specs, backoffice y datos sensibles están en el repositorio privado `colombinis/sacsi-interno`.
 
+Las Features, tareas, Issues de planificación y estados del proyecto se gestionan en el repositorio privado. No crear ni reintroducir `_ai_context/` en este repositorio. Si un cambio del sitio necesita una especificación, la spec vive en el privado y aquí solo queda el código público necesario para el build.
+
 | Repositorio | Contenido | Acceso |
 |-------------|-----------|--------|
 | `colombinis/colombinis.github.io` (este) | Sitio Astro v7, `src/`, `public/`, `CNAME`, CI/CD | Público — GitHub Pages |
