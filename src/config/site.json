@@ -13,7 +13,7 @@
     "email": "sacsi@sacsi.com.ar",
     "phone_display": "+54-341-519-7937",
     "form_endpoint": "https://sacsi-contacto.colombinis.workers.dev/api/contacto",
-    "turnstile_site_key": "TURNSTILE_SITE_KEY_PLACEHOLDER"
+    "turnstile_site_key": "0x4AAAAAAEmlx5MeWdaszZEE"
   },
   "social": {
     "instagram": "https://instagram.com/sacsi",
