@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#F9F9FB" rx="16"/>
+  <rect x="100" y="40" width="200" height="140" fill="#1A1A2E" opacity="0.08" rx="12"/>
+  <rect x="140" y="70" width="120" height="12" fill="#0A7CFF" opacity="0.25" rx="4"/>
+  <rect x="140" y="100" width="80" height="10" fill="#1A1A2E" opacity="0.12" rx="3"/>
+  <circle cx="200" cy="200" r="28" fill="#0A7CFF" opacity="0.12"/>
+  <text x="200" y="270" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#444444" text-anchor="middle">Software</text>
+</svg>
