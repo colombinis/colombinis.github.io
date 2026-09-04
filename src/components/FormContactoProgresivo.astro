@@ -101,11 +101,23 @@ const sourceDefault = source ?? 'contacto-progresivo';
     <input type="text" id="pf-website" name="website" tabindex="-1" autocomplete="off">
   </div>
 
+  <!-- Turnstile widget script (una sola vez por página) -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+  <!-- Turnstile: protección anti-bot. -->
+  <div class="cf-turnstile" data-sitekey={config.contact.turnstile_site_key} data-theme="light" data-size="compact"></div>
+
   <!-- Botón único de envío -->
   <button type="submit" class="btn btn--primary" id="pf-submit">Enviar mensaje</button>
 
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>
+
+<!-- Thank-you state: reemplaza el form después de envío exitoso -->
+<div class="form-thankyou" style="display:none;">
+  <p class="form-thankyou__title">¡Mensaje enviado! ✅</p>
+  <p class="form-thankyou__text">Te respondemos en 24 horas hábiles.</p>
+</div>
 
   <!-- Alternativas: WhatsApp (icono) + Preferís email? -->
   <div class="form-alt">
@@ -277,6 +289,10 @@ const sourceDefault = source ?? 'contacto-progresivo';
     var statusEl = form.querySelector('.form-status');
     var source = form.getAttribute('data-source') || 'contacto-progresivo';
 
+    // Contenedores para thank-you state
+    var formAlt = document.querySelector('.form-alt');
+    var thankyou = document.querySelector('.form-thankyou');
+
     function categoriaValida() {
       return !!categoria.value;
     }
@@ -309,6 +325,15 @@ const sourceDefault = source ?? 'contacto-progresivo';
         statusEl.className = 'form-status form-status--error';
         return;
       }
+
+      // Validar Turnstile
+      var turnstileToken = form.querySelector('input[name="cf-turnstile-response"]');
+      if (!turnstileToken || !turnstileToken.value) {
+        statusEl.textContent = 'Completá la verificación de seguridad.';
+        statusEl.className = 'form-status form-status--error';
+        return;
+      }
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'checkout_started', source: source, categoria: categoria.value });
 
@@ -326,9 +351,14 @@ const sourceDefault = source ?? 'contacto-progresivo';
               source: source,
               categoria: categoria.value,
             });
-            statusEl.textContent = '¡Mensaje enviado! Te respondemos en 24 h.';
-            statusEl.className = 'form-status form-status--success';
-            form.reset();
+            // Thank-you state: ocultar form y botones alternativos
+            form.style.display = 'none';
+            if (formAlt && formAlt.classList.contains('form-alt')) {
+              formAlt.style.display = 'none';
+            }
+            thankyou = document.querySelector('.form-thankyou');
+            if (thankyou) thankyou.style.display = 'block';
+            submitBtn.disabled = true;
           } else {
             statusEl.textContent = 'Error al enviar. Por favor, intentá de nuevo.';
             statusEl.className = 'form-status form-status--error';
