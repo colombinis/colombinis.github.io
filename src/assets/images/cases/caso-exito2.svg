@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <rect width="400" height="300" fill="#F9F9FB" rx="16"/>
+  <rect x="40" y="40" width="320" height="100" fill="#1A1A2E" opacity="0.07" rx="10"/>
+  <text x="60" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#1A1A2E">Transformación</text>
+  <text x="60" y="115" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="12" fill="#444444">Digitalización en 90 días</text>
+  <circle cx="340" cy="80" r="28" fill="#0A7CFF" opacity="0.15"/>
+  <text x="200" y="260" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13" fill="#444444" text-anchor="middle">Caso de éxito</text>
+</svg>
