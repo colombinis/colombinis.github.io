@@ -54,10 +54,28 @@ function rateLimited(request) {
   return record.count > MAX_REQUESTS_PER_WINDOW;
 }
 
+async function verifyTurnstile(token, env) {
+  if (!token) return false;
+  const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: token }),
+  });
+  if (!resp.ok) return false;
+  const data = await resp.json();
+  return data.success === true;
+}
+
 async function sendEmail(request, env) {
   const form = await request.formData();
   const website = clean(form.get('website'), 100);
   if (website) return jsonResponse({ ok: true }, 200, request);
+
+  const turnstileToken = clean(form.get('cf-turnstile-response'), 1000);
+  if (!env.TURNSTILE_SECRET_KEY) return jsonResponse({ ok: false, message: 'Captcha no configurado.' }, 500, request);
+  if (!turnstileToken) return jsonResponse({ ok: false, message: 'Captcha requerido.' }, 400, request);
+  const valid = await verifyTurnstile(turnstileToken, env);
+  if (!valid) return jsonResponse({ ok: false, message: 'Verificación inválida.' }, 400, request);
 
   const nombre = clean(form.get('nombre'), 100);
   const email = clean(form.get('email'), 254);
