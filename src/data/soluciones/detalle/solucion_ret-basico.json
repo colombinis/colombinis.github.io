@@ -43,5 +43,7 @@
       "descripcion": "Resumen de lo realizado y ajustes solicitados por el cliente",
       "horas": 1
     }
-  ]
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": ""
 }

@@ -4,12 +4,34 @@
   "title": "Solucion",
   "description": "Un paquete de solución (servicio comercial). Incluye pricing, estimación de horas y flujo de ejecución detallado.",
   "type": "object",
-  "required": ["id", "nombre", "categorias", "precioMin", "precioMax", "horasMin", "horasMax", "costoFijo", "nota", "flujo"],
+  "required": [
+    "id",
+    "nombre",
+    "categorias",
+    "precioMin",
+    "precioMax",
+    "horasMin",
+    "horasMax",
+    "costoFijo",
+    "descripcion_publica",
+    "flujo"
+  ],
   "properties": {
     "id": {
       "type": "string",
       "description": "Identificador único de la solución. Usado en URLs: /soluciones/<id>/.",
-      "examples": ["landing", "sitio-pro", "ecommerce", "auto-basico", "auto-int", "soft-chico", "soft-grande", "hora-tec", "ret-basico", "ret-pro"]
+      "examples": [
+        "landing",
+        "sitio-pro",
+        "ecommerce",
+        "auto-basico",
+        "auto-int",
+        "soft-chico",
+        "soft-grande",
+        "hora-tec",
+        "ret-basico",
+        "ret-pro"
+      ]
     },
     "nombre": {
       "type": "string",
@@ -18,9 +40,14 @@
     "categorias": {
       "type": "array",
       "description": "Lista de refs 'servicio/categoria' a las que aplica esta solución.",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "minItems": 1,
-      "examples": ["presencia-online/sitio-web-institucional", "automatizacion/facturacion-cobranzas"]
+      "examples": [
+        "presencia-online/sitio-web-institucional",
+        "automatizacion/facturacion-cobranzas"
+      ]
     },
     "precioMin": {
       "type": "number",
@@ -47,26 +74,51 @@
       "description": "Costo fijo asociado (ARS k). Default: 0.",
       "default": 0
     },
-    "nota": {
-      "type": "string",
-      "description": "Nota interna sobre fijación de precios o márgenes."
-    },
     "flujo": {
       "type": "array",
       "description": "Pasos secuenciales del flujo de la solución.",
       "items": {
         "type": "object",
-        "required": ["orden", "paso", "entradas", "salidas", "descripcion", "horas"],
+        "required": [
+          "orden",
+          "paso",
+          "entradas",
+          "salidas",
+          "descripcion",
+          "horas"
+        ],
         "properties": {
-          "orden": { "type": "integer", "minimum": 1 },
-          "paso": { "type": "string" },
-          "entradas": { "type": "string" },
-          "salidas": { "type": "string" },
-          "descripcion": { "type": "string" },
-          "horas": { "type": "number", "minimum": 0 }
+          "orden": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "paso": {
+            "type": "string"
+          },
+          "entradas": {
+            "type": "string"
+          },
+          "salidas": {
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string"
+          },
+          "horas": {
+            "type": "number",
+            "minimum": 0
+          }
         },
         "additionalProperties": false
       }
+    },
+    "descripcion_publica": {
+      "type": "string",
+      "description": "Copy público orientado al beneficio del cliente."
+    },
+    "nota_interna_pricing": {
+      "type": "string",
+      "description": "Nota interna sobre fijación de precios o márgenes."
     }
   },
   "additionalProperties": false
