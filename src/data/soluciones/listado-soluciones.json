@@ -1,123 +1,161 @@
 {
   "meta": {
-    "fuente": "PRI-02 precios-servicios + PRI-03 breakeven-costos (tarifa real USD 20/h ≈ ARS 22k/h)",
-    "unidades_precio": "ARS k (miles)",
-    "unidades_horas": "horas",
-    "unidades_costo_fijo": "ARS (pesos)",
-    "costo_fijo_default": 0,
-    "objetivo_margen_pct": 14,
+    "fuente": "Catálogo SACsi 2026",
     "actualizado": "2026-08-07"
   },
   "soluciones": [
     {
-      "id": "landing",
       "nombre": "Landing page",
-      "categorias": ["sitio-web-institucional", "contenido-seo-basico"],
+      "categorias": [
+        "sitio-web-institucional",
+        "contenido-seo-basico"
+      ],
       "precioMin": 500,
       "precioMax": 700,
       "horasMin": 15,
       "horasMax": 20,
       "costoFijo": 0,
-      "nota": "Ajustado en PRI-03 de $250-400k a $500-700k para cubrir 15-20h @22k/h con margen 14-52%"
+      "descripcion_publica": "Página de aterrizaje optimizada para convertir visitas en consultas. Diseño móvil-first, carga rápida y copy orientado a tu oferta.",
+      "nota_interna_pricing": "Ajustado en PRI-03 de $250-400k a $500-700k para cubrir 15-20h @22k/h con margen 14-52%",
+      "id": "landing"
     },
     {
-      "id": "sitio-pro",
       "nombre": "Sitio pro",
-      "categorias": ["sitio-web-institucional", "contenido-seo-basico"],
+      "categorias": [
+        "sitio-web-institucional",
+        "contenido-seo-basico"
+      ],
       "precioMin": 600,
       "precioMax": 1000,
       "horasMin": 25,
       "horasMax": 35,
       "costoFijo": 0,
-      "nota": "Margen +9% a +30% con tarifa real"
+      "descripcion_publica": "Sitio institucional completo con identidad visual propia, secciones a medida y optimización SEO base para posicionarte en buscadores.",
+      "nota_interna_pricing": "Margen +9% a +30% con tarifa real",
+      "id": "sitio-pro"
     },
     {
-      "id": "ecommerce",
       "nombre": "E-commerce",
-      "categorias": ["tienda-online", "stock-logistica"],
+      "categorias": [
+        "tienda-online",
+        "stock-logistica"
+      ],
       "precioMin": 1200,
       "precioMax": 2000,
       "horasMin": 50,
       "horasMax": 80,
       "costoFijo": 150,
-      "nota": "Incluye pasarela + gestión envíos + sincronización stock"
+      "descripcion_publica": "Tienda online funcional con pasarela de pagos, gestión de envíos y sincronización de stock. Lista para vender desde el día uno.",
+      "nota_interna_pricing": "Incluye pasarela + gestión envíos + sincronización stock",
+      "id": "ecommerce"
     },
     {
-      "id": "auto-basico",
       "nombre": "Automatización básico",
-      "categorias": ["facturacion-cobranzas", "reportes-dashboards"],
+      "categorias": [
+        "facturacion-cobranzas",
+        "reportes-dashboards"
+      ],
       "precioMin": 360,
       "precioMax": 580,
       "horasMin": 16,
       "horasMax": 26,
       "costoFijo": 0,
-      "nota": "Flujo simple: 1-2 herramientas, output en Google Sheets/Docs"
+      "descripcion_publica": "Automatización simple conectando 1-2 herramientas. Ahorra tiempo tareas repetitivas con salidas listas en Google Sheets o Docs.",
+      "nota_interna_pricing": "Flujo simple: 1-2 herramientas, output en Google Sheets/Docs",
+      "id": "auto-basico"
     },
     {
-      "id": "auto-int",
       "nombre": "Automatización intermedio",
-      "categorias": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards", "integraciones"],
+      "categorias": [
+        "facturacion-cobranzas",
+        "stock-logistica",
+        "reportes-dashboards",
+        "integraciones"
+      ],
       "precioMin": 580,
       "precioMax": 920,
       "horasMin": 26,
       "horasMax": 42,
       "costoFijo": 200,
-      "nota": "Flujo de 3-4 herramientas con sync bidireccional + integración ERP"
+      "descripcion_publica": "Automatización intermedia con sync bidireccional entre sistemas. Integra tu ERP, facturación o logística en un flujo confiable.",
+      "nota_interna_pricing": "Flujo de 3-4 herramientas con sync bidireccional + integración ERP",
+      "id": "auto-int"
     },
     {
-      "id": "soft-chico",
       "nombre": "Software chico",
-      "categorias": ["sistemas-gestion"],
+      "categorias": [
+        "sistemas-gestion"
+      ],
       "precioMin": 280,
       "precioMax": 420,
       "horasMin": 12,
       "horasMax": 19,
       "costoFijo": 0,
-      "nota": "Admin simple con alta/baja + 1 reporte, sin autenticando ni sync con terceros"
+      "descripcion_publica": "Software a medida para gestión interna: altas, bajas y reportes. Rápido de implementar, sin integraciones complejas.",
+      "nota_interna_pricing": "Admin simple con alta/baja + 1 reporte, sin autenticando ni sync con terceros",
+      "id": "soft-chico"
     },
     {
-      "id": "soft-grande",
       "nombre": "Software grande",
-      "categorias": ["sistemas-gestion", "integraciones", "apps-portales"],
+      "categorias": [
+        "sistemas-gestion",
+        "integraciones",
+        "apps-portales"
+      ],
       "precioMin": 1200,
       "precioMax": 2200,
       "horasMin": 50,
       "horasMax": 100,
       "costoFijo": 300,
-      "nota": "Sistema completo con auth, sync, API propia, y 3+ roles"
+      "descripcion_publica": "Sistema completo con autenticación, API propia, sincronización y múltiples roles. Escalable para operaciones complejas.",
+      "nota_interna_pricing": "Sistema completo con auth, sync, API propia, y 3+ roles",
+      "id": "soft-grande"
     },
     {
-      "id": "hora-tec",
       "nombre": "Hora técnica",
-      "categorias": ["integraciones", "sistemas-gestion"],
+      "categorias": [
+        "integraciones",
+        "sistemas-gestion"
+      ],
       "precioMin": 18,
       "precioMax": 18,
       "horasMin": 1,
       "horasMax": 1,
       "costoFijo": 0,
-      "nota": "1h técnica para consultas puntuales, debug o asistencia"
+      "descripcion_publica": "Hora de consultoría técnica para resolver dudas puntuales, debug o asistencia específica sin contratar un proyecto completo.",
+      "nota_interna_pricing": "1h técnica para consultas puntuales, debug o asistencia",
+      "id": "hora-tec"
     },
     {
-      "id": "ret-basico",
       "nombre": "Retainer básico",
-      "categorias": ["sitio-web-institucional", "reportes-dashboards"],
+      "categorias": [
+        "sitio-web-institucional",
+        "reportes-dashboards"
+      ],
       "precioMin": 600,
       "precioMax": 800,
       "horasMin": 27,
       "horasMax": 36,
       "costoFijo": 0,
-      "nota": "8h/mes dedicadas a automatización + reportes + casos críticos"
+      "descripcion_publica": "Mantenimiento preventivo mensual: actualizaciones, backups, monitoreo y correcciones menores para que tu sitio no se detenga.",
+      "nota_interna_pricing": "8h/mes dedicadas a automatización + reportes + casos críticos",
+      "id": "ret-basico"
     },
     {
-      "id": "ret-pro",
       "nombre": "Retainer pro",
-      "categorias": ["sitio-web-institucional", "sistemas-gestion", "integraciones"],
+      "categorias": [
+        "sitio-web-institucional",
+        "sistemas-gestion",
+        "integraciones"
+      ],
       "precioMin": 1300,
       "precioMax": 1900,
       "horasMin": 59,
       "horasMax": 86,
       "costoFijo": 0,
-      "nota": "20h/mes dedicadas a mantenimiento y evolución continua + prioridad absoluta"
+      "descripcion_publica": "Evolución continua con prioridad absoluta: mantenimiento + mejoras + soporte reactivo. Tu equipo técnico dedicado en la práctica.",
+      "nota_interna_pricing": "20h/mes dedicadas a mantenimiento y evolución continua + prioridad absoluta",
+      "id": "ret-pro"
     }
   ]
 }

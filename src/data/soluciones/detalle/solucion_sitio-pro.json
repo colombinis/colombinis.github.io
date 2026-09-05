@@ -99,5 +99,7 @@
       "descripcion": "Entrega de accesos y explicación de cómo editar contenido básico",
       "horas": 1
     }
-  ]
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": ""
 }

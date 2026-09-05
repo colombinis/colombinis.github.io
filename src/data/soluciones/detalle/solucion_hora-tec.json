@@ -19,5 +19,7 @@
       "descripcion": "Hora de consultoría o desarrollo puntual: se resuelve el tema y se entrega el resultado o recomendación",
       "horas": 1
     }
-  ]
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": ""
 }

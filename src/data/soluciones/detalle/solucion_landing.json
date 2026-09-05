@@ -107,5 +107,7 @@
       "descripcion": "Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads",
       "horas": 1
     }
-  ]
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": ""
 }

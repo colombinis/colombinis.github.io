@@ -99,5 +99,7 @@
       "descripcion": "Cómo cargar productos, ver pedidos y gestionar stock",
       "horas": 2
     }
-  ]
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": ""
 }
