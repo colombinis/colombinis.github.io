@@ -14,7 +14,15 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
   <section class="hero">
     <div class="hero__container">
       <div class="not-found__badge">
-        <Icon name="alert-triangle" size={24} />
+        <img
+          src="/src/assets/images/shared/icon-check.svg"
+          srcset="/src/assets/images/shared/icon-check.svg 1x, /src/assets/images/shared/icon-check@2x.svg 2x"
+          sizes="24px"
+          width="24"
+          height="24"
+          alt="Icono de alerta"
+          loading="lazy"
+        />
       </div>
       <p class="hero__label">404</p>
       <h1 class="hero__title">Página no encontrada</h1>
