@@ -11,9 +11,9 @@ Las Features, tareas, Issues de planificación y estados del proyecto se gestion
 | Repositorio | Contenido | Acceso |
 |-------------|-----------|--------|
 | `colombinis/colombinis.github.io` (este) | Sitio Astro v7, `src/`, `public/`, `CNAME`, CI/CD | Público — GitHub Pages |
-| `colombinis/sacsi-interno` | `_ai_context/`, `src/pages/padmin/`, `src/lib/rentabilidad.*`, specs, tareas, scripts | Privado — solo owner |
+| `colombinis/sacsi-interno` | `_ai_context/`, `workers/`, `tests/`, `docs/verificacion-*`, specs, tareas, scripts, PRD | Privado — solo owner |
 
-**Regla:** Si un archivo no es necesario para el build de Astro, vive en el privado. Si Astro lo importa o lo consume en `src/data/`, vive aquí.
+**Regla:** Este repo público solo contiene código necesario para el build de Astro. Todo lo sensible (backend, secrets, tests internos, documentación de negocio) vive en el repo privado.
 
 ## Quick reference
 
