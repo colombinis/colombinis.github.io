@@ -1,9 +1,14 @@
 ---
 // Componente reutilizable: sección "Resultados que hablan" (social proof)
-// Métricas + testimonios generales (homepage). Se renderiza SSG estático.
-import { getTestimoniosGenerales } from '../lib/data-utils';
+// Métricas + testimonios generales o por servicio. Se renderiza SSG estático.
+import { getTestimoniosGenerales, getTestimoniosByServicio } from '../lib/data-utils';
 
-const testimoniosData = getTestimoniosGenerales();
+interface Props {
+  servicioId?: string;
+}
+
+const { servicioId } = Astro.props;
+const testimoniosData = servicioId ? getTestimoniosByServicio(servicioId) : getTestimoniosGenerales();
 ---
 
 <section id="social-proof" class="section">
