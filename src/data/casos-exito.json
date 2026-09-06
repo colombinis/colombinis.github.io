@@ -71,7 +71,11 @@
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
     },
-    "solucion_relacionada": "sitio-pro"
+    "solucion_relacionada": "sitio-pro",
+    "cliente_nombre": "Estudio de arquitectura",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "tienda-woocommerce-suscripciones",
@@ -145,7 +149,11 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "solucion_relacionada": "ecommerce"
+    "solucion_relacionada": "ecommerce",
+    "cliente_nombre": "Tienda de suscripciones",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "wordpress-headless-nextjs",
@@ -219,7 +227,11 @@
       "categoria": "sitio-web-institucional",
       "etiqueta": "Presencia Online > Sitio web institucional"
     },
-    "solucion_relacionada": "sitio-pro"
+    "solucion_relacionada": "sitio-pro",
+    "cliente_nombre": "Medio de noticias digital",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "rescate-rendimiento-seguridad-wordpress",
@@ -293,7 +305,11 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "solucion_relacionada": "ecommerce"
+    "solucion_relacionada": "ecommerce",
+    "cliente_nombre": "E-commerce WordPress",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "plataforma-cursos-lms-membresias",
@@ -367,7 +383,11 @@
       "categoria": "apps-portales",
       "etiqueta": "Software a Medida > Apps y portales"
     },
-    "solucion_relacionada": "soft-grande"
+    "solucion_relacionada": "soft-grande",
+    "cliente_nombre": "Academia online",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "tienda-ropa-usada",
@@ -421,7 +441,11 @@
       "categoria": "facturacion-cobranzas",
       "etiqueta": "Automatización de Procesos > Facturación y cobranzas"
     },
-    "solucion_relacionada": "ecommerce"
+    "solucion_relacionada": "ecommerce",
+    "cliente_nombre": "Tienda de ropa usada",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "consultorio-psicologia",
@@ -475,7 +499,11 @@
       "categoria": "sistemas-gestion",
       "etiqueta": "Software a Medida > Sistemas de gestión"
     },
-    "solucion_relacionada": "soft-chico"
+    "solucion_relacionada": "soft-chico",
+    "cliente_nombre": "Consultorio de psicología",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "ferreteria-gas-plomeria",
@@ -529,7 +557,11 @@
       "categoria": "tienda-online",
       "etiqueta": "Presencia Online > Tienda online"
     },
-    "solucion_relacionada": "ecommerce"
+    "solucion_relacionada": "ecommerce",
+    "cliente_nombre": "Ferretería y gas/plomería",
+    "cliente_logo": "",
+    "cliente_url": "",
+    "cliente_anonimo": false
   },
   {
     "slug": "chatbot-ia-local-sacsi",
@@ -609,6 +641,10 @@
       "etiqueta": "Software a Medida > Apps y portales"
     },
     "solucion_relacionada": "soft-chico",
-    "disclaimer": "Este chatbot utiliza tecnología de inteligencia artificial local en pleno desarrollo. Las respuestas son generadas por un modelo de lenguaje pequeño (~0.5B parámetros) que corre en el navegador. La información proporcionada es orientativa y puede contener errores. Para datos precisos sobre servicios, precios o tiempos, te recomendamos contactarnos por los canales oficiales."
+    "disclaimer": "Este chatbot utiliza tecnología de inteligencia artificial local en pleno desarrollo. Las respuestas son generadas por un modelo de lenguaje pequeño (~0.5B parámetros) que corre en el navegador. La información proporcionada es orientativa y puede contener errores. Para datos precisos sobre servicios, precios o tiempos, te recomendamos contactarnos por los canales oficiales.",
+    "cliente_nombre": "SACsi",
+    "cliente_logo": "",
+    "cliente_url": "https://sacsi.com.ar",
+    "cliente_anonimo": false
   }
 ]

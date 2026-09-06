@@ -31,6 +31,8 @@ interface Props {
   testimonial: Testimonial;
   metrics: Metric[];
   disclaimer?: string;
+  cliente?: string;
+  clienteUrl?: string;
 }
 
 const {
@@ -46,6 +48,8 @@ const {
   testimonial,
   metrics,
   disclaimer,
+  cliente,
+  clienteUrl,
 } = Astro.props;
 ---
 
@@ -57,6 +61,11 @@ const {
       <div class="hero__actions">
         <a class="hero__cta" href="/contacto/">¿Tenés preguntas?. Consultanos ahora !!!</a>
       </div>
+      {cliente && (
+        <p class="hero__client">
+          {clienteUrl ? <a href={clienteUrl} target="_blank" rel="noopener noreferrer">{cliente}</a> : cliente}
+        </p>
+      )}
     </div>
   </section>
 
