@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title>Reel / Short — Plantilla SACsi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #1A1A2E; color: #fff; }
+  .frame { width: 1080px; height: 1920px; position: relative; overflow: hidden; }
+  .bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .gradient { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(26,26,46,0.95) 30%, rgba(26,26,46,0.2) 60%, rgba(26,26,46,0.0) 100%); }
+  .content { position: absolute; left: 64px; right: 64px; bottom: 120px; }
+  .step { display: inline-flex; align-items: center; gap: 12px; color: #0A7CFF; font-weight: 700; font-size: 22px; margin-bottom: 16px; }
+  .step-num { width: 44px; height: 44px; border-radius: 50%; background: #0A7CFF; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+  h2 { font-size: 72px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
+  p { font-size: 26px; line-height: 1.4; color: #E8E8E8; margin-bottom: 32px; }
+  .cta { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; text-decoration: none; padding: 18px 28px; border-radius: 8px; font-weight: 600; font-size: 20px; }
+  .logo { position: absolute; top: 40px; left: 64px; }
+  .logo img { height: 40px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <!-- CAMBIAR: imagen de fondo -->
+    <div class="bg" style="background-image: url('../assets/sacsi-transversales-03-iconografia-4-pasos.webp');"></div>
+    <div class="gradient"></div>
+    <div class="logo"><img src="../logo.svg" alt="SACsi"></div>
+    <div class="content">
+      <div class="step"><span class="step-num">1</span> Diagnóstico</div>
+      <!-- CAMBIAR: título y copy -->
+      <h2>Automatizá tu negocio en 4 pasos</h2>
+      <p>Sin fricción, sin código, con resultados medibles desde la primera semana.</p>
+      <a class="cta" href="https://wa.me/5493415197937">Quiero empezar</a>
+    </div>
+  </div>
+</body>
+</html>

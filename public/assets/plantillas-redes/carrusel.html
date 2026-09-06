@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title>Carrusel — Plantilla SACsi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #FAFAFA; color: #1A1A2E; }
+  .slide { width: 1080px; height: 1080px; position: relative; overflow: hidden; display: none; }
+  .slide.active { display: block; }
+  .bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,46,0.25) 0%, rgba(26,26,46,0.85) 100%); }
+  .content { position: absolute; left: 64px; right: 64px; bottom: 80px; color: #fff; }
+  .tag { display: inline-block; background: #0A7CFF; color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 100px; margin-bottom: 16px; }
+  h1 { font-size: 64px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+  p { font-size: 24px; line-height: 1.4; color: #E8E8E8; }
+  .logo { position: absolute; top: 40px; right: 40px; }
+  .logo img { height: 48px; }
+  .cta { margin-top: 24px; }
+  .cta a { display: inline-block; background: #25D366; color: #fff; text-decoration: none; padding: 16px 28px; border-radius: 8px; font-weight: 600; font-size: 18px; }
+  .nav { position: absolute; bottom: 24px; right: 64px; display: flex; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.35); }
+  .dot.active { background: #fff; }
+</style>
+</head>
+<body>
+  <div class="slide active">
+    <!-- CAMBIAR: imagen de fondo -->
+    <div class="bg" style="background-image: url('../assets/sacsi-servicios-12-consultoria-ia.webp');"></div>
+    <div class="overlay"></div>
+    <div class="logo"><img src="../logo.svg" alt="SACsi"></div>
+    <div class="content">
+      <span class="tag">Servicio</span>
+      <!-- CAMBIAR: título y copy -->
+      <h1>Consultoría IA para PyMEs</h1>
+      <p>Automatizá tareas y reducí costos con inteligencia artificial aplicada a tu negocio.</p>
+      <div class="cta"><a href="https://wa.me/5493415197937">Consultar ahora</a></div>
+    </div>
+    <div class="nav"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title=Caso de éxito — Plantilla SACsi">
+<title>Caso de éxito — Plantilla SACsi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #FAFAFA; color: #1A1A2E; }
+  .frame { width: 1080px; height: 1350px; position: relative; overflow: hidden; }
+  .cover { position: relative; height: 520px; }
+  .cover img { width: 100%; height: 100%; object-fit: cover; }
+  .overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,26,46,0.0) 0%, rgba(26,26,46,0.85) 100%); }
+  .cover-content { position: absolute; left: 64px; right: 64px; bottom: 32px; color: #fff; }
+  .tag { display: inline-block; background: #0A7CFF; color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; border-radius: 100px; margin-bottom: 12px; }
+  h2 { font-size: 48px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+  .body { padding: 40px 64px; }
+  .kpi { display: flex; gap: 24px; margin-bottom: 24px; }
+  .kpi-box { flex: 1; background: #FFFFFF; border: 1.5px solid #E0E0E0; border-radius: 16px; padding: 20px; text-align: center; }
+  .kpi-box strong { display: block; font-size: 36px; font-weight: 700; color: #0A7CFF; }
+  .kpi-box span { font-size: 16px; color: #444; }
+  p { font-size: 20px; line-height: 1.5; color: #444; margin-bottom: 24px; }
+  .cta { display: inline-block; background: #25D366; color: #fff; text-decoration: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 18px; }
+  .logo { position: absolute; top: 28px; right: 40px; }
+  .logo img { height: 44px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="cover">
+      <!-- CAMBIAR: imagen del caso -->
+      <img src="../assets/sacsi-casos-30-ferreteria-gas-plomeria.webp" alt="Caso de éxito">
+      <div class="overlay"></div>
+      <div class="cover-content">
+        <span class="tag">Caso de éxito</span>
+        <!-- CAMBIAR: título -->
+        <h2>Ferretería y gas/plomería: +30% consultas en 45 días</h2>
+      </div>
+      <div class="logo"><img src="../logo.svg" alt="SACsi"></div>
+    </div>
+    <div class="body">
+      <!-- CAMBIAR: texto y KPIs -->
+      <div class="kpi">
+        <div class="kpi-box"><strong>+30%</strong><span>Consultas web</span></div>
+        <div class="kpi-box"><strong>2.4x</strong><span>ROI inversión</span></div>
+        <div class="kpi-box"><strong>45 días</strong><span>Tiempo de deploy</span></div>
+      </div>
+      <p>Implementamos sitio + SEO local + formulario inteligente. Resultado: consultas calificadas por WhatsApp y menor fricción de compra.</p>
+      <a class="cta" href="https://wa.me/5493415197937">Quiero un caso así</a>
+    </div>
+  </div>
+</body>
+</html>

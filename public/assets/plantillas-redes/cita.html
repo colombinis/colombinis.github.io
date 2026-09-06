@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title>Cita — Plantilla SACsi</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #1A1A2E; color: #fff; }
+  .frame { width: 1080px; height: 1080px; padding: 80px 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .top img { height: 44px; }
+  .quote { font-size: 52px; font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; }
+  .accent { color: #0A7CFF; }
+  .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+  .author { font-size: 20px; color: #E8E8E8; }
+  .author strong { color: #fff; display: block; font-size: 22px; }
+  .logo-personal { height: 40px; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="top">
+      <img src="../logo.svg" alt="SACsi">
+      <span style="color:#0A7CFF;font-weight:700;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;">Cita</span>
+    </div>
+    <div>
+      <!-- CAMBIAR: cita -->
+      <div class="quote">“La tecnología no reemplaza a las personas, <span class="accent">potencia</span> lo que ya saben hacer.”</div>
+    </div>
+    <div class="bottom">
+      <div class="author">
+        <strong>Sebastian Colombini</strong>
+        Fundador · SACsi
+      </div>
+      <!-- CAMBIAR: logo personal si querés usar la ruta Sebastián -->
+      <img class="logo-personal" src="../logo-autor.svg" alt="Sebastian Colombini">
+    </div>
+  </div>
+</body>
+</html>
