@@ -119,6 +119,14 @@
     "nota_interna_pricing": {
       "type": "string",
       "description": "Nota interna sobre fijación de precios o márgenes."
+    },
+    "recibis": {
+      "type": "string",
+      "description": "Lista de entregables en lenguaje cliente para la sección pública 'Recibís'."
+    },
+    "necesitamos": {
+      "type": "string",
+      "description": "Lista de requerimientos en lenguaje cliente para la sección pública 'Qué necesitamos de vos'."
     }
   },
   "additionalProperties": false

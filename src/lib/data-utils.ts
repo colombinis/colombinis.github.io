@@ -72,6 +72,8 @@ interface SolucionDetalle {
   horasMin: number;
   horasMax: number;
   costoFijo: number;
+  recibis?: string;
+  necesitamos?: string;
   flujo: PasoFlujo[];
 }
 

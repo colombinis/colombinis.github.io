@@ -205,7 +205,7 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
               {flujo.map((paso) => (
                 <li class="incluye__item">
                   <span class="incluye__num">{paso.orden}</span>
-                  <span>{paso.salidas}</span>
+                  <span>{detalle?.recibis || paso.salidas}</span>
                 </li>
               ))}
             </ul>
@@ -216,7 +216,7 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
               {flujo.map((paso) => (
                 <li class="incluye__item">
                   <span class="incluye__num">{paso.orden}</span>
-                  <span>{paso.entradas}</span>
+                  <span>{detalle?.necesitamos || paso.entradas}</span>
                 </li>
               ))}
             </ul>
