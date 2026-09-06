@@ -8,6 +8,7 @@ interface Metric {
 
 interface SolutionCard {
   icon: string;
+  imagen?: string;
   title: string;
   text: string;
 }
@@ -33,6 +34,7 @@ interface Props {
   disclaimer?: string;
   cliente?: string;
   clienteUrl?: string;
+  imagen?: string;
 }
 
 const {
@@ -50,6 +52,7 @@ const {
   disclaimer,
   cliente,
   clienteUrl,
+  imagen,
 } = Astro.props;
 ---
 
@@ -86,13 +89,23 @@ const {
     </div>
   </section>
 
+  {imagen && (
+    <section class="section">
+      <div class="container">
+        <img src={imagen} alt={title} loading="lazy" style="width:100%;border-radius:var(--rounded-md);" />
+      </div>
+    </section>
+  )}
+
   <section class="section section--alt">
     <div class="container">
       <h2 class="section__title">La solución</h2>
       <div class="cards-grid">
         {solutions.map((s) => (
           <article class="service-card">
-            <div class="service-card__icon">{s.icon}</div>
+            <div class="service-card__icon">
+              {s.imagen ? <img src={s.imagen} alt={s.title} loading="lazy" /> : <span aria-hidden="true">{s.icon}</span>}
+            </div>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
           </article>

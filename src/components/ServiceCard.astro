@@ -1,11 +1,11 @@
 ---
-const { title, icon, href, claim, label } = Astro.props;
+const { title, icon, href, claim, label, imagen } = Astro.props;
 ---
 
 <article class="service-card">
   {label ? <span class="service-card__type">{label}</span> : ''}
   <div class="service-card__icon">
-    {icon ? <img src={icon} alt={title} style="height:48px;width:auto;" /> : ''}
+    {imagen ? <img src={imagen} alt={title} loading="lazy" /> : icon ? <span aria-hidden="true">{icon}</span> : ''}
   </div>
   <h3>
     <a href={href} style="color:inherit;text-decoration:none;">{title}</a>

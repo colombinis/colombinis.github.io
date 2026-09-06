@@ -18,6 +18,12 @@ const servicios = getServicios();
       grid-template-columns: repeat(3, 1fr);
     }
   }
+  .service-card__icon img {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
 </style>
 
 <section id="soluciones" class="section">
@@ -28,6 +34,8 @@ const servicios = getServicios();
         <ServiceCard
           title={service.title}
           href={service.href}
+          imagen={service.imagen}
+          icon={service.icon}
         >
           {service.short}
           <span slot="claim">{service.claim}</span>

@@ -18,7 +18,8 @@
       "descripcion_publica": "Página de aterrizaje optimizada para convertir visitas en consultas. Diseño móvil-first, carga rápida y copy orientado a tu oferta.",
       "nota_interna_pricing": "Ajustado en PRI-03 de $250-400k a $500-700k para cubrir 15-20h @22k/h con margen 14-52%",
       "id": "landing",
-      "servicio_id": "presencia-online"
+      "servicio_id": "presencia-online",
+      "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp"
     },
     {
       "nombre": "Sitio pro",
@@ -34,7 +35,8 @@
       "descripcion_publica": "Sitio institucional completo con identidad visual propia, secciones a medida y optimización SEO base para posicionarte en buscadores.",
       "nota_interna_pricing": "Margen +9% a +30% con tarifa real",
       "id": "sitio-pro",
-      "servicio_id": "presencia-online"
+      "servicio_id": "presencia-online",
+      "imagen": "/assets/sacsi-soluciones-26-sitio-pro.webp"
     },
     {
       "nombre": "E-commerce",
@@ -50,7 +52,8 @@
       "descripcion_publica": "Tienda online funcional con pasarela de pagos, gestión de envíos y sincronización de stock. Lista para vender desde el día uno.",
       "nota_interna_pricing": "Incluye pasarela + gestión envíos + sincronización stock",
       "id": "ecommerce",
-      "servicio_id": "presencia-online"
+      "servicio_id": "presencia-online",
+      "imagen": "/assets/sacsi-soluciones-18-venta-simple.webp"
     },
     {
       "nombre": "Automatización básico",
@@ -66,7 +69,8 @@
       "descripcion_publica": "Automatización simple conectando 1-2 herramientas. Ahorra tiempo tareas repetitivas con salidas listas en Google Sheets o Docs.",
       "nota_interna_pricing": "Flujo simple: 1-2 herramientas, output en Google Sheets/Docs",
       "id": "auto-basico",
-      "servicio_id": "automatizacion"
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
     },
     {
       "nombre": "Automatización intermedio",
@@ -84,7 +88,8 @@
       "descripcion_publica": "Automatización intermedia con sync bidireccional entre sistemas. Integra tu ERP, facturación o logística en un flujo confiable.",
       "nota_interna_pricing": "Flujo de 3-4 herramientas con sync bidireccional + integración ERP",
       "id": "auto-int",
-      "servicio_id": "automatizacion"
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
     },
     {
       "nombre": "Software chico",
@@ -99,7 +104,8 @@
       "descripcion_publica": "Software a medida para gestión interna: altas, bajas y reportes. Rápido de implementar, sin integraciones complejas.",
       "nota_interna_pricing": "Admin simple con alta/baja + 1 reporte, sin autenticando ni sync con terceros",
       "id": "soft-chico",
-      "servicio_id": "software-a-medida"
+      "servicio_id": "software-a-medida",
+      "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
     },
     {
       "nombre": "Software grande",
@@ -116,7 +122,8 @@
       "descripcion_publica": "Sistema completo con autenticación, API propia, sincronización y múltiples roles. Escalable para operaciones complejas.",
       "nota_interna_pricing": "Sistema completo con auth, sync, API propia, y 3+ roles",
       "id": "soft-grande",
-      "servicio_id": "software-a-medida"
+      "servicio_id": "software-a-medida",
+      "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
     },
     {
       "nombre": "Hora técnica",
@@ -132,7 +139,8 @@
       "descripcion_publica": "Hora de consultoría técnica para resolver dudas puntuales, debug o asistencia específica sin contratar un proyecto completo.",
       "nota_interna_pricing": "1h técnica para consultas puntuales, debug o asistencia",
       "id": "hora-tec",
-      "servicio_id": "software-a-medida"
+      "servicio_id": "software-a-medida",
+      "imagen": "/assets/sacsi-servicios-11-soporte-mantenimiento.webp"
     },
     {
       "nombre": "Retainer básico",
@@ -148,7 +156,8 @@
       "descripcion_publica": "Mantenimiento preventivo mensual: actualizaciones, backups, monitoreo y correcciones menores para que tu sitio no se detenga.",
       "nota_interna_pricing": "8h/mes dedicadas a automatización + reportes + casos críticos",
       "id": "ret-basico",
-      "servicio_id": "automatizacion"
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
     },
     {
       "nombre": "Retainer pro",
@@ -165,7 +174,8 @@
       "descripcion_publica": "Evolución continua con prioridad absoluta: mantenimiento + mejoras + soporte reactivo. Tu equipo técnico dedicado en la práctica.",
       "nota_interna_pricing": "20h/mes dedicadas a mantenimiento y evolución continua + prioridad absoluta",
       "id": "ret-pro",
-      "servicio_id": "automatizacion"
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
     }
   ]
 }

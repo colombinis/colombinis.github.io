@@ -19,7 +19,8 @@ const casos = getCasos();
         <ServiceCard
           title={caso.title}
           href={`/casos-exito/${caso.slug}/`}
-          icon="/logo-autor.svg"
+          imagen={caso.imagen}
+          icon={caso.imagen ? '' : '/logo-autor.svg'}
           label={caso.label}
         >
           {caso.excerpt}

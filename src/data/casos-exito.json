@@ -75,7 +75,8 @@
     "cliente_nombre": "Estudio de arquitectura",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-33-tema-wordpress-gutenberg.webp"
   },
   {
     "slug": "tienda-woocommerce-suscripciones",
@@ -153,7 +154,8 @@
     "cliente_nombre": "Tienda de suscripciones",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-35-tienda-woocommerce-suscripciones.webp"
   },
   {
     "slug": "wordpress-headless-nextjs",
@@ -231,7 +233,8 @@
     "cliente_nombre": "Medio de noticias digital",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-36-wordpress-headless-nextjs.webp"
   },
   {
     "slug": "rescate-rendimiento-seguridad-wordpress",
@@ -309,7 +312,8 @@
     "cliente_nombre": "E-commerce WordPress",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-32-rescate-rendimiento-seguridad.webp"
   },
   {
     "slug": "plataforma-cursos-lms-membresias",
@@ -387,7 +391,8 @@
     "cliente_nombre": "Academia online",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-31-plataforma-cursos-lms.webp"
   },
   {
     "slug": "tienda-ropa-usada",
@@ -445,7 +450,8 @@
     "cliente_nombre": "Tienda de ropa usada",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-34-tienda-ropa-usada.webp"
   },
   {
     "slug": "consultorio-psicologia",
@@ -503,7 +509,8 @@
     "cliente_nombre": "Consultorio de psicología",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-29-consultorio-psicologia.webp"
   },
   {
     "slug": "ferreteria-gas-plomeria",
@@ -561,7 +568,8 @@
     "cliente_nombre": "Ferretería y gas/plomería",
     "cliente_logo": "",
     "cliente_url": "",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-30-ferreteria-gas-plomeria.webp"
   },
   {
     "slug": "chatbot-ia-local-sacsi",
@@ -645,6 +653,7 @@
     "cliente_nombre": "SACsi",
     "cliente_logo": "",
     "cliente_url": "https://sacsi.com.ar",
-    "cliente_anonimo": false
+    "cliente_anonimo": false,
+    "imagen": "/assets/sacsi-casos-28-chatbot-ia-local.webp"
   }
 ]
