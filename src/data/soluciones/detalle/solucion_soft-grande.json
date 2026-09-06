@@ -86,5 +86,7 @@
     }
   ],
   "descripcion_publica": "",
-  "nota_interna_pricing": ""
+  "nota_interna_pricing": "",
+  "recibis": "Sistema completo en producción: usuarios, roles, API y sincronización funcionando.",
+  "necesitamos": "Nos compartís el diagrama de actores, reglas de negocio y volumen de operación esperado."
 }
