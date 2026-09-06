@@ -52,6 +52,7 @@ interface SolucionSimple {
   horasMax: number;
   costoFijo: number;
   descripcion_publica: string;
+  servicio_id?: string;
 }
 
 interface PasoFlujo {
