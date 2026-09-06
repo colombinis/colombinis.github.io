@@ -5,6 +5,7 @@
   "icon": "📦",
   "descripcion": "Sincronización de inventario en tiempo real entre tu local, proveedores y canales de venta.",
   "claim": "Stock siempre al día.",
+  "imagen": "/assets/sacsi-soluciones-21-gestion-stock.webp",
   "beneficios": [
     {
       "texto": "Inventario que se registra en dos pasos, con validaciones y generación automática de código.",

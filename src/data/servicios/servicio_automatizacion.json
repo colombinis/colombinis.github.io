@@ -6,5 +6,6 @@
   "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
   "hero_label": "AUTOMATIZACIÓN",
   "categoria_section_title": "¿Qué automatizamos?",
+  "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp",
   "categorias_ids": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards"]
 }

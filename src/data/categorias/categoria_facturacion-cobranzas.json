@@ -5,6 +5,7 @@
   "icon": "📊",
   "descripcion": "Emisión automática de comprobantes, recordatorios de pago y conciliación bancaria sin intervención manual.",
   "claim": "Reducí errores y olvidos.",
+  "imagen": "/assets/sacsi-soluciones-22-facturacion-automatica.webp",
   "beneficios": [
     {
       "texto": "Cobro recurrente automático con Mercado Pago: los pagos entran solos cada mes, sin perseguir transferencias.",

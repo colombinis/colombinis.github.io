@@ -5,6 +5,7 @@
   "icon": "🔌",
   "descripcion": "Conectamos tus herramientas actuales: CRM, ERP, pasarelas de pago, marketplaces y más.",
   "claim": "Sin silos de información.",
+  "imagen": "/assets/sacsi-servicios-14-migraciones.webp",
   "beneficios": [
     {
       "texto": "Pasarelas de pago locales integradas (Mercado Pago) para cobrar y debitar de forma automática.",

@@ -73,5 +73,6 @@
   "descripcion_publica": "",
   "nota_interna_pricing": "",
   "recibis": "Flujo automatizado entre sistemas: sincronización bidireccional y panel de control operativo.",
-  "necesitamos": "Nos contás qué sistemas deben intercambiar datos y las reglas de negocio a respetar."
+  "necesitamos": "Nos contás qué sistemas deben intercambiar datos y las reglas de negocio a respetar.",
+  "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
 }
