@@ -169,14 +169,16 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
 
       <aside class="pdp__buybox" aria-label="Precio y consulta">
         <p class="pdp__price-label">
-          Precio desde<sup aria-hidden="true">*</sup>
+          Precio<sup aria-hidden="true">*</sup>
         </p>
-        <p class="pdp__price">{formatearARS(solucion.precioMin)}</p>
-        {esRango && <p class="pdp__price-old">{formatearARS(solucion.precioMax)}</p>}
+        <p class="pdp__price">
+          {formatearARS(solucion.precioMin)}
+          {esRango && <> – {formatearARS(solucion.precioMax)}</>}
+        </p>
         <p class="pdp__note">
           <sup aria-hidden="true">*</sup>
-          Precios expresados en pesos argentinos (ARS) y válidos para clientes que ya tienen
-          productos contratados con SACsi.
+          Precios expresados en pesos argentinos (ARS). El valor final se define en la
+          primera reunión sin cargo, según el alcance y la complejidad del proyecto.
         </p>
         <div class="pdp__actions">
           <a
