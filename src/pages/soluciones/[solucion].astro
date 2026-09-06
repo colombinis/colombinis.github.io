@@ -71,6 +71,7 @@ const breadcrumb = [
 
 // --- Descripción (meta + bloque de producto) ---
 const descripcion =
+  solucion.descripcion_publica ||
   detalle?.flujo?.[0]?.descripcion ||
   'Un paquete de solución estructurada para resolver un desafío puntual de tu negocio.';
 
