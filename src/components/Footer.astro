@@ -206,7 +206,7 @@ const casos = getCasos();
   /* Desktop: 3 columnas + acciones en fila */
   @media (min-width: 601px) {
     .footer-grid {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: var(--spacing-xxl);
     }
     .footer__actions {
@@ -299,6 +299,21 @@ const casos = getCasos();
               >{caso.title}</a>
             </div>
           ))}
+        </div>
+      </div>
+
+      <!-- Col 4: NAP + Google Business Profile -->
+      <div class="footer-col">
+        <h3>{config.site.name}</h3>
+        <div class="footer-nap">
+          <p><strong>Dirección:</strong> Milan 1216, Rosario, Santa Fe CP 2000, Argentina</p>
+          <p><strong>Tel:</strong> <a class="footer__email" href={`tel:${config.contact.phone_display}`}>{config.contact.phone_display}</a></p>
+          <p><strong>Email:</strong> <a class="footer__email" href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
+          <p>
+            <a class="footer__email" href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Rosario" target="_blank" rel="noopener noreferrer">
+              Ver en Google Maps
+            </a>
+          </p>
         </div>
       </div>
     </div>
