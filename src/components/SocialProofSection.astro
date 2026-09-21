@@ -5,10 +5,16 @@ import { getTestimoniosGenerales, getTestimoniosByServicio } from '../lib/data-u
 
 interface Props {
   servicioId?: string;
+  maxTestimonios?: number;
 }
 
-const { servicioId } = Astro.props;
-const testimoniosData = servicioId ? getTestimoniosByServicio(servicioId) : getTestimoniosGenerales();
+const { servicioId, maxTestimonios = 2 } = Astro.props;
+const testimoniosDataRaw = servicioId ? getTestimoniosByServicio(servicioId) : getTestimoniosGenerales();
+
+const testimoniosData = testimoniosDataRaw ? {
+  ...testimoniosDataRaw,
+  testimonios: testimoniosDataRaw.testimonios?.slice(0, maxTestimonios) ?? []
+} : null;
 ---
 
 <section id="social-proof" class="section">
