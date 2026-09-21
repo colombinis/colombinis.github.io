@@ -3,9 +3,13 @@
   "title": "Automatización de Procesos",
   "href": "/servicios/automatizacion/",
   "claim": "Liberá hasta 65% del tiempo administrativo de tu equipo.",
-  "short": "Transformá tareas repetitivas en procesos automáticos. Facturación, reportes, sincronización de stock y más — todo funcionando solo.",
+  "short": "Automatizá tareas repetitivas en Rosario. Facturación, reportes y stock sincronizado — todo funcionando solo. Liberá hasta 65% del tiempo administrativo.",
   "hero_label": "AUTOMATIZACIÓN",
   "categoria_section_title": "¿Qué automatizamos?",
   "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp",
-  "categorias_ids": ["facturacion-cobranzas", "stock-logistica", "reportes-dashboards"]
+  "categorias_ids": [
+    "facturacion-cobranzas",
+    "stock-logistica",
+    "reportes-dashboards"
+  ]
 }

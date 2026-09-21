@@ -3,9 +3,13 @@
   "title": "Presencia Online",
   "href": "/servicios/presencia-online/",
   "claim": "Llevá tu negocio a internet y empezá a vender 24/7.",
-  "short": "Un sitio web profesional con o sin tienda online. Simple, moderno, y pensado para que tus clientes te encuentren y compres sin vueltas.",
+  "short": "Llevá tu negocio a internet con un sitio web profesional en Rosario. Diseño a medida que convierte visitas en clientes. Empezá a vender 24/7.",
   "hero_label": "PRESENCIA ONLINE",
   "categoria_section_title": "¿Qué incluye?",
   "imagen": "/assets/sacsi-servicios-10-presencia-online.webp",
-  "categorias_ids": ["sitio-web-institucional", "tienda-online", "contenido-seo-basico"]
+  "categorias_ids": [
+    "sitio-web-institucional",
+    "tienda-online",
+    "contenido-seo-basico"
+  ]
 }
