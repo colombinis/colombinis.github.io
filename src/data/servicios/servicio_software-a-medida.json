@@ -3,9 +3,13 @@
   "title": "Software a Medida",
   "href": "/servicios/software-a-medida/",
   "claim": "Sistemas hechos a tu medida, hasta un 50% más rápido.",
-  "short": "Creamos el sistema que tu negocio necesita, ni más ni menos. Sin pagar por funciones que no vas a usar ni sufrir con procesos que no se adaptan a vos.",
+  "short": "Creá el sistema que tu negocio necesita en Rosario. Ni más ni menos. Software a medida que se adapta a vos, no al revés. Hasta 50% más rápido.",
   "hero_label": "DESARROLLO",
   "categoria_section_title": "¿Qué construimos?",
   "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp",
-  "categorias_ids": ["sistemas-gestion", "integraciones", "apps-portales"]
+  "categorias_ids": [
+    "sistemas-gestion",
+    "integraciones",
+    "apps-portales"
+  ]
 }
