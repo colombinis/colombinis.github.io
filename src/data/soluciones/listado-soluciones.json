@@ -15,7 +15,7 @@
       "horasMin": 15,
       "horasMax": 20,
       "costoFijo": 0,
-      "descripcion_publica": "Página de aterrizaje optimizada para convertir visitas en consultas. Diseño móvil-first, carga rápida y copy orientado a tu oferta.",
+      "descripcion_publica": "Convertí visitas en consultas con una landing page profesional en Rosario. Diseño que capta leads, no que decora. Empezá hoy.",
       "id": "landing",
       "servicio_id": "presencia-online",
       "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp"
@@ -31,7 +31,7 @@
       "horasMin": 25,
       "horasMax": 35,
       "costoFijo": 0,
-      "descripcion_publica": "Sitio institucional completo con identidad visual propia, secciones a medida y optimización SEO base para posicionarte en buscadores.",
+      "descripcion_publica": "Refuerzá tu imagen con un sitio web profesional en Rosario. Diseño a medida que transmite confianza y convierte. Sin plantillas genéricas.",
       "id": "sitio-pro",
       "servicio_id": "presencia-online",
       "imagen": "/assets/sacsi-soluciones-26-sitio-pro.webp"
@@ -47,7 +47,7 @@
       "horasMin": 50,
       "horasMax": 80,
       "costoFijo": 150,
-      "descripcion_publica": "Tienda online funcional con pasarela de pagos, gestión de envíos y sincronización de stock. Lista para vender desde el día uno.",
+      "descripcion_publica": "Vendé 24/7 con una tienda online en Rosario. E-commerce funcional con pagos, envíos y stock sincronizado. Lista para facturar desde el día uno.",
       "id": "ecommerce",
       "servicio_id": "presencia-online",
       "imagen": "/assets/sacsi-soluciones-18-venta-simple.webp"
@@ -63,7 +63,7 @@
       "horasMin": 16,
       "horasMax": 26,
       "costoFijo": 0,
-      "descripcion_publica": "Automatización simple conectando 1-2 herramientas. Ahorra tiempo tareas repetitivas con salidas listas en Google Sheets o Docs.",
+      "descripcion_publica": "Ahorrá horas con automatización simple en Rosario. Conectamos 1-2 herramientas y eliminás tareas repetitivas para siempre.",
       "id": "auto-basico",
       "servicio_id": "automatizacion",
       "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
@@ -81,7 +81,7 @@
       "horasMin": 26,
       "horasMax": 42,
       "costoFijo": 200,
-      "descripcion_publica": "Automatización intermedia con sync bidireccional entre sistemas. Integra tu ERP, facturación o logística en un flujo confiable.",
+      "descripcion_publica": "Integrá tus sistemas con automatización avanzada en Rosario. Sincronizá bidireccionalmente tu ERP, facturación y logística. Operaciones sin fricción.",
       "id": "auto-int",
       "servicio_id": "automatizacion",
       "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
@@ -96,7 +96,7 @@
       "horasMin": 12,
       "horasMax": 19,
       "costoFijo": 0,
-      "descripcion_publica": "Software a medida para gestión interna: altas, bajas y reportes. Rápido de implementar, sin integraciones complejas.",
+      "descripcion_publica": "Gestioná tu negocio con software a medida en Rosario. Altas, bajas y reportes sin complicaciones. Implementación rápida, sin curva de aprendizaje.",
       "id": "soft-chico",
       "servicio_id": "software-a-medida",
       "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
@@ -113,7 +113,7 @@
       "horasMin": 50,
       "horasMax": 100,
       "costoFijo": 300,
-      "descripcion_publica": "Sistema completo con autenticación, API propia, sincronización y múltiples roles. Escalable para operaciones complejas.",
+      "descripcion_publica": "Escalá tu operación con sistema a medida en Rosario. Autenticación, API propia y múltiples roles. Software que crece con tu negocio, no que lo limita.",
       "id": "soft-grande",
       "servicio_id": "software-a-medida",
       "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
@@ -129,7 +129,7 @@
       "horasMin": 1,
       "horasMax": 1,
       "costoFijo": 0,
-      "descripcion_publica": "Hora de consultoría técnica para resolver dudas puntuales, debug o asistencia específica sin contratar un proyecto completo.",
+      "descripcion_publica": "Resolvé tu problema técnico con consultoría 1:1 en Rosario. Debug, asesoramiento o auditoría en una hora. Sin contratos ni compromisos.",
       "id": "hora-tec",
       "servicio_id": "software-a-medida",
       "imagen": "/assets/sacsi-servicios-11-soporte-mantenimiento.webp"
@@ -145,7 +145,7 @@
       "horasMin": 27,
       "horasMax": 36,
       "costoFijo": 0,
-      "descripcion_publica": "Mantenimiento preventivo mensual: actualizaciones, backups, monitoreo y correcciones menores para que tu sitio no se detenga.",
+      "descripcion_publica": "Mantené tu web funcionando con soporte preventivo en Rosario. Actualizaciones, backups y monitoreo mensual. Evitá caídas antes de que ocurran.",
       "id": "ret-basico",
       "servicio_id": "automatizacion",
       "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
@@ -162,7 +162,7 @@
       "horasMin": 59,
       "horasMax": 86,
       "costoFijo": 0,
-      "descripcion_publica": "Evolución continua con prioridad absoluta: mantenimiento + mejoras + soporte reactivo. Tu equipo técnico dedicado en la práctica.",
+      "descripcion_publica": "Evolucioná tu producto digital con retainer técnico en Rosario. 20h/mes dedicadas a mejoras y soporte prioritario. Tu equipo técnico externo.",
       "id": "ret-pro",
       "servicio_id": "automatizacion",
       "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
