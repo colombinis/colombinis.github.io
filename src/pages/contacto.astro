@@ -11,6 +11,7 @@
 import Layout from "../layouts/Layout.astro";
 import FormContactoProgresivo from "../components/FormContactoProgresivo.astro";
 import config from "../config/site.json";
+import { ShieldCheck } from "lucide-astro";
 
 // Whatsapp como fallback secundario (el usuario lo conserva en /contacto como alternativa).
 const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
@@ -25,47 +26,105 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
 ---
 
 <Layout
-  title="Contacto · Rosario"
-  description="Contactanos sin compromiso para tu proyecto. Contanos tu idea y te respondemos en 24 h por WhatsApp, email o redes sociales."
+  title="Contacto y Consulta sin Cargo para PyMEs en Rosario"
+  description="Primera conversación sin cargo para PyMEs en Rosario. Te decimos con honestidad qué tecnología justa necesitás para tu negocio y qué no."
 >
   <div class="page-header">
+    <p class="hero__label">ATENCIÓN PERSONALIZADA EN ROSARIO</p>
     <h1>Contactanos</h1>
+    <div class="contact-promise-card">
+      <div class="contact-promise-badge">
+        <ShieldCheck size={16} aria-hidden="true" />
+        <strong>Primera conversación sin cargo</strong>
+      </div>
+      <p class="contact-promise-highlight">
+        Te decimos con honestidad si te conviene avanzar.
+      </p>
+      <p class="contact-promise-desc">
+        Sin vueltas ni presiones comerciales: evaluamos tus procesos y te recomendamos únicamente lo que tu negocio necesita para crecer.
+      </p>
+    </div>
     <p class="page-header__subtitle">
-      Estamos listos para escucharte. Respondemos por WhatsApp, mail o las redes
-      que prefieras.
+      Completá el formulario breve o escribinos directo por WhatsApp para coordinar tu primera charla.
     </p>
   </div>
 
   <section class="contact-section">
     <div class="contact-grid">
-      <!-- Formulario progresivo reutilizable (3 steps, Formspree, GTM) -->
-      <!-- source="contacto-page" identifica el entry point en GA4/dataLayer -->
+      <!-- Formulario progresivo reutilizable -->
       <FormContactoProgresivo
         categoria={categoria}
         asunto={asunto}
         source="contacto-page"
         defaultToOtros={true}
       />
-
-      
     </div>
   </section>
 </Layout>
 
 <style>
+  .hero__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-sm);
+  }
   .page-header {
     padding: var(--spacing-xxl) var(--spacing-lg) 0;
     text-align: center;
   }
+  .contact-promise-card {
+    background: #FFFFFF;
+    border: 2px solid #0A7CFF;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    max-width: 580px;
+    margin: var(--spacing-md) auto var(--spacing-lg);
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+  }
+  .contact-promise-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #EBF4FF;
+    color: var(--tertiary-dark);
+    padding: 6px 14px;
+    border-radius: var(--rounded-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: normal;
+    text-align: center;
+    margin-bottom: var(--spacing-xs);
+  }
+  .contact-promise-highlight {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--primary);
+    margin: var(--spacing-xs) 0;
+    overflow-wrap: break-word;
+  }
+  .contact-promise-desc {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin: 0;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+  }
   .page-header__subtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
     color: var(--secondary);
-    margin: 0 auto var(--spacing-xl);
+    margin: 0 auto var(--spacing-lg);
     max-width: 560px;
   }
   .contact-section {
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xxl);
+    padding: 0 var(--spacing-lg) var(--spacing-xxl);
   }
   .contact-grid {
     max-width: 600px;

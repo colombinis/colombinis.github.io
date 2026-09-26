@@ -1,0 +1,119 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'input'> {
+  label?: string;
+  helperText?: string;
+  error?: string;
+  id: string;
+}
+
+const {
+  label,
+  helperText,
+  error,
+  id,
+  class: className = '',
+  required = false,
+  ...rest
+} = Astro.props;
+---
+
+<div class="ui-input-group">
+  {label && (
+    <label for={id} class="ui-input-label">
+      {label}
+      {required && <span class="ui-input-required" aria-hidden="true">*</span>}
+    </label>
+  )}
+  <div class="ui-input-wrapper">
+    <slot name="prefix" />
+    <input
+      id={id}
+      class={`ui-input ${error ? 'ui-input--error' : ''} ${className}`}
+      required={required}
+      aria-invalid={error ? 'true' : undefined}
+      aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
+      {...rest}
+    />
+    <slot name="suffix" />
+  </div>
+  {error ? (
+    <p id={`${id}-error`} class="ui-input-msg ui-input-msg--error">{error}</p>
+  ) : helperText ? (
+    <p id={`${id}-helper`} class="ui-input-msg">{helperText}</p>
+  ) : null}
+</div>
+
+<style>
+  .ui-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ui-input-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary, #1A1A2E);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ui-input-required {
+    color: #DC2626;
+  }
+
+  .ui-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ui-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--primary, #1A1A2E);
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--rounded-sm, 8px);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  .ui-input:focus {
+    border-color: var(--tertiary, #0A7CFF);
+    box-shadow: 0 0 0 3px rgba(10, 124, 255, 0.15);
+  }
+
+  .ui-input:disabled {
+    background-color: #F8FAFC;
+    color: #94A3B8;
+    cursor: not-allowed;
+  }
+
+  .ui-input--error {
+    border-color: #DC2626;
+  }
+  .ui-input--error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .ui-input-msg {
+    font-size: 0.8125rem;
+    color: var(--muted, #64748B);
+    margin: 0;
+  }
+
+  .ui-input-msg--error {
+    color: #DC2626;
+    font-weight: 500;
+  }
+</style>

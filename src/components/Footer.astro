@@ -133,6 +133,8 @@ const casos = getCasos();
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 500;
+    line-height: 1.4;
+    overflow-wrap: break-word;
     transition: color 0.2s ease;
   }
   .footer-caso__name:hover {
@@ -162,16 +164,21 @@ const casos = getCasos();
     align-items: center;
   }
   .footer__cta--form {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--whatsapp);
     color: #FFFFFF;
-    padding: 12px 28px;
+    padding: 12px 24px;
     border-radius: var(--rounded-sm);
     font-weight: 600;
     font-size: 0.95rem;
+    line-height: 1.4;
     text-decoration: none;
     transition: background-color 0.2s ease;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
     align-self: center;
   }
   .footer__cta--form:hover {
@@ -181,16 +188,22 @@ const casos = getCasos();
 
   .footer__contact-row {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-xs);
     font-size: 0.93rem;
     color: #909090;
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
+    max-width: 100%;
   }
   .footer__email {
     color: var(--tertiary);
     text-decoration: none;
     font-weight: 500;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   .footer__email:hover {
     text-decoration: underline;
@@ -318,6 +331,9 @@ const casos = getCasos();
       </div>
     </div>
 
-    <p class="footer-copy">&copy; {new Date().getFullYear()} {config.site.name} — {config.site.tagline}</p>
+    <p class="footer-copy">
+      &copy; {new Date().getFullYear()} {config.site.name} — {config.site.tagline} ·
+      <a href="/design-style-guide/" style="color:#A0A0A0;text-decoration:underline;">Sistema de Diseño</a>
+    </p>
   </footer>
 </div>

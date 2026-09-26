@@ -1,0 +1,410 @@
+---
+// Página: Lead Magnet Checklist Automatización
+// Captura email → descarga directa de PDF sin login
+import Layout from '../layouts/Layout.astro';
+import config from '../config/site.json';
+import { Check, Lock, CheckCircle2 } from 'lucide-astro';
+
+const formEndpoint = config.contact.form_endpoint;
+---
+
+<Layout
+  title="Checklist Gratis: ¿Tu negocio necesita automatización? · PyMEs Rosario"
+  description="Descargá gratis el checklist práctico para PyMEs en Rosario. Detectá tareas repetitivas y cuellos de botella para automatizar con tecnología justa."
+>
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">RECURSO GRATUITO PARA PYMES</p>
+      <h1 class="hero__title">Checklist: ¿Tu negocio necesita automatización?</h1>
+      <p class="hero__subtitle">
+        Descubrí en menos de 5 minutos si estás perdiendo horas valiosas y dinero en tareas manuales que pueden funcionar solas con tecnología justa y sin sobrecostos.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container checklist-container">
+      <div class="checklist-info">
+        <h2>¿Qué vas a evaluar en este checklist?</h2>
+        <ul class="checklist-items">
+          <li>
+            <span class="check-icon"><Check size={14} aria-hidden="true" /></span>
+            <div>
+              <strong>Carga repetitiva de datos:</strong>
+              <p>Evaluá cuántas horas semanales dedica tu equipo a copiar y pegar datos entre WhatsApp, planillas de Excel y sistemas de AFIP.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check-icon"><Check size={14} aria-hidden="true" /></span>
+            <div>
+              <strong>Facturación y cobranzas:</strong>
+              <p>Detectá cuellos de botella en la emisión de comprobantes, control de deudas y avisos de cobro a clientes.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check-icon"><Check size={14} aria-hidden="true" /></span>
+            <div>
+              <strong>Stock e inventario desincronizado:</strong>
+              <p>Comprobá si los quiebres de stock o errores de entrega se deben a falta de actualización en tiempo real.</p>
+            </div>
+          </li>
+          <li>
+            <span class="check-icon"><Check size={14} aria-hidden="true" /></span>
+            <div>
+              <strong>Matriz de decisión honesta:</strong>
+              <p>Te enseñamos cuándo conviene armar una solución simple y cuándo es preferible no invertir y seguir manual.</p>
+            </div>
+          </li>
+        </ul>
+
+        <div class="checklist-guarantee">
+          <p><strong>Filosofía SACsi:</strong> Elegimos la tecnología adecuada, no la de moda. Entendemos lo que cuesta cada peso y no te vendemos nada que no necesites.</p>
+        </div>
+      </div>
+
+      <div class="checklist-form-card">
+        <div class="card-header">
+          <h3>Descargá la guía en PDF</h3>
+          <p>Completá tu nombre y email para descargar el archivo de inmediato. Sin registro ni contraseñas.</p>
+        </div>
+
+        <form id="lead-magnet-form" method="POST" action={formEndpoint}>
+          <input type="hidden" name="categoria" value="checklist-automatizacion" />
+          <input type="hidden" name="source" value="lead-magnet-checklist" />
+
+          <div class="form-group">
+            <label for="lm-nombre">Tu nombre <span aria-hidden="true">*</span></label>
+            <input type="text" id="lm-nombre" name="nombre" required placeholder="Ej: Mariano López" />
+          </div>
+
+          <div class="form-group">
+            <label for="lm-email">Tu email de trabajo <span aria-hidden="true">*</span></label>
+            <input type="email" id="lm-email" name="email" required placeholder="tu@empresa.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="lm-rubro">Rubro o actividad de tu negocio (opcional)</label>
+            <input type="text" id="lm-rubro" name="rubro" placeholder="Ej: Distribuidora, Ferretería, Comercio" />
+          </div>
+
+          <button type="submit" class="btn btn--primary" id="lm-submit">
+            Descargar Checklist en PDF (Gratis)
+          </button>
+
+          <p class="form-privacy">
+            <Lock size={13} aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:4px;" />
+            <span>Respetamos tu privacidad. No enviamos spam ni compartimos tus datos.</span>
+          </p>
+        </form>
+
+        <div id="lm-success" class="lead-success" style="display:none;">
+          <div class="success-icon">
+            <CheckCircle2 size={44} color="#059669" aria-hidden="true" />
+          </div>
+          <h4>¡Listo! Tu descarga está lista</h4>
+          <p>La descarga del checklist comenzará en unos segundos.</p>
+          <a
+            id="download-btn-direct"
+            class="btn btn--primary"
+            href="/descargas/checklist-automatizacion-pymes-sacsi.pdf"
+            download="Checklist-Automatizacion-SACsi.pdf"
+          >
+            Hacé clic acá si no descargó automáticamente
+          </a>
+          <p class="next-step-note">
+            ¿Querés conversar sobre tu caso puntual? <a href="/contacto/">Agendá tu primera conversación sin cargo</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .checklist-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 860px) {
+    .checklist-container {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+
+  .checklist-info h2 {
+    font-size: 1.6rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .checklist-items {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .checklist-items li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .check-icon {
+    background: #EBF4FF;
+    color: var(--tertiary-dark);
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .checklist-items strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .checklist-items p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--secondary);
+    line-height: 1.5;
+  }
+
+  .checklist-guarantee {
+    background: #FFFFFF;
+    border-left: 4px solid var(--tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--rounded-sm);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .checklist-guarantee p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--secondary);
+    line-height: 1.6;
+  }
+
+  .checklist-form-card {
+    background: var(--surface);
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-header h3 {
+    font-size: 1.35rem;
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .card-header p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0 0 var(--spacing-lg);
+    line-height: 1.5;
+  }
+
+  #lead-magnet-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .form-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .form-group input {
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: var(--rounded-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--tertiary);
+    box-shadow: 0 0 0 3px rgba(10, 124, 255, 0.15);
+  }
+
+  .btn--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    border-radius: var(--rounded-sm);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    margin-top: var(--spacing-xs);
+  }
+
+  .btn--primary:hover {
+    background: var(--tertiary);
+  }
+
+  .form-privacy {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+    text-align: center;
+  }
+
+  .lead-success {
+    text-align: center;
+    padding: var(--spacing-lg) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .success-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .lead-success h4 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+    line-height: 1.3;
+  }
+
+  .lead-success p {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-sm);
+    line-height: 1.5;
+  }
+
+  #download-btn-direct {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    border-radius: var(--rounded-sm);
+    text-align: center;
+    text-decoration: none;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    margin: var(--spacing-md) 0;
+    background: var(--primary);
+    color: #FFFFFF;
+    transition: background-color 0.2s ease;
+  }
+
+  #download-btn-direct:hover {
+    background: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .next-step-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-top: var(--spacing-md);
+    line-height: 1.5;
+    overflow-wrap: break-word;
+  }
+</style>
+
+<script>
+  (function () {
+    var form = document.getElementById('lead-magnet-form') as HTMLFormElement | null;
+    var successDiv = document.getElementById('lm-success');
+    var downloadBtn = document.getElementById('download-btn-direct');
+    if (!form || !successDiv) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nombre = (form.querySelector('#lm-nombre') as HTMLInputElement)?.value.trim();
+      var email = (form.querySelector('#lm-email') as HTMLInputElement)?.value.trim();
+
+      if (!nombre || !email || email.indexOf('@') === -1) {
+        alert('Por favor, ingresá un nombre y un email válido.');
+        return;
+      }
+
+      // Enviar evento a dataLayer si existe
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        (window as any).dataLayer.push({
+          event: 'lead_magnet_download',
+          resource: 'checklist-automatizacion',
+          lead_email: email,
+        });
+      }
+
+      // Enviar formulario al endpoint
+      var formData = new FormData(form);
+      try {
+        fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' },
+        }).catch(function () {
+          // Si el endpoint no responde, igual permitimos la descarga directa del PDF
+        });
+      } catch (err) {
+        // Ignorar error de red y proceder con descarga
+      }
+
+      // Mostrar pantalla de éxito
+      form.style.display = 'none';
+      successDiv.style.display = 'flex';
+
+      // Disparar descarga directa del PDF
+      var downloadUrl = '/descargas/checklist-automatizacion-pymes-sacsi.pdf';
+      var a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = 'Checklist-Automatizacion-SACsi.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+  })();
+</script>

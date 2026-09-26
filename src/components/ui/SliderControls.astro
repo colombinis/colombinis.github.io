@@ -1,0 +1,123 @@
+---
+interface Props {
+  totalSlides?: number;
+  currentSlide?: number;
+  showDots?: boolean;
+  class?: string;
+  targetId?: string;
+}
+
+const {
+  totalSlides = 3,
+  currentSlide = 0,
+  showDots = true,
+  class: className = '',
+  targetId,
+} = Astro.props;
+---
+
+<div class={`ui-slider-controls ${className}`} data-ui-slider-controls data-target={targetId}>
+  <button
+    type="button"
+    class="ui-slider-btn ui-slider-btn--prev"
+    aria-label="Diapositiva anterior"
+    data-slider-prev
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  {showDots && (
+    <div class="ui-slider-dots" role="tablist" aria-label="Selector de diapositiva" data-slider-dots>
+      {Array.from({ length: totalSlides }).map((_, i) => (
+        <button
+          type="button"
+          class={`ui-slider-dot ${i === currentSlide ? 'is-active' : ''}`}
+          role="tab"
+          aria-selected={i === currentSlide ? 'true' : 'false'}
+          aria-label={`Ir a diapositiva ${i + 1}`}
+          data-slide-index={i}
+        />
+      ))}
+    </div>
+  )}
+
+  <button
+    type="button"
+    class="ui-slider-btn ui-slider-btn--next"
+    aria-label="Diapositiva siguiente"
+    data-slider-next
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .ui-slider-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+    background-color: var(--surface, #FFFFFF);
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-full, 100px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  }
+
+  .ui-slider-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: var(--primary, #1A1A2E);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    outline: none;
+  }
+
+  .ui-slider-btn:hover {
+    background-color: var(--primary, #1A1A2E);
+    color: #FFFFFF;
+    border-color: var(--primary, #1A1A2E);
+  }
+
+  .ui-slider-btn:focus-visible {
+    outline: 2px solid var(--tertiary, #0A7CFF);
+    outline-offset: 2px;
+  }
+
+  .ui-slider-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 4px;
+  }
+
+  .ui-slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #CBD5E1;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .ui-slider-dot.is-active {
+    width: 24px;
+    border-radius: 4px;
+    background-color: var(--tertiary, #0A7CFF);
+  }
+
+  .ui-slider-dot:hover:not(.is-active) {
+    background-color: #94A3B8;
+  }
+</style>

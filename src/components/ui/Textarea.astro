@@ -1,0 +1,112 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'textarea'> {
+  label?: string;
+  helperText?: string;
+  error?: string;
+  id: string;
+}
+
+const {
+  label,
+  helperText,
+  error,
+  id,
+  class: className = '',
+  required = false,
+  rows = 4,
+  ...rest
+} = Astro.props;
+---
+
+<div class="ui-textarea-group">
+  {label && (
+    <label for={id} class="ui-textarea-label">
+      {label}
+      {required && <span class="ui-textarea-required" aria-hidden="true">*</span>}
+    </label>
+  )}
+  <textarea
+    id={id}
+    class={`ui-textarea ${error ? 'ui-textarea--error' : ''} ${className}`}
+    required={required}
+    rows={rows}
+    aria-invalid={error ? 'true' : undefined}
+    aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
+    {...rest}
+  ></textarea>
+  {error ? (
+    <p id={`${id}-error`} class="ui-textarea-msg ui-textarea-msg--error">{error}</p>
+  ) : helperText ? (
+    <p id={`${id}-helper`} class="ui-textarea-msg">{helperText}</p>
+  ) : null}
+</div>
+
+<style>
+  .ui-textarea-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ui-textarea-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary, #1A1A2E);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .ui-textarea-required {
+    color: #DC2626;
+  }
+
+  .ui-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--primary, #1A1A2E);
+    background-color: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--rounded-sm, 8px);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    line-height: 1.5;
+  }
+
+  .ui-textarea:focus {
+    border-color: var(--tertiary, #0A7CFF);
+    box-shadow: 0 0 0 3px rgba(10, 124, 255, 0.15);
+  }
+
+  .ui-textarea:disabled {
+    background-color: #F8FAFC;
+    color: #94A3B8;
+    cursor: not-allowed;
+  }
+
+  .ui-textarea--error {
+    border-color: #DC2626;
+  }
+  .ui-textarea--error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  }
+
+  .ui-textarea-msg {
+    font-size: 0.8125rem;
+    color: var(--muted, #64748B);
+    margin: 0;
+  }
+
+  .ui-textarea-msg--error {
+    color: #DC2626;
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,124 @@
+---
+import {
+  BarChart3,
+  Package,
+  TrendingUp,
+  Wrench,
+  Plug,
+  Smartphone,
+  Globe,
+  ShoppingCart,
+  Megaphone,
+  Palette,
+  Blocks,
+  Zap,
+  Coffee,
+  RefreshCw,
+  User,
+  Puzzle,
+  Rocket,
+  Sparkles,
+  Lock,
+  GraduationCap,
+  Key,
+  FileCheck,
+  Image,
+  DollarSign,
+  Calendar,
+  Building2,
+  FileText,
+  CreditCard,
+  Bot,
+  Coins,
+  BookOpen,
+  AlertTriangle,
+  CheckCircle2,
+  ShieldCheck,
+  HelpCircle,
+  Layers,
+  ArrowRight,
+  Code
+} from 'lucide-astro';
+
+interface Props {
+  name?: string;
+  size?: number;
+  class?: string;
+  color?: string;
+}
+
+const {
+  name = '',
+  size = 20,
+  class: className = '',
+  color = 'currentColor',
+} = Astro.props;
+
+// Normalización de nombres / emojis
+const iconKey = name.trim();
+
+// Mapa de compatibilidad: emojis / nombres a iconos de Lucide
+const iconMap: Record<string, any> = {
+  // Emojis a Lucide
+  '📊': BarChart3,
+  '📦': Package,
+  '📈': TrendingUp,
+  '🛠️': Wrench,
+  '🛠': Wrench,
+  '🔌': Plug,
+  '📱': Smartphone,
+  '🌐': Globe,
+  '🛒': ShoppingCart,
+  '📣': Megaphone,
+  '🎨': Palette,
+  '🧱': Blocks,
+  '⚡': Zap,
+  '☕': Coffee,
+  '🔄': RefreshCw,
+  '👤': User,
+  '🧩': Puzzle,
+  '🚀': Rocket,
+  '🧹': Sparkles,
+  '🔒': Lock,
+  '🎓': GraduationCap,
+  '🔑': Key,
+  '📜': FileCheck,
+  '🖼️': Image,
+  '🖼': Image,
+  '💸': DollarSign,
+  '📅': Calendar,
+  '🏠': Building2,
+  '📄': FileText,
+  '💳': CreditCard,
+  '🤖': Bot,
+  '💰': Coins,
+  '📚': BookOpen,
+  '⚠️': AlertTriangle,
+  '⚠': AlertTriangle,
+  '✅': CheckCircle2,
+  '🤝': ShieldCheck,
+
+  // Nombres comunes en inglés / slug
+  'chart': BarChart3,
+  'analytics': TrendingUp,
+  'package': Package,
+  'inventory': Package,
+  'tools': Wrench,
+  'integration': Plug,
+  'mobile': Smartphone,
+  'web': Globe,
+  'ecommerce': ShoppingCart,
+  'marketing': Megaphone,
+  'design': Palette,
+  'code': Code,
+  'security': Lock,
+  'calendar': Calendar,
+  'layers': Layers,
+  'arrow-right': ArrowRight,
+  'bot': Bot,
+};
+
+const ResolvedIcon = iconMap[iconKey] || Layers;
+---
+
+<ResolvedIcon size={size} color={color} class={className} aria-hidden="true" />
