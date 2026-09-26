@@ -1,0 +1,42 @@
+[
+  {
+    "id": "distribuidora-alimentos",
+    "servicio_id": "automatizacion",
+    "rubro": "Distribuidora Mayorista de Alimentos",
+    "ubicacion": "Rosario",
+    "titulo": "Sincronización de pedidos, AFIP y stock",
+    "problema": "El equipo dedicaba más de 25 horas semanales a copiar pedidos de WhatsApp a planillas Excel y emitir facturas en AFIP una por una, sufriendo errores recurrentes de stock y demoras de entrega.",
+    "solucion_justa": "Integración directa y ligera entre planillas de pedidos y el webservice de AFIP con actualización de inventario en tiempo real, sin contratar un ERP corporativo costoso.",
+    "resultado_medible": "Reducción del 80% en tiempo administrativo manual (de 25 a 5 horas semanales) y cero errores de facturación desde el primer mes."
+  },
+  {
+    "id": "servicios-tecnicos",
+    "servicio_id": "software-a-medida",
+    "rubro": "Empresa de Servicios Técnicos y Climatización",
+    "ubicacion": "Gran Rosario",
+    "titulo": "Sistema ágil de cuadrillas y órdenes de servicio",
+    "problema": "Las órdenes de trabajo se pasaban en papel y chats de WhatsApp. Se perdían presupuestos en seguimiento, los técnicos no sabían qué repuestos llevar y las cobranzas se demoraban semanas.",
+    "solucion_justa": "Aplicación web liviana adaptada al teléfono de los técnicos en la calle, con fichas de clientes, historial de visitas, fotos del trabajo y estado de órdenes en tiempo real.",
+    "resultado_medible": "Aumento del 40% en presupuestos concretados y trazabilidad del 100% de los trabajos sin pérdida de comprobantes."
+  },
+  {
+    "id": "comercio-indumentaria",
+    "servicio_id": "presencia-online",
+    "rubro": "Local Minorista y Mayorista de Indumentaria",
+    "ubicacion": "Centro de Rosario",
+    "titulo": "Catálogo web rápido con checkout directo a WhatsApp",
+    "problema": "Ventas de mostrador estancadas y colapso de mensajes en Instagram respondiendo precios individuales a mano, agotando al personal sin concretar cierres efectivos.",
+    "solucion_justa": "Catálogo web ultrarrápido y autoadministrable optimizado para celulares, que permite armar carritos y enviar pedidos con detalle y monto exacto a WhatsApp en un clic.",
+    "resultado_medible": "Incremento del 65% en consultas con compra definida y 30 nuevas ventas concretadas durante las dos primeras semanas de estreno."
+  },
+  {
+    "id": "estudio-profesional",
+    "servicio_id": "automatizacion",
+    "rubro": "Estudio Contable y Asesoría PyME",
+    "ubicacion": "Rosario",
+    "titulo": "Portal de autogestión de comprobantes y alertas de vencimiento",
+    "problema": "El estudio colapsaba cada fin de mes respondiendo emails repetitivos solicitando liquidaciones, recibos de sueldo y recordatorios de fechas de pago impositivo.",
+    "solucion_justa": "Configuración de un portal simple y seguro de autogestión para clientes con avisos programados automáticos por email y WhatsApp antes de cada vencimiento.",
+    "resultado_medible": "70% de disminución de llamados y emails por pedidos de comprobantes y cobranza de honorarios al día en un 95%."
+  }
+]

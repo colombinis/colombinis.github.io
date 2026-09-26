@@ -58,6 +58,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+p, a, span, li {
+  overflow-wrap: break-word;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -172,20 +181,22 @@ h1, h2, h3 {
 }
 
 .hero__title {
-  font-size: 2rem;
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   color: var(--primary);
   margin: 0 0 var(--spacing-md);
+  overflow-wrap: break-word;
 }
 
 .hero__subtitle {
-  font-size: 0.93rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   color: var(--secondary);
   margin: 0 auto var(--spacing-xl);
-  max-width: 560px;
+  max-width: 600px;
+  overflow-wrap: break-word;
 }
 
 .hero__actions {
@@ -193,20 +204,29 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 12px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
 }
 
 .hero__cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--primary);
   color: #FFFFFF;
-  padding: 14px 32px;
+  padding: 14px 24px;
   border-radius: var(--rounded-sm);
   font-weight: 600;
   font-size: 1rem;
+  line-height: 1.4;
   text-decoration: none;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
   transition: background-color 0.2s ease;
 }
 
@@ -224,17 +244,25 @@ h1, h2, h3 {
 }
 
 .hero__cta-secondary {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   color: var(--primary);
-  padding: 14px 32px;
+  padding: 14px 24px;
   border-radius: var(--rounded-sm);
   font-weight: 600;
   font-size: 1rem;
+  line-height: 1.4;
   text-decoration: none;
   border: 1.5px solid #DDDDDD;
   width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
   transition: border-color 0.2s ease;
 }
 
@@ -902,6 +930,12 @@ h1, h2, h3 {
   .hero__actions {
     flex-direction: row;
     gap: 16px;
+  }
+
+  .hero__actions .hero__cta,
+  .hero__actions .hero__cta-secondary {
+    width: auto;
+    max-width: 100%;
   }
 
   .section {

@@ -1,0 +1,104 @@
+---
+interface Props {
+  variant?: 'default' | 'muted' | 'interactive' | 'accent';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  class?: string;
+  as?: string;
+  href?: string;
+}
+
+const {
+  variant = 'default',
+  padding = 'md',
+  class: className = '',
+  as: Tag = 'div',
+  href,
+  ...rest
+} = Astro.props;
+
+const Element = href ? 'a' : Tag;
+const classes = [
+  'ui-card',
+  `ui-card--${variant}`,
+  `ui-card--p-${padding}`,
+  href ? 'ui-card--link' : '',
+  className
+].filter(Boolean).join(' ');
+---
+
+<Element href={href} class={classes} {...rest}>
+  <slot />
+</Element>
+
+<style>
+  .ui-card {
+    background-color: var(--surface, #FFFFFF);
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Variantes */
+  .ui-card--default {
+    background-color: var(--surface, #FFFFFF);
+    border-color: #E2E8F0;
+  }
+
+  .ui-card--muted {
+    background-color: #F8FAFC;
+    border-color: #E2E8F0;
+  }
+
+  .ui-card--interactive {
+    background-color: var(--surface, #FFFFFF);
+    border-color: #E2E8F0;
+    cursor: pointer;
+  }
+  .ui-card--interactive:hover {
+    transform: translateY(-3px);
+    border-color: #CBD5E1;
+    box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  }
+
+  .ui-card--accent {
+    background-color: var(--surface, #FFFFFF);
+    border-color: rgba(10, 124, 255, 0.4);
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+  }
+  .ui-card--accent:hover {
+    border-color: var(--tertiary, #0A7CFF);
+    box-shadow: 0 8px 24px rgba(10, 124, 255, 0.12);
+  }
+
+  .ui-card--link {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ui-card--link:hover {
+    transform: translateY(-2px);
+    border-color: #CBD5E1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Padding */
+  .ui-card--p-none {
+    padding: 0;
+  }
+  .ui-card--p-sm {
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+  }
+  .ui-card--p-md {
+    padding: var(--spacing-lg, 24px);
+  }
+  .ui-card--p-lg {
+    padding: var(--spacing-xl, 32px);
+  }
+</style>

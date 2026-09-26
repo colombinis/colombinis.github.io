@@ -2,29 +2,28 @@
 import Layout from '../layouts/Layout.astro';
 import config from '../config/site.json';
 import SolucionesSection from '../components/SolucionesSection.astro';
-import CasosCarousel from '../components/CasosCarousel.astro';
+import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
 import SocialProofSection from '../components/SocialProofSection.astro';
 import FaqSection from '../components/FaqSection.astro';
 ---
 
 <Layout
-  title="Inicio · Rosario"
-  description="SACsi: soluciones informáticas para PyMEs en Rosario. Automatización de procesos, software a medida y presencia online. Más de 15 años de experiencia."
+  title="Tecnología Justa para PyMEs en Rosario"
+  description="Tecnología justa para emprendedores y PyMEs en Rosario. Automatización, software a medida y presencia online sin pagar de más ni modas."
 >
   <!-- Hero: label + propuesta de valor + CTAs -->
   <section id="hero" class="hero">
     <div class="hero__container">
-      <p class="hero__label">SOLUCIONES INFORMÁTICAS</p>
-      <h1 class="hero__title">Tecnología simple para PyMEs que quieren crecer</h1>
+      <p class="hero__label">TECNOLOGÍA JUSTA EN ROSARIO</p>
+      <h1 class="hero__title">Tecnología justa para emprendedores y PyMEs. Sin sobredimensionar. Sin modas. Solo lo que realmente necesitás para crecer.</h1>
       <p class="hero__subtitle">
-        Automatizamos procesos, desarrollamos software a medida y potenciamos tu presencia online. Más de 15 años ayudando a empresas como la tuya a ganar tiempo, reducir costos y vender más.
+        Más de 15 años acompañando a PyMEs y emprendedores en Rosario. Entendemos lo que cuesta cada peso: analizamos tu realidad para que inviertas únicamente en lo que genera valor real, sin pagar licencias innecesarias ni sistemas sobredimensionados.
       </p>
       <div class="hero__actions">
         <a
           class="hero__cta hero__cta--form"
-          href="/contacto/?categoria=otros&asunto=Consulta%20desde%20home"
-          >Consultar sin cargo</a>
-
+          href="/contacto/"
+          >Te decimos qué necesitás… y qué no. Consulta sin cargo</a>
       </div>
     </div>
 
@@ -41,13 +40,8 @@ import FaqSection from '../components/FaqSection.astro';
     />
   </section>
 
-  <!-- Carrusel de casos de éxito -->
-  <section id="casos-destacados" class="section section--alt">
-    <div class="hero__cases">
-      <h2 class="section__title">Casos de éxito</h2>
-      <CasosCarousel />
-    </div>
-  </section>
+  <!-- Casos reales con formato fijo: Problema → Solución justa → Resultado medible (100% estático) -->
+  <CasosAnonimosSection />
   <!-- Cómo trabajamos -->
   <section id="como-trabajamos" class="section section--alt">
     <div class="container">
@@ -85,8 +79,39 @@ import FaqSection from '../components/FaqSection.astro';
     </div>
   </section>
 
+  <!-- Origen de SACsi e identidad -->
+  <section class="section brand-identity-note">
+    <div class="container">
+      <div class="brand-origin-box">
+        <p class="brand-origin-badge">ORIGEN DE NUESTRO NOMBRE</p>
+        <p class="brand-origin-text">
+          <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>, analista y desarrollador informático en Rosario. Simboliza nuestra misión: acercar Soluciones Informáticas reales, con tecnología justa y empatía con el bolsillo de cada PyME.
+        </p>
+        <a class="brand-origin-link" href="/sobre-nosotros/">Conocé nuestra historia y equipo →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Resultados que hablan (componente reutilizable) -->
   <SocialProofSection />
+
+  <!-- Lead Magnet: Checklist de Automatización -->
+  <section class="section section--alt lead-magnet-banner">
+    <div class="container lead-magnet-card">
+      <div class="lead-magnet-content">
+        <span class="lead-magnet-tag">RECURSO GRATUITO PARA PYMES</span>
+        <h3>¿Tu negocio necesita automatización?</h3>
+        <p>
+          Descargá nuestro checklist en PDF y detectá en 5 minutos qué tareas repetitivas te están costando horas y dinero. Sin registros complicados.
+        </p>
+      </div>
+      <div class="lead-magnet-action">
+        <a class="hero__cta hero__cta--form" href="/checklist-automatizacion/">
+          Descargar Checklist Gratis (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
 
   <section id="faq" class="section">
     <div class="container">
@@ -96,3 +121,91 @@ import FaqSection from '../components/FaqSection.astro';
   </section>
 
 </Layout>
+
+<style>
+  .brand-identity-note {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  .brand-origin-box {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-left: 4px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    max-width: 840px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+  .brand-origin-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-xs);
+  }
+  .brand-origin-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-sm);
+  }
+  .brand-origin-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--tertiary-dark);
+    text-decoration: underline;
+  }
+  .brand-origin-link:hover {
+    color: var(--primary);
+  }
+  .lead-magnet-banner {
+    padding: var(--spacing-xxl) var(--spacing-md);
+  }
+  .lead-magnet-card {
+    background: #FFFFFF;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+  }
+  @media (min-width: 768px) {
+    .lead-magnet-card {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  .lead-magnet-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+    display: block;
+    margin-bottom: var(--spacing-xs);
+  }
+  .lead-magnet-content h3 {
+    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-xs);
+  }
+  .lead-magnet-content p {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+  .lead-magnet-action .hero__cta {
+    width: 100%;
+    max-width: 360px;
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+  }
+</style>

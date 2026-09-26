@@ -6,6 +6,7 @@
 import LogoBrand from './LogoBrand.astro';
 import config from '../config/site.json';
 import { getNavServicios } from '../lib/data-utils';
+import { Menu, ChevronDown } from 'lucide-astro';
 
 // En Astro, el import de config devuelve el JSON parseado.
 const configLinks = config.nav.links;
@@ -357,7 +358,7 @@ const links = configLinks.map((link) =>
         aria-controls="nav-menu"
         aria-expanded="false"
       >
-        ☰
+        <Menu size={22} aria-hidden="true" />
       </button>
       <ul id="nav-menu" class="nav-menu-mobile">
         {links.map((link) => (
@@ -365,8 +366,9 @@ const links = configLinks.map((link) =>
             {link.submenu ? (
               <li>
                 <details class="nav-mobile-group">
-                  <summary class="nav-link" style="cursor:pointer; list-style:none;">
-                    {link.label} <span style="float:right;">▼</span>
+                  <summary class="nav-link" style="cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between;">
+                    <span>{link.label}</span>
+                    <ChevronDown size={16} aria-hidden="true" />
                   </summary>
                   {link.submenu.map((sub) => (
                     <a class="nav-link" href={sub.href} style="padding:6px 0; border-bottom:none;">

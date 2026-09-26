@@ -1,5 +1,7 @@
 ---
 import Layout from './Layout.astro';
+import IconResolver from '../components/ui/IconResolver.astro';
+import { AlertTriangle } from 'lucide-astro';
 
 interface Metric {
   value: string;
@@ -104,7 +106,11 @@ const {
         {solutions.map((s) => (
           <article class="service-card">
             <div class="service-card__icon">
-              {s.imagen ? <img src={s.imagen} alt={s.title} loading="lazy" /> : <span aria-hidden="true">{s.icon}</span>}
+              {s.imagen ? (
+                <img src={s.imagen} alt={s.title} loading="lazy" />
+              ) : (
+                <IconResolver name={s.icon} size={28} />
+              )}
             </div>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
@@ -152,8 +158,9 @@ const {
     <section class="section">
       <div class="container">
         <div class="case-disclaimer" style="padding:var(--spacing-md);background:#FFF3CD;border-radius:var(--rounded-sm);border:1.5px solid #FFD93D;">
-          <p style="margin:0;font-size:0.9rem;color:#856404;">
-            <strong>⚠️ Nota importante:</strong> {disclaimer}
+          <p style="margin:0;font-size:0.9rem;color:#856404;display:flex;align-items:flex-start;gap:8px;">
+            <AlertTriangle size={18} color="#D97706" aria-hidden="true" style="flex-shrink:0;margin-top:2px;" />
+            <span><strong>Nota importante:</strong> {disclaimer}</span>
           </p>
         </div>
       </div>

@@ -1,0 +1,282 @@
+---
+// Componente: Casos de éxito anónimos con formato fijo
+// Formato: Problema → Solución justa → Resultado medible
+// Estático (sin JS), carga ultra rápida, diseño responsive
+import casosData from '../data/casos-anonimos.json';
+import { MapPin, AlertCircle, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-astro';
+
+interface Props {
+  servicioId?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  servicioId,
+  title = "Casos reales con resultados medibles",
+  subtitle = "Tecnología justa aplicada a PyMEs y comercios de Rosario. Sin modas ni sobrecostos: soluciones que funcionan."
+} = Astro.props;
+
+const casos = servicioId
+  ? casosData.filter((c) => c.servicio_id === servicioId)
+  : casosData;
+---
+
+<section class="casos-anonimos-section">
+  <div class="container">
+    <div class="casos-header">
+      <p class="casos-label">EXPERIENCIA COMPROBADA</p>
+      <h2 class="section__title">{title}</h2>
+      <p class="section__subtitle">{subtitle}</p>
+    </div>
+
+    <div class="casos-grid">
+      {casos.map((caso) => (
+        <article class="caso-card">
+          <div class="caso-card__meta">
+            <span class="caso-badge">{caso.rubro}</span>
+            <span class="caso-location">
+              <MapPin size={13} aria-hidden="true" />
+              <span>{caso.ubicacion}</span>
+            </span>
+          </div>
+
+          <h3 class="caso-card__title">{caso.titulo}</h3>
+
+          <div class="caso-flow">
+            <div class="flow-step flow-step--problema">
+              <div class="flow-step__header">
+                <span class="step-indicator step-indicator--danger">
+                  <AlertCircle size={14} aria-hidden="true" />
+                </span>
+                <h4 class="flow-step__title">Problema</h4>
+              </div>
+              <p class="flow-step__desc">{caso.problema}</p>
+            </div>
+
+            <div class="flow-step flow-step--solucion">
+              <div class="flow-step__header">
+                <span class="step-indicator step-indicator--primary">
+                  <CheckCircle2 size={14} aria-hidden="true" />
+                </span>
+                <h4 class="flow-step__title">Solución justa</h4>
+              </div>
+              <p class="flow-step__desc">{caso.solucion_justa}</p>
+            </div>
+
+            <div class="flow-step flow-step--resultado">
+              <div class="flow-step__header">
+                <span class="step-indicator step-indicator--success">
+                  <TrendingUp size={14} aria-hidden="true" />
+                </span>
+                <h4 class="flow-step__title">Resultado medible</h4>
+              </div>
+              <p class="flow-step__desc flow-step__desc--highlight">{caso.resultado_medible}</p>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="casos-footer-cta">
+      <p class="casos-footer-cta__text">¿Tenés un cuello de botella similar en tu negocio?</p>
+      <a class="hero__cta hero__cta--form" href="/contacto/">
+        <span>Te decimos qué necesitás… y qué no. Consulta sin cargo</span>
+        <ArrowRight size={16} aria-hidden="true" />
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .casos-anonimos-section {
+    padding: var(--spacing-xxl) var(--spacing-md);
+    background: var(--neutral);
+  }
+
+  .casos-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .casos-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .casos-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .casos-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .caso-card {
+    background: var(--surface);
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .caso-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .caso-card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .caso-badge {
+    background: #F3F4F6;
+    color: var(--primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: var(--rounded-full);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .caso-location {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .caso-card__title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-md);
+    line-height: 1.35;
+  }
+
+  .caso-flow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    flex-grow: 1;
+  }
+
+  .flow-step {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--rounded-sm);
+    background: #FAFBFD;
+    border-left: 3px solid #CBD5E1;
+  }
+
+  .flow-step--problema {
+    border-left-color: #EF4444;
+    background: #FEF2F2;
+  }
+
+  .flow-step--solucion {
+    border-left-color: var(--tertiary);
+    background: #EFF6FF;
+  }
+
+  .flow-step--resultado {
+    border-left-color: #10B981;
+    background: #ECFDF5;
+  }
+
+  .flow-step__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .step-indicator {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .step-indicator--danger {
+    background: #FEE2E2;
+    color: #DC2626;
+  }
+
+  .step-indicator--primary {
+    background: #DBEAFE;
+    color: var(--tertiary-dark);
+  }
+
+  .step-indicator--success {
+    background: #D1FAE5;
+    color: #059669;
+  }
+
+  .flow-step__title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .flow-step__desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  .flow-step__desc--highlight {
+    font-weight: 600;
+    color: #065F46;
+  }
+
+  .casos-footer-cta {
+    margin-top: var(--spacing-xl);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .casos-footer-cta__text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  .casos-footer-cta .hero__cta {
+    width: 100%;
+    max-width: 520px;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: normal;
+    text-align: center;
+  }
+</style>

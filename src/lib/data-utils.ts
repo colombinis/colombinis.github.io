@@ -28,6 +28,8 @@ interface Servicio {
   hero_label: string;
   categoria_section_title: string;
   categorias_ids: string[];
+  seo_title?: string;
+  seo_description?: string;
 }
 
 interface Categoria {
@@ -120,7 +122,7 @@ interface DatosNormalizados {
  * Analogia: "Eloquent::all()" pero para los archivos JSON.
  */
 function loadCache(): DatosNormalizados {
-  if (_cache) return _cache as DatosNormalizados;
+  if (process.env.NODE_ENV === 'production' && _cache) return _cache as DatosNormalizados;
 
   const servicios: Servicio[] = [];
   const categorias: Categoria[] = [];

@@ -7,7 +7,9 @@
 import Layout from '../../layouts/Layout.astro';
 import SolucionesSection from '../../components/SolucionesSection.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
+import CasosAnonimosSection from '../../components/CasosAnonimosSection.astro';
 import { getServicio, getCategoriasByServicio, getTestimoniosByServicio } from '../../lib/data-utils';
+import { Check } from 'lucide-astro';
 
 interface Props {
   params: { servicio: string };
@@ -41,8 +43,8 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
 ---
 
 <Layout
-  title={`${svcTitle} · Rosario`}
-  description={svcShort}
+  title={servicio.seo_title || `${svcTitle} para PyMEs en Rosario`}
+  description={servicio.seo_description || svcShort}
 >
   <!-- Hero -->
   <section class="hero">
@@ -52,6 +54,10 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
       <p class="hero__subtitle">
         {svcShort}
       </p>
+      <div class="service-value-pills">
+        <span class="value-pill"><Check size={14} aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:4px;" />Elegimos la tecnología adecuada, no la de moda</span>
+        <span class="value-pill"><Check size={14} aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:4px;" />Entendemos lo que cuesta cada peso</span>
+      </div>
       <div class="hero__actions">
         <a
           class="hero__cta hero__cta--form"
@@ -84,6 +90,13 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
     </div>
   </section>
 
+  <!-- Casos anónimos de éxito del servicio (Problema → Solución justa → Resultado medible) -->
+  <CasosAnonimosSection
+    servicioId={servicio.id}
+    title={`Casos reales de ${svcTitle}`}
+    subtitle="Tecnología justa aplicada: problema concreto, solución sin sobrecostos y resultado medible."
+  />
+
   <!-- Testimonios / Social proof -->
   {testimoniosData && (
     <section class="section section--alt">
@@ -113,5 +126,26 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
     font-weight: 600;
     color: var(--tertiary);
     margin-top: var(--spacing-xs);
+  }
+  .service-value-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin: 0 auto var(--spacing-lg);
+    max-width: 680px;
+  }
+  .value-pill {
+    background: #EBF4FF;
+    color: var(--tertiary-dark);
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.35;
+    padding: 6px 14px;
+    border-radius: var(--rounded-full);
+    border: 1px solid rgba(10, 124, 255, 0.2);
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 </style>

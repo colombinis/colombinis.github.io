@@ -21,6 +21,7 @@
 //   - Build-time: getServicios() + getCategoriasByServicio() popular el select jerarquizado.
 import { getServicios, getCategoriasByServicio } from '../lib/data-utils';
 import config from '../config/site.json';
+import { CheckCircle2 } from 'lucide-astro';
 
 interface Props {
   categoria?: string;
@@ -31,7 +32,7 @@ interface Props {
 
 const { categoria, source, defaultToOtros = false } = Astro.props as Props;
 const formEndpoint = config.contact.form_endpoint;
-const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20quiero%20saber%20m%C3%A1s%20sobre%20sus%20soluciones`;
+const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20SACsi,%20quiero%20hacer%20una%20consulta%20sin%20cargo%20para%20mi%20negocio`;
 
 // Jerarquía servicio -> categorías (fuente de verdad: data-utils).
 const servicios = getServicios().map((svc) => ({
@@ -108,14 +109,17 @@ const sourceDefault = source ?? 'contacto-progresivo';
   <div class="cf-turnstile" data-sitekey={config.contact.turnstile_site_key} data-theme="light" data-size="compact"></div>
 
   <!-- Botón único de envío -->
-  <button type="submit" class="btn btn--primary" id="pf-submit">Enviar mensaje</button>
+  <button type="submit" class="btn btn--primary" id="pf-submit">Enviar consulta sin cargo</button>
 
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>
 
 <!-- Thank-you state: reemplaza el form después de envío exitoso -->
 <div class="form-thankyou" style="display:none;">
-  <p class="form-thankyou__title">¡Mensaje enviado! ✅</p>
+  <p class="form-thankyou__title" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+    <CheckCircle2 size={24} color="#059669" aria-hidden="true" />
+    <span>¡Mensaje enviado con éxito!</span>
+  </p>
   <p class="form-thankyou__text">Te respondemos en 24 horas hábiles.</p>
 </div>
 
@@ -326,12 +330,15 @@ const sourceDefault = source ?? 'contacto-progresivo';
         return;
       }
 
-      // Validar Turnstile
+      // Validar Turnstile si el widget está activo en la página
+      var turnstileContainer = form.querySelector('.cf-turnstile');
       var turnstileToken = form.querySelector('input[name="cf-turnstile-response"]');
-      if (!turnstileToken || !turnstileToken.value) {
-        statusEl.textContent = 'Completá la verificación de seguridad.';
-        statusEl.className = 'form-status form-status--error';
-        return;
+      if (turnstileContainer && window.turnstile && typeof window.turnstile.render === 'function') {
+        if (!turnstileToken || !turnstileToken.value) {
+          statusEl.textContent = 'Completá la verificación de seguridad.';
+          statusEl.className = 'form-status form-status--error';
+          return;
+        }
       }
 
       window.dataLayer = window.dataLayer || [];

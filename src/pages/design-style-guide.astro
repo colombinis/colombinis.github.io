@@ -1,0 +1,787 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Input from '../components/ui/Input.astro';
+import Textarea from '../components/ui/Textarea.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import Tabs from '../components/ui/Tabs.astro';
+import SliderControls from '../components/ui/SliderControls.astro';
+import IconResolver from '../components/ui/IconResolver.astro';
+import {
+  ArrowRight,
+  ShieldCheck,
+  Check,
+  CheckCircle2,
+  AlertCircle,
+  TrendingUp,
+  MapPin,
+  Lock,
+  MessageSquare,
+  Wrench,
+  Search,
+  ExternalLink,
+  Code2,
+  Sliders,
+  Sparkles,
+  Terminal,
+  Cpu,
+  BarChart3,
+  Package,
+  Layers
+} from 'lucide-astro';
+
+// Datos de demostración para acordeón
+const faqDemo = [
+  {
+    id: 'pyme-justa',
+    title: '¿Qué significa "Tecnología Justa" para una PyME?',
+    content: 'Significa diseñar e implementar únicamente la tecnología que resuelve el cuello de botella actual de tu operación. Sin sobredimensionar servidores, sin obligarte a contratar licencias corporativas innecesarias y cuidando el retorno de cada inversión.'
+  },
+  {
+    id: 'tiempos-implementacion',
+    title: '¿Cuánto demora una automatización o sistema a medida?',
+    content: 'Un flujo de sincronización o automatización puntual suele desplegarse en 1 a 2 semanas. Desarrollos a medida más integrales se entregan de forma modular en ciclos ágiles de 3 a 4 semanas con entregables funcionales en cada etapa.'
+  },
+  {
+    id: 'primera-consulta',
+    title: '¿Cómo funciona la primera conversación sin cargo?',
+    content: 'Coordinamos una charla de 20 minutos por videollamada o WhatsApp. Nos contás tus procesos manuales y te decimos con franqueza si conviene avanzar con tecnología o si podés resolverlo con un ajuste organizativo sin costo.'
+  }
+];
+
+// Pestañas de demostración
+const tabsDemo = [
+  { id: 'overview', label: 'Visión General' },
+  { id: 'tokens', label: 'Tokens de Diseño' },
+  { id: 'code-snippet', label: 'Ejemplo de Código' }
+];
+---
+
+<Layout
+  title="Guía de Componentes y Sistema de Diseño · SACsi"
+  description="Guía viva de componentes, tokens y patrones de interfaz para SACsi. Arquitectura limpia inspirada en shadcn/ui y tokens de DESIGN.md."
+>
+  <div class="guide-hero">
+    <div class="container">
+      <div class="guide-hero__badge">
+        <Badge variant="accent">
+          <Terminal size={13} aria-hidden="true" />
+          <span>SISTEMA DE DISEÑO VIVO</span>
+        </Badge>
+      </div>
+      <h1 class="guide-hero__title">Guía de Componentes de SACsi</h1>
+      <p class="guide-hero__subtitle">
+        Catálogo navegable de patrones, controles interactivos y tokens visuales probados en producción. Construido bajo la filosofía de <strong>Tecnología Justa</strong>, sin elementos genéricos de IA ni emojis decorativos.
+      </p>
+
+      <!-- Barra de navegación rápida -->
+      <nav class="guide-nav" aria-label="Navegación del sistema de diseño">
+        <a href="#tokens" class="guide-nav__link">Tokens</a>
+        <a href="#botones" class="guide-nav__link">Botones</a>
+        <a href="#tarjetas" class="guide-nav__link">Tarjetas</a>
+        <a href="#formularios" class="guide-nav__link">Formularios</a>
+        <a href="#controles" class="guide-nav__link">Controles & Sliders</a>
+        <a href="#acordeon" class="guide-nav__link">Acordeón</a>
+        <a href="#iconos" class="guide-nav__link">Iconografía</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container guide-content">
+
+    <!-- 1. TOKENS -->
+    <section id="tokens" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>1. Tokens Fundamentales (DESIGN.md)</h2>
+        <p>Paleta sobria con un 60% de superficie neutra, 30% estructural y 10% de acento de interacción.</p>
+      </div>
+
+      <div class="swatches-grid">
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#1A1A2E;"></div>
+          <div class="swatch-info">
+            <strong>Primary</strong>
+            <code>#1A1A2E</code>
+            <span>Navy profundo / Encabezados</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#0A7CFF;"></div>
+          <div class="swatch-info">
+            <strong>Tertiary / Accent</strong>
+            <code>#0A7CFF</code>
+            <span>Azul eléctrico interactivo</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#25D366;"></div>
+          <div class="swatch-info">
+            <strong>WhatsApp</strong>
+            <code>#25D366</code>
+            <span>Canal directo de conversión</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#444444;"></div>
+          <div class="swatch-info">
+            <strong>Secondary</strong>
+            <code>#444444</code>
+            <span>Texto corporal (WCAG AA)</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#FAFAFA; border:1px solid #E2E8F0;"></div>
+          <div class="swatch-info">
+            <strong>Neutral Canvas</strong>
+            <code>#FAFAFA</code>
+            <span>Fondo general suave</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#FFFFFF; border:1px solid #E2E8F0;"></div>
+          <div class="swatch-info">
+            <strong>Surface</strong>
+            <code>#FFFFFF</code>
+            <span>Tarjetas y formularios</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BOTONES -->
+    <section id="botones" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>2. Botones & Acciones (Button.astro)</h2>
+        <p>Inspirados en las primitivas de shadcn/ui con soporte de foco accesible, estados activos y slots de iconos.</p>
+      </div>
+
+      <div class="component-showcase">
+        <div class="showcase-row">
+          <span class="showcase-label">Variantes principales:</span>
+          <div class="btn-group-wrap">
+            <Button variant="primary">
+              <span>Consulta sin cargo</span>
+              <ArrowRight slot="icon-end" size={16} />
+            </Button>
+
+            <Button variant="secondary">
+              <Code2 slot="icon-start" size={16} />
+              <span>Ver especificaciones</span>
+            </Button>
+
+            <Button variant="outline">
+              <span>Descargar recurso</span>
+            </Button>
+
+            <Button variant="whatsapp" href="https://api.whatsapp.com/send?phone=5493415197937" target="_blank">
+              <MessageSquare slot="icon-start" size={16} />
+              <span>Contactar por WhatsApp</span>
+            </Button>
+
+            <Button variant="ghost">
+              <span>Cancelar</span>
+            </Button>
+
+            <Button variant="link" href="/contacto/">
+              <span>Más información →</span>
+            </Button>
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Escala de tamaños:</span>
+          <div class="btn-group-wrap" style="align-items:center;">
+            <Button size="sm" variant="secondary">Pequeño (sm)</Button>
+            <Button size="md" variant="primary">Predeterminado (md)</Button>
+            <Button size="lg" variant="primary">Llamada Hero (lg)</Button>
+            <Button size="icon" variant="outline" aria-label="Buscar">
+              <Search size={16} />
+            </Button>
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Estados deshabilitados:</span>
+          <div class="btn-group-wrap">
+            <Button variant="primary" disabled>Enviando datos...</Button>
+            <Button variant="outline" disabled>No disponible</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TARJETAS & BENTO -->
+    <section id="tarjetas" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>3. Tarjetas & Contenedores (Card.astro)</h2>
+        <p>Estructuras limpias con bordes sutiles y elevación única en interacción.</p>
+      </div>
+
+      <div class="cards-preview-grid">
+        <Card variant="default">
+          <div class="card-demo-header">
+            <Badge variant="neutral">ESTÁTICA</Badge>
+            <h3>Tarjeta Estándar</h3>
+          </div>
+          <p>Superficie blanca con borde de 1px en color pizarra neutro. Ideal para agrupaciones de contenido informativo o secciones de apoyo.</p>
+          <div class="card-demo-footer">
+            <span class="text-xs text-muted">Contenedor pasivo</span>
+          </div>
+        </Card>
+
+        <Card variant="interactive" href="#tarjetas">
+          <div class="card-demo-header">
+            <Badge variant="accent">INTERACTIVA</Badge>
+            <h3>Tarjeta Cliqueable</h3>
+          </div>
+          <p>Reacciona al hover con una suave elevación de 3px y profundización de sombra. Incluye accesibilidad nativa para teclado.</p>
+          <div class="card-demo-footer">
+            <span class="text-xs text-blue">Hacé clic para probar hover →</span>
+          </div>
+        </Card>
+
+        <Card variant="accent">
+          <div class="card-demo-header">
+            <Badge variant="success">DESTACADA</Badge>
+            <h3>Propuesta Justa</h3>
+          </div>
+          <p>Borde y resplandor sutil en azul institucional. Se utiliza en el lead magnet o en las ofertas principales de valor.</p>
+          <div class="card-demo-footer">
+            <Button size="sm" variant="primary">Acción directa</Button>
+          </div>
+        </Card>
+      </div>
+    </section>
+
+    <!-- 4. FORMULARIOS -->
+    <section id="formularios" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>4. Controles de Formulario (Input / Textarea)</h2>
+        <p>Entradas de texto accesibles con anillos de enfoque contrastados y soporte de mensajes de error.</p>
+      </div>
+
+      <div class="form-preview-grid">
+        <div class="form-preview-col">
+          <Input
+            id="guide-demo-name"
+            label="Nombre y apellido"
+            placeholder="Ej: Marcelo Rossi"
+            required={true}
+            helperText="Ingresá el nombre de la persona de contacto."
+          />
+
+          <Input
+            id="guide-demo-email"
+            type="email"
+            label="Correo corporativo"
+            placeholder="marcelo@distribuidorapyme.com.ar"
+            required={true}
+          />
+        </div>
+
+        <div class="form-preview-col">
+          <Input
+            id="guide-demo-error"
+            label="Campo con validación activa"
+            value="correo-invalido"
+            error="El formato del correo ingresado no es válido."
+          />
+
+          <Textarea
+            id="guide-demo-msg"
+            label="Descripción del proyecto o duda"
+            rows={3}
+            placeholder="Contanos brevemente qué proceso te gustaría automatizar o mejorar..."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TABS & CONTROLES DE SLIDER -->
+    <section id="controles" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>5. Controles Interactivos & Segmentados (Tabs & Sliders)</h2>
+        <p>Navegación por pestañas y barras de control para carruseles, testeados y sin librerías pesadas.</p>
+      </div>
+
+      <div class="controls-preview-box">
+        <div class="controls-preview-sub">
+          <h3>Pestañas Segmentadas (Tabs.astro)</h3>
+          <p class="text-sm text-muted">Controles de selección limpios con tablist accesible:</p>
+
+          <Tabs tabs={tabsDemo} defaultTab="overview">
+            <div id="tab-panel-overview" role="tabpanel" aria-labelledby="tab-btn-overview">
+              <div class="tab-content-box">
+                <h4>Filosofía de Arquitectura de SACsi</h4>
+                <p>Nuestras interfaces son 100% estáticas compiladas en Astro v7. Maximizamos el rendimiento reduciendo al mínimo la carga de JavaScript y privilegiando la velocidad de navegación en conexiones móviles de Argentina.</p>
+              </div>
+            </div>
+
+            <div id="tab-panel-tokens" role="tabpanel" aria-labelledby="tab-btn-tokens" hidden>
+              <div class="tab-content-box">
+                <h4>Tokens Integrados</h4>
+                <p>Los componentes consumen directamente las variables CSS de <code>global.css</code> sincronizadas con <code>DESIGN.md</code>, asegurando consistencia total en toda la aplicación.</p>
+              </div>
+            </div>
+
+            <div id="tab-panel-code-snippet" role="tabpanel" aria-labelledby="tab-btn-code-snippet" hidden>
+              <div class="tab-content-box">
+                <pre class="code-preview"><code>&lt;Button variant="primary" href="/contacto/"&gt;
+  &lt;span&gt;Consulta sin cargo&lt;/span&gt;
+  &lt;ArrowRight slot="icon-end" size={16} /&gt;
+&lt;/Button&gt;</code></pre>
+              </div>
+            </div>
+          </Tabs>
+        </div>
+
+        <div class="controls-preview-sub">
+          <h3>Controles de Slider / Carrusel (SliderControls.astro)</h3>
+          <p class="text-sm text-muted">Botoneras prev/next y dots de navegación con feedback visual:</p>
+          <div class="slider-controls-wrap">
+            <SliderControls totalSlides={4} currentSlide={0} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ACORDEÓN -->
+    <section id="acordeon" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>6. Acordeón Desplegable (Accordion.astro)</h2>
+        <p>Estructura probada para Preguntas Frecuentes con animación suave de apertura y rotación de flecha.</p>
+      </div>
+
+      <div class="accordion-container-wrap">
+        <Accordion items={faqDemo} />
+      </div>
+    </section>
+
+    <!-- 7. ICONOGRAFÍA & CERO-EMOJIS -->
+    <section id="iconos" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>7. Iconografía Vectorial (Lucide Icons)</h2>
+        <p>Reemplazo estricto de cualquier emoticón por iconos SVG geométricos y profesionales.</p>
+      </div>
+
+      <div class="icons-grid">
+        <div class="icon-sample">
+          <ShieldCheck size={24} color="#0A7CFF" />
+          <span>ShieldCheck (Confianza)</span>
+        </div>
+        <div class="icon-sample">
+          <CheckCircle2 size={24} color="#059669" />
+          <span>CheckCircle2 (Éxito)</span>
+        </div>
+        <div class="icon-sample">
+          <AlertCircle size={24} color="#DC2626" />
+          <span>AlertCircle (Problema)</span>
+        </div>
+        <div class="icon-sample">
+          <TrendingUp size={24} color="#065F46" />
+          <span>TrendingUp (Métricas)</span>
+        </div>
+        <div class="icon-sample">
+          <Wrench size={24} color="#1A1A2E" />
+          <span>Wrench (Solución justa)</span>
+        </div>
+        <div class="icon-sample">
+          <MapPin size={24} color="#64748B" />
+          <span>MapPin (Ubicación Rosario)</span>
+        </div>
+        <div class="icon-sample">
+          <Lock size={24} color="#475569" />
+          <span>Lock (Seguridad)</span>
+        </div>
+        <div class="icon-sample">
+          <BarChart3 size={24} color="#0A7CFF" />
+          <span>BarChart3 (Reportes)</span>
+        </div>
+        <div class="icon-sample">
+          <Package size={24} color="#0A7CFF" />
+          <span>Package (Stock/Logística)</span>
+        </div>
+        <div class="icon-sample">
+          <Layers size={24} color="#1A1A2E" />
+          <span>Layers (Arquitectura)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANNER DE RETORNO -->
+    <section class="guide-footer-banner">
+      <div class="guide-footer-box">
+        <h3>¿Querés volver al sitio principal?</h3>
+        <p>Todos estos componentes se encuentran integrados en la página de inicio, servicios y flujo de contacto.</p>
+        <div class="guide-footer-actions">
+          <Button variant="primary" href="/">Volver al Inicio</Button>
+          <Button variant="outline" href="/contacto/">Ir a Contacto</Button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  .guide-hero {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    padding: var(--spacing-xxl) var(--spacing-md) var(--spacing-xl);
+    text-align: center;
+  }
+
+  .guide-hero__badge {
+    display: inline-flex;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .guide-hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: var(--primary, #1A1A2E);
+    margin: 0 0 var(--spacing-sm);
+    letter-spacing: -0.02em;
+  }
+
+  .guide-hero__subtitle {
+    font-size: 1.05rem;
+    color: var(--secondary, #444444);
+    max-width: 680px;
+    margin: 0 auto var(--spacing-xl);
+    line-height: 1.6;
+  }
+
+  .guide-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+  }
+
+  .guide-nav__link {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--muted, #64748B);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: var(--rounded-full, 100px);
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    transition: all 0.15s ease;
+  }
+
+  .guide-nav__link:hover {
+    color: var(--primary, #1A1A2E);
+    border-color: #CBD5E1;
+    background-color: #F1F5F9;
+  }
+
+  .guide-content {
+    padding: var(--spacing-xxl) var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxl);
+  }
+
+  .guide-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .section-title-wrap h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary, #1A1A2E);
+    margin: 0 0 4px;
+  }
+
+  .section-title-wrap p {
+    font-size: 0.95rem;
+    color: var(--muted, #64748B);
+    margin: 0;
+  }
+
+  /* Swatches */
+  .swatches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 16px;
+  }
+
+  .swatch-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-sm, 8px);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+
+  .swatch-color {
+    height: 70px;
+    width: 100%;
+  }
+
+  .swatch-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .swatch-info strong {
+    font-size: 0.875rem;
+    color: var(--primary, #1A1A2E);
+  }
+
+  .swatch-info code {
+    font-size: 0.75rem;
+    color: var(--tertiary-dark, #0066CC);
+    font-family: monospace;
+  }
+
+  .swatch-info span {
+    font-size: 0.75rem;
+    color: var(--muted, #64748B);
+  }
+
+  /* Component showcase box */
+  .component-showcase {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+  }
+
+  .showcase-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .showcase-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted, #64748B);
+  }
+
+  .btn-group-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  /* Cards grid */
+  .cards-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .cards-preview-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card-demo-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .card-demo-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .card-demo-footer {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid #F1F5F9;
+  }
+
+  .text-xs {
+    font-size: 0.8rem;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .text-muted {
+    color: var(--muted, #64748B);
+  }
+
+  .text-blue {
+    color: var(--tertiary-dark, #0066CC);
+    font-weight: 600;
+  }
+
+  /* Forms preview */
+  .form-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .form-preview-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-preview-col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  /* Controls preview box */
+  .controls-preview-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-xl);
+  }
+
+  @media (min-width: 860px) {
+    .controls-preview-box {
+      grid-template-columns: 1.2fr 0.8fr;
+    }
+  }
+
+  .controls-preview-sub h3 {
+    font-size: 1.15rem;
+    margin: 0 0 4px;
+  }
+
+  .tab-content-box {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-sm, 8px);
+    padding: var(--spacing-lg);
+  }
+
+  .tab-content-box h4 {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 1rem;
+    color: var(--primary, #1A1A2E);
+  }
+
+  .tab-content-box p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--secondary, #444444);
+    line-height: 1.5;
+  }
+
+  .code-preview {
+    background: #1A1A2E;
+    color: #F8FAFC;
+    padding: 14px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .slider-controls-wrap {
+    margin-top: var(--spacing-md);
+  }
+
+  /* Accordion wrap */
+  .accordion-container-wrap {
+    max-width: 840px;
+  }
+
+  /* Icons grid */
+  .icons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .icon-sample {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-sm, 8px);
+    padding: 16px 10px;
+    text-align: center;
+    transition: transform 0.15s ease;
+  }
+
+  .icon-sample:hover {
+    transform: translateY(-2px);
+    border-color: #CBD5E1;
+  }
+
+  .icon-sample span {
+    font-size: 0.75rem;
+    color: var(--secondary, #444444);
+    font-weight: 500;
+  }
+
+  /* Footer banner */
+  .guide-footer-banner {
+    padding-top: var(--spacing-lg);
+  }
+
+  .guide-footer-box {
+    background: #FFFFFF;
+    border: 2px solid var(--tertiary, #0A7CFF);
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-xl);
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(10, 124, 255, 0.08);
+  }
+
+  .guide-footer-box h3 {
+    margin: 0 0 var(--spacing-xs);
+    font-size: 1.35rem;
+  }
+
+  .guide-footer-box p {
+    margin: 0 0 var(--spacing-lg);
+    font-size: 0.95rem;
+    color: var(--secondary, #444444);
+  }
+
+  .guide-footer-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

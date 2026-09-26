@@ -1,0 +1,62 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1197 >>
+stream
+BT
+/F1 20 Tf
+50 740 Td
+(SACsi - Soluciones Informaticas) Tj
+/F1 14 Tf
+0 -30 Td
+(Checklist: Tu negocio necesita automatizacion?) Tj
+/F1 10 Tf
+0 -24 Td
+(Tecnologia justa para PyMEs y emprendedores sin modas ni sobrecostos) Tj
+0 -30 Td
+(1. TAREAS REPETITIVAS: Copias datos a mano entre WhatsApp, Excel o AFIP? (+5 hs/sem) ) Tj
+0 -20 Td
+(2. FACTURACION MANUAL: Emites facturas una por una con demoras a fin de mes? ) Tj
+0 -20 Td
+(3. CONTROL DE STOCK: Ocurren faltantes o errores de despacho por inventario desfasado? ) Tj
+0 -20 Td
+(4. ATENCION AL CLIENTE: Respondes siempre las mismas dudas sobre precios o estados? ) Tj
+0 -20 Td
+(5. REPORTES DISPERSOS: Tardas dias en saber cuanto vendiste y cuanto ganaste? ) Tj
+0 -35 Td
+(INTERPRETACION DE RESULTADOS:) Tj
+0 -18 Td
+(- Si marcaste 1 o 2: Con pequeños scripts de sincronizacion liberas hasta 10 hs semanales.) Tj
+0 -18 Td
+(- Si marcaste 3 o mas: Tu operacion esta perdiendo margen y clientes por desorganizacion.) Tj
+0 -35 Td
+(Filosofia SACsi: Elegimos la tecnologia adecuada, no la de moda. Entendemos lo que cuesta cada peso.) Tj
+0 -20 Td
+(Contacto y primera consulta sin cargo: https://sacsi.com.ar/contacto/ | WhatsApp: +54 9 341 519-7937) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001489 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1559
+%%EOF
