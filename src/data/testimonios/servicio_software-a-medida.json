@@ -1,27 +1,24 @@
 {
   "servicio_id": "software-a-medida",
-  "section_title": "Nuestro enfoque",
+  "section_title": "Resultados medibles en clientes",
   "testimonios": [
     {
-      "quote": "El equipo de SACsi no solo entrega código, entiende el negocio. Se tomaron el tiempo de conocer nuestros procesos y nos ayudaron a mejorarlos.",
-      "autor": "Romina Paz",
-      "rol": "CEO — Grupo Logístico Central"
+      "quote": "Aumentamos un 40% los presupuestos concretados y logramos trazabilidad del 100% de las órdenes de trabajo de nuestros técnicos en la calle, sin perder comprobantes.",
+      "autor": "Gerente de Servicios",
+      "rol": "Empresa de Servicios Técnicos y Climatización",
+      "ubicacion": "Santa Fe"
     },
     {
-      "quote": "Dejé de ser la secretaria de mis propios cursos. Ahora la academia funciona sola: los alumnos entran, avanzan y se certifican mientras yo preparo el próximo contenido.",
-      "autor": " Academia de capacitación profesional",
-      "ubicacion": "Argentina"
+      "quote": "Entendieron nuestro flujo diario sin tecnicismos ni pretender vendernos un software gigante. Desarrollaron justo lo que necesitábamos y se redujo un 60% la carga administrativa.",
+      "autor": "Directora",
+      "rol": "Centro de Atención y Consultorios",
+      "ubicacion": "Santa Fe"
     },
     {
-      "quote": "El administrativo se redujo un 70%. Los pacientes reservan solos y yo me enfoco en atender.",
-      "autor": "Directora — Consultorio de psicología",
-      "ubicacion": "Rosario, Santa Fe"
-    },
-    {
-      "quote": "Contraté una hora técnica y resolví el problema en 30 minutos. No hizo falta un proyecto entero ni presupuestos largos.",
-      "autor": "Dueño — E-commerce WordPress",
-      "rol": "Rosario, Santa Fe",
-      "ubicacion": "Rosario, Santa Fe"
+      "quote": "Automatizamos el seguimiento de alumnos y certificaciones. La plataforma funciona de manera simple y robusta sin pagar licencias mensuales en dólares.",
+      "autor": "Coordinador Académico",
+      "rol": "Instituto de Formación Profesional",
+      "ubicacion": "Santa Fe"
     }
   ]
 }

@@ -42,8 +42,8 @@
     },
     {
       "id": "clientes-fuera-de-rosario",
-      "titulo": "¿Trabajan con empresas fuera de Rosario?",
-      "respuesta": "¡Sí! Trabajamos con clientes de toda Argentina y del exterior. Todo se coordina por videollamada, teléfono o mail. No hace falta que estés en Rosario.",
+      "titulo": "¿Trabajan con clientes fuera de su zona?",
+      "respuesta": "¡Sí! Aunque nacimos en Rosario, trabajamos con clientes de toda Argentina y del exterior de manera 100% remota por videollamada, teléfono o email.",
       "donde_mostrar": {
         "nivel": "general",
         "servicio": null,

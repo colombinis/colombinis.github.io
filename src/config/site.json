@@ -30,12 +30,22 @@
         "href": "/servicios/"
       },
       {
-        "label": "Cómo pensamos",
-        "href": "/como-pensamos/"
-      },
-      {
-        "label": "Checklist Gratis",
-        "href": "/checklist-automatizacion/"
+        "label": "Recursos gratis",
+        "href": "/recursos/",
+        "submenu": [
+          {
+            "label": "Checklist de Automatización",
+            "href": "/checklist-automatizacion/"
+          },
+          {
+            "label": "Cómo construir tu Identidad Digital",
+            "href": "/recursos/identidad-digital/"
+          },
+          {
+            "label": "Cómo implementar Inteligencia Artificial",
+            "href": "/recursos/inteligencia-artificial/"
+          }
+        ]
       },
       {
         "label": "Sobre nosotros",

@@ -1,0 +1,446 @@
+---
+// Página: Guía Práctica de Inteligencia Artificial para PyMEs
+import Layout from '../../layouts/Layout.astro';
+import config from '../../config/site.json';
+import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Sparkles } from 'lucide-astro';
+---
+
+<Layout
+  title="Cómo implementar Inteligencia Artificial en tu negocio · Guía Gratis | SACsi"
+  description="Guía realista y honesta de Inteligencia Artificial para PyMEs: qué herramientas funcionan de verdad hoy, qué costos evitar y cómo implementarla con tecnología justa."
+>
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">RECURSO GRATUITO · GUÍA PRÁCTICA</p>
+      <h1 class="hero__title">Cómo implementar Inteligencia Artificial en tu negocio sin caer en modas</h1>
+      <p class="hero__subtitle">
+        Una mirada honesta, práctica y enfocada en rentabilidad: qué soluciones resuelven problemas hoy en una PyME, qué sobrecostos evitar y cómo empezar paso a paso.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container guide-layout">
+      <!-- Contenido Principal -->
+      <article class="guide-content">
+        <div class="intro-box">
+          <p>
+            <strong>Regla número uno de la Tecnología Justa:</strong> Si tus procesos internos hoy están desordenados, agregar Inteligencia Artificial solo va a acelerar el desorden. Primero se ordenan los procedimientos; luego se potencian con la herramienta justa.
+          </p>
+        </div>
+
+        <h2>4 casos de uso reales donde la IA genera retorno hoy</h2>
+
+        <div class="ia-card">
+          <div class="ia-header">
+            <span class="ia-icon"><Bot size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="ia-tag">CASO DE USO 01</span>
+              <h3>1. Pre-atención y filtrado inteligente de consultas</h3>
+            </div>
+          </div>
+          <p>
+            En vez de obligar a tus vendedores a responder 50 veces por día "¿qué precio tiene?", "¿hacen envíos a Córdoba?" o "¿atienden los sábados?", un asistente inteligente entrenado exclusivamente con tu catálogo y preguntas frecuentes puede:
+          </p>
+          <ul class="ia-checks">
+            <li><Check size={16} aria-hidden="true" /> Responder de inmediato las 24 horas con el tono de tu negocio.</li>
+            <li><Check size={16} aria-hidden="true" /> Derivar con todos los datos clave cargados a un operador humano cuando el cliente está listo para comprar.</li>
+            <li><Check size={16} aria-hidden="true" /> Reducir en más de un 60% el tiempo de espera inicial.</li>
+          </ul>
+        </div>
+
+        <div class="ia-card">
+          <div class="ia-header">
+            <span class="ia-icon"><FileText size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="ia-tag">CASO DE USO 02</span>
+              <h3>2. Extracción de datos de facturas y presupuestos</h3>
+            </div>
+          </div>
+          <p>
+            Cargar a mano facturas de proveedores en PDF o planillas de Excel desalineadas insume decenas de horas al mes en administración. Con modelos de visión y lenguaje actuales:
+          </p>
+          <ul class="ia-checks">
+            <li><Check size={16} aria-hidden="true" /> La IA lee el documento adjunto y extrae CUIT, fecha, items, subtotales y percepciones.</li>
+            <li><Check size={16} aria-hidden="true" /> Los datos se envían automáticamente a tu sistema de gestión o planilla de control.</li>
+            <li><Check size={16} aria-hidden="true" /> Se eliminan los errores de tipeo humano en montos y números de comprobante.</li>
+          </ul>
+        </div>
+
+        <div class="ia-card">
+          <div class="ia-header">
+            <span class="ia-icon"><Cpu size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="ia-tag">CASO DE USO 03</span>
+              <h3>3. Asistentes internos con modelos locales (SLMs) y privacidad total</h3>
+            </div>
+          </div>
+          <p>
+            Muchas empresas temen subir información contable o de clientes a ChatGPT por privacidad. Hoy es posible correr modelos compactos (Small Language Models) directamente en la infraestructura propia de la empresa o en el navegador del usuario:
+          </p>
+          <ul class="ia-checks">
+            <li><Check size={16} aria-hidden="true" /> Tus datos nunca salen de tus dispositivos ni alimentan nubes de terceros.</li>
+            <li><Check size={16} aria-hidden="true" /> Costo cero por token o llamada una vez instalado.</li>
+            <li><Check size={16} aria-hidden="true" /> Ideal para búsquedas en manuales de procedimiento, contratos y reglamentos internos.</li>
+          </ul>
+        </div>
+
+        <div class="ia-card">
+          <div class="ia-header">
+            <span class="ia-icon"><Sparkles size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="ia-tag">CASO DE USO 04</span>
+              <h3>4. Aceleración en redacción y seguimiento comercial</h3>
+            </div>
+          </div>
+          <p>
+            Personalizar propuestas comerciales para cada cliente suele postergarse por falta de tiempo. Con prompts estructurados, tu equipo puede generar borradores de cotizaciones y mensajes de seguimiento adaptados al rubro de cada prospecto en minutos.
+          </p>
+        </div>
+
+        <h2>3 errores caros que debés evitar</h2>
+
+        <div class="warning-box">
+          <div class="warning-item">
+            <AlertTriangle size={20} color="#D97706" aria-hidden="true" />
+            <div>
+              <strong>1. Pagar licencias en dólares que nadie usa:</strong>
+              <p>Comprar suites de $30 o $50 USD mensuales por usuario para que solo usen el corrector ortográfico es tirar presupuesto. Empezá con soluciones puntuales.</p>
+            </div>
+          </div>
+
+          <div class="warning-item">
+            <AlertTriangle size={20} color="#D97706" aria-hidden="true" />
+            <div>
+              <strong>2. Creer que la IA reemplaza al criterio humano:</strong>
+              <p>La IA asiste y agiliza; la supervisión y la decisión comercial final siempre deben ser de personas que conocen tu negocio.</p>
+            </div>
+          </div>
+
+          <div class="warning-item">
+            <AlertTriangle size={20} color="#D97706" aria-hidden="true" />
+            <div>
+              <strong>3. Automatizar procesos que todavía cambian semana a semana:</strong>
+              <p>Solo conviene automatizar flujos estables y repetitivos. Si el proceso no está claro en un papel, la IA no lo va a ordenar por arte de magia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="action-summary-box">
+          <h3>¿Querés saber si tu empresa puede aprovechar IA hoy?</h3>
+          <p>
+            En 15 minutos analizamos tus tareas cotidianas y te decimos con franqueza si te conviene aplicar un modelo de IA o si tu problema se resuelve con una automatización tradicional más económica y simple.
+          </p>
+          <a class="hero__cta hero__cta--form" href="/contacto/?asunto=Consulta%20sobre%20IA">
+            Consultar sobre IA sin cargo ni compromiso
+          </a>
+        </div>
+      </article>
+
+      <!-- Sidebar -->
+      <aside class="guide-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-badge">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>TECNOLOGÍA JUSTA</span>
+          </div>
+          <h4>¿Buscás automatizar tareas repetitivas?</h4>
+          <p>
+            Conectamos sistemas, planillas, facturación y WhatsApp para que tu equipo recupere horas de trabajo operativo.
+          </p>
+          <a class="btn-sidebar" href="/servicios/automatizacion/">
+            <span>Conocé el servicio de Automatización</span>
+            <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+
+        <div class="sidebar-card sidebar-card--alt">
+          <h4>Otros recursos gratuitos</h4>
+          <ul class="sidebar-links">
+            <li>
+              <a href="/checklist-automatizacion/">
+                <strong>Checklist de Automatización</strong>
+                <span>Detectá si tu negocio pierde horas en tareas manuales.</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recursos/identidad-digital/">
+                <strong>Guía de Identidad Digital</strong>
+                <span>Cómo construir presencia propia y duradera.</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .guide-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .guide-layout {
+      grid-template-columns: 1fr 340px;
+    }
+  }
+
+  .intro-box {
+    background: #FEF3C7;
+    border-left: 4px solid #D97706;
+    padding: var(--spacing-lg);
+    border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .intro-box p {
+    font-size: 1.05rem;
+    color: #92400E;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .guide-content h2 {
+    font-size: 1.7rem;
+    color: var(--primary);
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+
+  .ia-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .ia-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .ia-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rounded-sm);
+    background: #EEF2FF;
+    color: #4F46E5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ia-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #4F46E5;
+    display: block;
+  }
+
+  .ia-header h3 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .ia-card p {
+    font-size: 0.98rem;
+    color: var(--secondary);
+    line-height: 1.6;
+    margin: var(--spacing-xs) 0 var(--spacing-sm);
+  }
+
+  .ia-checks {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ia-checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.92rem;
+    color: var(--secondary);
+  }
+
+  .ia-checks svg {
+    color: #4F46E5;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* Warning Box */
+  .warning-box {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .warning-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .warning-item svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .warning-item strong {
+    display: block;
+    color: #92400E;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+
+  .warning-item p {
+    font-size: 0.9rem;
+    color: #78350F;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .action-summary-box {
+    background: #F8FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    margin-top: var(--spacing-xxl);
+  }
+
+  .action-summary-box h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .action-summary-box p {
+    font-size: 1rem;
+    color: var(--secondary);
+    max-width: 580px;
+    margin: 0 auto var(--spacing-lg);
+    line-height: 1.6;
+  }
+
+  .action-summary-box .hero__cta {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* Sidebar */
+  .sidebar-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .sidebar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ECFDF5;
+    color: #047857;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--rounded-full);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .sidebar-card h4 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .sidebar-card p {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .btn-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary);
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: var(--rounded-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-sidebar:hover {
+    background: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .sidebar-card--alt {
+    background: #F8FAFC;
+  }
+
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-links li a {
+    display: block;
+    padding: 10px 12px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-sm);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .sidebar-links li a:hover {
+    border-color: var(--tertiary);
+    transform: translateX(2px);
+  }
+
+  .sidebar-links strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  .sidebar-links span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

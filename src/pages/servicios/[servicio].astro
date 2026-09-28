@@ -34,16 +34,25 @@ const {
   href: svcHref,
   claim: svcClaim,
   short: svcShort,
+  value_prop: svcValueProp,
   hero_label,
   categoria_section_title,
 } = servicio;
+
+const defaultPropMap: Record<string, string> = {
+  'automatizacion': 'Sin gastar de más. Solo lo que realmente genera valor.',
+  'presencia-online': 'Sitios y tiendas que funcionan sin complicaciones ni costos ocultos.',
+  'software-a-medida': 'Sistemas hechos a la medida de tu realidad, no de las modas.',
+};
+
+const serviceValueProp = svcValueProp || defaultPropMap[servicio.id] || 'Tecnología justa adaptada a las necesidades de tu PyME.';
 
 const categorias = getCategoriasByServicio(servicio.id);
 const testimoniosData = getTestimoniosByServicio(servicio.id);
 ---
 
 <Layout
-  title={servicio.seo_title || `${svcTitle} para PyMEs en Rosario`}
+  title={servicio.seo_title || `${svcTitle} para PyMEs`}
   description={servicio.seo_description || svcShort}
 >
   <!-- Hero -->
@@ -51,13 +60,10 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
     <div class="hero__container">
       <p class="hero__label">{hero_label}</p>
       <h1 class="hero__title">{svcTitle}</h1>
+      <p class="service-value-line">{serviceValueProp}</p>
       <p class="hero__subtitle">
         {svcShort}
       </p>
-      <div class="service-value-pills">
-        <span class="value-pill"><Check size={14} aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:4px;" />Elegimos la tecnología adecuada, no la de moda</span>
-        <span class="value-pill"><Check size={14} aria-hidden="true" style="display:inline;vertical-align:-1px;margin-right:4px;" />Entendemos lo que cuesta cada peso</span>
-      </div>
       <div class="hero__actions">
         <a
           class="hero__cta hero__cta--form"
@@ -103,7 +109,7 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
       <div class="container">
         <h2 class="section__title">{testimoniosData.section_title}</h2>
         <div class="testimonials-grid">
-          {testimoniosData.testimonios.map((t) => (
+          {testimoniosData.testimonios.slice(0, 3).map((t) => (
             <div class="testimonial-card">
               <p class="testimonial-card__quote">
                 "{t.quote}"
@@ -127,25 +133,13 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
     color: var(--tertiary);
     margin-top: var(--spacing-xs);
   }
-  .service-value-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    margin: 0 auto var(--spacing-lg);
-    max-width: 680px;
-  }
-  .value-pill {
-    background: #EBF4FF;
-    color: var(--tertiary-dark);
-    font-size: 0.88rem;
+  .service-value-line {
+    font-size: 1.15rem;
     font-weight: 600;
-    line-height: 1.35;
-    padding: 6px 14px;
-    border-radius: var(--rounded-full);
-    border: 1px solid rgba(10, 124, 255, 0.2);
+    color: var(--tertiary-dark);
+    margin: 0 auto var(--spacing-md);
+    max-width: 640px;
+    line-height: 1.4;
     text-align: center;
-    white-space: normal;
-    overflow-wrap: break-word;
   }
 </style>
