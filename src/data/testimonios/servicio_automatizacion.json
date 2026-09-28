@@ -1,21 +1,24 @@
 {
   "servicio_id": "automatizacion",
-  "section_title": "Beneficios concretos",
+  "section_title": "Resultados medibles en clientes",
   "testimonios": [
     {
-      "quote": "Pasamos de cargar 3 horas por día a que el sistema lo haga solo. El retorno fue inmediato.",
-      "autor": "Carina Mendoza",
-      "rol": "Gerenta de Administración — Distribuidora del Sur"
+      "quote": "Redujimos un 80% el tiempo administrativo manual: pasamos de 25 a 5 horas semanales copiando pedidos y facturando en AFIP, con cero errores de stock.",
+      "autor": "Responsable de Operaciones",
+      "rol": "Distribuidora Mayorista de Alimentos",
+      "ubicacion": "Santa Fe"
     },
     {
-      "quote": "Dejamos de perder ventas por stock desactualizado. Ahora la web refleja lo que tenemos en tiempo real.",
-      "autor": "Gonzalo Martínez",
-      "rol": "Dueño — Ferretería Martínez Hnos."
+      "quote": "Logramos un 70% menos de llamados y emails repetitivos por comprobantes. El portal de autogestión y recordatorios automáticos ordenó toda la cobranza.",
+      "autor": "Socio Fundador",
+      "rol": "Estudio Contable y Asesoría PyME",
+      "ubicacion": "Santa Fe"
     },
     {
-      "quote": "El administrativo se redujo un 70%. Ahora podemos dedicar el tiempo a vender más y no a cargar stock.",
-      "autor": "Dueña — Tienda de ropa usada",
-      "ubicacion": "Rosario, Santa Fe"
+      "quote": "Dejamos de perder ventas por stock desactualizado. La integración sincroniza pedidos en tiempo real y el equipo ahora se enfoca en vender.",
+      "autor": "Dueño",
+      "rol": "Comercio de Repuestos y Ferretería",
+      "ubicacion": "Santa Fe"
     }
   ]
 }

@@ -1,91 +1,230 @@
 ---
+// Página: Sobre Nosotros — Historia, Filosofía "Tecnología Justa", Equipo y Clientes
 import Layout from '../layouts/Layout.astro';
+
+const clientes = [
+  {
+    name: 'MLR Sistemas',
+    url: 'https://mlrsistemas.com.ar/',
+    logo: '/assets/clientes/mlr-sistemas.webp',
+    description: 'Sistemas de gestión y software empresarial'
+  },
+  {
+    name: 'Syloper',
+    url: 'https://syloper.com/',
+    logo: '/assets/clientes/syloper.svg',
+    description: 'Consultoría y desarrollo de software'
+  },
+  {
+    name: 'Ameba',
+    url: 'https://www.ameba.com.uy/en',
+    logo: '/assets/clientes/ameba.svg',
+    description: 'Diseño y desarrollo de plataformas digitales'
+  },
+  {
+    name: 'SOESGPYLA',
+    url: 'https://www.soesgpyla.com.ar/',
+    logo: '/assets/clientes/soesgpyla.svg',
+    description: 'Sindicato Obreros Estaciones de Servicio'
+  },
+  {
+    name: 'Grupo El Positivo',
+    url: 'https://www.grupoelpositivo.com.ar/',
+    logo: '/assets/clientes/grupo-el-positivo.png',
+    description: 'Comercialización y distribución de artículos'
+  },
+  {
+    name: 'e-Softing',
+    url: 'https://e-softing.com.ar/',
+    logo: '/assets/clientes/e-softing.svg',
+    description: 'Soluciones tecnológicas e infraestructura'
+  },
+  {
+    name: '1950labs',
+    url: 'https://1950labs.com/',
+    logo: '/assets/clientes/1950labs.png',
+    description: 'Staff augmentation y desarrollo de software'
+  },
+  {
+    name: 'Tornillo Alvear',
+    url: 'https://www.tornilloalvear.com/',
+    logo: '/assets/clientes/tornillo-alvear.png',
+    description: 'Fijaciones, tornillería y ferretería industrial'
+  }
+];
 ---
 
-<Layout title="Sobre Nosotros · Rosario" description="Conocé a SACsi, soluciones informáticas en Rosario. Más de 15 años ayudando a PyMEs con automatización, software a medida y presencia online.">
+<Layout
+  title="Sobre Nosotros · Tecnología Justa | SACsi"
+  description="Conocé a SACsi y la historia de Sebastián Colombini: más de 15 años acompañando empresas desde Rosario con tecnología justa, sin modas y cuidando cada peso."
+>
+  <!-- Hero -->
   <section class="hero">
     <div class="hero__container">
-      <p class="hero__label">NOSOTROS</p>
-      <h1 class="hero__title">Sobre SACsi</h1>
+      <p class="hero__label">NUESTRA HISTORIA Y FILOSOFÍA</p>
+      <h1 class="hero__title">Sobre Nosotros: Tecnología justa para tu negocio</h1>
       <p class="hero__subtitle">
-        Somos un equipo de desarrolladores y consultores con más de 15 años ayudando a PyMEs a integrar tecnología sin fricción.
+        Creemos que la tecnología debe resolver problemas reales, no crearlos. Ni modas pasajeras, ni costos sobredimensionados: solo lo que realmente necesitás para crecer.
       </p>
+      <div class="hero__actions">
+        <a class="hero__cta hero__cta--form" href="/contacto/">
+          Te decimos qué necesitás… y qué no. Consulta sin cargo
+        </a>
+      </div>
     </div>
   </section>
 
+  <!-- Historia de Sebastián / El Origen -->
   <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Números</h2>
-      <div class="stats-grid">
-        <div class="stat">
-          <span class="stat__number">+15</span>
-          <span class="stat__label">años de experiencia</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">+50</span>
-          <span class="stat__label">proyectos entregados</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">+30</span>
-          <span class="stat__label">clientes activos</span>
-        </div>
-        <div class="stat">
-          <span class="stat__number">100%</span>
-          <span class="stat__label">proyectos en Rosario</span>
-        </div>
+    <div class="container philosophy-grid">
+      <div class="bio-card">
+        <div class="bio-avatar">SC</div>
+        <h2 class="bio-name">Sebastián Alejandro Colombini</h2>
+        <p class="bio-role">Fundador & Lead Developer</p>
+        <span class="bio-location">Rosario, Santa Fe, Argentina</span>
       </div>
-    </div>
-  </section>
 
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">Equipo</h2>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-card__avatar">SC</div>
-          <h3 class="team-card__name">Sebastián Colombini</h3>
-          <p class="team-card__role">Fundador / Lead Developer</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--alt">
-    <div class="container">
-      <h2 class="section__title">Clientes que confían</h2>
-      <div class="clients-grid">
-        <span class="client-badge">Ferretería</span>
-        <span class="client-badge">Tienda de ropa</span>
-        <span class="client-badge">E-commerce</span>
-        <span class="client-badge">Academia online</span>
-        <span class="client-badge">Consultorio</span>
-        <span class="client-badge">Medio digital</span>
-        <span class="client-badge">Estudio de arquitectura</span>
-        <span class="client-badge">Café de especialidad</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="section__title">Nuestra historia y origen</h2>
-      <div class="historia-content" style="max-width:720px;margin:0 auto;color:var(--secondary);line-height:1.7;">
-        <p style="font-size:1.05rem;color:var(--primary);margin-bottom:var(--spacing-md);background:#F3F4F6;padding:var(--spacing-md);border-radius:var(--rounded-sm);border-left:4px solid var(--tertiary);">
-          <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>, analista y desarrollador informático en Rosario. Su visión desde el primer día fue acercar Soluciones Informáticas honestas, prácticas y sin tecnicismos que confundan.
-        </p>
-        <p style="margin-bottom:var(--spacing-md);">
-          SACsi nació en Rosario con la convicción de que la tecnología no tiene por qué ser complicada ni costosa. Trabajamos con empresas y comercios de diferentes rubros adaptando soluciones a su realidad presupuestaria y operativa, no al revés.
+      <div class="bio-text">
+        <span class="section-tag">EL ORIGEN</span>
+        <h2>+15 años acompañando empresas desde Rosario</h2>
+        <p>
+          <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>. Empecé a desarrollar software hace más de una década y media, colaborando mano a mano con empresas, distribuidores, estudios contables y comercios familiares de la región y el país.
         </p>
         <p>
-          Nuestra bandera es la <strong>tecnología justa</strong>: sin sobredimensionar, sin atarte a modas pasajeras y respetando el esfuerzo económico de cada PyME.
+          En todo este tiempo vi repetirse el mismo patrón una y otra vez: empresas tentadas a contratar plataformas gigantescas o la última tecnología de moda, pagando fortunas en licencias mensuales para terminar usando menos del 10% de las funciones, frustradas y con procesos más lentos que antes.
+        </p>
+        <p>
+          Fundé SACsi para ser el contrapeso de esa tendencia. Para decirle a los dueños de negocios la verdad: <em>qué tecnología necesitás hoy y cuál no te conviene pagar</em>.
         </p>
       </div>
     </div>
   </section>
 
+  <!-- Los 4 Pilares de la Tecnología Justa -->
+  <section class="section">
+    <div class="container">
+      <div class="pillars-header">
+        <span class="section-tag">NUESTRA BANDERA</span>
+        <h2 class="section__title">Los 4 pilares de la Tecnología Justa</h2>
+        <p class="section__subtitle">
+          Cada proyecto que tomamos en SACsi se rige por estas cuatro reglas inquebrantables.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <article class="pillar-card">
+          <div class="pillar-number">01</div>
+          <h3>Sin sobredimensionar</h3>
+          <p>
+            No te proponemos un desarrollo de seis meses para algo que un script o una automatización directa resuelve en una semana. El tamaño de la solución debe ser proporcional a tu volumen y rentabilidad.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-number">02</div>
+          <h3>Sin modas pasajeras</h3>
+          <p>
+            Elegimos tecnologías maduras, robustas y ampliamente documentadas. No usamos herramientas solo porque sean tendencia en redes. Lo que construimos tiene que seguir funcionando firme durante años.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-number">03</div>
+          <h3>Entendemos lo que cuesta cada peso</h3>
+          <p>
+            En Argentina cada inversión cuenta. Calculamos el retorno antes de empezar: cada automatización o sistema debe pagarse solo, ahorrando horas operativas o generando nuevas oportunidades de venta.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-number">04</div>
+          <h3>Honestidad radical</h3>
+          <p>
+            Si en la primera charla vemos que tu problema se soluciona ordenando un procedimiento interno o usando una planilla gratuita, te lo decimos de frente. Tu confianza vale mucho más que una venta forzada.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Equipo -->
   <section class="section section--alt">
     <div class="container">
-      <h2 class="section__title">Cómo trabajamos</h2>
+      <div class="pillars-header">
+        <span class="section-tag">QUIÉNES SOMOS</span>
+        <h2 class="section__title">Equipo</h2>
+        <p class="section__subtitle">Un equipo técnico especializado, cercano y comprometido con los resultados de tu negocio.</p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card equipo-card">
+          <div class="team-card__avatar iniciales">SC</div>
+          <h3 class="team-card__name">Sebastián Colombini</h3>
+          <p class="team-card__role">Fundador / Lead Developer</p>
+          <p class="team-card__bio bio-corta">Dirección técnica y arquitectura de sistemas con más de 15 años de trayectoria.</p>
+        </div>
+
+        <div class="team-card equipo-card">
+          <div class="team-card__avatar iniciales">DI</div>
+          <h3 class="team-card__name">Equipo de Desarrollo</h3>
+          <p class="team-card__role">Desarrollo e Integraciones</p>
+          <p class="team-card__bio bio-corta">Especialistas en automatizaciones ligeras y sistemas a medida para optimizar tu día a día.</p>
+        </div>
+
+        <div class="team-card equipo-card">
+          <div class="team-card__avatar iniciales">SA</div>
+          <h3 class="team-card__name">Soporte y Acompañamiento</h3>
+          <p class="team-card__role">Soporte y Evolución Continua</p>
+          <p class="team-card__bio bio-corta">Te acompañamos después de la entrega para que todo siga funcionando sin complicaciones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Clientes que confían con Logos Reales -->
+  <section class="section">
+    <div class="container">
+      <div class="clients-header">
+        <span class="section-tag">TRAYECTORIA Y CONFIANZA</span>
+        <h2 class="section__title">Clientes que confían</h2>
+        <p class="section__subtitle">
+          Empresas, organizaciones y estudios que confían en nuestras soluciones, integraciones y acompañamiento técnico.
+        </p>
+      </div>
+
+      <div class="clients-logo-grid">
+        {clientes.map((c) => (
+          <a
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="client-logo-card"
+            title={`Visitar sitio de ${c.name}`}
+          >
+            <div class="client-logo-wrapper">
+              <img
+                src={c.logo}
+                alt={`Logo de ${c.name}`}
+                loading="lazy"
+                decoding="async"
+                class="client-logo-img"
+              />
+            </div>
+            <span class="client-logo-name">{c.name}</span>
+            <span class="client-logo-desc">{c.description}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cómo trabajamos -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="steps-header">
+        <span class="section-tag">METODOLOGÍA</span>
+        <h2 class="section__title">Cómo trabajamos</h2>
+        <p class="section__subtitle">Procesos claros, iteraciones cortas y entregas continuas sin sorpresas.</p>
+      </div>
       <div class="steps">
         <div class="step">
           <div class="step__number">1</div>
@@ -111,3 +250,297 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
+
+<style>
+  /* Historia & Filosofía */
+  .philosophy-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+  }
+
+  @media (min-width: 768px) {
+    .philosophy-grid {
+      grid-template-columns: 300px 1fr;
+    }
+  }
+
+  .bio-card {
+    background: var(--surface);
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl) var(--spacing-lg);
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .bio-avatar {
+    width: 84px;
+    height: 84px;
+    background: var(--primary);
+    color: #FFFFFF;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-md);
+    border: 3px solid #EBF4FF;
+  }
+
+  .bio-name {
+    font-size: 1.2rem;
+    margin: 0 0 var(--spacing-xs);
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .bio-role {
+    font-size: 0.92rem;
+    color: var(--tertiary-dark);
+    font-weight: 600;
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .bio-location {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .bio-text h2 {
+    font-size: 1.8rem;
+    margin: 0 0 var(--spacing-md);
+    line-height: 1.3;
+    color: var(--primary);
+  }
+
+  .bio-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--secondary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Pilares */
+  .pillars-header,
+  .clients-header,
+  .steps-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .pillars-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .pillar-card {
+    background: var(--surface);
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  }
+
+  .pillar-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #E2E8F0;
+    margin-bottom: var(--spacing-xs);
+    line-height: 1;
+  }
+
+  .pillar-card h3 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+    font-weight: 700;
+  }
+
+  .pillar-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+  }
+
+  /* Equipo */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .team-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .team-card__avatar {
+    width: 68px;
+    height: 68px;
+    background: var(--primary, #1A1A2E);
+    color: #FFFFFF;
+    font-size: 1.35rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    border: 3px solid #EBF4FF;
+  }
+
+  .team-card:nth-child(2) .team-card__avatar {
+    background: var(--tertiary-dark, #0066CC);
+  }
+
+  .team-card:nth-child(3) .team-card__avatar {
+    background: #059669;
+  }
+
+  .team-card__name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary, #1A1A2E);
+    margin: 0 0 4px;
+  }
+
+  .team-card__role {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--tertiary, #0A7CFF);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .team-card__bio {
+    font-size: 0.9rem;
+    color: var(--secondary, #444444);
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Clientes con Logos Reales */
+  .clients-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .clients-logo-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .clients-logo-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .client-logo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+  }
+
+  .client-logo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-color: var(--tertiary);
+  }
+
+  .client-logo-wrapper {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
+  }
+
+  .client-logo-img {
+    max-height: 48px;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .client-logo-card:hover .client-logo-img {
+    transform: scale(1.04);
+  }
+
+  .client-logo-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  .client-logo-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+</style>

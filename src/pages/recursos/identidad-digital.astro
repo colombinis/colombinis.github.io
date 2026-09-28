@@ -1,0 +1,399 @@
+---
+// Página: Guía Práctica de Identidad Digital para PyMEs
+import Layout from '../../layouts/Layout.astro';
+import config from '../../config/site.json';
+import { Globe, Mail, MapPin, MessageSquare, Star, ArrowRight, ShieldCheck, Check } from 'lucide-astro';
+
+const formEndpoint = config.contact.form_endpoint;
+---
+
+<Layout
+  title="Cómo construir tu Identidad Digital · Guía Gratis para PyMEs | SACsi"
+  description="Guía práctica y gratuita para emprendedores y PyMEs: cómo crear un ecosistema digital profesional propio, sin depender solo de redes sociales y generando confianza."
+>
+  <section class="hero">
+    <div class="hero__container">
+      <p class="hero__label">RECURSO GRATUITO · GUÍA PRÁCTICA</p>
+      <h1 class="hero__title">Cómo construir una Identidad Digital sólida para tu negocio</h1>
+      <p class="hero__subtitle">
+        Dejá de depender únicamente de algoritmos y redes sociales. Aprendé a construir un ecosistema digital propio, profesional y duradero que genere confianza inmediata en tus clientes.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container guide-layout">
+      <!-- Contenido Principal -->
+      <article class="guide-content">
+        <div class="intro-box">
+          <p>
+            <strong>El error más común en PyMEs:</strong> Creer que tener una cuenta de Instagram o una página en Facebook equivale a tener presencia digital. Si la red social cambia las reglas o te bloquea la cuenta, perdés el canal directo con tus clientes. La verdadera identidad digital se construye sobre activos que te pertenecen.
+          </p>
+        </div>
+
+        <h2>Los 5 pilares para una presencia digital profesional</h2>
+
+        <div class="pilar-card">
+          <div class="pilar-header">
+            <span class="pilar-icon"><Globe size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="pilar-step">Pilar 01</span>
+              <h3>1. Dominio propio y sitio web bajo tu control</h3>
+            </div>
+          </div>
+          <p>
+            Tener tu propio dominio (ej: <code>tunegocio.com.ar</code>) es la escritura pública de tu negocio en internet. Un sitio web institucional o landing page rápida le transmite seguridad a quien busca contratarte por primera vez:
+          </p>
+          <ul class="pilar-checks">
+            <li><Check size={16} aria-hidden="true" /> Velocidad de carga inmediata (menos de 2 segundos en el celular).</li>
+            <li><Check size={16} aria-hidden="true" /> Explicación clara de qué problemas resolvés y a quién ayudás.</li>
+            <li><Check size={16} aria-hidden="true" /> Sin modas visuales pesadas que distraigan de tu propuesta comercial.</li>
+          </ul>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-header">
+            <span class="pilar-icon"><Mail size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="pilar-step">Pilar 02</span>
+              <h3>2. Casillas de correo corporativas</h3>
+            </div>
+          </div>
+          <p>
+            Enviar presupuestos desde <code>tunegocio@gmail.com</code> resta seriedad frente a empresas medianas o corporaciones. Configurar cuentas de correo institucionales (<code>ventas@tunegocio.com.ar</code>) cuesta muy poco y posiciona tu marca un escalón arriba de la competencia informal.
+          </p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-header">
+            <span class="pilar-icon"><MapPin size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="pilar-step">Pilar 03</span>
+              <h3>3. Ficha de Google Business Profile (Google Maps)</h3>
+            </div>
+          </div>
+          <p>
+            Cuando alguien busca tus productos en tu zona, la ficha de Google es lo primero que ve. Mantenerla verificada, con dirección real, horarios actualizados, fotos de tus instalaciones y enlace a tu web multiplica los contactos espontáneos sin pagar publicidad.
+          </p>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-header">
+            <span class="pilar-icon"><MessageSquare size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="pilar-step">Pilar 04</span>
+              <h3>4. WhatsApp Business optimizado</h3>
+            </div>
+          </div>
+          <p>
+            En Argentina el 90% de las ventas de cercanía se cierran por WhatsApp. No uses un perfil personal:
+          </p>
+          <ul class="pilar-checks">
+            <li><Check size={16} aria-hidden="true" /> Mensaje de bienvenida breve y mensaje de ausencia con horarios claros.</li>
+            <li><Check size={16} aria-hidden="true" /> Catálogo de productos o servicios clave con precios y fotos reales.</li>
+            <li><Check size={16} aria-hidden="true" /> Respuestas rápidas guardadas para las 5 preguntas que te hacen todos los días.</li>
+          </ul>
+        </div>
+
+        <div class="pilar-card">
+          <div class="pilar-header">
+            <span class="pilar-icon"><Star size={22} aria-hidden="true" /></span>
+            <div>
+              <span class="pilar-step">Pilar 05</span>
+              <h3>5. Reputación y testimonios reales</h3>
+            </div>
+          </div>
+          <p>
+            Nadie compra a ciegas. Incluir nombres de clientes reales, fotos y capturas de recomendaciones concretas genera la prueba social necesaria para acelerar las decisiones de compra.
+          </p>
+        </div>
+
+        <div class="action-summary-box">
+          <h3>¿Cómo auditar la identidad digital de tu negocio hoy?</h3>
+          <p>
+            Buscá el nombre de tu empresa en modo incógnito en Google. Si lo primero que aparece es un directorio desactualizado o una página de Facebook inactiva desde 2021, estás perdiendo clientes todos los días.
+          </p>
+          <a class="hero__cta hero__cta--form" href="/contacto/?asunto=Auditoria%20Identidad%20Digital">
+            Pedir una auditoría de presencia digital sin cargo
+          </a>
+        </div>
+      </article>
+
+      <!-- Sidebar / Recursos relacionados -->
+      <aside class="guide-sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-badge">
+            <ShieldCheck size={16} aria-hidden="true" />
+            <span>TECNOLOGÍA JUSTA</span>
+          </div>
+          <h4>¿Necesitás armar tu web o renovar tu presencia?</h4>
+          <p>
+            Desarrollamos sitios web institucionales rápidos, accesibles y orientados a ventas para PyMEs y profesionales.
+          </p>
+          <a class="btn-sidebar" href="/servicios/presencia-online/">
+            <span>Conocé el servicio de Presencia Online</span>
+            <ArrowRight size={16} aria-hidden="true" />
+          </a>
+        </div>
+
+        <div class="sidebar-card sidebar-card--alt">
+          <h4>Otros recursos gratuitos</h4>
+          <ul class="sidebar-links">
+            <li>
+              <a href="/checklist-automatizacion/">
+                <strong>Checklist de Automatización</strong>
+                <span>Detectá tareas repetitivas en tu negocio.</span>
+              </a>
+            </li>
+            <li>
+              <a href="/recursos/inteligencia-artificial/">
+                <strong>Guía de Inteligencia Artificial</strong>
+                <span>Cómo implementarla sin pagar de más.</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .guide-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xxl);
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .guide-layout {
+      grid-template-columns: 1fr 340px;
+    }
+  }
+
+  .intro-box {
+    background: #EBF4FF;
+    border-left: 4px solid var(--tertiary);
+    padding: var(--spacing-lg);
+    border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .intro-box p {
+    font-size: 1.05rem;
+    color: var(--primary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .guide-content h2 {
+    font-size: 1.7rem;
+    color: var(--primary);
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+
+  .pilar-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .pilar-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .pilar-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rounded-sm);
+    background: #EFF6FF;
+    color: var(--tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .pilar-step {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+    display: block;
+  }
+
+  .pilar-header h3 {
+    font-size: 1.25rem;
+    margin: 0;
+    color: var(--primary);
+  }
+
+  .pilar-card p {
+    font-size: 0.98rem;
+    color: var(--secondary);
+    line-height: 1.6;
+    margin: var(--spacing-xs) 0 var(--spacing-sm);
+  }
+
+  .pilar-card code {
+    background: #F1F5F9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--primary);
+  }
+
+  .pilar-checks {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pilar-checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.92rem;
+    color: var(--secondary);
+  }
+
+  .pilar-checks svg {
+    color: var(--tertiary);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .action-summary-box {
+    background: #F8FAFC;
+    border: 2px solid #E2E8F0;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    text-align: center;
+    margin-top: var(--spacing-xxl);
+  }
+
+  .action-summary-box h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .action-summary-box p {
+    font-size: 1rem;
+    color: var(--secondary);
+    max-width: 580px;
+    margin: 0 auto var(--spacing-lg);
+    line-height: 1.6;
+  }
+
+  .action-summary-box .hero__cta {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  /* Sidebar */
+  .sidebar-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  }
+
+  .sidebar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ECFDF5;
+    color: #047857;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--rounded-full);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .sidebar-card h4 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+  }
+
+  .sidebar-card p {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    line-height: 1.5;
+    margin: 0 0 var(--spacing-md);
+  }
+
+  .btn-sidebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary);
+    color: #FFFFFF;
+    padding: 10px 16px;
+    border-radius: var(--rounded-sm);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-sidebar:hover {
+    background: var(--tertiary);
+    color: #FFFFFF;
+  }
+
+  .sidebar-card--alt {
+    background: #F8FAFC;
+  }
+
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebar-links li a {
+    display: block;
+    padding: 10px 12px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--rounded-sm);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .sidebar-links li a:hover {
+    border-color: var(--tertiary);
+    transform: translateX(2px);
+  }
+
+  .sidebar-links strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  .sidebar-links span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

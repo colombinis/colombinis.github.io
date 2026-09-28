@@ -7,6 +7,7 @@
 import LogoBrand from './LogoBrand.astro';
 import { getServicios, getCategoriasByServicio, getSoluciones, getCasos } from '../lib/data-utils';
 import config from '../config/site.json';
+import { Phone, Mail, MapPin } from 'lucide-astro';
 
 // Datos normalizados: servicios + categorías
 const servicios = getServicios();
@@ -43,6 +44,29 @@ const casos = getCasos();
   }
 
   /* ---------- Col 1: Logo + servicios ---------- */
+  .footer-logo-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+  }
+  .footer-logo-wrap :global(.logo-brand) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .footer-logo-wrap :global(.logo-brand:hover) {
+    transform: translateY(-2px);
+    opacity: 0.95;
+  }
+  .footer-logo-wrap :global(.logo-brand__img) {
+    height: 42px;
+    width: auto;
+    border-radius: var(--rounded-xs);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
   .footer-solutions {
     display: flex;
     flex-direction: column;
@@ -141,49 +165,45 @@ const casos = getCasos();
     color: var(--tertiary);
   }
 
-  /* ---------- Col 3: Sección "¿Empezamos?" ---------- */
-  .footer__cta {
-    text-align: center;
-  }
-  .footer__cta h2 {
-    color: #E0E0E0;
-    margin-bottom: var(--spacing-md);
-  }
-  .footer__cta p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #B0B0B0;
-    margin: 0 0 var(--spacing-md);
+  /* CTA Banner Section */
+  .cta-banner-section {
+    padding: var(--spacing-xxl) var(--spacing-md);
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
   }
 
-  /* Fila de acciones: WhatsApp a la izquierda, email a la derecha */
-  .footer__actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    align-items: center;
+  .cta-banner {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
   }
-  .footer__cta--form {
-    display: inline-flex;
-    align-items: center;
+
+  .cta-banner h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary);
+  }
+
+  .cta-banner p {
+    font-size: 1.05rem;
+    color: var(--secondary);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .cta-banner__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     justify-content: center;
-    background-color: var(--whatsapp);
-    color: #FFFFFF;
-    padding: 12px 24px;
-    border-radius: var(--rounded-sm);
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
+  }
+
+  .cta-banner__actions .hero__cta {
+    width: 100%;
+    max-width: 320px;
+    min-width: 0;
+    box-sizing: border-box;
     white-space: normal;
     text-align: center;
-    max-width: 100%;
-    align-self: center;
-  }
-  .footer__cta--form:hover {
-    background-color: var(--whatsapp-hover);
-    color: #FFFFFF;
   }
 
   .footer__contact-row {
@@ -209,6 +229,48 @@ const casos = getCasos();
     text-decoration: underline;
   }
 
+  /* ---------- Col 4: NAP + Contacto ---------- */
+  .footer-nap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-nap__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #D1D5DB; /* Gris claro de alta legibilidad sobre fondo oscuro #252628 */
+  }
+  .footer-nap__item strong {
+    color: #F9FAFB; /* Blanco suave destacado */
+    font-weight: 600;
+  }
+  .footer-nap__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #60A5FA; /* Azul accesible y vibrante para fondos oscuros */
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .footer-nap__text {
+    flex: 1;
+    overflow-wrap: break-word;
+  }
+  .footer-nap__link {
+    color: #60A5FA;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+  }
+  .footer-nap__link:hover {
+    color: #93C5FD;
+    text-decoration: underline;
+  }
+
   .footer-copy {
     font-size: 0.85rem;
     color: #909090;
@@ -216,41 +278,33 @@ const casos = getCasos();
     margin: 0;
   }
 
-  /* Desktop: 3 columnas + acciones en fila */
+  /* Desktop: 4 columnas */
   @media (min-width: 601px) {
     .footer-grid {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: var(--spacing-xxl);
     }
-    .footer__actions {
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
-    .footer__cta--form {
-      width: auto;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .footer__actions {
-      flex-direction: column;
-    }
   }
 </style>
-  <section id="cta-final" class="cta-final">
-    <div class="container">
-      <div class="footer-col footer__cta">
-        <h2>Tenés alguna pregunta?</h2>
-        <p>
-          En 15 minutos podés saber cómo podemos ayudarte.
-        </p>
-        <div class="footer__actions">
-          <a
-            class="footer__cta footer__cta--form"
-            href="/contacto/?categoria=otros&asunto=Consulta%20desde%20footer"
-            >Consultanos sin compromiso</a>
-        </div>
+  <!-- CTA Banner Section -->
+  <section id="cta-final" class="section cta-banner-section">
+    <div class="container cta-banner">
+      <h2>¿Tenés una duda o proyecto en mente?</h2>
+      <p>
+        Agendá una primera conversación sin cargo. Te escuchamos y te decimos con honestidad qué camino te conviene.
+      </p>
+      <div class="cta-banner__actions">
+        <a class="hero__cta hero__cta--form" href="/contacto/">
+          Consultar sin cargo
+        </a>
+        <a
+          class="hero__cta hero__cta--whatsapp"
+          href="https://api.whatsapp.com/send?phone=5493415197937&text=Hola%20SACsi,%20quiero%20hacer%20una%20consulta%20sin%20cargo%20para%20mi%20negocio"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Escribinos por WhatsApp
+        </a>
       </div>
     </div>
   </section>
@@ -259,7 +313,9 @@ const casos = getCasos();
     <div class="footer-grid">
       <!-- Col 1: Logo + servicios -->
       <div class="footer-col">
-        <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
+        <div class="footer-logo-wrap">
+          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
+        </div>
         <div class="footer-solutions">
           {servicios.map((sol) => (
             <div class="footer-solution-group">
@@ -319,21 +375,43 @@ const casos = getCasos();
       <div class="footer-col">
         <h3>{config.site.name}</h3>
         <div class="footer-nap">
-          <p><strong>Dirección:</strong> Milan 1216, Rosario, Santa Fe CP 2000, Argentina</p>
-          <p><strong>Tel:</strong> <a class="footer__email" href={`tel:${config.contact.phone_display}`}>{config.contact.phone_display}</a></p>
-          <p><strong>Email:</strong> <a class="footer__email" href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
-          <p>
-            <a class="footer__email" href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Rosario" target="_blank" rel="noopener noreferrer">
-              Ver en Google Maps
-            </a>
+          <p class="footer-nap__item">
+            <span class="footer-nap__icon" aria-hidden="true">
+              <Phone size={18} />
+            </span>
+            <span class="footer-nap__text">
+              <strong>Tel:</strong> <a class="footer-nap__link" href={`tel:${config.contact.phone_display}`}>{config.contact.phone_display}</a>
+            </span>
+          </p>
+          <p class="footer-nap__item">
+            <span class="footer-nap__icon" aria-hidden="true">
+              <Mail size={18} />
+            </span>
+            <span class="footer-nap__text">
+              <strong>Email:</strong> <a class="footer-nap__link" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
+            </span>
+          </p>
+          <p class="footer-nap__item">
+            <span class="footer-nap__icon" aria-hidden="true">
+              <MapPin size={18} />
+            </span>
+            <span class="footer-nap__text">
+              <a
+                class="footer-nap__link"
+                href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Argentina"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver en Google Maps &rarr;
+              </a>
+            </span>
           </p>
         </div>
       </div>
     </div>
 
     <p class="footer-copy">
-      &copy; {new Date().getFullYear()} {config.site.name} — {config.site.tagline} ·
-      <a href="/design-style-guide/" style="color:#A0A0A0;text-decoration:underline;">Sistema de Diseño</a>
+      &copy; {new Date().getFullYear()} {config.site.name} — {config.site.tagline}
     </p>
   </footer>
 </div>
