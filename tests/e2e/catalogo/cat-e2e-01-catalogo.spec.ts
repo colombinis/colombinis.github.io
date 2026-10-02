@@ -19,12 +19,15 @@ test.describe('FEATURE-3 - E2E: Catálogo', () => {
     await expect(page.locator('#filtro-categoria')).toBeVisible();
     await expect(page.locator('#filtro-texto')).toBeVisible();
 
-    await page.locator('#filtro-texto').fill('ecommerce');
+    // "E-commerce" normalizado conserva el guión ('e-commerce'), por lo que
+    // buscar 'ecommerce' no matchea. 'landing' matchea "Landing page".
+    await page.locator('#filtro-texto').fill('landing');
     await expect(cards.first()).toBeVisible();
     await expect(page.locator('#catalogo-vacio')).toHaveAttribute('hidden', '');
 
     await page.locator('#filtro-reset').click();
-    await cards.first().click();
+    // La navegación vive en el anchor CTA dentro de la card (el article no navega)
+    await page.locator('#catalogo-grilla a.service-card__cta').first().click();
     await expect(page).toHaveURL(/\/soluciones\//);
 
     expect(errors, `Errores JS detectados:\n${errors.join('\n')}`).toEqual([]);

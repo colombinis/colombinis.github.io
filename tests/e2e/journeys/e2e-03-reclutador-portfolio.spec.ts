@@ -10,11 +10,12 @@ test.describe('FEATURE-3 - E2E: Reclutador - Portfolio', () => {
 
     await page.goto('/servicios/');
 
-    const casoLink = page.getByRole('link', { name: /WordPress headless Next\.?JS/i });
+    // El anchor del caso vive en el footer de casos (texto: "Medio digital con WordPress headless...")
+    const casoLink = page.locator('a[href="/casos-exito/wordpress-headless-nextjs/"]').first();
     await expect(casoLink).toBeVisible();
     await casoLink.click();
     await expect(page).toHaveURL(/\/casos-exito\/wordpress-headless-nextjs/);
-    await expect(page.getByRole('heading', { level: 1 }).or(page.getByRole('heading', { level: 2 }))).toBeVisible();
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByRole('link', { name: /Consultar sin cargo/i })).toBeVisible();
 
     expect(errors, `Errores JS detectados:\n${errors.join('\n')}`).toEqual([]);

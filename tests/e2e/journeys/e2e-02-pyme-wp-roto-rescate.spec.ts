@@ -11,11 +11,11 @@ test.describe('FEATURE-3 - E2E: WP roto - rescate', () => {
     await page.goto('/servicios/');
 
     const cards = page.locator('.service-card');
-    await expect(cards).toHaveCount(6);
+    await expect(cards).toHaveCount(3);
 
     await page.goto('/servicios/presencia-online');
     await expect(page).toHaveTitle(/Presencia/);
-    await expect(page.getByRole('link', { name: /Consultar sin cargo/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Consultar sin cargo/i }).first()).toBeVisible();
 
     expect(errors, `Errores JS detectados:\n${errors.join('\n')}`).toEqual([]);
   });

@@ -15,7 +15,7 @@ test.describe('FEATURE-3 - E2E: Funnel de CTAs', () => {
     await expect(page.getByRole('link', { name: /Consultar sin cargo/i }).first()).toBeVisible();
 
     await page.goto('/contacto');
-    await expect(page.getByLabel('Nombre', { exact: false }).or(page.locator('form'))).toBeVisible();
+    await expect(page.locator('#form-contacto-progresivo')).toBeVisible();
 
     await page.goto('/sobre-nosotros');
     await expect(page.getByRole('link', { name: /Consultar sin cargo/i }).first()).toBeVisible();
