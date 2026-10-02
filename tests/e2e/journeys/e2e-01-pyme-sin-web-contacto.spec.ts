@@ -13,13 +13,14 @@ test.describe('FEATURE-3 - E2E: PYME sin web - Contacto', () => {
     await expect(page).toHaveTitle(/SACsi/);
     await expect(page.getByRole('link', { name: /Consultar sin cargo/i })).toBeVisible();
 
-    // CTA WhatsApp directo desde /contacto
+    // CTA WhatsApp directo desde /contacto (hay 2 links WhatsApp: botón + hero CTA)
     await page.goto('/contacto');
-    const wa = page.getByRole('link', { name: /WhatsApp/i });
+    const wa = page.getByRole('link', { name: /WhatsApp/i }).first();
     await expect(wa).toBeVisible();
-    await expect(wa).toHaveAttribute('href', /wa\.me\/5493415197937/);
+    // El sitio usa api.whatsapp.com/send (no wa.me)
+    await expect(wa).toHaveAttribute('href', /whatsapp\.com\/send\?phone=5493415197937/);
 
-    await expect(page.getByLabel('Nombre', { exact: false }).or(page.locator('form'))).toBeVisible();
+    await expect(page.locator('#form-contacto-progresivo')).toBeVisible();
 
     expect(errors, `Errores JS detectados:\n${errors.join('\n')}`).toEqual([]);
   });

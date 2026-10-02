@@ -40,3 +40,7 @@ _ai_context/docs/automatizacion/n8n_data/
 # generated docs (output of scripts/report-status.py, etc. — not hand-edited)
 _ai_context/docs/tareas/STATUS.md
 _ai_context/docs/tareas/generated/
+
+# playwright test artifacts
+test-results/
+playwright-report/

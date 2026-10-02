@@ -19,7 +19,7 @@ Las Features, tareas, Issues de planificación y estados del proyecto se gestion
 
 | What | How |
 |------|-----|
-| Dev server (Astro) | `npm run dev` — serves on port 8000 |
+| Dev server (Astro) | `npm run dev` — serves on port 3000 |
 | Build (Astro) | `npm run build` — outputs to `dist/` |
 | Preview build | `npm run preview` — serves `dist/` on port 8000 |
 | Serve static HTML | `python3 -m http.server 8000` (no build needed) |
