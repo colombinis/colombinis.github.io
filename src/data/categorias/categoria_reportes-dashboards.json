@@ -19,6 +19,11 @@
       "texto": "Decisiones con datos reales: informes automáticos sin armar planillas a mano."
     }
   ],
-  "casos": ["tienda-woocommerce-suscripciones", "consultorio-psicologia"],
-  "soluciones": ["auto-basico", "auto-int", "ret-basico"]
+  "casos": [
+    "tienda-woocommerce-suscripciones",
+    "consultorio-psicologia"
+  ],
+  "soluciones": [
+    "ret-basico"
+  ]
 }

@@ -1,0 +1,19 @@
+{
+  "id": "ia-aplicada",
+  "title": "IA Aplicada",
+  "href": "/servicios/ia-aplicada/",
+  "claim": "IA sobre lo que ya tenés. Sin migrar, sin modas.",
+  "value_prop": "Inteligencia artificial aplicada a tus sistemas actuales: asistentes, contenido y datos que trabajan solos.",
+  "short": "Aplicamos inteligencia artificial sobre los sistemas que tu negocio ya usa: asistentes que atienden 24/7, contenido que se genera solo y datos que se ordenan solos. Sin migraciones.",
+  "hero_label": "INTELIGENCIA ARTIFICIAL",
+  "seo_title": "IA Aplicada para PyMEs",
+  "seo_description": "Inteligencia artificial aplicada a tu negocio sobre los sistemas que ya usás: asistentes inteligentes, contenido automático y datos inteligentes. Sin migrar todo.",
+  "categoria_section_title": "¿Qué aplicamos?",
+  "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp",
+  "categorias_ids": [
+    "asistentes-ia",
+    "contenido-automatico",
+    "datos-inteligentes"
+  ],
+  "orden": 1
+}

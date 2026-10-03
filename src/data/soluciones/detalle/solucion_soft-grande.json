@@ -1,16 +1,16 @@
 {
   "id": "soft-grande",
-  "nombre": "Software grande",
+  "nombre": "Sistemas y plataformas",
   "categorias": [
     "sistemas-gestion",
     "integraciones",
     "apps-portales"
   ],
-  "precioMin": 3000,
-  "precioMax": 6000,
+  "precioMin": 1800,
+  "precioMax": 3000,
   "horasMin": 100,
   "horasMax": 160,
-  "costoFijo": 0,
+  "costoFijo": 300,
   "flujo": [
     {
       "orden": 1,

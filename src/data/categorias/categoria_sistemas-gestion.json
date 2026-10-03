@@ -24,6 +24,11 @@
       "caso": "consultorio-psicologia"
     }
   ],
-  "casos": ["consultorio-psicologia"],
-  "soluciones": ["soft-chico", "soft-grande", "hora-tec", "ret-pro"]
+  "casos": [
+    "consultorio-psicologia"
+  ],
+  "soluciones": [
+    "soft-grande",
+    "ret-pro"
+  ]
 }

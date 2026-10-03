@@ -1,14 +1,14 @@
 {
   "id": "landing",
-  "nombre": "Landing page",
+  "nombre": "Landing estratégica",
   "categorias": [
     "sitio-web-institucional",
     "contenido-seo-basico"
   ],
-  "precioMin": 500,
+  "precioMin": 600,
   "precioMax": 700,
-  "horasMin": 15,
-  "horasMax": 20,
+  "horasMin": 25,
+  "horasMax": 30,
   "costoFijo": 0,
   "flujo": [
     {

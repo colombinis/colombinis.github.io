@@ -5,10 +5,10 @@
     "sitio-web-institucional",
     "contenido-seo-basico"
   ],
-  "precioMin": 600,
+  "precioMin": 800,
   "precioMax": 1000,
-  "horasMin": 25,
-  "horasMax": 35,
+  "horasMin": 30,
+  "horasMax": 36,
   "costoFijo": 0,
   "flujo": [
     {

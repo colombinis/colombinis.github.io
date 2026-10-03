@@ -42,6 +42,11 @@
       "description": "Lista de IDs de categorías que pertenecen a este servicio (FK → categorias/).",
       "items": { "type": "string" },
       "minItems": 1
+    },
+    "orden": {
+      "type": "integer",
+      "description": "Posición del servicio en la navegación y listados (menor = primero). Default: orden alfabético de carga si falta.",
+      "minimum": 1
     }
   },
   "additionalProperties": false

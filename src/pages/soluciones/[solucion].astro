@@ -48,10 +48,6 @@ function formatearARS(miles: number): string {
   return arsFormatter.format(Math.round(miles * 1000));
 }
 
-function formatearHoras(min: number, max: number): string {
-  return min === max ? `${min} h` : `${min}-${max} h`;
-}
-
 // --- Categorías + breadcrumb (Inicio › Servicio › Categoría › Solución) ---
 const categorias = (solucion.categorias ?? [])
   .map((id) => getCategoria(id))
@@ -115,7 +111,7 @@ const contactoUrl = categoriaPrincipal
 
 const esRango = solucion.precioMax > solucion.precioMin;
 const totalPasos = flujo.length;
-const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
+// Nota A5: horasMin/horasMax son dato interno de rentabilidad — no se muestran al público.
 ---
 
 <Layout title={solucion.nombre} description={descripcion}>
@@ -152,7 +148,6 @@ const horasTotales = formatearHoras(solucion.horasMin, solucion.horasMax);
           <h1 class="pdp__title">{solucion.nombre}</h1>
           <p class="pdp__desc">{descripcion}</p>
           <ul class="pdp__chips">
-            <li>Tiempo estimado: {horasTotales}</li>
             {totalPasos > 0 && (
               <li>{totalPasos} {totalPasos === 1 ? 'paso' : 'pasos'} de ejecución</li>
             )}

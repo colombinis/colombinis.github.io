@@ -24,6 +24,11 @@
       "caso": "ferreteria-gas-plomeria"
     }
   ],
-  "casos": ["tienda-ropa-usada", "ferreteria-gas-plomeria"],
-  "soluciones": ["auto-int", "ecommerce"]
+  "casos": [
+    "tienda-ropa-usada",
+    "ferreteria-gas-plomeria"
+  ],
+  "soluciones": [
+    "ecommerce"
+  ]
 }

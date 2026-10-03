@@ -9,7 +9,7 @@
   "precioMax": 2000,
   "horasMin": 50,
   "horasMax": 70,
-  "costoFijo": 0,
+  "costoFijo": 150,
   "flujo": [
     {
       "orden": 1,

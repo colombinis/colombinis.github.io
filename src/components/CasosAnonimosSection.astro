@@ -21,7 +21,7 @@ const casos = servicioId
   ? casosData.filter((c) => c.servicio_id === servicioId)
   : casosData;
 ---
-
+{casos.length > 0 && (
 <section class="casos-anonimos-section">
   <div class="container">
     <div class="casos-header">
@@ -87,6 +87,7 @@ const casos = servicioId
     </div>
   </div>
 </section>
+)}
 
 <style>
   .casos-anonimos-section {

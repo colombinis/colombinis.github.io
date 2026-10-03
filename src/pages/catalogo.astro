@@ -15,14 +15,10 @@ const servicios = getServiciosConSoluciones();
 const categorias = getCategoriasConSoluciones();
 const soluciones = getSoluciones();
 
-// Formateo de precios (ARS k) y horas para las tarjetas
+// Formateo de precios (ARS k) para las tarjetas
 function formatearPrecio(min: number, max: number): string {
   if (min === max) return `$${min}k ARS`;
   return `$${min}k - $${max}k ARS`;
-}
-function formatearHoras(min: number, max: number): string {
-  if (min === max) return `${min}h`;
-  return `${min}-${max}h`;
 }
 
 // Categorías y servicios de cada solución, desde el detalle solucion_<id>.json
@@ -154,7 +150,10 @@ const breadcrumb = [
                 <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
               </h3>
               <p class="service-card__claim">
-                {s.nota}
+                {s.descripcion_publica}
+              </p>
+              <p class="service-card__price">
+                Desde {formatearPrecio(s.precioMin, s.precioMax)}
               </p>
               <a class="service-card__cta" href={`/soluciones/${s.id}/`}
                 >Ver +</a>
@@ -170,6 +169,19 @@ const breadcrumb = [
         </p>
         <a class="hero__cta" href="/contacto/" style="display:inline-block;">
           Consultar sin cargo
+        </a>
+      </div>
+
+      <!-- C3: puerta de entrada al servicio IA — diagnóstico con entregable -->
+      <div class="catalogo-diagnostico">
+        <p>¿No sabés por dónde empezar?</p>
+        <p class="catalogo-diagnostico__desc">
+          En una sesión de trabajo detectamos dónde tu negocio pierde horas y
+          qué conviene automatizar primero. Recibís un diagnóstico en PDF con
+          roadmap y ROI estimado.
+        </p>
+        <a class="hero__cta" href="/soluciones/diagnostico-ia/">
+          Empezá con un Diagnóstico IA express
         </a>
       </div>
     </div>
@@ -403,6 +415,38 @@ const breadcrumb = [
   }
   .catalogo-vacio a {
     margin-top: var(--spacing-md);
+  }
+
+  /* Precio "desde" en tarjetas (C3) */
+  .service-card__price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  /* CTA diagnóstico (C3) */
+  .catalogo-diagnostico {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-md);
+    background: #FFFFFF;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+  }
+  .catalogo-diagnostico p:first-child {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+  }
+  .catalogo-diagnostico__desc {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    max-width: 560px;
+    margin: 0 auto var(--spacing-lg);
+    line-height: 1.5;
   }
 
   @media (min-width: 601px) {

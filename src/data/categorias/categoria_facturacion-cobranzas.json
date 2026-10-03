@@ -24,6 +24,9 @@
       "caso": "tienda-woocommerce-suscripciones"
     }
   ],
-  "casos": ["tienda-woocommerce-suscripciones", "tienda-ropa-usada"],
-  "soluciones": ["auto-basico", "auto-int"]
+  "casos": [
+    "tienda-woocommerce-suscripciones",
+    "tienda-ropa-usada"
+  ],
+  "soluciones": []
 }

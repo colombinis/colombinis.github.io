@@ -28,6 +28,7 @@ interface Servicio {
   hero_label: string;
   categoria_section_title: string;
   categorias_ids: string[];
+  orden?: number;
   seo_title?: string;
   seo_description?: string;
 }
@@ -180,10 +181,17 @@ function loadCache(): DatosNormalizados {
 }
 
 /**
- * Devuelve todos los servicios.
+ * Devuelve todos los servicios, ordenados por el campo `orden` (DA6:
+ * 1=IA aplicada, 2=Automatización, 3=Presencia online, 4=Software a medida).
+ * Los que no definen `orden` van al final, en orden de carga.
+ * Analogía Laravel: Servicio::orderBy('orden')->get().
  */
 export function getServicios(): Servicio[] {
-  return loadCache().servicios;
+  return [...loadCache().servicios].sort((a, b) => {
+    const oa = a.orden ?? Number.MAX_SAFE_INTEGER;
+    const ob = b.orden ?? Number.MAX_SAFE_INTEGER;
+    return oa - ob;
+  });
 }
 
 /**
@@ -279,11 +287,11 @@ export function getCategoriasConSoluciones(): Categoria[] {
 
 /**
  * Devuelve solo los servicios que tienen ≥1 categoría con ≥1 solución (CA-02).
- * Analogia Laravel: Servicio::whereHas('categorias.soluciones')->get()
+ * Analogía Laravel: Servicio::whereHas('categorias.soluciones')->get()
  */
 export function getServiciosConSoluciones(): Servicio[] {
   const catsConSoluciones = getCategoriasConSoluciones();
-  return loadCache().servicios.filter((s) =>
+  return getServicios().filter((s) =>
     catsConSoluciones.some((c) => c.servicio_id === s.id)
   );
 }

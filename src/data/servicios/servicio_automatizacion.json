@@ -2,17 +2,18 @@
   "id": "automatizacion",
   "title": "Automatización de Procesos",
   "href": "/servicios/automatizacion/",
-  "claim": "Elegimos la tecnología adecuada, no la de moda. Entendemos lo que cuesta cada peso.",
+  "claim": "Recuperá las horas que tu negocio pierde todos los días.",
   "value_prop": "Sin gastar de más. Solo lo que realmente genera valor.",
   "short": "Automatizá tareas repetitivas sin gastar de más: facturación, reportes y stock sincronizado. Liberá hasta 65% del tiempo administrativo de tu equipo con soluciones simples y efectivas.",
   "hero_label": "AUTOMATIZACIÓN",
   "seo_title": "Automatización de Procesos para PyMEs",
-  "seo_description": "Tecnología justa para PyMEs: automatizá tareas repetitivas, facturación y stock. Cuidamos cada peso de tu negocio con soluciones simples.",
+  "seo_description": "Automatizamos tareas repetitivas para PyMEs: facturación, stock y reportes que se arman solos, sobre las herramientas que ya usás.",
   "categoria_section_title": "¿Qué automatizamos?",
   "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp",
   "categorias_ids": [
     "facturacion-cobranzas",
     "stock-logistica",
     "reportes-dashboards"
-  ]
+  ],
+  "orden": 2
 }

@@ -1,0 +1,53 @@
+{
+  "id": "diagnostico-ia",
+  "nombre": "Diagnóstico IA express",
+  "categorias": [
+    "asistentes-ia",
+    "contenido-automatico",
+    "datos-inteligentes"
+  ],
+  "precioMin": 90,
+  "precioMax": 150,
+  "horasMin": 2,
+  "horasMax": 3,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Preparación",
+      "entradas": "Consulta del cliente",
+      "salidas": "Cuestionario previo respondido",
+      "descripcion": "Enviamos un cuestionario corto para entender tu negocio, tus herramientas y tus tareas repetitivas antes de la sesión",
+      "horas": 0.5
+    },
+    {
+      "orden": 2,
+      "paso": "Sesión de mapeo de procesos",
+      "entradas": "Cuestionario respondido",
+      "salidas": "Mapa de procesos y fricciones documentado",
+      "descripcion": "Videollamada de trabajo: recorremos cómo operás hoy y detectamos dónde se pierden horas",
+      "horas": 1.5
+    },
+    {
+      "orden": 3,
+      "paso": "Análisis de oportunidades y ROI",
+      "entradas": "Mapa de procesos",
+      "salidas": "Listado priorizado de 3 a 5 oportunidades con horas ahorradas estimadas",
+      "descripcion": "Analizamos qué vale la pena automatizar con IA y qué no, con estimación de retorno para cada oportunidad",
+      "horas": 0.5
+    },
+    {
+      "orden": 4,
+      "paso": "Entregable y cierre",
+      "entradas": "Análisis de oportunidades",
+      "salidas": "PDF con roadmap + reunión de presentación",
+      "descripcion": "Entregamos el diagnóstico en PDF con roadmap por fases y lo presentamos en una reunión breve",
+      "horas": 0.5
+    }
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": "",
+  "recibis": "Diagnóstico en PDF: mapa de tus procesos, 3 a 5 oportunidades de IA con ROI estimado y un roadmap de implementación por fases.",
+  "necesitamos": "Una videollamada de 90 minutos y contarnos cómo trabajás hoy: qué tareas se repiten y qué sistemas o planillas usás.",
+  "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp"
+}

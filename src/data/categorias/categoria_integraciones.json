@@ -20,6 +20,12 @@
       "caso": "tienda-woocommerce-suscripciones"
     }
   ],
-  "casos": ["tienda-woocommerce-suscripciones", "wordpress-headless-nextjs"],
-  "soluciones": ["auto-int", "soft-grande", "hora-tec", "ret-pro"]
+  "casos": [
+    "tienda-woocommerce-suscripciones",
+    "wordpress-headless-nextjs"
+  ],
+  "soluciones": [
+    "soft-grande",
+    "ret-pro"
+  ]
 }
