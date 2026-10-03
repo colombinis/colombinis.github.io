@@ -1,0 +1,84 @@
+{
+  "id": "ia-avanzada",
+  "nombre": "IA avanzada",
+  "categorias": [
+    "asistentes-ia",
+    "datos-inteligentes"
+  ],
+  "precioMin": 1800,
+  "precioMax": 3500,
+  "horasMin": 55,
+  "horasMax": 70,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento integral",
+      "entradas": "Diagnóstico IA + accesos del cliente",
+      "salidas": "Mapa de procesos, datos y sistemas actuales",
+      "descripcion": "Se documentan los procesos manuales, las fuentes de información y los sistemas que intervendrán",
+      "horas": 5
+    },
+    {
+      "orden": 2,
+      "paso": "Arquitectura de la solución IA",
+      "entradas": "Mapa de procesos",
+      "salidas": "Diseño técnico aprobado (canales, modelos, integraciones)",
+      "descripcion": "Se definen canales (web, WhatsApp, email), motor de IA, estrategia RAG y puntos de integración",
+      "horas": 8
+    },
+    {
+      "orden": 3,
+      "paso": "Preparación de la base de conocimiento",
+      "entradas": "Documentos, catálogos y datos del cliente",
+      "salidas": "Base de conocimiento vectorizada y consultable",
+      "descripcion": "Ingesta, limpieza y estructuración de la información del negocio para consulta por IA (RAG)",
+      "horas": 10
+    },
+    {
+      "orden": 4,
+      "paso": "Desarrollo del asistente multi-canal",
+      "entradas": "Arquitectura aprobada",
+      "salidas": "Asistente funcionando en todos los canales definidos",
+      "descripcion": "Implementación del asistente con memoria de conversación, tono de marca y respuestas basadas en tus datos",
+      "horas": 15
+    },
+    {
+      "orden": 5,
+      "paso": "Integraciones con tus sistemas",
+      "entradas": "Asistente desarrollado",
+      "salidas": "Integraciones operativas (agenda, e-commerce, CRM, planillas)",
+      "descripcion": "Conexión del asistente con los sistemas existentes para que ejecute acciones, no solo responda",
+      "horas": 10
+    },
+    {
+      "orden": 6,
+      "paso": "Testing integral",
+      "entradas": "Solución integrada",
+      "salidas": "Escenarios E2E OK",
+      "descripcion": "Pruebas de extremo a extremo con datos y consultas reales de tu negocio",
+      "horas": 8
+    },
+    {
+      "orden": 7,
+      "paso": "Documentación y capacitación",
+      "entradas": "Solución probada",
+      "salidas": "Manuales + equipo capacitado",
+      "descripcion": "Manual de operación y sesión de capacitación para el equipo del cliente",
+      "horas": 4
+    },
+    {
+      "orden": 8,
+      "paso": "Estabilización",
+      "entradas": "Solución entregada",
+      "salidas": "Operación estable en producción",
+      "descripcion": "Soporte intensivo las primeras semanas y ajustes de precisión",
+      "horas": 6
+    }
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": "",
+  "recibis": "Asistente multi-canal con base de conocimiento propia (RAG), integrado a tus sistemas: WhatsApp, web y correo trabajando juntos con la información real de tu negocio.",
+  "necesitamos": "Acceso a tus fuentes de información (documentos, catálogo, sistemas) y los canales donde querés atender (web, WhatsApp, email).",
+  "imagen": "/assets/sacsi-servicios-13-dashboards.webp"
+}

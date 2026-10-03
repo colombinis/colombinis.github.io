@@ -13,16 +13,17 @@ test.describe('FEATURE-3 - E2E: Catálogo', () => {
     await expect(page.getByRole('heading', { name: /Catálogo de soluciones/i })).toBeVisible();
 
     const cards = page.locator('#catalogo-grilla .service-card');
-    await expect(cards).toHaveCount(10);
+    await expect(cards).toHaveCount(9);
 
     await expect(page.locator('#filtro-servicio')).toBeVisible();
     await expect(page.locator('#filtro-categoria')).toBeVisible();
     await expect(page.locator('#filtro-texto')).toBeVisible();
 
     // "E-commerce" normalizado conserva el guión ('e-commerce'), por lo que
-    // buscar 'ecommerce' no matchea. 'landing' matchea "Landing page".
+    // buscar 'ecommerce' no matchea. 'landing' matchea "Landing estratégica".
     await page.locator('#filtro-texto').fill('landing');
-    await expect(cards.first()).toBeVisible();
+    const cardLanding = page.locator('#catalogo-grilla .service-card[data-solucion-id="landing"]');
+    await expect(cardLanding).toBeVisible();
     await expect(page.locator('#catalogo-vacio')).toHaveAttribute('hidden', '');
 
     await page.locator('#filtro-reset').click();

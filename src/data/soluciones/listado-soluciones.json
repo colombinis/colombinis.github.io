@@ -1,21 +1,103 @@
 {
   "meta": {
     "fuente": "Catálogo SACsi 2026",
-    "actualizado": "2026-08-07"
+    "actualizado": "2026-10-03"
   },
   "soluciones": [
     {
-      "nombre": "Landing page",
+      "nombre": "Diagnóstico IA express",
+      "categorias": [
+        "asistentes-ia",
+        "contenido-automatico",
+        "datos-inteligentes"
+      ],
+      "precioMin": 90,
+      "precioMax": 150,
+      "horasMin": 2,
+      "horasMax": 3,
+      "costoFijo": 0,
+      "descripcion_publica": "En una sesión de trabajo detectamos dónde tu negocio pierde horas y qué conviene automatizar primero. Recibís un diagnóstico en PDF con roadmap y ROI estimado. Se descuenta del proyecto si avanzás con la implementación.",
+      "id": "diagnostico-ia",
+      "servicio_id": "ia-aplicada",
+      "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp"
+    },
+    {
+      "nombre": "IA esencial",
+      "categorias": [
+        "asistentes-ia",
+        "contenido-automatico"
+      ],
+      "precioMin": 900,
+      "precioMax": 1500,
+      "horasMin": 24,
+      "horasMax": 32,
+      "costoFijo": 0,
+      "descripcion_publica": "Un asistente inteligente o un flujo de contenido con IA funcionando sobre las herramientas que ya usás: tu web, tu WhatsApp o tu WooCommerce. Base de conocimiento propia: responde con tus datos reales, sin migrar nada.",
+      "id": "ia-esencial",
+      "servicio_id": "ia-aplicada",
+      "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp"
+    },
+    {
+      "nombre": "IA avanzada",
+      "categorias": [
+        "asistentes-ia",
+        "datos-inteligentes"
+      ],
+      "precioMin": 1800,
+      "precioMax": 3500,
+      "horasMin": 55,
+      "horasMax": 70,
+      "costoFijo": 0,
+      "descripcion_publica": "Asistente multi-canal con búsqueda inteligente (RAG) sobre tus documentos e integraciones con tus sistemas: WhatsApp, web y email atendiendo solos con la información real de tu negocio.",
+      "id": "ia-avanzada",
+      "servicio_id": "ia-aplicada",
+      "imagen": "/assets/sacsi-servicios-13-dashboards.webp"
+    },
+    {
+      "nombre": "Retainer básico /mes",
+      "categorias": [
+        "sitio-web-institucional",
+        "reportes-dashboards"
+      ],
+      "precioMin": 250,
+      "precioMax": 400,
+      "horasMin": 5,
+      "horasMax": 5,
+      "costoFijo": 0,
+      "descripcion_publica": "Mantené tu web funcionando con soporte preventivo en Rosario. Actualizaciones, backups y monitoreo mensual. Evitá caídas antes de que ocurran.",
+      "id": "ret-basico",
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
+    },
+    {
+      "nombre": "Retainer pro /mes",
+      "categorias": [
+        "sitio-web-institucional",
+        "sistemas-gestion",
+        "integraciones"
+      ],
+      "precioMin": 600,
+      "precioMax": 900,
+      "horasMin": 15,
+      "horasMax": 20,
+      "costoFijo": 0,
+      "descripcion_publica": "Evolucioná tu producto digital con retainer técnico en Rosario. Mejoras continuas y soporte prioritario cada mes, con reporte transparente de lo hecho. Tu equipo técnico externo.",
+      "id": "ret-pro",
+      "servicio_id": "automatizacion",
+      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
+    },
+    {
+      "nombre": "Landing estratégica",
       "categorias": [
         "sitio-web-institucional",
         "contenido-seo-basico"
       ],
-      "precioMin": 500,
+      "precioMin": 600,
       "precioMax": 700,
-      "horasMin": 15,
-      "horasMax": 20,
+      "horasMin": 25,
+      "horasMax": 30,
       "costoFijo": 0,
-      "descripcion_publica": "Convertí visitas en consultas con una landing page profesional en Rosario. Diseño que capta leads, no que decora. Empezá hoy.",
+      "descripcion_publica": "Convertí visitas en consultas con una landing pensada para vender en Rosario: definimos la oferta, el copy y la pauta, con formulario, WhatsApp y tracking conectados. Diseño que capta leads, no que decora.",
       "id": "landing",
       "servicio_id": "presencia-online",
       "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp"
@@ -26,10 +108,10 @@
         "sitio-web-institucional",
         "contenido-seo-basico"
       ],
-      "precioMin": 600,
+      "precioMin": 800,
       "precioMax": 1000,
-      "horasMin": 25,
-      "horasMax": 35,
+      "horasMin": 30,
+      "horasMax": 36,
       "costoFijo": 0,
       "descripcion_publica": "Refuerzá tu imagen con un sitio web profesional en Rosario. Diseño a medida que transmite confianza y convierte. Sin plantillas genéricas.",
       "id": "sitio-pro",
@@ -45,7 +127,7 @@
       "precioMin": 1200,
       "precioMax": 2000,
       "horasMin": 50,
-      "horasMax": 80,
+      "horasMax": 70,
       "costoFijo": 150,
       "descripcion_publica": "Vendé 24/7 con una tienda online en Rosario. E-commerce funcional con pagos, envíos y stock sincronizado. Lista para facturar desde el día uno.",
       "id": "ecommerce",
@@ -53,119 +135,21 @@
       "imagen": "/assets/sacsi-soluciones-18-venta-simple.webp"
     },
     {
-      "nombre": "Automatización básico",
-      "categorias": [
-        "facturacion-cobranzas",
-        "reportes-dashboards"
-      ],
-      "precioMin": 360,
-      "precioMax": 580,
-      "horasMin": 16,
-      "horasMax": 26,
-      "costoFijo": 0,
-      "descripcion_publica": "Ahorrá horas con automatización simple en Rosario. Conectamos 1-2 herramientas y eliminás tareas repetitivas para siempre.",
-      "id": "auto-basico",
-      "servicio_id": "automatizacion",
-      "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
-    },
-    {
-      "nombre": "Automatización intermedio",
-      "categorias": [
-        "facturacion-cobranzas",
-        "stock-logistica",
-        "reportes-dashboards",
-        "integraciones"
-      ],
-      "precioMin": 580,
-      "precioMax": 920,
-      "horasMin": 26,
-      "horasMax": 42,
-      "costoFijo": 200,
-      "descripcion_publica": "Integrá tus sistemas con automatización avanzada en Rosario. Sincronizá bidireccionalmente tu ERP, facturación y logística. Operaciones sin fricción.",
-      "id": "auto-int",
-      "servicio_id": "automatizacion",
-      "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp"
-    },
-    {
-      "nombre": "Software chico",
-      "categorias": [
-        "sistemas-gestion"
-      ],
-      "precioMin": 280,
-      "precioMax": 420,
-      "horasMin": 12,
-      "horasMax": 19,
-      "costoFijo": 0,
-      "descripcion_publica": "Gestioná tu negocio con software a medida en Rosario. Altas, bajas y reportes sin complicaciones. Implementación rápida, sin curva de aprendizaje.",
-      "id": "soft-chico",
-      "servicio_id": "software-a-medida",
-      "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
-    },
-    {
-      "nombre": "Software grande",
+      "nombre": "Sistemas y plataformas",
       "categorias": [
         "sistemas-gestion",
         "integraciones",
         "apps-portales"
       ],
-      "precioMin": 1200,
-      "precioMax": 2200,
-      "horasMin": 50,
-      "horasMax": 100,
+      "precioMin": 1800,
+      "precioMax": 3000,
+      "horasMin": 100,
+      "horasMax": 160,
       "costoFijo": 300,
-      "descripcion_publica": "Escalá tu operación con sistema a medida en Rosario. Autenticación, API propia y múltiples roles. Software que crece con tu negocio, no que lo limita.",
+      "descripcion_publica": "Escalá tu operación con sistemas a medida en Rosario. Autenticación, roles, API propia e integraciones. Software que crece con tu negocio, no que lo limita.",
       "id": "soft-grande",
       "servicio_id": "software-a-medida",
       "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
-    },
-    {
-      "nombre": "Hora técnica",
-      "categorias": [
-        "integraciones",
-        "sistemas-gestion"
-      ],
-      "precioMin": 18,
-      "precioMax": 18,
-      "horasMin": 1,
-      "horasMax": 1,
-      "costoFijo": 0,
-      "descripcion_publica": "Resolvé tu problema técnico con consultoría 1:1 en Rosario. Debug, asesoramiento o auditoría en una hora. Sin contratos ni compromisos.",
-      "id": "hora-tec",
-      "servicio_id": "software-a-medida",
-      "imagen": "/assets/sacsi-servicios-11-soporte-mantenimiento.webp"
-    },
-    {
-      "nombre": "Retainer básico",
-      "categorias": [
-        "sitio-web-institucional",
-        "reportes-dashboards"
-      ],
-      "precioMin": 600,
-      "precioMax": 800,
-      "horasMin": 27,
-      "horasMax": 36,
-      "costoFijo": 0,
-      "descripcion_publica": "Mantené tu web funcionando con soporte preventivo en Rosario. Actualizaciones, backups y monitoreo mensual. Evitá caídas antes de que ocurran.",
-      "id": "ret-basico",
-      "servicio_id": "automatizacion",
-      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
-    },
-    {
-      "nombre": "Retainer pro",
-      "categorias": [
-        "sitio-web-institucional",
-        "sistemas-gestion",
-        "integraciones"
-      ],
-      "precioMin": 1300,
-      "precioMax": 1900,
-      "horasMin": 59,
-      "horasMax": 86,
-      "costoFijo": 0,
-      "descripcion_publica": "Evolucioná tu producto digital con retainer técnico en Rosario. 20h/mes dedicadas a mejoras y soporte prioritario. Tu equipo técnico externo.",
-      "id": "ret-pro",
-      "servicio_id": "automatizacion",
-      "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
     }
   ]
 }

@@ -15,7 +15,12 @@ const servicios = getServicios();
   }
   @media (min-width: 601px) {
     .cards-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1024px) {
+    .cards-grid {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
   .service-card__icon img {

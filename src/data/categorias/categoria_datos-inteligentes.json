@@ -1,0 +1,22 @@
+{
+  "id": "datos-inteligentes",
+  "servicio_id": "ia-aplicada",
+  "title": "Datos inteligentes",
+  "icon": "🧠",
+  "descripcion": "Búsqueda interna que entiende lenguaje natural, clasificación automática de consultas y reportes que se arman solos.",
+  "claim": "Tus datos responden solos.",
+  "imagen": "/assets/sacsi-servicios-13-dashboards.webp",
+  "beneficios": [
+    {
+      "texto": "Búsqueda interna con IA (RAG): encontrás respuestas en tus documentos y datos preguntando en castellano."
+    },
+    {
+      "texto": "Consultas y tickets clasificados solos: cada mensaje llega etiquetado a la persona correcta."
+    },
+    {
+      "texto": "Reportes que se arman solos sobre tus planillas y sistemas actuales, sin cargar nada a mano."
+    }
+  ],
+  "casos": [],
+  "soluciones": ["diagnostico-ia", "ia-avanzada"]
+}

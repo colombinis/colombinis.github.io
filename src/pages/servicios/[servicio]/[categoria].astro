@@ -38,14 +38,10 @@ const { title: catTitle, descripcion, claim, beneficios, casos } = categoria;
 // Soluciones asociadas a esta categoría (según el campo categorias de cada detalle solucion_<id>.json)
 const solucionesCategoria = getSolucionesByCategoria(categoria.id);
 
-// Formateo de precios (ARS k) y horas para las tarjetas
+// Formateo de precios (ARS k) para las tarjetas
 function formatearPrecio(min: number, max: number) {
   if (min === max) return `$${min}k ARS`;
   return `$${min}k - $${max}k ARS`;
-}
-function formatearHoras(min: number, max: number) {
-  if (min === max) return `${min}h`;
-  return `${min}-${max}h`;
 }
 
 // Breadcrumb

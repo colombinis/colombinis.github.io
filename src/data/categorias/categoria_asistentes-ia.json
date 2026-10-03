@@ -1,0 +1,24 @@
+{
+  "id": "asistentes-ia",
+  "servicio_id": "ia-aplicada",
+  "title": "Asistentes inteligentes",
+  "icon": "🤖",
+  "descripcion": "Asistentes con IA entrenados con la información real de tu negocio: responden, filtran consultas y agendan, 24/7.",
+  "claim": "Tu negocio responde a las 3 de la mañana.",
+  "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp",
+  "beneficios": [
+    {
+      "texto": "Asistente entrenado con tu catálogo y preguntas frecuentes: responde 24/7 sin personal dedicado.",
+      "caso": "chatbot-ia-local-sacsi"
+    },
+    {
+      "texto": "Atención sin costos de infraestructura: el asistente puede correr sin servidores adicionales que mantener.",
+      "caso": "chatbot-ia-local-sacsi"
+    },
+    {
+      "texto": "Pre-atención y filtrado de consultas: tu equipo solo atiende los casos que valen la pena."
+    }
+  ],
+  "casos": ["chatbot-ia-local-sacsi"],
+  "soluciones": ["diagnostico-ia", "ia-esencial", "ia-avanzada"]
+}

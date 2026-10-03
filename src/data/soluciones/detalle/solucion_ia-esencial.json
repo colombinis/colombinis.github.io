@@ -1,0 +1,76 @@
+{
+  "id": "ia-esencial",
+  "nombre": "IA esencial",
+  "categorias": [
+    "asistentes-ia",
+    "contenido-automatico"
+  ],
+  "precioMin": 900,
+  "precioMax": 1500,
+  "horasMin": 24,
+  "horasMax": 32,
+  "costoFijo": 0,
+  "flujo": [
+    {
+      "orden": 1,
+      "paso": "Relevamiento del proceso",
+      "entradas": "Diagnóstico IA (o relevamiento inicial)",
+      "salidas": "Proceso objetivo documentado",
+      "descripcion": "Definimos el proceso a cubrir: las consultas repetitivas a automatizar o el contenido a generar",
+      "horas": 3
+    },
+    {
+      "orden": 2,
+      "paso": "Diseño del asistente o flujo IA",
+      "entradas": "Proceso documentado",
+      "salidas": "Diseño aprobado (canales, tono, disparadores)",
+      "descripcion": "Se define el canal (web, WhatsApp o email), el tono de marca y los casos que el asistente o flujo debe resolver",
+      "horas": 4
+    },
+    {
+      "orden": 3,
+      "paso": "Preparación de la base de conocimiento",
+      "entradas": "Diseño aprobado + material del cliente",
+      "salidas": "Base de conocimiento estructurada (FAQ, catálogo, documentos)",
+      "descripcion": "Ordenamos y estructuramos la información real del negocio para que la IA responda con datos propios, no inventados",
+      "horas": 5
+    },
+    {
+      "orden": 4,
+      "paso": "Implementación",
+      "entradas": "Base de conocimiento lista",
+      "salidas": "Asistente o flujo funcionando sobre tus herramientas",
+      "descripcion": "Configuramos el asistente o flujo con IA sobre lo que ya usás: tu web, tu WhatsApp, tu WooCommerce o tus planillas",
+      "horas": 8
+    },
+    {
+      "orden": 5,
+      "paso": "Pruebas con casos reales",
+      "entradas": "Implementación conectada",
+      "salidas": "Casos de prueba OK + ajustes de precisión",
+      "descripcion": "Probamos con consultas y contenido reales de tu negocio y ajustamos respuestas y comportamientos",
+      "horas": 4
+    },
+    {
+      "orden": 6,
+      "paso": "Documentación y capacitación",
+      "entradas": "Asistente probado",
+      "salidas": "Guía de uso + sesión de capacitación",
+      "descripcion": "Documentamos cómo mantener la base de conocimiento y capacitamos a tu equipo",
+      "horas": 2
+    },
+    {
+      "orden": 7,
+      "paso": "Acompañamiento inicial",
+      "entradas": "Entrega hecha",
+      "salidas": "Operación estable",
+      "descripcion": "Semanas iniciales de ajustes y monitoreo hasta que todo funciona solo",
+      "horas": 3
+    }
+  ],
+  "descripcion_publica": "",
+  "nota_interna_pricing": "",
+  "recibis": "Un asistente inteligente o un flujo de contenido con IA funcionando sobre tus herramientas actuales, con base de conocimiento propia y equipo capacitado.",
+  "necesitamos": "El proceso que querés cubrir y el material real de tu negocio: catálogo, preguntas frecuentes, documentos o planillas.",
+  "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp"
+}

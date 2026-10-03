@@ -505,7 +505,7 @@
       "categoria": "sistemas-gestion",
       "etiqueta": "Software a Medida > Sistemas de gestión"
     },
-    "solucion_relacionada": "soft-chico",
+    "solucion_relacionada": "soft-grande",
     "cliente_nombre": "Consultorio de psicología",
     "cliente_logo": "",
     "cliente_url": "",
@@ -575,7 +575,7 @@
     "slug": "chatbot-ia-local-sacsi",
     "tipo": "proyecto-tipo",
     "title": "Chatbot IA local para SACsi",
-    "category": "Desarrollo de software a medida",
+    "category": "IA Aplicada · Asistentes inteligentes",
     "metric": "100% cliente-side",
     "excerpt": "Un asistente virtual con IA que corre en el navegador del usuario, sin backend, sin costos de servidor y con respuestas automáticas basadas en conocimiento real del negocio.",
     "subtitle": "SACsi recibe consultas frecuentes sobre servicios, precios y tiempos de implementación. La atención manual consume tiempo que podría destinarse a tareas de mayor valor.",
@@ -644,11 +644,11 @@
       }
     },
     "tipo_solucion": {
-      "servicio": "software-a-medida",
-      "categoria": "apps-portales",
-      "etiqueta": "Software a Medida > Apps y portales"
+      "servicio": "ia-aplicada",
+      "categoria": "asistentes-ia",
+      "etiqueta": "IA Aplicada > Asistentes inteligentes"
     },
-    "solucion_relacionada": "soft-chico",
+    "solucion_relacionada": "ia-esencial",
     "disclaimer": "Este chatbot utiliza tecnología de inteligencia artificial local en pleno desarrollo. Las respuestas son generadas por un modelo de lenguaje pequeño (~0.5B parámetros) que corre en el navegador. La información proporcionada es orientativa y puede contener errores. Para datos precisos sobre servicios, precios o tiempos, te recomendamos contactarnos por los canales oficiales.",
     "cliente_nombre": "SACsi",
     "cliente_logo": "",

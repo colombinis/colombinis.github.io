@@ -21,16 +21,15 @@
       "type": "string",
       "description": "Identificador único de la solución. Usado en URLs: /soluciones/<id>/.",
       "examples": [
+        "diagnostico-ia",
+        "ia-esencial",
+        "ia-avanzada",
         "landing",
         "sitio-pro",
         "ecommerce",
-        "auto-basico",
-        "auto-int",
-        "soft-chico",
-        "soft-grande",
-        "hora-tec",
         "ret-basico",
-        "ret-pro"
+        "ret-pro",
+        "soft-grande"
       ]
     },
     "nombre": {

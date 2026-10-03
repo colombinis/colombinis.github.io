@@ -53,7 +53,17 @@
     {
       "id": "que-servicios-ofrecen",
       "titulo": "¿Qué servicios ofrecen exactamente?",
-      "respuesta": "Ofrecemos tres servicios principales: <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología), <strong>desarrollo de software a medida</strong> (creamos sistemas que se adaptan exactamente a tu negocio), y <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales). Si no estás seguro de cuál necesitás, podemos asesorarte sin compromiso.",
+      "respuesta": "Ofrecemos cuatro servicios principales: <strong>IA aplicada</strong> (asistentes inteligentes, contenido automático y datos inteligentes sobre los sistemas que ya usás), <strong>automatización de procesos</strong> (eliminamos tareas repetitivas con tecnología y mantenemos tus sistemas con planes mensuales), <strong>presencia online</strong> (sitios web profesionales y tiendas virtuales), y <strong>software a medida</strong> (sistemas que se adaptan exactamente a tu negocio). Si no estás seguro de cuál necesitás, empezá con un Diagnóstico IA express y te lo decimos en una sesión.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "cuanto-cuesta-ia",
+      "titulo": "¿Cuánto cuesta implementar IA en mi negocio?",
+      "respuesta": "Depende del alcance, con precios transparentes: el <strong>Diagnóstico IA express</strong> cuesta entre $90.000 y $150.000 (se descuenta del proyecto si avanzás), una implementación <strong>IA esencial</strong> (un asistente o un flujo de contenido) arranca en $900.000, y la <strong>IA avanzada</strong> (multi-canal con búsqueda inteligente sobre tus documentos) en $1.800.000. Todo se define en la primera conversación sin cargo. La IA se aplica sobre lo que ya tenés: sin migrar tu web ni cambiar tus herramientas.",
       "donde_mostrar": {
         "nivel": "general",
         "servicio": null,

@@ -1,0 +1,25 @@
+{
+  "id": "contenido-automatico",
+  "servicio_id": "ia-aplicada",
+  "title": "Contenido automático",
+  "icon": "✍️",
+  "descripcion": "Descripciones de producto, emails y publicaciones generados con IA a partir de los datos reales de tu catálogo.",
+  "claim": "Tu catálogo se escribe solo.",
+  "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp",
+  "beneficios": [
+    {
+      "texto": "Descripciones de producto generadas con IA sobre tu WooCommerce (plugin propio, público en GitHub): catálogo completo sin redactar a mano."
+    },
+    {
+      "texto": "Emails y respuestas con tu tono de marca, generados desde tus datos reales."
+    },
+    {
+      "texto": "Publicaciones para redes con la información de tus productos y servicios, listas para revisar y publicar."
+    }
+  ],
+  "casos": [],
+  "soluciones": [
+    "diagnostico-ia",
+    "ia-esencial"
+  ]
+}

@@ -6,10 +6,10 @@
     "sistemas-gestion",
     "integraciones"
   ],
-  "precioMin": 500,
-  "precioMax": 800,
+  "precioMin": 600,
+  "precioMax": 900,
   "horasMin": 15,
-  "horasMax": 15,
+  "horasMax": 20,
   "costoFijo": 0,
   "flujo": [
     {
