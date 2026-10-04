@@ -1059,3 +1059,51 @@ body.header-overlay #header-container {
 body.header-overlay #header-container.solid {
   top: 0; /* topbar fuera de vista -> el menú sólido ocupa todo el ancho superior */
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CARDS NARANJAS (home donweb, feedback 5): fundo naranja del logo,
+   texto blanco, botón navy sólido. Scoped a la home vía
+   body.header-overlay — /servicios/* conserva los cards claros.
+   ═══════════════════════════════════════════════════════════════════ */
+body.header-overlay .service-card {
+  background: #F16529; /* naranja exacto del logo (referencia del dueño) */
+  color: #1A1A2E;       /* cuerpo navy: 6.3:1 sobre naranja — AA normal ok */
+}
+
+body.header-overlay .service-card h3,
+body.header-overlay .service-card h3 a {
+  color: #FFFFFF;
+}
+
+body.header-overlay .service-card p {
+  color: #1A1A2E; /* navy: contraste 6.3:1 sobre naranja (AA texto normal) */
+}
+
+body.header-overlay .service-card__claim {
+  color: #FFFFFF;
+}
+
+/* Botón dentro del card naranja: navy sólido, texto blanco */
+body.header-overlay .service-card .hero__cta-secondary {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+body.header-overlay .service-card .hero__cta-secondary:hover {
+  background-color: #10101F;
+  border-color: #10101F;
+  color: #FFFFFF;
+}
+
+/* Cards de casos anónimos (misma sección home): fondo naranja suave para
+   no duplicar densidad con las cards de servicio */
+body.header-overlay .caso-card {
+  background: #FFF4EC;
+  border-color: #FFE3D1;
+}
+
+/* Hover de cards naranjas: sombra cálida en vez de neutra */
+body.header-overlay .service-card:hover {
+  box-shadow: 0 12px 32px rgba(241, 101, 41, 0.28);
+}
