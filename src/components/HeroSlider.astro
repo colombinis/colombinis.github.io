@@ -40,11 +40,7 @@ const slides: Slide[] = getServicios().map((svc) => ({
         <div class="hero-slider__inner">
           <div class="hero-slider__content">
             <p class="hero-slider__eyebrow">SACSI · TECNOLOGÍA JUSTA</p>
-            {i === 0 ? (
-              <h1 class="hero-slider__title">{s.title}</h1>
-            ) : (
-              <h2 class="hero-slider__title">{s.title}</h2>
-            )}
+            <h2 class="hero-slider__title">{s.title}</h2>
             <p class="hero-slider__claim">{s.claim}</p>
             <p class="hero-slider__desc">{s.short}</p>
             <div class="hero-slider__actions">

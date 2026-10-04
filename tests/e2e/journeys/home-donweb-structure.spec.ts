@@ -29,11 +29,13 @@ test.describe('HOME donweb structure', () => {
       '/soluciones/diagnostico-ia/'
     );
 
-    // Slider: 4 slides, uno por servicio, H1 solo en el primero
+    // Slider: 4 slides (uno por servicio). El H1 de la página vive en el
+    // hero de marca (debajo del slider): en el carrusel todos son h2.
     const slides = page.locator('.hero-slider__slide');
     await expect(slides).toHaveCount(4);
-    await expect(page.locator('.hero-slider__slide h1')).toHaveCount(1);
-    await expect(page.locator('.hero-slider__slide h2')).toHaveCount(3);
+    await expect(page.locator('.hero-slider__slide h1')).toHaveCount(0);
+    await expect(page.locator('.hero-slider__slide h2')).toHaveCount(4);
+    await expect(page.locator('#hero h1')).toHaveCount(1);
 
     // Píldora de precio ELIMINADA por decisión del dueño (feedback 3)
     await expect(page.locator('.hero-slider__price')).toHaveCount(0);
