@@ -1,49 +1,73 @@
 ---
+// HOME — estructura estilo donweb.com/es-ar (rama feature/home-donweb-structure)
+//
+// Orden de secciones (relevado de donweb, adaptado a contenido SACsi):
+//   0. Topbar promo fina (slot pre-header)                     [nuevo]
+//   1. Header transparente sobre hero → sólido al scroll       [overlay]
+//   2. Hero slider: 1 slide por servicio + precio "desde"      [nuevo]
+//   3. Resultados que hablan (social proof)                    [existe]
+//   4. Soluciones para tu negocio (4 servicios)                 [existe]
+//   5. Banner CTA Diagnóstico IA                                [nuevo]
+//   6. Casos reales (Problema → Solución justa → Resultado)     [existe]
+//   7. Cómo trabajamos (4 pasos)                                [existe]
+//   8. POR QUÉ SACSI (4 pilares)                                [nuevo]
+//   9. Checklist lead magnet + origen marca + FAQ               [existe]
 import Layout from '../layouts/Layout.astro';
-import config from '../config/site.json';
+import HeroSlider from '../components/HeroSlider.astro';
 import SolucionesSection from '../components/SolucionesSection.astro';
 import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
 import SocialProofSection from '../components/SocialProofSection.astro';
+import PorQueSacsiSection from '../components/PorQueSacsiSection.astro';
 import FaqSection from '../components/FaqSection.astro';
 ---
 
 <Layout
   title="Tecnología Justa para PyMEs en Rosario"
   description="Tecnología justa para emprendedores y PyMEs. IA aplicada, automatización, software a medida y presencia online sin pagar de más ni modas."
+  overlayHeader={true}
 >
-  <!-- Hero: label + propuesta de valor + CTAs -->
-  <section id="hero" class="hero">
-    <div class="hero__container">
-      <p class="hero__label">TECNOLOGÍA JUSTA</p>
-      <h1 class="hero__title">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas. Solo lo que realmente necesitás para crecer.</h1>
-      <p class="hero__subtitle">
-        Más de 15 años acompañando a dueños de pequeños negocios y estudios de diseño o marketing en Rosario. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real y se pague sola: sin licencias innecesarias ni sistemas sobredimensionados.
-      </p>
-      <div class="hero__actions">
-        <a
-          class="hero__cta hero__cta--form"
-          href="/contacto/"
-          >Te decimos qué necesitás… y qué no. Consulta sin cargo</a>
+  <Fragment slot="pre-header">
+    <div class="topbar-promo">
+      ¿No sabés por dónde empezar? Conocé el
+      <a href="/soluciones/diagnostico-ia/">Diagnóstico IA express</a>
+      — recibís un roadmap con ROI estimado.
+    </div>
+  </Fragment>
+
+  <!-- 2. Hero slider: un slide por servicio (estilo donweb) -->
+  <HeroSlider />
+
+  <!-- 3. Resultados que hablan (social proof) -->
+  <SocialProofSection />
+
+  <!-- 4. Soluciones para tu negocio (los 4 servicios) -->
+  <SolucionesSection />
+
+  <!-- 5. Banner CTA Diagnóstico IA (la puerta de entrada al funnel) -->
+  <section class="section section--alt diagnostico-banner">
+    <div class="container diagnostico-banner__card">
+      <div class="diagnostico-banner__content">
+        <span class="diagnostico-banner__tag">EMPEZÁ POR ACÁ</span>
+        <h2>¿No sabés qué necesita tu negocio?</h2>
+        <p>
+          En una sesión de trabajo detectamos dónde perdés horas y qué conviene
+          automatizar primero. Recibís un diagnóstico en PDF con roadmap y ROI
+          estimado. Se descuenta del proyecto si avanzás.
+        </p>
+      </div>
+      <div class="diagnostico-banner__action">
+        <a class="hero__cta" href="/soluciones/diagnostico-ia/">
+          Quiero mi Diagnóstico IA
+        </a>
       </div>
     </div>
-
-    <!-- Soluciones para tu negocio (componente reutilizable) -->
-    <SolucionesSection />
-    <img
-      src="/assets/sacsi-transversales-01-hero-principal.webp"
-      srcset="/assets/sacsi-transversales-01-hero-principal.webp 1x"
-      sizes="(max-width: 375px) 90vw, (max-width: 1440px) 60vw, 80vw"
-      width="375"
-      height="250"
-      alt="Patrón visual institucional SACsi"
-      loading="lazy"
-    />
   </section>
 
-  <!-- Casos reales con formato fijo: Problema → Solución justa → Resultado medible (100% estático) -->
+  <!-- 6. Casos reales (Problema → Solución justa → Resultado medible) -->
   <CasosAnonimosSection subtitle="Tecnología justa aplicada a pequeños comercios, estudios y PyMEs. Sin modas ni sobrecostos: soluciones que funcionan." />
-  <!-- Cómo trabajamos -->
-  <section id="como-trabajamos" class="section section--alt">
+
+  <!-- 7. Cómo trabajamos -->
+  <section id="como-trabajamos" class="section">
     <div class="container">
       <h2 class="section__title">Cómo trabajamos</h2>
       <div class="steps">
@@ -51,30 +75,56 @@ import FaqSection from '../components/FaqSection.astro';
           <div class="step__number">1</div>
           <h3>Descubrimiento</h3>
           <p>
-            Analizamos tu negocio, tus procesos y tus necesidades. Recibís un diagnóstico claro con las oportunidades de mejora identificadas.
+            Analizamos tu negocio, tus procesos y tus necesidades. Recibís un
+            diagnóstico claro con las oportunidades de mejora identificadas.
           </p>
         </div>
         <div class="step">
           <div class="step__number">2</div>
           <h3>Diagnóstico</h3>
           <p>
-            Evaluamos la mejor solución técnica para tu caso. Recibís una propuesta con alcance, tiempos y presupuesto sin sorpresas.
+            Evaluamos la mejor solución técnica para tu caso. Recibís una
+            propuesta con alcance, tiempos y presupuesto sin sorpresas.
           </p>
         </div>
         <div class="step">
           <div class="step__number">3</div>
           <h3>Prototipo</h3>
           <p>
-            Construimos una versión funcional de la solución. Recibís entregas periódicas con avances visibles para que puedas sugerir ajustes.
+            Construimos una versión funcional de la solución. Recibís entregas
+            periódicas con avances visibles para que puedas sugerir ajustes.
           </p>
         </div>
         <div class="step">
           <div class="step__number">4</div>
           <h3>Producción</h3>
           <p>
-            Ponemos la solución en marcha y te acompañamos. Recibís soporte continuo y garantía de funcionamiento post-entrega.
+            Ponemos la solución en marcha y te acompañamos. Recibís soporte
+            continuo y garantía de funcionamiento post-entrega.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. POR QUÉ SACSI (4 pilares, patrón donweb) -->
+  <PorQueSacsiSection />
+
+  <!-- 9. Lead magnet: Checklist de Automatización -->
+  <section class="section section--alt lead-magnet-banner">
+    <div class="container lead-magnet-card">
+      <div class="lead-magnet-content">
+        <span class="lead-magnet-tag">RECURSO GRATUITO PARA PYMES</span>
+        <h2>¿Tu negocio necesita automatización?</h2>
+        <p>
+          Descargá nuestro checklist en PDF y detectá en 5 minutos qué tareas
+          repetitivas te están costando horas y dinero. Sin registros complicados.
+        </p>
+      </div>
+      <div class="lead-magnet-action">
+        <a class="hero__cta hero__cta--form" href="/checklist-automatizacion/">
+          Descargar Checklist Gratis (PDF)
+        </a>
       </div>
     </div>
   </section>
@@ -92,28 +142,8 @@ import FaqSection from '../components/FaqSection.astro';
     </div>
   </section>
 
-  <!-- Resultados que hablan (componente reutilizable) -->
-  <SocialProofSection />
-
-  <!-- Lead Magnet: Checklist de Automatización -->
-  <section class="section section--alt lead-magnet-banner">
-    <div class="container lead-magnet-card">
-      <div class="lead-magnet-content">
-        <span class="lead-magnet-tag">RECURSO GRATUITO PARA PYMES</span>
-        <h3>¿Tu negocio necesita automatización?</h3>
-        <p>
-          Descargá nuestro checklist en PDF y detectá en 5 minutos qué tareas repetitivas te están costando horas y dinero. Sin registros complicados.
-        </p>
-      </div>
-      <div class="lead-magnet-action">
-        <a class="hero__cta hero__cta--form" href="/checklist-automatizacion/">
-          Descargar Checklist Gratis (PDF)
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="section">
+  <!-- FAQ -->
+  <section id="faq" class="section section--alt">
     <div class="container">
       <h2 class="section__title">Preguntas frecuentes</h2>
       <FaqSection />
@@ -123,6 +153,54 @@ import FaqSection from '../components/FaqSection.astro';
 </Layout>
 
 <style>
+  .diagnostico-banner {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  .diagnostico-banner__card {
+    background: #FFFFFF;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+  }
+  .diagnostico-banner__tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+  }
+  .diagnostico-banner__content h2 {
+    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-xs);
+    color: var(--primary);
+  }
+  .diagnostico-banner__content p {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+  .diagnostico-banner__action .hero__cta {
+    width: 100%;
+    max-width: 360px;
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .diagnostico-banner__card {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
   .brand-identity-note {
     padding: var(--spacing-lg) var(--spacing-md);
   }
@@ -190,7 +268,7 @@ import FaqSection from '../components/FaqSection.astro';
     display: block;
     margin-bottom: var(--spacing-xs);
   }
-  .lead-magnet-content h3 {
+  .lead-magnet-content h2 {
     font-size: 1.4rem;
     margin: 0 0 var(--spacing-xs);
   }

@@ -1,0 +1,125 @@
+---
+// PorQueSacsiSection: 4 pilares de diferenciación (patrón "POR QUÉ DONWEB").
+// Contenido 100% de SACsi: datos reales del negocio (no inventados).
+import { ShieldCheck, Users, Wrench, TrendingUp } from 'lucide-astro';
+
+const pilares = [
+  {
+    id: 'experiencia',
+    icon: 'ShieldCheck',
+    titulo: 'Más de 15 años de oficio',
+    texto:
+      'No improvisamos: 15+ años construyendo tiendas, sistemas y automatizaciones para PyMEs. Vimos cada moda pasar.',
+  },
+  {
+    id: 'trato',
+    icon: 'Users',
+    titulo: 'Hablamos tu idioma, no código',
+    texto:
+      'Te explicamos qué necesitás y qué NO, en castellano claro. Presupuesto cerrado sin letra chica ni sorpresas.',
+  },
+  {
+    id: 'ia',
+    icon: 'Wrench',
+    titulo: 'IA sobre lo que ya tenés',
+    texto:
+      'Asistentes y automatizaciones sobre tu WordPress, tu planilla, tu WhatsApp. Sin migraciones que paralicen el negocio.',
+  },
+  {
+    id: 'roi',
+    icon: 'TrendingUp',
+    titulo: 'Tecnología que se paga sola',
+    texto:
+      'Si no genera ahorro de horas o ventas, no te lo vendemos. Cada solución arranca con ROI estimado en papel.',
+  },
+];
+---
+
+<section class="section pq-sacsi" aria-labelledby="pq-sacsi-title">
+  <div class="container">
+    <h2 class="section__title" id="pq-sacsi-title">POR QUÉ SACSI</h2>
+    <div class="pq-sacsi__grid">
+      {pilares.map((p) => (
+        <article class="pq-sacsi__card">
+          <span class="pq-sacsi__icon">
+            {p.icon === 'ShieldCheck' && <ShieldCheck size={30} aria-hidden="true" />}
+            {p.icon === 'Users' && <Users size={30} aria-hidden="true" />}
+            {p.icon === 'Wrench' && <Wrench size={30} aria-hidden="true" />}
+            {p.icon === 'TrendingUp' && <TrendingUp size={30} aria-hidden="true" />}
+          </span>
+          <h3 class="pq-sacsi__title">{p.titulo}</h3>
+          <p class="pq-sacsi__text">{p.texto}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pq-sacsi {
+    background: var(--surface);
+  }
+
+  .pq-sacsi__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 601px) {
+    .pq-sacsi__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pq-sacsi__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pq-sacsi__card {
+    background: #FFFFFF;
+    border: 1px solid #E8E8E8;
+    border-top: 4px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pq-sacsi__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(10, 124, 255, 0.1);
+  }
+
+  .pq-sacsi__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #EBF4FF;
+    color: var(--tertiary-dark);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .pq-sacsi__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .pq-sacsi__text {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--secondary);
+    margin: 0;
+  }
+</style>

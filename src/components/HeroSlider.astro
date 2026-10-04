@@ -1,0 +1,412 @@
+---
+// HeroSlider: carrusel hero estilo donweb — un slide por servicio.
+// Vanilla JS (sin Swiper): scroll-snap + autoplay + dots + teclado.
+// Data-driven: slides generados desde src/data/servicios/ + piso de precio
+// de la solución más barata del servicio (catálogo aprobado 2026-10).
+import { getServicios } from '../lib/data-utils';
+import { getSoluciones } from '../lib/data-utils';
+
+interface Slide {
+  id: string;
+  title: string;
+  claim: string;
+  short: string;
+  href: string;
+  imagen: string;
+  precioDesde: number | null; // ARS k
+}
+
+const servicios = getServicios();
+
+const slides: Slide[] = servicios.map((svc) => {
+  // Piso de precio del servicio = precioMin más bajo de sus soluciones
+  const precios = getSoluciones()
+    .filter((s) => s.servicio_id === svc.id)
+    .map((s) => s.precioMin);
+  return {
+    id: svc.id,
+    title: svc.title,
+    claim: svc.claim,
+    short: svc.short,
+    href: svc.href,
+    imagen: svc.imagen,
+    precioDesde: precios.length ? Math.min(...precios) : null,
+  };
+});
+
+const arsFormatter = new Intl.NumberFormat('es-AR', {
+  style: 'currency',
+  currency: 'ARS',
+  maximumFractionDigits: 0,
+});
+
+function formatearARS(miles: number): string {
+  return arsFormatter.format(Math.round(miles * 1000));
+}
+---
+
+<section
+  class="hero-slider"
+  aria-roledescription="carousel"
+  aria-label="Servicios principales de SACsi"
+>
+  <div class="hero-slider__viewport" id="hero-slider-viewport">
+    {slides.map((s, i) => (
+      <article
+        class="hero-slider__slide"
+        role="group"
+        aria-roledescription="slide"
+        aria-label={`${i + 1} de ${slides.length}: ${s.title}`}
+        data-index={i}
+      >
+        <div class="hero-slider__content">
+          <p class="hero-slider__eyebrow">SACSI · TECNOLOGÍA JUSTA</p>
+          {i === 0 ? (
+            <h1 class="hero-slider__title">{s.title}</h1>
+          ) : (
+            <h2 class="hero-slider__title">{s.title}</h2>
+          )}
+          <p class="hero-slider__claim">{s.claim}</p>
+          <p class="hero-slider__desc">{s.short}</p>
+          <div class="hero-slider__actions">
+            <a class="hero-slider__cta" href={s.href}>
+              Ver {s.title}
+            </a>
+            <a
+              class="hero-slider__cta hero-slider__cta--ghost"
+              href={`/contacto/?categoria=${s.id}&asunto=Consulta%20sobre%20${encodeURIComponent(s.title)}`}
+            >
+              Consultar sin cargo
+            </a>
+          </div>
+        </div>
+        <div class="hero-slider__media">
+          <img
+            src={s.imagen}
+            srcset={`${s.imagen} 1x`}
+            alt={`Ilustración representativa del servicio ${s.title}`}
+            width="600"
+            height="400"
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </div>
+        {s.precioDesde !== null && (
+          <p class="hero-slider__price">
+            <span class="hero-slider__price-label">Desde</span>
+            <strong class="hero-slider__price-value">{formatearARS(s.precioDesde)}</strong>
+          </p>
+        )}
+      </article>
+    ))}
+  </div>
+
+  <div class="hero-slider__dots" role="tablist" aria-label="Elegí un slide">
+    {slides.map((s, i) => (
+      <button
+        class="hero-slider__dot"
+        data-goto={i}
+        role="tab"
+        aria-selected={i === 0 ? 'true' : 'false'}
+        aria-label={`Ir a ${s.title}`}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-slider {
+    position: relative;
+    background: var(--primary);
+    color: #FFFFFF;
+    overflow: hidden;
+  }
+
+  .hero-slider__viewport {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge legacy */
+  }
+  .hero-slider__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-slider__slide {
+    position: relative;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    min-height: 78vh;
+    display: grid;
+    align-content: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xxl) var(--spacing-md);
+  }
+
+  @media (min-width: 901px) {
+    .hero-slider__slide {
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: var(--spacing-xl);
+      max-width: var(--container);
+      margin: 0 auto;
+      min-height: 82vh;
+    }
+  }
+
+  .hero-slider__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #7FB8FF;
+    margin: 0 0 var(--spacing-sm);
+  }
+
+  .hero-slider__title {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--spacing-sm);
+    text-transform: uppercase;
+  }
+
+  .hero-slider__claim {
+    font-size: clamp(1.05rem, 2.6vw, 1.45rem);
+    font-weight: 600;
+    color: #C9DFFF;
+    margin: 0 0 var(--spacing-sm);
+    max-width: 32ch;
+  }
+
+  .hero-slider__desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0 0 var(--spacing-lg);
+    max-width: 52ch;
+  }
+
+  .hero-slider__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .hero-slider__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--tertiary);
+    color: #FFFFFF;
+    padding: 14px 26px;
+    border-radius: var(--rounded-sm);
+    font-weight: 700;
+    font-size: 0.98rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .hero-slider__cta:hover {
+    background-color: #FFFFFF;
+    color: var(--primary);
+    transform: translateY(-1px);
+  }
+
+  .hero-slider__cta--ghost {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.55);
+    font-weight: 600;
+  }
+
+  .hero-slider__cta--ghost:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+  }
+
+  .hero-slider__media {
+    display: none;
+  }
+
+  @media (min-width: 901px) {
+    .hero-slider__media {
+      display: block;
+    }
+    .hero-slider__media img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--rounded-md);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  .hero-slider__price {
+    position: absolute;
+    right: var(--spacing-md);
+    bottom: var(--spacing-md);
+    margin: 0;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    border-radius: var(--rounded-full);
+    padding: 8px 18px;
+  }
+
+  .hero-slider__price-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #C9DFFF;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-slider__price-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #FFFFFF;
+  }
+
+  .hero-slider__dots {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: var(--spacing-lg);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+  }
+
+  .hero-slider__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .hero-slider__dot[aria-selected='true'] {
+    background: #FFFFFF;
+    transform: scale(1.15);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-slider__viewport {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var viewport = document.getElementById('hero-slider-viewport');
+    if (!viewport) return;
+
+    var dots = Array.prototype.slice.call(
+      document.querySelectorAll('.hero-slider__dot')
+    );
+    var slides = Array.prototype.slice.call(
+      viewport.querySelectorAll('.hero-slider__slide')
+    );
+    if (!slides.length) return;
+
+    var AUTOPLAY_MS = 6000;
+    var timer: number | undefined;
+    var currentIndex = 0;
+    var reducedMotion =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function goTo(index: number, smooth: boolean) {
+      currentIndex = (index + slides.length) % slides.length;
+      viewport.scrollTo({
+        left: slides[currentIndex].offsetLeft,
+        behavior: smooth && !reducedMotion ? 'smooth' : 'auto',
+      });
+    }
+
+    function syncDots() {
+      dots.forEach(function (dot, i) {
+        dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
+      });
+    }
+
+    function startAutoplay() {
+      if (reducedMotion) return;
+      stopAutoplay();
+      timer = window.setInterval(function () {
+        goTo(currentIndex + 1, true);
+      }, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+      if (timer) {
+        window.clearInterval(timer);
+        timer = undefined;
+      }
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        goTo(parseInt(dot.getAttribute('data-goto') || '0', 10), true);
+        syncDots();
+        startAutoplay(); // reinicia el conteo tras interacción
+      });
+    });
+
+    // Sincronizar dots cuando el usuario scrollea/toca el carrusel
+    var scrollTimer: number | undefined;
+    viewport.addEventListener('scroll', function () {
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(function () {
+        var center = viewport.scrollLeft + viewport.clientWidth / 2;
+        var best = 0;
+        var bestDist = Infinity;
+        slides.forEach(function (s, i) {
+          var mid = s.offsetLeft + s.offsetWidth / 2;
+          var dist = Math.abs(mid - center);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        if (best !== currentIndex) {
+          currentIndex = best;
+          syncDots();
+        }
+      }, 80);
+    }, { passive: true });
+
+    // Pausar autoplay cuando el carrusel no está visible o la pestaña duerme
+    document.addEventListener('visibilitychange', function () {
+      document.hidden ? stopAutoplay() : startAutoplay();
+    });
+
+    // Teclado: flechas izq/der cuando el carrusel tiene foco
+    viewport.setAttribute('tabindex', '0');
+    viewport.addEventListener('keydown', function (e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goTo(currentIndex + 1, true);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goTo(currentIndex - 1, true);
+      }
+      syncDots();
+      startAutoplay();
+    });
+
+    // Touch/swipe pausa el autoplay mientras se interactúa
+    viewport.addEventListener('pointerdown', stopAutoplay);
+    viewport.addEventListener('pointerup', startAutoplay);
+    viewport.addEventListener('pointercancel', startAutoplay);
+
+    syncDots();
+    startAutoplay();
+  })();
+</script>
