@@ -37,7 +37,27 @@ import FaqSection from '../components/FaqSection.astro';
   <!-- 2. Hero slider: un slide por servicio (estilo donweb) -->
   <HeroSlider />
 
-  <!-- 3. Soluciones para tu negocio (los 4 servicios) -->
+  <!-- 3. Hero de marca (el original) debajo del slider: propuesta de valor
+       + CTA naranja, fondo claro, texto navy — combinación de la referencia
+       del dueño (sacsi-hero-text.png). -->
+  <section id="hero" class="hero hero--brand">
+    <div class="hero__container">
+      <p class="hero__label">TECNOLOGÍA JUSTA</p>
+      <h1 class="hero__title">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas. Solo lo que realmente necesitás para crecer.</h1>
+      <p class="hero__subtitle">
+        Más de 15 años acompañando a dueños de pequeños negocios y estudios de diseño o marketing en Rosario. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real y se pague sola: sin licencias innecesarias ni sistemas sobredimensionados.
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--form hero__cta--orange"
+          href="/contacto/"
+          >Te decimos qué necesitás… y qué no. Consulta sin cargo</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Soluciones para tu negocio (los 4 servicios) -->
   <SolucionesSection />
 
   <!-- 5. Banner CTA Diagnóstico IA (la puerta de entrada al funnel) -->
@@ -140,6 +160,29 @@ import FaqSection from '../components/FaqSection.astro';
 </Layout>
 
 <style>
+  /* Hero de marca (debajo del slider): fondo claro, texto navy, acento
+     naranja — combinación de la referencia del dueño (sacsi-hero-text.png).
+     El fondo/base (.hero) viene de global.css; acá solo el diferencial. */
+  .hero--brand {
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    border-bottom: 1px solid #EEF1F5;
+  }
+
+  .hero--brand .hero__label {
+    color: #F16529; /* naranja del logo — label de marca */
+  }
+
+  .hero__cta--orange,
+  .hero__cta--orange:hover {
+    background-color: #F16529;
+    color: #FFFFFF;
+  }
+
+  .hero__cta--orange:hover {
+    background-color: #D9531E;
+  }
+
   .diagnostico-banner {
     padding: var(--spacing-xl) var(--spacing-md);
   }
