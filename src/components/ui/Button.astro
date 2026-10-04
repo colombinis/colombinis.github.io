@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 
 interface Props extends HTMLAttributes<'button'> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'ghost' | 'link';
+  variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'ghost' | 'link' | 'orange';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   href?: string;
   target?: string;
@@ -151,6 +151,20 @@ const classes = [
   }
   .ui-btn--link:hover {
     text-decoration: underline;
+  }
+
+  /* Variante orange (home donweb): naranja del logo #F16529, texto navy
+     (contraste 5.39:1, WCAG AA). Hover a naranja profundo #D9531E con
+     texto blanco (4.03:1 sobre fondo, AA texto grande). */
+  .ui-btn--orange {
+    background-color: #F16529;
+    color: #1A1A2E;
+  }
+  .ui-btn--orange:hover {
+    background-color: #D9531E;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(241, 101, 41, 0.3);
   }
 
   /* Tamaños */
