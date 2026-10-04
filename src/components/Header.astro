@@ -408,11 +408,13 @@ const links = configLinks.map((link) =>
     });
   }
 
-  // Header overlay (home): transparente sobre el hero, sólido al scrollear
+  // Header overlay (home): transparente sobre el hero, sólido al scrollear.
+  // Umbral 40px > altura de la topbar (34px): así el salto a top:0 ocurre
+  // cuando la topbar estática ya salió de vista (nunca se pisan).
   const headerContainer = document.getElementById('header-container');
   if (headerContainer) {
     const onScroll = function () {
-      headerContainer.classList.toggle('solid', window.scrollY > 24);
+      headerContainer.classList.toggle('solid', window.scrollY > 40);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

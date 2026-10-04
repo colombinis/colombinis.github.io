@@ -35,8 +35,8 @@ test.describe('HOME donweb structure', () => {
     await expect(page.locator('.hero-slider__slide h1')).toHaveCount(1);
     await expect(page.locator('.hero-slider__slide h2')).toHaveCount(3);
 
-    // Precios "desde" presentes en los 4 slides
-    await expect(page.locator('.hero-slider__price')).toHaveCount(4);
+    // Píldora de precio ELIMINADA por decisión del dueño (feedback 3)
+    await expect(page.locator('.hero-slider__price')).toHaveCount(0);
 
     // Dots: click en el 3er slide
     const dots = page.locator('.hero-slider__dot');
@@ -55,9 +55,16 @@ test.describe('HOME donweb structure', () => {
       return { clientW: vp.clientWidth, slides };
     });
     expect(geo.clientW).toBeGreaterThan(0);
+    // Invariant real (inmune a la posición de scroll del carrusel en el
+    // momento de medir): cada slide = ancho del viewport y contiguos sin
+    // gap ni overlap (regresión "se ven todos juntos").
     geo.slides.forEach((s, i) => {
       expect(s.width, `slide ${i} debe ocupar el viewport completo`).toBe(geo.clientW);
-      expect(s.left, `slide ${i} debe empezar justo donde termina el anterior`).toBe(i * geo.clientW);
+      if (i > 0) {
+        const prev = geo.slides[i - 1];
+        const gap = s.left - (prev.left + prev.width);
+        expect(gap, `slide ${i} debe ser contiguo al anterior (gap=${gap})`).toBe(0);
+      }
     });
 
     // Slide visible contiene el título del 3er servicio
