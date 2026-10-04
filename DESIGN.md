@@ -284,3 +284,30 @@ El sitio es 100% estático (GitHub Pages). Astro genera ese estático pero elimi
 | Lighthouse | Herramienta de Google que audita performance, accesibilidad, SEO y buenas prácticas. |
 | Astro | Framework de sitios estáticos usado como stack oficial del proyecto. |
 
+
+## Diseño Atómico (gobernanza de componentes)
+
+`/design-style-guide` (página Astro) + `src/components/ui/` son el catálogo canónico de este documento. Regla vigente desde 2026-10-04:
+
+1. **Primitivos**: los elementos de UI viven como componentes en `src/components/ui/` (Button, Card, Badge, Input, Textarea, Accordion, Tabs, SliderControls, IconResolver) y están documentados en `/design-style-guide`.
+2. **Composición**: cualquier componente nuevo de interfaz se construye componiendo esos primitivos — no se duplica su markup/estilo inline.
+3. **Flujo obligatorio antes de agregar un elemento o componente de UI**:
+   a. ¿Existe en `/design-style-guide` o en este documento? → usarlo.
+   b. ¿No existe pero se puede componer con primitivos existentes? → componer.
+   c. ¿Faltan primitivos? → preguntar al dueño de qué fuente tomar el primitivo.
+   d. Sin respuesta del dueño → tomar como referencia el componente compatible de https://ui.shadcn.com/docs/components, adaptado a Astro + tokens SACsi (sin dependencias npm nuevas).
+4. **Tokens de marca 2026**: junto al navy #1A1A2E y azul #0A7CFF, el naranja #F16529 (hover #D9531E) es acento de marca: CTA hero, banda superior de cards, labels. Contraste AA: texto blanco sobre #F16529 solo para texto grande; texto de cuerpo sobre naranja en navy #1A1A2E (5.39:1).
+
+### Componentes primitivos vigentes
+
+| Componente | Archivo | Variantes |
+|---|---|---|
+| Button | `src/components/ui/Button.astro` | primary, secondary, outline, whatsapp, ghost, link, orange |
+| Card | `src/components/ui/Card.astro` | default, muted, interactive, accent, media-accent |
+| Badge | `src/components/ui/Badge.astro` | (ver design-style-guide) |
+| Input | `src/components/ui/Input.astro` | — |
+| Textarea | `src/components/ui/Textarea.astro` | — |
+| Accordion | `src/components/ui/Accordion.astro` | — |
+| Tabs | `src/components/ui/Tabs.astro` | — |
+| SliderControls | `src/components/ui/SliderControls.astro` | prev/next/dots (targetId) |
+| IconResolver | `src/components/ui/IconResolver.astro` | lucide |
