@@ -78,6 +78,7 @@ const tabsDemo = [
 
       <!-- Barra de navegación rápida -->
       <nav class="guide-nav" aria-label="Navegación del sistema de diseño">
+        <a href="#hero-marca" class="guide-nav__link">Hero</a>
         <a href="#tokens" class="guide-nav__link">Tokens</a>
         <a href="#botones" class="guide-nav__link">Botones</a>
         <a href="#tarjetas" class="guide-nav__link">Tarjetas</a>
@@ -90,6 +91,32 @@ const tabsDemo = [
   </div>
 
   <main class="container guide-content">
+
+    <!-- 0. HERO DE MARCA (patrón de la home) -->
+    <section id="hero-marca" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>0. Hero de Marca (patrón home)</h2>
+        <p>El hero de la home: fondo claro, título navy con la propuesta de valor, y CTA naranja del logo. Sin label superior — el eyebrow fue eliminado por decisión de diseño (feedback 9).</p>
+      </div>
+
+      <div class="hero-marca-demo">
+        <div class="hero-marca-demo__inner">
+          <h1 class="hero-marca-demo__title">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas.</h1>
+          <p class="hero-marca-demo__subtitle">
+            Más de 15 años acompañando a dueños de pequeños negocios. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real.
+          </p>
+          <div class="hero-marca-demo__actions">
+            <Button variant="orange" size="lg" href="/contacto/">
+              <span>Te decimos qué necesitás… y qué no. Consulta sin cargo</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> un solo H1 por página (la propuesta de valor, no el nombre del servicio); CTA en naranja #F16529 con texto navy (5.39:1 WCAG AA); sin label/eyebrow superior repetido.
+      </p>
+    </section>
 
     <!-- 1. TOKENS -->
     <section id="tokens" class="guide-section">
@@ -114,6 +141,24 @@ const tabsDemo = [
             <strong>Tertiary / Accent</strong>
             <code>#0A7CFF</code>
             <span>Azul eléctrico interactivo</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#F16529;"></div>
+          <div class="swatch-info">
+            <strong>Naranja Marca (nuevo)</strong>
+            <code>#F16529</code>
+            <span>Acento de marca del logo — CTAs hero, banda de cards, labels</span>
+          </div>
+        </div>
+
+        <div class="swatch-card">
+          <div class="swatch-color" style="background:#D9531E;"></div>
+          <div class="swatch-info">
+            <strong>Naranja Profundo</strong>
+            <code>#D9531E</code>
+            <span>Hover del naranja de marca</span>
           </div>
         </div>
 
@@ -168,6 +213,11 @@ const tabsDemo = [
           <div class="btn-group-wrap">
             <Button variant="primary">
               <span>Consulta sin cargo</span>
+              <ArrowRight slot="icon-end" size={16} />
+            </Button>
+
+            <Button variant="orange">
+              <span>CTA naranja de marca</span>
               <ArrowRight slot="icon-end" size={16} />
             </Button>
 
@@ -255,6 +305,22 @@ const tabsDemo = [
           <p>Borde y resplandor sutil en azul institucional. Se utiliza en el lead magnet o en las ofertas principales de valor.</p>
           <div class="card-demo-footer">
             <Button size="sm" variant="primary">Acción directa</Button>
+          </div>
+        </Card>
+
+        <Card variant="media-accent">
+          <div class="ui-card__media">
+            <img src="/assets/sacsi-servicios-12-consultoria-ia.webp" alt="Ilustración del servicio IA Aplicada" loading="lazy" />
+          </div>
+          <div class="card-demo-header">
+            <Badge variant="neutral">HOME</Badge>
+            <h3>Servicio con Banda Naranja</h3>
+          </div>
+          <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris.</p>
+          <div class="card-demo-footer">
+            <Button size="sm" variant="primary">
+              <span>Ver servicio</span>
+            </Button>
           </div>
         </Card>
       </div>
@@ -483,6 +549,54 @@ const tabsDemo = [
     color: var(--primary, #1A1A2E);
     border-color: #CBD5E1;
     background-color: #F1F5F9;
+  }
+
+  /* Hero de marca (patrón home) */
+  .hero-marca-demo {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-xxl) var(--spacing-lg);
+    text-align: center;
+  }
+
+  .hero-marca-demo__inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-marca-demo__title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--primary, #1A1A2E);
+    margin: 0 0 var(--spacing-md);
+    line-height: 1.25;
+  }
+
+  .hero-marca-demo__subtitle {
+    font-size: 1rem;
+    color: var(--secondary, #444444);
+    line-height: 1.6;
+    margin: 0 0 var(--spacing-xl);
+  }
+
+  .hero-marca-demo__actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .pattern-note {
+    font-size: 0.88rem;
+    color: var(--muted, #6B6B6B);
+    background: #FFF4EC;
+    border-left: 4px solid #F16529;
+    border-radius: var(--rounded-sm, 8px);
+    padding: var(--spacing-md) var(--spacing-lg);
+    margin: 0;
+  }
+
+  .pattern-note strong {
+    color: #C2410C;
   }
 
   .guide-content {

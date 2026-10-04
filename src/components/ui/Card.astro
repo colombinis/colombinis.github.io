@@ -1,6 +1,6 @@
 ---
 interface Props {
-  variant?: 'default' | 'muted' | 'interactive' | 'accent';
+  variant?: 'default' | 'muted' | 'interactive' | 'accent' | 'media-accent';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   class?: string;
   as?: string;
@@ -76,6 +76,39 @@ const classes = [
   .ui-card--accent:hover {
     border-color: var(--tertiary, #0A7CFF);
     box-shadow: 0 8px 24px rgba(10, 124, 255, 0.12);
+  }
+
+  /* Variante media-accent (home donweb): banda superior naranja #F16529
+     con la imagen del servicio centrada y bordes redondeados (--rounded-sm).
+     El cuerpo del card queda blanco con los textos globales.
+     NOTA scoping: .ui-card__media lo aporta el CONSUMIDOR via slot, por lo
+     que el cid es el de la página consumidora — los selectores descendentes
+     deben ser :global() para alcanzarlo. */
+  .ui-card--media-accent {
+    background-color: var(--surface, #FFFFFF);
+    border-color: #E8E8E8;
+  }
+  .ui-card--media-accent:hover {
+    border-color: #FFD3B8;
+    box-shadow: 0 12px 32px rgba(241, 101, 41, 0.22);
+  }
+
+  .ui-card--media-accent :global(.ui-card__media) {
+    background: #F16529;
+    padding: var(--spacing-lg, 24px) var(--spacing-md, 16px);
+    margin: 0 calc(-1 * var(--spacing-lg, 24px)) var(--spacing-md, 16px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ui-card--media-accent :global(.ui-card__media) :global(img) {
+    width: auto;
+    max-width: 100%;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    border-radius: var(--rounded-sm, 8px);
   }
 
   .ui-card--link {
