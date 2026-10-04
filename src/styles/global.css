@@ -1061,49 +1061,56 @@ body.header-overlay #header-container.solid {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   CARDS NARANJAS (home donweb, feedback 5): fundo naranja del logo,
-   texto blanco, botón navy sólido. Scoped a la home vía
+   CARDS CON BANDA NARANJA SUPERIOR (home donweb, feedback 5+6): el
+   naranja es SOLO la cabecera del card (donde va la imagen); el cuerpo
+   queda claro con los textos de siempre. Scoped a la home vía
    body.header-overlay — /servicios/* conserva los cards claros.
    ═══════════════════════════════════════════════════════════════════ */
 body.header-overlay .service-card {
-  background: #F16529; /* naranja exacto del logo (referencia del dueño) */
-  color: #1A1A2E;       /* cuerpo navy: 6.3:1 sobre naranja — AA normal ok */
+  background: #FFFFFF;
+  padding: 0 24px 28px; /* sin padding superior: la banda llega a los bordes */
+  overflow: hidden; /* recorta la banda con el radius del card */
+  border: 1px solid #E8E8E8;
 }
 
-body.header-overlay .service-card h3,
-body.header-overlay .service-card h3 a {
-  color: #FFFFFF;
+body.header-overlay .service-card__icon {
+  background: #F16529; /* naranja del logo — banda superior */
+  padding: var(--spacing-lg) var(--spacing-md);
+  margin: 0 -24px var(--spacing-md); /* compensa el padding del card: borde a borde */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-body.header-overlay .service-card p {
-  color: #1A1A2E; /* navy: contraste 6.3:1 sobre naranja (AA texto normal) */
-}
+/* Textos: vuelven a los colores globales legibles (título navy, cuerpo secondary) */
 
-body.header-overlay .service-card__claim {
-  color: #FFFFFF;
-}
-
-/* Botón dentro del card naranja: navy sólido, texto blanco */
+/* Botón del card: naranja como acento de marca, texto navy (5.39:1, AA ok) */
 body.header-overlay .service-card .hero__cta-secondary {
-  background-color: var(--primary);
-  color: #FFFFFF;
-  border-color: var(--primary);
+  background-color: #F16529;
+  border-color: #F16529;
+  color: #1A1A2E;
 }
 
 body.header-overlay .service-card .hero__cta-secondary:hover {
-  background-color: #10101F;
-  border-color: #10101F;
-  color: #FFFFFF;
+  /* Sin cambio de colores en hover: elevar solo (navy sobre #D9531E daría
+     4.28:1 y blanco 4.03:1 — ambos borderline AA; mantener #F16529 con
+     navy es 5.39:1). */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(241, 101, 41, 0.35);
 }
 
-/* Cards de casos anónimos (misma sección home): fondo naranja suave para
-   no duplicar densidad con las cards de servicio */
-body.header-overlay .caso-card {
-  background: #FFF4EC;
-  border-color: #FFE3D1;
-}
-
-/* Hover de cards naranjas: sombra cálida en vez de neutra */
+/* Hover del card: sombra cálida */
 body.header-overlay .service-card:hover {
-  box-shadow: 0 12px 32px rgba(241, 101, 41, 0.28);
+  box-shadow: 0 12px 32px rgba(241, 101, 41, 0.22);
+}
+
+/* Cards de casos: patrón claro (no tienen imagen de cabecera);
+   el acento naranja vive en el badge del rubro */
+body.header-overlay .caso-card {
+  background: #FFFFFF;
+}
+
+body.header-overlay .caso-badge {
+  background: #FFF4EC;
+  color: #C2410C;
 }
