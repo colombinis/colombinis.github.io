@@ -481,17 +481,7 @@ const tabsDemo = [
       </div>
     </section>
 
-    <!-- BANNER DE RETORNO -->
-    <section class="guide-footer-banner">
-      <div class="guide-footer-box">
-        <h3>¿Querés volver al sitio principal?</h3>
-        <p>Todos estos componentes se encuentran integrados en la página de inicio, servicios y flujo de contacto.</p>
-        <div class="guide-footer-actions">
-          <Button variant="primary" href="/">Volver al Inicio</Button>
-          <Button variant="outline" href="/contacto/">Ir a Contacto</Button>
-        </div>
-      </div>
-    </section>
+    <!-- BANNER DE RETORNO: eliminado por decisión del dueño (feedback 12) -->
 
   </main>
 </Layout>
@@ -865,37 +855,5 @@ const tabsDemo = [
     font-weight: 500;
   }
 
-  /* Footer banner */
-  .guide-footer-banner {
-    padding-top: var(--spacing-lg);
-  }
-
-  .guide-footer-box {
-    background: #FFFFFF;
-    border: 2px solid var(--tertiary, #0A7CFF);
-    border-radius: var(--rounded-md, 16px);
-    padding: var(--spacing-xl);
-    text-align: center;
-    max-width: 640px;
-    margin: 0 auto;
-    box-shadow: 0 4px 20px rgba(10, 124, 255, 0.08);
-  }
-
-  .guide-footer-box h3 {
-    margin: 0 0 var(--spacing-xs);
-    font-size: 1.35rem;
-  }
-
-  .guide-footer-box p {
-    margin: 0 0 var(--spacing-lg);
-    font-size: 0.95rem;
-    color: var(--secondary, #444444);
-  }
-
-  .guide-footer-actions {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+  /* Footer banner: eliminado (feedback 12) — estilos retirados junto con el markup */
 </style>
