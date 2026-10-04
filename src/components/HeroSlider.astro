@@ -39,7 +39,6 @@ const slides: Slide[] = getServicios().map((svc) => ({
       >
         <div class="hero-slider__inner">
           <div class="hero-slider__content">
-            <p class="hero-slider__eyebrow">SACSI · TECNOLOGÍA JUSTA</p>
             <h2 class="hero-slider__title">{s.title}</h2>
             <p class="hero-slider__claim">{s.claim}</p>
             <p class="hero-slider__desc">{s.short}</p>
@@ -131,14 +130,6 @@ const slides: Slide[] = getServicios().map((svc) => ({
       align-items: center;
       gap: var(--spacing-xl);
     }
-  }
-
-  .hero-slider__eyebrow {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: #7FB8FF;
-    margin: 0 0 var(--spacing-sm);
   }
 
   .hero-slider__title {
