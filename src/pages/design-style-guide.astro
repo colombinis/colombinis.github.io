@@ -410,10 +410,38 @@ const tabsDemo = [
 
         <div class="controls-preview-sub">
           <h3>Controles de Slider / Carrusel (SliderControls.astro)</h3>
-          <p class="text-sm text-muted">Botoneras prev/next y dots de navegación con feedback visual:</p>
-          <div class="slider-controls-wrap">
-            <SliderControls totalSlides={4} currentSlide={0} />
+          <p class="text-sm text-muted">Botoneras prev/next y dots de navegación con feedback visual — demo interactiva con mini-slides:</p>
+
+          <div class="slider-demo">
+            <div class="slider-demo__viewport" id="guide-slider-demo" aria-live="polite">
+              <div class="slider-demo__slide is-active" data-slide="0">
+                <strong>Slide 1 — IA Aplicada</strong>
+                <span>El control refleja el slide activo en los dots y permite prev/next con teclado (foco).</span>
+              </div>
+              <div class="slider-demo__slide" data-slide="1">
+                <strong>Slide 2 — Automatización</strong>
+                <span>Los dots son role="tab" con aria-selected sincronizado.</span>
+              </div>
+              <div class="slider-demo__slide" data-slide="2">
+                <strong>Slide 3 — Presencia Online</strong>
+                <span>El botón activo se estira (pill) para marcar posición.</span>
+              </div>
+              <div class="slider-demo__slide" data-slide="3">
+                <strong>Slide 4 — Software a Medida</strong>
+                <span>Loop infinito: next en el último vuelve al primero.</span>
+              </div>
+            </div>
+
+            <div class="slider-demo__controls">
+              <SliderControls totalSlides={4} currentSlide={0} targetId="guide-slider-demo" />
+            </div>
           </div>
+
+          <pre class="code-preview"><code><SliderControls totalSlides={4} currentSlide={0} targetId="mi-carrusel" />
+
+// Integración (vanilla): escuchar data-slider-prev / data-slider-next /
+// data-slider-dots dentro de [data-ui-slider-controls] y reflejar el
+// índice en el carrusel con targetId (ver script de esta página).</code></pre>
         </div>
       </div>
     </section>
@@ -818,6 +846,49 @@ const tabsDemo = [
     margin-top: var(--spacing-md);
   }
 
+  /* Demo interactiva de SliderControls (feedback 13) */
+  .slider-demo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+    align-items: center;
+    width: 100%;
+  }
+
+  .slider-demo__viewport {
+    width: 100%;
+    min-height: 110px;
+  }
+
+  .slider-demo__slide {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    padding: var(--spacing-lg, 24px);
+  }
+
+  .slider-demo__slide.is-active {
+    display: flex;
+  }
+
+  .slider-demo__slide strong {
+    color: var(--primary, #1A1A2E);
+    font-size: 1rem;
+  }
+
+  .slider-demo__slide span {
+    font-size: 0.9rem;
+    color: var(--secondary, #444444);
+  }
+
+  .slider-demo__controls {
+    display: flex;
+    justify-content: center;
+  }
+
   /* Accordion wrap */
   .accordion-container-wrap {
     max-width: 840px;
@@ -857,3 +928,41 @@ const tabsDemo = [
 
   /* Footer banner: eliminado (feedback 12) — estilos retirados junto con el markup */
 </style>
+
+<script>
+  // Demo interactiva de SliderControls (sección 5): conecta prev/next/dots
+  // con el mini-carrusel #guide-slider-demo. Patrón de integración vanilla
+  // reutilizable: el componente expone data-slider-prev/next/dots + targetId.
+  (function () {
+    var viewport = document.getElementById('guide-slider-demo');
+    var controls = document.querySelector('[data-ui-slider-controls][data-target="guide-slider-demo"]');
+    if (!viewport || !controls) return;
+
+    var slides = Array.prototype.slice.call(viewport.querySelectorAll('.slider-demo__slide'));
+    var dots = Array.prototype.slice.call(controls.querySelectorAll('.ui-slider-dot'));
+    var current = 0;
+
+    function render() {
+      slides.forEach(function (s, i) {
+        s.classList.toggle('is-active', i === current);
+      });
+      dots.forEach(function (d, i) {
+        d.classList.toggle('is-active', i === current);
+        d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+      });
+    }
+
+    function go(index) {
+      current = (index + slides.length) % slides.length;
+      render();
+    }
+
+    controls.querySelector('[data-slider-prev]').addEventListener('click', function () { go(current - 1); });
+    controls.querySelector('[data-slider-next]').addEventListener('click', function () { go(current + 1); });
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () { go(parseInt(d.getAttribute('data-slide-index'), 10)); });
+    });
+
+    render();
+  })();
+</script>
