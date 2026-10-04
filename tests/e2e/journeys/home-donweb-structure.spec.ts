@@ -44,6 +44,22 @@ test.describe('HOME donweb structure', () => {
     await dots.nth(2).click();
     await expect(dots.nth(2)).toHaveAttribute('aria-selected', 'true');
 
+    // Slide 4: imagen correcta de software (regresión del fix anterior)
+    // + GEOMETRÍA: cada slide = 1 viewport exacto (regresión "se ven todos juntos")
+    const geo = await page.evaluate(() => {
+      const vp = document.querySelector('#hero-slider-viewport');
+      const slides = [...document.querySelectorAll('.hero-slider__slide')].map((s) => {
+        const r = s.getBoundingClientRect();
+        return { left: Math.round(r.left), width: Math.round(r.width) };
+      });
+      return { clientW: vp.clientWidth, slides };
+    });
+    expect(geo.clientW).toBeGreaterThan(0);
+    geo.slides.forEach((s, i) => {
+      expect(s.width, `slide ${i} debe ocupar el viewport completo`).toBe(geo.clientW);
+      expect(s.left, `slide ${i} debe empezar justo donde termina el anterior`).toBe(i * geo.clientW);
+    });
+
     // Slide visible contiene el título del 3er servicio
     const slide3 = slides.nth(2);
     await expect(slide3).toBeInViewport({ timeout: 5000 });
