@@ -991,3 +991,71 @@ h1, h2, h3 {
     right: -22px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   HEADER OVERLAY (home, estilo donweb): transparente sobre el hero,
+   sólido al scrollear. Se activa con body.header-overlay (Layout prop).
+   ═══════════════════════════════════════════════════════════════════ */
+body.header-overlay #header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+body.header-overlay #header-container.solid {
+  background: var(--surface);
+  border-bottom: 1px solid #E8E8E8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Textos del header en blanco mientras es transparente */
+body.header-overlay #header-container:not(.solid) .nav-link,
+body.header-overlay #header-container:not(.solid) .logo-brand__text {
+  color: #FFFFFF;
+}
+
+body.header-overlay #header-container:not(.solid) .hamburger {
+  color: #FFFFFF;
+}
+
+/* El main arranca debajo del header fijo en overlay */
+body.header-overlay main {
+  padding-top: 0;
+}
+
+/* ── Barra superior de anuncio (estilo donweb, solo home) ── */
+.topbar-promo {
+  position: relative;
+  z-index: 1001;
+  background: var(--tertiary-dark, #0A5FCB);
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 0.82rem;
+  padding: 7px var(--spacing-md);
+}
+
+.topbar-promo a {
+  color: #FFFFFF;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+body.header-overlay .topbar-promo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+body.header-overlay #header-container {
+  top: 34px; /* altura de la topbar */
+}
+
+body.header-overlay #header-container.solid {
+  top: 0;
+}

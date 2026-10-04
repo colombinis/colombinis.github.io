@@ -408,6 +408,16 @@ const links = configLinks.map((link) =>
     });
   }
 
+  // Header overlay (home): transparente sobre el hero, sólido al scrollear
+  const headerContainer = document.getElementById('header-container');
+  if (headerContainer) {
+    const onScroll = function () {
+      headerContainer.classList.toggle('solid', window.scrollY > 24);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   // Desktop dropdown — toggle hover activo con click también (para touch)
   document.addEventListener('click', function (e) {
     // Cerrar dropdowns si se hace click fuera

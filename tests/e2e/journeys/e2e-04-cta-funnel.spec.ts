@@ -9,7 +9,7 @@ test.describe('FEATURE-3 - E2E: Funnel de CTAs', () => {
     });
 
     await page.goto('/');
-    await expect(page.getByRole('link', { name: /Consultar sin cargo/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Consultar sin cargo/i }).first()).toBeVisible();
 
     await page.goto('/servicios/automatizacion');
     await expect(page.getByRole('link', { name: /Consultar sin cargo/i }).first()).toBeVisible();

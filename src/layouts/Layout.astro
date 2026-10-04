@@ -9,6 +9,8 @@ interface Props {
   description?: string;
   image?: string;
   robots?: string;
+  /** Header transparente sobre el hero (estilo donweb, solo home por ahora) */
+  overlayHeader?: boolean;
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   description = config.site.description,
   image = '/og-image.png',
   robots,
+  overlayHeader = false,
 } = Astro.props;
 
 const GTM_ID = 'GTM-T7PWJ99';
@@ -102,9 +105,11 @@ const jsonLd = {
     </script>
     <!-- End Google Tag Manager -->
   </head>
-  <body>
+  <body class={overlayHeader ? 'header-overlay' : undefined}>
     <!-- Skip link para navegación por teclado (WCAG 2.1 AA) -->
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <!-- Slot opcional: barra superior sobre el header (solo home) -->
+    <slot name="pre-header" />
     <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe
