@@ -304,6 +304,10 @@ h1, h2, h3 {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
 }
 
+.service-card__icon img {
+  border-radius: var(--rounded-sm); /* imagen con bordes redondeados (feedback 7) */
+}
+
 .service-card__icon {
   font-size: 2.5rem;
   margin-bottom: var(--spacing-md);
@@ -1084,19 +1088,19 @@ body.header-overlay .service-card__icon {
 
 /* Textos: vuelven a los colores globales legibles (título navy, cuerpo secondary) */
 
-/* Botón del card: naranja como acento de marca, texto navy (5.39:1, AA ok) */
+/* Botón del card: navy sólido con texto BLANCO (feedback 7 — el texto del
+   botón debe ser blanco; blanco sobre navy = 17:1 AA. El naranja queda
+   como banda superior, no en el botón). */
 body.header-overlay .service-card .hero__cta-secondary {
-  background-color: #F16529;
-  border-color: #F16529;
-  color: #1A1A2E;
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #FFFFFF;
 }
 
 body.header-overlay .service-card .hero__cta-secondary:hover {
-  /* Sin cambio de colores en hover: elevar solo (navy sobre #D9531E daría
-     4.28:1 y blanco 4.03:1 — ambos borderline AA; mantener #F16529 con
-     navy es 5.39:1). */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(241, 101, 41, 0.35);
+  background-color: #10101F;
+  border-color: #10101F;
+  color: #FFFFFF;
 }
 
 /* Hover del card: sombra cálida */
