@@ -164,6 +164,7 @@ function formatearARS(miles: number): string {
   }
 
   .hero-slider__title {
+    color: #FFFFFF; /* el global h1/h2/h3 pinta --primary (navy): sobre fondo navy sería ilegible */
     font-size: clamp(2.2rem, 6vw, 4rem);
     font-weight: 800;
     line-height: 1.05;
@@ -198,7 +199,7 @@ function formatearARS(miles: number): string {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--tertiary);
+    background-color: #F16529; /* naranja del logo SACsi (patrón donweb: CTA naranja) */
     color: #FFFFFF;
     padding: 14px 26px;
     border-radius: var(--rounded-sm);
@@ -209,8 +210,8 @@ function formatearARS(miles: number): string {
   }
 
   .hero-slider__cta:hover {
-    background-color: #FFFFFF;
-    color: var(--primary);
+    background-color: #D9531E;
+    color: #FFFFFF;
     transform: translateY(-1px);
   }
 
@@ -243,8 +244,8 @@ function formatearARS(miles: number): string {
 
   .hero-slider__price {
     position: absolute;
-    right: var(--spacing-md);
-    bottom: var(--spacing-md);
+    right: var(--spacing-xl);
+    bottom: var(--spacing-xxl);
     margin: 0;
     display: inline-flex;
     align-items: baseline;
@@ -272,8 +273,7 @@ function formatearARS(miles: number): string {
 
   .hero-slider__dots {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: var(--spacing-md);
     bottom: var(--spacing-lg);
     display: flex;
     gap: 10px;

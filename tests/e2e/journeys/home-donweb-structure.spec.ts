@@ -54,27 +54,27 @@ test.describe('HOME donweb structure', () => {
     await page.evaluate(() => window.scrollTo(0, 400));
     await expect(header).toHaveClass(/solid/);
 
-    // Orden de secciones (por posición Y)
+    // Orden de secciones (por posición Y) — testimonios DEBAJO de casos (feedback dueño)
     const orden = await page.evaluate(() => {
       const q = (sel) => document.querySelector(sel);
       const pos = (el) => (el ? Math.round(el.getBoundingClientRect().top + window.scrollY) : -1);
       return {
         slider: pos(q('.hero-slider')),
-        socialProof: pos(q('#social-proof')),
         soluciones: pos(q('#soluciones')),
         diagnostico: pos(q('.diagnostico-banner')),
         casos: pos(q('.casos-anonimos-section')),
+        testimonios: pos(q('#social-proof')),
         comoTrabajamos: pos(q('#como-trabajamos')),
         porQue: pos(q('.pq-sacsi')),
         checklist: pos(q('.lead-magnet-banner')),
         faq: pos(q('#faq')),
       };
     });
-    expect(orden.slider).toBeLessThan(orden.socialProof);
-    expect(orden.socialProof).toBeLessThan(orden.soluciones);
+    expect(orden.slider).toBeLessThan(orden.soluciones);
     expect(orden.soluciones).toBeLessThan(orden.diagnostico);
     expect(orden.diagnostico).toBeLessThan(orden.casos);
-    expect(orden.casos).toBeLessThan(orden.comoTrabajamos);
+    expect(orden.casos).toBeLessThan(orden.testimonios);
+    expect(orden.testimonios).toBeLessThan(orden.comoTrabajamos);
     expect(orden.comoTrabajamos).toBeLessThan(orden.porQue);
     expect(orden.porQue).toBeLessThan(orden.checklist);
     expect(orden.checklist).toBeLessThan(orden.faq);
