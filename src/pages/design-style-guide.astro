@@ -76,52 +76,34 @@ const tabsDemo = [
         Catálogo navegable de patrones, controles interactivos y tokens visuales probados en producción. Construido bajo la filosofía de <strong>Tecnología Justa</strong>, sin elementos genéricos de IA ni emojis decorativos.
       </p>
 
-      <!-- Barra de navegación rápida -->
+      <!-- Barra de navegación rápida (orden por nivel atómico) -->
       <nav class="guide-nav" aria-label="Navegación del sistema de diseño">
-        <a href="#hero-marca" class="guide-nav__link">Hero</a>
-        <a href="#tokens" class="guide-nav__link">Tokens</a>
-        <a href="#botones" class="guide-nav__link">Botones</a>
-        <a href="#tarjetas" class="guide-nav__link">Tarjetas</a>
+        <a href="#tokens" class="guide-nav__link">Fundaciones · Tokens</a>
+        <a href="#botones" class="guide-nav__link">Primitivos · Botones</a>
+        <a href="#badges" class="guide-nav__link">Badges</a>
         <a href="#formularios" class="guide-nav__link">Formularios</a>
-        <a href="#controles" class="guide-nav__link">Controles & Sliders</a>
-        <a href="#acordeon" class="guide-nav__link">Acordeón</a>
         <a href="#iconos" class="guide-nav__link">Iconografía</a>
+        <a href="#tarjetas" class="guide-nav__link">Composiciones · Tarjetas</a>
+        <a href="#controles" class="guide-nav__link">Tabs</a>
+        <a href="#acordeon" class="guide-nav__link">Acordeón</a>
+        <a href="#slider-controls" class="guide-nav__link">Slider</a>
+        <a href="#hero-marca" class="guide-nav__link">Organismos · Hero</a>
+        <a href="#slider-demo" class="guide-nav__link">Carrusel</a>
       </nav>
     </div>
   </div>
 
   <main class="container guide-content">
 
-    <!-- 0. HERO DE MARCA (patrón de la home) -->
-    <section id="hero-marca" class="guide-section">
-      <div class="section-title-wrap">
-        <h2>0. Hero de Marca (patrón home)</h2>
-        <p>El hero de la home: fondo claro, título navy con la propuesta de valor, y CTA naranja del logo. Sin label superior — el eyebrow fue eliminado por decisión de diseño (feedback 9).</p>
-      </div>
+    <!-- Nota de gobernanza: Diseño Atómico (DESIGN.md) -->
+    <aside class="governance-note" aria-label="Regla de gobernanza del sistema de diseño">
+      <strong>Gobernanza — Diseño Atómico (ver DESIGN.md):</strong> ante cualquier elemento de UI nuevo, el flujo obligatorio es: 1) buscarlo primero en esta guía; 2) si no existe, componerlo con los primitivos de <code>src/components/ui/</code>; 3) si faltan primitivos, preguntar al dueño la fuente; 4) sin respuesta del dueño, tomar como referencia el componente compatible de <a href="https://ui.shadcn.com/docs/components" target="_blank" rel="noopener">ui.shadcn.com</a>, adaptado a Astro + tokens SACsi.
+    </aside>
 
-      <div class="hero-marca-demo">
-        <div class="hero-marca-demo__inner">
-          <h1 class="hero-marca-demo__title">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas.</h1>
-          <p class="hero-marca-demo__subtitle">
-            Más de 15 años acompañando a dueños de pequeños negocios. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real.
-          </p>
-          <div class="hero-marca-demo__actions">
-            <Button variant="orange" size="lg" href="/contacto/">
-              <span>Te decimos qué necesitás… y qué no. Consulta sin cargo</span>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <p class="pattern-note">
-        <strong>Regla del patrón:</strong> un solo H1 por página (la propuesta de valor, no el nombre del servicio); CTA en naranja #F16529 con texto navy (5.39:1 WCAG AA); sin label/eyebrow superior repetido.
-      </p>
-    </section>
-
-    <!-- 1. TOKENS -->
+    <!-- 1. FUNDACIONES — TOKENS -->
     <section id="tokens" class="guide-section">
       <div class="section-title-wrap">
-        <h2>1. Tokens Fundamentales (DESIGN.md)</h2>
+        <h2>1. Fundaciones — Tokens Fundamentales (DESIGN.md)</h2>
         <p>Paleta sobria con un 60% de superficie neutra, 30% estructural y 10% de acento de interacción.</p>
       </div>
 
@@ -149,7 +131,7 @@ const tabsDemo = [
           <div class="swatch-info">
             <strong>Naranja Marca (nuevo)</strong>
             <code>#F16529</code>
-            <span>Acento de marca del logo — CTAs hero, banda de cards, labels</span>
+            <span>Acento de marca del logo — CTAs hero, banda de Cards, labels</span>
           </div>
         </div>
 
@@ -200,10 +182,10 @@ const tabsDemo = [
       </div>
     </section>
 
-    <!-- 2. BOTONES -->
+    <!-- 2. PRIMITIVOS — BOTONES -->
     <section id="botones" class="guide-section">
       <div class="section-title-wrap">
-        <h2>2. Botones & Acciones (Button.astro)</h2>
+        <h2>2. Primitivos — Botones & Acciones (Button.astro)</h2>
         <p>Inspirados en las primitivas de shadcn/ui con soporte de foco accesible, estados activos y slots de iconos.</p>
       </div>
 
@@ -267,10 +249,134 @@ const tabsDemo = [
       </div>
     </section>
 
-    <!-- 3. TARJETAS & BENTO -->
+    <!-- 3. PRIMITIVOS — BADGES -->
+    <section id="badges" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>3. Primitivos — Etiquetas de Estado (Badge.astro)</h2>
+        <p>Micro-etiquetas de estado y categoría que se componen dentro de tarjetas, encabezados y banners.</p>
+      </div>
+
+      <div class="component-showcase">
+        <div class="showcase-row">
+          <span class="showcase-label">Variantes:</span>
+          <div class="btn-group-wrap">
+            <Badge variant="neutral">Neutra</Badge>
+            <Badge variant="accent">Acento</Badge>
+            <Badge variant="success">Éxito</Badge>
+            <Badge variant="warning">Alerta</Badge>
+            <Badge variant="outline">Contorno</Badge>
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Escala de tamaños:</span>
+          <div class="btn-group-wrap" style="align-items:center;">
+            <Badge variant="accent" size="sm">Pequeña (sm)</Badge>
+            <Badge variant="accent" size="md">Predeterminada (md)</Badge>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PRIMITIVOS — FORMULARIOS -->
+    <section id="formularios" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>4. Primitivos — Controles de Formulario (Input / Textarea)</h2>
+        <p>Entradas de texto accesibles con anillos de enfoque contrastados y soporte de mensajes de error.</p>
+      </div>
+
+      <div class="form-preview-grid">
+        <div class="form-preview-col">
+          <Input
+            id="guide-demo-name"
+            label="Nombre y apellido"
+            placeholder="Ej: Marcelo Rossi"
+            required={true}
+            helperText="Ingresá el nombre de la persona de contacto."
+          />
+
+          <Input
+            id="guide-demo-email"
+            type="email"
+            label="Correo corporativo"
+            placeholder="marcelo@distribuidorapyme.com.ar"
+            required={true}
+          />
+        </div>
+
+        <div class="form-preview-col">
+          <Input
+            id="guide-demo-error"
+            label="Campo con validación activa"
+            value="correo-invalido"
+            error="El formato del correo ingresado no es válido."
+          />
+
+          <Textarea
+            id="guide-demo-msg"
+            label="Descripción del proyecto o duda"
+            rows={3}
+            placeholder="Contanos brevemente qué proceso te gustaría automatizar o mejorar..."
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PRIMITIVOS — ICONOGRAFÍA -->
+    <section id="iconos" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>5. Primitivos — Iconografía Vectorial (Lucide + IconResolver)</h2>
+        <p>Reemplazo estricto de cualquier emoticón por iconos SVG geométricos y profesionales, resueltos desde lucide-astro vía IconResolver.</p>
+      </div>
+
+      <div class="icons-grid">
+        <div class="icon-sample">
+          <ShieldCheck size={24} color="#0A7CFF" />
+          <span>ShieldCheck (Confianza)</span>
+        </div>
+        <div class="icon-sample">
+          <CheckCircle2 size={24} color="#059669" />
+          <span>CheckCircle2 (Éxito)</span>
+        </div>
+        <div class="icon-sample">
+          <AlertCircle size={24} color="#DC2626" />
+          <span>AlertCircle (Problema)</span>
+        </div>
+        <div class="icon-sample">
+          <TrendingUp size={24} color="#065F46" />
+          <span>TrendingUp (Métricas)</span>
+        </div>
+        <div class="icon-sample">
+          <Wrench size={24} color="#1A1A2E" />
+          <span>Wrench (Solución justa)</span>
+        </div>
+        <div class="icon-sample">
+          <MapPin size={24} color="#64748B" />
+          <span>MapPin (Ubicación Rosario)</span>
+        </div>
+        <div class="icon-sample">
+          <Lock size={24} color="#475569" />
+          <span>Lock (Seguridad)</span>
+        </div>
+        <div class="icon-sample">
+          <BarChart3 size={24} color="#0A7CFF" />
+          <span>BarChart3 (Reportes)</span>
+        </div>
+        <div class="icon-sample">
+          <Package size={24} color="#0A7CFF" />
+          <span>Package (Stock/Logística)</span>
+        </div>
+        <div class="icon-sample">
+          <Layers size={24} color="#1A1A2E" />
+          <span>Layers (Arquitectura)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMPOSICIONES — TARJETAS -->
     <section id="tarjetas" class="guide-section">
       <div class="section-title-wrap">
-        <h2>3. Tarjetas & Contenedores (Card.astro)</h2>
+        <h2>6. Composiciones — Tarjetas & Contenedores (Card.astro)</h2>
         <p>Estructuras limpias con bordes sutiles y elevación única en interacción.</p>
       </div>
 
@@ -326,58 +432,14 @@ const tabsDemo = [
       </div>
     </section>
 
-    <!-- 4. FORMULARIOS -->
-    <section id="formularios" class="guide-section">
-      <div class="section-title-wrap">
-        <h2>4. Controles de Formulario (Input / Textarea)</h2>
-        <p>Entradas de texto accesibles con anillos de enfoque contrastados y soporte de mensajes de error.</p>
-      </div>
-
-      <div class="form-preview-grid">
-        <div class="form-preview-col">
-          <Input
-            id="guide-demo-name"
-            label="Nombre y apellido"
-            placeholder="Ej: Marcelo Rossi"
-            required={true}
-            helperText="Ingresá el nombre de la persona de contacto."
-          />
-
-          <Input
-            id="guide-demo-email"
-            type="email"
-            label="Correo corporativo"
-            placeholder="marcelo@distribuidorapyme.com.ar"
-            required={true}
-          />
-        </div>
-
-        <div class="form-preview-col">
-          <Input
-            id="guide-demo-error"
-            label="Campo con validación activa"
-            value="correo-invalido"
-            error="El formato del correo ingresado no es válido."
-          />
-
-          <Textarea
-            id="guide-demo-msg"
-            label="Descripción del proyecto o duda"
-            rows={3}
-            placeholder="Contanos brevemente qué proceso te gustaría automatizar o mejorar..."
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. TABS & CONTROLES DE SLIDER -->
+    <!-- 7. COMPOSICIONES — TABS -->
     <section id="controles" class="guide-section">
       <div class="section-title-wrap">
-        <h2>5. Controles Interactivos & Segmentados (Tabs & Sliders)</h2>
-        <p>Navegación por pestañas y barras de control para carruseles, testeados y sin librerías pesadas.</p>
+        <h2>7. Composiciones — Pestañas Segmentadas (Tabs.astro)</h2>
+        <p>Navegación por pestañas con tablist accesible, testeada y sin librerías pesadas.</p>
       </div>
 
-      <div class="controls-preview-box">
+      <div class="controls-preview-box controls-preview-box--single">
         <div class="controls-preview-sub">
           <h3>Pestañas Segmentadas (Tabs.astro)</h3>
           <p class="text-sm text-muted">Controles de selección limpios con tablist accesible:</p>
@@ -407,9 +469,78 @@ const tabsDemo = [
             </div>
           </Tabs>
         </div>
+      </div>
+    </section>
 
+    <!-- 8. COMPOSICIONES — ACORDEÓN -->
+    <section id="acordeon" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>8. Composiciones — Acordeón Desplegable (Accordion.astro)</h2>
+        <p>Estructura probada para Preguntas Frecuentes con animación suave de apertura y rotación de flecha.</p>
+      </div>
+
+      <div class="accordion-container-wrap">
+        <Accordion items={faqDemo} />
+      </div>
+    </section>
+
+    <!-- 9. COMPOSICIONES — CONTROLES DE SLIDER -->
+    <section id="slider-controls" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>9. Composiciones — Controles de Slider (SliderControls.astro)</h2>
+        <p>Botoneras prev/next y dots de navegación con feedback visual — sin librerías pesadas.</p>
+      </div>
+
+      <div class="controls-preview-box controls-preview-box--single">
         <div class="controls-preview-sub">
           <h3>Controles de Slider / Carrusel (SliderControls.astro)</h3>
+          <p class="text-sm text-muted">Componente de controles para carruseles. Demo viva en Organismos — Carrusel Interactivo:</p>
+
+          <pre class="code-preview"><code><SliderControls totalSlides={4} currentSlide={0} targetId="mi-carrusel" />
+
+// Integración (vanilla): escuchar data-slider-prev / data-slider-next /
+// data-slider-dots dentro de [data-ui-slider-controls] y reflejar el
+// índice en el carrusel con targetId (ver script de esta página).</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ORGANISMOS — HERO DE MARCA -->
+    <section id="hero-marca" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>10. Organismos — Hero de Marca (patrón home)</h2>
+        <p>El hero de la home: fondo claro, título navy con la propuesta de valor, y CTA naranja del logo. Sin label superior — el eyebrow fue eliminado por decisión de diseño (feedback 9).</p>
+      </div>
+
+      <div class="hero-marca-demo">
+        <div class="hero-marca-demo__inner">
+          <h2 class="hero-marca-demo__title" aria-label="Demostración del patrón Hero de Marca: en la home real este título es el h1 único de la página">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas.</h2>
+          <p class="hero-marca-demo__subtitle">
+            Más de 15 años acompañando a dueños de pequeños negocios. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real.
+          </p>
+          <div class="hero-marca-demo__actions">
+            <Button variant="orange" size="lg" href="/contacto/">
+              <span>Te decimos qué necesitás… y qué no. Consulta sin cargo</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> un solo H1 por página (la propuesta de valor, no el nombre del servicio); CTA en naranja #F16529 con texto navy (5.39:1 WCAG AA); sin label/eyebrow superior repetido.
+      </p>
+    </section>
+
+    <!-- 11. ORGANISMOS — CARRUSEL INTERACTIVO (demo viva) -->
+    <section id="slider-demo" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>11. Organismos — Carrusel Interactivo (demo viva)</h2>
+        <p>Un organismo de sección: compone la composición SliderControls con slides de contenido y un script vanilla reutilizable, sin librerías.</p>
+      </div>
+
+      <div class="controls-preview-box controls-preview-box--single">
+        <div class="controls-preview-sub">
+          <h3>Carrusel con SliderControls (demo interactiva)</h3>
           <p class="text-sm text-muted">Botoneras prev/next y dots de navegación con feedback visual — demo interactiva con mini-slides:</p>
 
           <div class="slider-demo">
@@ -436,77 +567,12 @@ const tabsDemo = [
               <SliderControls totalSlides={4} currentSlide={0} targetId="guide-slider-demo" />
             </div>
           </div>
-
-          <pre class="code-preview"><code><SliderControls totalSlides={4} currentSlide={0} targetId="mi-carrusel" />
-
-// Integración (vanilla): escuchar data-slider-prev / data-slider-next /
-// data-slider-dots dentro de [data-ui-slider-controls] y reflejar el
-// índice en el carrusel con targetId (ver script de esta página).</code></pre>
         </div>
       </div>
-    </section>
 
-    <!-- 6. ACORDEÓN -->
-    <section id="acordeon" class="guide-section">
-      <div class="section-title-wrap">
-        <h2>6. Acordeón Desplegable (Accordion.astro)</h2>
-        <p>Estructura probada para Preguntas Frecuentes con animación suave de apertura y rotación de flecha.</p>
-      </div>
-
-      <div class="accordion-container-wrap">
-        <Accordion items={faqDemo} />
-      </div>
-    </section>
-
-    <!-- 7. ICONOGRAFÍA & CERO-EMOJIS -->
-    <section id="iconos" class="guide-section">
-      <div class="section-title-wrap">
-        <h2>7. Iconografía Vectorial (Lucide Icons)</h2>
-        <p>Reemplazo estricto de cualquier emoticón por iconos SVG geométricos y profesionales.</p>
-      </div>
-
-      <div class="icons-grid">
-        <div class="icon-sample">
-          <ShieldCheck size={24} color="#0A7CFF" />
-          <span>ShieldCheck (Confianza)</span>
-        </div>
-        <div class="icon-sample">
-          <CheckCircle2 size={24} color="#059669" />
-          <span>CheckCircle2 (Éxito)</span>
-        </div>
-        <div class="icon-sample">
-          <AlertCircle size={24} color="#DC2626" />
-          <span>AlertCircle (Problema)</span>
-        </div>
-        <div class="icon-sample">
-          <TrendingUp size={24} color="#065F46" />
-          <span>TrendingUp (Métricas)</span>
-        </div>
-        <div class="icon-sample">
-          <Wrench size={24} color="#1A1A2E" />
-          <span>Wrench (Solución justa)</span>
-        </div>
-        <div class="icon-sample">
-          <MapPin size={24} color="#64748B" />
-          <span>MapPin (Ubicación Rosario)</span>
-        </div>
-        <div class="icon-sample">
-          <Lock size={24} color="#475569" />
-          <span>Lock (Seguridad)</span>
-        </div>
-        <div class="icon-sample">
-          <BarChart3 size={24} color="#0A7CFF" />
-          <span>BarChart3 (Reportes)</span>
-        </div>
-        <div class="icon-sample">
-          <Package size={24} color="#0A7CFF" />
-          <span>Package (Stock/Logística)</span>
-        </div>
-        <div class="icon-sample">
-          <Layers size={24} color="#1A1A2E" />
-          <span>Layers (Arquitectura)</span>
-        </div>
-      </div>
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> el organismo no reinventa controles — reutiliza SliderControls (Composiciones) y refleja el índice activo con un script vanilla de unas pocas líneas, sin dependencias nuevas.
+      </p>
     </section>
 
     <!-- BANNER DE RETORNO: eliminado por decisión del dueño (feedback 12) -->
@@ -567,6 +633,32 @@ const tabsDemo = [
     color: var(--primary, #1A1A2E);
     border-color: #CBD5E1;
     background-color: #F1F5F9;
+  }
+
+  /* Nota de gobernanza (Diseño Atómico — DESIGN.md) */
+  .governance-note {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--secondary, #444444);
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid var(--primary, #1A1A2E);
+    border-radius: var(--rounded-sm, 8px);
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .governance-note strong {
+    color: var(--primary, #1A1A2E);
+  }
+
+  .governance-note code {
+    font-family: monospace;
+    font-size: 0.85em;
+  }
+
+  .governance-note a {
+    color: var(--tertiary-dark, #0066CC);
+    font-weight: 600;
   }
 
   /* Hero de marca (patrón home) */
@@ -806,6 +898,11 @@ const tabsDemo = [
     }
   }
 
+  /* Variante de columna única (secciones con un solo bloque) */
+  .controls-preview-box--single {
+    grid-template-columns: 1fr;
+  }
+
   .controls-preview-sub h3 {
     font-size: 1.15rem;
     margin: 0 0 4px;
@@ -930,9 +1027,10 @@ const tabsDemo = [
 </style>
 
 <script>
-  // Demo interactiva de SliderControls (sección 5): conecta prev/next/dots
-  // con el mini-carrusel #guide-slider-demo. Patrón de integración vanilla
-  // reutilizable: el componente expone data-slider-prev/next/dots + targetId.
+  // Demo interactiva de SliderControls (Organismos — Carrusel Interactivo):
+  // conecta prev/next/dots con el mini-carrusel #guide-slider-demo.
+  // Patrón de integración vanilla reutilizable: el componente expone
+  // data-slider-prev/next/dots + targetId.
   (function () {
     var viewport = document.getElementById('guide-slider-demo');
     var controls = document.querySelector('[data-ui-slider-controls][data-target="guide-slider-demo"]');
