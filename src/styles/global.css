@@ -1045,17 +1045,17 @@ body.header-overlay main {
   text-decoration: underline;
 }
 
+/* La topbar es estática: scrollea con la página (como donweb). El header
+   fijo arranca DEBAJO de ella y sube a top:0 cuando se vuelve sólido
+   (para entonces la topbar ya scrolleó fuera). */
 body.header-overlay .topbar-promo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: static;
 }
 
 body.header-overlay #header-container {
-  top: 34px; /* altura de la topbar */
+  top: 34px; /* debajo de la topbar estática (scroll 0) */
 }
 
 body.header-overlay #header-container.solid {
-  top: 0;
+  top: 0; /* topbar fuera de vista -> el menú sólido ocupa todo el ancho superior */
 }

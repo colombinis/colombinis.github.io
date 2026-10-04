@@ -1,10 +1,8 @@
 ---
 // HeroSlider: carrusel hero estilo donweb — un slide por servicio.
 // Vanilla JS (sin Swiper): scroll-snap + autoplay + dots + teclado.
-// Data-driven: slides generados desde src/data/servicios/ + piso de precio
-// de la solución más barata del servicio (catálogo aprobado 2026-10).
+// Data-driven: slides generados desde src/data/servicios/ (orden `orden`).
 import { getServicios } from '../lib/data-utils';
-import { getSoluciones } from '../lib/data-utils';
 
 interface Slide {
   id: string;
@@ -13,36 +11,16 @@ interface Slide {
   short: string;
   href: string;
   imagen: string;
-  precioDesde: number | null; // ARS k
 }
 
-const servicios = getServicios();
-
-const slides: Slide[] = servicios.map((svc) => {
-  // Piso de precio del servicio = precioMin más bajo de sus soluciones
-  const precios = getSoluciones()
-    .filter((s) => s.servicio_id === svc.id)
-    .map((s) => s.precioMin);
-  return {
-    id: svc.id,
-    title: svc.title,
-    claim: svc.claim,
-    short: svc.short,
-    href: svc.href,
-    imagen: svc.imagen,
-    precioDesde: precios.length ? Math.min(...precios) : null,
-  };
-});
-
-const arsFormatter = new Intl.NumberFormat('es-AR', {
-  style: 'currency',
-  currency: 'ARS',
-  maximumFractionDigits: 0,
-});
-
-function formatearARS(miles: number): string {
-  return arsFormatter.format(Math.round(miles * 1000));
-}
+const slides: Slide[] = getServicios().map((svc) => ({
+  id: svc.id,
+  title: svc.title,
+  claim: svc.claim,
+  short: svc.short,
+  href: svc.href,
+  imagen: svc.imagen,
+}));
 ---
 
 <section
@@ -93,12 +71,6 @@ function formatearARS(miles: number): string {
             />
           </div>
         </div>
-        {s.precioDesde !== null && (
-          <p class="hero-slider__price">
-            <span class="hero-slider__price-label">Desde</span>
-            <strong class="hero-slider__price-value">{formatearARS(s.precioDesde)}</strong>
-          </p>
-        )}
       </article>
     ))}
   </div>
@@ -252,34 +224,6 @@ function formatearARS(miles: number): string {
     }
   }
 
-  .hero-slider__price {
-    position: absolute;
-    right: var(--spacing-xl);
-    bottom: var(--spacing-xxl);
-    margin: 0;
-    display: inline-flex;
-    align-items: baseline;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(6px);
-    border-radius: var(--rounded-full);
-    padding: 8px 18px;
-  }
-
-  .hero-slider__price-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: #C9DFFF;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
-
-  .hero-slider__price-value {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: #FFFFFF;
-  }
 
   .hero-slider__dots {
     position: absolute;
