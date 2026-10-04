@@ -59,37 +59,39 @@ function formatearARS(miles: number): string {
         aria-label={`${i + 1} de ${slides.length}: ${s.title}`}
         data-index={i}
       >
-        <div class="hero-slider__content">
-          <p class="hero-slider__eyebrow">SACSI · TECNOLOGÍA JUSTA</p>
-          {i === 0 ? (
-            <h1 class="hero-slider__title">{s.title}</h1>
-          ) : (
-            <h2 class="hero-slider__title">{s.title}</h2>
-          )}
-          <p class="hero-slider__claim">{s.claim}</p>
-          <p class="hero-slider__desc">{s.short}</p>
-          <div class="hero-slider__actions">
-            <a class="hero-slider__cta" href={s.href}>
-              Ver {s.title}
-            </a>
-            <a
-              class="hero-slider__cta hero-slider__cta--ghost"
-              href={`/contacto/?categoria=${s.id}&asunto=Consulta%20sobre%20${encodeURIComponent(s.title)}`}
-            >
-              Consultar sin cargo
-            </a>
+        <div class="hero-slider__inner">
+          <div class="hero-slider__content">
+            <p class="hero-slider__eyebrow">SACSI · TECNOLOGÍA JUSTA</p>
+            {i === 0 ? (
+              <h1 class="hero-slider__title">{s.title}</h1>
+            ) : (
+              <h2 class="hero-slider__title">{s.title}</h2>
+            )}
+            <p class="hero-slider__claim">{s.claim}</p>
+            <p class="hero-slider__desc">{s.short}</p>
+            <div class="hero-slider__actions">
+              <a class="hero-slider__cta" href={s.href}>
+                Ver {s.title}
+              </a>
+              <a
+                class="hero-slider__cta hero-slider__cta--ghost"
+                href={`/contacto/?categoria=${s.id}&asunto=Consulta%20sobre%20${encodeURIComponent(s.title)}`}
+              >
+                Consultar sin cargo
+              </a>
+            </div>
           </div>
-        </div>
-        <div class="hero-slider__media">
-          <img
-            src={s.imagen}
-            srcset={`${s.imagen} 1x`}
-            alt={`Ilustración representativa del servicio ${s.title}`}
-            width="600"
-            height="400"
-            loading={i === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-          />
+          <div class="hero-slider__media">
+            <img
+              src={s.imagen}
+              srcset={`${s.imagen} 1x`}
+              alt={`Ilustración representativa del servicio ${s.title}`}
+              width="600"
+              height="400"
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
         </div>
         {s.precioDesde !== null && (
           <p class="hero-slider__price">
@@ -138,20 +140,28 @@ function formatearARS(miles: number): string {
     flex: 0 0 100%;
     scroll-snap-align: start;
     min-height: 78vh;
+    padding: var(--spacing-xxl) var(--spacing-md);
+    box-sizing: border-box;
+  }
+
+  /* El contenido interior sí se acota al container, pero el SLIDE ocupa
+     100% del viewport — si el slide tuviera max-width, con viewport > container
+     se ve el slide siguiente pegado (bug reportado por el dueño). */
+  .hero-slider__inner {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    min-height: calc(78vh - 2 * var(--spacing-xxl));
     display: grid;
     align-content: center;
     gap: var(--spacing-lg);
-    padding: var(--spacing-xxl) var(--spacing-md);
   }
 
   @media (min-width: 901px) {
-    .hero-slider__slide {
+    .hero-slider__inner {
       grid-template-columns: 1.15fr 0.85fr;
       align-items: center;
       gap: var(--spacing-xl);
-      max-width: var(--container);
-      margin: 0 auto;
-      min-height: 82vh;
     }
   }
 
