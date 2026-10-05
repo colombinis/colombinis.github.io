@@ -2,6 +2,9 @@
 // Página: Guía Práctica de Identidad Digital para PyMEs
 import Layout from '../../layouts/Layout.astro';
 import config from '../../config/site.json';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
 import { Globe, Mail, MapPin, MessageSquare, Star, ArrowRight, ShieldCheck, Check } from 'lucide-astro';
 
 const formEndpoint = config.contact.form_endpoint;
@@ -25,19 +28,19 @@ const formEndpoint = config.contact.form_endpoint;
     <div class="container guide-layout">
       <!-- Contenido Principal -->
       <article class="guide-content">
-        <div class="intro-box">
+        <Card variant="accent" class="intro-box">
           <p>
             <strong>El error más común en PyMEs:</strong> Creer que tener una cuenta de Instagram o una página en Facebook equivale a tener presencia digital. Si la red social cambia las reglas o te bloquea la cuenta, perdés el canal directo con tus clientes. La verdadera identidad digital se construye sobre activos que te pertenecen.
           </p>
-        </div>
+        </Card>
 
         <h2>Los 5 pilares para una presencia digital profesional</h2>
 
-        <div class="pilar-card">
+        <Card variant="default" padding="lg" class="pilar-card">
           <div class="pilar-header">
             <span class="pilar-icon"><Globe size={22} aria-hidden="true" /></span>
             <div>
-              <span class="pilar-step">Pilar 01</span>
+              <Badge variant="accent" size="sm" class="pilar-step">Pilar 01</Badge>
               <h3>1. Dominio propio y sitio web bajo tu control</h3>
             </div>
           </div>
@@ -49,39 +52,39 @@ const formEndpoint = config.contact.form_endpoint;
             <li><Check size={16} aria-hidden="true" /> Explicación clara de qué problemas resolvés y a quién ayudás.</li>
             <li><Check size={16} aria-hidden="true" /> Sin modas visuales pesadas que distraigan de tu propuesta comercial.</li>
           </ul>
-        </div>
+        </Card>
 
-        <div class="pilar-card">
+        <Card variant="default" padding="lg" class="pilar-card">
           <div class="pilar-header">
             <span class="pilar-icon"><Mail size={22} aria-hidden="true" /></span>
             <div>
-              <span class="pilar-step">Pilar 02</span>
+              <Badge variant="accent" size="sm" class="pilar-step">Pilar 02</Badge>
               <h3>2. Casillas de correo corporativas</h3>
             </div>
           </div>
           <p>
             Enviar presupuestos desde <code>tunegocio@gmail.com</code> resta seriedad frente a empresas medianas o corporaciones. Configurar cuentas de correo institucionales (<code>ventas@tunegocio.com.ar</code>) cuesta muy poco y posiciona tu marca un escalón arriba de la competencia informal.
           </p>
-        </div>
+        </Card>
 
-        <div class="pilar-card">
+        <Card variant="default" padding="lg" class="pilar-card">
           <div class="pilar-header">
             <span class="pilar-icon"><MapPin size={22} aria-hidden="true" /></span>
             <div>
-              <span class="pilar-step">Pilar 03</span>
+              <Badge variant="accent" size="sm" class="pilar-step">Pilar 03</Badge>
               <h3>3. Ficha de Google Business Profile (Google Maps)</h3>
             </div>
           </div>
           <p>
             Cuando alguien busca tus productos en tu zona, la ficha de Google es lo primero que ve. Mantenerla verificada, con dirección real, horarios actualizados, fotos de tus instalaciones y enlace a tu web multiplica los contactos espontáneos sin pagar publicidad.
           </p>
-        </div>
+        </Card>
 
-        <div class="pilar-card">
+        <Card variant="default" padding="lg" class="pilar-card">
           <div class="pilar-header">
             <span class="pilar-icon"><MessageSquare size={22} aria-hidden="true" /></span>
             <div>
-              <span class="pilar-step">Pilar 04</span>
+              <Badge variant="accent" size="sm" class="pilar-step">Pilar 04</Badge>
               <h3>4. WhatsApp Business optimizado</h3>
             </div>
           </div>
@@ -93,66 +96,66 @@ const formEndpoint = config.contact.form_endpoint;
             <li><Check size={16} aria-hidden="true" /> Catálogo de productos o servicios clave con precios y fotos reales.</li>
             <li><Check size={16} aria-hidden="true" /> Respuestas rápidas guardadas para las 5 preguntas que te hacen todos los días.</li>
           </ul>
-        </div>
+        </Card>
 
-        <div class="pilar-card">
+        <Card variant="default" padding="lg" class="pilar-card">
           <div class="pilar-header">
             <span class="pilar-icon"><Star size={22} aria-hidden="true" /></span>
             <div>
-              <span class="pilar-step">Pilar 05</span>
+              <Badge variant="accent" size="sm" class="pilar-step">Pilar 05</Badge>
               <h3>5. Reputación y testimonios reales</h3>
             </div>
           </div>
           <p>
             Nadie compra a ciegas. Incluir nombres de clientes reales, fotos y capturas de recomendaciones concretas genera la prueba social necesaria para acelerar las decisiones de compra.
           </p>
-        </div>
+        </Card>
 
-        <div class="action-summary-box">
+        <Card variant="muted" padding="lg" class="action-summary-box">
           <h3>¿Cómo auditar la identidad digital de tu negocio hoy?</h3>
           <p>
             Buscá el nombre de tu empresa en modo incógnito en Google. Si lo primero que aparece es un directorio desactualizado o una página de Facebook inactiva desde 2021, estás perdiendo clientes todos los días.
           </p>
-          <a class="hero__cta hero__cta--form" href="/contacto/?asunto=Auditoria%20Identidad%20Digital">
-            Pedir una auditoría de presencia digital sin cargo
-          </a>
-        </div>
+          <Button variant="primary" size="lg" href="/contacto/?asunto=Auditoria%20Identidad%20Digital" class="action-summary-cta">
+            <span>Pedir una auditoría de presencia digital sin cargo</span>
+          </Button>
+        </Card>
       </article>
 
       <!-- Sidebar / Recursos relacionados -->
       <aside class="guide-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-badge">
+        <Card variant="default" padding="md" class="sidebar-card">
+          <Badge variant="success" size="sm" class="sidebar-badge">
             <ShieldCheck size={16} aria-hidden="true" />
             <span>TECNOLOGÍA JUSTA</span>
-          </div>
+          </Badge>
           <h4>¿Necesitás armar tu web o renovar tu presencia?</h4>
           <p>
             Desarrollamos sitios web institucionales rápidos, accesibles y orientados a ventas para PyMEs y profesionales.
           </p>
-          <a class="btn-sidebar" href="/servicios/presencia-online/">
+          <Button variant="primary" href="/servicios/presencia-online/" class="btn-sidebar">
             <span>Conocé el servicio de Presencia Online</span>
-            <ArrowRight size={16} aria-hidden="true" />
-          </a>
-        </div>
+            <ArrowRight slot="icon-end" size={16} aria-hidden="true" />
+          </Button>
+        </Card>
 
-        <div class="sidebar-card sidebar-card--alt">
+        <Card variant="muted" padding="md" class="sidebar-card sidebar-card--alt">
           <h4>Otros recursos gratuitos</h4>
           <ul class="sidebar-links">
             <li>
-              <a href="/checklist-automatizacion/">
+              <Card variant="interactive" padding="sm" href="/checklist-automatizacion/">
                 <strong>Checklist de Automatización</strong>
                 <span>Detectá tareas repetitivas en tu negocio.</span>
-              </a>
+              </Card>
             </li>
             <li>
-              <a href="/recursos/inteligencia-artificial/">
+              <Card variant="interactive" padding="sm" href="/recursos/inteligencia-artificial/">
                 <strong>Guía de Inteligencia Artificial</strong>
                 <span>Cómo implementarla sin pagar de más.</span>
-              </a>
+              </Card>
             </li>
           </ul>
-        </div>
+        </Card>
       </aside>
     </div>
   </section>
@@ -172,15 +175,14 @@ const formEndpoint = config.contact.form_endpoint;
     }
   }
 
-  .intro-box {
-    background: #EBF4FF;
-    border-left: 4px solid var(--tertiary);
-    padding: var(--spacing-lg);
-    border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
+  /* Intro — Card variant="accent" (patrón lead magnet) con
+     identidad de callout del borde izquierdo de acento. */
+  :global(.intro-box) {
     margin-bottom: var(--spacing-xl);
+    border-left: 4px solid var(--tertiary);
   }
 
-  .intro-box p {
+  :global(.intro-box) p {
     font-size: 1.05rem;
     color: var(--primary);
     line-height: 1.6;
@@ -193,13 +195,10 @@ const formEndpoint = config.contact.form_endpoint;
     margin: var(--spacing-xl) 0 var(--spacing-lg);
   }
 
-  .pilar-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
+  /* Pilares — Card variant="default" padding="lg".
+     El Card aporta fondo, borde, radio, padding y sombra. */
+  :global(.pilar-card) {
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .pilar-header {
@@ -221,13 +220,12 @@ const formEndpoint = config.contact.form_endpoint;
     flex-shrink: 0;
   }
 
-  .pilar-step {
+  :global(.pilar-step) {
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--tertiary-dark);
-    display: block;
   }
 
   .pilar-header h3 {
@@ -236,14 +234,14 @@ const formEndpoint = config.contact.form_endpoint;
     color: var(--primary);
   }
 
-  .pilar-card p {
+  :global(.pilar-card) p {
     font-size: 0.98rem;
     color: var(--secondary);
     line-height: 1.6;
     margin: var(--spacing-xs) 0 var(--spacing-sm);
   }
 
-  .pilar-card code {
+  :global(.pilar-card) code {
     background: #F1F5F9;
     padding: 2px 6px;
     border-radius: 4px;
@@ -274,22 +272,19 @@ const formEndpoint = config.contact.form_endpoint;
     margin-top: 3px;
   }
 
-  .action-summary-box {
-    background: #F8FAFC;
-    border: 2px solid #E2E8F0;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
+  /* Resumen de acción — Card variant="muted" padding="lg" */
+  :global(.action-summary-box) {
     text-align: center;
     margin-top: var(--spacing-xxl);
   }
 
-  .action-summary-box h3 {
+  :global(.action-summary-box) h3 {
     font-size: 1.4rem;
     color: var(--primary);
     margin: 0 0 var(--spacing-sm);
   }
 
-  .action-summary-box p {
+  :global(.action-summary-box) p {
     font-size: 1rem;
     color: var(--secondary);
     max-width: 580px;
@@ -297,68 +292,38 @@ const formEndpoint = config.contact.form_endpoint;
     line-height: 1.6;
   }
 
-  .action-summary-box .hero__cta {
+  :global(.action-summary-cta) {
+    display: flex;
     max-width: 440px;
     margin: 0 auto;
   }
 
-  /* Sidebar */
-  .sidebar-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
+  /* Sidebar — Cards. El Card aporta fondo, borde, radio,
+     padding y sombra; la página solo ajusta el espaciado. */
+  :global(.sidebar-card) {
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
-  .sidebar-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #ECFDF5;
-    color: #047857;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: var(--rounded-full);
+  :global(.sidebar-badge) {
     margin-bottom: var(--spacing-sm);
   }
 
-  .sidebar-card h4 {
+  :global(.sidebar-card) h4 {
     font-size: 1.1rem;
     color: var(--primary);
     margin: 0 0 var(--spacing-xs);
   }
 
-  .sidebar-card p {
+  :global(.sidebar-card) p {
     font-size: 0.9rem;
     color: var(--secondary);
     line-height: 1.5;
     margin: 0 0 var(--spacing-md);
   }
 
-  .btn-sidebar {
-    display: flex;
-    align-items: center;
+  :global(.btn-sidebar) {
+    width: 100%;
     justify-content: space-between;
-    background: var(--primary);
-    color: #FFFFFF;
-    padding: 10px 16px;
-    border-radius: var(--rounded-sm);
-    font-size: 0.88rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn-sidebar:hover {
-    background: var(--tertiary);
-    color: #FFFFFF;
-  }
-
-  .sidebar-card--alt {
-    background: #F8FAFC;
   }
 
   .sidebar-links {
@@ -368,21 +333,6 @@ const formEndpoint = config.contact.form_endpoint;
     display: flex;
     flex-direction: column;
     gap: 12px;
-  }
-
-  .sidebar-links li a {
-    display: block;
-    padding: 10px 12px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-sm);
-    text-decoration: none;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .sidebar-links li a:hover {
-    border-color: var(--tertiary);
-    transform: translateX(2px);
   }
 
   .sidebar-links strong {
