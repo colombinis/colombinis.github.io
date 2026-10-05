@@ -1,6 +1,6 @@
 ---
 interface Props {
-  variant?: 'default' | 'muted' | 'interactive' | 'accent' | 'media-accent';
+  variant?: 'default' | 'muted' | 'interactive' | 'accent' | 'media-accent' | 'top-accent';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   class?: string;
   as?: string;
@@ -118,6 +118,37 @@ const classes = [
     object-fit: contain;
     display: block;
     border-radius: var(--rounded-sm, 8px);
+  }
+
+  /* Variante top-accent (sección "Por qué SACsi" de la home): card blanco
+     centrado con línea de acento azul de 4px en el borde superior. La
+     composición típica agrega el icono circular (.ui-card__icon) arriba
+     del contenido; el icono lo aporta el consumidor vía IconResolver. */
+  .ui-card--top-accent {
+    background-color: var(--surface, #FFFFFF);
+    border-color: #E8E8E8;
+    border-top: 4px solid var(--tertiary, #0A7CFF);
+    text-align: center;
+  }
+  .ui-card--top-accent:hover {
+    border-color: #E8E8E8;
+    border-top-color: var(--tertiary, #0A7CFF);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(10, 124, 255, 0.1);
+  }
+
+  /* Icono circular de la composición top-accent: disco celeste con
+     icono azul oscuro. */
+  .ui-card--top-accent :global(.ui-card__icon) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #EBF4FF;
+    color: var(--tertiary-dark, #0066CC);
+    margin-bottom: var(--spacing-md, 16px);
   }
 
   .ui-card--link {
