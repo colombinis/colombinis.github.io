@@ -2,8 +2,15 @@
 // Componente: Casos de éxito anónimos con formato fijo
 // Formato: Problema → Solución justa → Resultado medible
 // Estático (sin JS), carga ultra rápida, diseño responsive
+// Diseño Atómico: compone los primitivos src/components/ui/ (Card, Badge,
+// Button). Las clases de página (caso-card, caso-badge, hero__cta) viajan
+// por el prop class para conservar los hooks de test/E2E y la piel
+// definida en global.css (p. ej. body.header-overlay .caso-badge).
 import casosData from '../data/casos-anonimos.json';
 import { MapPin, AlertCircle, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-astro';
+import Card from './ui/Card.astro';
+import Badge from './ui/Badge.astro';
+import Button from './ui/Button.astro';
 
 interface Props {
   servicioId?: string;
@@ -32,9 +39,9 @@ const casos = servicioId
 
     <div class="casos-grid">
       {casos.map((caso) => (
-        <article class="caso-card">
+        <Card as="article" variant="default" padding="md" class="caso-card">
           <div class="caso-card__meta">
-            <span class="caso-badge">{caso.rubro}</span>
+            <Badge variant="warning" class="caso-badge">{caso.rubro}</Badge>
             <span class="caso-location">
               <MapPin size={13} aria-hidden="true" />
               <span>{caso.ubicacion}</span>
@@ -74,16 +81,16 @@ const casos = servicioId
               <p class="flow-step__desc flow-step__desc--highlight">{caso.resultado_medible}</p>
             </div>
           </div>
-        </article>
+        </Card>
       ))}
     </div>
 
     <div class="casos-footer-cta">
       <p class="casos-footer-cta__text">¿Tenés un cuello de botella similar en tu negocio?</p>
-      <a class="hero__cta hero__cta--form" href="/contacto/">
+      <Button variant="primary" href="/contacto/" class="hero__cta hero__cta--form">
         <span>Te decimos qué necesitás… y qué no. Consulta sin cargo</span>
-        <ArrowRight size={16} aria-hidden="true" />
-      </a>
+        <ArrowRight size={16} aria-hidden="true" slot="icon-end" />
+      </Button>
     </div>
   </div>
 </section>
@@ -123,18 +130,11 @@ const casos = servicioId
     }
   }
 
-  .caso-card {
-    background: var(--surface);
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .caso-card:hover {
+  /* El primitivo Card (variant default, padding md) pinta el cromo del card
+     (fondo, borde, radio, sombra, padding, flex column). .caso-card sobrevive
+     como hook de test/E2E y aporta solo la firma hover de la sección.
+     :global() porque el <article> lo renderiza Card (scoping de Astro). */
+  :global(.caso-card):hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
@@ -148,13 +148,10 @@ const casos = servicioId
     margin-bottom: var(--spacing-sm);
   }
 
-  .caso-badge {
-    background: #F3F4F6;
-    color: var(--primary);
-    font-size: 0.78rem;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: var(--rounded-full);
+  /* El primitivo Badge (variant warning) aporta paleta, tamaño y forma; se
+     conserva la identidad tipográfica del rubro en MAYÚSCULAS.
+     :global() porque el <span> lo renderiza Badge (scoping de Astro). */
+  :global(.caso-badge) {
     text-transform: uppercase;
     letter-spacing: 0.03em;
   }
@@ -272,12 +269,12 @@ const casos = servicioId
     margin: 0;
   }
 
-  .casos-footer-cta .hero__cta {
+  /* El CTA es un primitivo Button (variant primary, href /contacto/) con la
+     piel hero__cta de global.css; el ancho responsive de la sección se
+     ajusta aquí. :global() porque el <a> lo renderiza Button (scoping de Astro). */
+  .casos-footer-cta :global(.hero__cta) {
     width: 100%;
     max-width: 520px;
     min-width: 0;
-    box-sizing: border-box;
-    white-space: normal;
-    text-align: center;
   }
 </style>
