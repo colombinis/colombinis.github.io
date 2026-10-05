@@ -8,8 +8,16 @@
 // Se deriva el "asunto" readable desde la categoria (o se pasa explicito).
 //
 // Props del componente: categoria? (precarga select), asunto? (readonly), source? (tracking).
+//
+// Diseño Atómico (DESIGN.md): la tarjeta de promesa es <Card variant="accent">
+// y el pill "Primera conversación sin cargo" es <Badge variant="accent"> —
+// primitivos de src/components/ui/ (patrones ver design-style-guide.astro).
+// El sizing exclusivo de página viaja por el prop class con :global() en el
+// <style> (la raíz del primitivo la renderiza el componente ui, no esta página).
 import Layout from "../layouts/Layout.astro";
 import FormContactoProgresivo from "../components/FormContactoProgresivo.astro";
+import Card from "../components/ui/Card.astro";
+import Badge from "../components/ui/Badge.astro";
 import config from "../config/site.json";
 import { ShieldCheck } from "lucide-astro";
 
@@ -32,18 +40,18 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
   <div class="page-header">
     <p class="hero__label">ATENCIÓN PERSONALIZADA EN ROSARIO</p>
     <h1>Contactanos</h1>
-    <div class="contact-promise-card">
-      <div class="contact-promise-badge">
+    <Card variant="accent" class="contact-promise-card">
+      <Badge variant="accent" class="contact-promise-badge">
         <ShieldCheck size={16} aria-hidden="true" />
         <strong>Primera conversación sin cargo</strong>
-      </div>
+      </Badge>
       <p class="contact-promise-highlight">
         Te decimos con honestidad si te conviene avanzar.
       </p>
       <p class="contact-promise-desc">
         Sin vueltas ni presiones comerciales: evaluamos tus procesos y te recomendamos únicamente lo que tu negocio necesita para crecer.
       </p>
-    </div>
+    </Card>
     <p class="page-header__subtitle">
       Completá el formulario breve o escribinos directo por WhatsApp para coordinar tu primera charla.
     </p>
@@ -75,31 +83,18 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
     padding: var(--spacing-xxl) var(--spacing-lg) 0;
     text-align: center;
   }
-  .contact-promise-card {
-    background: #FFFFFF;
-    border: 2px solid #0A7CFF;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-md) var(--spacing-lg);
+  /* Sizing de página sobre la Card primitiva (raíz renderizada por ui/Card) */
+  :global(.contact-promise-card) {
     max-width: 580px;
     margin: var(--spacing-md) auto var(--spacing-lg);
-    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
-    box-sizing: border-box;
     overflow-wrap: break-word;
   }
-  .contact-promise-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #EBF4FF;
-    color: var(--tertiary-dark);
-    padding: 6px 14px;
-    border-radius: var(--rounded-full);
-    font-size: 0.85rem;
-    font-weight: 600;
-    line-height: 1.3;
+  /* El pill original permitía saltos de línea en pantallas angostas */
+  :global(.contact-promise-badge) {
+    margin-bottom: var(--spacing-xs);
     white-space: normal;
     text-align: center;
-    margin-bottom: var(--spacing-xs);
+    line-height: 1.3;
   }
   .contact-promise-highlight {
     font-size: 1.15rem;
