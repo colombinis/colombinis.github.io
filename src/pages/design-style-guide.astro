@@ -236,6 +236,9 @@ const tabsDemo = [
             <Button size="icon" variant="outline" aria-label="Buscar">
               <Search size={16} />
             </Button>
+            <Button size="icon" variant="primary" round aria-label="Ir">
+              <IconResolver name="chevron-right" size={20} />
+            </Button>
           </div>
         </div>
 
@@ -424,9 +427,9 @@ const tabsDemo = [
               <h3>Servicio con Banda Naranja</h3>
             </div>
             <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor.</p>
-            <div class="card-demo-footer">
-              <Button size="sm" variant="primary">
-                <span>Ver servicio</span>
+            <div class="card-demo-footer card-demo-footer--end">
+              <Button size="icon" variant="primary" round href="#tarjetas" aria-label="Ver servicio">
+                <IconResolver name="chevron-right" size={20} />
               </Button>
             </div>
           </div>
@@ -840,7 +843,12 @@ const tabsDemo = [
   .card-demo-footer {
     margin-top: var(--spacing-md);
     padding-top: var(--spacing-sm);
-    border-top: 1px solid #F1F5F9;
+    border-top: 1px solid #f1f5f9;
+  }
+  /* Variante del footer del demo: CTA circular alineado al borde derecho. */
+  .card-demo-footer--end {
+    display: flex;
+    justify-content: flex-end;
   }
 
   .text-xs {

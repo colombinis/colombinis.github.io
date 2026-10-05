@@ -4,6 +4,8 @@ import type { HTMLAttributes } from 'astro/types';
 interface Props extends HTMLAttributes<'button'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'whatsapp' | 'ghost' | 'link' | 'orange';
   size?: 'sm' | 'md' | 'lg' | 'icon';
+  /** Círculo perfecto para botones solo-icono (ej. chevron en cards). */
+  round?: boolean;
   href?: string;
   target?: string;
   rel?: string;
@@ -14,6 +16,7 @@ interface Props extends HTMLAttributes<'button'> {
 const {
   variant = 'primary',
   size = 'md',
+  round = false,
   href,
   target,
   rel,
@@ -26,6 +29,7 @@ const classes = [
   'ui-btn',
   `ui-btn--${variant}`,
   `ui-btn--${size}`,
+  round ? 'ui-btn--round' : '',
   className
 ].filter(Boolean).join(' ');
 ---
@@ -189,5 +193,15 @@ const classes = [
     padding: 0;
     border-radius: var(--rounded-sm, 8px);
     flex-shrink: 0;
+  }
+
+  /* Botón solo-icono circular (capacidad round): círculo perfecto para
+     chevrons/flechas de acción. Combínalo con size="icon" — p.ej. el CTA
+     "ver servicio" de las cards media-accent (fondo negro, icono blanco). */
+  .ui-btn--round {
+    border-radius: 9999px;
+  }
+  .ui-btn--round:hover {
+    transform: translateX(2px);
   }
 </style>
