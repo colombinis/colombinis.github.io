@@ -1064,50 +1064,6 @@ body.header-overlay #header-container.solid {
   top: 0; /* topbar fuera de vista -> el menú sólido ocupa todo el ancho superior */
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   CARDS CON BANDA NARANJA SUPERIOR (home donweb, feedback 5+6): el
-   naranja es SOLO la cabecera del card (donde va la imagen); el cuerpo
-   queda claro con los textos de siempre. Scoped a la home vía
-   body.header-overlay — /servicios/* conserva los cards claros.
-   ═══════════════════════════════════════════════════════════════════ */
-body.header-overlay .service-card {
-  background: #FFFFFF;
-  padding: 0 24px 28px; /* sin padding superior: la banda llega a los bordes */
-  overflow: hidden; /* recorta la banda con el radius del card */
-  border: 1px solid #E8E8E8;
-}
-
-body.header-overlay .service-card__icon {
-  background: #F16529; /* naranja del logo — banda superior */
-  padding: var(--spacing-lg) var(--spacing-md);
-  margin: 0 -24px var(--spacing-md); /* compensa el padding del card: borde a borde */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Textos: vuelven a los colores globales legibles (título navy, cuerpo secondary) */
-
-/* Botón del card: navy sólido con texto BLANCO (feedback 7 — el texto del
-   botón debe ser blanco; blanco sobre navy = 17:1 AA. El naranja queda
-   como banda superior, no en el botón). */
-body.header-overlay .service-card .hero__cta-secondary {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: #FFFFFF;
-}
-
-body.header-overlay .service-card .hero__cta-secondary:hover {
-  background-color: #10101F;
-  border-color: #10101F;
-  color: #FFFFFF;
-}
-
-/* Hover del card: sombra cálida */
-body.header-overlay .service-card:hover {
-  box-shadow: 0 12px 32px rgba(241, 101, 41, 0.22);
-}
-
 /* Cards de casos: patrón claro (no tienen imagen de cabecera);
    el acento naranja vive en el badge del rubro */
 body.header-overlay .caso-card {
