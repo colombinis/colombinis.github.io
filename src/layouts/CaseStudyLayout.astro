@@ -1,6 +1,9 @@
 ---
 import Layout from './Layout.astro';
 import IconResolver from '../components/ui/IconResolver.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
 import { AlertTriangle } from 'lucide-astro';
 
 interface Metric {
@@ -58,13 +61,22 @@ const {
 } = Astro.props;
 ---
 
+<!--
+  Diseño Atómico (DESIGN.md): este layout compone los primitivos de
+  src/components/ui/ (Button, Card, Badge) en lugar de markup ad-hoc.
+  Las clases de página (hero__cta, service-card, testimonial-card,
+  metric, tech-tag, case-disclaimer) viajan via el prop `class` para
+  conservar la piel/responsive definida en global.css.
+-->
 <Layout title={title} description={description}>
   <section class="hero">
     <div class="hero__container">
       <h1 class="hero__title">{title}</h1>
       <p class="hero__subtitle">{heroSubtitle}</p>
       <div class="hero__actions">
-        <a class="hero__cta" href="/contacto/">¿Tenés preguntas? Consultanos ahora</a>
+        <Button variant="primary" size="lg" href="/contacto/" class="hero__cta">
+          ¿Tenés preguntas? Consultanos ahora
+        </Button>
       </div>
       {cliente && (
         <p class="hero__client">
@@ -104,7 +116,7 @@ const {
       <h2 class="section__title">La solución</h2>
       <div class="cards-grid">
         {solutions.map((s) => (
-          <article class="service-card">
+          <Card as="article" variant="muted" padding="lg" class="service-card">
             <div class="service-card__icon">
               {s.imagen ? (
                 <img src={s.imagen} alt={s.title} loading="lazy" />
@@ -114,7 +126,7 @@ const {
             </div>
             <h3>{s.title}</h3>
             <p>{s.text}</p>
-          </article>
+          </Card>
         ))}
       </div>
     </div>
@@ -126,7 +138,7 @@ const {
         <h2 class="section__title">Stack técnico</h2>
         <div class="tech-stack">
           {stack.map((t) => (
-            <span class="tech-tag">{t}</span>
+            <Badge variant="neutral" class="tech-tag">{t}</Badge>
           ))}
         </div>
       </div>
@@ -137,18 +149,18 @@ const {
     <div class="container">
       <h2 class="section__title">Resultado</h2>
       <div class="testimonials-grid">
-        <div class="testimonial-card">
+        <Card variant="muted" padding="lg" class="testimonial-card">
           <p class="testimonial-card__quote">{testimonial.quote}</p>
           <p class="testimonial-card__author">{testimonial.author}</p>
           <p class="testimonial-card__role">{testimonial.role}</p>
-        </div>
+        </Card>
       </div>
       <div class="metrics-grid" style="margin-top:var(--spacing-xl);">
         {metrics.map((m) => (
-          <div class="metric">
+          <Card variant="muted" padding="lg" class="metric">
             <p class="metric__number">{m.value}</p>
             <p class="metric__label">{m.label}</p>
-          </div>
+          </Card>
         ))}
       </div>
     </div>
@@ -157,13 +169,36 @@ const {
   {disclaimer && (
     <section class="section">
       <div class="container">
-        <div class="case-disclaimer" style="padding:var(--spacing-md);background:#FFF3CD;border-radius:var(--rounded-sm);border:1.5px solid #FFD93D;">
+        <Card
+          variant="default"
+          padding="md"
+          class="case-disclaimer"
+          style="padding:var(--spacing-md);background:#FFF3CD;border-radius:var(--rounded-sm);border:1.5px solid #FFD93D;"
+        >
           <p style="margin:0;font-size:0.9rem;color:#856404;display:flex;align-items:flex-start;gap:8px;">
             <AlertTriangle size={18} color="#D97706" aria-hidden="true" style="flex-shrink:0;margin-top:2px;" />
             <span><strong>Nota importante:</strong> {disclaimer}</span>
           </p>
-        </div>
+        </Card>
       </div>
     </section>
   )}
 </Layout>
+
+<style>
+  /* Píldoras del stack técnico: el <span> lo renderiza Badge.astro, por lo
+     que una regla scoped no alcanza la raíz del primitivo — se restaura la
+     forma de píldora (y su piel de página) con :global(). tech-tag solo se
+     usa en este layout, así que no hay efecto colateral en otras páginas.
+     Debe ganarle a .ui-badge--neutral del primitivo (misma especificidad,
+     este bloque se emite después en el bundle). */
+  :global(.tech-tag) {
+    background-color: var(--surface);
+    border: 1px solid #E0E0E0;
+    border-radius: var(--rounded-full);
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+</style>

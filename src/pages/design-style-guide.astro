@@ -37,7 +37,7 @@ const faqDemo = [
   {
     id: 'pyme-justa',
     title: '¿Qué significa "Tecnología Justa" para una PyME?',
-    content: 'Significa diseñar e implementar únicamente la tecnología que resuelve el cuello de botella actual de tu operación. Sin sobredimensionar servidores, sin obligarte a contratar licencias corporativas innecesarias y cuidando el retorno de cada inversión.'
+    content: 'Significa diseñar e implementar únicamente la tecnología que resuelve el cuello de botella actual de tu operación. <strong>Sin sobredimensionar servidores</strong>, sin obligarte a contratar licencias corporativas innecesarias y cuidando el retorno de cada inversión.'
   },
   {
     id: 'tiempos-implementacion',
@@ -418,15 +418,17 @@ const tabsDemo = [
           <div class="ui-card__media">
             <img src="/assets/sacsi-servicios-12-consultoria-ia.webp" alt="Ilustración del servicio IA Aplicada" loading="lazy" />
           </div>
-          <div class="card-demo-header">
-            <Badge variant="neutral">HOME</Badge>
-            <h3>Servicio con Banda Naranja</h3>
-          </div>
-          <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris.</p>
-          <div class="card-demo-footer">
-            <Button size="sm" variant="primary">
-              <span>Ver servicio</span>
-            </Button>
+          <div class="ui-card__body">
+            <div class="card-demo-header">
+              <Badge variant="neutral">HOME</Badge>
+              <h3>Servicio con Banda Naranja</h3>
+            </div>
+            <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor.</p>
+            <div class="card-demo-footer">
+              <Button size="sm" variant="primary">
+                <span>Ver servicio</span>
+              </Button>
+            </div>
           </div>
         </Card>
       </div>
@@ -476,7 +478,7 @@ const tabsDemo = [
     <section id="acordeon" class="guide-section">
       <div class="section-title-wrap">
         <h2>8. Composiciones — Acordeón Desplegable (Accordion.astro)</h2>
-        <p>Estructura probada para Preguntas Frecuentes con animación suave de apertura y rotación de flecha.</p>
+        <p>Estructura probada para Preguntas Frecuentes con animación suave de apertura y rotación de flecha. El contenido del ítem admite HTML inline seguro (strong, br) — así lo consume FaqSection, la composición de FAQ del sitio.</p>
       </div>
 
       <div class="accordion-container-wrap">

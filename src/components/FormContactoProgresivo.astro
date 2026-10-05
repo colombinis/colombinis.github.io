@@ -19,9 +19,19 @@
 //   - Eventos GTM (dataLayer.push): form_submit (onsubmit), checkout_started (en click de enviar).
 //   - NO jQuery. Vanilla JS inline solo para validación + GTM.
 //   - Build-time: getServicios() + getCategoriasByServicio() popular el select jerarquizado.
+//
+// Diseño Atómico (DESIGN.md): campos <Input>/<Textarea> y CTAs <Button> vienen de
+// src/components/ui/ (ver design-style-guide.astro). El select jerarquizado NO tiene
+// primitivo Select en el catálogo — se conserva el <select> nativo con estilos
+// tokenizados a mano (mismo box de Input). IDs/nombres de campos y hooks JS intocados
+// (contrato E2E: #form-contacto-progresivo, pf-categoria, pf-brief, .form-status,
+// .cf-turnstile, dataLayer checkout_started/form_submit, fetch(form.action) con resp.ok).
 import { getServicios, getCategoriasByServicio } from '../lib/data-utils';
 import config from '../config/site.json';
 import { CheckCircle2 } from 'lucide-astro';
+import Button from './ui/Button.astro';
+import Input from './ui/Input.astro';
+import Textarea from './ui/Textarea.astro';
 
 interface Props {
   categoria?: string;
@@ -55,7 +65,9 @@ const sourceDefault = source ?? 'contacto-progresivo';
   data-default-otros={defaultToOtros ? '1' : undefined}
   autocomplete="on"
 >
-  <!-- 1. Select jerarquizado: Servicio > Categorías + Otro (requerido) -->
+  <!-- 1. Select jerarquizado: Servicio > Categorías + Otro (requerido).
+       No existe primitivo Select en src/components/ui/ — se conserva el
+       select nativo estilizado con los tokens de Input. -->
   <div class="form-group">
     <label for="pf-categoria">¿Sobre qué necesitás información? <span aria-hidden="true">*</span></label>
     <select id="pf-categoria" name="categoria" required>
@@ -79,27 +91,50 @@ const sourceDefault = source ?? 'contacto-progresivo';
   </div>
 
   <!-- 2. Nombre (requerido) -->
-  <div class="form-group">
-    <label for="pf-nombre">Nombre <span aria-hidden="true">*</span></label>
-    <input type="text" id="pf-nombre" name="nombre" required maxlength="100" autocomplete="name" placeholder="Tu nombre">
-  </div>
+  <Input
+    id="pf-nombre"
+    name="nombre"
+    type="text"
+    label="Nombre"
+    required
+    maxlength="100"
+    autocomplete="name"
+    placeholder="Tu nombre"
+  />
 
   <!-- 3. Email (requerido) -->
-  <div class="form-group">
-    <label for="pf-email">Email <span aria-hidden="true">*</span></label>
-    <input type="email" id="pf-email" name="email" required maxlength="254" autocomplete="email" placeholder="tu@email.com">
-  </div>
+  <Input
+    id="pf-email"
+    name="email"
+    type="email"
+    label="Email"
+    required
+    maxlength="254"
+    autocomplete="email"
+    placeholder="tu@email.com"
+  />
 
   <!-- 4. Cuéntanos brevemente (requerido) -->
-  <div class="form-group">
-    <label for="pf-brief">Cuéntanos brevemente qué necesitás <span aria-hidden="true">*</span></label>
-    <textarea id="pf-brief" name="message" rows="4" required maxlength="500" placeholder="Máximo 500 caracteres..."></textarea>
-  </div>
+  <Textarea
+    id="pf-brief"
+    name="message"
+    label="Cuéntanos brevemente qué necesitás"
+    required
+    rows={4}
+    maxlength="500"
+    placeholder="Máximo 500 caracteres..."
+  />
 
   <!-- Honeypot anti-spam: debe permanecer vacío y no es visible para usuarios. -->
   <div class="form-trap" aria-hidden="true">
-    <label for="pf-website">Sitio web</label>
-    <input type="text" id="pf-website" name="website" tabindex="-1" autocomplete="off">
+    <Input
+      id="pf-website"
+      name="website"
+      type="text"
+      label="Sitio web"
+      tabindex="-1"
+      autocomplete="off"
+    />
   </div>
 
   <!-- Turnstile widget script (una sola vez por página) -->
@@ -109,7 +144,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
   <div class="cf-turnstile" data-sitekey={config.contact.turnstile_site_key} data-theme="light" data-size="compact"></div>
 
   <!-- Botón único de envío -->
-  <button type="submit" class="btn btn--primary" id="pf-submit">Enviar consulta sin cargo</button>
+  <Button type="submit" variant="primary" id="pf-submit">Enviar consulta sin cargo</Button>
 
   <p class="form-status" role="status" aria-live="polite"></p>
 </form>
@@ -125,29 +160,40 @@ const sourceDefault = source ?? 'contacto-progresivo';
 
   <!-- Alternativas: WhatsApp (icono) + Preferís email? -->
   <div class="form-alt">
-    <a class="btn btn--whatsapp" href={whatsappUrl} rel="noopener noreferrer" target="_blank" aria-label="Contactarnos por WhatsApp">
-      <img class="ic" src="/icons/brand-whatsapp.svg" alt="WhatsApp" width="18" height="18" />
+    <Button
+      variant="whatsapp"
+      href={whatsappUrl}
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label="Contactarnos por WhatsApp"
+    >
+      <img slot="icon-start" class="ic" src="/icons/brand-whatsapp.svg" alt="WhatsApp" width="18" height="18" />
       Escribinos al WhatsApp
-    </a>
-    <button type="button" class="btn btn--email" id="pf-prefiere-email" data-email={config.contact.email}>
-      <img class="ic" src="/icons/mail.svg" alt="" aria-hidden="true" width="18" height="18" />
+    </Button>
+    <Button
+      variant="outline"
+      type="button"
+      id="pf-prefiere-email"
+      data-email={config.contact.email}
+    >
+      <img slot="icon-start" class="ic" src="/icons/mail.svg" alt="" aria-hidden="true" width="18" height="18" />
       Si preferis por Email
-    </button>
+    </Button>
   </div>
 <!-- Redes sociales (iconos de la misma familia que WhatsApp) -->
 <div class="social-links">
-  <a class="social-item" href={config.social.instagram} rel="noopener noreferrer" target="_blank" aria-label="Instagram">
-    <img class="ic" src="/icons/brand-instagram.svg" alt="" aria-hidden="true" width="18" height="18" />
+  <Button variant="outline" href={config.social.instagram} rel="noopener noreferrer" target="_blank" aria-label="Instagram">
+    <img slot="icon-start" class="ic" src="/icons/brand-instagram.svg" alt="" aria-hidden="true" width="18" height="18" />
     Instagram
-  </a>
-  <a class="social-item" href={config.social.youtube} rel="noopener noreferrer" target="_blank" aria-label="YouTube">
-    <img class="ic" src="/icons/brand-youtube.svg" alt="" aria-hidden="true" width="18" height="18" />
+  </Button>
+  <Button variant="outline" href={config.social.youtube} rel="noopener noreferrer" target="_blank" aria-label="YouTube">
+    <img slot="icon-start" class="ic" src="/icons/brand-youtube.svg" alt="" aria-hidden="true" width="18" height="18" />
     YouTube
-  </a>
-  <a class="social-item" href={config.social.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">
-    <img class="ic" src="/icons/brand-linkedin.svg" alt="" aria-hidden="true" width="18" height="18" />
+  </Button>
+  <Button variant="outline" href={config.social.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">
+    <img slot="icon-start" class="ic" src="/icons/brand-linkedin.svg" alt="" aria-hidden="true" width="18" height="18" />
     LinkedIn
-  </a>
+  </Button>
 </div>
 
 <style>
@@ -159,85 +205,52 @@ const sourceDefault = source ?? 'contacto-progresivo';
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: .3rem;
+    gap: 6px;
   }
+  /* Select nativo (no hay primitivo Select): mismo estilo que ui-input */
   .form-group label {
-    font-size: .85rem;
-    color: var(--secondary, #444);
+    font-size: 0.875rem;
+    color: var(--primary, #1A1A2E);
     font-weight: 600;
   }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
+  .form-group select {
     width: 100%;
-    padding: .6rem .75rem;
-    border: 1px solid #D0D0D0;
-    border-radius: 8px;
-    font-size: .95rem;
-    color: var(--primary, #222);
-    background: #fff;
+    padding: 10px 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--rounded-sm, 8px);
+    font-size: 0.95rem;
+    color: var(--primary, #1A1A2E);
+    background-color: #FFFFFF;
     font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
   }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: 2px solid var(--tertiary, #0066cc);
-    outline-offset: 1px;
-    border-color: var(--tertiary, #0066cc);
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--tertiary, #0A7CFF);
+    box-shadow: 0 0 0 3px rgba(10, 124, 255, 0.15);
   }
-  .form-group textarea { resize: vertical; }
-  .form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
-
-  /* Botones */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    padding: .7rem 1.2rem;
-    font-size: .95rem;
-    font-weight: 600;
-    font-family: inherit;
-    text-decoration: none;
-    transition: background-color .2s ease, color .2s ease;
-  }
-  .btn--primary {
-    background: var(--primary, #1A1A2E);
-    color: #fff;
-  }
-  .btn--primary:hover { background: var(--tertiary, #0066cc); }
-  .btn--primary:disabled { opacity: .5; cursor: not-allowed; }
-
-  .btn--whatsapp {
-    background: var(--whatsapp, #25D366);
-    color: #fff;
-  }
-  .btn--whatsapp:hover { background: var(--whatsapp-hover, #1ebe5d); }
-
-  .btn--email {
-    background: transparent;
-    color: var(--secondary, #444);
-    border: 1.5px solid #D0D0D0;
-  }
-  .btn--email:hover {
-    border-color: var(--tertiary, #0066cc);
-    color: var(--tertiary, #0066cc);
+  .form-trap {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
   }
 
   .form-alt {
     display: flex;
     flex-wrap: wrap;
-    gap: .75rem;
+    gap: 0.75rem;
     align-items: normal;
     justify-content: center;
   }
-  .ic { flex-shrink: 0; }
+  .ic {
+    flex-shrink: 0;
+  }
 
   .form-status {
-    font-size: .85rem;
+    font-size: 0.85rem;
     color: var(--secondary, #444);
     margin: 0;
     min-height: 1.1em;
@@ -249,33 +262,21 @@ const sourceDefault = source ?? 'contacto-progresivo';
   .social-links {
     display: flex;
     flex-wrap: wrap;
-    gap: .75rem;
-    margin-top: .5rem;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
     justify-content: center;
   }
-  .social-item {
-    display: inline-flex;
-    align-items: center;
-    gap: .4rem;
-    padding: .5rem .9rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: .9rem;
-    color: var(--primary, #222);
-    border: 1.5px solid #E0E0E0;
-    transition: background-color .2s ease, color .2s ease;
-  }
-  .social-item:hover {
-    background: var(--tertiary, #0066cc);
-    color: #fff;
-    border-color: var(--tertiary, #0066cc);
-  }
-  .social-item .ic { color: currentColor; }
 
+  /* Mobile-first: los Button primitivos ocupan el ancho completo */
   @media (max-width: 600px) {
-    .btn, .social-item { width: 100%; }
-    .form-alt { flex-direction: column; align-items: stretch; }
+    .form-alt :global(.ui-btn),
+    .social-links :global(.ui-btn) {
+      width: 100%;
+    }
+    .form-alt {
+      flex-direction: column;
+      align-items: stretch;
+    }
   }
 </style>
 
