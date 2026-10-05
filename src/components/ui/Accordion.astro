@@ -52,9 +52,8 @@ const {
         aria-labelledby={`accordion-trigger-${item.id}`}
         hidden
       >
-        <div class="ui-accordion-inner">
-          <p>{item.content}</p>
-        </div>
+        {/* set:html: el contenido del ítem puede llevar HTML inline seguro (<strong>, <br>) */}
+        <div class="ui-accordion-inner" set:html={item.content} />
       </div>
     </div>
   ))}
