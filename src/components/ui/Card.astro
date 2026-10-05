@@ -80,13 +80,14 @@ const classes = [
 
   /* Variante media-accent (home donweb): banda superior naranja #F16529
      con la imagen del servicio centrada y bordes redondeados (--rounded-sm).
-     El cuerpo del card queda blanco con los textos globales.
-     NOTA scoping: .ui-card__media lo aporta el CONSUMIDOR via slot, por lo
-     que el cid es el de la página consumidora — los selectores descendentes
-     deben ser :global() para alcanzarlo. */
+     AUTÓNOMA respecto del padding del consumidor: la variante fuerza
+     padding 0 y el cuerpo del contenido se espacia con su propio padding
+     (.ui-card__body). La banda siempre llega flush al top y a los bordes
+     (recortada por el overflow:hidden del .ui-card base). */
   .ui-card--media-accent {
     background-color: var(--surface, #FFFFFF);
     border-color: #E8E8E8;
+    padding: 0 !important; /* la variante controla su layout interno */
   }
   .ui-card--media-accent:hover {
     border-color: #FFD3B8;
@@ -96,10 +97,16 @@ const classes = [
   .ui-card--media-accent :global(.ui-card__media) {
     background: #F16529;
     padding: var(--spacing-lg, 24px) var(--spacing-md, 16px);
-    margin: 0 calc(-1 * var(--spacing-lg, 24px)) var(--spacing-md, 16px);
+    margin: 0 0 var(--spacing-md, 16px); /* sin márgenes negativos: el card ya tiene padding 0 */
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  /* Cuerpo del contenido en media-accent: el espaciado lo da el body,
+     no el padding del card. */
+  .ui-card--media-accent :global(.ui-card__body) {
+    padding: 0 var(--spacing-lg, 24px) var(--spacing-lg, 24px);
   }
 
   .ui-card--media-accent :global(.ui-card__media) :global(img) {

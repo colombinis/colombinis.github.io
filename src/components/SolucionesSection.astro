@@ -45,16 +45,18 @@ const servicios = getServicios();
     <div class="cards-grid">
       {servicios.map((service) => (
         <Card
+          as="article"
           variant="media-accent"
-          padding="none"
           class="service-card"
-          href={service.href}
+          data-servicio={service.id}
         >
           <div class="ui-card__media">
             <img src={service.imagen} alt={service.title} loading="lazy" />
           </div>
-          <div class="service-card__body">
-            <h3>{service.title}</h3>
+          <div class="ui-card__body service-card__body">
+            <h3>
+              <a href={service.href}>{service.title}</a>
+            </h3>
             <p>{service.claim}</p>
             <Button variant="primary" size="sm" href={service.href}
               >Ver servicio</Button
