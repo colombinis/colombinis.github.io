@@ -2,6 +2,7 @@
 // Componente reutilizable: sección "Resultados que hablan" (social proof)
 // Métricas + testimonios generales o por servicio. Se renderiza SSG estático.
 import { getTestimoniosGenerales, getTestimoniosByServicio } from '../lib/data-utils';
+import Card from './ui/Card.astro';
 
 interface Props {
   servicioId?: string;
@@ -25,13 +26,13 @@ const testimoniosData = testimoniosDataRaw ? {
       <div class="testimonials">
         <div class="testimonials-grid">
           {testimoniosData.testimonios.map((t) => (
-            <div class="testimonial-card">
+            <Card variant="default" padding="md" class="testimonial-card">
               <p class="testimonial-card__quote">
                 "{t.quote}"
               </p>
               <p class="testimonial-card__author">{t.autor}</p>
               {t.rol && <p class="testimonial-card__role">{t.rol}</p>}
-            </div>
+            </Card>
           ))}
         </div>
       </div>
