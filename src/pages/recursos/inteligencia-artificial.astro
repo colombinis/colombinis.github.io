@@ -2,6 +2,9 @@
 // Página: Guía Práctica de Inteligencia Artificial para PyMEs
 import Layout from '../../layouts/Layout.astro';
 import config from '../../config/site.json';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
+import Button from '../../components/ui/Button.astro';
 import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Sparkles } from 'lucide-astro';
 ---
 
@@ -23,19 +26,19 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     <div class="container guide-layout">
       <!-- Contenido Principal -->
       <article class="guide-content">
-        <div class="intro-box">
+        <Card variant="muted" class="intro-box">
           <p>
             <strong>Regla número uno de la Tecnología Justa:</strong> Si tus procesos internos hoy están desordenados, agregar Inteligencia Artificial solo va a acelerar el desorden. Primero se ordenan los procedimientos; luego se potencian con la herramienta justa.
           </p>
-        </div>
+        </Card>
 
         <h2>4 casos de uso reales donde la IA genera retorno hoy</h2>
 
-        <div class="ia-card">
+        <Card variant="default" padding="lg" class="ia-card">
           <div class="ia-header">
             <span class="ia-icon"><Bot size={22} aria-hidden="true" /></span>
             <div>
-              <span class="ia-tag">CASO DE USO 01</span>
+              <Badge variant="accent" size="sm" class="ia-tag">CASO DE USO 01</Badge>
               <h3>1. Pre-atención y filtrado inteligente de consultas</h3>
             </div>
           </div>
@@ -47,13 +50,13 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
             <li><Check size={16} aria-hidden="true" /> Derivar con todos los datos clave cargados a un operador humano cuando el cliente está listo para comprar.</li>
             <li><Check size={16} aria-hidden="true" /> Reducir en más de un 60% el tiempo de espera inicial.</li>
           </ul>
-        </div>
+        </Card>
 
-        <div class="ia-card">
+        <Card variant="default" padding="lg" class="ia-card">
           <div class="ia-header">
             <span class="ia-icon"><FileText size={22} aria-hidden="true" /></span>
             <div>
-              <span class="ia-tag">CASO DE USO 02</span>
+              <Badge variant="accent" size="sm" class="ia-tag">CASO DE USO 02</Badge>
               <h3>2. Extracción de datos de facturas y presupuestos</h3>
             </div>
           </div>
@@ -65,13 +68,13 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
             <li><Check size={16} aria-hidden="true" /> Los datos se envían automáticamente a tu sistema de gestión o planilla de control.</li>
             <li><Check size={16} aria-hidden="true" /> Se eliminan los errores de tipeo humano en montos y números de comprobante.</li>
           </ul>
-        </div>
+        </Card>
 
-        <div class="ia-card">
+        <Card variant="default" padding="lg" class="ia-card">
           <div class="ia-header">
             <span class="ia-icon"><Cpu size={22} aria-hidden="true" /></span>
             <div>
-              <span class="ia-tag">CASO DE USO 03</span>
+              <Badge variant="accent" size="sm" class="ia-tag">CASO DE USO 03</Badge>
               <h3>3. Asistentes internos con modelos locales (SLMs) y privacidad total</h3>
             </div>
           </div>
@@ -83,24 +86,24 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
             <li><Check size={16} aria-hidden="true" /> Costo cero por token o llamada una vez instalado.</li>
             <li><Check size={16} aria-hidden="true" /> Ideal para búsquedas en manuales de procedimiento, contratos y reglamentos internos.</li>
           </ul>
-        </div>
+        </Card>
 
-        <div class="ia-card">
+        <Card variant="default" padding="lg" class="ia-card">
           <div class="ia-header">
             <span class="ia-icon"><Sparkles size={22} aria-hidden="true" /></span>
             <div>
-              <span class="ia-tag">CASO DE USO 04</span>
+              <Badge variant="accent" size="sm" class="ia-tag">CASO DE USO 04</Badge>
               <h3>4. Aceleración en redacción y seguimiento comercial</h3>
             </div>
           </div>
           <p>
             Personalizar propuestas comerciales para cada cliente suele postergarse por falta de tiempo. Con prompts estructurados, tu equipo puede generar borradores de cotizaciones y mensajes de seguimiento adaptados al rubro de cada prospecto en minutos.
           </p>
-        </div>
+        </Card>
 
         <h2>3 errores caros que debés evitar</h2>
 
-        <div class="warning-box">
+        <Card variant="muted" class="warning-box">
           <div class="warning-item">
             <AlertTriangle size={20} color="#D97706" aria-hidden="true" />
             <div>
@@ -124,53 +127,53 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
               <p>Solo conviene automatizar flujos estables y repetitivos. Si el proceso no está claro en un papel, la IA no lo va a ordenar por arte de magia.</p>
             </div>
           </div>
-        </div>
+        </Card>
 
-        <div class="action-summary-box">
+        <Card variant="muted" padding="lg" class="action-summary-box">
           <h3>¿Querés saber si tu empresa puede aprovechar IA hoy?</h3>
           <p>
             En 15 minutos analizamos tus tareas cotidianas y te decimos con franqueza si te conviene aplicar un modelo de IA o si tu problema se resuelve con una automatización tradicional más económica y simple.
           </p>
-          <a class="hero__cta hero__cta--form" href="/contacto/?asunto=Consulta%20sobre%20IA">
+          <Button variant="primary" size="lg" href="/contacto/?asunto=Consulta%20sobre%20IA" class="hero__cta--form">
             Consultar sobre IA sin cargo ni compromiso
-          </a>
-        </div>
+          </Button>
+        </Card>
       </article>
 
       <!-- Sidebar -->
       <aside class="guide-sidebar">
-        <div class="sidebar-card">
-          <div class="sidebar-badge">
+        <Card variant="default" class="sidebar-card">
+          <Badge variant="success" size="sm" class="sidebar-badge">
             <ShieldCheck size={16} aria-hidden="true" />
             <span>TECNOLOGÍA JUSTA</span>
-          </div>
+          </Badge>
           <h4>¿Buscás automatizar tareas repetitivas?</h4>
           <p>
             Conectamos sistemas, planillas, facturación y WhatsApp para que tu equipo recupere horas de trabajo operativo.
           </p>
-          <a class="btn-sidebar" href="/servicios/automatizacion/">
+          <Button variant="primary" size="sm" href="/servicios/automatizacion/" class="btn-sidebar">
             <span>Conocé el servicio de Automatización</span>
-            <ArrowRight size={16} aria-hidden="true" />
-          </a>
-        </div>
+            <ArrowRight slot="icon-end" size={16} aria-hidden="true" />
+          </Button>
+        </Card>
 
-        <div class="sidebar-card sidebar-card--alt">
+        <Card variant="muted" class="sidebar-card sidebar-card--alt">
           <h4>Otros recursos gratuitos</h4>
           <ul class="sidebar-links">
             <li>
-              <a href="/checklist-automatizacion/">
+              <Card variant="interactive" padding="sm" href="/checklist-automatizacion/" class="sidebar-link">
                 <strong>Checklist de Automatización</strong>
                 <span>Detectá si tu negocio pierde horas en tareas manuales.</span>
-              </a>
+              </Card>
             </li>
             <li>
-              <a href="/recursos/identidad-digital/">
+              <Card variant="interactive" padding="sm" href="/recursos/identidad-digital/" class="sidebar-link">
                 <strong>Guía de Identidad Digital</strong>
                 <span>Cómo construir presencia propia y duradera.</span>
-              </a>
+              </Card>
             </li>
           </ul>
-        </div>
+        </Card>
       </aside>
     </div>
   </section>
@@ -190,10 +193,11 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     }
   }
 
-  .intro-box {
+  /* Callout de apertura: Card muted + acento ámbar propio de la guía.
+     Selector con prefijo de contexto para ganarle a .ui-card--muted. */
+  .guide-content .intro-box {
     background: #FEF3C7;
     border-left: 4px solid #D97706;
-    padding: var(--spacing-lg);
     border-radius: 0 var(--rounded-sm) var(--rounded-sm) 0;
     margin-bottom: var(--spacing-xl);
   }
@@ -211,13 +215,9 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     margin: var(--spacing-xl) 0 var(--spacing-lg);
   }
 
+  /* Casos de uso: Card default lg — solo espaciado propio de la guía */
   .ia-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .ia-header {
@@ -231,21 +231,12 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     width: 44px;
     height: 44px;
     border-radius: var(--rounded-sm);
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: #EFF6FF;
+    color: var(--tertiary);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-  }
-
-  .ia-tag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #4F46E5;
-    display: block;
   }
 
   .ia-header h3 {
@@ -279,19 +270,15 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
   }
 
   .ia-checks svg {
-    color: #4F46E5;
+    color: var(--tertiary);
     flex-shrink: 0;
     margin-top: 3px;
   }
 
-  /* Warning Box */
-  .warning-box {
+  /* Errores: Card muted + tinte de alerta ámbar */
+  .guide-content .warning-box {
     background: #FFFBEB;
-    border: 1px solid #FDE68A;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
+    border-color: #FDE68A;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-xl);
   }
@@ -321,11 +308,9 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     line-height: 1.5;
   }
 
-  .action-summary-box {
-    background: #F8FAFC;
-    border: 2px solid #E2E8F0;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
+  /* Resumen de acción: Card muted + CTA Button primary */
+  .guide-content .action-summary-box {
+    border-width: 2px;
     text-align: center;
     margin-top: var(--spacing-xxl);
   }
@@ -344,31 +329,17 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     line-height: 1.6;
   }
 
-  .action-summary-box .hero__cta {
+  .action-summary-box .hero__cta--form {
     max-width: 440px;
     margin: 0 auto;
   }
 
   /* Sidebar */
   .sidebar-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   }
 
   .sidebar-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #ECFDF5;
-    color: #047857;
-    font-size: 0.72rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: var(--rounded-full);
     margin-bottom: var(--spacing-sm);
   }
 
@@ -385,27 +356,10 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     margin: 0 0 var(--spacing-md);
   }
 
-  .btn-sidebar {
-    display: flex;
-    align-items: center;
+  /* CTA del sidebar: Button primary sm a ancho completo */
+  .sidebar-card .btn-sidebar {
+    width: 100%;
     justify-content: space-between;
-    background: var(--primary);
-    color: #FFFFFF;
-    padding: 10px 16px;
-    border-radius: var(--rounded-sm);
-    font-size: 0.88rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn-sidebar:hover {
-    background: var(--tertiary);
-    color: #FFFFFF;
-  }
-
-  .sidebar-card--alt {
-    background: #F8FAFC;
   }
 
   .sidebar-links {
@@ -415,21 +369,6 @@ import { Bot, FileText, Cpu, AlertTriangle, ShieldCheck, ArrowRight, Check, Spar
     display: flex;
     flex-direction: column;
     gap: 12px;
-  }
-
-  .sidebar-links li a {
-    display: block;
-    padding: 10px 12px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-sm);
-    text-decoration: none;
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
-
-  .sidebar-links li a:hover {
-    border-color: var(--tertiary);
-    transform: translateX(2px);
   }
 
   .sidebar-links strong {
