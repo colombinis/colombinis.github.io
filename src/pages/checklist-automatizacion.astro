@@ -4,17 +4,21 @@
 import Layout from '../layouts/Layout.astro';
 import config from '../config/site.json';
 import { Check, Lock, CheckCircle2 } from 'lucide-astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Badge from '../components/ui/Badge.astro';
+import Input from '../components/ui/Input.astro';
 
 const formEndpoint = config.contact.form_endpoint;
 ---
 
 <Layout
   title="Checklist Gratis: ¿Tu negocio necesita automatización? · PyMEs Rosario"
-  description="Descargá gratis el checklist práctico para PyMEs en Rosario. Detectá tareas repetitivas y cuellos de botella para automatizar con tecnología justa."
+  description="Descargá gratis el checklist práctico para PyMEs en Rosario. Detectá tareas repetitivas y cuellos de botella para automatizar con tecnología justa y sin sobrecostos."
 >
   <section class="hero">
     <div class="hero__container">
-      <p class="hero__label">RECURSO GRATUITO PARA PYMES</p>
+      <Badge variant="accent" class="hero__badge">RECURSO GRATUITO PARA PYMES</Badge>
       <h1 class="hero__title">Checklist: ¿Tu negocio necesita automatización?</h1>
       <p class="hero__subtitle">
         Descubrí en menos de 5 minutos si estás perdiendo horas valiosas y dinero en tareas manuales que pueden funcionar solas con tecnología justa y sin sobrecostos.
@@ -57,12 +61,12 @@ const formEndpoint = config.contact.form_endpoint;
           </li>
         </ul>
 
-        <div class="checklist-guarantee">
+        <Card variant="default" padding="md" class="checklist-guarantee">
           <p><strong>Filosofía SACsi:</strong> Elegimos la tecnología adecuada, no la de moda. Entendemos lo que cuesta cada peso y no te vendemos nada que no necesites.</p>
-        </div>
+        </Card>
       </div>
 
-      <div class="checklist-form-card">
+      <Card variant="accent" padding="lg">
         <div class="card-header">
           <h3>Descargá la guía en PDF</h3>
           <p>Completá tu nombre y email para descargar el archivo de inmediato. Sin registro ni contraseñas.</p>
@@ -76,24 +80,35 @@ const formEndpoint = config.contact.form_endpoint;
           {/* El worker exige `message`; para el lead magnet enviamos un valor fijo */}
           <input type="hidden" name="message" value="Descarga del checklist de automatización (lead magnet)" />
 
-          <div class="form-group">
-            <label for="lm-nombre">Tu nombre <span aria-hidden="true">*</span></label>
-            <input type="text" id="lm-nombre" name="nombre" required placeholder="Ej: Mariano López" />
-          </div>
+          <Input
+            id="lm-nombre"
+            name="nombre"
+            type="text"
+            required={true}
+            label="Tu nombre"
+            placeholder="Ej: Mariano López"
+          />
 
-          <div class="form-group">
-            <label for="lm-email">Tu email de trabajo <span aria-hidden="true">*</span></label>
-            <input type="email" id="lm-email" name="email" required placeholder="tu@empresa.com" />
-          </div>
+          <Input
+            id="lm-email"
+            name="email"
+            type="email"
+            required={true}
+            label="Tu email de trabajo"
+            placeholder="tu@empresa.com"
+          />
 
-          <div class="form-group">
-            <label for="lm-rubro">Rubro o actividad de tu negocio (opcional)</label>
-            <input type="text" id="lm-rubro" name="rubro" placeholder="Ej: Distribuidora, Ferretería, Comercio" />
-          </div>
+          <Input
+            id="lm-rubro"
+            name="rubro"
+            type="text"
+            label="Rubro o actividad de tu negocio (opcional)"
+            placeholder="Ej: Distribuidora, Ferretería, Comercio"
+          />
 
-          <button type="submit" class="btn btn--primary" id="lm-submit">
+          <Button type="submit" variant="primary" id="lm-submit" class="checklist-submit">
             Descargar Checklist en PDF (Gratis)
-          </button>
+          </Button>
 
           {/* Turnstile: el worker exige cf-turnstile-response (patrón de /contacto) */}
           <div class="cf-turnstile" data-sitekey={config.contact.turnstile_site_key} data-theme="light" data-size="compact"></div>
@@ -113,19 +128,20 @@ const formEndpoint = config.contact.form_endpoint;
           </div>
           <h4>¡Listo! Tu descarga está lista</h4>
           <p>La descarga del checklist comenzará en unos segundos.</p>
-          <a
+          <Button
+            variant="primary"
             id="download-btn-direct"
-            class="btn btn--primary"
             href="/descargas/checklist-automatizacion-pymes-sacsi.pdf"
             download="Checklist-Automatizacion-SACsi.pdf"
+            class="checklist-download"
           >
             Hacé clic acá si no descargó automáticamente
-          </a>
+          </Button>
           <p class="next-step-note">
             ¿Querés saber qué conviene automatizar primero en tu caso? <a href="/soluciones/diagnostico-ia/">Empezá con un Diagnóstico IA express</a> y recibí un roadmap con ROI estimado.
           </p>
         </div>
-      </div>
+      </Card>
     </div>
   </section>
 </Layout>
@@ -144,6 +160,12 @@ const formEndpoint = config.contact.form_endpoint;
     .checklist-container {
       grid-template-columns: 1.1fr 0.9fr;
     }
+  }
+
+  /* Eyebrow del hero (Badge): la Badge aporta el estilo de píldora;
+     solo ajustamos el margen inferior propio de esta página. */
+  .hero__badge {
+    margin-bottom: var(--spacing-md);
   }
 
   .checklist-info h2 {
@@ -193,12 +215,12 @@ const formEndpoint = config.contact.form_endpoint;
     line-height: 1.5;
   }
 
-  .checklist-guarantee {
-    background: #FFFFFF;
+  /* Callout de garantía: la Card (variant default) aporta superficie,
+     borde, radio y sombra; el acento azul a la izquierda es exclusivo
+     de esta página (selector más específico para ganarle al borde
+     base de .ui-card). */
+  .checklist-info .checklist-guarantee {
     border-left: 4px solid var(--tertiary);
-    padding: var(--spacing-md);
-    border-radius: var(--rounded-sm);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   }
 
   .checklist-guarantee p {
@@ -206,14 +228,6 @@ const formEndpoint = config.contact.form_endpoint;
     font-size: 0.92rem;
     color: var(--secondary);
     line-height: 1.6;
-  }
-
-  .checklist-form-card {
-    background: var(--surface);
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   }
 
   .card-header h3 {
@@ -234,61 +248,11 @@ const formEndpoint = config.contact.form_endpoint;
     gap: var(--spacing-md);
   }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    text-align: left;
-  }
-
-  .form-group label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--primary);
-  }
-
-  .form-group input {
-    padding: 12px 14px;
-    border: 1px solid #D1D5DB;
-    border-radius: var(--rounded-sm);
-    font-size: 0.95rem;
-    font-family: inherit;
-    transition: border-color 0.2s ease;
-  }
-
-  .form-group input:focus {
-    outline: none;
-    border-color: var(--tertiary);
-    box-shadow: 0 0 0 3px rgba(10, 124, 255, 0.15);
-  }
-
-  .btn--primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary);
-    color: #FFFFFF;
-    border: none;
-    padding: 14px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.4;
-    border-radius: var(--rounded-sm);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    text-align: center;
-    text-decoration: none;
+  /* Botón de envío: la Button (variant primary) aporta el estilo base;
+     el ancho completo y el margen son propios de este formulario. */
+  .checklist-submit {
     width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    white-space: normal;
-    word-break: normal;
-    overflow-wrap: break-word;
     margin-top: var(--spacing-xs);
-  }
-
-  .btn--primary:hover {
-    background: var(--tertiary);
   }
 
   .form-privacy {
@@ -336,32 +300,13 @@ const formEndpoint = config.contact.form_endpoint;
     line-height: 1.5;
   }
 
-  #download-btn-direct {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
+  /* Botón de descarga directa: la Button (variant primary, href → <a>)
+     aporta el estilo base; ancho completo y margen son propios de
+     esta página. */
+  .checklist-download {
     width: 100%;
-    max-width: 100%;
-    padding: 14px 20px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    line-height: 1.4;
-    border-radius: var(--rounded-sm);
-    text-align: center;
-    text-decoration: none;
-    white-space: normal;
-    word-break: normal;
-    overflow-wrap: break-word;
     margin: var(--spacing-md) 0;
-    background: var(--primary);
-    color: #FFFFFF;
-    transition: background-color 0.2s ease;
-  }
-
-  #download-btn-direct:hover {
-    background: var(--tertiary);
-    color: #FFFFFF;
+    overflow-wrap: break-word;
   }
 
   .next-step-note {
