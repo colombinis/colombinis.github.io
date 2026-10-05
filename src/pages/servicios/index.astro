@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import SolucionesSection from '../../components/SolucionesSection.astro';
+import Button from '../../components/ui/Button.astro';
+import Badge from '../../components/ui/Badge.astro';
 ---
 
 <Layout
@@ -9,13 +11,13 @@ import SolucionesSection from '../../components/SolucionesSection.astro';
 >
   <section class="hero">
     <div class="hero__container">
-      <p class="hero__label">SERVICIOS INFORMÁTICOS</p>
+      <Badge variant="accent" class="hero__label">SERVICIOS INFORMÁTICOS</Badge>
       <h1 class="hero__title">Soluciones con tecnología justa para tu negocio</h1>
       <p class="hero__subtitle">
         IA aplicada, automatización, presencia online y software a medida: elegimos la tecnología adecuada, no la de moda. Te ayudamos a ganar tiempo, reducir costos operativos y vender más sin pagar licencias de más.
       </p>
       <div class="hero__actions">
-        <a class="hero__cta hero__cta--form" href="/contacto/">Consultar sin cargo</a>
+        <Button variant="primary" size="lg" href="/contacto/" class="hero__cta hero__cta--form">Consultar sin cargo</Button>
       </div>
     </div>
   </section>
