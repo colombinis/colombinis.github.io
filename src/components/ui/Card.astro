@@ -112,7 +112,9 @@ const classes = [
   .ui-card--media-accent :global(.ui-card__media) :global(img) {
     width: auto;
     max-width: 100%;
-    height: 64px;
+    height: auto; /* proporción natural de la imagen — sin altura fija
+     (anterior 64px). 'auto' neutraliza también los atributos HTML
+     height/width que algunos consumidores ponen en el <img>. */
     object-fit: contain;
     display: block;
     border-radius: var(--rounded-sm, 8px);

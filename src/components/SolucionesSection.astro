@@ -10,6 +10,7 @@
 // y el href se preservan en la raíz del card.
 import Card from './ui/Card.astro';
 import Button from './ui/Button.astro';
+import IconResolver from './ui/IconResolver.astro';
 import { getServicios } from '../lib/data-utils';
 
 const servicios = getServicios();
@@ -36,6 +37,13 @@ const servicios = getServicios();
      cuerpo se reponer acá con los mismos valores de la home donweb. */
   .service-card__body {
     padding: 0 24px 28px;
+    /* Flex column para poder alinear el CTA circular al borde derecho
+       del card (patrón chevron de la home donweb). */
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card__body :global(.ui-btn--round) {
+    align-self: flex-end;
   }
 </style>
 
@@ -58,8 +66,8 @@ const servicios = getServicios();
               <a href={service.href}>{service.title}</a>
             </h3>
             <p>{service.claim}</p>
-            <Button variant="primary" size="sm" href={service.href}
-              >Ver servicio</Button
+            <Button variant="primary" size="icon" round href={service.href} aria-label={`Ver servicio ${service.title}`}
+              ><IconResolver name="chevron-right" size={20} /></Button
             >
           </div>
         </Card>
