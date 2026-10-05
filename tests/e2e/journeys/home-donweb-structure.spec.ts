@@ -76,6 +76,43 @@ test.describe('HOME donweb structure', () => {
     // Header overlay: transparente al cargar, sólido tras scroll
     const header = page.locator('#header-container');
     await expect(header).not.toHaveClass(/solid/);
+    // REGRESIÓN topbar: la topbar estática y el header fijo nunca se pisan.
+    // El header arranca a top = altura real de la topbar (CSS var --topbar-h,
+    // medida por JS en runtime) y solo sube a top:0 cuando la barra ya
+    // scrolleó fuera. Bug original: top fijo 34px pisaba la topbar de 2
+    // líneas (56px en mobile). Nota: la clase .solid la togglea el evento
+    // scroll (asincrónico) — no muestrear la clase dentro de un evaluate.
+    const topbarGeo = await page.evaluate(() => {
+      window.scrollTo(0, 0);
+      const topbar = document.querySelector('.topbar-promo');
+      const headerEl = document.getElementById('header-container');
+      const tb = topbar.getBoundingClientRect();
+      const hd = headerEl.getBoundingClientRect();
+      return {
+        topbarH: Math.round(tb.height),
+        headerTop: Math.round(hd.top),
+        cssVar: getComputedStyle(document.documentElement).getPropertyValue('--topbar-h').trim(),
+      };
+    });
+    // El header arranca EXACTAMENTE debajo de la topbar (±1px subpixel)
+    expect(Math.abs(topbarGeo.headerTop - topbarGeo.topbarH)).toBeLessThanOrEqual(1);
+    // La CSS var refleja la altura medida (contrato con el JS de Header)
+    expect(topbarGeo.cssVar).toBe(`${topbarGeo.topbarH}px`);
+
+    // Umbral de "solid" = altura medida + 4px: al cruzarlo, la topbar ya
+    // tiene que estar fuera del viewport (bottom <= 0) — nunca se pisan.
+    await page.evaluate((y) => window.scrollTo(0, y), topbarGeo.topbarH + 10);
+    await expect(header).toHaveClass(/solid/);
+    const topbarBottomWhenSolid = await page.evaluate(() =>
+      document.querySelector('.topbar-promo').getBoundingClientRect().bottom
+    );
+    expect(topbarBottomWhenSolid).toBeLessThanOrEqual(0);
+
+    // Un pelo por debajo del umbral: aún no es sólido (la topbar sigue viva)
+    await page.evaluate((y) => window.scrollTo(0, y), topbarGeo.topbarH + 3);
+    await page.waitForTimeout(120); // dejar que el evento scroll se procese
+    await expect(header).not.toHaveClass(/solid/);
+
     await page.evaluate(() => window.scrollTo(0, 400));
     await expect(header).toHaveClass(/solid/);
 
