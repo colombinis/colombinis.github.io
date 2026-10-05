@@ -6,10 +6,10 @@
 // Analogia Laravel: Route::get('/servicios/{servicio}', ...) → ServicioController@show
 import Layout from '../../layouts/Layout.astro';
 import SolucionesSection from '../../components/SolucionesSection.astro';
-import ServiceCard from '../../components/ServiceCard.astro';
 import CasosAnonimosSection from '../../components/CasosAnonimosSection.astro';
 import { getServicio, getCategoriasByServicio, getTestimoniosByServicio } from '../../lib/data-utils';
-import { Check } from 'lucide-astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
 
 interface Props {
   params: { servicio: string };
@@ -65,10 +65,14 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
         {svcShort}
       </p>
       <div class="hero__actions">
-        <a
-          class="hero__cta hero__cta--form"
+        <Button
+          variant="primary"
+          size="lg"
+          class="hero__cta"
           href={`/contacto/?categoria=${servicio.id}&asunto=Consulta%20sobre%20${servicio.title}`}
-          >Consultar sin cargo</a>
+        >
+          Consultar sin cargo
+        </Button>
       </div>
     </div>
   </section>
@@ -79,18 +83,27 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
       <h2 class="section__title">{categoria_section_title}</h2>
       <div class="cards-grid">
         {categorias.map((cat) => (
-          <article class="service-card">
-            <div class="service-card__icon">{cat.icon ? <img src={cat.imagen ?? cat.icon} alt={cat.title} loading="lazy" /> : ''}</div>
-            <h3><a href={cat.id.startsWith(servicio.id + '/') ? `${svcHref}${cat.id}/` : `${svcHref}${cat.id}/`} style="color:inherit;text-decoration:none;">{cat.title}</a></h3>
-            <p>{cat.descripcion}</p>
-            <p class="service-card__claim">{cat.claim}</p>
-            <div class="hero__actions">
-              <a
-                class="hero__cta-secondary"
-                href={cat.id.startsWith(servicio.id + '/') ? `${svcHref}${cat.id}/` : `${svcHref}${cat.id}/`}
-                >Ver +</a>
+          <Card as="article" variant="media-accent" padding="none" class="service-card">
+            <div class="ui-card__media">
+              <img src={cat.imagen ?? cat.icon} alt={cat.title} loading="lazy" />
             </div>
-          </article>
+            <div class="ui-card__body service-card__body">
+              <h3 class="service-card__title">
+                <a href={`${svcHref}${cat.id}/`}>{cat.title}</a>
+              </h3>
+              <p class="service-card__desc">{cat.descripcion}</p>
+              <p class="service-card__claim">{cat.claim}</p>
+              <div class="hero__actions">
+                <Button
+                  variant="outline"
+                  class="hero__cta-secondary"
+                  href={`${svcHref}${cat.id}/`}
+                >
+                  Ver +
+                </Button>
+              </div>
+            </div>
+          </Card>
         ))}
       </div>
     </div>
@@ -110,14 +123,14 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
         <h2 class="section__title">{testimoniosData.section_title}</h2>
         <div class="testimonials-grid">
           {testimoniosData.testimonios.slice(0, 3).map((t) => (
-            <div class="testimonial-card">
+            <Card variant="muted" padding="md">
               <p class="testimonial-card__quote">
                 "{t.quote}"
               </p>
               <p class="testimonial-card__author">{t.autor}</p>
               {t.rol && <p class="testimonial-card__role">{t.rol}</p>}
               {t.ubicacion && <p class="testimonial-card__role">{t.ubicacion}</p>}
-            </div>
+            </Card>
           ))}
         </div>
       </div>
@@ -127,11 +140,16 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
 </Layout>
 
 <style>
-  .service-card__claim {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--tertiary);
-    margin-top: var(--spacing-xs);
+  /* Card de categoría = primitivo Card variant="media-accent" con
+     padding="none": la banda .ui-card__media lleva márgenes negativos
+     (-24px) que, sin padding de card, la extienden borde a borde (el
+     primitivo la recorta con overflow:hidden). El wrapper
+     .service-card__body recupera el padding del cuerpo que p-none deja
+     en 0, con paridad al patrón de banda de global.css (0 24px 32px).
+     La tipografía del card (h3 / p / .service-card__claim) la aporta
+     global.css vía la clase .service-card conservada en la raíz. */
+  .service-card__body {
+    padding: 0 var(--spacing-lg) var(--spacing-xl);
   }
   .service-value-line {
     font-size: 1.15rem;

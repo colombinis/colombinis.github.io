@@ -4,6 +4,9 @@
 // Data source: src/data/servicios/servicio_*.json + src/data/categorias/categoria_*.json (normalizados)
 // Analogia Laravel: Route::get('/servicios/{servicio}/{categoria}', ...) → Service::find($id)->categoria($cat)
 import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/ui/Button.astro';
+import Card from '../../../components/ui/Card.astro';
+import Badge from '../../../components/ui/Badge.astro';
 import { getServicio, getCategoriaByServicio, getServicios, getCategoriasByServicio, getSolucionesByCategoria } from '../../../lib/data-utils';
 
 interface Props {
@@ -70,16 +73,19 @@ const breadcrumb = [
   <!-- Hero -->
   <section class="hero hero--detail">
     <div class="hero__container">
-      <p class="hero__label">{svcTitle.toUpperCase()}</p>
+      <Badge variant="accent" size="md" class="categoria-hero__label">{svcTitle.toUpperCase()}</Badge>
       <h1 class="hero__title">{catTitle}</h1>
       <p class="hero__subtitle">{descripcion}</p>
       <p class="hero__claim">{claim}</p>
       <div class="hero__actions">
-        <a
-          class="hero__cta hero__cta--form"
+        <Button
+          variant="primary"
+          size="lg"
+          class="categoria-hero__cta"
           href={`/contacto/?categoria=${categoria.id}&asunto=Consulta%20sobre%20${categoria.title}`}
-          >Consultar sin cargo</a
         >
+          Consultar sin cargo
+        </Button>
       </div>
     </div>
   </section>
@@ -90,18 +96,20 @@ const breadcrumb = [
       <h2 class="section__title">Beneficios concretos</h2>
       <div class="cards-grid">
         {beneficios.map((beneficio) => (
-          <article class="service-card">
-            <p>{beneficio.texto}</p>
+          <Card variant="muted" padding="md" as="article" class="categoria-card">
+            <p class="categoria-card__texto">{beneficio.texto}</p>
             {beneficio.caso ? (
-              <a
-                class="hero__cta-secondary"
+              <Button
+                variant="outline"
+                size="sm"
                 href={`/casos-exito/${beneficio.caso}/`}
-                >Ver caso de exito</a
               >
+                Ver caso de exito
+              </Button>
             ) : (
-              <span class="hero__cta-secondary">Sin caso asociado</span>
+              <Button variant="outline" size="sm" disabled>Sin caso asociado</Button>
             )}
-          </article>
+          </Card>
         ))}
       </div>
     </div>
@@ -114,24 +122,26 @@ const breadcrumb = [
         <h2 class="section__title">Soluciones relacionadas</h2>
         <div class="cards-grid">
           {solucionesCategoria.map((solucion) => (
-            <article class="service-card">
+            <Card variant="muted" padding="md" as="article" class="categoria-card">
               <h3>
                 <a href={`/soluciones/${solucion.id}/`}>{solucion.nombre}</a>
               </h3>
               <p class="service-card__claim">
                 Desde {solucion.precioMin}
               </p>
-              <a
-                class="hero__cta-secondary"
+              <Button
+                variant="outline"
+                size="sm"
                 href={`/soluciones/${solucion.id}/`}
-                >Ver detalle </a>
-            </article>
+              >
+                Ver detalle
+              </Button>
+            </Card>
           ))}
         </div>
       </div>
     </section>
   )}
-
 
 </Layout>
 
@@ -164,8 +174,38 @@ const breadcrumb = [
   .breadcrumb a:hover {
     text-decoration: underline;
   }
-  .hero__cta-secondary {
+
+  /* Hero: label (Badge) y CTA (Button) — paridad con .hero__label / .hero__cta
+     de global.css (label margin + CTA full-width en móvil) */
+  .categoria-hero__label {
+    margin: 0 0 var(--spacing-md);
+  }
+  .categoria-hero__cta {
+    width: 100%;
+  }
+  @media (min-width: 601px) {
+    .categoria-hero__cta {
+      width: auto;
+    }
+  }
+
+  /* Cards de categoría: tipografía con paridad a .service-card (global.css),
+     ya que el primitivo Card no incluye estilos de texto interno */
+  .categoria-card__texto {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md);
+  }
+  .categoria-card h3 {
+    font-size: 1.15rem;
     font-weight: 600;
-    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+  }
+  .categoria-card h3 a {
+    color: inherit;
+    text-decoration: none;
   }
 </style>
