@@ -7,6 +7,9 @@
 import Layout from '../../layouts/Layout.astro';
 import FAQData from '../../data/preguntas-frecuentes-solucion.json';
 import SocialProofSection from '../../components/SocialProofSection.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
 import {
   getSoluciones,
   getSolucionDetalle,
@@ -138,13 +141,13 @@ const totalPasos = flujo.length;
     <div class="container pdp__grid">
       <div class="pdp__left">
         {categoriaPrincipal && (
-          <div class="pdp__media" aria-hidden="true">
+          <Card variant="muted" padding="lg" class="pdp__media" aria-hidden="true">
             <span class="pdp__media-icon">{categoriaPrincipal.icon}</span>
             <span class="pdp__media-label">{categoriaPrincipal.title}</span>
-          </div>
+          </Card>
         )}
         <div class="pdp__info">
-          <span class="pdp__tag">Solución a medida</span>
+          <Badge variant="accent" class="pdp__tag">Solución a medida</Badge>
           <h1 class="pdp__title">{solucion.nombre}</h1>
           <p class="pdp__desc">{descripcion}</p>
           <ul class="pdp__chips">
@@ -155,14 +158,20 @@ const totalPasos = flujo.length;
           {categorias.length > 0 && (
             <div class="pdp__cats">
               {categorias.map((cat) => (
-                <span class="pdp__cat">{cat.title}</span>
+                <Badge variant="neutral" class="pdp__cat">{cat.title}</Badge>
               ))}
             </div>
           )}
         </div>
       </div>
 
-      <aside class="pdp__buybox" aria-label="Precio y consulta">
+      <Card
+        as="aside"
+        variant="accent"
+        padding="lg"
+        class="pdp__buybox"
+        aria-label="Precio y consulta"
+      >
         <p class="pdp__price-label">
           Precio<sup aria-hidden="true">*</sup>
         </p>
@@ -176,17 +185,20 @@ const totalPasos = flujo.length;
           primera reunión sin cargo, según el alcance y la complejidad del proyecto.
         </p>
         <div class="pdp__actions">
-          <a
-            class="pdp__cta pdp__cta--primary"
+          <Button
+            variant="primary"
+            size="lg"
             href={contactoUrl}
-            >Quiero recibir mas info</a
+            class="pdp__cta pdp__cta--primary"
           >
+            Quiero recibir mas info
+          </Button>
         </div>
         <ul class="pdp__trust">
           <li>Presupuesto claro y sin compromiso</li>
           <li>Avances en cada etapa</li>
         </ul>
-      </aside>
+      </Card>
     </div>
   </section>
 
@@ -232,12 +244,12 @@ const totalPasos = flujo.length;
           {relacionadas.map((s) => {
             const resumen = getSolucionDetalle(s.id)?.flujo?.[0]?.descripcion || '';
             return (
-              <article class="service-card">
+              <Card as="article" variant="interactive" class="service-card">
                 <h3>
                   <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
                 </h3>
-                {resumen && <p>{resumen}</p>}                
-              </article>
+                {resumen && <p>{resumen}</p>}
+              </Card>
             );
           })}
         </div>
