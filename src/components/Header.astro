@@ -409,14 +409,29 @@ const links = configLinks.map((link) =>
   }
 
   // Header overlay (home): transparente sobre el hero, sólido al scrollear.
-  // Umbral 40px > altura de la topbar (34px): así el salto a top:0 ocurre
-  // cuando la topbar estática ya salió de vista (nunca se pisan).
+  // La topbar estática mide distinto según el viewport (envuelve a 2-3 líneas
+  // en mobile): medimos su altura real y la exponemos como --topbar-h (el
+  // CSS posiciona el header debajo de ella) y como umbral de "solid" (así
+  // el header solo sube a top:0 cuando la topbar ya salió de vista).
+  // Solo corre en páginas con overlay (body.header-overlay): en el resto
+  // la clase .solid no tiene estilos y no se toca.
   const headerContainer = document.getElementById('header-container');
-  if (headerContainer) {
+  const topbarPromo = document.querySelector('.topbar-promo');
+  if (headerContainer && document.body.classList.contains('header-overlay')) {
+    let topbarH = topbarPromo ? topbarPromo.offsetHeight : 34;
+    const measureTopbar = function () {
+      if (!topbarPromo) return;
+      topbarH = topbarPromo.offsetHeight;
+      document.documentElement.style.setProperty('--topbar-h', topbarH + 'px');
+    };
+    measureTopbar();
+    // Umbral = altura real + 4px de margen (nunca un número mágico).
     const onScroll = function () {
-      headerContainer.classList.toggle('solid', window.scrollY > 40);
+      headerContainer.classList.toggle('solid', window.scrollY > topbarH + 4);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
+    // La topbar puede cambiar de alto (rotación / resize): re-medir.
+    window.addEventListener('resize', measureTopbar, { passive: true });
     onScroll();
   }
 
