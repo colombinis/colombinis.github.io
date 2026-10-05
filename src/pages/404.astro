@@ -1,9 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Icon from '../components/Icon.astro';
-import config from '../config/site.json';
-
-const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.whatsapp.phone}&text=Hola%20estaba%20navegando%20por%20el%20sitio%20y%20necesito%20ayuda`;
+import Badge from '../components/ui/Badge.astro';
+import { AlertTriangle } from 'lucide-astro';
 ---
 
 <Layout
@@ -14,17 +12,9 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
   <section class="hero">
     <div class="hero__container">
       <div class="not-found__badge">
-        <img
-          src="/src/assets/images/shared/icon-check.svg"
-          srcset="/src/assets/images/shared/icon-check.svg 1x, /src/assets/images/shared/icon-check@2x.svg 2x"
-          sizes="24px"
-          width="24"
-          height="24"
-          alt="Icono de alerta"
-          loading="lazy"
-        />
+        <AlertTriangle size={24} aria-hidden="true" />
       </div>
-      <p class="hero__label">404</p>
+      <Badge variant="accent" class="hero__label">404</Badge>
       <h1 class="hero__title">Página no encontrada</h1>
       <p class="hero__subtitle">
         La página que estás buscando no existe o fue movida. No te preocupes, podés volver a la página de inicio o escribirnos directamente.
@@ -34,7 +24,9 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
 </Layout>
 
 <style>
-  /* Badge con icono de alerta */
+  /* Medallón circular de icono de alerta — composición page-specific con tokens.
+     No mapea a <Card> (no es una caja de contenido con border+padding) ni a
+     <Badge> (no es una píldora de texto), así que se queda como CSS propio. */
   .not-found__badge {
     width: 64px;
     height: 64px;
@@ -45,81 +37,5 @@ const whatsappUrl = `${config.contact.whatsapp.base_url}?phone=${config.contact.
     justify-content: center;
     margin: 0 auto var(--spacing-md);
     color: var(--tertiary);
-  }
-
-  /* Grid de acciones: ahora los botones tienen iconos + texto */
-  .not-found__actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    width: 100%;
-  }
-
-  .hero__cta,
-  .hero__cta--whatsapp,
-  .hero__cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    width: 100%;
-  }
-
-  /* Tips list con iconos */
-  .not-found__tips h2 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin: 0 0 var(--spacing-md);
-  }
-
-  .not-found-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    text-align: left;
-  }
-
-  .not-found-list li {
-    font-size: 0.93rem;
-    line-height: 1.6;
-    color: var(--secondary);
-    display: flex;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-  }
-
-  .not-found__tip-icon {
-    color: var(--tertiary);
-    margin-top: 1px;
-  }
-
-  .not-found-list a {
-    color: var(--tertiary);
-    font-weight: 500;
-  }
-
-  /* CTA final con iconos */
-  .cta-final__whatsapp,
-  .cta-final__outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-  }
-
-  @media (min-width: 601px) {
-    .hero__cta,
-    .hero__cta--whatsapp,
-    .hero__cta-secondary {
-      width: auto;
-    }
-
-    .not-found-list {
-      text-align: left;
-    }
   }
 </style>
