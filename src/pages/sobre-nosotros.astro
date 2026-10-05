@@ -1,6 +1,9 @@
 ---
 // Página: Sobre Nosotros — Historia, Filosofía "Tecnología Justa", Equipo y Clientes
 import Layout from '../layouts/Layout.astro';
+import Badge from '../components/ui/Badge.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
 
 const clientes = [
   {
@@ -67,9 +70,9 @@ const clientes = [
         Creemos que la tecnología debe resolver problemas reales, no crearlos. Ni modas pasajeras, ni costos sobredimensionados: solo lo que realmente necesitás para crecer.
       </p>
       <div class="hero__actions">
-        <a class="hero__cta hero__cta--form" href="/contacto/">
+        <Button variant="primary" size="lg" href="/contacto/" class="hero__cta hero__cta--form">
           Te decimos qué necesitás… y qué no. Consulta sin cargo
-        </a>
+        </Button>
       </div>
     </div>
   </section>
@@ -77,15 +80,15 @@ const clientes = [
   <!-- Historia de Sebastián / El Origen -->
   <section class="section section--alt">
     <div class="container philosophy-grid">
-      <div class="bio-card">
+      <Card variant="default" padding="lg" class="bio-card">
         <div class="bio-avatar">SC</div>
         <h2 class="bio-name">Sebastián Alejandro Colombini</h2>
         <p class="bio-role">Fundador & Lead Developer</p>
         <span class="bio-location">Rosario, Santa Fe, Argentina</span>
-      </div>
+      </Card>
 
       <div class="bio-text">
-        <span class="section-tag">EL ORIGEN</span>
+        <Badge variant="accent" size="sm" class="section-tag">EL ORIGEN</Badge>
         <h2>+15 años acompañando empresas desde Rosario</h2>
         <p>
           <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>. Empecé a desarrollar software hace más de una década y media, colaborando mano a mano con empresas, distribuidores, estudios contables y comercios familiares de la región y el país.
@@ -104,7 +107,7 @@ const clientes = [
   <section class="section">
     <div class="container">
       <div class="pillars-header">
-        <span class="section-tag">NUESTRA BANDERA</span>
+        <Badge variant="accent" size="sm" class="section-tag">NUESTRA BANDERA</Badge>
         <h2 class="section__title">Los 4 pilares de la Tecnología Justa</h2>
         <p class="section__subtitle">
           Cada proyecto que tomamos en SACsi se rige por estas cuatro reglas inquebrantables.
@@ -112,37 +115,37 @@ const clientes = [
       </div>
 
       <div class="pillars-grid">
-        <article class="pillar-card">
+        <Card variant="default" padding="lg" as="article" class="pillar-card">
           <div class="pillar-number">01</div>
           <h3>Sin sobredimensionar</h3>
           <p>
             No te proponemos un desarrollo de seis meses para algo que un script o una automatización directa resuelve en una semana. El tamaño de la solución debe ser proporcional a tu volumen y rentabilidad.
           </p>
-        </article>
+        </Card>
 
-        <article class="pillar-card">
+        <Card variant="default" padding="lg" as="article" class="pillar-card">
           <div class="pillar-number">02</div>
           <h3>Sin modas pasajeras</h3>
           <p>
             Elegimos tecnologías maduras, robustas y ampliamente documentadas. No usamos herramientas solo porque sean tendencia en redes. Lo que construimos tiene que seguir funcionando firme durante años.
           </p>
-        </article>
+        </Card>
 
-        <article class="pillar-card">
+        <Card variant="default" padding="lg" as="article" class="pillar-card">
           <div class="pillar-number">03</div>
           <h3>Entendemos lo que cuesta cada peso</h3>
           <p>
             En Argentina cada inversión cuenta. Calculamos el retorno antes de empezar: cada automatización o sistema debe pagarse solo, ahorrando horas operativas o generando nuevas oportunidades de venta.
           </p>
-        </article>
+        </Card>
 
-        <article class="pillar-card">
+        <Card variant="default" padding="lg" as="article" class="pillar-card">
           <div class="pillar-number">04</div>
           <h3>Honestidad radical</h3>
           <p>
             Si en la primera charla vemos que tu problema se soluciona ordenando un procedimiento interno o usando una planilla gratuita, te lo decimos de frente. Tu confianza vale mucho más que una venta forzada.
           </p>
-        </article>
+        </Card>
       </div>
     </div>
   </section>
@@ -151,31 +154,31 @@ const clientes = [
   <section class="section section--alt">
     <div class="container">
       <div class="pillars-header">
-        <span class="section-tag">QUIÉNES SOMOS</span>
+        <Badge variant="accent" size="sm" class="section-tag">QUIÉNES SOMOS</Badge>
         <h2 class="section__title">Equipo</h2>
         <p class="section__subtitle">Un equipo técnico especializado, cercano y comprometido con los resultados de tu negocio.</p>
       </div>
       <div class="team-grid">
-        <div class="team-card equipo-card">
+        <Card variant="default" padding="lg" class="team-card equipo-card">
           <div class="team-card__avatar iniciales">SC</div>
           <h3 class="team-card__name">Sebastián Colombini</h3>
           <p class="team-card__role">Fundador / Lead Developer</p>
           <p class="team-card__bio bio-corta">Dirección técnica y arquitectura de sistemas con más de 15 años de trayectoria.</p>
-        </div>
+        </Card>
 
-        <div class="team-card equipo-card">
+        <Card variant="default" padding="lg" class="team-card equipo-card">
           <div class="team-card__avatar iniciales">DI</div>
           <h3 class="team-card__name">Equipo de Desarrollo</h3>
           <p class="team-card__role">Desarrollo e Integraciones</p>
           <p class="team-card__bio bio-corta">Especialistas en automatizaciones ligeras y sistemas a medida para optimizar tu día a día.</p>
-        </div>
+        </Card>
 
-        <div class="team-card equipo-card">
+        <Card variant="default" padding="lg" class="team-card equipo-card">
           <div class="team-card__avatar iniciales">SA</div>
           <h3 class="team-card__name">Soporte y Acompañamiento</h3>
           <p class="team-card__role">Soporte y Evolución Continua</p>
           <p class="team-card__bio bio-corta">Te acompañamos después de la entrega para que todo siga funcionando sin complicaciones.</p>
-        </div>
+        </Card>
       </div>
     </div>
   </section>
@@ -184,7 +187,7 @@ const clientes = [
   <section class="section">
     <div class="container">
       <div class="clients-header">
-        <span class="section-tag">TRAYECTORIA Y CONFIANZA</span>
+        <Badge variant="accent" size="sm" class="section-tag">TRAYECTORIA Y CONFIANZA</Badge>
         <h2 class="section__title">Clientes que confían</h2>
         <p class="section__subtitle">
           Empresas, organizaciones y estudios que confían en nuestras soluciones, integraciones y acompañamiento técnico.
@@ -193,12 +196,14 @@ const clientes = [
 
       <div class="clients-logo-grid">
         {clientes.map((c) => (
-          <a
+          <Card
+            variant="interactive"
             href={c.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="client-logo-card"
             title={`Visitar sitio de ${c.name}`}
+            padding="md"
+            class="client-logo-card"
           >
             <div class="client-logo-wrapper">
               <img
@@ -211,7 +216,7 @@ const clientes = [
             </div>
             <span class="client-logo-name">{c.name}</span>
             <span class="client-logo-desc">{c.description}</span>
-          </a>
+          </Card>
         ))}
       </div>
     </div>
@@ -221,7 +226,7 @@ const clientes = [
   <section class="section section--alt">
     <div class="container">
       <div class="steps-header">
-        <span class="section-tag">METODOLOGÍA</span>
+        <Badge variant="accent" size="sm" class="section-tag">METODOLOGÍA</Badge>
         <h2 class="section__title">Cómo trabajamos</h2>
         <p class="section__subtitle">Procesos claros, iteraciones cortas y entregas continuas sin sorpresas.</p>
       </div>
@@ -266,11 +271,8 @@ const clientes = [
     }
   }
 
+  /* .bio-card: superficie, borde, radio y padding los aporta <Card variant="default" padding="lg"> */
   .bio-card {
-    background: var(--surface);
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl) var(--spacing-lg);
     text-align: center;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
@@ -309,13 +311,13 @@ const clientes = [
     color: var(--muted);
   }
 
+  /* .section-tag: display/box lo aporta <Badge>; se conserva la tipografía de etiqueta de sección */
   .section-tag {
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     color: var(--tertiary-dark);
     text-transform: uppercase;
-    display: block;
     margin-bottom: var(--spacing-xs);
   }
 
@@ -353,14 +355,9 @@ const clientes = [
     }
   }
 
+  /* .pillar-card: fondo, borde, radio, padding y transición los aporta <Card variant="default" padding="lg"> */
   .pillar-card {
-    background: var(--surface);
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
     position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .pillar-card:hover {
@@ -405,17 +402,12 @@ const clientes = [
     }
   }
 
+  /* .team-card: fondo, borde, radio, padding y transición los aporta <Card variant="default" padding="lg"> */
   .team-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl) var(--spacing-md);
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .team-card:hover {
@@ -487,19 +479,15 @@ const clientes = [
     }
   }
 
+  /* .client-logo-card: superficie, borde, radio y padding los aporta
+     <Card variant="interactive" padding="md"> (renderiza <a> con href) */
   .client-logo-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-lg) var(--spacing-md);
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   }
 
   .client-logo-card:hover {
