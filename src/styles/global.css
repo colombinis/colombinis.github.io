@@ -1051,13 +1051,15 @@ body.header-overlay main {
 
 /* La topbar es estática: scrollea con la página (como donweb). El header
    fijo arranca DEBAJO de ella y sube a top:0 cuando se vuelve sólido
-   (para entonces la topbar ya scrolleó fuera). */
+   (para entonces la topbar ya scrolleó fuera).
+   --topbar-h la mide el JS de Header.astro (la topbar envuelve a 2-3 líneas
+   en mobile: 34px fijos la pisaban — bug reportado por el dueño). */
 body.header-overlay .topbar-promo {
   position: static;
 }
 
 body.header-overlay #header-container {
-  top: 34px; /* debajo de la topbar estática (scroll 0) */
+  top: var(--topbar-h, 34px); /* debajo de la topbar estática (scroll 0) */
 }
 
 body.header-overlay #header-container.solid {
