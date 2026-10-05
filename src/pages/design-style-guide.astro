@@ -426,12 +426,26 @@ const tabsDemo = [
               <Badge variant="neutral">HOME</Badge>
               <h3>Servicio con Banda Naranja</h3>
             </div>
-            <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor.</p>
+            <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor. CTA circular alineado al borde derecho.</p>
             <div class="card-demo-footer card-demo-footer--end">
               <Button size="icon" variant="primary" round href="#tarjetas" aria-label="Ver servicio">
                 <IconResolver name="chevron-right" size={20} />
               </Button>
             </div>
+          </div>
+        </Card>
+
+        <Card variant="top-accent">
+          <span class="ui-card__icon">
+            <IconResolver name="ShieldCheck" size={30} />
+          </span>
+          <div class="card-demo-header">
+            <Badge variant="accent">POR QUÉ SACSI</Badge>
+            <h3>Pilar con Acento Superior</h3>
+          </div>
+          <p>Card blanco centrado con línea azul de 4px en el borde superior e icono circular celeste. Es el patrón de los 4 pilares de la sección "Por qué SACsi" de la home (experiencia, trato, IA, ROI).</p>
+          <div class="card-demo-footer">
+            <span class="text-xs text-muted">Consumidor: PorQueSacsiSection</span>
           </div>
         </Card>
       </div>

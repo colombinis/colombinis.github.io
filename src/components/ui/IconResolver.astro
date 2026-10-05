@@ -15,6 +15,7 @@ import {
   Coffee,
   RefreshCw,
   User,
+  Users,
   Puzzle,
   Rocket,
   Sparkles,
@@ -118,6 +119,13 @@ const iconMap: Record<string, any> = {
   'arrow-right': ArrowRight,
   'chevron-right': ChevronRight,
   'bot': Bot,
+
+  // Alias PascalCase (los consumidores pasan el nombre del icono Lucide
+  // directamente — ej. PorQueSacsiSection y el demo top-accent de la guía)
+  'ShieldCheck': ShieldCheck,
+  'Users': Users,
+  'Wrench': Wrench,
+  'TrendingUp': TrendingUp,
 };
 
 const ResolvedIcon = iconMap[iconKey] || Layers;
