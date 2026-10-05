@@ -2,7 +2,14 @@
 // Componente reutilizable: Sección "Soluciones para tu negocio"
 // Se renderiza del lado del servidor (SSG estático) — sin carga asíncrona.
 // Fuente única de verdad: src/data/servicios/servicio_*.json (datos normalizados)
-import ServiceCard from './ServiceCard.astro';
+//
+// Migración a design system (s3-soluciones): cada card se compone con el
+// primitivo <Card variant="media-accent" padding="none"> (banda naranja
+// #F16529 borde a borde via .ui-card__media, CSS del propio primitivo) +
+// <Button variant="primary" size="sm"> como CTA. El hook de test "service-card"
+// y el href se preservan en la raíz del card.
+import Card from './ui/Card.astro';
+import Button from './ui/Button.astro';
 import { getServicios } from '../lib/data-utils';
 
 const servicios = getServicios();
@@ -23,11 +30,12 @@ const servicios = getServicios();
       grid-template-columns: repeat(4, 1fr);
     }
   }
-  .service-card__icon img {
-    height: 64px;
-    width: auto;
-    object-fit: contain;
-    display: block;
+  /* Cuerpo del card de servicio: el primitivo Card (media-accent) aporta
+     la banda naranja borde a borde, el borde y el hover; como el card usa
+     padding="none" (para que la banda llegue a los bordes), el padding del
+     cuerpo se reponer acá con los mismos valores de la home donweb. */
+  .service-card__body {
+    padding: 0 24px 28px;
   }
 </style>
 
@@ -36,15 +44,23 @@ const servicios = getServicios();
     <h2 class="soluciones__title">Soluciones para tu negocio</h2>
     <div class="cards-grid">
       {servicios.map((service) => (
-        <ServiceCard
-          title={service.title}
+        <Card
+          variant="media-accent"
+          padding="none"
+          class="service-card"
           href={service.href}
-          imagen={service.imagen}
-          icon={service.icon}
         >
-          <span slot="claim">{service.claim}</span>
-          <a slot="cta" class="hero__cta-secondary" href={service.href}>Ver servicio</a>
-        </ServiceCard>
+          <div class="ui-card__media">
+            <img src={service.imagen} alt={service.title} loading="lazy" />
+          </div>
+          <div class="service-card__body">
+            <h3>{service.title}</h3>
+            <p>{service.claim}</p>
+            <Button variant="primary" size="sm" href={service.href}
+              >Ver servicio</Button
+            >
+          </div>
+        </Card>
       ))}
     </div>
     <div style="text-align: center; margin-top: var(--spacing-xl);">
