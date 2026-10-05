@@ -160,15 +160,16 @@ const breadcrumb = [
                   loading="lazy"
                 />
               </div>
-              <h3>
-                <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
-              </h3>
-              <p class="service-card__claim">
-                {s.descripcion_publica}
-              </p>
-              <p class="service-card__price">
-                Desde {formatearPrecio(s.precioMin, s.precioMax)}
-              </p>
+              <div class="ui-card__body">
+                <h3>
+                  <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
+                </h3>
+                <p class="service-card__claim">
+                  {s.descripcion_publica}
+                </p>
+                <p class="service-card__price">
+                  Desde {formatearPrecio(s.precioMin, s.precioMax)}
+                </p>
               <Button
                 variant="whatsapp"
                 size="sm"
@@ -177,6 +178,7 @@ const breadcrumb = [
               >
                 Ver +
               </Button>
+              </div>
             </Card>
           );
         })}

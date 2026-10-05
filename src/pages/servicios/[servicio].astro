@@ -87,7 +87,7 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
             <div class="ui-card__media">
               <img src={cat.imagen ?? cat.icon} alt={cat.title} loading="lazy" />
             </div>
-            <div class="service-card__body">
+            <div class="ui-card__body service-card__body">
               <h3 class="service-card__title">
                 <a href={`${svcHref}${cat.id}/`}>{cat.title}</a>
               </h3>
