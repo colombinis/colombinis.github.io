@@ -127,7 +127,8 @@ const breadcrumb = [
     </div>
   </section>
 
-  <!-- Grilla de soluciones (base; pulido de tarjetas en CAT-03) -->
+  <!-- Grilla de soluciones — tarjetas con el primitivo Card
+       variante media-accent (banda naranja donweb) -->
   <section class="section">
     <div class="container">
       <p class="catalogo-contador" id="catalogo-contador" aria-live="polite">
@@ -140,23 +141,25 @@ const breadcrumb = [
           return (
             <Card
               as="article"
-              variant="muted"
-              padding="md"
+              variant="media-accent"
+              padding="none"
               class="service-card"
               data-solucion-id={s.id}
               data-servicio={serviciosIds.join(' ')}
               data-categoria={cats.join(' ')}
               data-nombre={s.nombre}
             >
-              <img
-                src={s.imagen ? s.imagen : `/assets/sacsi-transversales-02-patron-institucional.webp`}
-                srcset={s.imagen ? `${s.imagen} 1x` : `/assets/sacsi-transversales-02-patron-institucional.webp 1x`}
-                sizes="(max-width: 375px) 90vw, (max-width: 1440px) 60vw, 80vw"
-                width="375"
-                height="250"
-                alt={`Ilustración representativa de ${s.nombre}`}
-                loading="lazy"
-              />
+              <div class="ui-card__media">
+                <img
+                  src={s.imagen ? s.imagen : `/assets/sacsi-transversales-02-patron-institucional.webp`}
+                  srcset={s.imagen ? `${s.imagen} 1x` : `/assets/sacsi-transversales-02-patron-institucional.webp 1x`}
+                  sizes="(max-width: 375px) 90vw, (max-width: 1440px) 60vw, 80vw"
+                  width="375"
+                  height="250"
+                  alt={`Ilustración representativa de ${s.nombre}`}
+                  loading="lazy"
+                />
+              </div>
               <h3>
                 <a href={`/soluciones/${s.id}/`}>{s.nombre}</a>
               </h3>
@@ -454,6 +457,35 @@ const breadcrumb = [
     font-weight: 700;
     color: var(--tertiary-dark);
     margin: 0 0 var(--spacing-sm);
+  }
+
+  /* Tarjetas del catálogo: el contenedor es el primitivo
+     <Card variant="media-accent" padding="none">. La banda
+     .ui-card__media (fondo #F16529, márgenes horizontales
+     -24px del primitivo) queda al ras del borde superior y a
+     todo el ancho porque el card tiene overflow:hidden —
+     mismo patrón "donweb" de body.header-overlay .service-card
+     en global.css.
+     La regla global .service-card (padding 28px 24px 32px;
+     fondo #F9F9FB) es del layout legacy donde .service-card
+     era el card: se neutraliza con mayor especificidad para
+     que gane el primitivo (la clase se conserva por el
+     contrato E2E .service-card).
+     Con padding "none" el primitivo no aporta inset interior,
+     así que el cuerpo lo lleva acá; la tipografía vertical
+     (h3, claim, cta) sigue siendo la global .service-card. */
+  :global(.service-card.ui-card--media-accent) {
+    padding: 0;
+    background-color: var(--surface, #FFFFFF);
+  }
+  :global(.service-card.ui-card--media-accent h3),
+  :global(.service-card.ui-card--media-accent .service-card__claim),
+  :global(.service-card.ui-card--media-accent .service-card__price) {
+    padding-left: var(--spacing-md, 16px);
+    padding-right: var(--spacing-md, 16px);
+  }
+  :global(.service-card.ui-card--media-accent .service-card__cta) {
+    margin: 0 var(--spacing-md, 16px) var(--spacing-md, 16px);
   }
 
   /* CTA diagnóstico (C3) — banner renderizado por Card.astro → :global */
