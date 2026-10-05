@@ -1,6 +1,9 @@
 ---
 // Página: Hub de Recursos Gratuitos para PyMEs
 import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import Card from '../../components/ui/Card.astro';
+import Badge from '../../components/ui/Badge.astro';
 import { CheckSquare, Globe, Bot, ArrowRight, ShieldCheck } from 'lucide-astro';
 
 const recursos = [
@@ -54,12 +57,12 @@ const recursos = [
         {recursos.map((rec) => {
           const IconComp = rec.icon;
           return (
-            <article class="resource-card">
+            <Card variant="interactive" padding="lg" as="article" class="resource-card">
               <div class="resource-card__header">
-                <span class="resource-card__tag">{rec.tag}</span>
-                <span class="resource-card__badge">{rec.badge}</span>
+                <Badge variant="outline" size="sm" class="resource-card__tag">{rec.tag}</Badge>
+                <Badge variant="neutral" size="sm" class="resource-card__badge">{rec.badge}</Badge>
               </div>
-              
+
               <div class="resource-card__icon-wrap" style={`color: ${rec.accent}; background-color: ${rec.accent}12;`}>
                 <IconComp size={28} aria-hidden="true" />
               </div>
@@ -71,26 +74,26 @@ const recursos = [
               <p class="resource-card__desc">{rec.description}</p>
 
               <div class="resource-card__footer">
-                <a class="resource-card__btn" href={rec.slug}>
+                <Button variant="link" href={rec.slug} class="resource-card__btn">
                   <span>Acceder al recurso gratis</span>
-                  <ArrowRight size={16} aria-hidden="true" />
-                </a>
+                  <ArrowRight slot="icon-end" size={16} aria-hidden="true" />
+                </Button>
               </div>
-            </article>
+            </Card>
           );
         })}
       </div>
 
-      <div class="resources-promise">
-        <div class="promise-badge">
+      <Card variant="muted" padding="lg" class="resources-promise">
+        <Badge variant="success" size="sm" class="promise-badge">
           <ShieldCheck size={18} aria-hidden="true" />
           <span>COMPROMISO SACSI</span>
-        </div>
+        </Badge>
         <h3>Todos nuestros recursos son 100% gratuitos y prácticos</h3>
         <p>
           No te pedimos registrarte con contraseñas complejas ni te llenamos la casilla de correos de spam. Nuestro objetivo es que conozcas cómo pensamos y tomes decisiones informadas.
         </p>
-      </div>
+      </Card>
     </div>
   </section>
 </Layout>
@@ -109,23 +112,6 @@ const recursos = [
     }
   }
 
-  .resource-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-
-  .resource-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    border-color: var(--tertiary);
-  }
-
   .resource-card__header {
     display: flex;
     justify-content: space-between;
@@ -134,19 +120,19 @@ const recursos = [
     font-size: 0.75rem;
   }
 
-  .resource-card__tag {
-    font-weight: 700;
+  /* Etiqueta de categoría (Badge outline) con look de eyebrow: texto
+     suelto, sin fondo ni borde, como en el diseño original. */
+  .resource-card__header .resource-card__tag {
+    text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--tertiary-dark);
-    text-transform: uppercase;
+    background-color: transparent;
+    border-color: transparent;
   }
 
-  .resource-card__badge {
-    background: #F1F5F9;
-    color: var(--secondary);
-    padding: 3px 8px;
+  /* Badge de formato: píldora redondeada */
+  .resource-card__header .resource-card__badge {
     border-radius: var(--rounded-full);
-    font-weight: 600;
   }
 
   .resource-card__icon-wrap {
@@ -188,42 +174,32 @@ const recursos = [
     border-top: 1px solid #F1F5F9;
   }
 
-  .resource-card__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+  /* CTA del card (Button variante link): mantiene el gesto original —
+     el gap se ensancha y el texto pasa a primary al hover. */
+  .resource-card__footer .resource-card__btn {
     font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--tertiary);
     text-decoration: none;
-    transition: gap 0.2s ease, color 0.2s ease;
+    transition: gap 0.2s ease, color 0.2s ease, text-decoration 0.2s ease;
   }
 
-  .resource-card__btn:hover {
+  .resource-card__footer .resource-card__btn:hover {
     gap: 12px;
     color: var(--primary);
+    text-decoration: none;
   }
 
   .resources-promise {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-radius: var(--rounded-md);
-    padding: var(--spacing-xl);
     text-align: center;
     max-width: 760px;
     margin: 0 auto;
   }
 
-  .promise-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #ECFDF5;
-    color: #047857;
+  .resources-promise .promise-badge {
+    border-radius: var(--rounded-full);
     font-size: 0.75rem;
     font-weight: 700;
     padding: 4px 12px;
-    border-radius: var(--rounded-full);
+    border-color: transparent;
     margin-bottom: var(--spacing-sm);
   }
 
