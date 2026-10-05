@@ -10,8 +10,13 @@ test.describe('FEATURE-3 - E2E: WP roto - rescate', () => {
 
     await page.goto('/servicios/');
 
+    // Cards del sistema atómico (Card media-accent): 4 de SolucionesSection
+    // + las de categorías cuando la página las incluye. Invariant: todas
+    // las .service-card son ui-card del design system (ningún markup legado).
     const cards = page.locator('.service-card');
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(8);
+    await expect(page.locator('.service-card.ui-card--media-accent')).toHaveCount(8);
+    await expect(page.locator('.service-card:not(.ui-card)')).toHaveCount(0);
 
     await page.goto('/servicios/ia-aplicada');
     await expect(page).toHaveTitle(/IA/);
