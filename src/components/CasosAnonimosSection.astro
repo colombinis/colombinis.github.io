@@ -15,14 +15,26 @@ import Button from './ui/Button.astro';
 interface Props {
   servicioId?: string;
   title?: string;
+  titleHighlight?: string;
   subtitle?: string;
+  hideLabel?: boolean;
+  hideMeta?: boolean;
 }
 
 const {
   servicioId,
   title = "Casos reales con resultados medibles",
-  subtitle = "Tecnología justa aplicada a pequeños comercios, estudios y PyMEs de Rosario. Sin modas ni sobrecostos: soluciones que funcionan."
+  titleHighlight = "Experiencia comprobada",
+  subtitle,
+  hideLabel = false,
+  hideMeta = false,
 } = Astro.props;
+
+// Título bicolor (home): resalta la primera parte en naranja de marca
+// (#F16529), el resto en navy --primary. Requiere que title EMPIECE con
+// titleHighlight; si no, se renderiza plano como antes.
+const startsWithHighlight = title.startsWith(titleHighlight);
+const titleRest = startsWithHighlight ? title.slice(titleHighlight.length) : '';
 
 const casos = servicioId
   ? casosData.filter((c) => c.servicio_id === servicioId)
@@ -32,21 +44,29 @@ const casos = servicioId
 <section class="casos-anonimos-section">
   <div class="container">
     <div class="casos-header">
-      <p class="casos-label">EXPERIENCIA COMPROBADA</p>
-      <h2 class="section__title">{title}</h2>
-      <p class="section__subtitle">{subtitle}</p>
+      {!hideLabel && <p class="casos-label">EXPERIENCIA COMPROBADA</p>}
+      <h2 class="section__title">
+        {startsWithHighlight ? (
+          <span class="casos-title-highlight">{titleHighlight}</span><span>{titleRest}</span>
+        ) : (
+          title
+        )}
+      </h2>
+      {subtitle && <p class="section__subtitle">{subtitle}</p>}
     </div>
 
     <div class="casos-grid">
       {casos.map((caso) => (
         <Card as="article" variant="default" padding="md" class="caso-card">
-          <div class="caso-card__meta">
-            <Badge variant="warning" class="caso-badge">{caso.rubro}</Badge>
-            <span class="caso-location">
-              <MapPin size={13} aria-hidden="true" />
-              <span>{caso.ubicacion}</span>
-            </span>
-          </div>
+          {!hideMeta && (
+            <div class="caso-card__meta">
+              <Badge variant="warning" class="caso-badge">{caso.rubro}</Badge>
+              <span class="caso-location">
+                <MapPin size={13} aria-hidden="true" />
+                <span>{caso.ubicacion}</span>
+              </span>
+            </div>
+          )}
 
           <h3 class="caso-card__title">{caso.titulo}</h3>
 
@@ -146,6 +166,12 @@ const casos = servicioId
     flex-wrap: wrap;
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-sm);
+  }
+
+  /* Título bicolor de la sección (home): "Experiencia comprobada" en
+     naranja de marca #F16529, el resto hereda el navy de section__title. */
+  .casos-title-highlight {
+    color: #F16529;
   }
 
   /* El primitivo Badge (variant warning) aporta paleta, tamaño y forma; se
