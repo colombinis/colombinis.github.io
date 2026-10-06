@@ -1,6 +1,6 @@
 ---
 interface Props {
-  variant?: 'default' | 'muted' | 'interactive' | 'accent' | 'media-accent' | 'top-accent';
+  variant?: 'default' | 'muted' | 'interactive' | 'accent' | 'media-accent' | 'top-accent' | 'case-flow';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   class?: string;
   as?: string;
@@ -149,6 +149,122 @@ const classes = [
     background: #EBF4FF;
     color: var(--tertiary-dark, #0066CC);
     margin-bottom: var(--spacing-md, 16px);
+  }
+
+  /* Variante case-flow (sección "Experiencia comprobada en casos reales"
+     de la home): card de caso anónimo con la secuencia
+     Problema → Solución justa → Resultado medible.
+     La composición (.ui-flow) es reutilizable: el consumidor arma los
+     pasos con .ui-flow__step + modificador (--problema/--solucion/
+     --resultado) e indicador con icono. El CSS vive acá, una sola vez. */
+  .ui-card--case-flow {
+    background-color: var(--surface, #FFFFFF);
+    border-color: #E8E8E8;
+  }
+
+  .ui-card--case-flow :global(.ui-card__title) {
+    font-size: 1.2rem;
+    font-weight: 700;
+    /* Pedido del dueño: título como banda naranja de marca con fuente
+       blanca + icono del logo (S azul sobre favicon) integrado. */
+    background: #F16529;
+    color: #FFFFFF;
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+    border-radius: var(--rounded-sm, 8px);
+    margin: 0 0 var(--spacing-md, 16px);
+    line-height: 1.35;
+    /* flex para alinear icono + texto del título */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+  }
+  .ui-card--case-flow :global(.ui-card__title-icon) {
+    flex-shrink: 0;
+    width: 1.35em;
+    height: 1.35em;
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* Contenedor de la secuencia: columna que se estira para alinear el
+     pie de todas las cards de una grilla. */
+  .ui-card--case-flow :global(.ui-flow) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+    flex-grow: 1;
+  }
+
+  .ui-card--case-flow :global(.ui-flow__step) {
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+    border-radius: var(--rounded-sm, 8px);
+    background: #FAFBFD;
+    border-left: 3px solid #CBD5E1;
+  }
+  .ui-card--case-flow :global(.ui-flow__step--problema) {
+    border-left-color: #EF4444;
+    background: #FEF2F2;
+  }
+  .ui-card--case-flow :global(.ui-flow__step--solucion) {
+    border-left-color: var(--tertiary, #0A7CFF);
+    background: #EFF6FF;
+  }
+  .ui-card--case-flow :global(.ui-flow__step--resultado) {
+    border-left-color: #10B981;
+    background: #ECFDF5;
+  }
+
+  .ui-card--case-flow :global(.ui-flow__header) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  /* Indicador circular del paso con su icono (el icono lo aporta el
+     consumidor vía IconResolver). */
+  .ui-card--case-flow :global(.ui-flow__indicator) {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ui-card--case-flow :global(.ui-flow__indicator--danger) {
+    background: #FEE2E2;
+    color: #DC2626;
+  }
+  .ui-card--case-flow :global(.ui-flow__indicator--primary) {
+    background: #DBEAFE;
+    color: var(--tertiary-dark, #0066CC);
+  }
+  .ui-card--case-flow :global(.ui-flow__indicator--success) {
+    background: #D1FAE5;
+    color: #059669;
+  }
+
+  .ui-card--case-flow :global(.ui-flow__title) {
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: var(--primary, #1A1A2E);
+  }
+
+  .ui-card--case-flow :global(.ui-flow__desc) {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--secondary, #444444);
+    margin: 0;
+  }
+  .ui-card--case-flow :global(.ui-flow__desc--highlight) {
+    font-weight: 600;
+    color: #065F46;
   }
 
   .ui-card--link {

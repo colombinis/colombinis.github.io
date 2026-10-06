@@ -38,7 +38,6 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
   description="Primera conversación sin cargo para PyMEs en Rosario. Te decimos con honestidad qué tecnología justa necesitás para tu negocio y qué no."
 >
   <div class="page-header">
-    <p class="hero__label">ATENCIÓN PERSONALIZADA EN ROSARIO</p>
     <h1>Contactanos</h1>
     <Card variant="accent" class="contact-promise-card">
       <Badge variant="accent" class="contact-promise-badge">
@@ -71,14 +70,6 @@ const asunto = Astro.url.searchParams.get("asunto") ?? undefined;
 </Layout>
 
 <style>
-  .hero__label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--tertiary-dark);
-    margin: 0 0 var(--spacing-sm);
-  }
   .page-header {
     padding: var(--spacing-xxl) var(--spacing-lg) 0;
     text-align: center;

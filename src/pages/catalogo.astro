@@ -5,6 +5,7 @@
 // los filtros interactivos (cambio/input) se resuelven client-side en CAT-02.
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
+import IconResolver from '../components/ui/IconResolver.astro';
 import Card from '../components/ui/Card.astro';
 import Input from '../components/ui/Input.astro';
 import {
@@ -67,7 +68,6 @@ const breadcrumb = [
   <!-- Hero -->
   <section class="hero hero--detail">
     <div class="hero__container">
-      <p class="hero__label">CATÁLOGO</p>
       <h1 class="hero__title">Catálogo de soluciones</h1>
       <p class="hero__subtitle">
         Todas las soluciones que podés contratar en SACsi. Filtralas por servicio,
@@ -171,12 +171,14 @@ const breadcrumb = [
                   Desde {formatearPrecio(s.precioMin, s.precioMax)}
                 </p>
               <Button
-                variant="whatsapp"
-                size="sm"
+                variant="primary"
+                size="icon"
+                round
                 href={`/soluciones/${s.id}/`}
                 class="service-card__cta"
+                aria-label={`Ver solución ${s.nombre}`}
               >
-                Ver +
+                <IconResolver name="chevron-right" size={20} />
               </Button>
               </div>
             </Card>
@@ -335,6 +337,16 @@ const breadcrumb = [
 </script>
 
 <style>
+  /* Patrón maestro (guía): body flex-column + CTA circular alineado al
+     borde derecho del card. */
+  .ui-card__body {
+    display: flex;
+    flex-direction: column;
+  }
+  .ui-card__body :global(.ui-btn--round) {
+    align-self: flex-end;
+  }
+
   /* Breadcrumb (mismo patrón que las páginas de servicio/categoría) */
   .breadcrumb {
     font-size: 0.9rem;
@@ -486,9 +498,8 @@ const breadcrumb = [
     padding-left: var(--spacing-md, 16px);
     padding-right: var(--spacing-md, 16px);
   }
-  :global(.service-card.ui-card--media-accent .service-card__cta) {
-    margin: 0 var(--spacing-md, 16px) var(--spacing-md, 16px);
-  }
+  /* El CTA circular ya no lleva margen: el patrón maestro (guía) lo pega
+     al borde derecho vía align-self en el body flex-column. */
 
   /* CTA diagnóstico (C3) — banner renderizado por Card.astro → :global */
   :global(.catalogo-diagnostico) {

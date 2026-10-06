@@ -2,32 +2,26 @@
 // Componente: Casos de éxito anónimos con formato fijo
 // Formato: Problema → Solución justa → Resultado medible
 // Estático (sin JS), carga ultra rápida, diseño responsive
-// Diseño Atómico: compone los primitivos src/components/ui/ (Card, Badge,
-// Button). Las clases de página (caso-card, caso-badge, hero__cta) viajan
-// por el prop class para conservar los hooks de test/E2E y la piel
-// definida en global.css (p. ej. body.header-overlay .caso-badge).
+// Diseño Atómico: compone los primitivos src/components/ui/ (Card,
+// Button). El primitivo Card (variant case-flow) aporta el cromo del
+// card, el título en banda naranja y toda la secuencia .ui-flow*.
+// .caso-card sobrevive como hook de test/E2E (piel hover de la sección).
 import casosData from '../data/casos-anonimos.json';
-import { MapPin, AlertCircle, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-astro';
+import { AlertCircle, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-astro';
 import Card from './ui/Card.astro';
-import Badge from './ui/Badge.astro';
+import BrandIcon from './ui/BrandIcon.astro';
 import Button from './ui/Button.astro';
 
 interface Props {
   servicioId?: string;
   title?: string;
   titleHighlight?: string;
-  subtitle?: string;
-  hideLabel?: boolean;
-  hideMeta?: boolean;
 }
 
 const {
   servicioId,
   title = "Casos reales con resultados medibles",
   titleHighlight = "Experiencia comprobada",
-  subtitle,
-  hideLabel = false,
-  hideMeta = false,
 } = Astro.props;
 
 // Título bicolor (home): resalta la primera parte en naranja de marca
@@ -44,7 +38,6 @@ const casos = servicioId
 <section class="casos-anonimos-section">
   <div class="container">
     <div class="casos-header">
-      {!hideLabel && <p class="casos-label">EXPERIENCIA COMPROBADA</p>}
       <h2 class="section__title">
         {startsWithHighlight ? (
           <span class="casos-title-highlight">{titleHighlight}</span><span>{titleRest}</span>
@@ -52,53 +45,45 @@ const casos = servicioId
           title
         )}
       </h2>
-      {subtitle && <p class="section__subtitle">{subtitle}</p>}
     </div>
 
     <div class="casos-grid">
       {casos.map((caso) => (
-        <Card as="article" variant="default" padding="md" class="caso-card">
-          {!hideMeta && (
-            <div class="caso-card__meta">
-              <Badge variant="warning" class="caso-badge">{caso.rubro}</Badge>
-              <span class="caso-location">
-                <MapPin size={13} aria-hidden="true" />
-                <span>{caso.ubicacion}</span>
-              </span>
-            </div>
-          )}
+        <Card as="article" variant="case-flow" padding="md" class="caso-card">
+          <h3 class="ui-card__title">
+            <BrandIcon class="ui-card__title-icon" alt="" />
+            <span>{caso.titulo}</span>
+          </h3>
 
-          <h3 class="caso-card__title">{caso.titulo}</h3>
-
-          <div class="caso-flow">
-            <div class="flow-step flow-step--problema">
-              <div class="flow-step__header">
-                <span class="step-indicator step-indicator--danger">
+          <div class="ui-flow">
+            <div class="ui-flow__step ui-flow__step--problema">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--danger">
                   <AlertCircle size={14} aria-hidden="true" />
                 </span>
-                <h4 class="flow-step__title">Problema</h4>
+                <h4 class="ui-flow__title">Problema</h4>
               </div>
-              <p class="flow-step__desc">{caso.problema}</p>
+              <p class="ui-flow__desc">{caso.problema}</p>
             </div>
 
-            <div class="flow-step flow-step--solucion">
-              <div class="flow-step__header">
-                <span class="step-indicator step-indicator--primary">
+            <div class="ui-flow__step ui-flow__step--solucion">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--primary">
                   <CheckCircle2 size={14} aria-hidden="true" />
                 </span>
-                <h4 class="flow-step__title">Solución justa</h4>
+                <h4 class="ui-flow__title">Solución justa</h4>
               </div>
-              <p class="flow-step__desc">{caso.solucion_justa}</p>
+              <p class="ui-flow__desc">{caso.solucion_justa}</p>
             </div>
 
-            <div class="flow-step flow-step--resultado">
-              <div class="flow-step__header">
-                <span class="step-indicator step-indicator--success">
+            <div class="ui-flow__step ui-flow__step--resultado">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--success">
                   <TrendingUp size={14} aria-hidden="true" />
                 </span>
-                <h4 class="flow-step__title">Resultado medible</h4>
+                <h4 class="ui-flow__title">Resultado medible</h4>
               </div>
-              <p class="flow-step__desc flow-step__desc--highlight">{caso.resultado_medible}</p>
+              <p class="ui-flow__desc ui-flow__desc--highlight">{caso.resultado_medible}</p>
             </div>
           </div>
         </Card>
@@ -127,15 +112,6 @@ const casos = servicioId
     margin-bottom: var(--spacing-xl);
   }
 
-  .casos-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--tertiary-dark);
-    margin: 0 0 var(--spacing-xs);
-  }
-
   .casos-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -159,124 +135,15 @@ const casos = servicioId
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   }
 
-  .caso-card__meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-sm);
-  }
+  /* El primitivo Card (variant case-flow) aporta el cromo del card y TODA
+     la composición Problema → Solución justa → Resultado medible (.ui-flow*)
+     con el título en banda naranja. Acá queda solo lo propio de la sección
+     (grid, header, footer CTA). */
 
   /* Título bicolor de la sección (home): "Experiencia comprobada" en
      naranja de marca #F16529, el resto hereda el navy de section__title. */
   .casos-title-highlight {
     color: #F16529;
-  }
-
-  /* El primitivo Badge (variant warning) aporta paleta, tamaño y forma; se
-     conserva la identidad tipográfica del rubro en MAYÚSCULAS.
-     :global() porque el <span> lo renderiza Badge (scoping de Astro). */
-  :global(.caso-badge) {
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-
-  .caso-location {
-    font-size: 0.82rem;
-    color: var(--muted);
-    font-weight: 500;
-  }
-
-  .caso-card__title {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin: 0 0 var(--spacing-md);
-    line-height: 1.35;
-  }
-
-  .caso-flow {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    flex-grow: 1;
-  }
-
-  .flow-step {
-    padding: var(--spacing-sm) var(--spacing-md);
-    border-radius: var(--rounded-sm);
-    background: #FAFBFD;
-    border-left: 3px solid #CBD5E1;
-  }
-
-  .flow-step--problema {
-    border-left-color: #EF4444;
-    background: #FEF2F2;
-  }
-
-  .flow-step--solucion {
-    border-left-color: var(--tertiary);
-    background: #EFF6FF;
-  }
-
-  .flow-step--resultado {
-    border-left-color: #10B981;
-    background: #ECFDF5;
-  }
-
-  .flow-step__header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
-
-  .step-indicator {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-
-  .step-indicator--danger {
-    background: #FEE2E2;
-    color: #DC2626;
-  }
-
-  .step-indicator--primary {
-    background: #DBEAFE;
-    color: var(--tertiary-dark);
-  }
-
-  .step-indicator--success {
-    background: #D1FAE5;
-    color: #059669;
-  }
-
-  .flow-step__title {
-    font-size: 0.88rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-    color: var(--primary);
-  }
-
-  .flow-step__desc {
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: var(--secondary);
-    margin: 0;
-  }
-
-  .flow-step__desc--highlight {
-    font-weight: 600;
-    color: #065F46;
   }
 
   .casos-footer-cta {

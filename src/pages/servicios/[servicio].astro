@@ -9,6 +9,7 @@ import SolucionesSection from '../../components/SolucionesSection.astro';
 import CasosAnonimosSection from '../../components/CasosAnonimosSection.astro';
 import { getServicio, getCategoriasByServicio, getTestimoniosByServicio } from '../../lib/data-utils';
 import Button from '../../components/ui/Button.astro';
+import IconResolver from '../../components/ui/IconResolver.astro';
 import Card from '../../components/ui/Card.astro';
 
 interface Props {
@@ -35,7 +36,6 @@ const {
   claim: svcClaim,
   short: svcShort,
   value_prop: svcValueProp,
-  hero_label,
   categoria_section_title,
 } = servicio;
 
@@ -58,7 +58,6 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
   <!-- Hero -->
   <section class="hero">
     <div class="hero__container">
-      <p class="hero__label">{hero_label}</p>
       <h1 class="hero__title">{svcTitle}</h1>
       <p class="service-value-line">{serviceValueProp}</p>
       <p class="hero__subtitle">
@@ -93,15 +92,15 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
               </h3>
               <p class="service-card__desc">{cat.descripcion}</p>
               <p class="service-card__claim">{cat.claim}</p>
-              <div class="hero__actions">
-                <Button
-                  variant="outline"
-                  class="hero__cta-secondary"
-                  href={`${svcHref}${cat.id}/`}
-                >
-                  Ver +
-                </Button>
-              </div>
+              <Button
+                variant="primary"
+                size="icon"
+                round
+                href={`${svcHref}${cat.id}/`}
+                aria-label={`Ver categoría ${cat.title}`}
+              >
+                <IconResolver name="chevron-right" size={20} />
+              </Button>
             </div>
           </Card>
         ))}
@@ -113,7 +112,6 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
   <CasosAnonimosSection
     servicioId={servicio.id}
     title={`Casos reales de ${svcTitle}`}
-    subtitle="Tecnología justa aplicada: problema concreto, solución sin sobrecostos y resultado medible."
   />
 
   <!-- Testimonios / Social proof -->
@@ -150,6 +148,12 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
      global.css vía la clase .service-card conservada en la raíz. */
   .service-card__body {
     padding: 0 var(--spacing-lg) var(--spacing-xl);
+    /* Patrón maestro (guía): CTA circular alineado al borde derecho. */
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card__body :global(.ui-btn--round) {
+    align-self: flex-end;
   }
   .service-value-line {
     font-size: 1.15rem;
