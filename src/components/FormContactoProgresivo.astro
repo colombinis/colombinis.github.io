@@ -15,7 +15,8 @@
 //   - Un solo paso: nombre + select servicio/categoría + email + brief (requeridos).
 //   - Submit único "Enviar mensaje" → POST al backend configurado en site.json.
 //   - Debajo del submit: botón WhatsApp (con icono) + botón "Preferís email?" (estilo botón, scroll al email).
-//   - Redes sociales con iconos SVG de la misma familia que el icono de WhatsApp (no emojis).
+//   - Redes sociales removidas del form (feedback dueño 2026-10-06): Instagram y YouTube
+//     viven ahora en el Footer (col 4); LinkedIn se eliminó del sitio.
 //   - Eventos GTM (dataLayer.push): form_submit (onsubmit), checkout_started (en click de enviar).
 //   - NO jQuery. Vanilla JS inline solo para validación + GTM.
 //   - Build-time: getServicios() + getCategoriasByServicio() popular el select jerarquizado.
@@ -180,22 +181,6 @@ const sourceDefault = source ?? 'contacto-progresivo';
       Si preferis por Email
     </Button>
   </div>
-<!-- Redes sociales (iconos de la misma familia que WhatsApp) -->
-<div class="social-links">
-  <Button variant="outline" href={config.social.instagram} rel="noopener noreferrer" target="_blank" aria-label="Instagram">
-    <img slot="icon-start" class="ic" src="/icons/brand-instagram.svg" alt="" aria-hidden="true" width="18" height="18" />
-    Instagram
-  </Button>
-  <Button variant="outline" href={config.social.youtube} rel="noopener noreferrer" target="_blank" aria-label="YouTube">
-    <img slot="icon-start" class="ic" src="/icons/brand-youtube.svg" alt="" aria-hidden="true" width="18" height="18" />
-    YouTube
-  </Button>
-  <Button variant="outline" href={config.social.linkedin} rel="noopener noreferrer" target="_blank" aria-label="LinkedIn">
-    <img slot="icon-start" class="ic" src="/icons/brand-linkedin.svg" alt="" aria-hidden="true" width="18" height="18" />
-    LinkedIn
-  </Button>
-</div>
-
 <style>
   .progressive-form {
     display: grid;
@@ -258,19 +243,9 @@ const sourceDefault = source ?? 'contacto-progresivo';
   .form-status--success { color: #128C7E; font-weight: 600; }
   .form-status--error { color: #E53935; font-weight: 500; }
 
-  /* Redes sociales */
-  .social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-    justify-content: center;
-  }
-
   /* Mobile-first: los Button primitivos ocupan el ancho completo */
   @media (max-width: 600px) {
-    .form-alt :global(.ui-btn),
-    .social-links :global(.ui-btn) {
+    .form-alt :global(.ui-btn) {
       width: 100%;
     }
     .form-alt {

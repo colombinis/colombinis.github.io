@@ -1,18 +1,24 @@
 ---
-// Footer con 3 columnas:
+// Footer con 4 columnas:
 // Col 1: Logo + texto "Soluciones Informáticas" + links de servicios (desde src/data/servicios/ + categorias/)
 // Col 2: Listado de soluciones (desde src/data/soluciones/listado-soluciones.json)
-// Col 3: Sección "¿Empezamos?" con WhatsApp + email
+// Col 3: Listado de casos de éxito
+// Col 4: NAP (tel/email/mapa) + redes sociales Instagram y YouTube debajo del email
+// CTA banner "¿Tenés una duda o proyecto en mente?": OCULTO en /contacto (feedback dueño 2026-10-06)
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
 import { getServicios, getCategoriasByServicio, getSoluciones, getCasos } from '../lib/data-utils';
 import config from '../config/site.json';
-import { Phone, Mail, MapPin } from 'lucide-astro';
+import { Phone, Mail, MapPin, Instagram, Youtube } from 'lucide-astro';
 
 // Datos normalizados: servicios + categorías
 const servicios = getServicios();
 const soluciones = getSoluciones();
 const casos = getCasos();
+
+// El CTA banner no aplica en /contacto: esa página ya ES el canal de contacto.
+const pathname = Astro.url.pathname;
+const isContacto = pathname === '/contacto' || pathname === '/contacto/';
 ---
 
 <style>
@@ -286,7 +292,9 @@ const casos = getCasos();
     }
   }
 </style>
-  <!-- CTA Banner Section -->
+  <!-- CTA Banner Section — oculto en /contacto (feedback dueño 2026-10-06:
+       esa página ya es el canal de contacto; duplicarlo suma ruido) -->
+  {!isContacto && (
   <section id="cta-final" class="section cta-banner-section">
     <div class="container cta-banner">
       <h2>¿Tenés una duda o proyecto en mente?</h2>
@@ -308,6 +316,7 @@ const casos = getCasos();
       </div>
     </div>
   </section>
+  )}
 <div id="footer-container">
   <footer class="wrapper">
     <div class="footer-grid">
@@ -389,6 +398,22 @@ const casos = getCasos();
             </span>
             <span class="footer-nap__text">
               <strong>Email:</strong> <a class="footer-nap__link" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
+            </span>
+          </p>
+          <p class="footer-nap__item">
+            <span class="footer-nap__icon" aria-hidden="true">
+              <Instagram size={18} />
+            </span>
+            <span class="footer-nap__text">
+              <a class="footer-nap__link" href={config.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+            </span>
+          </p>
+          <p class="footer-nap__item">
+            <span class="footer-nap__icon" aria-hidden="true">
+              <Youtube size={18} />
+            </span>
+            <span class="footer-nap__text">
+              <a class="footer-nap__link" href={config.social.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
             </span>
           </p>
           <p class="footer-nap__item">
