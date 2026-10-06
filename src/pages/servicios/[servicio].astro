@@ -139,8 +139,8 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
 
 <style>
   /* Card de categoría = primitivo Card variant="media-accent" con
-     padding="none": la banda .ui-card__media lleva márgenes negativos
-     (-24px) que, sin padding de card, la extienden borde a borde (el
+     padding="none": la banda .ui-card__media (fondo accent #0A7CFF)
+     llega borde a borde porque la variante fuerza padding 0 (el
      primitivo la recorta con overflow:hidden). El wrapper
      .service-card__body recupera el padding del cuerpo que p-none deja
      en 0, con paridad al patrón de banda de global.css (0 24px 32px).
