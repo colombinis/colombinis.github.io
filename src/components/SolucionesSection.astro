@@ -4,8 +4,8 @@
 // Fuente única de verdad: src/data/servicios/servicio_*.json (datos normalizados)
 //
 // Migración a design system (s3-soluciones): cada card se compone con el
-// primitivo <Card variant="media-accent" padding="none"> (banda naranja
-// #F16529 borde a borde via .ui-card__media, CSS del propio primitivo) +
+// primitivo <Card variant="media-accent" padding="none"> (banda azul
+// accent #0A7CFF borde a borde via .ui-card__media, CSS del propio primitivo) +
 // <Button variant="primary" size="sm"> como CTA. El hook de test "service-card"
 // y el href se preservan en la raíz del card.
 import Card from './ui/Card.astro';
@@ -32,7 +32,7 @@ const servicios = getServicios();
     }
   }
   /* Cuerpo del card de servicio: el primitivo Card (media-accent) aporta
-     la banda naranja borde a borde, el borde y el hover; como el card usa
+     la banda azul accent borde a borde, el borde y el hover; como el card usa
      padding="none" (para que la banda llegue a los bordes), el padding del
      cuerpo se reponer acá con los mismos valores de la home donweb. */
   .service-card__body {

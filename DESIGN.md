@@ -296,7 +296,7 @@ El sitio es 100% estático (GitHub Pages). Astro genera ese estático pero elimi
    b. ¿No existe pero se puede componer con primitivos existentes? → componer.
    c. ¿Faltan primitivos? → preguntar al dueño de qué fuente tomar el primitivo.
    d. Sin respuesta del dueño → tomar como referencia el componente compatible de https://ui.shadcn.com/docs/components, adaptado a Astro + tokens SACsi (sin dependencias npm nuevas).
-4. **Tokens de marca 2026**: junto al navy #1A1A2E y azul #0A7CFF, el naranja #F16529 (hover #D9531E) es acento de marca: CTA hero, banda superior de cards, labels. Contraste AA: texto blanco sobre #F16529 solo para texto grande; texto de cuerpo sobre naranja en navy #1A1A2E (5.39:1).
+4. **Tokens de marca 2026**: junto al navy #1A1A2E y azul #0A7CFF, el naranja #F16529 (hover #D9531E) es acento de marca: CTA hero y labels. Desde 2026-10-06 (decisión del dueño) las bandas superiores de cards (variantes `media-accent` y `case-flow`) usan el azul accent #0A7CFF — texto blanco sobre #0A7CFF: 4.06:1, AA para texto grande. Contraste AA: texto blanco sobre #F16529 solo para texto grande; texto de cuerpo sobre naranja en navy #1A1A2E (5.39:1).
 
 ### Componentes primitivos vigentes
 
