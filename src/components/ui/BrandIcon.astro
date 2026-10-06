@@ -1,0 +1,26 @@
+---
+// BrandIcon.astro — Icono de marca SACsi: el propio favicon.ico
+// (cuadrado azul #00A1F1 con la "S" estilizada blanca del logo).
+// Primitivo reutilizable; consumo típico: dentro del título banda-naranja
+// de los cards de caso (Card variant case-flow).
+// Se usa el asset real (/favicon.ico, PNG 40x40) — fidelidad garantizada;
+// a los ~26px del título (1.35em de 1.2rem) el 40px fuente renderiza nítido.
+interface Props {
+  size?: number;
+  class?: string;
+  alt?: string;
+}
+
+const { size = 26, class: className = '', alt = '' } = Astro.props;
+---
+
+<img
+  src="/favicon.ico"
+  width={size}
+  height={size}
+  class={className}
+  alt={alt}
+  aria-hidden={alt ? undefined : 'true'}
+  loading="eager"
+  decoding="async"
+/>

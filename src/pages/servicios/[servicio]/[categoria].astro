@@ -73,7 +73,6 @@ const breadcrumb = [
   <!-- Hero -->
   <section class="hero hero--detail">
     <div class="hero__container">
-      <Badge variant="accent" size="md" class="categoria-hero__label">{svcTitle.toUpperCase()}</Badge>
       <h1 class="hero__title">{catTitle}</h1>
       <p class="hero__subtitle">{descripcion}</p>
       <p class="hero__claim">{claim}</p>
@@ -175,11 +174,8 @@ const breadcrumb = [
     text-decoration: underline;
   }
 
-  /* Hero: label (Badge) y CTA (Button) — paridad con .hero__label / .hero__cta
-     de global.css (label margin + CTA full-width en móvil) */
-  .categoria-hero__label {
-    margin: 0 0 var(--spacing-md);
-  }
+  /* Hero: CTA (Button) — paridad con .hero__cta de global.css
+     (CTA full-width en móvil) */
   .categoria-hero__cta {
     width: 100%;
   }

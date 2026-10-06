@@ -33,6 +33,7 @@ import {
   Coins,
   BookOpen,
   AlertTriangle,
+  AlertCircle,
   CheckCircle2,
   ShieldCheck,
   HelpCircle,
@@ -121,11 +122,13 @@ const iconMap: Record<string, any> = {
   'bot': Bot,
 
   // Alias PascalCase (los consumidores pasan el nombre del icono Lucide
-  // directamente — ej. PorQueSacsiSection y el demo top-accent de la guía)
+  // directamente — ej. PorQueSacsiSection y el demo top-accent/case-flow)
   'ShieldCheck': ShieldCheck,
   'Users': Users,
   'Wrench': Wrench,
   'TrendingUp': TrendingUp,
+  'AlertCircle': AlertCircle,
+  'CheckCircle2': CheckCircle2,
 };
 
 const ResolvedIcon = iconMap[iconKey] || Layers;

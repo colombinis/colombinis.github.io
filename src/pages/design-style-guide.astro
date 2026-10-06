@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import Badge from '../components/ui/Badge.astro';
+import BrandIcon from '../components/ui/BrandIcon.astro';
 import Input from '../components/ui/Input.astro';
 import Textarea from '../components/ui/Textarea.astro';
 import Accordion from '../components/ui/Accordion.astro';
@@ -446,6 +447,49 @@ const tabsDemo = [
           <p>Card blanco centrado con línea azul de 4px en el borde superior e icono circular celeste. Es el patrón de los 4 pilares de la sección "Por qué SACsi" de la home (experiencia, trato, IA, ROI).</p>
           <div class="card-demo-footer">
             <span class="text-xs text-muted">Consumidor: PorQueSacsiSection</span>
+          </div>
+        </Card>
+
+        <Card variant="case-flow" padding="md">
+          <h3 class="ui-card__title">
+            <BrandIcon class="ui-card__title-icon" alt="" />
+            <span>Comercio minorista: pedidos por WhatsApp</span>
+          </h3>
+
+          <div class="ui-flow">
+            <div class="ui-flow__step ui-flow__step--problema">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--danger">
+                  <IconResolver name="AlertCircle" size={14} />
+                </span>
+                <h4 class="ui-flow__title">Problema</h4>
+              </div>
+              <p class="ui-flow__desc">Cada pedido entraba por WhatsApp a mano y terminaba copiado en una planilla, con errores de stock y facturación demorada.</p>
+            </div>
+
+            <div class="ui-flow__step ui-flow__step--solucion">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--primary">
+                  <IconResolver name="CheckCircle2" size={14} />
+                </span>
+                <h4 class="ui-flow__title">Solución justa</h4>
+              </div>
+              <p class="ui-flow__desc">Automatización sobre lo que ya usaban: el pedido de WhatsApp se carga en el sistema y dispara stock y factura sin retipear.</p>
+            </div>
+
+            <div class="ui-flow__step ui-flow__step--resultado">
+              <div class="ui-flow__header">
+                <span class="ui-flow__indicator ui-flow__indicator--success">
+                  <IconResolver name="TrendingUp" size={14} />
+                </span>
+                <h4 class="ui-flow__title">Resultado medible</h4>
+              </div>
+              <p class="ui-flow__desc ui-flow__desc--highlight">Reducción del 80% en tiempo administrativo y cero errores de facturación desde el primer mes.</p>
+            </div>
+          </div>
+
+          <div class="card-demo-footer">
+            <span class="text-xs text-muted">Consumidor: CasosAnonimosSection (home y /servicios/*)</span>
           </div>
         </Card>
       </div>
