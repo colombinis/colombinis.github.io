@@ -4,7 +4,7 @@
 // Estático (sin JS), carga ultra rápida, diseño responsive
 // Diseño Atómico: compone los primitivos src/components/ui/ (Card,
 // Button). El primitivo Card (variant case-flow) aporta el cromo del
-// card, el título en banda naranja y toda la secuencia .ui-flow*.
+// card, el título en banda azul accent (#0A7CFF) y toda la secuencia .ui-flow*.
 // .caso-card sobrevive como hook de test/E2E (piel hover de la sección).
 import casosData from '../data/casos-anonimos.json';
 import { AlertCircle, CheckCircle2, TrendingUp, ArrowRight } from 'lucide-astro';
@@ -49,7 +49,7 @@ const casos = servicioId
 
     <div class="casos-grid">
       {casos.map((caso) => (
-        <Card as="article" variant="case-flow" padding="md" class="caso-card">
+        <Card as="article" variant="case-flow" padding="none" class="caso-card">
           <h3 class="ui-card__title">
             <BrandIcon class="ui-card__title-icon" alt="" />
             <span>{caso.titulo}</span>
@@ -137,8 +137,8 @@ const casos = servicioId
 
   /* El primitivo Card (variant case-flow) aporta el cromo del card y TODA
      la composición Problema → Solución justa → Resultado medible (.ui-flow*)
-     con el título en banda naranja. Acá queda solo lo propio de la sección
-     (grid, header, footer CTA). */
+     con el título en banda azul accent (#0A7CFF) flush al tope. Acá queda
+     solo lo propio de la sección (grid, header, footer CTA). */
 
   /* Título bicolor de la sección (home): "Experiencia comprobada" en
      naranja de marca #F16529, el resto hereda el navy de section__title. */

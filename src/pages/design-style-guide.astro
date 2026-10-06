@@ -425,9 +425,9 @@ const tabsDemo = [
           <div class="ui-card__body">
             <div class="card-demo-header">
               <Badge variant="neutral">HOME</Badge>
-              <h3>Servicio con Banda Naranja</h3>
+              <h3>Servicio con Banda Azul Accent</h3>
             </div>
-            <p>Patrón de los cards de la home: banda superior naranja #F16529 con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor. CTA circular alineado al borde derecho.</p>
+            <p>Patrón de los cards de la home: banda superior azul accent #0A7CFF con la imagen del servicio centrada y bordes redondeados; cuerpo blanco con título navy y claim gris. La variante es autónoma: fuerza su propio layout (banda flush a los bordes) sin depender del padding que pase el consumidor. CTA circular alineado al borde derecho.</p>
             <div class="card-demo-footer card-demo-footer--end">
               <Button size="icon" variant="primary" round href="#tarjetas" aria-label="Ver servicio">
                 <IconResolver name="chevron-right" size={20} />
@@ -450,7 +450,7 @@ const tabsDemo = [
           </div>
         </Card>
 
-        <Card variant="case-flow" padding="md">
+        <Card variant="case-flow" padding="none">
           <h3 class="ui-card__title">
             <BrandIcon class="ui-card__title-icon" alt="" />
             <span>Comercio minorista: pedidos por WhatsApp</span>
@@ -488,7 +488,7 @@ const tabsDemo = [
             </div>
           </div>
 
-          <div class="card-demo-footer">
+          <div class="card-demo-footer card-demo-footer--inset">
             <span class="text-xs text-muted">Consumidor: CasosAnonimosSection (home y /servicios/*)</span>
           </div>
         </Card>
@@ -907,6 +907,12 @@ const tabsDemo = [
   .card-demo-footer--end {
     display: flex;
     justify-content: flex-end;
+  }
+  /* Footer dentro de un card flush (padding 0): el inset lo aporta el
+     footer, no el card. Alineado con el cuerpo (.ui-flow: 0 24px 24px). */
+  .card-demo-footer--inset {
+    padding: var(--spacing-sm, 8px) var(--spacing-lg, 24px) var(--spacing-lg, 24px);
+    margin: 0;
   }
 
   .text-xs {

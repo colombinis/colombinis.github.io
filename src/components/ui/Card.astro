@@ -78,8 +78,9 @@ const classes = [
     box-shadow: 0 8px 24px rgba(10, 124, 255, 0.12);
   }
 
-  /* Variante media-accent (home donweb): banda superior naranja #F16529
-     con la imagen del servicio centrada y bordes redondeados (--rounded-sm).
+  /* Variante media-accent (home donweb): banda superior azul accent
+     #0A7CFF (pedido del dueño 2026-10-06; antes naranja #F16529) con la
+     imagen del servicio centrada y bordes redondeados (--rounded-sm).
      AUTÓNOMA respecto del padding del consumidor: la variante fuerza
      padding 0 y el cuerpo del contenido se espacia con su propio padding
      (.ui-card__body). La banda siempre llega flush al top y a los bordes
@@ -89,13 +90,14 @@ const classes = [
     border-color: #E8E8E8;
     padding: 0 !important; /* la variante controla su layout interno */
   }
+  /* Hover en familia azul: contra-parte del glow naranja original. */
   .ui-card--media-accent:hover {
-    border-color: #FFD3B8;
-    box-shadow: 0 12px 32px rgba(241, 101, 41, 0.22);
+    border-color: #B8D4FF;
+    box-shadow: 0 12px 32px rgba(10, 124, 255, 0.22);
   }
 
   .ui-card--media-accent :global(.ui-card__media) {
-    background: #F16529;
+    background: var(--tertiary, #0A7CFF);
     padding: var(--spacing-lg, 24px) var(--spacing-md, 16px);
     margin: 0 0 var(--spacing-md, 16px); /* sin márgenes negativos: el card ya tiene padding 0 */
     display: flex;
@@ -156,21 +158,28 @@ const classes = [
      Problema → Solución justa → Resultado medible.
      La composición (.ui-flow) es reutilizable: el consumidor arma los
      pasos con .ui-flow__step + modificador (--problema/--solucion/
-     --resultado) e indicador con icono. El CSS vive acá, una sola vez. */
+     --resultado) e indicador con icono. El CSS vive acá, una sola vez.
+     AUTÓNOMA respecto del padding del consumidor (mismo contrato que
+     media-accent, feedback 2026-10-06): la variante fuerza padding 0 y
+     la banda del título llega flush al top y al 100% del ancho; el
+     espaciado interior lo aporta el contenido (.ui-flow). */
   .ui-card--case-flow {
     background-color: var(--surface, #FFFFFF);
     border-color: #E8E8E8;
+    padding: 0 !important; /* la variante controla su layout interno */
   }
 
   .ui-card--case-flow :global(.ui-card__title) {
     font-size: 1.2rem;
     font-weight: 700;
-    /* Pedido del dueño: título como banda naranja de marca con fuente
-       blanca + icono del logo (S azul sobre favicon) integrado. */
-    background: #F16529;
+    /* Pedido del dueño (2026-10-06): título como banda azul accent
+       #0A7CFF (antes naranja #F16529) con fuente blanca + icono del
+       logo integrado. Banda flush: sin radius y padding alineado al
+       cuerpo (.ui-flow). Blanco sobre #0A7CFF: 4.06:1 — AA para texto
+       grande (1.2rem/700 califica como large text). */
+    background: var(--tertiary, #0A7CFF);
     color: #FFFFFF;
-    padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
-    border-radius: var(--rounded-sm, 8px);
+    padding: var(--spacing-md, 16px) var(--spacing-lg, 24px);
     margin: 0 0 var(--spacing-md, 16px);
     line-height: 1.35;
     /* flex para alinear icono + texto del título */
@@ -187,12 +196,15 @@ const classes = [
   }
 
   /* Contenedor de la secuencia: columna que se estira para alinear el
-     pie de todas las cards de una grilla. */
+     pie de todas las cards de una grilla. Con el card flush (padding 0),
+     el inset del cuerpo lo aporta el propio .ui-flow — paridad con
+     .ui-card__body de media-accent (0 24px 24px). */
   .ui-card--case-flow :global(.ui-flow) {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md, 16px);
     flex-grow: 1;
+    padding: 0 var(--spacing-lg, 24px) var(--spacing-lg, 24px);
   }
 
   .ui-card--case-flow :global(.ui-flow__step) {
