@@ -25,14 +25,6 @@ const links = configLinks.map((link) =>
 ---
 
 <style>
-  #header-container {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background: var(--surface);
-    border-bottom: 1px solid #E8E8E8;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
 
   header.wrapper {
     max-width: var(--container);
@@ -41,6 +33,15 @@ const links = configLinks.map((link) =>
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1003; /* Sobre menú (1002) y topbar (1001) */
+    position: relative;
+  }
+
+  #header-container {
+    position: relative;
+    background: var(--surface);
+    border-bottom: 1px solid #E8E8E8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   /* ---------- Desktop navigation ---------- */
@@ -159,7 +160,7 @@ const links = configLinks.map((link) =>
   /* Dropdown nivel 3 (anidado dentro de nivel 2) */
   .nav-dropdown--level3 {
     position: absolute;
-    top: 0;
+    top: var(--header-top, 0);
     left: 100%;
     min-width: 200px;
     background: var(--surface);
@@ -220,6 +221,8 @@ const links = configLinks.map((link) =>
     padding: 4px;
     color: var(--primary);
     line-height: 1;
+    z-index: 1004; /* Siempre encima del menú */
+    position: relative;
   }
 
   .nav-menu-mobile {
@@ -233,10 +236,12 @@ const links = configLinks.map((link) =>
     left: 0;
     right: 0;
     background: var(--surface);
-    padding: var(--spacing-md);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-lg) var(--spacing-md);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     gap: var(--spacing-sm);
-    z-index: 100;
+    z-index: 1002; /* Debajo del botón (1004), sobre header (1000) y topbar (1001) */
+    max-height: 70vh;
+    overflow-y: auto;
   }
 
   .nav-menu-mobile.active {
@@ -244,9 +249,22 @@ const links = configLinks.map((link) =>
   }
 
   .nav-menu-mobile .nav-link {
-    padding: 10px 0;
+    padding: 14px 0;
     border-bottom: 1px solid #eee;
-    font-size: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .nav-menu-mobile .nav-mobile-group > .nav-link {
+    border-bottom: none;
+    padding: 14px 0;
+  }
+
+  .nav-menu-mobile details summary.nav-link {
+    font-weight: 600;
+  }
+
+  .nav-menu-mobile .nav-mobile-group[open] > .nav-link {
+    border-bottom: 1px solid #eee;
   }
 
   @media (min-width: 601px) {
@@ -269,9 +287,32 @@ const links = configLinks.map((link) =>
     }
 
     .header-cta {
-      display: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--whatsapp);
+      color: #FFFFFF;
+      padding: 14px 20px;
+      border-radius: var(--rounded-sm);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .header-cta:hover {
+      background-color: var(--whatsapp-hover);
     }
   }
+.nav-link--accent {
+  color: var(--tertiary);
+  font-weight: 600;
+}
+.nav-link--accent:hover {
+  opacity: 0.8;
+}
 </style>
 
 <div id="header-container">
@@ -340,6 +381,8 @@ const links = configLinks.map((link) =>
           </>
         ))}
         <li>
+        </li>
+        <li>
           <a
             class="header-cta"
             href="/contacto/"
@@ -385,7 +428,7 @@ const links = configLinks.map((link) =>
           </>
         ))}
         <li>
-          <a class="nav-link" href="/contacto/">Contacto</a>
+          <a class="nav-link header-cta" href="/contacto/">Contacto</a>
         </li>
       </ul>
     </nav>
@@ -425,12 +468,13 @@ const links = configLinks.map((link) =>
       document.documentElement.style.setProperty('--topbar-h', topbarH + 'px');
     };
     measureTopbar();
-    // Umbral = altura real + 4px de margen (nunca un número mágico).
+    // Umbral = altura real de la topbar + 4px de margen.
     const onScroll = function () {
+      // La topbar ya es sticky (top:0). El header empieza debajo de ella.
+      // Cuando scroll > topbarH, el header se vuelve sólido (fijo en top:0).
       headerContainer.classList.toggle('solid', window.scrollY > topbarH + 4);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    // La topbar puede cambiar de alto (rotación / resize): re-medir.
     window.addEventListener('resize', measureTopbar, { passive: true });
     onScroll();
   }
