@@ -156,7 +156,7 @@ const sourceDefault = source ?? 'contacto-progresivo';
     <CheckCircle2 size={24} color="#059669" aria-hidden="true" />
     <span>¡Mensaje enviado con éxito!</span>
   </p>
-  <p class="form-thankyou__text">Te respondemos en 24 horas hábiles.</p>
+  <p class="form-thankyou__text">¡Recibimos tu consulta! Te respondemos en menos de 24 horas hábiles con una primera orientación sincera. Mientras tanto, podés escribirnos por WhatsApp si es urgente.</p>
 </div>
 
   <!-- Alternativas: WhatsApp (icono) + Preferís email? -->
@@ -334,11 +334,9 @@ const sourceDefault = source ?? 'contacto-progresivo';
               source: source,
               categoria: categoria.value,
             });
-            // Thank-you state: ocultar form y botones alternativos
+            // Thank-you state: ocultar form
             form.style.display = 'none';
-            if (formAlt && formAlt.classList.contains('form-alt')) {
-              formAlt.style.display = 'none';
-            }
+            // Dejamos visible el botón de WhatsApp (form-alt permanece)
             thankyou = document.querySelector('.form-thankyou');
             if (thankyou) thankyou.style.display = 'block';
             submitBtn.disabled = true;

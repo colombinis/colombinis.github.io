@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Accordion from '../../components/ui/Accordion.astro';
+
+const title = 'Diagnóstico IA express';
+const description = 'En una sesión de trabajo detectamos dónde tu negocio pierde horas y qué conviene automatizar primero. Recibís un diagnóstico en PDF con roadmap y ROI estimado. Se descuenta del proyecto si avanzás con la implementación.';
+---
+<Layout title={`${title} | SACsi`} description={description}>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__container">
+      <h1 class="hero__title">Diagnóstico IA express</h1>
+      <p class="hero__subtitle">
+        En una sesión de trabajo detectamos dónde tu negocio pierde horas y qué conviene automatizar primero. Recibís un diagnóstico en PDF con roadmap y ROI estimado.
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--form hero__cta--orange"
+          href="/contacto/"
+          >Quiero mi Diagnóstico IA</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- Detalle del servicio -->
+  <section class="section">
+    <div class="container">
+      <p>
+        El Diagnóstico IA express es el punto de partida ideal para cualquier
+        pyme que quiera explorar el potencial de la inteligencia artificial sin
+        comprometer recursos innecesarios. En una reunión de trabajo (presencial
+        o virtual) analizamos tus procesos actuales, identificamos cuellos de
+        bottle y proponemos un roadmap de implementación con estimación de retorno
+        de la inversión.
+      </p>
+      <p>
+        El entregable es un PDF que incluye:
+      </p>
+      <ul class="section__list">
+        <li>Mapa de procesos actuales y puntos de mejora.</li>
+        <li>Recomendaciones de herramientas y flujos de IA adaptados a tu pila
+          tecnológica.</li>
+        <li>Plan de implementación por fases con tiempos y costos estimados.</li>
+        <li>Cálculo de ROI esperado basado en casos similares.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Acordeón con FAQs -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Preguntas frecuentes</h2>
+      <Accordion
+        items={[
+          {
+            id: 'funciona-con-mi-sistema',
+            title: '¿La IA funciona con mi sistema actual (WordPress, Excel, WhatsApp, etc.)?',
+            content: 'Sí. Nuestras soluciones de IA están diseñadas para integrarse con las herramientas que ya usás: tu sitio web, tu CRM, tus hojas de cálculo, WhatsApp y más. No requerimos migraciones ni cambios drásticos en tu infraestructura existente.'
+          },
+          {
+            id: 'datos-seguros',
+            title: '¿Mis datos quedan seguros?',
+            content: 'Absolutamente. Trabajamos bajo estrictos estándares de confidencialidad y seguridad. Los datos de tu negocio permanecen en tus servidores o en la nube que ya utilizás, y nunca los compartimos con terceros sin tu autorización explícita.'
+          },
+          {
+            id: 'tiempo-implementacion',
+            title: '¿Cuánto tarda en implementarse un asistente de IA?',
+            content: 'Dependiendo de la complejidad, un asistente básico puede estar operativo en 2-4 semanas. Soluciones más avanzadas con integraciones múltiples pueden requerir entre 6 y 8 semanas. Siempre te entregamos un cronograma claro tras el diagnóstico inicial.'
+          },
+          {
+            id: 'post-diagnostico',
+            title: '¿Qué pasa si después del Diagnóstico no avanzo?',
+            content: 'El diagnóstico es un servicio independiente. Si decidís no continuar con la implementación, simplemente te llevás el informe y podés usarlo para tomar decisiones internas. No hay obligación ni costos ocultos.'
+          },
+          {
+            id: 'empresa-fuera-rosario',
+            title: '¿Trabajan con empresas de fuera de Rosario?',
+            content: 'Sí. Aunque nuestro equipo está basado en Rosario, atendemos a clientes de todo el país y del exterior mediante reuniones virtuales y despliegues remotos. La colaboración online es parte estándar de nuestro proceso.'
+          }
+        ]}
+        class="faq-accordion"
+      />
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <section class="section section--alt cta-banner">
+    <div class="container cta-banner__card">
+      <div class="cta-banner__content">
+        <h2>¿Listo para aplicar IA en tu negocio?</h2>
+        <p>Te decimos exactamente qué necesitás y qué no, sin migrar sistemas ni pagar de más.</p>
+      </div>
+      <div class="cta-banner__action">
+        <a class="hero__cta hero__cta--form" href="/contacto/">
+          Consultar sin cargo
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

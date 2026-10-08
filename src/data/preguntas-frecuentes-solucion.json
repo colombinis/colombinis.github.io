@@ -109,6 +109,56 @@
         "servicio": "software-a-medida",
         "categoria": "apps-portales"
       }
+    },
+    {
+      "id": "ia-funciona-sistema",
+      "titulo": "¿La IA funciona con mi sistema actual (WordPress, Excel, WhatsApp, etc.)?",
+      "respuesta": "Sí. La IA se integra con lo que ya usás: podemos conectar con WordPress, Excel, WhatsApp y otros sistemas sin requerir migraciones ni cambios drásticos en tus herramientas.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "datos-seguros",
+      "titulo": "¿Mis datos quedan seguros?",
+      "respuesta": "Totalmente. Trabajamos bajo estrictos protocolos de confidencialidad y seguridad. Tus datos permanecen en tu infraestructura o en entornos encriptados que controlás, sin compartir con terceros.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "tiempo-implementacion-ia",
+      "titulo": "¿Cuánto tarda en implementarse un asistente de IA?",
+      "respuesta": "Un asistente básico puede estar listo en 2-4 semanas tras el Diagnóstico IA. El tiempo depende de la complejidad y las integraciones necesarias, pero siempre te entregamos un cronograma claro.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "post-diagnostico-no-avanza",
+      "titulo": "¿Qué pasa si después del Diagnóstico no avanzo?",
+      "respuesta": "El Diagnóstico IA es un servicio independiente. Si decidís no continuar, simplemente te quedás con el informe y el roadmap. No hay obligación ni costos ocultos.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
+    },
+    {
+      "id": "empresas-fuera-rosario",
+      "titulo": "¿Trabajan con empresas de fuera de Rosario?",
+      "respuesta": "Sí. Aunque estamos en Rosario, atendemos a clientes de todo Argentina y del exterior de forma 100% remota mediante videollamadas, correo y teléfono.",
+      "donde_mostrar": {
+        "nivel": "general",
+        "servicio": null,
+        "categoria": null
+      }
     }
   ]
 }

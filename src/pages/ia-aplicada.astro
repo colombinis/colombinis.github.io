@@ -1,0 +1,300 @@
+---
+// Página: IA Aplicada
+import Layout from '../layouts/Layout.astro';
+import { getServicio, getCategoriasByServicio } from '../lib/data-utils';
+import Card from '../components/ui/Card.astro';
+import Button from '../components/ui/Button.astro';
+import IconResolver from '../components/ui/IconResolver.astro';
+
+const servicio = getServicio('ia-aplicada');
+
+if (!servicio) {
+  throw new Error('No se encontró servicio=ia-aplicada');
+}
+
+const { title: svcTitle, href: svcHref, claim: svcClaim, short: svcShort, value_prop: svcValueProp, categoria_section_title, imagen } = servicio;
+const categorias = getCategoriasByServicio(servicio.id);
+---
+<Layout
+  title={`${svcTitle} | SACsi`}
+  description={svcShort}
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__container">
+      <h1 class="hero__title">IA Aplicada</h1>
+      <p class="hero__subtitle">
+        Inteligencia artificial sobre los sistemas que tu negocio ya usa.
+        Sin migrar. Sin modas. Sin complicaciones.
+      </p>
+      <div class="hero__actions">
+        <a
+          class="hero__cta hero__cta--form hero__cta--orange"
+          href="/contacto/"
+          >Te decimos qué necesitás… y qué no. Consulta sin cargo</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Qué aplicamos? -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">{categoria_section_title}</h2>
+      <div class="cards-grid">
+        {categorias.map((cat) => (
+          <Card
+            as="article"
+            variant="media-accent"
+            padding="none"
+            class="service-card"
+            href={`${svcHref}${cat.id}/`}
+          >
+            <div class="ui-card__media">
+              <img src={cat.imagen ?? cat.icon} alt={cat.title} loading="lazy" />
+            </div>
+            <div class="ui-card__body service-card__body">
+              <h3 class="service-card__title">
+                <a href={`${svcHref}${cat.id}/`}>{cat.title}</a>
+              </h3>
+              <p class="service-card__desc">{cat.descripcion}</p>
+              <p class="service-card__claim">{cat.claim}</p>
+              <Button
+                variant="primary"
+                size="icon"
+                round
+                href={`${svcHref}${cat.id}/`}
+                aria-label={`Ver categoría ${cat.title}`}
+              >
+                <IconResolver name="chevron-right" size={20} />
+              </Button>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Casos reales de IA Aplicada -->
+  <section class="section section--alt">
+    <div class="container">
+      <h2 class="section__title">Casos reales de IA Aplicada</h2>
+      <div class="cases-grid">
+        <!-- Caso 1: Asistente de consultas 24/7 para estudio contable -->
+        <article class="case-card">
+          <div class="case-header">
+            <h3 class="case-title">Asistente de consultas 24/7 para estudio contable</h3>
+          </div>
+          <div class="case-body">
+            <div class="case-problem">
+              <h4>Problema:</h4>
+              <p>El estudio recibía decenas de mensajes por WhatsApp todos los días pidiendo estados de cuenta, vencimientos y liquidaciones.</p>
+            </div>
+            <div class="case-solution">
+              <h4>Solución justa:</h4>
+              <p>Asistente de IA entrenado con la información real del estudio que responde automáticamente el 70% de las consultas frecuentes y deriva solo lo importante.</p>
+            </div>
+            <div class="case-result">
+              <h4>Resultado medible:</h4>
+              <p>Reducción del 65% de mensajes manuales y respuesta inmediata las 24 horas.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Caso 2: Generación automática de descripciones de producto -->
+        <article class="case-card">
+          <div class="case-header">
+            <h3 class="case-title">Generación automática de descripciones de producto</h3>
+          </div>
+          <div class="case-body">
+            <div class="case-problem">
+              <h4>Problema:</h4>
+              <p>Cargar 200 productos nuevos al e-commerce llevaba días de trabajo manual escribiendo títulos y descripciones.</p>
+            </div>
+            <div class="case-solution">
+              <h4>Solución justa:</h4>
+              <p>Flujo de IA que toma la ficha técnica y genera títulos + descripciones optimizadas automáticamente.</p>
+            </div>
+            <div class="case-result">
+              <h4>Resultado medible:</h4>
+              <p>De 2 días de trabajo a 25 minutos. Publicación 8 veces más rápida.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resultados medibles / Testimonios -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section__title">Lo que dicen nuestros clientes</h2>
+      <div class="testimonials-grid">
+        {/* TODO: Implement testimonials from data when available */}
+        <blockquote class="testimonial-card">
+          <p>«Gracias al asistente de IA, nuestro estudio contable redujo la carga de trabajo diario y ahora podemos enfocarnos en tareas de mayor valor.»</p>
+          <cite>Estudio Contable Rosario</cite>
+        </blockquote>
+        <blockquote class="testimonial-card">
+          <p>«La generación automática de descripciones nos permitió duplicar nuestro catálogo en la mitad del tiempo.»</p>
+          <cite>E-commerce de Indumentaria</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- CTA final -->
+  <section class="section section--alt cta-banner">
+    <div class="container cta-banner__card">
+      <div class="cta-banner__content">
+        <h2>¿Listo para aplicar IA en tu negocio?</h2>
+        <p>Te decimos exactamente qué necesitás y qué no, sin migrar sistemas ni pagar de más.</p>
+      </div>
+      <div class="cta-banner__action">
+        <a class="hero__cta hero__cta--form" href="/contacto/">
+          ¿Tenés una duda o proyecto en mente?
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cases-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 601px) {
+    .cases-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .case-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .case-header {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .case-title {
+    font-size: 1.25rem;
+    color: var(--primary);
+    margin: 0;
+  }
+  
+  .case-body {
+    flex-grow: 1;
+  }
+  
+  .case-problem, .case-solution, .case-result {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .case-problem h4, .case-solution h4, .case-result h4 {
+    font-size: 0.95rem;
+    color: var(--tertiary-dark);
+    margin: 0 0 var(--spacing-xs) 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .case-problem p, .case-solution p, .case-result p {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .testimonials-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: 1fr;
+  }
+  
+  @media (min-width: 601px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .testimonial-card {
+    background: #F8FAFC;
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg);
+    border-left: 4px solid var(--tertiary);
+  }
+  
+  .testimonial-card blockquote {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--secondary);
+    margin: 0 0 var(--spacing-md) 0;
+    line-height: 1.6;
+  }
+  
+  .testimonial-card cite {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  
+  .cta-banner {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  
+  .cta-banner__card {
+    background: #FFFFFF;
+    border: 2px solid var(--tertiary);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(10, 124, 255, 0.08);
+  }
+  
+  @media (min-width: 768px) {
+    .cta-banner__card {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+  
+  .cta-banner__content h2 {
+    font-size: 1.4rem;
+    margin: 0 0 var(--spacing-xs);
+    color: var(--primary);
+  }
+  
+  .cta-banner__content p {
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin: 0;
+    max-width: 580px;
+    line-height: 1.5;
+  }
+  
+  .cta-banner__action .hero__cta {
+    width: 100%;
+    max-width: 360px;
+    min-width: 0;
+    white-space: normal;
+    text-align: center;
+  }
+</style>
