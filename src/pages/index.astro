@@ -1,6 +1,6 @@
 ---
 // HOME — estructura estilo donweb.com/es-ar (rama feature/home-donweb-structure)
-//
+// 
 // Orden de secciones (relevado de donweb, adaptado a contenido SACsi):
 //   0. Topbar promo fina (slot pre-header)                     [nuevo]
 //   1. Header transparente sobre hero → sólido al scroll       [overlay]
@@ -19,44 +19,20 @@ import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
 import SocialProofSection from '../components/SocialProofSection.astro';
 import PorQueSacsiSection from '../components/PorQueSacsiSection.astro';
 import FaqSection from '../components/FaqSection.astro';
+import Hero from '../components/Hero.astro';
 ---
-
+ 
 <Layout
   title="Tecnología Justa para PyMEs en Rosario"
   description="Tecnología justa para emprendedores y PyMEs. IA aplicada, automatización, software a medida y presencia online sin pagar de más ni modas."
-  overlayHeader={true}
+  
 >
-  <Fragment slot="pre-header">
-    <div class="topbar-promo">
-      ¿No sabés por dónde empezar? Conocé el <a href="/soluciones/diagnostico-ia/">Diagnóstico IA express</a> y recibís un roadmap con ROI estimado.
-    </div>
-  </Fragment>
-
+  <Hero />
+  
   <!-- 2. Hero slider: un slide por servicio (estilo donweb) -->
-  <HeroSlider />
-
-  <!-- 3. Hero de marca (el original) debajo del slider: propuesta de valor
-       + CTA naranja, fondo claro, texto navy — combinación de la referencia
-       del dueño (sacsi-hero-text.png). -->
-  <section id="hero" class="hero hero--brand">
-    <div class="hero__container">
-      <h1 class="hero__title">Tecnología justa para emprendedores y PyMEs en Rosario. Sin sobredimensionar. Sin modas. Solo lo que realmente necesitás para crecer.</h1>
-      <p class="hero__subtitle">
-        Más de 15 años acompañando a dueños de pequeños negocios y estudios de diseño o marketing en Rosario. Analizamos tu realidad para que inviertas únicamente en lo que genera valor real y se pague sola: sin licencias innecesarias ni sistemas sobredimensionados.
-      </p>
-      <div class="hero__actions">
-        <a
-          class="hero__cta hero__cta--form hero__cta--orange"
-          href="/contacto/"
-          >Te decimos qué necesitás… y qué no. Consulta sin cargo</a
-        >
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Soluciones para tu negocio (los 4 servicios) -->
+  <HeroSlider />  <!-- 4. Soluciones para tu negocio (los 4 servicios) -->
   <SolucionesSection />
-
+  
   <!-- 5. Banner CTA Diagnóstico IA (la puerta de entrada al funnel) -->
   <section class="section section--alt diagnostico-banner">
     <div class="container diagnostico-banner__card">
@@ -76,7 +52,7 @@ import FaqSection from '../components/FaqSection.astro';
       </div>
     </div>
   </section>
-
+  
   <!-- 6. Casos reales (Problema → Solución justa → Resultado medible) -->
   <CasosAnonimosSection
     title="Experiencia comprobada en casos reales"
@@ -84,10 +60,10 @@ import FaqSection from '../components/FaqSection.astro';
     hideLabel={true}
     hideMeta={true}
   />
-
+  
   <!-- 7. Testimonios / Resultados que hablan — debajo de Casos reales (feedback dueño) -->
   <SocialProofSection />
-
+  
   <!-- 8. Cómo trabajamos -->
   <section id="como-trabajamos" class="section">
     <div class="container">
@@ -128,10 +104,10 @@ import FaqSection from '../components/FaqSection.astro';
       </div>
     </div>
   </section>
-
+  
   <!-- 8. POR QUÉ SACSI (4 pilares, patrón donweb) -->
   <PorQueSacsiSection />
-
+  
   <!-- 9. Lead magnet: Checklist de Automatización -->
   <section class="section section--alt lead-magnet-banner">
     <div class="container lead-magnet-card">
@@ -150,7 +126,7 @@ import FaqSection from '../components/FaqSection.astro';
       </div>
     </div>
   </section>
-
+  
   <!-- FAQ -->
   <section id="faq" class="section section--alt">
     <div class="container">
@@ -158,7 +134,7 @@ import FaqSection from '../components/FaqSection.astro';
       <FaqSection />
     </div>
   </section>
-
+  
 </Layout>
 
 <style>
@@ -170,17 +146,17 @@ import FaqSection from '../components/FaqSection.astro';
     padding-bottom: var(--spacing-xxl);
     border-bottom: 1px solid #EEF1F5;
   }
-
+  
   .hero__cta--orange,
   .hero__cta--orange:hover {
     background-color: #F16529;
     color: #FFFFFF;
   }
-
+  
   .hero__cta--orange:hover {
     background-color: #D9531E;
   }
-
+  
   .diagnostico-banner {
     padding: var(--spacing-xl) var(--spacing-md);
   }
@@ -228,7 +204,7 @@ import FaqSection from '../components/FaqSection.astro';
       text-align: left;
     }
   }
-
+  
   .lead-magnet-banner {
     padding: var(--spacing-xxl) var(--spacing-md);
   }

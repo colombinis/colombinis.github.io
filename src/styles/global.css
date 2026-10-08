@@ -1029,21 +1029,24 @@ body.header-overlay main {
   text-decoration: underline;
 }
 
-/* La topbar es estática: scrollea con la página (como donweb). El header
-   fijo arranca DEBAJO de ella y sube a top:0 cuando se vuelve sólido
-   (para entonces la topbar ya scrolleó fuera).
-   --topbar-h la mide el JS de Header.astro (la topbar envuelve a 2-3 líneas
-   en mobile: 34px fijos la pisaban — bug reportado por el dueño). */
+/* La topbar es sticky: se queda fija arriba al scrollear.
+   Cuando el header se vuelve sólido (topbar fuera de vista), el header ocupa top:0. */
 body.header-overlay .topbar-promo {
-  position: static;
+  position: sticky;
+  top: 0;
+  z-index: 1001;
 }
 
 body.header-overlay #header-container {
-  top: var(--topbar-h, 34px); /* debajo de la topbar estática (scroll 0) */
+  position: absolute !important;
+  top: var(--topbar-h, 34px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
 }
 
 body.header-overlay #header-container.solid {
-  top: 0; /* topbar fuera de vista -> el menú sólido ocupa todo el ancho superior */
+  top: 0 !important;
 }
 
 /* Cards de casos: patrón claro (no tienen imagen de cabecera);
