@@ -1,9 +1,9 @@
 ---
 // Footer con 4 columnas:
-// Col 1: Logo + texto "Soluciones Informáticas" + links de servicios (desde src/data/servicios/ + categorias/)
+// Col 1: Listado de servicios (desde src/data/servicios/ + categorias/)
 // Col 2: Listado de soluciones (desde src/data/soluciones/listado-soluciones.json)
 // Col 3: Listado de casos de éxito
-// Col 4: NAP (tel/email/mapa) + redes sociales Instagram y YouTube debajo del email
+// Col 4: Logo + NAP (tel/email/mapa) + redes sociales Instagram y YouTube debajo del email
 // CTA banner "¿Tenés una duda o proyecto en mente?": OCULTO en /contacto (feedback dueño 2026-10-06)
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
@@ -35,7 +35,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     gap: var(--spacing-xl);
   }
 
-  /* Grid de 3 columnas */
+  /* Grid de columnas (1 en mobile, 4 desde 601px) */
   .footer-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -49,12 +49,12 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     margin: 0 0 var(--spacing-md);
   }
 
-  /* ---------- Col 1: Logo + servicios ---------- */
+  /* ---------- Col 4: Logo ---------- */
   .footer-logo-wrap {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
   }
   .footer-logo-wrap :global(.logo-brand) {
     display: inline-flex;
@@ -320,11 +320,9 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
 <div id="footer-container">
   <footer class="wrapper">
     <div class="footer-grid">
-      <!-- Col 1: Logo + servicios -->
+      <!-- Col 1: Servicios -->
       <div class="footer-col">
-        <div class="footer-logo-wrap">
-          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
-        </div>
+        <h3>Servicios</h3>
         <div class="footer-solutions">
           {servicios.map((sol) => (
             <div class="footer-solution-group">
@@ -380,9 +378,11 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
         </div>
       </div>
 
-      <!-- Col 4: NAP + Google Business Profile -->
+      <!-- Col 4: Logo + NAP + Google Business Profile -->
       <div class="footer-col">
-        <h3>{config.site.name}</h3>
+        <div class="footer-logo-wrap">
+          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
+        </div>
         <div class="footer-nap">
           <p class="footer-nap__item">
             <span class="footer-nap__icon" aria-hidden="true">
