@@ -13,14 +13,18 @@ Sitio web institucional de SACsi — soluciones informáticas para PyMEs en Rosa
 
 **Sitio en producción:** [sacsi.com.ar](https://sacsi.com.ar)
 
+---
+
 ## Desarrollo
 
 ```bash
 npm install
-npm run dev      # http://localhost:8000
+npm run dev      # http://localhost:3000
 npm run build    # → dist/
 npm run preview  # sirve dist/ en :8000
 ```
+
+---
 
 ## Estructura
 
@@ -34,6 +38,8 @@ src/
 └── styles/       # CSS global con custom properties
 ```
 
+---
+
 ## Documentación interna
 
 La documentación de arquitectura, tareas, specs y el backoffice están en el repositorio privado:
@@ -41,6 +47,20 @@ La documentación de arquitectura, tareas, specs y el backoffice están en el re
 - **Contenido:** `_ai_context/`, `src/pages/padmin/`, `src/lib/rentabilidad.*`, scripts, diseño
 
 Las nuevas Features y tareas se crean exclusivamente en `colombinis/sacsi-interno`, siguiendo el protocolo de trazabilidad negocio → Feature → tarea → Issue → GitHub Project 4.
+
+---
+
+## 📋 QA Onboarding
+
+¿Necesitas validar calidad del sitio? Usa nuestro paquete de onboarding QA:
+
+**Ubicación:** `/workspace/portfolio/onboarding/qa-onboarding-sacsi/`
+
+**Inicio rápido:** Lee `QUICKSTART.md` - te guía paso a paso sin necesidad de permisos de admin.
+
+**Acceso:** https://github.com/colombinis/sacsi-com-ar
+
+---
 
 ## Design tokens
 

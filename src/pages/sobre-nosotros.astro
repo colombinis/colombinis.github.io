@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
+import ClientesConfian from '../components/ClientesConfian.astro';
 
 const clientes = [
   {
@@ -80,7 +81,7 @@ const clientes = [
   <section class="section section--alt">
     <div class="container philosophy-grid">
       <Card variant="default" padding="lg" class="bio-card">
-        <div class="bio-avatar">SC</div>
+        <img src="/assets/seba-opt.webp" alt="Sebastián Alejandro Colombini" class="bio-avatar" />
         <h2 class="bio-name">Sebastián Alejandro Colombini</h2>
         <p class="bio-role">Fundador & Lead Developer</p>
         <span class="bio-location">Rosario, Santa Fe, Argentina</span>
@@ -149,77 +150,10 @@ const clientes = [
     </div>
   </section>
 
-  <!-- Sección Equipo -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="pillars-header">
-        <Badge variant="accent" size="sm" class="section-tag">QUIÉNES SOMOS</Badge>
-        <h2 class="section__title">Equipo</h2>
-        <p class="section__subtitle">Un equipo técnico especializado, cercano y comprometido con los resultados de tu negocio.</p>
-      </div>
-      <div class="team-grid">
-        <Card variant="default" padding="lg" class="team-card equipo-card">
-          <div class="team-card__avatar iniciales">SC</div>
-          <h3 class="team-card__name">Sebastián Colombini</h3>
-          <p class="team-card__role">Fundador / Lead Developer</p>
-          <p class="team-card__bio bio-corta">Dirección técnica y arquitectura de sistemas con más de 15 años de trayectoria.</p>
-        </Card>
-
-        <Card variant="default" padding="lg" class="team-card equipo-card">
-          <div class="team-card__avatar iniciales">DI</div>
-          <h3 class="team-card__name">Equipo de Desarrollo</h3>
-          <p class="team-card__role">Desarrollo e Integraciones</p>
-          <p class="team-card__bio bio-corta">Especialistas en automatizaciones ligeras y sistemas a medida para optimizar tu día a día.</p>
-        </Card>
-
-        <Card variant="default" padding="lg" class="team-card equipo-card">
-          <div class="team-card__avatar iniciales">SA</div>
-          <h3 class="team-card__name">Soporte y Acompañamiento</h3>
-          <p class="team-card__role">Soporte y Evolución Continua</p>
-          <p class="team-card__bio bio-corta">Te acompañamos después de la entrega para que todo siga funcionando sin complicaciones.</p>
-        </Card>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- Sección Clientes que confían con Logos Reales -->
-  <section class="section">
-    <div class="container">
-      <div class="clients-header">
-        <Badge variant="accent" size="sm" class="section-tag">TRAYECTORIA Y CONFIANZA</Badge>
-        <h2 class="section__title">Clientes que confían</h2>
-        <p class="section__subtitle">
-          Empresas, organizaciones y estudios que confían en nuestras soluciones, integraciones y acompañamiento técnico.
-        </p>
-      </div>
-
-      <div class="clients-logo-grid">
-        {clientes.map((c) => (
-          <Card
-            variant="interactive"
-            href={c.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={`Visitar sitio de ${c.name}`}
-            padding="md"
-            class="client-logo-card"
-          >
-            <div class="client-logo-wrapper">
-              <img
-                src={c.logo}
-                alt={`Logo de ${c.name}`}
-                loading="lazy"
-                decoding="async"
-                class="client-logo-img"
-              />
-            </div>
-            <span class="client-logo-name">{c.name}</span>
-            <span class="client-logo-desc">{c.description}</span>
-          </Card>
-        ))}
-      </div>
-    </div>
-  </section>
+  <ClientesConfian clientes={clientes} />
 
   <!-- Cómo trabajamos -->
   <section class="section section--alt">
@@ -463,71 +397,5 @@ const clientes = [
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
-  }
-
-  @media (min-width: 640px) {
-    .clients-logo-grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-lg);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .clients-logo-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  /* .client-logo-card: superficie, borde, radio y padding los aporta
-     <Card variant="interactive" padding="md"> (renderiza <a> con href) */
-  .client-logo-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  .client-logo-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    border-color: var(--tertiary);
-  }
-
-  .client-logo-wrapper {
-    height: 64px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--spacing-sm);
-    padding: 0 var(--spacing-xs);
-  }
-
-  .client-logo-img {
-    max-height: 48px;
-    max-width: 150px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-  }
-
-  .client-logo-card:hover .client-logo-img {
-    transform: scale(1.04);
-  }
-
-  .client-logo-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 2px;
-  }
-
-  .client-logo-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.35;
   }
 </style>

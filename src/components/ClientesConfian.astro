@@ -1,0 +1,201 @@
+---
+// Componente reutilizable: Sección "Clientes que confían"
+// Uso: import ClientesConfian from '../components/ClientesConfian.astro';
+//      <ClientesConfian clientes={clientes} />
+// Los datos de clientes pueden pasarse como prop o usar los por defecto.
+
+interface Cliente {
+  name: string;
+  url: string;
+  logo: string;
+  description: string;
+}
+
+interface Props {
+  clientes?: Cliente[];
+  title?: string;
+  subtitle?: string;
+  badgeText?: string;
+  mode?: 'default' | 'logos-only';
+}
+
+const {
+  clientes = [],
+  title = 'Clientes que confían',
+  subtitle = 'Empresas, organizaciones y estudios que confían en nuestras soluciones, integraciones y acompañamiento técnico.',
+  badgeText = 'TRAYECTORIA Y CONFIANZA',
+  mode = 'default'
+} = Astro.props;
+
+import Card from './ui/Card.astro';
+import Badge from './ui/Badge.astro';
+---
+
+<!-- Sección Clientes que confían -->
+<section class="section" aria-labelledby="clientes-confian-title">
+  <div class="container">
+    {mode === 'default' && (
+      <div class="clients-header">
+        <Badge variant="accent" size="sm" class="section-tag">
+          {badgeText}
+        </Badge>
+        <h2 id="clientes-confian-title" class="section__title">{title}</h2>
+        <p class="section__subtitle">{subtitle}</p>
+      </div>
+    )}
+
+    <div class="clients-logo-grid">
+      {clientes.map((c) => (
+        <Card
+          variant="interactive"
+          as="div"
+          target="_blank"
+          rel="noopener noreferrer"
+          title={` ${c.name}`}
+          padding="md"
+          class={`client-logo-card ${mode === 'logos-only' ? 'client-logo-card--logos-only' : ''}`}
+        >
+          <div class="client-logo-wrapper">
+            <img
+              src={c.logo}
+              alt={`Logo de ${c.name}`}
+              loading="lazy"
+              decoding="async"
+              class="client-logo-img"
+            />
+          </div>
+          {mode === 'default' && (
+            <>
+              <span class="client-logo-name">{c.name}</span>
+              <span class="client-logo-desc">{c.description}</span>
+            </>
+          )}
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-tag {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--tertiary-dark);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-xs);
+    display: inline-block;
+  }
+
+  .section__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0 0 var(--spacing-sm);
+    line-height: 1.25;
+  }
+
+  .section__subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary);
+    margin: 0;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Grid responsivo */
+  .clients-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .clients-logo-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .clients-logo-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* .client-logo-card: superficie, borde, radio y padding los aporta
+     <Card variant="interactive" padding="md"> (renderiza <a> con href) */
+  .client-logo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    min-height: 140px;
+  }
+
+  .client-logo-card--logos-only {
+    min-height: auto;
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .client-logo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-color: var(--tertiary);
+  }
+
+  .client-logo-wrapper {
+    height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
+    background-color: #0a7cff36; /* azul claro con opacidad */
+    border-radius: var(--rounded-sm, 8px);
+  }
+
+  .client-logo-card--logos-only .client-logo-wrapper {
+    margin-bottom: 0;
+    height: auto;
+    padding: 0;
+    border-radius: var(--rounded-sm, 8px);
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+
+  .client-logo-img {
+    max-height: 48px;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  .client-logo-card:hover .client-logo-img {
+    transform: scale(1.04);
+  }
+
+  .client-logo-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  .client-logo-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+</style>

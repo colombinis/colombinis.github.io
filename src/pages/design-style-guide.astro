@@ -10,6 +10,7 @@ import Accordion from '../components/ui/Accordion.astro';
 import Tabs from '../components/ui/Tabs.astro';
 import SliderControls from '../components/ui/SliderControls.astro';
 import IconResolver from '../components/ui/IconResolver.astro';
+import ClientesConfian from '../components/ClientesConfian.astro';
 import {
   ArrowRight,
   ShieldCheck,
@@ -85,6 +86,7 @@ const tabsDemo = [
         <a href="#formularios" class="guide-nav__link">Formularios</a>
         <a href="#iconos" class="guide-nav__link">Iconografía</a>
         <a href="#tarjetas" class="guide-nav__link">Composiciones · Tarjetas</a>
+        <a href="#clientes-confian" class="guide-nav__link">Organismos · Clientes</a>
         <a href="#controles" class="guide-nav__link">Tabs</a>
         <a href="#acordeon" class="guide-nav__link">Acordeón</a>
         <a href="#slider-controls" class="guide-nav__link">Slider</a>
@@ -493,6 +495,59 @@ const tabsDemo = [
           </div>
         </Card>
       </div>
+    </section>
+
+    <!-- 6b. ORGANISMOS — CLIENTES QUE CONFIAN -->
+    <section id="clientes-confian" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>6b. Organismos — Sección Clientes que Confían (ClientesConfian.astro)</h2>
+        <p>Componente reutilizable que expone la lista de clientes con logos reales. Grid responsivo: 2 columnas (mobile), 3 (tablet), 4 (desktop). Consumido en <code>/sobre-nosotros</code>.</p>
+      </div>
+
+      <div class="component-showcase">
+        <div class="showcase-row">
+          <span class="showcase-label">Variante Default (sobre-nosotros):</span>
+          <div class="btn-group-wrap">
+            <ClientesConfian
+              clientes={[
+                { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
+                { name: 'Syloper', url: 'https://syloper.com/', logo: '/assets/clientes/syloper.svg', description: 'Consultoría y desarrollo de software' },
+                { name: 'Ameba', url: 'https://www.ameba.com.uy/en', logo: '/assets/clientes/ameba.svg', description: 'Diseño y desarrollo de plataformas digitales' },
+                { name: 'SOESGPYLA', url: 'https://www.soesgpyla.com.ar/', logo: '/assets/clientes/soesgpyla.svg', description: 'Sindicato Obreros Estaciones de Servicio' },
+                { name: 'Grupo El Positivo', url: 'https://www.grupoelpositivo.com.ar/', logo: '/assets/clientes/grupo-el-positivo.png', description: 'Comercialización y distribución de artículos' },
+                { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
+                { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
+                { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
+                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' }
+              ]}
+            />
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Variante Logos Only (solo imágenes):</span>
+          <div class="btn-group-wrap">
+            <ClientesConfian
+              mode="logos-only"
+              clientes={[
+                { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
+                { name: 'Syloper', url: 'https://syloper.com/', logo: '/assets/clientes/syloper.svg', description: 'Consultoría y desarrollo de software' },
+                { name: 'Ameba', url: 'https://www.ameba.com.uy/en', logo: '/assets/clientes/ameba.svg', description: 'Diseño y desarrollo de plataformas digitales' },
+                { name: 'SOESGPYLA', url: 'https://www.soesgpyla.com.ar/', logo: '/assets/clientes/soesgpyla.svg', description: 'Sindicato Obreros Estaciones de Servicio' },
+                { name: 'Grupo El Positivo', url: 'https://www.grupoelpositivo.com.ar/', logo: '/assets/clientes/grupo-el-positivo.png', description: 'Comercialización y distribución de artículos' },
+                { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
+                { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
+                { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
+                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' }
+              ]}
+            />
+          </div>
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> usa el componente <code>ClientesConfian.astro</code> en lugar de duplicar markup. Los logos viven en <code>/public/assets/clientes/</code> (WebP/SVG/PNG). El componente es accesible (aria-labelledby en el h2, alt descriptivos, focus visible). Grid único responsivo: 2/3/4 columnas. Modos: <code>default</code> (con textos) y <code>logos-only</code> (solo imágenes).
+      </p>
     </section>
 
     <!-- 7. COMPOSICIONES — TABS -->
