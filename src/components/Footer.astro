@@ -1,9 +1,9 @@
 ---
 // Footer con 4 columnas:
-// Col 1: Listado de servicios (desde src/data/servicios/ + categorias/)
-// Col 2: Listado de soluciones (desde src/data/soluciones/listado-soluciones.json)
-// Col 3: Listado de casos de éxito
-// Col 4: Logo + NAP (tel/email/mapa) + redes sociales Instagram y YouTube debajo del email
+// Col 1: Logo + NAP (solo iconos clickeables: tel, email, Instagram, YouTube, Maps)
+// Col 2: Listado de servicios (desde src/data/servicios/ + categorias/)
+// Col 3: Listado de soluciones (desde src/data/soluciones/listado-soluciones.json)
+// Col 4: Listado de casos de éxito
 // CTA banner "¿Tenés una duda o proyecto en mente?": OCULTO en /contacto (feedback dueño 2026-10-06)
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
 import LogoBrand from './LogoBrand.astro';
@@ -43,13 +43,13 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
   }
 
   .footer-col h3 {
-    font-size: 1rem;
+    font-size: 25px;
     font-weight: 600;
-    color: #E0E0E0;
+    color: #D9531E; /* naranja profundo: 3.76:1 sobre #252628 → AA para texto grande (≥24px) */
     margin: 0 0 var(--spacing-md);
   }
 
-  /* ---------- Col 4: Logo ---------- */
+  /* ---------- Col 1: Logo ---------- */
   .footer-logo-wrap {
     display: flex;
     justify-content: flex-start;
@@ -73,6 +73,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
 
+  /* ---------- Col 2: Listado de servicios ---------- */
   .footer-solutions {
     display: flex;
     flex-direction: column;
@@ -113,7 +114,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     opacity: 1;
   }
 
-  /* ---------- Col 2: Listado de soluciones ---------- */
+  /* ---------- Col 3: Listado de soluciones ---------- */
   .footer-soluciones {
     display: flex;
     flex-direction: column;
@@ -141,7 +142,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     color: var(--tertiary);
   }
 
-  /* ---------- Col 3: Listado de casos de éxito ---------- */
+  /* ---------- Col 4: Listado de casos de éxito ---------- */
   .footer-casos {
     display: flex;
     flex-direction: column;
@@ -235,46 +236,28 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     text-decoration: underline;
   }
 
-  /* ---------- Col 4: NAP + Contacto ---------- */
+  /* ---------- Col 1: NAP + Contacto (solo iconos) ---------- */
   .footer-nap {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacing-xs);
   }
-  .footer-nap__item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin: 0;
-    font-size: 0.92rem;
-    line-height: 1.5;
-    color: #D1D5DB; /* Gris claro de alta legibilidad sobre fondo oscuro #252628 */
-  }
-  .footer-nap__item strong {
-    color: #F9FAFB; /* Blanco suave destacado */
-    font-weight: 600;
-  }
-  .footer-nap__icon {
+  .footer-nap__link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #60A5FA; /* Azul accesible y vibrante para fondos oscuros */
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .footer-nap__text {
-    flex: 1;
-    overflow-wrap: break-word;
-  }
-  .footer-nap__link {
-    color: #60A5FA;
+    width: 44px;   /* target táctil mínimo (WCAG 2.5.5) */
+    height: 44px;
+    margin-left: -12px; /* alineación óptica con el borde del logo */
+    color: var(--surface); /* Surface #FFFFFF */
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease, text-decoration 0.2s ease;
   }
-  .footer-nap__link:hover {
-    color: #93C5FD;
-    text-decoration: underline;
+  .footer-nap__link:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   .footer-copy {
@@ -284,8 +267,9 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     margin: 0;
   }
 
-  /* Desktop: 4 columnas */
-  @media (min-width: 601px) {
+  /* Desktop: 4 columnas — desde 768px para que la Col 1 no colapse
+     (con 601px quedaba en 32-65px y los iconos se apilaban en 5 filas) */
+  @media (min-width: 768px) {
     .footer-grid {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: var(--spacing-xxl);
@@ -320,7 +304,63 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
 <div id="footer-container">
   <footer class="wrapper">
     <div class="footer-grid">
-      <!-- Col 1: Servicios -->
+      <!-- Col 1: Logo + NAP (tel/email/mapa + redes) -->
+      <div class="footer-col">
+        <div class="footer-logo-wrap">
+          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
+        </div>
+        <!-- Solo iconos: cada <a> envuelve el icono y lo nombra con aria-label -->
+        <div class="footer-nap">
+          <a
+            class="footer-nap__link"
+            href={`tel:${config.contact.phone_display}`}
+            aria-label={`Llamar al ${config.contact.phone_display}`}
+            title="Llamar"
+          >
+            <Phone size={20} aria-hidden="true" />
+          </a>
+          <a
+            class="footer-nap__link"
+            href={`mailto:${config.contact.email}`}
+            aria-label={`Enviar un email a ${config.contact.email}`}
+            title="Email"
+          >
+            <Mail size={20} aria-hidden="true" />
+          </a>
+          <a
+            class="footer-nap__link"
+            href={config.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram de SACsi"
+            title="Instagram"
+          >
+            <Instagram size={20} aria-hidden="true" />
+          </a>
+          <a
+            class="footer-nap__link"
+            href={config.social.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube de SACsi"
+            title="YouTube"
+          >
+            <Youtube size={20} aria-hidden="true" />
+          </a>
+          <a
+            class="footer-nap__link"
+            href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Argentina"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ver ubicación en Google Maps"
+            title="Google Maps"
+          >
+            <MapPin size={20} aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Col 2: Servicios -->
       <div class="footer-col">
         <h3>Servicios</h3>
         <div class="footer-solutions">
@@ -342,7 +382,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
         </div>
       </div>
 
-      <!-- Col 2: Listado de soluciones -->
+      <!-- Col 3: Listado de soluciones -->
       <div class="footer-col">
         <h3>Soluciones</h3>
         <div class="footer-soluciones">
@@ -363,7 +403,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
         </div>
       </div>
 
-      <!-- Col 3: Listado de casos de éxito -->
+      <!-- Col 4: Listado de casos de éxito -->
       <div class="footer-col">
         <h3>Casos de éxito</h3>
         <div class="footer-casos">
@@ -378,61 +418,6 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
         </div>
       </div>
 
-      <!-- Col 4: Logo + NAP + Google Business Profile -->
-      <div class="footer-col">
-        <div class="footer-logo-wrap">
-          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
-        </div>
-        <div class="footer-nap">
-          <p class="footer-nap__item">
-            <span class="footer-nap__icon" aria-hidden="true">
-              <Phone size={18} />
-            </span>
-            <span class="footer-nap__text">
-              <strong>Tel:</strong> <a class="footer-nap__link" href={`tel:${config.contact.phone_display}`}>{config.contact.phone_display}</a>
-            </span>
-          </p>
-          <p class="footer-nap__item">
-            <span class="footer-nap__icon" aria-hidden="true">
-              <Mail size={18} />
-            </span>
-            <span class="footer-nap__text">
-              <strong>Email:</strong> <a class="footer-nap__link" href={`mailto:${config.contact.email}`}>{config.contact.email}</a>
-            </span>
-          </p>
-          <p class="footer-nap__item">
-            <span class="footer-nap__icon" aria-hidden="true">
-              <Instagram size={18} />
-            </span>
-            <span class="footer-nap__text">
-              <a class="footer-nap__link" href={config.social.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-            </span>
-          </p>
-          <p class="footer-nap__item">
-            <span class="footer-nap__icon" aria-hidden="true">
-              <Youtube size={18} />
-            </span>
-            <span class="footer-nap__text">
-              <a class="footer-nap__link" href={config.social.youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
-            </span>
-          </p>
-          <p class="footer-nap__item">
-            <span class="footer-nap__icon" aria-hidden="true">
-              <MapPin size={18} />
-            </span>
-            <span class="footer-nap__text">
-              <a
-                class="footer-nap__link"
-                href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Argentina"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver en Google Maps &rarr;
-              </a>
-            </span>
-          </p>
-        </div>
-      </div>
     </div>
 
     <p class="footer-copy">
