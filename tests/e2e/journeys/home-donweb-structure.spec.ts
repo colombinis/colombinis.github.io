@@ -127,7 +127,7 @@ test.describe('HOME donweb structure', () => {
         casos: pos(q('.casos-anonimos-section')),
         testimonios: pos(q('#social-proof')),
         comoTrabajamos: pos(q('#como-trabajamos')),
-        porQue: pos(q('.pq-sacsi')),
+        porQue: pos(q('.pq-foto')),
         checklist: pos(q('.lead-magnet-banner')),
         faq: pos(q('#faq')),
       };
@@ -146,8 +146,8 @@ test.describe('HOME donweb structure', () => {
       page.getByRole('link', { name: /Consultar sin cargo/i }).first()
     ).toBeVisible();
 
-    // POR QUÉ SACSI: 4 pilares
-    await expect(page.locator('.pq-sacsi__card')).toHaveCount(4);
+    // POR QUÉ SACSI: 4 pilares en el organismo foto + filas (2026-10-09)
+    await expect(page.locator('.pq-foto__row')).toHaveCount(4);
 
     expect(errors, `Errores JS detectados:\n${errors.join('\n')}`).toEqual([]);
   });
