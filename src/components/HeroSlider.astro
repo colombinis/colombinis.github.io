@@ -12,7 +12,20 @@ interface Slide {
   imagen: string;
 }
 
-const slides: Slide[] = getServicios().map((svc) => ({
+interface Props {
+  /** Slides del carrusel. Default: los servicios (portada). Las páginas de
+   *  servicio pasan acá el contenido de sus cards de categoría. */
+  slides?: Slide[];
+  /** aria-label del carrusel. */
+  label?: string;
+}
+
+const {
+  slides: slidesProp,
+  label = 'Servicios principales de SACsi',
+} = Astro.props;
+
+const slides: Slide[] = slidesProp ?? getServicios().map((svc) => ({
   id: svc.id,
   title: svc.title,
   claim: svc.claim,
@@ -24,7 +37,7 @@ const slides: Slide[] = getServicios().map((svc) => ({
 <section
   class="hero-slider"
   aria-roledescription="carousel"
-  aria-label="Servicios principales de SACsi"
+  aria-label={label}
 >
   <div class="hero-slider__viewport" id="hero-slider-viewport">
     {slides.map((s, i) => (
