@@ -1,11 +1,15 @@
 ---
 // Página: Sobre Nosotros — Historia, Filosofía "Tecnología Justa", Equipo y Clientes
+//
+// Entrada de la página: organismo HeroRow (§10b "Fila Hero + Slider (portada
+// de la home)") — hero a la izquierda con el contenido previo de la página y,
+// a la derecha, el carrusel con los 4 pilares. La sección "Los 4 pilares de
+// la Tecnología Justa" se eliminó: sus cards viven ahora como slides.
 import Layout from '../layouts/Layout.astro';
 import Badge from '../components/ui/Badge.astro';
-import Button from '../components/ui/Button.astro';
-import Card from '../components/ui/Card.astro';
 import BioCard from '../components/BioCard.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
+import HeroRow from '../components/HeroRow.astro';
 
 const clientes = [
   { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
@@ -21,26 +25,65 @@ const clientes = [
   { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
   { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
 ];
+
+// Slides del slider de la fila Hero+Slider (§10b): las 4 cards de "Los 4
+// pilares de la Tecnología Justa", con el mismo título y texto. Los pilares
+// no tienen página de destino propia: cada slide enlaza al CTA de la página
+// (/contacto/), la acción que comparten todos.
+const pilaresSlides = [
+  {
+    id: 'sin-sobredimensionar',
+    title: 'Sin sobredimensionar',
+    claim:
+      'No te proponemos un desarrollo de seis meses para algo que un script o una automatización directa resuelve en una semana. El tamaño de la solución debe ser proporcional a tu volumen y rentabilidad.',
+    href: '/contacto/',
+    imagen: '/assets/sacsi-servicios-09-automatizacion-procesos.webp',
+  },
+  {
+    id: 'sin-modas-pasajeras',
+    title: 'Sin modas pasajeras',
+    claim:
+      'Elegimos tecnologías maduras, robustas y ampliamente documentadas. No usamos herramientas solo porque sean tendencia en redes. Lo que construimos tiene que seguir funcionando firme durante años.',
+    href: '/contacto/',
+    imagen: '/assets/sacsi-servicios-11-soporte-mantenimiento.webp',
+  },
+  {
+    id: 'entendemos-cada-peso',
+    title: 'Entendemos lo que cuesta cada peso',
+    claim:
+      'En Argentina cada inversión cuenta. Calculamos el retorno antes de empezar: cada automatización o sistema debe pagarse solo, ahorrando horas operativas o generando nuevas oportunidades de venta.',
+    href: '/contacto/',
+    imagen: '/assets/sacsi-servicios-13-dashboards.webp',
+  },
+  {
+    id: 'honestidad-radical',
+    title: 'Honestidad radical',
+    claim:
+      'Si en la primera charla vemos que tu problema se soluciona ordenando un procedimiento interno o usando una planilla gratuita, te lo decimos de frente. Tu confianza vale mucho más que una venta forzada.',
+    href: '/contacto/',
+    imagen: '/assets/sacsi-servicios-12-consultoria-ia.webp',
+  },
+];
 ---
 
 <Layout
   title="Sobre Nosotros · Tecnología Justa | SACsi"
   description="Conocé a SACsi y la historia de Sebastián Colombini: más de 15 años acompañando empresas desde Rosario con tecnología justa, sin modas y cuidando cada peso."
 >
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero__container">
-      <h1 class="hero__title">Sobre Nosotros: Tecnología justa para tu negocio</h1>
-      <p class="hero__subtitle">
-        Creemos que la tecnología debe resolver problemas reales, no crearlos. Ni modas pasajeras, ni costos sobredimensionados: solo lo que realmente necesitás para crecer.
-      </p>
-      <div class="hero__actions">
-        <Button variant="primary" size="lg" href="/contacto/" class="hero__cta hero__cta--form">
-          Te decimos qué necesitás… y qué no. Consulta sin cargo
-        </Button>
-      </div>
-    </div>
-  </section>
+  <!-- Entrada: fila Hero + Slider (§10b) — izquierda = hero con el contenido
+       previo de la página; derecha = carrusel con los 4 pilares. -->
+  <HeroRow
+    hero={{
+      titleAccent: '',
+      title: 'Sobre Nosotros: Tecnología justa para tu negocio',
+      subtitle:
+        'Creemos que la tecnología debe resolver problemas reales, no crearlos. Ni modas pasajeras, ni costos sobredimensionados: solo lo que realmente necesitás para crecer.',
+      ctaLabel: 'Te decimos qué necesitás… y qué no. Consulta sin cargo',
+      ctaHref: '/contacto/',
+    }}
+    slides={pilaresSlides}
+    sliderLabel="Los 4 pilares de la Tecnología Justa"
+  />
 
   <!-- Historia de Sebastián / El Origen -->
   <section class="section section--alt">
@@ -62,55 +105,6 @@ const clientes = [
       </div>
     </div>
   </section>
-
-  <!-- Los 4 Pilares de la Tecnología Justa -->
-  <section class="section">
-    <div class="container">
-      <div class="pillars-header">
-        <Badge variant="accent" size="sm" class="section-tag">NUESTRA BANDERA</Badge>
-        <h2 class="section__title">Los 4 pilares de la Tecnología Justa</h2>
-        <p class="section__subtitle">
-          Cada proyecto que tomamos en SACsi se rige por estas cuatro reglas inquebrantables.
-        </p>
-      </div>
-
-      <div class="pillars-grid">
-        <Card variant="default" padding="lg" as="article" class="pillar-card">
-          <div class="pillar-number">01</div>
-          <h3>Sin sobredimensionar</h3>
-          <p>
-            No te proponemos un desarrollo de seis meses para algo que un script o una automatización directa resuelve en una semana. El tamaño de la solución debe ser proporcional a tu volumen y rentabilidad.
-          </p>
-        </Card>
-
-        <Card variant="default" padding="lg" as="article" class="pillar-card">
-          <div class="pillar-number">02</div>
-          <h3>Sin modas pasajeras</h3>
-          <p>
-            Elegimos tecnologías maduras, robustas y ampliamente documentadas. No usamos herramientas solo porque sean tendencia en redes. Lo que construimos tiene que seguir funcionando firme durante años.
-          </p>
-        </Card>
-
-        <Card variant="default" padding="lg" as="article" class="pillar-card">
-          <div class="pillar-number">03</div>
-          <h3>Entendemos lo que cuesta cada peso</h3>
-          <p>
-            En Argentina cada inversión cuenta. Calculamos el retorno antes de empezar: cada automatización o sistema debe pagarse solo, ahorrando horas operativas o generando nuevas oportunidades de venta.
-          </p>
-        </Card>
-
-        <Card variant="default" padding="lg" as="article" class="pillar-card">
-          <div class="pillar-number">04</div>
-          <h3>Honestidad radical</h3>
-          <p>
-            Si en la primera charla vemos que tu problema se soluciona ordenando un procedimiento interno o usando una planilla gratuita, te lo decimos de frente. Tu confianza vale mucho más que una venta forzada.
-          </p>
-        </Card>
-      </div>
-    </div>
-  </section>
-
-  
 
   <!-- Sección Clientes que confían con Logos Reales -->
   <ClientesConfian clientes={clientes} />
@@ -189,55 +183,10 @@ const clientes = [
   }
 
   /* Pilares */
-  .pillars-header,
   .clients-header,
   .steps-header {
     text-align: center;
     margin-bottom: var(--spacing-xl);
-  }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-  }
-
-  @media (min-width: 640px) {
-    .pillars-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  /* .pillar-card: fondo, borde, radio, padding y transición los aporta <Card variant="default" padding="lg"> */
-  .pillar-card {
-    position: relative;
-  }
-
-  .pillar-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
-  }
-
-  .pillar-number {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #E2E8F0;
-    margin-bottom: var(--spacing-xs);
-    line-height: 1;
-  }
-
-  .pillar-card h3 {
-    font-size: 1.2rem;
-    color: var(--primary);
-    margin: 0 0 var(--spacing-sm);
-    font-weight: 700;
-  }
-
-  .pillar-card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--secondary);
-    margin: 0;
   }
 
   /* Equipo */
