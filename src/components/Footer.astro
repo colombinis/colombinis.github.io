@@ -6,7 +6,7 @@
 // Col 4: Listado de casos de éxito
 // CTA banner "¿Tenés una duda o proyecto en mente?": OCULTO en /contacto (feedback dueño 2026-10-06)
 // Background: #252628 (gris oscuro) con colores ajustados para contraste
-import LogoBrand from './LogoBrand.astro';
+import Logo from './ui/Logo.astro';
 import { getServicios, getCategoriasByServicio, getSoluciones, getCasos } from '../lib/data-utils';
 import config from '../config/site.json';
 import { Phone, Mail, MapPin, Instagram, Youtube } from 'lucide-astro';
@@ -56,20 +56,22 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     align-items: center;
     margin-bottom: var(--spacing-md);
   }
-  .footer-logo-wrap :global(.logo-brand) {
+  .footer-logo-wrap :global(.ui-logo) {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
-  .footer-logo-wrap :global(.logo-brand:hover) {
+  .footer-logo-wrap :global(.ui-logo:hover) {
     transform: translateY(-2px);
     opacity: 0.95;
   }
-  .footer-logo-wrap :global(.logo-brand__img) {
-    height: 42px;
-    width: auto;
-    border-radius: var(--rounded-xs);
+  /* Reemplazo del logo por el primitivo Logo (variación "SACsi" a color),
+     escalado al peso visual que tenía la imagen en el footer. */
+  .footer-logo-wrap :global(.ui-logo.ui-logo--lg .ui-logo__split) {
+    font-size: 1.75rem;
+  }
+  .footer-logo-wrap :global(.ui-logo__split) {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   }
 
@@ -85,14 +87,14 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     gap: var(--spacing-xs);
   }
   .footer-solution-title {
-    color: #E8E8E8;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 600;
-    transition: color 0.2s ease;
   }
   .footer-solution-title:hover {
-    color: var(--tertiary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .footer-solution-categories {
     display: flex;
@@ -103,14 +105,13 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     list-style: none;
   }
   .footer-solution-categories a {
-    color: #D4D4D4;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 0.86rem;
-    transition: color 0.2s ease;
   }
   .footer-solution-categories a:hover {
-    color: var(--tertiary);
-    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* ---------- Col 3: Listado de soluciones ---------- */
@@ -131,14 +132,14 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     border-bottom: none;
   }
   .footer-solucion__name {
-    color: #B0B0B0;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 500;
-    transition: color 0.2s ease;
   }
   .footer-solucion__name:hover {
-    color: var(--tertiary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* ---------- Col 4: Listado de casos de éxito ---------- */
@@ -159,16 +160,33 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     border-bottom: none;
   }
   .footer-caso__name {
-    color: #B0B0B0;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 0.93rem;
     font-weight: 500;
     line-height: 1.4;
     overflow-wrap: break-word;
-    transition: color 0.2s ease;
   }
   .footer-caso__name:hover {
-    color: var(--tertiary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Base común de TODOS los links de las listas del footer: blancos y con
+     subrayado en hover. Evita que cualquier <a> herede el azul global
+     (global.css: a { color: var(--tertiary) }) — aplica también a futuros links. */
+  .footer-solutions a,
+  .footer-soluciones a,
+  .footer-casos a {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  .footer-solutions a:hover,
+  .footer-soluciones a:hover,
+  .footer-casos a:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   /* CTA Banner Section */
@@ -210,29 +228,6 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
     box-sizing: border-box;
     white-space: normal;
     text-align: center;
-  }
-
-  .footer__contact-row {
-    display: inline-flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    font-size: 0.93rem;
-    color: #909090;
-    white-space: normal;
-    text-align: center;
-    max-width: 100%;
-  }
-  .footer__email {
-    color: var(--tertiary);
-    text-decoration: none;
-    font-weight: 500;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-  .footer__email:hover {
-    text-decoration: underline;
   }
 
   /* ---------- Col 1: NAP + Contacto (solo iconos) ---------- */
@@ -322,7 +317,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
       <!-- Col 1: Logo + NAP (tel/email/mapa + redes) -->
       <div class="footer-col">
         <div class="footer-logo-wrap">
-          <LogoBrand tagline="Soluciones Informáticas" sin-texto="true"/>
+          <Logo variant="sacsi-color" theme="dark" size="lg" href="/" />
         </div>
         <!-- Solo iconos: cada <a> envuelve el icono y lo nombra con aria-label -->
         <div class="footer-nap">
@@ -362,16 +357,7 @@ const isContacto = pathname === '/contacto' || pathname === '/contacto/';
           >
             <Youtube size={20} aria-hidden="true" />
           </a>
-          <a
-            class="footer-nap__link"
-            href="https://www.google.com/maps/search/?api=1&query=SACsi+Milan+1216+Argentina"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Ver ubicación en Google Maps"
-            title="Google Maps"
-          >
-            <MapPin size={20} aria-hidden="true" />
-          </a>
+          
         </div>
       </div>
 
