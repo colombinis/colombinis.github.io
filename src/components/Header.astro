@@ -8,6 +8,18 @@ import config from '../config/site.json';
 import { getNavServicios } from '../lib/data-utils';
 import { Menu, ChevronDown } from 'lucide-astro';
 
+interface Props {
+  /** Instancia de previsualización (guía de diseño): ids únicos para poder
+      renderizar el menú real junto al header de la página sin duplicar ids. */
+  preview?: boolean;
+}
+
+const { preview = false } = Astro.props;
+// Prefijo de ids para la variante preview (no afecta al header real).
+const uid = preview ? 'preview-' : '';
+const navLabel = preview ? 'Navegación principal (previsualización)' : 'Navegación principal';
+const mobileNavLabel = preview ? 'Navegación móvil (previsualización)' : 'Navegación móvil';
+
 // En Astro, el import de config devuelve el JSON parseado.
 const configLinks = config.nav.links;
 
@@ -37,7 +49,9 @@ const links = configLinks.map((link) =>
     position: relative;
   }
 
-  #header-container {
+  /* Clase (no id) para que la variante preview comparta los estilos base.
+     Las reglas de overlay en global.css siguen apuntando al #header-container real. */
+  .header-container {
     position: relative;
     background: var(--surface);
     border-bottom: 1px solid #E8E8E8;
@@ -315,12 +329,12 @@ const links = configLinks.map((link) =>
 }
 </style>
 
-<div id="header-container">
+<div id={`${uid}header-container`} class="header-container">
   <header class="wrapper">
     <LogoBrand tagline="Soluciones Informáticas" />
 
     <!-- Desktop navigation -->
-    <nav class="desktop-nav" role="navigation" aria-label="Navegación principal">
+    <nav class="desktop-nav" role="navigation" aria-label={navLabel}>
       <ul class="nav-list">
         {links.map((link) => (
           <>
@@ -393,17 +407,18 @@ const links = configLinks.map((link) =>
     </nav>
 
     <!-- Mobile navigation -->
-    <nav class="mobile-nav" role="navigation" aria-label="Navegación móvil">
+    <nav class="mobile-nav" role="navigation" aria-label={mobileNavLabel}>
       <button
         class="hamburger"
-        id="nav-toggle"
+        id={`${uid}nav-toggle`}
+        data-nav-toggle
         aria-label="Abrir menú de navegación"
-        aria-controls="nav-menu"
+        aria-controls={`${uid}nav-menu`}
         aria-expanded="false"
       >
         <Menu size={22} aria-hidden="true" />
       </button>
-      <ul id="nav-menu" class="nav-menu-mobile">
+      <ul id={`${uid}nav-menu`} class="nav-menu-mobile">
         {links.map((link) => (
           <>
             {link.submenu ? (
@@ -436,11 +451,13 @@ const links = configLinks.map((link) =>
 </div>
 
 <script>
-  // Toggle del menú móvil
-  const toggle = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-menu');
+  // Toggle del menú móvil — se enlaza a TODAS las instancias (header real +
+  // variante preview de la guía de diseño) vía [data-nav-toggle].
+  document.querySelectorAll('[data-nav-toggle]').forEach(function (toggle) {
+    const menuId = toggle.getAttribute('aria-controls');
+    const menu = menuId ? document.getElementById(menuId) : null;
+    if (!menu) return;
 
-  if (toggle && menu) {
     toggle.addEventListener('click', function () {
       const isOpen = menu.classList.toggle('active');
       toggle.setAttribute('aria-expanded', String(isOpen));
@@ -449,7 +466,7 @@ const links = configLinks.map((link) =>
         isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
       );
     });
-  }
+  });
 
   // Header overlay (home): transparente sobre el hero, sólido al scrollear.
   // La topbar estática mide distinto según el viewport (envuelve a 2-3 líneas
@@ -461,10 +478,11 @@ const links = configLinks.map((link) =>
   const headerContainer = document.getElementById('header-container');
   const topbarPromo = document.querySelector('.topbar-promo');
   if (headerContainer && document.body.classList.contains('header-overlay')) {
-    let topbarH = topbarPromo ? topbarPromo.offsetHeight : 34;
+    let topbarH = topbarPromo ? topbarPromo.offsetHeight : 0;
+    // La topbar puede no estar en el DOM (TopBarControl con visible=false):
+    // en ese caso --topbar-h queda en 0 y el header no deja hueco.
     const measureTopbar = function () {
-      if (!topbarPromo) return;
-      topbarH = topbarPromo.offsetHeight;
+      topbarH = topbarPromo ? topbarPromo.offsetHeight : 0;
       document.documentElement.style.setProperty('--topbar-h', topbarH + 'px');
     };
     measureTopbar();
