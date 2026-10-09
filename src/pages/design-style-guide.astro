@@ -660,10 +660,33 @@ const logoVariants = [
             />
           </div>
         </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Variante Slider (marquesina automática, sin dots):</span>
+          <div class="btn-group-wrap">
+            <ClientesConfian
+              mode="slider"
+              clientes={[
+                { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
+                { name: 'Syloper', url: 'https://syloper.com/', logo: '/assets/clientes/syloper.svg', description: 'Consultoría y desarrollo de software' },
+                { name: 'Ameba', url: 'https://www.ameba.com.uy/en', logo: '/assets/clientes/ameba.svg', description: 'Diseño y desarrollo de plataformas digitales' },
+                { name: 'SOESGPYLA', url: 'https://www.soesgpyla.com.ar/', logo: '/assets/clientes/soesgpyla.svg', description: 'Sindicato Obreros Estaciones de Servicio' },
+                { name: 'Grupo El Positivo', url: 'https://www.grupoelpositivo.com.ar/', logo: '/assets/clientes/grupo-el-positivo.png', description: 'Comercialización y distribución de artículos' },
+                { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
+                { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
+                { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
+                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' },
+                { name: 'ON94', url: 'https://on94.com.ar/', logo: '/assets/clientes/on94.png', description: 'Radio online — Santa Fe, Argentina' },
+                { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
+                { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
+              ]}
+            />
+          </div>
+        </div>
       </div>
 
       <p class="pattern-note">
-        <strong>Regla del patrón:</strong> usa el componente <code>ClientesConfian.astro</code> en lugar de duplicar markup. Los logos viven en <code>/public/assets/clientes/</code> (WebP/SVG/PNG). El componente es accesible (aria-labelledby en el h2, alt descriptivos, focus visible). Grid único responsivo: 2/3/4 columnas. Modos: <code>default</code> (con textos) y <code>logos-only</code> (solo imágenes).
+        <strong>Regla del patrón:</strong> usa el componente <code>ClientesConfian.astro</code> en lugar de duplicar markup. Los logos viven en <code>/public/assets/clientes/</code> (WebP/SVG/PNG). El componente es accesible (aria-labelledby en el h2, alt descriptivos, focus visible). Grid único responsivo: 2/3/4 columnas. Modos: <code>default</code> (con textos), <code>logos-only</code> (solo imágenes) y <code>slider</code> (marquesina automática de logos con fondo de color, sin dots de control — pausa en hover/foco y respeta <code>prefers-reduced-motion</code>).
       </p>
     </section>
 
