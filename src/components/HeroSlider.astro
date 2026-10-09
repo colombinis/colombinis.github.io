@@ -8,7 +8,6 @@ interface Slide {
   id: string;
   title: string;
   claim: string;
-  short: string;
   href: string;
   imagen: string;
 }
@@ -17,7 +16,6 @@ const slides: Slide[] = getServicios().map((svc) => ({
   id: svc.id,
   title: svc.title,
   claim: svc.claim,
-  short: svc.short,
   href: svc.href,
   imagen: svc.imagen,
 }));
@@ -38,33 +36,23 @@ const slides: Slide[] = getServicios().map((svc) => ({
         data-index={i}
       >
         <div class="hero-slider__inner">
-          <div class="hero-slider__content">
-            <h2 class="hero-slider__title">{s.title}</h2>
-            <p class="hero-slider__claim">{s.claim}</p>
-            <p class="hero-slider__desc">{s.short}</p>
-            <div class="hero-slider__actions">
-              <a class="hero-slider__cta" href={s.href}>
-                Ver {s.title}
-              </a>
-              <a
-                class="hero-slider__cta hero-slider__cta--ghost"
-                href={`/contacto/?categoria=${s.id}&asunto=Consulta%20sobre%20${encodeURIComponent(s.title)}`}
-              >
-                Consultar sin cargo
-              </a>
+          <a class="hero-slider__link" href={s.href}>
+            <div class="hero-slider__media" aria-hidden="true">
+              <img
+                src={s.imagen}
+                srcset={`${s.imagen} 1x`}
+                alt=""
+                width="600"
+                height="400"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
             </div>
-          </div>
-          <div class="hero-slider__media">
-            <img
-              src={s.imagen}
-              srcset={`${s.imagen} 1x`}
-              alt={`Ilustración representativa del servicio ${s.title}`}
-              width="600"
-              height="400"
-              loading={i === 0 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          </div>
+            <div class="hero-slider__content">
+              <h2 class="hero-slider__title">{s.title}</h2>
+              <p class="hero-slider__claim">{s.claim}</p>
+            </div>
+          </a>
         </div>
       </article>
     ))}
@@ -102,115 +90,112 @@ const slides: Slide[] = getServicios().map((svc) => ({
     display: none;
   }
 
+  /* El slide es un lienzo: la imagen de fondo lo cubre por completo y el
+     texto se superpone centrado. */
   .hero-slider__slide {
     position: relative;
     flex: 0 0 100%;
     scroll-snap-align: start;
     min-height: 78vh;
-    padding: var(--spacing-xxl) var(--spacing-md);
+    overflow: hidden;
     box-sizing: border-box;
   }
 
-  /* El contenido interior sí se acota al container, pero el SLIDE ocupa
-     100% del viewport — si el slide tuviera max-width, con viewport > container
-     se ve el slide siguiente pegado (bug reportado por el dueño). */
-  .hero-slider__inner {
+  /* Imagen de fondo: ocupa TODO el slide (object-fit: cover).
+     z-index: 0 explícito para que el panel de texto (z-index: 1) quede
+     encima — sin esto, el absolute pinta sobre el contenido estático. */
+  .hero-slider__media {
+    position: absolute;
+    inset: 0;
+    display: block;
+    z-index: 0;
+  }
+  .hero-slider__media img {
     width: 100%;
-    max-width: var(--container);
-    margin: 0 auto;
-    min-height: calc(78vh - 2 * var(--spacing-xxl));
-    display: grid;
-    align-content: center;
-    gap: var(--spacing-lg);
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .hero-slider__link:hover .hero-slider__media img,
+  .hero-slider__link:focus-visible .hero-slider__media img {
+    transform: scale(1.03);
   }
 
-  @media (min-width: 901px) {
-    .hero-slider__inner {
-      grid-template-columns: 1.15fr 0.85fr;
-      align-items: center;
-      gap: var(--spacing-xl);
-    }
+  /* Scrim sutil de marca sobre la imagen para reforzar el contraste. */
+  .hero-slider__slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(26, 26, 46, 0.2),
+      rgba(26, 26, 46, 0.55)
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* El slide completo es un link: el texto va centrado vertical y
+     horizontalmente sobre la imagen. */
+  .hero-slider__link {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    padding: var(--spacing-xxl) var(--spacing-md);
+  }
+
+  .hero-slider__link:focus-visible {
+    outline: 2px solid var(--tertiary);
+    outline-offset: 4px;
+    border-radius: var(--rounded-md);
+  }
+
+  /* Panel translúcido detrás del texto: fondo semitransparente para que el
+     contraste permita leer sobre cualquier zona de la imagen. */
+  .hero-slider__content {
+    position: relative;
+    z-index: 1; /* sobre la imagen de fondo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    max-width: 480px;
+    padding: var(--spacing-lg) var(--spacing-md);
+    border-radius: var(--rounded-md);
+    background: rgba(26, 26, 46, 0.5);
   }
 
   .hero-slider__title {
-    color: #FFFFFF; /* el global h1/h2/h3 pinta --primary (navy): sobre fondo navy sería ilegible */
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    color: #FFFFFF;
+    font-size: clamp(2rem, 6vw, 3.2rem);
     font-weight: 800;
     line-height: 1.05;
     letter-spacing: -0.01em;
-    margin: 0 0 var(--spacing-sm);
+    margin: 0;
     text-transform: uppercase;
   }
 
   .hero-slider__claim {
-    font-size: clamp(1.05rem, 2.6vw, 1.45rem);
+    font-size: clamp(1rem, 2.4vw, 1.35rem);
     font-weight: 600;
     color: #C9DFFF;
-    margin: 0 0 var(--spacing-sm);
-    max-width: 32ch;
+    margin: 0;
+    max-width: 34ch;
   }
 
-  .hero-slider__desc {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.82);
-    margin: 0 0 var(--spacing-lg);
-    max-width: 52ch;
+  /* Hover: el título pasa al naranja de marca. */
+  .hero-slider__link:hover .hero-slider__title,
+  .hero-slider__link:focus-visible .hero-slider__title {
+    color: #F16529;
   }
-
-  .hero-slider__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-  }
-
-  .hero-slider__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #F16529; /* naranja del logo SACsi (patrón donweb: CTA naranja) */
-    color: #FFFFFF;
-    padding: 14px 26px;
-    border-radius: var(--rounded-sm);
-    font-weight: 700;
-    font-size: 0.98rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.15s ease;
-  }
-
-  .hero-slider__cta:hover {
-    background-color: #D9531E;
-    color: #FFFFFF;
-    transform: translateY(-1px);
-  }
-
-  .hero-slider__cta--ghost {
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.55);
-    font-weight: 600;
-  }
-
-  .hero-slider__cta--ghost:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #FFFFFF;
-  }
-
-  .hero-slider__media {
-    display: none;
-  }
-
-  @media (min-width: 901px) {
-    .hero-slider__media {
-      display: block;
-    }
-    .hero-slider__media img {
-      width: 100%;
-      height: auto;
-      border-radius: var(--rounded-md);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-    }
-  }
-
 
   .hero-slider__dots {
     position: absolute;
@@ -240,6 +225,43 @@ const slides: Slide[] = getServicios().map((svc) => ({
   @media (prefers-reduced-motion: reduce) {
     .hero-slider__viewport {
       scroll-behavior: auto;
+    }
+    .hero-slider__media img {
+      transition: none;
+    }
+  }
+
+  /* Modo fila 60/40 de la home (wrapper .hero-row): el carrusel llena la
+     altura de la fila (definida por el hero) y reduce tipografías/panel para
+     el 40% restante. La imagen de fondo y el centrado son los de la base,
+     así que acá solo se ajusta escala. En mobile no aplica (por debajo de
+     901px el slider conserva su formato completo). */
+  @media (min-width: 901px) {
+    :global(.hero-row) .hero-slider {
+      display: flex;
+      flex-direction: column;
+    }
+    :global(.hero-row) .hero-slider__viewport {
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    :global(.hero-row) .hero-slider__slide {
+      min-height: 0;
+    }
+    :global(.hero-row) .hero-slider__link {
+      padding: var(--spacing-md);
+    }
+    :global(.hero-row) .hero-slider__content {
+      z-index: 1; /* sobre la imagen, también en el modo fila 60/40 */
+      max-width: 320px;
+      padding: var(--spacing-md);
+    }
+    :global(.hero-row) .hero-slider__title {
+      font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+      line-height: 1.1;
+    }
+    :global(.hero-row) .hero-slider__claim {
+      font-size: 0.95rem;
     }
   }
 </style>

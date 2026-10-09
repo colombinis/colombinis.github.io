@@ -4,16 +4,15 @@
 // Orden de secciones (relevado de donweb, adaptado a contenido SACsi):
 //   0. Topbar promo fina (slot pre-header)                     [nuevo]
 //   1. Header transparente sobre hero → sólido al scroll       [overlay]
-//   2. Hero slider: 1 slide por servicio + precio "desde"      [nuevo]
-//   3. Resultados que hablan (social proof)                    [existe]
-//   4. Soluciones para tu negocio (4 servicios)                 [existe]
+//   2. Hero de marca + slider en una fila (60/40)               [nuevo]
+//   3. Soluciones para tu negocio (4 servicios)                 [existe]
 //   5. Banner CTA Diagnóstico IA                                [nuevo]
 //   6. Casos reales (Problema → Solución justa → Resultado)     [existe]
 //   7. Cómo trabajamos (4 pasos)                                [existe]
 //   8. POR QUÉ SACSI (4 pilares)                                [nuevo]
 //   9. Checklist lead magnet + origen marca + FAQ               [existe]
 import Layout from '../layouts/Layout.astro';
-import HeroSlider from '../components/HeroSlider.astro';
+import HeroRow from '../components/HeroRow.astro';
 import SolucionesSection from '../components/SolucionesSection.astro';
 import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
 import SocialProofSection from '../components/SocialProofSection.astro';
@@ -26,11 +25,15 @@ import FaqSection from '../components/FaqSection.astro';
   description="Tecnología justa para emprendedores y PyMEs. IA aplicada, automatización, software a medida y presencia online sin pagar de más ni modas."
   
 >
-  <!-- 2. Hero slider: un slide por servicio (estilo donweb) -->
-  <HeroSlider />  <!-- 4. Soluciones para tu negocio (los 4 servicios) -->
+  <!-- 2. Bloque de marca en una fila: hero (propuesta de valor) al 60% y
+       slider de servicios al 40%. Ambos con el mismo fondo navy/texto blanco.
+       Organismo HerowRow.astro (ver /design-style-guide §10b). -->
+  <HeroRow />
+
+  <!-- 3. Soluciones para tu negocio (los 4 servicios) -->
   <SolucionesSection />
   
-  <!-- 5. Banner CTA Diagnóstico IA (la puerta de entrada al funnel) -->
+  <!-- 4. Banner CTA Diagnóstico IA (la puerta de entrada al funnel) -->
   <section class="section section--alt diagnostico-banner">
     <div class="container diagnostico-banner__card">
       <div class="diagnostico-banner__content">
@@ -50,7 +53,7 @@ import FaqSection from '../components/FaqSection.astro';
     </div>
   </section>
   
-  <!-- 6. Casos reales (Problema → Solución justa → Resultado medible) -->
+  <!-- 5. Casos reales (Problema → Solución justa → Resultado medible) -->
   <CasosAnonimosSection
     title="Experiencia comprobada en casos reales"
     titleHighlight="Experiencia comprobada"
@@ -58,10 +61,10 @@ import FaqSection from '../components/FaqSection.astro';
     hideMeta={true}
   />
   
-  <!-- 7. Testimonios / Resultados que hablan — debajo de Casos reales (feedback dueño) -->
+  <!-- 6. Testimonios / Resultados que hablan — debajo de Casos reales (feedback dueño) -->
   <SocialProofSection />
   
-  <!-- 8. Cómo trabajamos -->
+  <!-- 7. Cómo trabajamos -->
   <section id="como-trabajamos" class="section">
     <div class="container">
       <h2 class="section__title">Cómo trabajamos</h2>
@@ -135,25 +138,9 @@ import FaqSection from '../components/FaqSection.astro';
 </Layout>
 
 <style>
-  /* Hero de marca (debajo del slider): fondo claro, texto navy, acento
-     naranja — combinación de la referencia del dueño (sacsi-hero-text.png).
-     El fondo/base (.hero) viene de global.css; acá solo el diferencial. */
-  .hero--brand {
-    padding-top: var(--spacing-xxl);
-    padding-bottom: var(--spacing-xxl);
-    border-bottom: 1px solid #EEF1F5;
-  }
-  
-  .hero__cta--orange,
-  .hero__cta--orange:hover {
-    background-color: #F16529;
-    color: #FFFFFF;
-  }
-  
-  .hero__cta--orange:hover {
-    background-color: #D9531E;
-  }
-  
+  /* El bloque hero + slider (grid 60/40, fondo navy) vive en el organismo
+     HeroRow.astro; el estilo del hero de marca vive scopeado en
+     src/components/Hero.astro. */
   .diagnostico-banner {
     padding: var(--spacing-xl) var(--spacing-md);
   }
