@@ -1,0 +1,364 @@
+---
+// BioCard.astro — Tarjeta de perfil "Me presento".
+// Extraída y adaptada del componente independiente
+// stitch_about_us_profile_component/code.html a Astro + tokens SACsi.
+//
+// Composición: tarjeta bicolor 50/50 (arriba #FAFAFA, abajo #D9531E) con el
+// avatar cruzando el corte, badge de rol con punto pulsante, mensaje de
+// presentación y accesos directos de contacto (ver prop `actions`).
+//
+// Nota de geometría: el avatar se centra en el espacio libre entre header y
+// footer (`margin: auto 0`), por lo que el aro queda a caballo del corte,
+// levemente por encima del eje exacto (comportamiento heredado de la
+// referencia de Stitch, que usa `my-auto`).
+//
+// Consumidores:
+//   · src/pages/sobre-nosotros.astro  → <BioCard /> (reemplaza la bio-card)
+//   · /design-style-guide §6a         → <BioCard headingTag="h3" /> (catálogo)
+import { MessageSquare, Phone } from 'lucide-astro';
+
+interface ContactAction {
+  label: string;
+  href: string;
+  type: 'chat' | 'phone' | 'whatsapp';
+}
+
+interface Props {
+  /** Etiqueta de rol sobre el título. */
+  badge?: string;
+  /** Título principal de presentación. */
+  title?: string;
+  /** Bajada bajo el título. */
+  subtitle?: string;
+  /** Retrato del perfil (recorte circular). */
+  image?: string;
+  imageAlt?: string;
+  /** Mensaje de presentación (sobre el panel naranja). */
+  message?: string;
+  /** Acciones de contacto. Por defecto: Chat y WhatsApp. El grid se adapta a
+   *  la cantidad (`repeat(N, 1fr)` no es necesario: `auto-fit`). */
+  actions?: ContactAction[];
+  /** Tag del encabezado. 'h2' por defecto; 'h3' en demos de la guía. */
+  headingTag?: 'h2' | 'h3';
+  class?: string;
+}
+
+const {
+  badge = 'Consultor Estratégico',
+  title = 'Me presento, soy Sebastián.',
+  subtitle = 'No soy una agencia anónima, sino un consultor que va a escucharte personalmente.',
+  image = '/assets/seba-avatar.webp',
+  imageAlt = 'Sebastián Alejandro Colombini, fundador de SACsi',
+  message = 'Seré tu aliado estratégico y estoy listo para ayudarte en lo que necesites. Si querés vender más por internet o tenés alguna consulta sobre cualquier servicio que hayas contratado, contactate por chat o WhatsApp.',
+  actions = [
+    { label: 'Chat', href: '/contacto/', type: 'chat' },
+    { label: 'WhatsApp', href: 'https://api.whatsapp.com/send?phone=5493415197937', type: 'whatsapp' }
+  ],
+  headingTag = 'h2',
+  class: className = ''
+} = Astro.props;
+
+const Heading = headingTag;
+---
+
+<article class={`bio-profile ${className}`.trim()}>
+  <!-- Capa 1: fondo bicolor 50/50 + profundidad -->
+  <div class="bio-profile__bg" aria-hidden="true">
+    <div class="bio-profile__bg-top"></div>
+    <div class="bio-profile__bg-bottom"></div>
+  </div>
+
+  <!-- Capa 2: contenido en capas -->
+  <div class="bio-profile__content">
+    <div class="bio-profile__header">
+      <span class="bio-profile__badge">
+        <span class="bio-profile__dot"></span>
+        {badge}
+      </span>
+      <Heading class="bio-profile__title">
+        {title}
+        <span class="bio-profile__subtitle">{subtitle}</span>
+      </Heading>
+    </div>
+
+    <div class="bio-profile__photo">
+      <img
+        src={image}
+        alt={imageAlt}
+        width="420"
+        height="420"
+        loading="lazy"
+        decoding="async"
+        class="bio-profile__avatar"
+      />
+    </div>
+
+    <div class="bio-profile__footer">
+      <p class="bio-profile__message">{message}</p>
+
+      <div class="bio-profile__actions">
+        {actions.map((action) => (
+          <a
+            href={action.href}
+            class={`bio-profile__action bio-profile__action--${action.type}`}
+            target={action.type === 'whatsapp' ? '_blank' : undefined}
+            rel={action.type === 'whatsapp' ? 'noopener noreferrer' : undefined}
+          >
+            {action.type === 'chat' && <MessageSquare size={16} aria-hidden="true" />}
+            {action.type === 'phone' && <Phone size={16} aria-hidden="true" />}
+            {action.type === 'whatsapp' && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm0 18.09c-1.49 0-2.95-.4-4.22-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.1 8.1 0 01-1.24-4.32c0-4.48 3.65-8.13 8.13-8.13 2.17 0 4.21.85 5.75 2.38a8.077 8.077 0 012.38 5.75c0 4.48-3.65 8.13-8.13 8.13z"></path>
+              </svg>
+            )}
+            <span>{action.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</article>
+
+<style>
+  .bio-profile {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: #FAFAFA;
+    box-shadow: 0 24px 48px -12px rgba(26, 26, 46, 0.28);
+    isolation: isolate;
+  }
+
+  /* --- Capa de fondo bicolor 50/50 --- */
+  .bio-profile__bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bio-profile__bg-top,
+  .bio-profile__bg-bottom {
+    position: relative;
+    height: 50%;
+    overflow: hidden;
+  }
+
+  .bio-profile__bg-top {
+    background: #FAFAFA;
+  }
+
+  .bio-profile__bg-top::before {
+    content: '';
+    position: absolute;
+    top: -64px;
+    right: -64px;
+    width: 176px;
+    height: 176px;
+    border-radius: 50%;
+    background: rgba(241, 101, 41, 0.14);
+    filter: blur(40px);
+  }
+
+  .bio-profile__bg-bottom {
+    background: #D9531E;
+  }
+
+  .bio-profile__bg-bottom::before {
+    content: '';
+    position: absolute;
+    bottom: -64px;
+    left: -64px;
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.10);
+    filter: blur(40px);
+  }
+
+  /* Textura sutil de puntos sobre el panel naranja */
+  .bio-profile__bg-bottom::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.10;
+    background-image: radial-gradient(#FFFFFF 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* --- Capa de contenido --- */
+  .bio-profile__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 600px;
+    padding: var(--spacing-xl, 32px) var(--spacing-lg, 24px);
+    text-align: center;
+  }
+
+  .bio-profile__header {
+    width: 100%;
+    padding-top: var(--spacing-xs, 4px);
+    padding-bottom: var(--spacing-md, 16px);
+  }
+
+  .bio-profile__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: var(--rounded-full, 100px);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgba(217, 83, 30, 0.10);
+    color: #D9531E;
+    margin-bottom: 12px;
+  }
+
+  .bio-profile__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #D9531E;
+    animation: bio-profile-pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes bio-profile-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.8); }
+  }
+
+  .bio-profile__title {
+    margin: 0;
+    font-size: 1.375rem;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    color: var(--primary, #1A1A2E);
+  }
+
+  .bio-profile__subtitle {
+    display: block;
+    margin-top: var(--spacing-sm, 8px);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--secondary, #444444);
+  }
+
+  /* --- Retrato centrado sobre el corte 50/50 --- */
+  .bio-profile__photo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+    padding: var(--spacing-sm, 8px) 0;
+  }
+
+  .bio-profile__avatar {
+    position: relative;
+    z-index: 1;
+    width: 188px;
+    height: 188px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #FFFFFF;
+    /* Sin borde: el único círculo es el halo decorativo, como en la
+       referencia. Un border acá duplicaba el anillo (bug reportado). */
+    box-shadow: 0 8px 24px rgba(26, 26, 46, 0.25);
+  }
+
+  /* --- Pie: mensaje + accesos de contacto --- */
+  .bio-profile__footer {
+    width: 100%;
+    padding-top: var(--spacing-md, 16px);
+  }
+
+  .bio-profile__message {
+    margin: 0 auto var(--spacing-lg, 24px);
+    max-width: 320px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #FFFFFF;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+  }
+
+  .bio-profile__actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-sm, 8px);
+  }
+
+  .bio-profile__action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 6px;
+    border-radius: var(--rounded-sm, 8px);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .bio-profile__action--chat,
+  .bio-profile__action--phone {
+    background: #FFFFFF;
+    color: #D9531E;
+  }
+
+  .bio-profile__action--chat:hover,
+  .bio-profile__action--phone:hover {
+    background: #FFF4EC;
+  }
+
+  .bio-profile__action--whatsapp {
+    background: var(--whatsapp, #25D366);
+    color: #FFFFFF;
+  }
+
+  .bio-profile__action--whatsapp:hover {
+    background: var(--whatsapp-hover, #1DA851);
+  }
+
+  .bio-profile__action:active {
+    transform: scale(0.96);
+  }
+
+  /* Anillo de foco visible sobre el panel naranja/verde */
+  .bio-profile__action:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 640px) {
+    .bio-profile__content {
+      min-height: 640px;
+    }
+  }
+
+  /* Respeto por usuarios con movimiento reducido (WCAG 2.1) */
+  @media (prefers-reduced-motion: reduce) {
+    .bio-profile__dot {
+      animation: none;
+    }
+
+    .bio-profile__action {
+      transition: none;
+    }
+  }
+</style>
