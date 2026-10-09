@@ -9,14 +9,14 @@
 //   5. Banner CTA Diagnóstico IA                                [nuevo]
 //   6. Casos reales (Problema → Solución justa → Resultado)     [existe]
 //   7. Cómo trabajamos (4 pasos)                                [existe]
-//   8. POR QUÉ SACSI (4 pilares)                                [nuevo]
+//   8. POR QUÉ SACSI (foto + pilares)                                [nuevo]
 //   9. Checklist lead magnet + origen marca + FAQ               [existe]
 import Layout from '../layouts/Layout.astro';
 import HeroRow from '../components/HeroRow.astro';
 import SolucionesSection from '../components/SolucionesSection.astro';
 import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
-import PorQueSacsiSection from '../components/PorQueSacsiSection.astro';
+import PorQueSacsiConFoto from '../components/PorQueSacsiConFoto.astro';
 import FaqSection from '../components/FaqSection.astro';
 
 // Clientes que confían — logos reales (variante slider, marquesina automática)
@@ -121,8 +121,10 @@ const clientes = [
     </div>
   </section>
   
-  <!-- 8. POR QUÉ SACSI (4 pilares, patrón donweb) -->
-  <PorQueSacsiSection />
+  <!-- 8. POR QUÉ SACSI — foto a todo el ancho + filas (icono, título y
+       bajada) sobre la mitad derecha. Organismo PorQueSacsiConFoto.astro
+       (ver /design-style-guide §13). Reemplaza la grilla de 4 cards. -->
+  <PorQueSacsiConFoto />
   
   <!-- 9. Lead magnet: Checklist de Automatización -->
   <section class="section section--alt lead-magnet-banner">

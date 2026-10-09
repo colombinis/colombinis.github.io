@@ -1,0 +1,232 @@
+---
+// PorQueSacsiConFoto.astro — Organismo: 1 columna.
+// Foto a todo el ancho del contenedor con las filas "POR QUÉ SACSI"
+// (título + bajada + icono) SUPERPUESTAS sobre la foto:
+//   · ≥901px → contenido sobre la foto, alineado a la izquierda, con los
+//     iconos en la derecha (borde derecho de la imagen). El velo es
+//     #10192E61 (38%, decisión del dueño) y cada fila lleva un chip navy
+//     que garantiza el contraste AA de los tres colores (título naranja
+//     #F16529, bajada #FAFAFA e icono azul #0A7CFF) sobre el retrato.
+//   · <901px → el texto no entra sobre la foto, así que el contenido pasa
+//     a un panel navy debajo de la imagen (mismo lenguaje, misma paleta).
+// Cada fila es: bloque (título + bajada, text-align left) a la izquierda +
+// icono a la derecha (el bloque flex:1 empuja el icono al borde derecho).
+//
+// Diseño Atómico: compone el primitivo IconResolver. El contenido de los
+// pilares vive en src/data/pilares.json (fuente única compartida con la
+// home — la home usa este mismo organismo desde 2026-10-09, reemplazando
+// la grilla de 4 cards PorQueSacsiSection).
+//
+// Consumidores:
+//   · Home (sección "POR QUÉ SACSI")             → <PorQueSacsiConFoto />
+//   · /design-style-guide §13 (demo viva)        → <PorQueSacsiConFoto headingTag="h2" />
+import IconResolver from './ui/IconResolver.astro';
+import pilares from '../data/pilares.json';
+
+interface Props {
+  /** Tag del título de la sección. 'h2' por defecto; en demos de la guía
+   *  se pasa 'h2' para no duplicar el h1 de la página. */
+  headingTag?: 'h2' | 'h3';
+  /** Título de la sección. Default: el de la home. */
+  title?: string;
+  /** Retrato de fondo (ocupa el 100% del ancho del contenedor). */
+  image?: string;
+  /** Texto alternativo del retrato. */
+  imageAlt?: string;
+  class?: string;
+}
+
+const {
+  headingTag = 'h2',
+  title = 'POR QUÉ SACSI',
+  image = '/assets/seba-saco-azul.png',
+  imageAlt = 'Sebastián Alejandro Colombini, fundador de SACsi',
+  class: className = '',
+} = Astro.props;
+
+const Heading = headingTag;
+---
+
+<section class={`section pq-foto ${className}`.trim()} aria-labelledby="pq-foto-title">
+  <div class="container">
+    <Heading class="pq-foto__title" id="pq-foto-title">{title}</Heading>
+
+    <div class="pq-foto__stage">
+      <div class="pq-foto__media">
+        <img
+          class="pq-foto__img"
+          src={image}
+          alt={imageAlt}
+          width="1100"
+          height="614"
+          sizes="100vw"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class="pq-foto__content">
+        <ul class="pq-foto__rows">
+          {pilares.map((p) => (
+            <li class="pq-foto__row" data-pilar={p.id}>
+              <span class="pq-foto__row-body">
+                <span class="pq-foto__row-title">{p.titulo}</span>
+                <span class="pq-foto__row-text">{p.texto}</span>
+              </span>
+              <span class="pq-foto__icon">
+                <IconResolver name={p.icon} size={20} />
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pq-foto {
+    background: var(--surface);
+  }
+
+  .pq-foto__title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    color: var(--primary, #1A1A2E);
+    text-align: center;
+    margin: 0 0 var(--spacing-lg);
+  }
+
+  /* Stage: la foto ocupa el 100% del ancho del contenedor y define el
+     marco redondeado. También es el fondo del panel de texto en mobile. */
+  .pq-foto__stage {
+    position: relative;
+    border-radius: var(--rounded-md, 16px);
+    overflow: hidden;
+    background: #10192E; /* navy del velo: continuo con el panel de texto */
+    isolation: isolate;
+  }
+
+  .pq-foto__media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+  }
+
+  .pq-foto__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* La foto es el fondo de la sección: el velo la oscurece y el texto
+       vive arriba, por eso el encuadre busca el equilibrio del sujeto. */
+    object-fit: cover;
+    object-position: 38% 30%;
+  }
+
+  .pq-foto__content {
+    padding: var(--spacing-lg);
+  }
+
+  .pq-foto__rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md, 16px);
+  }
+
+  /* Fila: bloque (título y bajada) a la izquierda + icono a la derecha.
+     El bloque crece (flex: 1) y empuja el icono al borde derecho de la
+     imagen. En desktop la fila es un chip navy (ver media query). */
+  .pq-foto__row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-sm, 8px);
+  }
+
+  /* Icono azul (decisión del dueño 2026-10-09: #0A7CFF). El margin-top
+     lo centra sobre la primera línea del título (1.4rem × 1.2 ≈ 27px). */
+  .pq-foto__icon {
+    display: inline-flex;
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: #0A7CFF;
+  }
+
+  .pq-foto__row-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .pq-foto__row-title {
+    color: #F16529; /* naranja de marca (decisión del dueño) */
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* Bajada: blanca #FAFAFA (decisión del dueño 2026-10-09); la jerarquía
+     con el título la da el peso y el color, no el cuerpo. */
+  .pq-foto__row-text {
+    color: #FAFAFA;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  /* Desktop: el contenido se SUPERpone a la foto, ALINEADO A LA
+     IZQUIERDA, con los iconos en la derecha (borde derecho de la imagen). */
+  @media (min-width: 901px) {
+    .pq-foto__stage {
+      aspect-ratio: 16 / 9;
+    }
+
+    .pq-foto__media {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+    }
+
+    /* Velo: #10192E al 38% (decisión del dueño 2026-10-09: #10192E61) —
+       la foto se ve casi sin oscurecer. Como el texto y los iconos caen
+       sobre la camisa blanca del retrato y la zona clara del mapa, cada
+       fila lleva un chip navy (0.9) que garantiza el contraste AA de los
+       tres colores sin tapar la foto entre fila y fila. */
+    .pq-foto__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #10192E61;
+    }
+
+    .pq-foto__content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--spacing-xl);
+    }
+
+    /* Chip por fila: respaldo oscuro que hace legible el título naranja,
+       la bajada blanca y el icono azul sobre cualquier punto de la foto. */
+    .pq-foto__row {
+      background: rgba(16, 25, 46, 0.9);
+      border-radius: var(--rounded-sm, 8px);
+      padding: var(--spacing-sm, 8px) var(--spacing-md, 16px);
+    }
+  }
+</style>

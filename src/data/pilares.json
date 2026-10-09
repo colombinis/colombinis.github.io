@@ -1,0 +1,26 @@
+[
+  {
+    "id": "experiencia",
+    "icon": "ShieldCheck",
+    "titulo": "Más de 15 años de oficio",
+    "texto": "No improvisamos: 15+ años construyendo tiendas, sistemas y automatizaciones."
+  },
+  {
+    "id": "trato",
+    "icon": "Users",
+    "titulo": "Hablamos tu idioma, no código",
+    "texto": "Te explicamos qué necesitás y qué NO, de forma clara y sin letra chica ni sorpresas."
+  },
+  {
+    "id": "ia",
+    "icon": "Wrench",
+    "titulo": "IA sobre lo que ya tenés",
+    "texto": "Asistentes de WhatsApp y automatizaciones sobre lo que ya tenés."
+  },
+  {
+    "id": "roi",
+    "icon": "TrendingUp",
+    "titulo": "Tecnología que se paga sola",
+    "texto": "Si no genera ahorro de horas o ventas, no te lo vendemos."
+  }
+]

@@ -16,6 +16,7 @@ import Header from '../components/Header.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
 import BioCard from '../components/BioCard.astro';
 import HeroRow from '../components/HeroRow.astro';
+import PorQueSacsiConFoto from '../components/PorQueSacsiConFoto.astro';
 import {
   ArrowRight,
   ShieldCheck,
@@ -129,6 +130,7 @@ const logoVariants = [
         <a href="#hero-marca" class="guide-nav__link">Organismos · Hero</a>
         <a href="#hero-slider-row" class="guide-nav__link">Organismos · Hero+Slider</a>
         <a href="#slider-demo" class="guide-nav__link">Carrusel</a>
+        <a href="#foto-pilares" class="guide-nav__link">Organismos · Foto+Pilares</a>
         <a href="#chrome" class="guide-nav__link">Chrome · TopBar + Menú</a>
       </nav>
     </div>
@@ -536,7 +538,7 @@ const logoVariants = [
           </div>
           <p>Card blanco centrado con línea azul de 4px en el borde superior e icono circular celeste. Es el patrón de los 4 pilares de la sección "Por qué SACsi" de la home (experiencia, trato, IA, ROI).</p>
           <div class="card-demo-footer">
-            <span class="text-xs text-muted">Consumidor: PorQueSacsiSection</span>
+            <span class="text-xs text-muted">Consumidor: PorQueSacsiConFoto</span>
           </div>
         </Card>
 
@@ -891,6 +893,24 @@ const logoVariants = [
 
     <!-- BANNER DE RETORNO: eliminado por decisión del dueño (feedback 12) -->
 
+    <!-- 13. ORGANISMOS — FOTO + PILARES (1 columna, contenido sobre la foto) -->
+    <section id="foto-pilares" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>13. Organismos — Foto + Pilares (1 columna)</h2>
+        <p>
+          Una columna: el retrato <code>/assets/seba-saco-azul.png</code> ocupa el 100% del ancho del contenedor y las 4 filas &ldquo;POR QUÉ SACSI&rdquo; van <strong>superpuestas sobre la imagen, alineadas a la izquierda, con los iconos en la derecha</strong>. Cada fila es título (naranja #F16529) + bajada (blanca #FAFAFA) a la izquierda e icono (azul #0A7CFF) a la derecha, en la misma fila. El velo de la foto es <code>#10192E61</code> (38%, decisión del dueño) y cada fila lleva un chip navy que mantiene el contraste. Demo viva con el organismo <code>PorQueSacsiConFoto.astro</code>.
+        </p>
+      </div>
+
+      <div class="foto-pilares-demo">
+        <PorQueSacsiConFoto headingTag="h2" />
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> usar el organismo <code>PorQueSacsiConFoto.astro</code> en lugar de repetir la fila. La foto va a todo el ancho del contenedor dentro de un <code>&lt;div class="pq-foto__stage"&gt;</code> (<code>overflow: hidden</code>, radio 16px). En desktop el contenido se superpone a la foto (<code>position: absolute</code>, ancho completo), <strong>alineado a la izquierda y con los iconos en la derecha</strong> (el bloque <code>título + bajada</code> crece con <code>flex: 1</code> y empuja el icono al borde derecho de la imagen). El velo es <code>#10192E61</code> (38%) y, como el texto cae sobre la camisa blanca del retrato, <strong>cada fila es un chip navy <code>rgba(16, 25, 46, 0.9)</code> que garantiza el contraste AA de los tres colores sin tapar la foto entre fila y fila.</strong> En mobile el contenido pasa a un panel navy <code>#10192E</code> debajo de la imagen. Los pilares salen de <code>src/data/pilares.json</code>.
+      </p>
+    </section>
+
   </main>
 </Layout>
 
@@ -1013,6 +1033,16 @@ const logoVariants = [
      El organismo HeroRow.astro aporta el grid 60/40 y el fondo navy;
      este contenedor solo enmarca y redondea para presentarlo en la guía. */
   .hero-row-demo {
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    overflow: hidden;
+  }
+
+  /* Foto + pilares (§13): marco de la demo viva. El organismo
+     PorQueSacsiConFoto.astro aporta el stage con la foto al 100% y las
+     filas superpuestas; este contenedor solo enmarca y redondea para
+     presentarlo en la guía. */
+  .foto-pilares-demo {
     border: 1px solid #E2E8F0;
     border-radius: var(--rounded-md, 16px);
     overflow: hidden;
