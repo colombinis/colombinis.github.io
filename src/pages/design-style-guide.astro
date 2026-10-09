@@ -14,6 +14,7 @@ import IconResolver from '../components/ui/IconResolver.astro';
 import TopBarControl from '../components/TopBarControl.astro';
 import Header from '../components/Header.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
+import BioCard from '../components/BioCard.astro';
 import HeroRow from '../components/HeroRow.astro';
 import {
   ArrowRight,
@@ -120,6 +121,7 @@ const logoVariants = [
         <a href="#iconos" class="guide-nav__link">Iconografía</a>
         <a href="#logotipo" class="guide-nav__link">Primitivos · Logotipo</a>
         <a href="#tarjetas" class="guide-nav__link">Composiciones · Tarjetas</a>
+        <a href="#bio-card" class="guide-nav__link">Composiciones · Perfil</a>
         <a href="#clientes-confian" class="guide-nav__link">Organismos · Clientes</a>
         <a href="#controles" class="guide-nav__link">Tabs</a>
         <a href="#acordeon" class="guide-nav__link">Acordeón</a>
@@ -583,6 +585,29 @@ const logoVariants = [
       </div>
     </section>
 
+    <!-- 6a. COMPOSICIONES — TARJETA DE PERFIL -->
+    <section id="bio-card" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>6a. Composiciones — Tarjeta de Perfil (BioCard.astro)</h2>
+        <p>
+          Tarjeta bicolor 50/50 extraída del componente independiente <code>stitch_about_us_profile_component</code>: panel superior claro <code>#FAFAFA</code> con badge de rol y presentación, panel inferior naranja profundo <code>#D9531E</code> con el mensaje y los accesos de contacto, y el retrato cruzando el corte. Consumida en <code>/sobre-nosotros</code> en reemplazo de la antigua <code>bio-card</code>.
+        </p>
+      </div>
+
+      <div class="component-showcase">
+        <div class="showcase-row">
+          <span class="showcase-label">Variante Default (sobre-nosotros):</span>
+          <div class="bio-card-stage">
+            <BioCard headingTag="h3" />
+          </div>
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> usar el organismo <code>BioCard.astro</code> en lugar de repetir el markup de la tarjeta. El corte 50/50 se resuelve con una capa de fondo (<code>.bio-profile__bg</code>); el retrato —recorte circular de <code>/assets/seba-avatar.webp</code>— se centra en el espacio libre entre header y footer (<code>margin: auto 0</code>).
+      </p>
+    </section>
+
     <!-- 6b. ORGANISMOS — CLIENTES QUE CONFIAN -->
     <section id="clientes-confian" class="guide-section">
       <div class="section-title-wrap">
@@ -604,7 +629,10 @@ const logoVariants = [
                 { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
                 { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
                 { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
-                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' }
+                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' },
+                { name: 'ON94', url: 'https://on94.com.ar/', logo: '/assets/clientes/on94.png', description: 'Radio online — Santa Fe, Argentina' },
+                { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
+                { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
               ]}
             />
           </div>
@@ -624,7 +652,10 @@ const logoVariants = [
                 { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
                 { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
                 { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
-                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' }
+                { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' },
+                { name: 'ON94', url: 'https://on94.com.ar/', logo: '/assets/clientes/on94.png', description: 'Radio online — Santa Fe, Argentina' },
+                { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
+                { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
               ]}
             />
           </div>
@@ -1147,6 +1178,17 @@ const logoVariants = [
   .card-demo-footer--inset {
     padding: var(--spacing-sm, 8px) var(--spacing-lg, 24px) var(--spacing-lg, 24px);
     margin: 0;
+  }
+
+  /* Escenario del demo de BioCard (§6a): fondo suave donde se proyecta
+     la sombra de la tarjeta de perfil. */
+  .bio-card-stage {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
   }
 
   .text-xs {

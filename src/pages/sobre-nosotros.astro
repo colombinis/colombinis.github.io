@@ -4,57 +4,22 @@ import Layout from '../layouts/Layout.astro';
 import Badge from '../components/ui/Badge.astro';
 import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
+import BioCard from '../components/BioCard.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
 
 const clientes = [
-  {
-    name: 'MLR Sistemas',
-    url: 'https://mlrsistemas.com.ar/',
-    logo: '/assets/clientes/mlr-sistemas.webp',
-    description: 'Sistemas de gestión y software empresarial'
-  },
-  {
-    name: 'Syloper',
-    url: 'https://syloper.com/',
-    logo: '/assets/clientes/syloper.svg',
-    description: 'Consultoría y desarrollo de software'
-  },
-  {
-    name: 'Ameba',
-    url: 'https://www.ameba.com.uy/en',
-    logo: '/assets/clientes/ameba.svg',
-    description: 'Diseño y desarrollo de plataformas digitales'
-  },
-  {
-    name: 'SOESGPYLA',
-    url: 'https://www.soesgpyla.com.ar/',
-    logo: '/assets/clientes/soesgpyla.svg',
-    description: 'Sindicato Obreros Estaciones de Servicio'
-  },
-  {
-    name: 'Grupo El Positivo',
-    url: 'https://www.grupoelpositivo.com.ar/',
-    logo: '/assets/clientes/grupo-el-positivo.png',
-    description: 'Comercialización y distribución de artículos'
-  },
-  {
-    name: 'e-Softing',
-    url: 'https://e-softing.com.ar/',
-    logo: '/assets/clientes/e-softing.svg',
-    description: 'Soluciones tecnológicas e infraestructura'
-  },
-  {
-    name: '1950labs',
-    url: 'https://1950labs.com/',
-    logo: '/assets/clientes/1950labs.png',
-    description: 'Staff augmentation y desarrollo de software'
-  },
-  {
-    name: 'Tornillo Alvear',
-    url: 'https://www.tornilloalvear.com/',
-    logo: '/assets/clientes/tornillo-alvear.png',
-    description: 'Fijaciones, tornillería y ferretería industrial'
-  }
+  { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
+  { name: 'Syloper', url: 'https://syloper.com/', logo: '/assets/clientes/syloper.svg', description: 'Consultoría y desarrollo de software' },
+  { name: 'Ameba', url: 'https://www.ameba.com.uy/en', logo: '/assets/clientes/ameba.svg', description: 'Diseño y desarrollo de plataformas digitales' },
+  { name: 'SOESGPYLA', url: 'https://www.soesgpyla.com.ar/', logo: '/assets/clientes/soesgpyla.svg', description: 'Sindicato Obreros Estaciones de Servicio' },
+  { name: 'Grupo El Positivo', url: 'https://www.grupoelpositivo.com.ar/', logo: '/assets/clientes/grupo-el-positivo.png', description: 'Comercialización y distribución de artículos' },
+  { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
+  { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
+  { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
+  { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' },
+  { name: 'ON94', url: 'https://on94.com.ar/', logo: '/assets/clientes/on94.png', description: 'Radio online — Santa Fe, Argentina' },
+  { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
+  { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
 ];
 ---
 
@@ -80,27 +45,16 @@ const clientes = [
   <!-- Historia de Sebastián / El Origen -->
   <section class="section section--alt">
     <div class="container philosophy-grid">
-      <Card variant="default" padding="lg" class="bio-card">
-        <img
-          src="/assets/seba-avatar.webp"
-          alt="Sebastián Alejandro Colombini, fundador de SACsi"
-          width="420"
-          height="420"
-          class="bio-avatar"
-        />
-        <h2 class="bio-name">Sebastián Alejandro Colombini</h2>
-        <p class="bio-role">Fundador & Lead Developer</p>
-        <span class="bio-location">Rosario, Santa Fe, Argentina</span>
-      </Card>
+      <BioCard />
 
       <div class="bio-text">
         <Badge variant="accent" size="sm" class="section-tag">EL ORIGEN</Badge>
         <h2>+15 años acompañando empresas desde Rosario</h2>
         <p>
-          <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>. Empecé a desarrollar software hace más de una década y media, colaborando mano a mano con empresas, distribuidores, estudios contables y comercios familiares de la región y el país.
+          <strong>SACsi nace de las iniciales de Sebastián Alejandro Colombini</strong>. Empecé a desarrollar software colaborando con comercios familiares de la región, luego tuve la oportunidad de trabajar en grandes empresas multinacionales.
         </p>
         <p>
-          En todo este tiempo vi repetirse el mismo patrón una y otra vez: empresas tentadas a contratar plataformas gigantescas o la última tecnología de moda, pagando fortunas en licencias mensuales para terminar usando menos del 10% de las funciones, frustradas y con procesos más lentos que antes.
+          En ese tiempo vi repetirse el mismo patrón una y otra vez: profesionales, PyMEs y pequeños comercios familiares que querian vender por internet se ven confundidos por la enorme cantidad de herramientas y promesas de marketing digital. Y terminan pagando mucho más de lo que necesitan, con resultados mediocres.
         </p>
         <p>
           Fundé SACsi para ser el contrapeso de esa tendencia. Para decirle a los dueños de negocios la verdad: <em>qué tecnología necesitás hoy y cuál no te conviene pagar</em>.
@@ -206,48 +160,8 @@ const clientes = [
 
   @media (min-width: 768px) {
     .philosophy-grid {
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: minmax(320px, 420px) 1fr;
     }
-  }
-
-  /* .bio-card: superficie, borde, radio y padding los aporta <Card variant="default" padding="lg"> */
-  .bio-card {
-    text-align: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  }
-
-  .bio-avatar {
-    width: 84px;
-    height: 84px;
-    background: var(--primary);
-    color: #FFFFFF;
-    font-size: 1.8rem;
-    font-weight: 700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--spacing-md);
-    border: 3px solid #EBF4FF;
-  }
-
-  .bio-name {
-    font-size: 1.2rem;
-    margin: 0 0 var(--spacing-xs);
-    color: var(--primary);
-    font-weight: 700;
-  }
-
-  .bio-role {
-    font-size: 0.92rem;
-    color: var(--tertiary-dark);
-    font-weight: 600;
-    margin: 0 0 var(--spacing-xs);
-  }
-
-  .bio-location {
-    font-size: 0.85rem;
-    color: var(--muted);
   }
 
   /* .section-tag: display/box lo aporta <Badge>; se conserva la tipografía de etiqueta de sección */
