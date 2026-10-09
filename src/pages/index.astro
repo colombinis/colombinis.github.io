@@ -15,9 +15,25 @@ import Layout from '../layouts/Layout.astro';
 import HeroRow from '../components/HeroRow.astro';
 import SolucionesSection from '../components/SolucionesSection.astro';
 import CasosAnonimosSection from '../components/CasosAnonimosSection.astro';
-import SocialProofSection from '../components/SocialProofSection.astro';
+import ClientesConfian from '../components/ClientesConfian.astro';
 import PorQueSacsiSection from '../components/PorQueSacsiSection.astro';
 import FaqSection from '../components/FaqSection.astro';
+
+// Clientes que confían — logos reales (variante slider, marquesina automática)
+const clientes = [
+  { name: 'MLR Sistemas', url: 'https://mlrsistemas.com.ar/', logo: '/assets/clientes/mlr-sistemas.webp', description: 'Sistemas de gestión y software empresarial' },
+  { name: 'Syloper', url: 'https://syloper.com/', logo: '/assets/clientes/syloper.svg', description: 'Consultoría y desarrollo de software' },
+  { name: 'Ameba', url: 'https://www.ameba.com.uy/en', logo: '/assets/clientes/ameba.svg', description: 'Diseño y desarrollo de plataformas digitales' },
+  { name: 'SOESGPYLA', url: 'https://www.soesgpyla.com.ar/', logo: '/assets/clientes/soesgpyla.svg', description: 'Sindicato Obreros Estaciones de Servicio' },
+  { name: 'Grupo El Positivo', url: 'https://www.grupoelpositivo.com.ar/', logo: '/assets/clientes/grupo-el-positivo.png', description: 'Comercialización y distribución de artículos' },
+  { name: 'e-Softing', url: 'https://e-softing.com.ar/', logo: '/assets/clientes/e-softing.svg', description: 'Soluciones tecnológicas e infraestructura' },
+  { name: '1950labs', url: 'https://1950labs.com/', logo: '/assets/clientes/1950labs.png', description: 'Staff augmentation y desarrollo de software' },
+  { name: 'Tornillo Alvear', url: 'https://www.tornilloalvear.com/', logo: '/assets/clientes/tornillo-alvear.png', description: 'Fijaciones, tornillería y ferretería industrial' },
+  { name: 'Fenicio', url: 'https://fenicio.io/', logo: '/assets/clientes/fenicio.png', description: 'Plataforma e-commerce para marcas' },
+  { name: 'ON94', url: 'https://on94.com.ar/', logo: '/assets/clientes/on94.png', description: 'Radio online — Santa Fe, Argentina' },
+  { name: 'Onmedia', url: 'https://onmedia.uy/', logo: '/assets/clientes/onmedia.png', description: 'Radio online — Maldonado, Uruguay' },
+  { name: 'eLearn Guitar', url: 'http://elearnguitar.com/', logo: '/assets/clientes/elearnguitar.png', description: 'Enseñanza y partituras de guitarra clásica en línea' }
+];
 ---
  
 <Layout
@@ -61,8 +77,8 @@ import FaqSection from '../components/FaqSection.astro';
     hideMeta={true}
   />
   
-  <!-- 6. Testimonios / Resultados que hablan — debajo de Casos reales (feedback dueño) -->
-  <SocialProofSection />
+  <!-- 6. Clientes que confían — logos reales, variante "slider" (marquesina automática, solo imágenes, sin dots) -->
+  <ClientesConfian mode="slider" clientes={clientes} />
   
   <!-- 7. Cómo trabajamos -->
   <section id="como-trabajamos" class="section">

@@ -3,6 +3,13 @@
 // Uso: import ClientesConfian from '../components/ClientesConfian.astro';
 //      <ClientesConfian clientes={clientes} />
 // Los datos de clientes pueden pasarse como prop o usar los por defecto.
+//
+// Modos:
+//   default      → grilla con logo + nombre + descripción.
+//   logos-only   → grilla de solo logos (sin textos).
+//   slider       → marquesina automática de logos con fondo de color, sin
+//                  dots de control. Título "Más que clientes, grandes
+//                  relaciones." (override con prop `title`).
 
 interface Cliente {
   name: string;
@@ -16,63 +23,124 @@ interface Props {
   title?: string;
   subtitle?: string;
   badgeText?: string;
-  mode?: 'default' | 'logos-only';
+  mode?: 'default' | 'logos-only' | 'slider';
 }
 
 const {
   clientes = [],
-  title = 'Clientes que confían',
+  title,
   subtitle = 'Empresas, organizaciones y estudios que confían en nuestras soluciones, integraciones y acompañamiento técnico.',
   badgeText = 'TRAYECTORIA Y CONFIANZA',
   mode = 'default'
 } = Astro.props;
+
+const isSlider = mode === 'slider';
+
+// El título histórico se mantiene; el modo slider usa el claim de relaciones.
+// En ambos casos la prop `title` lo puede pisar.
+const resolvedTitle =
+  title ?? (isSlider ? 'Más que clientes, grandes relaciones.' : 'Clientes que confían');
+
+// La marquesina duplica la lista para que el desplazamiento sea continuo y sin
+// salto: la pista se traduce exactamente el ancho de una vuelta (-50%). La
+// segunda copia queda oculta para accesibilidad (aria-hidden + sin foco).
+const sliderItems = isSlider
+  ? [
+      ...clientes.map((c) => ({ ...c, clone: false })),
+      ...clientes.map((c) => ({ ...c, clone: true })),
+    ]
+  : [];
+
+// Duración proporcional a la cantidad de logos (mínimo 24s), para que la
+// velocidad se mantenga pareja con pocos o muchos clientes.
+const sliderDuration = `${Math.max(24, clientes.length * 4)}s`;
 
 import Card from './ui/Card.astro';
 import Badge from './ui/Badge.astro';
 ---
 
 <!-- Sección Clientes que confían -->
-<section class="section" aria-labelledby="clientes-confian-title">
+<section
+  class="section"
+  aria-labelledby={mode === 'logos-only' ? undefined : 'clientes-confian-title'}
+  aria-label={mode === 'logos-only' ? resolvedTitle : undefined}
+>
   <div class="container">
     {mode === 'default' && (
       <div class="clients-header">
         <Badge variant="accent" size="sm" class="section-tag">
           {badgeText}
         </Badge>
-        <h2 id="clientes-confian-title" class="section__title">{title}</h2>
+        <h2 id="clientes-confian-title" class="section__title">{resolvedTitle}</h2>
         <p class="section__subtitle">{subtitle}</p>
       </div>
     )}
 
-    <div class="clients-logo-grid">
-      {clientes.map((c) => (
-        <Card
-          variant="interactive"
-          as="div"
-          target="_blank"
-          rel="noopener noreferrer"
-          title={` ${c.name}`}
-          padding="md"
-          class={`client-logo-card ${mode === 'logos-only' ? 'client-logo-card--logos-only' : ''}`}
+    {isSlider && (
+      <div class="clients-slider-header">
+        <h2 id="clientes-confian-title" class="clients-slider-title">{resolvedTitle}</h2>
+      </div>
+    )}
+
+    {!isSlider && (
+      <div class="clients-logo-grid">
+        {clientes.map((c) => (
+          <Card
+            variant="interactive"
+            as="div"
+            target="_blank"
+            rel="noopener noreferrer"
+            title={` ${c.name}`}
+            padding="md"
+            class={`client-logo-card ${mode === 'logos-only' ? 'client-logo-card--logos-only' : ''}`}
+          >
+            <div class="client-logo-wrapper">
+              <img
+                src={c.logo}
+                alt={`Logo de ${c.name}`}
+                loading="lazy"
+                decoding="async"
+                class="client-logo-img"
+              />
+            </div>
+            {mode === 'default' && (
+              <>
+                <span class="client-logo-name">{c.name}</span>
+                <span class="client-logo-desc">{c.description}</span>
+              </>
+            )}
+          </Card>
+        ))}
+      </div>
+    )}
+
+    {isSlider && (
+      <div class="clients-slider" role="group" aria-label="Logos de clientes">
+        <ul
+          class="clients-slider-track"
+          style={`--clients-duration: ${sliderDuration}`}
         >
-          <div class="client-logo-wrapper">
-            <img
-              src={c.logo}
-              alt={`Logo de ${c.name}`}
-              loading="lazy"
-              decoding="async"
-              class="client-logo-img"
-            />
-          </div>
-          {mode === 'default' && (
-            <>
-              <span class="client-logo-name">{c.name}</span>
-              <span class="client-logo-desc">{c.description}</span>
-            </>
-          )}
-        </Card>
-      ))}
-    </div>
+          {sliderItems.map((c) => (
+            <li
+              class={`clients-slider-item ${c.clone ? 'clients-slider-item--clone' : ''}`}
+              aria-hidden={c.clone ? 'true' : undefined}
+            >
+              <div class="clients-slider-card" title={c.name}>
+                <span class="clients-slider-media">
+                  <img
+                    src={c.logo}
+                    alt={c.clone ? '' : `Logo de ${c.name}`}
+                    loading="lazy"
+                    decoding="async"
+                    class="clients-slider-img"
+                  />
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
   </div>
 </section>
 
@@ -197,5 +265,145 @@ import Badge from './ui/Badge.astro';
     font-size: 0.8rem;
     color: var(--muted);
     line-height: 1.35;
+  }
+
+  /* ---------- Modo slider: marquesina automática de logos ---------- */
+  .clients-slider-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .clients-slider-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  /* Ventana de la marquesina: recorta la pista y difumina los bordes para que
+     los logos entren y salgan sin cortes duros. */
+  .clients-slider {
+    --clients-slider-gap: var(--spacing-md);
+    position: relative;
+    overflow: hidden;
+    padding: 2px 0;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+  }
+
+  /* Pista doble: se desplaza -50% (una vuelta completa) en loop infinito.
+     El gap va como margin-right de cada ítem para que -50% sea exacto. */
+  .clients-slider-track {
+    display: flex;
+    align-items: stretch;
+    width: max-content;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    animation: clients-marquee var(--clients-duration, 48s) linear infinite;
+    will-change: transform;
+  }
+
+  /* Pausa al interactuar (hover o foco de teclado). */
+  .clients-slider:hover .clients-slider-track,
+  .clients-slider:focus-within .clients-slider-track {
+    animation-play-state: paused;
+  }
+
+  .clients-slider-item {
+    flex: 0 0 auto;
+    margin-right: var(--clients-slider-gap);
+  }
+
+  .clients-slider-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 164px;
+    height: 92px;
+  }
+
+  /* Fondo de color al 100% de ancho/alto del contenedor de la imagen, para
+     asegurar contraste con logos claros u oscuros. */
+  .clients-slider-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-md);
+    background-color: #eaf3ff;
+    border: 1px solid #d6e6ff;
+    border-radius: var(--rounded-md);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .clients-slider-card:hover .clients-slider-media {
+    border-color: var(--tertiary);
+    box-shadow: 0 6px 16px rgba(10, 124, 255, 0.12);
+  }
+
+  .clients-slider-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @keyframes clients-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (min-width: 601px) {
+    .clients-slider {
+      --clients-slider-gap: var(--spacing-lg);
+    }
+
+    .clients-slider-card {
+      width: 200px;
+      height: 104px;
+    }
+  }
+
+  /* Sin animación: la ventana pasa a scroll horizontal manual y se oculta la
+     copia duplicada, para que la lista siga siendo navegable. */
+  @media (prefers-reduced-motion: reduce) {
+    .clients-slider {
+      -webkit-mask-image: none;
+      mask-image: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .clients-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .clients-slider-track {
+      animation: none;
+    }
+
+    .clients-slider-item--clone {
+      display: none;
+    }
   }
 </style>
