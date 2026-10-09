@@ -1,0 +1,192 @@
+---
+// Logo.astro — Primitivo de marca SACsi.
+// Expone las variaciones del logotipo listas para fondo claro (light) u oscuro (dark):
+//   · logo-texto     → imagen del logo actual (/logo.svg) + tagline "Soluciones Informáticas"
+//   · favicon-texto  → imagen del favicon (/favicon.ico) + tagline "Soluciones Informáticas"
+//   · sacsi-color    → texto "SACsi" con "SAC" sobre fondo celeste y "si" sobre fondo naranja
+//   · sacsi-blanco   → texto "SACsi" con tipografía blanca (pensado para fondos oscuros)
+//   · sacsi-naranja  → texto "SACsi" con tipografía naranja de marca
+//
+// El `theme` (light | dark) adapta el color del tagline al fondo sobre el que se apoya;
+// las variaciones de texto ya traen su propio color de marca.
+export type LogoVariant =
+  | 'logo-texto'
+  | 'favicon-texto'
+  | 'sacsi-color'
+  | 'sacsi-blanco'
+  | 'sacsi-naranja';
+
+export type LogoTheme = 'light' | 'dark';
+
+interface Props {
+  variant?: LogoVariant;
+  theme?: LogoTheme;
+  tagline?: string;
+  size?: 'md' | 'lg';
+  href?: string;
+  class?: string;
+}
+
+const {
+  variant = 'logo-texto',
+  theme = 'light',
+  tagline = 'Soluciones Informáticas',
+  size = 'md',
+  href,
+  class: className = '',
+} = Astro.props;
+
+const classes = [
+  'ui-logo',
+  `ui-logo--${variant}`,
+  `ui-logo--${theme}`,
+  `ui-logo--${size}`,
+  className,
+].filter(Boolean).join(' ');
+
+const Tag = href ? 'a' : 'span';
+const esTexto = variant === 'sacsi-color' || variant === 'sacsi-blanco' || variant === 'sacsi-naranja';
+---
+
+<Tag class={classes} {...(href ? { href } : {})}>
+  {variant === 'logo-texto' && (
+    <img class="ui-logo__img" src="/logo.svg" alt="Logo SACsi" type="image/svg+xml" />
+  )}
+
+  {variant === 'favicon-texto' && (
+    <img class="ui-logo__img ui-logo__img--favicon" src="/favicon.ico" alt="Logo SACsi" />
+  )}
+
+  {variant === 'sacsi-color' && (
+    <span class="ui-logo__split" role="img" aria-label="SACsi">
+      <span class="ui-logo__split-part ui-logo__split-part--sac" aria-hidden="true">SAC</span>
+      <span class="ui-logo__split-part ui-logo__split-part--si" aria-hidden="true">si</span>
+    </span>
+  )}
+
+  {variant === 'sacsi-blanco' && <span class="ui-logo__word">SACsi</span>}
+
+  {variant === 'sacsi-naranja' && <span class="ui-logo__word">SACsi</span>}
+
+  {!esTexto && <span class="ui-logo__tagline">{tagline}</span>}
+</Tag>
+
+<style>
+  .ui-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .ui-logo__img {
+    display: block;
+    width: auto;
+  }
+
+  .ui-logo__img--favicon {
+    border-radius: var(--rounded-xs, 4px);
+  }
+
+  .ui-logo__tagline {
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  /* El tagline sigue el fondo sobre el que se apoya el logo. */
+  .ui-logo--light .ui-logo__tagline {
+    color: var(--primary, #1A1A2E);
+  }
+
+  .ui-logo--dark .ui-logo__tagline {
+    color: #FFFFFF;
+  }
+
+  /* Variación "SACsi" con bloques de color (fiel al logo actual). */
+  .ui-logo__split {
+    display: inline-flex;
+    border-radius: var(--rounded-xs, 4px);
+    overflow: hidden;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+  }
+
+  .ui-logo__split-part {
+    padding: 0.18em 0.34em;
+    color: #FFFFFF;
+  }
+
+  .ui-logo__split-part--sac {
+    background: #00A1F1;
+  }
+
+  .ui-logo__split-part--si {
+    background: #F16529;
+  }
+
+  /* Variaciones tipográficas de color. */
+  .ui-logo__word {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .ui-logo--sacsi-blanco .ui-logo__word {
+    color: #FFFFFF;
+  }
+
+  .ui-logo--sacsi-naranja .ui-logo__word {
+    color: #F16529;
+  }
+
+  /* ---- Escala tipográfica (md / lg) ---- */
+  .ui-logo--md .ui-logo__img {
+    height: 34px;
+  }
+
+  .ui-logo--md .ui-logo__img--favicon {
+    height: 30px;
+    width: 30px;
+  }
+
+  .ui-logo--md .ui-logo__tagline {
+    font-size: 0.95rem;
+  }
+
+  .ui-logo--md .ui-logo__split {
+    font-size: 1.15rem;
+  }
+
+  .ui-logo--md .ui-logo__word {
+    font-size: 1.35rem;
+  }
+
+  .ui-logo--lg .ui-logo__img {
+    height: 46px;
+  }
+
+  .ui-logo--lg .ui-logo__img--favicon {
+    height: 40px;
+    width: 40px;
+    border-radius: var(--rounded-sm, 8px);
+  }
+
+  .ui-logo--lg .ui-logo__tagline {
+    font-size: 1.05rem;
+  }
+
+  .ui-logo--lg .ui-logo__split {
+    font-size: 1.5rem;
+  }
+
+  .ui-logo--lg .ui-logo__word {
+    font-size: 1.75rem;
+  }
+
+  @media (min-width: 601px) {
+    .ui-logo--md .ui-logo__img {
+      height: 40px;
+    }
+  }
+</style>
