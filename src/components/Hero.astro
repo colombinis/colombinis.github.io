@@ -1,17 +1,89 @@
-<section class="hero">
+---
+// Hero de marca (patrón home) — ver /design-style-guide/ §10 "Hero de Marca".
+//
+// Reglas del patrón (gobernanza del sistema de diseño):
+//   · Un solo H1 por página: la propuesta de valor (no el nombre del servicio).
+//   · Sin label/eyebrow superior.
+//   · Un único CTA naranja (#F16529), el acento del logo.
+//
+// Color: en la home este hero toma el fondo y los colores de texto del
+// HeroSlider que lo acompaña (justo debajo) — fondo navy (--primary) y texto
+// blanco — para que la propuesta de valor y el carrusel formen un mismo
+// bloque de marca a la entrada de la página.
+interface Props {
+  /** Tag del título: 'h1' por defecto (el único h1 de la página). En demos
+   *  o páginas interiores pasá 'h2'/'h3' para no duplicar el h1. */
+  headingTag?: 'h1' | 'h2' | 'h3';
+}
+
+const { headingTag = 'h1' } = Astro.props;
+const TitleTag = headingTag;
+---
+
+<section class="hero hero--brand">
   <div class="hero__container">
-    <h1 class="hero__title">TECNOLOGÍA JUSTA EN ROSARIO</h1>
+    <TitleTag class="hero__title">
+      <span class="hero__title-accent">Tecnología justa</span> para que Profesionales y PyMEs vendan más por internet.
+    </TitleTag>
     <p class="hero__subtitle">
-Tecnología justa para emprendedores y PyMEs.
-Sin sobredimensionar. Sin modas.
-Solo lo que realmente necesitás para crecer.
-Más de 15 años acompañando a dueños de pequeños negocios y estudios de diseño o marketing. 
-Analizamos tu realidad para que inviertas únicamente en lo que genera valor real y se pague sola: 
-sin licencias innecesarias ni sistemas sobredimensionados.
+      Desde Rosario ( y cerca de la casa de Messi ;-). 
+      Hace más de 15 años que <b>acercamos la tecnología que usan las grandes empresas</b> a pequeños comercios para que tengan las mismas posibilidades de VENDER MAS Y MEJOR sus productos y servicios.
     </p>
     <div class="hero__actions">
-      <a href="/contacto/" class="hero__cta hero__cta--form hero__cta--orange">Te decimos qué necesitás… y qué no. Consulta sin cargo</a>
-      <a href="/soluciones/diagnostico-ia/" class="hero__cta hero__cta--form">Quiero mi Diagnóstico IA</a>
+      <a class="hero__cta hero__cta--orange" href="/contacto/">
+        Te decimos qué necesitás… y qué no. Consulta sin cargo
+      </a>
     </div>
   </div>
 </section>
+
+<style>
+  /* Fondo y textos tomados del HeroSlider de la home: navy (--primary) + blanco.
+     La base .hero (fondo surface, centrado) viene de global.css; acá solo el
+     diferencial. El hero abre la página y el slider viene debajo: el borde
+     inferior sutil separa el bloque naval del carrusel contiguo. */
+  .hero--brand {
+    background: var(--primary);
+    color: #FFFFFF;
+    padding-top: var(--spacing-xxl);
+    padding-bottom: var(--spacing-xxl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .hero--brand .hero__title {
+    color: #FFFFFF;
+  }
+
+  /* "Tecnología justa" en naranja de marca (#F16529) — mismo acento que el
+     título bicolor de la sección de casos (.casos-title-highlight). */
+  .hero--brand .hero__title-accent {
+    color: #F16529;
+  }
+
+  .hero--brand .hero__subtitle {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* CTA naranja del logo: sobre fondo navy mantiene texto blanco, igual que el
+     CTA del slider. */
+  .hero--brand .hero__cta--orange {
+    background-color: #F16529;
+    color: #FFFFFF;
+    border: none;
+  }
+
+  .hero--brand .hero__cta--orange:hover {
+    background-color: #D9531E;
+    color: #FFFFFF;
+  }
+
+  /* Modo fila 60/40 de la home (wrapper .hero-row): el hero centra su
+     contenido verticalmente y separa del slider con un borde vertical. */
+  @media (min-width: 901px) {
+    :global(.hero-row) .hero--brand {
+      justify-content: center;
+      border-bottom: none;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+</style>

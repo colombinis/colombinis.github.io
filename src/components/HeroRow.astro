@@ -1,0 +1,49 @@
+---
+// Fila de portada (organismo): hero de marca (60%) + slider de servicios (40%)
+// tal como quedó en la home. Ambos comparten fondo navy (--primary) y texto
+// blanco; a ≥901px forman una fila en grid 3fr/2fr y en mobile se apilan.
+//
+// Consumidores:
+//   · src/pages/index.astro (portada)          → <HeroRow />
+//   · /design-style-guide §10b (demo viva)     → <HeroRow headingTag="h2" />
+//
+// El render del hero queda scopeado en Hero.astro; este componente solo
+// provee el contenedor 60/40 y compone los dos organismos de marca.
+import Hero from './Hero.astro';
+import HeroSlider from './HeroSlider.astro';
+
+interface Props {
+  /** Tag del título del hero. 'h1' en la home (único h1 de la página);
+   *  'h2' en demos/guía para no duplicar el h1 de la página. */
+  headingTag?: 'h1' | 'h2' | 'h3';
+}
+
+const { headingTag = 'h1' } = Astro.props;
+---
+
+<div class="hero-row">
+  <Hero headingTag={headingTag} />
+  <HeroSlider />
+</div>
+
+<style>
+  /* Bloque hero + slider en una fila: en desktop el hero ocupa 60% y el
+     slider 40% (grid 3fr/2fr); en mobile se apilan. El fondo navy lo
+     aportan los propios componentes; este fondo cubre cualquier remanente. */
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--primary);
+  }
+  /* Los hijos del row son componentes (Hero/HeroSlider) que traen su propio
+     scope de Astro, no el de HeroRow: la regla debe ser global para
+     aplicarse a sus raíces (evita overflow por min-width: auto). */
+  :global(.hero-row > *) {
+    min-width: 0;
+  }
+  @media (min-width: 901px) {
+    .hero-row {
+      grid-template-columns: 3fr 2fr; /* 60% / 40% */
+    }
+  }
+</style>
