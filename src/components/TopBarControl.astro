@@ -1,0 +1,20 @@
+---
+// Control único de visibilidad de la topbar promocional del sitio.
+//
+// Prop `visible` (default false): decide en tiempo de build si la topbar se
+// renderiza. El Layout consume <TopBarControl /> en todas las páginas, así
+// que la topbar está oculta en todo el sitio; para mostrarla en todas las
+// páginas se pasa <TopBarControl visible />.
+//
+// Sin JS ni estado compartido: la única fuente de verdad es la prop.
+import TopBar from './TopBar.astro';
+
+interface Props {
+  /** Muestra la topbar promocional. Por defecto false (oculta). */
+  visible?: boolean;
+}
+
+const { visible = false } = Astro.props;
+---
+
+{visible && <TopBar />}

@@ -11,6 +11,8 @@ import Accordion from '../components/ui/Accordion.astro';
 import Tabs from '../components/ui/Tabs.astro';
 import SliderControls from '../components/ui/SliderControls.astro';
 import IconResolver from '../components/ui/IconResolver.astro';
+import TopBarControl from '../components/TopBarControl.astro';
+import Header from '../components/Header.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
 import HeroRow from '../components/HeroRow.astro';
 import {
@@ -125,6 +127,7 @@ const logoVariants = [
         <a href="#hero-marca" class="guide-nav__link">Organismos · Hero</a>
         <a href="#hero-slider-row" class="guide-nav__link">Organismos · Hero+Slider</a>
         <a href="#slider-demo" class="guide-nav__link">Carrusel</a>
+        <a href="#chrome" class="guide-nav__link">Chrome · TopBar + Menú</a>
       </nav>
     </div>
   </div>
@@ -794,6 +797,44 @@ const logoVariants = [
       </p>
     </section>
 
+    <!-- 12. ORGANISMOS — CHROME DEL SITIO (TOPBAR + MENÚ) -->
+    <section id="chrome" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>12. Organismos — Chrome del sitio: TopBar + Menú (TopBarControl)</h2>
+        <p>
+          Control único de visibilidad de la topbar promocional: prop <code>visible</code> con default <code>false</code>, decidida en tiempo de build — sin JavaScript ni estado compartido. El <code>Layout</code> consume <code>&lt;TopBarControl /&gt;</code> en todas las páginas, por lo que la topbar está <strong>oculta en todo el sitio</strong> hasta que se pase <code>visible</code>. El menú se previsualiza con el componente real <code>Header.astro</code> (prop <code>preview</code>).
+        </p>
+      </div>
+
+      <div class="component-showcase">
+        <div class="showcase-row">
+          <span class="showcase-label">Variante visible (visible=true):</span>
+          <div class="chrome-frame chrome-frame--clip">
+            <TopBarControl visible />
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Default — oculta (visible=false):</span>
+          <div class="chrome-frame chrome-frame--empty">
+            <TopBarControl />
+            <p class="chrome-frame__empty">El componente no renderiza nada: la topbar queda oculta.</p>
+          </div>
+        </div>
+
+        <div class="showcase-row">
+          <span class="showcase-label">Menú real (preview):</span>
+          <div class="chrome-frame">
+            <Header preview />
+          </div>
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> la topbar solo se renderiza desde <code>&lt;TopBarControl /&gt;</code> en <code>Layout.astro</code> (nunca <code>TopBar.astro</code> directo). La única fuente de verdad es la prop <code>visible</code> (default <code>false</code>): así la topbar está oculta en todo el sitio; para mostrarla en todas las páginas, cambiar el Layout a <code>&lt;TopBarControl visible /&gt;</code>. Al no estar en el DOM, <code>Header.astro</code> deja <code>--topbar-h</code> en <code>0</code> y el header con <code>overlayHeader</code> arranca en <code>top:0</code> — el menú no deja hueco. Para previsualizar el menú real se usa <code>&lt;Header preview /&gt;</code> (ids únicos: no duplica <code>#header-container</code>).
+      </p>
+    </section>
+
     <!-- BANNER DE RETORNO: eliminado por decisión del dueño (feedback 12) -->
 
   </main>
@@ -921,6 +962,34 @@ const logoVariants = [
     border: 1px solid #E2E8F0;
     border-radius: var(--rounded-md, 16px);
     overflow: hidden;
+  }
+
+  /* Variantes del control de chrome (TopBarControl + Header preview) */
+  .chrome-frame {
+    position: relative;
+    z-index: 1; /* los menús desplegados de la preview pisan al contenido siguiente */
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-sm, 8px);
+  }
+
+  /* Clip: la barra azul de la variante visible sigue la curva del marco */
+  .chrome-frame--clip {
+    overflow: hidden;
+  }
+
+  /* Estado vacío: la variante default no renderiza nada */
+  .chrome-frame--empty {
+    background: #F8FAFC;
+    border-style: dashed;
+    text-align: center;
+  }
+
+  .chrome-frame__empty {
+    font-size: 0.8125rem;
+    color: var(--muted, #64748B);
+    margin: 0;
+    padding: 16px;
   }
 
   .pattern-note {
