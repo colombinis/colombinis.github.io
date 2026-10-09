@@ -4,6 +4,7 @@ import Button from '../components/ui/Button.astro';
 import Card from '../components/ui/Card.astro';
 import Badge from '../components/ui/Badge.astro';
 import BrandIcon from '../components/ui/BrandIcon.astro';
+import Logo from '../components/ui/Logo.astro';
 import Input from '../components/ui/Input.astro';
 import Textarea from '../components/ui/Textarea.astro';
 import Accordion from '../components/ui/Accordion.astro';
@@ -11,6 +12,7 @@ import Tabs from '../components/ui/Tabs.astro';
 import SliderControls from '../components/ui/SliderControls.astro';
 import IconResolver from '../components/ui/IconResolver.astro';
 import ClientesConfian from '../components/ClientesConfian.astro';
+import HeroRow from '../components/HeroRow.astro';
 import {
   ArrowRight,
   ShieldCheck,
@@ -59,6 +61,35 @@ const tabsDemo = [
   { id: 'tokens', label: 'Tokens de Diseño' },
   { id: 'code-snippet', label: 'Ejemplo de Código' }
 ];
+
+// Variaciones del logotipo SACsi (Logo.astro)
+const logoVariants = [
+  {
+    id: 'logo-texto',
+    label: 'Imagen del logo + texto',
+    desc: 'Logo actual (/logo.svg) acompañado del tagline "Soluciones Informáticas".'
+  },
+  {
+    id: 'favicon-texto',
+    label: 'Favicon + texto',
+    desc: 'Favicon (/favicon.ico) acompañado del tagline "Soluciones Informáticas".'
+  },
+  {
+    id: 'sacsi-color',
+    label: 'Texto "SACsi" a color',
+    desc: '"SAC" sobre bloque celeste #00A1F1 y "si" sobre bloque naranja #F16529.'
+  },
+  {
+    id: 'sacsi-blanco',
+    label: 'Texto "SACsi" en blanco',
+    desc: 'Tipografía blanca — pensada para fondos oscuros.'
+  },
+  {
+    id: 'sacsi-naranja',
+    label: 'Texto "SACsi" en naranja',
+    desc: 'Tipografía naranja de marca #F16529.'
+  }
+];
 ---
 
 <Layout
@@ -85,12 +116,14 @@ const tabsDemo = [
         <a href="#badges" class="guide-nav__link">Badges</a>
         <a href="#formularios" class="guide-nav__link">Formularios</a>
         <a href="#iconos" class="guide-nav__link">Iconografía</a>
+        <a href="#logotipo" class="guide-nav__link">Primitivos · Logotipo</a>
         <a href="#tarjetas" class="guide-nav__link">Composiciones · Tarjetas</a>
         <a href="#clientes-confian" class="guide-nav__link">Organismos · Clientes</a>
         <a href="#controles" class="guide-nav__link">Tabs</a>
         <a href="#acordeon" class="guide-nav__link">Acordeón</a>
         <a href="#slider-controls" class="guide-nav__link">Slider</a>
         <a href="#hero-marca" class="guide-nav__link">Organismos · Hero</a>
+        <a href="#hero-slider-row" class="guide-nav__link">Organismos · Hero+Slider</a>
         <a href="#slider-demo" class="guide-nav__link">Carrusel</a>
       </nav>
     </div>
@@ -379,6 +412,56 @@ const tabsDemo = [
       </div>
     </section>
 
+    <!-- 5b. PRIMITIVOS — LOGOTIPO DE MARCA -->
+    <section id="logotipo" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>5b. Primitivos — Logotipo de Marca (Logo.astro)</h2>
+        <p>
+          Cinco variaciones del logotipo SACsi, cada una sobre <strong>fondo claro</strong> y <strong>fondo oscuro</strong>. El prop <code>variant</code> define la variación y <code>theme</code> (light/dark) adapta el color del tagline al fondo sobre el que se apoya.
+        </p>
+      </div>
+
+      <div class="logo-showcase">
+        <div class="logo-showcase__col logo-showcase__col--light">
+          <h3 class="logo-showcase__col-title">Sobre fondo claro</h3>
+
+          {logoVariants.map((v) => (
+            <div class="logo-demo" data-variant={v.id}>
+              <div class="logo-demo__stage">
+                {v.id === 'sacsi-blanco' ? (
+                  <span class="logo-demo__plate">
+                    <Logo variant={v.id} theme="dark" size="lg" />
+                  </span>
+                ) : (
+                  <Logo variant={v.id} theme="light" size="lg" />
+                )}
+              </div>
+              <span class="logo-demo__label">{v.label}</span>
+              <span class="logo-demo__desc">{v.desc}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="logo-showcase__col logo-showcase__col--dark">
+          <h3 class="logo-showcase__col-title">Sobre fondo oscuro</h3>
+
+          {logoVariants.map((v) => (
+            <div class="logo-demo" data-variant={v.id}>
+              <div class="logo-demo__stage">
+                <Logo variant={v.id} theme="dark" size="lg" />
+              </div>
+              <span class="logo-demo__label">{v.label}</span>
+              <span class="logo-demo__desc">{v.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> usar el primitivo <code>Logo.astro</code> en <code>src/components/ui/</code> en lugar de repetir markup de marca. La variante blanca requiere fondo oscuro (en el panel claro se previsualiza sobre una placa navy). El bloque <code>sacsi-color</code> replica el logo real: <code>#00A1F1</code> detrás de "SAC" y <code>#F16529</code> detrás de "si". Todas las variaciones exponen un nombre accesible ("SACsi" / "Logo SACsi").
+      </p>
+    </section>
+
     <!-- 6. COMPOSICIONES — TARJETAS -->
     <section id="tarjetas" class="guide-section">
       <div class="section-title-wrap">
@@ -649,6 +732,24 @@ const tabsDemo = [
       </p>
     </section>
 
+    <!-- 10b. ORGANISMOS — FILA HERO + SLIDER (portada home) -->
+    <section id="hero-slider-row" class="guide-section">
+      <div class="section-title-wrap">
+        <h2>10b. Organismos — Fila Hero + Slider (portada de la home)</h2>
+        <p>
+          Cómo quedó la entrada de la home: el <strong>Hero de Marca</strong> (§10) y el <strong>Carrusel de servicios</strong> comparten una misma fila navy — hero 60% / slider 40% a partir de 901px, apilados en mobile. Demo viva con el organismo <code>HeroRow.astro</code> (composición de <code>Hero.astro</code> + <code>HeroSlider.astro</code>).
+        </p>
+      </div>
+
+      <div class="hero-row-demo">
+        <HeroRow headingTag="h2" />
+      </div>
+
+      <p class="pattern-note">
+        <strong>Regla del patrón:</strong> usar el organismo <code>HeroRow.astro</code> en lugar de repetir el wrapper 60/40. El grid es <code>3fr 2fr</code> (≥901px) y <code>1fr</code> apilado en mobile, sobre fondo <code>--primary</code> (navy); el hero toma los colores del slider contiguo (fondo navy, texto blanco, "Tecnología justa" en <code>#F16529</code>, CTA naranja con texto blanco). Los slides son links completos al servicio: imagen de fondo <code>object-fit: cover</code> (todo el slide) con título + claim sobre panel translúcido <code>rgba(26,26,46,0.5)</code>, centrados vertical y horizontalmente. El <code>h1</code> único de la página vive en el hero — en demos/páginas interiores pasá <code>headingTag="h2"</code>.
+      </p>
+    </section>
+
     <!-- 11. ORGANISMOS — CARRUSEL INTERACTIVO (demo viva) -->
     <section id="slider-demo" class="guide-section">
       <div class="section-title-wrap">
@@ -811,6 +912,15 @@ const tabsDemo = [
   .hero-marca-demo__actions {
     display: flex;
     justify-content: center;
+  }
+
+  /* Fila hero + slider (portada home) — marco de la demo viva §10b.
+     El organismo HeroRow.astro aporta el grid 60/40 y el fondo navy;
+     este contenedor solo enmarca y redondea para presentarlo en la guía. */
+  .hero-row-demo {
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    overflow: hidden;
   }
 
   .pattern-note {
@@ -1150,6 +1260,114 @@ const tabsDemo = [
     font-size: 0.75rem;
     color: var(--secondary, #444444);
     font-weight: 500;
+  }
+
+  /* Logotipo de marca (Logo.astro) */
+  .logo-showcase {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 860px) {
+    .logo-showcase {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .logo-showcase__col {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #E2E8F0;
+    border-radius: var(--rounded-md, 16px);
+    overflow: hidden;
+  }
+
+  .logo-showcase__col--light {
+    background: #FFFFFF;
+  }
+
+  .logo-showcase__col--dark {
+    background: var(--primary, #1A1A2E);
+    border-color: var(--primary, #1A1A2E);
+  }
+
+  .logo-showcase__col-title {
+    margin: 0;
+    padding: 12px var(--spacing-lg, 24px);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .logo-showcase__col--light .logo-showcase__col-title {
+    color: var(--muted, #64748B);
+    background: #F8FAFC;
+  }
+
+  .logo-showcase__col--dark .logo-showcase__col-title {
+    color: #CBD5E1;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .logo-demo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--spacing-lg, 24px);
+    border-bottom: 1px solid #E2E8F0;
+  }
+
+  .logo-demo:last-child {
+    border-bottom: none;
+  }
+
+  .logo-showcase__col--dark .logo-demo {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .logo-demo__stage {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    margin-bottom: 6px;
+  }
+
+  /* Placa oscura: la variante blanca necesita fondo oscuro para leerse. */
+  .logo-demo__plate {
+    display: inline-flex;
+    background: var(--primary, #1A1A2E);
+    border-radius: var(--rounded-sm, 8px);
+    padding: 10px 14px;
+  }
+
+  .logo-demo__label {
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .logo-showcase__col--light .logo-demo__label {
+    color: var(--primary, #1A1A2E);
+  }
+
+  .logo-showcase__col--dark .logo-demo__label {
+    color: #F8FAFC;
+  }
+
+  .logo-demo__desc {
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .logo-showcase__col--light .logo-demo__desc {
+    color: var(--muted, #64748B);
+  }
+
+  .logo-showcase__col--dark .logo-demo__desc {
+    color: #94A3B8;
   }
 
   /* Footer banner: eliminado (feedback 12) — estilos retirados junto con el markup */
