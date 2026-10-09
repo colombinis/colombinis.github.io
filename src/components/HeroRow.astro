@@ -6,6 +6,10 @@
 // Consumidores:
 //   · src/pages/index.astro (portada)          → <HeroRow />
 //   · /design-style-guide §10b (demo viva)     → <HeroRow headingTag="h2" />
+//   · src/pages/servicios/[servicio].astro     → <HeroRow hero={{…}} slides={…} />
+//
+// Asumimos UNA instancia de slider por página (el script de HeroSlider
+// identifica el viewport por id).
 //
 // El render del hero queda scopeado en Hero.astro; este componente solo
 // provee el contenedor 60/40 y compone los dos organismos de marca.
@@ -13,17 +17,52 @@ import Hero from './Hero.astro';
 import HeroSlider from './HeroSlider.astro';
 
 interface Props {
-  /** Tag del título del hero. 'h1' en la home (único h1 de la página);
+  /** Tag del título del hero. 'h1' en la portada (único h1 de la página);
    *  'h2' en demos/guía para no duplicar el h1 de la página. */
   headingTag?: 'h1' | 'h2' | 'h3';
+  /** Contenido del hero (izquierda). Default: el copy de la marca/home.
+   *  Pasar `titleAccent: ''` cuando el título sea monocromo (p. ej. el
+   *  nombre de un servicio): sin eso se anteponde "Tecnología justa".
+   *  Ver Hero.astro para el detalle de cada campo. */
+  hero?: {
+    titleAccent?: string;
+    title?: string;
+    valueLine?: string;
+    subtitle?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
+  /** Slides del slider (derecha). Default: los servicios de la portada. */
+  slides?: Array<{
+    id: string;
+    title: string;
+    claim: string;
+    href: string;
+    imagen: string;
+  }>;
+  /** aria-label del carrusel. */
+  sliderLabel?: string;
 }
 
-const { headingTag = 'h1' } = Astro.props;
+const {
+  headingTag = 'h1',
+  hero,
+  slides,
+  sliderLabel,
+} = Astro.props;
 ---
 
 <div class="hero-row">
-  <Hero headingTag={headingTag} />
-  <HeroSlider />
+  <Hero
+    headingTag={headingTag}
+    titleAccent={hero?.titleAccent}
+    title={hero?.title}
+    valueLine={hero?.valueLine}
+    subtitle={hero?.subtitle}
+    ctaLabel={hero?.ctaLabel}
+    ctaHref={hero?.ctaHref}
+  />
+  <HeroSlider slides={slides} label={sliderLabel} />
 </div>
 
 <style>

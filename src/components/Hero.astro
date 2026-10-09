@@ -14,24 +14,53 @@ interface Props {
   /** Tag del título: 'h1' por defecto (el único h1 de la página). En demos
    *  o páginas interiores pasá 'h2'/'h3' para no duplicar el h1. */
   headingTag?: 'h1' | 'h2' | 'h3';
+  /** Prefijo del título en naranja de marca (#F16529). Pasar `""` cuando el
+   *  título es monocromo (p. ej. el nombre de un servicio). */
+  titleAccent?: string;
+  /** Texto principal del título. Default: el de la home. */
+  title?: string;
+  /** Línea de valor intermedia (opcional): se muestra entre el título y el
+   *  subtitle en el color de énfasis del hero de marca. */
+  valueLine?: string;
+  /** Subtítulo. Si no se pasa, se renderiza el copy por defecto de la home
+   *  (que incluye markup: <b>). */
+  subtitle?: string;
+  /** Label del CTA. */
+  ctaLabel?: string;
+  /** Destino del CTA. */
+  ctaHref?: string;
 }
 
-const { headingTag = 'h1' } = Astro.props;
+const {
+  headingTag = 'h1',
+  titleAccent = 'Tecnología justa',
+  title = 'para que Profesionales y PyMEs vendan más por internet.',
+  valueLine,
+  subtitle,
+  ctaLabel = 'Te decimos qué necesitás… y qué no. Consulta sin cargo',
+  ctaHref = '/contacto/',
+} = Astro.props;
 const TitleTag = headingTag;
 ---
 
 <section class="hero hero--brand">
   <div class="hero__container">
     <TitleTag class="hero__title">
-      <span class="hero__title-accent">Tecnología justa</span> para que Profesionales y PyMEs vendan más por internet.
+      {titleAccent && <span class="hero__title-accent">{titleAccent} </span>}
+      {title}
     </TitleTag>
-    <p class="hero__subtitle">
-      Desde Rosario ( y cerca de la casa de Messi ;-). 
-      Hace más de 15 años que <b>acercamos la tecnología que usan las grandes empresas</b> a pequeños comercios para que tengan las mismas posibilidades de VENDER MAS Y MEJOR sus productos y servicios.
-    </p>
+    {valueLine && <p class="hero__value-line">{valueLine}</p>}
+    {subtitle !== undefined ? (
+      <p class="hero__subtitle">{subtitle}</p>
+    ) : (
+      <p class="hero__subtitle">
+        Desde Rosario ( y cerca de la casa de Messi ;-).
+        Hace más de 15 años que <b>acercamos la tecnología que usan las grandes empresas</b> a pequeños comercios para que tengan las mismas posibilidades de VENDER MAS Y MEJOR sus productos y servicios.
+      </p>
+    )}
     <div class="hero__actions">
-      <a class="hero__cta hero__cta--orange" href="/contacto/">
-        Te decimos qué necesitás… y qué no. Consulta sin cargo
+      <a class="hero__cta hero__cta--orange" href={ctaHref}>
+        {ctaLabel}
       </a>
     </div>
   </div>
@@ -62,6 +91,19 @@ const TitleTag = headingTag;
 
   .hero--brand .hero__subtitle {
     color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Línea de valor intermedia (opcional): mismo azul claro del claim del
+     slider (#C9DFFF, 8.6:1 sobre navy) para que se lea como parte del
+     bloque de marca y no compita con el título blanco. */
+  .hero__value-line {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #C9DFFF;
+    margin: 0 auto var(--spacing-md);
+    max-width: 640px;
+    line-height: 1.4;
+    text-align: center;
   }
 
   /* CTA naranja del logo: sobre fondo navy mantiene texto blanco, igual que el

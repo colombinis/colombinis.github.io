@@ -11,6 +11,7 @@ import { getServicio, getCategoriasByServicio, getTestimoniosByServicio } from '
 import Button from '../../components/ui/Button.astro';
 import IconResolver from '../../components/ui/IconResolver.astro';
 import Card from '../../components/ui/Card.astro';
+import HeroRow from '../../components/HeroRow.astro';
 
 interface Props {
   params: { servicio: string };
@@ -49,32 +50,37 @@ const serviceValueProp = svcValueProp || defaultPropMap[servicio.id] || 'Tecnolo
 
 const categorias = getCategoriasByServicio(servicio.id);
 const testimoniosData = getTestimoniosByServicio(servicio.id);
+
+// Slides del slider de la fila Hero+Slider (§10b): el contenido de las
+// cards de categoría, mismo destino que los links de la grilla de abajo.
+const categoriaSlides = categorias.map((cat) => ({
+  id: cat.id,
+  title: cat.title,
+  claim: cat.claim,
+  imagen: cat.imagen ?? cat.icon,
+  href: `${svcHref}${cat.id}/`,
+}));
 ---
 
 <Layout
   title={servicio.seo_title || `${svcTitle} para PyMEs`}
   description={servicio.seo_description || svcShort}
 >
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero__container">
-      <h1 class="hero__title">{svcTitle}</h1>
-      <p class="service-value-line">{serviceValueProp}</p>
-      <p class="hero__subtitle">
-        {svcShort}
-      </p>
-      <div class="hero__actions">
-        <Button
-          variant="primary"
-          size="lg"
-          class="hero__cta"
-          href={`/contacto/?categoria=${servicio.id}&asunto=Consulta%20sobre%20${servicio.title}`}
-        >
-          Consultar sin cargo
-        </Button>
-      </div>
-    </div>
-  </section>
+  <!-- Hero: fila Hero + Slider (§10b) — izquierda = contenido del hero del
+       servicio, derecha = slides armados desde las cards de categoría. -->
+  <HeroRow
+    headingTag="h1"
+    hero={{
+      titleAccent: '',
+      title: svcTitle,
+      valueLine: serviceValueProp,
+      subtitle: svcShort,
+      ctaLabel: 'Consultar sin cargo',
+      ctaHref: `/contacto/?categoria=${servicio.id}&asunto=Consulta%20sobre%20${servicio.title}`,
+    }}
+    slides={categoriaSlides}
+    sliderLabel={`Categorías de ${svcTitle}`}
+  />
 
   <!-- Categorías con cards -->
   <section class="section">
@@ -154,14 +160,5 @@ const testimoniosData = getTestimoniosByServicio(servicio.id);
   }
   .service-card__body :global(.ui-btn--round) {
     align-self: flex-end;
-  }
-  .service-value-line {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--tertiary-dark);
-    margin: 0 auto var(--spacing-md);
-    max-width: 640px;
-    line-height: 1.4;
-    text-align: center;
   }
 </style>
