@@ -15,6 +15,8 @@ Las Features, tareas, Issues de planificación y estados del proyecto se gestion
 
 **Regla:** Este repo público solo contiene código necesario para el build de Astro. Todo lo sensible (backend, secrets, tests internos, documentación de negocio) vive en el repo privado.
 
+**Nota (2026-10-23):** El flujo de contenido para redes (`plantillas-redes/`) se mudó a su propio repositorio y fue eliminado del historial de este repo. Si la carpeta aparece localmente es trabajo pendiente de migración — no volver a commitearla acá.
+
 ## Quick reference
 
 | What | How |
