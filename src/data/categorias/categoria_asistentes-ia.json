@@ -19,6 +19,12 @@
       "texto": "Pre-atención y filtrado de consultas: tu equipo solo atiende los casos que valen la pena."
     }
   ],
-  "casos": ["chatbot-ia-local-sacsi"],
-  "soluciones": ["diagnostico-ia", "ia-esencial", "ia-avanzada"]
+  "casos": [
+    "chatbot-ia-local-sacsi"
+  ],
+  "soluciones": [
+    "diagnostico-ia",
+    "ia-esencial",
+    "ia-avanzada"
+  ]
 }

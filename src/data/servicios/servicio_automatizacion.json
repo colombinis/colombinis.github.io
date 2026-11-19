@@ -10,10 +10,10 @@
   "seo_description": "Automatizamos tareas repetitivas para PyMEs: facturación, stock y reportes que se arman solos, sobre las herramientas que ya usás.",
   "categoria_section_title": "¿Qué automatizamos?",
   "imagen": "/assets/sacsi-servicios-09-automatizacion-procesos.webp",
+  "orden": 2,
   "categorias_ids": [
     "facturacion-cobranzas",
     "stock-logistica",
     "reportes-dashboards"
-  ],
-  "orden": 2
+  ]
 }

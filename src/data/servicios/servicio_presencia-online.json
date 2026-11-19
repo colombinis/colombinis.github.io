@@ -10,10 +10,10 @@
   "seo_description": "Tecnología justa para potenciar tu presencia online: sitios web y tiendas para PyMEs que convierten visitas en ventas reales.",
   "categoria_section_title": "¿Qué incluye?",
   "imagen": "/assets/sacsi-servicios-10-presencia-online.webp",
+  "orden": 3,
   "categorias_ids": [
     "sitio-web-institucional",
     "tienda-online",
     "contenido-seo-basico"
-  ],
-  "orden": 3
+  ]
 }

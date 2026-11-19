@@ -6,88 +6,78 @@
     "integraciones",
     "apps-portales"
   ],
+  "servicio_id": "software-a-medida",
   "precioMin": 1800,
   "precioMax": 3000,
   "horasMin": 100,
   "horasMax": 160,
-  "costoFijo": 300,
+  "descripcion_publica": "Escalá tu operación con sistemas a medida en Rosario. Autenticación, roles, API propia e integraciones. Software que crece con tu negocio, no que lo limita.",
+  "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp",
+  "recibis": "Sistema completo en producción: usuarios, roles, API y sincronización funcionando.",
+  "necesitamos": "Nos compartís el diagrama de actores, reglas de negocio y volumen de operación esperado.",
   "flujo": [
     {
       "orden": 1,
       "paso": "Relevamiento y especificación",
       "entradas": "Solicitud del cliente",
       "salidas": "Especificación funcional completa",
-      "descripcion": "Módulos, roles, reglas, integraciones y volúmenes esperados",
-      "horas": 12
+      "descripcion": "Módulos, roles, reglas, integraciones y volúmenes esperados"
     },
     {
       "orden": 2,
       "paso": "Propuesta por fases",
       "entradas": "Especificación",
       "salidas": "Roadmap aprobado (fases + presupuesto)",
-      "descripcion": "Se divide en fases entregables y se acuerda el plan",
-      "horas": 6
+      "descripcion": "Se divide en fases entregables y se acuerda el plan"
     },
     {
       "orden": 3,
       "paso": "Arquitectura del sistema",
       "entradas": "Especificación",
       "salidas": "Arquitectura técnica (BD, APIs, servicios)",
-      "descripcion": "Modelo de datos, microservicios o monolito, seguridad y escalabilidad",
-      "horas": 10
+      "descripcion": "Modelo de datos, microservicios o monolito, seguridad y escalabilidad"
     },
     {
       "orden": 4,
       "paso": "Desarrollo módulo 1 (core)",
       "entradas": "Arquitectura",
       "salidas": "Módulo core funcional",
-      "descripcion": "Autenticación, roles, módulo principal de negocio",
-      "horas": 30
+      "descripcion": "Autenticación, roles, módulo principal de negocio"
     },
     {
       "orden": 5,
       "paso": "Desarrollo módulos 2 y 3",
       "entradas": "Core listo",
       "salidas": "Módulos secundarios funcionales",
-      "descripcion": "Funcionalidades restantes e integraciones externas",
-      "horas": 40
+      "descripcion": "Funcionalidades restantes e integraciones externas"
     },
     {
       "orden": 6,
       "paso": "Testing integral",
       "entradas": "Todos los módulos",
       "salidas": "Suite de pruebas E2E OK",
-      "descripcion": "Pruebas funcionales, de carga y seguridad",
-      "horas": 20
+      "descripcion": "Pruebas funcionales, de carga y seguridad"
     },
     {
       "orden": 7,
       "paso": "Deploy y puesta en marcha",
       "entradas": "Sistema probado",
       "salidas": "Sistema en producción",
-      "descripcion": "Infraestructura, migración de datos y configuración",
-      "horas": 10
+      "descripcion": "Infraestructura, migración de datos y configuración"
     },
     {
       "orden": 8,
       "paso": "Documentación y capacitación",
       "entradas": "Sistema en producción",
       "salidas": "Manuales + equipo capacitado",
-      "descripcion": "Documentación técnica y de usuario; sesiones de capacitación",
-      "horas": 10
+      "descripcion": "Documentación técnica y de usuario; sesiones de capacitación"
     },
     {
       "orden": 9,
       "paso": "Estabilización",
       "entradas": "Sistema entregado",
       "salidas": "Sistema estable",
-      "descripcion": "Soporte y correcciones post-lanzamiento",
-      "horas": 12
+      "descripcion": "Soporte y correcciones post-lanzamiento"
     }
-  ],
-  "descripcion_publica": "",
-  "nota_interna_pricing": "",
-  "recibis": "Sistema completo en producción: usuarios, roles, API y sincronización funcionando.",
-  "necesitamos": "Nos compartís el diagrama de actores, reglas de negocio y volumen de operación esperado.",
-  "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp"
+  ]
 }

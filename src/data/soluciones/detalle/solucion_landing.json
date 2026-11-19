@@ -5,112 +5,99 @@
     "sitio-web-institucional",
     "contenido-seo-basico"
   ],
+  "servicio_id": "presencia-online",
   "precioMin": 600,
   "precioMax": 700,
   "horasMin": 25,
   "horasMax": 30,
-  "costoFijo": 0,
+  "descripcion_publica": "Convertí visitas en consultas con una landing pensada para vender en Rosario: definimos la oferta, el copy y la pauta, con formulario, WhatsApp y tracking conectados. Diseño que capta leads, no que decora.",
+  "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp",
+  "recibis": "Landing page publicada, conectada a tu dominio y lista para recibir visitas y consultas.",
+  "necesitamos": "Nos contás el objetivo de la landing, el público y el mensaje principal que querés transmitir.",
   "flujo": [
     {
       "orden": 1,
       "paso": "Briefing y relevamiento",
       "entradas": "Contacto inicial del cliente",
       "salidas": "Documento de brief (objetivo, público, oferta)",
-      "descripcion": "Reunión o cuestionario para entender qué quiere vender la landing y qué acción busca del visitante",
-      "horas": 1.5
+      "descripcion": "Reunión o cuestionario para entender qué quiere vender la landing y qué acción busca del visitante"
     },
     {
       "orden": 2,
       "paso": "Cotización y aprobación",
       "entradas": "Brief",
       "salidas": "Propuesta aprobada / seña cobrada",
-      "descripcion": "Se arma el alcance y precio en base al brief, y se espera confirmación del cliente",
-      "horas": 1
+      "descripcion": "Se arma el alcance y precio en base al brief, y se espera confirmación del cliente"
     },
     {
       "orden": 3,
       "paso": "Recopilación de contenido",
       "entradas": "Brief aprobado",
       "salidas": "Textos, imágenes, logo, referencias organizadas",
-      "descripcion": "Se pide y ordena el material que el cliente puede aportar; si no tiene, se define qué se va a redactar/generar",
-      "horas": 2
+      "descripcion": "Se pide y ordena el material que el cliente puede aportar; si no tiene, se define qué se va a redactar/generar"
     },
     {
       "orden": 4,
       "paso": "Wireframe y estructura",
       "entradas": "Brief + contenido",
       "salidas": "Boceto de secciones y jerarquía",
-      "descripcion": "Se define el orden de bloques (hero, beneficios, testimonios, CTA) sin diseño visual todavía",
-      "horas": 2
+      "descripcion": "Se define el orden de bloques (hero, beneficios, testimonios, CTA) sin diseño visual todavía"
     },
     {
       "orden": 5,
       "paso": "Diseño UI (mockup)",
       "entradas": "Wireframe + referencias visuales",
       "salidas": "Mockup de alta fidelidad",
-      "descripcion": "Se aplican colores, tipografía e imágenes reales sobre la estructura definida",
-      "horas": 6
+      "descripcion": "Se aplican colores, tipografía e imágenes reales sobre la estructura definida"
     },
     {
       "orden": 6,
       "paso": "Revisión de diseño",
       "entradas": "Mockup",
       "salidas": "Diseño aprobado (o ronda de cambios)",
-      "descripcion": "El cliente da feedback; suele incluir al menos una vuelta de ajustes",
-      "horas": 1.5
+      "descripcion": "El cliente da feedback; suele incluir al menos una vuelta de ajustes"
     },
     {
       "orden": 7,
       "paso": "Desarrollo y maquetación",
       "entradas": "Diseño aprobado",
       "salidas": "Landing funcional (no publicada)",
-      "descripcion": "Codificación o armado en plataforma (WordPress, Webflow, HTML/CSS)",
-      "horas": 8
+      "descripcion": "Codificación o armado en plataforma (WordPress, Webflow, HTML/CSS)"
     },
     {
       "orden": 8,
       "paso": "Integración de tracking",
       "entradas": "Landing maqueta + accesos del cliente",
       "salidas": "Pixel de Meta/Google, formulario, WhatsApp conectados",
-      "descripcion": "Se conecta la landing con las herramientas de medición y captura de leads que va a usar la pauta",
-      "horas": 2
+      "descripcion": "Se conecta la landing con las herramientas de medición y captura de leads que va a usar la pauta"
     },
     {
       "orden": 9,
       "paso": "QA y pruebas",
       "entradas": "Landing con integraciones",
       "salidas": "Reporte de bugs / checklist OK",
-      "descripcion": "Se revisa responsive, velocidad, links y que el formulario/pixel disparen correctamente",
-      "horas": 2
+      "descripcion": "Se revisa responsive, velocidad, links y que el formulario/pixel disparen correctamente"
     },
     {
       "orden": 10,
       "paso": "Ajustes finales",
       "entradas": "Reporte de QA",
       "salidas": "Landing lista para publicar",
-      "descripcion": "Se corrigen los issues detectados",
-      "horas": 1.5
+      "descripcion": "Se corrigen los issues detectados"
     },
     {
       "orden": 11,
       "paso": "Publicación (deploy)",
       "entradas": "Landing corregida + dominio/hosting",
       "salidas": "Landing en vivo",
-      "descripcion": "Se sube a producción y se verifica en el dominio real",
-      "horas": 1
+      "descripcion": "Se sube a producción y se verifica en el dominio real"
     },
     {
       "orden": 12,
       "paso": "Entrega y capacitación",
       "entradas": "Landing publicada",
       "salidas": "Cliente conforme / cierre del servicio",
-      "descripcion": "Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads",
-      "horas": 1
+      "descripcion": "Se entrega el link final y se explica brevemente cómo usar el formulario o ver los leads"
     }
-  ],
-  "descripcion_publica": "",
-  "nota_interna_pricing": "",
-  "recibis": "Landing page publicada, conectada a tu dominio y lista para recibir visitas y consultas.",
-  "necesitamos": "Nos contás el objetivo de la landing, el público y el mensaje principal que querés transmitir.",
-  "imagen": "/assets/sacsi-soluciones-24-presencia-total.webp"
+  ]
 }

@@ -24,6 +24,14 @@
       "caso": "wordpress-headless-nextjs"
     }
   ],
-  "casos": ["tema-wordpress-a-medida-gutenberg", "wordpress-headless-nextjs"],
-  "soluciones": ["landing", "sitio-pro", "ret-basico", "ret-pro"]
+  "casos": [
+    "tema-wordpress-a-medida-gutenberg",
+    "wordpress-headless-nextjs"
+  ],
+  "soluciones": [
+    "landing",
+    "sitio-pro",
+    "ret-basico",
+    "ret-pro"
+  ]
 }

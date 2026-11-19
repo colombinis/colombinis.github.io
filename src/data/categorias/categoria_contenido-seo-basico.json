@@ -19,6 +19,12 @@
       "texto": "Estructura semántica y metadatos pensados para aparecer en Google."
     }
   ],
-  "casos": ["rescate-rendimiento-seguridad-wordpress", "tema-wordpress-a-medida-gutenberg"],
-  "soluciones": ["landing", "sitio-pro"]
+  "casos": [
+    "rescate-rendimiento-seguridad-wordpress",
+    "tema-wordpress-a-medida-gutenberg"
+  ],
+  "soluciones": [
+    "landing",
+    "sitio-pro"
+  ]
 }

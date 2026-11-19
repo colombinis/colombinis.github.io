@@ -10,10 +10,10 @@
   "seo_description": "Inteligencia artificial aplicada a tu negocio sobre los sistemas que ya usás: asistentes inteligentes, contenido automático y datos inteligentes. Sin migrar todo.",
   "categoria_section_title": "¿Qué aplicamos?",
   "imagen": "/assets/sacsi-servicios-12-consultoria-ia.webp",
+  "orden": 1,
   "categorias_ids": [
     "asistentes-ia",
     "contenido-automatico",
     "datos-inteligentes"
-  ],
-  "orden": 1
+  ]
 }

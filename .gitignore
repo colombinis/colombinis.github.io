@@ -44,3 +44,13 @@ _ai_context/docs/tareas/generated/
 # playwright test artifacts
 test-results/
 playwright-report/
+
+# Artefactos de build PADM-10 — generados por scripts/prebuild-padm-10.ts
+# Nunca se editan a mano; se regeneran desde la API en cada build
+src/data/soluciones/listado-soluciones.json
+src/data/soluciones/detalle/*.json
+src/data/categorias/*.json
+src/data/servicios/*.json
+src/data/casos-anonimos.json
+src/data/preguntas-frecuentes*.json
+src/config/site.json

@@ -5,48 +5,43 @@
     "sitio-web-institucional",
     "reportes-dashboards"
   ],
+  "servicio_id": "automatizacion",
   "precioMin": 250,
   "precioMax": 400,
   "horasMin": 5,
   "horasMax": 5,
-  "costoFijo": 0,
+  "descripcion_publica": "Mantené tu web funcionando con soporte preventivo en Rosario. Actualizaciones, backups y monitoreo mensual. Evitá caídas antes de que ocurran.",
+  "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp",
+  "recibis": "Servicio mensual funcionando: actualizaciones, backups y monitoreo activo sin sorpresas.",
+  "necesitamos": "Nos pasás los accesos al sitio y herramientas a mantener, y prioridades del mes.",
   "flujo": [
     {
       "orden": 1,
       "paso": "Relevamiento inicial",
       "entradas": "Contrato de retainer",
       "salidas": "Inventario de activos (sitio, accesos, herramientas)",
-      "descripcion": "Se auditan los activos a mantener y se priorizan tareas recurrentes",
-      "horas": 1
+      "descripcion": "Se auditan los activos a mantener y se priorizan tareas recurrentes"
     },
     {
       "orden": 2,
       "paso": "Setup de monitoreo",
       "entradas": "Inventario",
       "salidas": "Monitoreo básico activo (uptime, backups)",
-      "descripcion": "Se configura control de disponibilidad y copias de seguridad",
-      "horas": 1
+      "descripcion": "Se configura control de disponibilidad y copias de seguridad"
     },
     {
       "orden": 3,
       "paso": "Mantenimiento mensual",
       "entradas": "Monitoreo activo",
       "salidas": "Sitio actualizado y funcionando",
-      "descripcion": "Actualizaciones, backups, correcciones menores y revisión de seguridad",
-      "horas": 2
+      "descripcion": "Actualizaciones, backups, correcciones menores y revisión de seguridad"
     },
     {
       "orden": 4,
       "paso": "Reporte y ajustes",
       "entradas": "Mantenimiento hecho",
       "salidas": "Reporte mensual al cliente",
-      "descripcion": "Resumen de lo realizado y ajustes solicitados por el cliente",
-      "horas": 1
+      "descripcion": "Resumen de lo realizado y ajustes solicitados por el cliente"
     }
-  ],
-  "descripcion_publica": "",
-  "nota_interna_pricing": "",
-  "recibis": "Servicio mensual funcionando: actualizaciones, backups y monitoreo activo sin sorpresas.",
-  "necesitamos": "Nos pasás los accesos al sitio y herramientas a mantener, y prioridades del mes.",
-  "imagen": "/assets/sacsi-soluciones-25-ret-basico-pro.webp"
+  ]
 }

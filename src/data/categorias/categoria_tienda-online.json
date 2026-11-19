@@ -24,6 +24,13 @@
       "caso": "rescate-rendimiento-seguridad-wordpress"
     }
   ],
-  "casos": ["ferreteria-gas-plomeria", "tienda-woocommerce-suscripciones", "rescate-rendimiento-seguridad-wordpress", "tienda-ropa-usada"],
-  "soluciones": ["ecommerce"]
+  "casos": [
+    "ferreteria-gas-plomeria",
+    "tienda-woocommerce-suscripciones",
+    "rescate-rendimiento-seguridad-wordpress",
+    "tienda-ropa-usada"
+  ],
+  "soluciones": [
+    "ecommerce"
+  ]
 }

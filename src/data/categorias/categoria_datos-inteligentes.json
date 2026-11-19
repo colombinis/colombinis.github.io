@@ -18,5 +18,8 @@
     }
   ],
   "casos": [],
-  "soluciones": ["diagnostico-ia", "ia-avanzada"]
+  "soluciones": [
+    "diagnostico-ia",
+    "ia-avanzada"
+  ]
 }

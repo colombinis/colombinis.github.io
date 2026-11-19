@@ -20,6 +20,10 @@
       "caso": "plataforma-cursos-lms-membresias"
     }
   ],
-  "casos": ["plataforma-cursos-lms-membresias"],
-  "soluciones": ["soft-grande"]
+  "casos": [
+    "plataforma-cursos-lms-membresias"
+  ],
+  "soluciones": [
+    "soft-grande"
+  ]
 }

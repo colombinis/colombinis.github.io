@@ -10,10 +10,10 @@
   "seo_description": "Desarrollo de software a medida y tecnología justa para PyMEs: sistemas simples y eficientes que se adaptan a tu presupuesto y necesidades.",
   "categoria_section_title": "¿Qué construimos?",
   "imagen": "/assets/sacsi-soluciones-27-soft-chico-grande.webp",
+  "orden": 4,
   "categorias_ids": [
     "sistemas-gestion",
     "integraciones",
     "apps-portales"
-  ],
-  "orden": 4
+  ]
 }

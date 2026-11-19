@@ -5,104 +5,92 @@
     "tienda-online",
     "stock-logistica"
   ],
+  "servicio_id": "presencia-online",
   "precioMin": 1200,
   "precioMax": 2000,
   "horasMin": 50,
   "horasMax": 70,
-  "costoFijo": 150,
+  "descripcion_publica": "Vendé 24/7 con una tienda online en Rosario. E-commerce funcional con pagos, envíos y stock sincronizado. Lista para facturar desde el día uno.",
+  "imagen": "/assets/sacsi-soluciones-18-venta-simple.webp",
+  "recibis": "Tienda online lista para vender: productos cargados, pasarela de pagos y envíos configurados.",
+  "necesitamos": "Nos pasás el catálogo de productos, precios, formas de pago y envío preferidas.",
   "flujo": [
     {
       "orden": 1,
       "paso": "Briefing y relevamiento",
       "entradas": "Contacto inicial",
       "salidas": "Brief + catálogo de productos (cantidad, variantes)",
-      "descripcion": "Se entiende el negocio, volumen de productos y canales de venta actuales",
-      "horas": 3
+      "descripcion": "Se entiende el negocio, volumen de productos y canales de venta actuales"
     },
     {
       "orden": 2,
       "paso": "Cotización y aprobación",
       "entradas": "Brief",
       "salidas": "Propuesta aprobada",
-      "descripcion": "Alcance (plataforma, pasarela, envíos, integraciones) y precio",
-      "horas": 2
+      "descripcion": "Alcance (plataforma, pasarela, envíos, integraciones) y precio"
     },
     {
       "orden": 3,
       "paso": "Setup de plataforma",
       "entradas": "Accesos + dominio",
       "salidas": "Tienda base instalada y configurada",
-      "descripcion": "Instalación de WooCommerce/Magento, tema, hosting y SSL",
-      "horas": 6
+      "descripcion": "Instalación de WooCommerce/Magento, tema, hosting y SSL"
     },
     {
       "orden": 4,
       "paso": "Carga de productos",
       "entradas": "Catálogo del cliente",
       "salidas": "Productos con precios, fotos y variantes",
-      "descripcion": "Carga manual o importación masiva del catálogo",
-      "horas": 8
+      "descripcion": "Carga manual o importación masiva del catálogo"
     },
     {
       "orden": 5,
       "paso": "Diseño y UX",
       "entradas": "Branding + estructura",
       "salidas": "Tienda con identidad visual",
-      "descripcion": "Personalización del tema, home, categorías y fichas de producto",
-      "horas": 10
+      "descripcion": "Personalización del tema, home, categorías y fichas de producto"
     },
     {
       "orden": 6,
       "paso": "Pasarela de pago y envíos",
       "entradas": "Cuentas del cliente (Mercado Pago, etc.)",
       "salidas": "Compra end-to-end funcional",
-      "descripcion": "Configuración de medios de pago, envíos y zonas",
-      "horas": 6
+      "descripcion": "Configuración de medios de pago, envíos y zonas"
     },
     {
       "orden": 7,
       "paso": "Integraciones",
       "entradas": "Tienda operativa",
       "salidas": "Stock, facturación, tracking conectados",
-      "descripcion": "Conexión con stock, factura electrónica y herramientas de seguimiento",
-      "horas": 6
+      "descripcion": "Conexión con stock, factura electrónica y herramientas de seguimiento"
     },
     {
       "orden": 8,
       "paso": "Pruebas de compra (E2E)",
       "entradas": "Tienda integrada",
       "salidas": "Compra de prueba exitosa en todos los medios de pago",
-      "descripcion": "Se prueban compras reales, emails, stock y devoluciones",
-      "horas": 4
+      "descripcion": "Se prueban compras reales, emails, stock y devoluciones"
     },
     {
       "orden": 9,
       "paso": "QA y ajustes",
       "entradas": "Reporte de pruebas",
       "salidas": "Tienda lista",
-      "descripcion": "Corrección de issues detectados",
-      "horas": 4
+      "descripcion": "Corrección de issues detectados"
     },
     {
       "orden": 10,
       "paso": "Publicación y lanzamiento",
       "entradas": "Tienda lista",
       "salidas": "Tienda en vivo",
-      "descripcion": "Deploy, verificación de dominio y prueba final",
-      "horas": 2
+      "descripcion": "Deploy, verificación de dominio y prueba final"
     },
     {
       "orden": 11,
       "paso": "Capacitación",
       "entradas": "Tienda publicada",
       "salidas": "Cliente opera la tienda",
-      "descripcion": "Cómo cargar productos, ver pedidos y gestionar stock",
-      "horas": 2
+      "descripcion": "Cómo cargar productos, ver pedidos y gestionar stock"
     }
-  ],
-  "descripcion_publica": "",
-  "nota_interna_pricing": "",
-  "recibis": "Tienda online lista para vender: productos cargados, pasarela de pagos y envíos configurados.",
-  "necesitamos": "Nos pasás el catálogo de productos, precios, formas de pago y envío preferidas.",
-  "imagen": "/assets/sacsi-soluciones-18-venta-simple.webp"
+  ]
 }
